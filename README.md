@@ -7,3 +7,9 @@ repo for the social project for third year
 - Mohammad Abu Khdier
 
 - Jad Jaraisy
+
+- Mohammad Quttaineh
+
+- Mohammad Tbakhy
+
+- Husam Halawani
