@@ -1,41 +1,43 @@
-# All the Rules to be followed and implemented during this project
+# All the Rules to be Followed and Implemented During This Project
 
-## **code rules**
+## **Code Rules**
 
-1. Maintain code readability and modularty
-1. Clear comments throughout the code
-1. No needless comments (exmaple x++ // increments x by 1 )
-1. All functions written by us must be documanted with a docstring
-1. Consistent Naming Conventions
-   1. camelCase: for variables and functions.
-   1. UPPER_SNAKE_CASE: for constants
-   1. PascalCase: for class names.
-1. test all changes (a protocol for testing will be made later)
-1. Avoid hard coding we will use config files
-1. Maintain security all sensitive data like api keys or passwords will be saved in a password file
-1. maintain ocp that we have learend.
-1. error handeling any external functions that return erros must be encaplsated with a handel
-1. detailed error messages
+1. Maintain code readability and modularity.
+1. Clear comments throughout the code.
+1. No needless comments (example: `x++ // increments x by 1`).
+1. All functions written by us must be documented with a docstring.
+1. Consistent Naming Conventions:
+   - `camelCase`: for variables and functions.
+   - `UPPER_SNAKE_CASE`: for constants.
+   - `PascalCase`: for class names.
+1. Test all changes (a protocol for testing will be made later).
+1. Avoid hard coding, we will use config files.
+1. Maintain security, all sensitive data like API keys or passwords will be saved in a password file.
+1. Maintain OCP (Open/Closed Principle) that we have learned.
+1. Error handling: any external functions that return errors must be encapsulated with a handle.
+1. Detailed error messages.
 
-### **github Rules**
+## **GitHub Rules**
 
-- No changes on main all code will be done on a branch then pulled
-- No push to main always make a pull request and dont merge
-- when making a pull request set project leader as the assignee
-- a change or addition must pass all tests before going on to main
-- follow repo struct src/ tests/ docs/ assets/
-- use git ignore to exclude unnecessary files
-- branch naming feature-featureName-branch or bugfix-bugName-branch
-- commit messages must be detailed and explain changes that have been made <type>(<scope>): <desc>
-- use issues to track bugs and features
-- whenever implemeting a new feature or fix pull from main to have the latest version
-- nested branching is allowed, pull request the final version
+- No changes on main, all code will be done on a branch then pulled.
+- No push to main, always make a pull request and don't merge.
+- When making a pull request, set the project leader as the assignee.
+- A change or addition must pass all tests before going on to main.
+- Follow repo structure: `src/`, `tests/`, `docs/`, `assets/`.
+- Use `.gitignore` to exclude unnecessary files.
+- Branch naming:
+  - `feature-featureName-branch`
+  - `bugfix-bugName-branch`
+- Commit messages must be detailed and explain changes that have been made: `<type>(<scope>): <description>`.
+- Use issues to track bugs and features.
+- Whenever implementing a new feature or fix, pull from main to have the latest version.
+- Nested branching is allowed, pull request the final version.
 
-### WorkFlow
+## **Workflow**
 
-- start an issue
-- Create a feature or bugfix branch.
-- Implement and Test
-- Push and Create a PR
-- Code Review
-- merge to main
+1. Start an issue.
+2. Create a feature or bugfix branch.
+3. Implement and test.
+4. Push and create a PR.
+5. Code review.
+6. Merge to main.
