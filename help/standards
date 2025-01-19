@@ -32,6 +32,7 @@
 - Use issues to track bugs and features.
 - Whenever implementing a new feature or fix, pull from main to have the latest version.
 - Nested branching is allowed, pull request the final version.
+- When commiting add version number.
 
 ## **Workflow**
 
