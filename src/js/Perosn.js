@@ -8,12 +8,9 @@ class Person {
       this.phone = phone;
       this.id_num = id_num;
       this.insurance = insurance
+      //TODO add picture support here 
     }
 
-    // do we need an empty constructor
-    constructor(){
-
-    }
     // ? maybe to add getters and setters
   
     pwd() {
