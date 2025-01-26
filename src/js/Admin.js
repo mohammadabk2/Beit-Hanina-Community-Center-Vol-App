@@ -21,6 +21,9 @@ class Admin extends Person {
     console.log(`${this.username} has logged in.`);
     //TODO login the Admin
   }
+  getPermissions(){
+    return Person.PERMISSIONS.ADMIN;
+  }
 
   // Overriding a method from the Person class
   pwd() {

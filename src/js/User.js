@@ -27,4 +27,8 @@ class User extends Person {
   pwd() {
     console.log("This is in the User class.");
   }
+
+  getPermissions(){
+    return Person.PERMISSIONS.USER;
+  }
 }

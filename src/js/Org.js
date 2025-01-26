@@ -22,6 +22,10 @@ class Admin extends Person {
     //TODO login the Org
   }
 
+  getPermissions(){
+    return Person.PERMISSIONS.ORGANIZER;
+  }
+
   // Overriding a method from the Person class
   pwd() {
     console.log("This is in the Org class.");
