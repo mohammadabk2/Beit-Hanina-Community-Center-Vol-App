@@ -1,5 +1,5 @@
 // Student class inherits from Person
-class User extends Person {
+class Volunteer extends Person {
   constructor(person, username, password, totalHours = 0) {
     // Call the parent class constructor using super
     super(
@@ -16,19 +16,17 @@ class User extends Person {
     this.username = username;
     this.password = password;
     this.totalHours = totalHours;
+
+    // set permissions
+    this.permissions = Person.PERMISSIONS.VOLUNTEER;
   }
 
-  login() {
-    console.log(`${this.username} has logged in.`);
-    //TODO login the user
+  getPermissions() {
+    return this.permissions;
   }
 
   // Overriding a method from the Person class
   pwd() {
     console.log("This is in the User class.");
-  }
-
-  getPermissions(){
-    return Person.PERMISSIONS.USER;
   }
 }

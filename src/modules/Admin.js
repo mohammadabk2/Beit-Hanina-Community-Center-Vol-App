@@ -12,17 +12,16 @@ class Admin extends Person {
       person.insurance
     );
 
-     // Additional properties for Admin
+    // Additional properties for Admin
     this.username = username;
     this.password = password;
+
+    // set permissions
+    this.permissions = Person.PERMISSIONS.ADMIN;
   }
 
-  login() {
-    console.log(`${this.username} has logged in.`);
-    //TODO login the Admin
-  }
-  getPermissions(){
-    return Person.PERMISSIONS.ADMIN;
+  getPermissions() {
+    return this.permissions;
   }
 
   // Overriding a method from the Person class

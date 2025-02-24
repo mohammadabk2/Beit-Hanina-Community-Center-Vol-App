@@ -1,5 +1,5 @@
 // Org class inherits from Person
-class Admin extends Person {
+class Organizer extends Person {
   constructor(person, username, password) {
     // Call the parent class constructor using super
     super(
@@ -15,15 +15,13 @@ class Admin extends Person {
     // Additional properties for Org
     this.username = username;
     this.password = password;
+
+    // set permissions
+    this.permissions = Person.PERMISSIONS.ORGANIZER;
   }
 
-  login() {
-    console.log(`${this.username} has logged in.`);
-    //TODO login the Org
-  }
-
-  getPermissions(){
-    return Person.PERMISSIONS.ORGANIZER;
+  getPermissions() {
+    return this.permissions;
   }
 
   // Overriding a method from the Person class
