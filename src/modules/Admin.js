@@ -1,6 +1,8 @@
 // Admin class inherits from Person
 class Admin extends Person {
-  constructor(person, username, password) {
+  #permissions;
+
+  constructor(person) {
     // Call the parent class constructor using super
     super(
       person.name,
@@ -12,16 +14,12 @@ class Admin extends Person {
       person.insurance
     );
 
-    // Additional properties for Admin
-    this.username = username;
-    this.password = password;
-
     // set permissions
-    this.permissions = Person.PERMISSIONS.ADMIN;
+    this.#permissions = Person.PERMISSIONS.ADMIN;
   }
 
   getPermissions() {
-    return this.permissions;
+    return this.#permissions;
   }
 
   // Overriding a method from the Person class

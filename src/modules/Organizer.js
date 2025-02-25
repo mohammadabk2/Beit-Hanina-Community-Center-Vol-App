@@ -1,6 +1,10 @@
 // Org class inherits from Person
 class Organizer extends Person {
-  constructor(person, username, password) {
+
+  #permissions;
+  #org_name;
+
+  constructor(person,org_name) {
     // Call the parent class constructor using super
     super(
       person.name,
@@ -12,16 +16,14 @@ class Organizer extends Person {
       person.insurance
     );
 
-    // Additional properties for Org
-    this.username = username;
-    this.password = password;
-
+    // extra properties
+    this.#org_name= org_name;
     // set permissions
-    this.permissions = Person.PERMISSIONS.ORGANIZER;
+    this.#permissions = Person.PERMISSIONS.ORGANIZER;
   }
 
   getPermissions() {
-    return this.permissions;
+    return this.#permissions;
   }
 
   // Overriding a method from the Person class

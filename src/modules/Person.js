@@ -1,15 +1,39 @@
 class Person {
   // full constructor
+
+  #name;
+  #birthdate;
+  #sex;
+  #address;
+  #phone;
+  #id_num;
+  #insurance;
+  #permissions;
+
+  #username;
+  #password;
+
   constructor(name, birthdate, sex, address, phone, id_num, insurance) {
-    this.name = name;
-    this.birthdate = birthdate;
-    this.sex = sex;
-    this.address = address;
-    this.phone = phone;
-    this.id_num = id_num;
-    this.insurance = insurance;
+    this.#name = name;
+    this.#birthdate = birthdate;
+    this.#sex = sex;
+    this.#address = address;
+    this.#phone = phone;
+    this.#id_num = id_num;
+    this.#insurance = insurance;
     //TODO add picture support here
-    this.permissions = []; // stars with no permssions
+  }
+
+  setUserName(username) {
+    this.#username = username;
+  }
+
+  getUserName() {
+    return this.#username;
+  }
+
+  setPassword(password) {
+    this.#password = password;
   }
 
   pwd() {
