@@ -1,3 +1,7 @@
+/* index.css */
+
+@import url('global.css');
+
 body {
     background-image: url('../../public/assets/logo.png');
     background-size: cover; /* Ensures the image covers the entire background */
