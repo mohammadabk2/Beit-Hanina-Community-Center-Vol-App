@@ -23,7 +23,7 @@ class PersonFactory {
 
     // todo generate username based on name and if its free
     let username = "john doe";
-    // todo generate random one time password
+    // todo generate random password
     let password = "password";
 
     person.setUserName(username);
@@ -37,7 +37,7 @@ class PersonFactory {
       case "Admin":
         return new Admin(person);
       default:
-        throw new Error("Invalid person type");
+        throw new Error("Invalid User type");
     }
   }
 }

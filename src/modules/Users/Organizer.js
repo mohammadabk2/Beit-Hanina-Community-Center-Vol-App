@@ -3,6 +3,7 @@ class Organizer extends Person {
 
   #permissions;
   #org_name;
+  #tags;
 
   constructor(person,org_name) {
     // Call the parent class constructor using super
@@ -18,12 +19,17 @@ class Organizer extends Person {
 
     // extra properties
     this.#org_name= org_name;
+    this.#tags = [];
     // set permissions
     this.#permissions = Person.PERMISSIONS.ORGANIZER;
   }
 
   getPermissions() {
     return this.#permissions;
+  }
+
+  #addTag(tag){
+    this.#tags.push(tag);
   }
 
   // Overriding a method from the Person class

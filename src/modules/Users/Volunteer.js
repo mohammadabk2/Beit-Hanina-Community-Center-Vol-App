@@ -3,6 +3,7 @@ class Volunteer extends Person {
 
   #totalHours;
   #permissions;
+  #tags;
 
   constructor(person, totalHours = 0) {
     // Call the parent class constructor using super
@@ -17,13 +18,17 @@ class Volunteer extends Person {
     );
 
     this.#totalHours = totalHours;
-
+    this.#tags = [];
     // set permissions
     this.#permissions = Person.PERMISSIONS.VOLUNTEER;
   }
 
   getPermissions() {
     return this.#permissions;
+  }
+
+  #addTag(tag){
+    this.#tags.push(tag);
   }
 
   // Overriding a method from the Person class

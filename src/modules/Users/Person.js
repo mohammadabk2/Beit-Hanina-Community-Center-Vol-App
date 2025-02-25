@@ -8,7 +8,6 @@ class Person {
   #phone;
   #id_num;
   #insurance;
-  #permissions;
 
   #username;
   #password;
@@ -24,7 +23,7 @@ class Person {
     //TODO add picture support here
   }
 
-  setUserName(username) {
+  #setUserName(username) {
     this.#username = username;
   }
 
@@ -32,7 +31,7 @@ class Person {
     return this.#username;
   }
 
-  setPassword(password) {
+  #setPassword(password) {
     this.#password = password;
   }
 
