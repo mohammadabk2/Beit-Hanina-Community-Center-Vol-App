@@ -1,6 +1,6 @@
 # Features
 
-1. 3 types of main users (Admin,Orgnizer,User).
+1. 3 types of main users (Admin,Orgnizer,Volunteer).
 
 1. sign up page for Orgnizer and User.
 
