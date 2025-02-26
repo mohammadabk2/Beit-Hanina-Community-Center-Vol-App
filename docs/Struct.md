@@ -19,14 +19,8 @@ Beit-Hanina-Community-Center-Vol-App/
 │   ├── README.ms
 │   └── service-worker.js
 ├── src/
-│   ├── controllers/
-│   │   └── empty
-│   ├── database/
-│   │   ├── db.js
-│   │   ├── dbbuild.js
-│   │   └── dbbuild.sql
-│   ├── middlewares/
-│   │   └── verifyToken.js
+│   ├── components/
+│   │   └── (your component files)
 │   ├── deprecated/
 |   |   ├── Users/
 │   │   |  ├── Admin.js
@@ -34,7 +28,7 @@ Beit-Hanina-Community-Center-Vol-App/
 │   │   |  ├── Person.js
 |   |   |  ├── PersonFactory.js
 │   │   |  └── Volunteer.js
-│   └── app.js
+│   └── (other existing files)
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
