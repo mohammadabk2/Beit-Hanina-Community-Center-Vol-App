@@ -7,11 +7,12 @@ Beit-Hanina-Community-Center-Vol-App/
 ├── public/
 │   ├── assets/
 |   |   ├──logo.png
+│   ├── src/
 │   └── service-worker.js
 ├── src/
 │   ├── components/
 │   │   └── (your component files)
-│   ├── models/
+│   ├── deprecated/
 |   |   ├── Users/
 │   │   |  ├── Admin.js
 │   │   |  ├── Orgnizer.js

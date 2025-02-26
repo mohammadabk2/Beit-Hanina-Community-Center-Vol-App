@@ -1,7 +1,22 @@
 {
+  "name": "eventflow",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dbbuild": "node src/database/dbbuild.js"
+  },
+  "author": "Mohammad abu khdier, Jad Jaraisy, Husam Halawani, Husam Halawani, Mohammad Tbakhy",
+  "license": "ISC",
   "dependencies": {
-    "next": "^15.1.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "path": "^0.12.7",
+    "pg": "^8.7.3"
   }
 }
