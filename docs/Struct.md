@@ -5,32 +5,32 @@ This document outlines the structure of the Beit Hanina Community Center Volunte
 ```
 Beit-Hanina-Community-Center-Vol-App/
 ├── public/
-│   ├── icon.png
-│   └── (other static assets)
+│   ├── assets/
+|   |   ├──logo.png
+│   ├── src/
+│   └── service-worker.js
 ├── src/
 │   ├── components/
 │   │   └── (your component files)
-│   ├── models/
-│   │   ├── Person.ts
-│   │   ├── User.ts
-│   │   ├── Org.ts
-│   │   └── Admin.ts
+│   ├── deprecated/
+|   |   ├── Users/
+│   │   |  ├── Admin.js
+│   │   |  ├── Orgnizer.js
+│   │   |  ├── Person.js
+|   |   |  ├── PersonFactory.js
+│   │   |  └── Volunteer.js
 
 │   ├── pages/
-│   │   ├── api/
-│   │   │   └── hello.ts
-│   │   ├── _app.tsx
-│   │   ├── _document.tsx
-│   │   └── index.tsx
+│   │   ├── about.js
+│   │   └── index.js
 │   ├── styles/
-│   │   ├── Home.module.css
+│   │   ├── index.css
 │   │   └── globals.css
 │   └── (other existing files)
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
 ├── README.md
-├── tsconfig.json
 └── next.config.js
 ```
 
