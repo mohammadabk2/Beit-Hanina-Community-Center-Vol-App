@@ -1,6 +1,5 @@
 // Student class inherits from Person
 class Volunteer extends Person {
-
   #totalHours;
   #permissions;
   #tags;
@@ -9,11 +8,11 @@ class Volunteer extends Person {
     // Call the parent class constructor using super
     super(
       person.name,
-      person.birthdate,
+      person.birthDate,
       person.sex,
       person.address,
-      person.phone,
-      person.id_num,
+      person.phoneNumber,
+      person.idNumber,
       person.insurance
     );
 
@@ -27,8 +26,25 @@ class Volunteer extends Person {
     return this.#permissions;
   }
 
-  #addTag(tag){
+  #incrementTotalHours(hour) {
+    this.#totalHours += hour;
+  }
+
+  #addTag(tag) {
     this.#tags.push(tag);
+  }
+
+  #getTags() {
+    return this.#tags;
+  }
+
+  #removeTag(tag) {
+    const index = this.#tags.indexOf(tag);
+    if (-1 !== index) {
+      this.#tags.splice(index, 1);
+    } else {
+      throw new Error("tag is not a valid tag in Tags");
+    }
   }
 
   // Overriding a method from the Person class

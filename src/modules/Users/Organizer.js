@@ -1,11 +1,10 @@
 // Org class inherits from Person
 class Organizer extends Person {
-
   #permissions;
-  #org_name;
+  #orgName;
   #tags;
 
-  constructor(person,org_name) {
+  constructor(person, org_name) {
     // Call the parent class constructor using super
     super(
       person.name,
@@ -18,18 +17,35 @@ class Organizer extends Person {
     );
 
     // extra properties
-    this.#org_name= org_name;
+    this.#orgName = orgName;
     this.#tags = [];
     // set permissions
     this.#permissions = Person.PERMISSIONS.ORGANIZER;
+  }
+
+  #setOrgName() {
+    this.#orgName = orgName;
   }
 
   getPermissions() {
     return this.#permissions;
   }
 
-  #addTag(tag){
+  #addTag(tag) {
     this.#tags.push(tag);
+  }
+
+  #getTags() {
+    return this.#tags;
+  }
+
+  #removeTag(tag) {
+    const index = this.#tags.indexOf(tag);
+    if (-1 !== index) {
+      this.#tags.splice(index, 1);
+    } else {
+      throw new Error("tag is not a valid tag in Tags");
+    }
   }
 
   // Overriding a method from the Person class

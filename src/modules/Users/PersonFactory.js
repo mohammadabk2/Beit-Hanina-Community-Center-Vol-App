@@ -4,20 +4,20 @@ class PersonFactory {
   static createPerson(
     type,
     name,
-    birthdate,
+    birthDate,
     sex,
     address,
-    phone,
-    id_num,
+    phoneNumber,
+    idNumber,
     insurance
   ) {
     const person = new Person(
       name,
-      birthdate,
+      birthDate,
       sex,
       address,
-      phone,
-      id_num,
+      phoneNumber,
+      idNumber,
       insurance
     );
 

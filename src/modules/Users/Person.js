@@ -2,32 +2,88 @@ class Person {
   // full constructor
 
   #name;
-  #birthdate;
+  #birthDate;
   #sex;
   #address;
-  #phone;
-  #id_num;
+  #phoneNumber;
+  #idNumber;
   #insurance;
 
   #username;
   #password;
 
-  constructor(name, birthdate, sex, address, phone, id_num, insurance) {
+  constructor(name, birthDate, sex, address, phoneNumber, idNumber, insurance) {
     this.#name = name;
-    this.#birthdate = birthdate;
+    this.#birthDate = birthDate;
     this.#sex = sex;
     this.#address = address;
-    this.#phone = phone;
-    this.#id_num = id_num;
+    this.#phoneNumber = phone;
+    this.#idNumber = idNumber;
     this.#insurance = insurance;
-    //TODO add picture support here
+    //TODO add id pic here maybe
+  }
+
+  #setName(name) {
+    this.#name = name;
+  }
+
+  #getName() {
+    return this.#name;
+  }
+
+  #setBirthDate(birthDate) {
+    this.#birthDate = birthDate;
+  }
+
+  #getBirthDate() {
+    return this.#birthDate;
+  }
+
+  #setSex(sex) {
+    this.#sex = sex;
+  }
+
+  #getSex() {
+    return this.#sex;
+  }
+
+  #setAddress(address) {
+    this.#address = address;
+  }
+
+  #getAddress() {
+    return this.#address;
+  }
+
+  #setPhone(phone) {
+    this.#phoneNumber = phoneNumber;
+  }
+
+  #getPhoneNumber() {
+    return this.#phoneNumber;
+  }
+
+  #setID(idNumber) {
+    this.#idNumber = idNumber;
+  }
+
+  #getIDNumber() {
+    return this.idNumber;
+  }
+
+  #setInsurance(insurance) {
+    this.#insurance = insurance;
+  }
+
+  #getInsurance(){
+    return this.#insurance;
   }
 
   #setUserName(username) {
     this.#username = username;
   }
 
-  getUserName() {
+  #getUserName() {
     return this.#username;
   }
 
