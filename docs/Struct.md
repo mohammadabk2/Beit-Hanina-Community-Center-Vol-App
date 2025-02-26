@@ -6,8 +6,17 @@ This document outlines the structure of the Beit Hanina Community Center Volunte
 Beit-Hanina-Community-Center-Vol-App/
 ├── public/
 │   ├── assets/
-|   |   ├──logo.png
+|   |   ├──logo.jpg
 │   ├── src/
+│   │   ├── pages/
+│   │   │   ├── about.js
+│   │   │   └──index.js
+│   |   ├── styles/
+│   │   |   ├── globals.css
+│   │   |   └── index.css
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.ms
 │   └── service-worker.js
 ├── src/
 │   ├── components/
@@ -19,19 +28,11 @@ Beit-Hanina-Community-Center-Vol-App/
 │   │   |  ├── Person.js
 |   |   |  ├── PersonFactory.js
 │   │   |  └── Volunteer.js
-
-│   ├── pages/
-│   │   ├── about.js
-│   │   └── index.js
-│   ├── styles/
-│   │   ├── index.css
-│   │   └── globals.css
 │   └── (other existing files)
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-├── README.md
-└── next.config.js
+└── README.md
 ```
 
 ## Directory and File Descriptions
