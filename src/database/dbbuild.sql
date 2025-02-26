@@ -1,16 +1,16 @@
-CREATE TABLE person
+CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     birth_date DATE NOT NULL,
     sex CHAR(1) NOT NULL,
-    phoneNumber VARCHAR(15) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
     email TEXT NOT NULL,
     address VARCHAR(255) NOT NULL,
     insurance VARCHAR(50),
-    idNumber VARCHAR(20) NOT NULL UNIQUE,
+    id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
-    passwordHash VARCHAR(255)
+    password_hash VARCHAR(255)
 );
 
 CREATE TABLE role (
@@ -18,21 +18,22 @@ CREATE TABLE role (
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE person_role (
-    person_id INT REFERENCES person(id) ON DELETE CASCADE,
+CREATE TABLE user_role (
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
     role_id INT REFERENCES role(id) ON DELETE CASCADE,
-    PRIMARY KEY (person_id, role_id)
+    PRIMARY KEY (user_id, role_id)
 );
 
 CREATE TABLE volunteer (
-    person_id INT PRIMARY KEY REFERENCES person(id) ON DELETE CASCADE,
+    user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     total_hours INT DEFAULT 0,
     tags TEXT[]
 );
 
 CREATE TABLE organizer (
-    person_id INT PRIMARY KEY REFERENCES person(id) ON DELETE CASCADE,
+    user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     org_name VARCHAR(100) NOT NULL,
+    given_hours INT DEFAULT 0,
     tags TEXT[]
 );
 
@@ -40,11 +41,11 @@ CREATE TABLE organizer (
 INSERT INTO role (name) VALUES ('ADMIN'), ('VOLUNTEER'), ('ORGANIZER');
 
 -- example
--- INSERT INTO person (name, birth_date, sex, address, phone_number, id_number, insurance, username, password)
+-- INSERT INTO users (name, birth_date, sex, address, phone_number, id_number, insurance, username, password_hash)
 -- VALUES ('John Doe', '1990-01-01', 'M', '123 Main St', '123-456-7890', 'ID12345', 'Health Insurance', 'johndoe', 'password123');
 
--- Assign roles to the inserted person
--- INSERT INTO person_role (person_id, role_id)
--- SELECT id, (SELECT id FROM role WHERE name = 'ADMIN') FROM inserted_person;
--- INSERT INTO person_role (person_id, role_id)
--- SELECT id, (SELECT id FROM role WHERE name = 'ORGANIZER') FROM inserted_person;
+-- Assign roles to the inserted user
+-- INSERT INTO user_role (user_id, role_id)
+-- SELECT id, (SELECT id FROM role WHERE name = 'ADMIN') FROM inserted_user;
+-- INSERT INTO user_role (user_id, role_id)
+-- SELECT id, (SELECT id FROM role WHERE name = 'ORGANIZER') FROM inserted_user;
