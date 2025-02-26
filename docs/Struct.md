@@ -22,7 +22,9 @@ Beit-Hanina-Community-Center-Vol-App/
 │   ├── controllers/
 │   │   └── empty
 │   ├── database/
-│   │   └── empty
+│   │   ├── db.js
+│   │   ├── dbbuild.js
+│   │   └── dbbuild.sql
 │   ├── middlewares/
 │   │   └── verifyToken.js
 │   ├── deprecated/
