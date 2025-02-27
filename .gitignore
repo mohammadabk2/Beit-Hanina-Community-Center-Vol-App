@@ -1,6 +1,7 @@
 # add files that shouldnt be uploaded to remote
 /node_modules
-/public/node_modules
+/client/node_modules
+/client/build
 
 
 npm-debug.log*
