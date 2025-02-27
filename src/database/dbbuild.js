@@ -452,20 +452,21 @@ async function createOrganizer(userId, orgName, tags = ["org"]) {
   return res.rows[0];
 }
 
+// ! all the tests performed only verify that the query is valid and not the function it self.
 module.exports = {
-  getUserByLogin,
+  getUserByLogin, // tested
   createUser, // tested
   getUserById, // tested
   assignRoleToUser,
-  getVolunteerDetailsById,
-  getOrganizerDetailsById,
+  getVolunteerDetailsById, // tested
+  getOrganizerDetailsById, // tested
   createVolunteer, // tested
   createOrganizer, // tested
   removeTagFromOrganizer, // tested
   addTagToOrganizer, // tested
   updateOrgName, // tested
-  incrementGivenHours,
-  incrementTotalHours,
+  incrementGivenHours, // tested
+  incrementTotalHours, // tested
   addTagToVolunteer, // tested
   updateUser,
   removeTagFromVolunteer, // tested
