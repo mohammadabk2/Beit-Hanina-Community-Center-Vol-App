@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dbbuild": "node src/database/dbbuild.js"
+    "dbbuild": "node src/database/dbbuild.js",
+    "build": "cd client && npm install && npm run build"
   },
   "author": "Mohammad abu khdier, Jad Jaraisy, Husam Halawani, Husam Halawani, Mohammad Tbakhy",
   "license": "ISC",
@@ -14,9 +15,15 @@
     "body-parser": "^1.20.0",
     "compression": "^1.7.4",
     "dotenv": "^16.0.1",
+    "exceljs": "^4.4.0",
     "express": "^4.18.1",
     "jsonwebtoken": "^9.0.2",
     "path": "^0.12.7",
-    "pg": "^8.13.3"
+    "pg": "^8.13.3",
+    "xlsx": "^0.18.5",
+    "workbox-webpack-plugin": "^6.1.5"
+  },
+  "devDependencies": {
+    "workbox-webpack-plugin": "^7.3.0"
   }
 }
