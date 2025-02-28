@@ -1,5 +1,5 @@
 # Structure of files
-
+```
 .
 ├── client
 │   ├── assets
@@ -41,11 +41,15 @@
 ├── src
 │   ├── app.js
 │   ├── controllers
-│   │   └── index.js
+│   │   ├── index.js
+│   │   ├── register.js
+│   │   └── validation.js
 │   ├── database
 │   │   ├── dbbuild.js
 │   │   ├── dbbuild.sql
-│   │   └── db.js
+│   │   ├── db.js
+│   │   └── validation
+│   │       └── users.js
 │   ├── deprecated
 │   │   └── Users
 │   │       ├── Admin.js
@@ -59,4 +63,5 @@
 │   └── test.txt
 └── workbox-config.js
 
-18 directories, 39 files
+19 directories, 42 files
+```

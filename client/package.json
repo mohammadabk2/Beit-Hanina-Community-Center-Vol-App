@@ -19,6 +19,7 @@
     "web-vitals": "^4.2.4",
     "workbox-webpack-plugin": "^6.1.5"
   },
+  "author": "Mohammad abu khdier, Jad Jaraisy, Husam Halawani, Husam Halawani, Mohammad Tbakhy",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npx workbox injectManifest ../workbox-config.js",
