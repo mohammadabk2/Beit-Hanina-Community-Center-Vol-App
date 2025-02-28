@@ -12,10 +12,14 @@
 │   │   └── manifest.json
 │   ├── README.md
 │   └── src
+│       ├── App.css
+│       ├── App.js
 │       ├── index.js
 │       ├── pages
-│       │   └── about.js
-│       └── service-worker.js
+│       │   ├── about.js
+│       │   └── index.js
+│       ├── service-worker.js
+│       └── Signup.js
 ├── docs
 │   ├── digrams
 │   │   ├── image.png
@@ -38,8 +42,11 @@
 ├── scripts
 │   ├── generate_file_struct.sh
 │   └── setup_app.sh
+├── SECURITY.md
 ├── src
 │   ├── app.js
+│   ├── components
+│   │   └── SignUpForm.js
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
@@ -57,11 +64,12 @@
 │   │       ├── PersonFactory.js
 │   │       ├── Person.js
 │   │       └── Volunteer.js
+│   ├── index.js
 │   └── middlewares
 │       └── verifyToken.js
 ├── tests
 │   └── test.txt
 └── workbox-config.js
 
-19 directories, 42 files
+20 directories, 49 files
 ```
