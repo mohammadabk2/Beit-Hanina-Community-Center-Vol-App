@@ -2,6 +2,7 @@ const { Pool } = require('pg');
 
 // Database connection configuration
 //TODO: setup the database on the server and then get these details
+// TODO get all these from .en
 const pool = new Pool({
   user: 'your_database_user',
   host: 'localhost',
