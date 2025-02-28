@@ -14,12 +14,15 @@
 │   └── src
 │       ├── App.css
 │       ├── App.js
+│       ├── components
+│       │   ├── SignUpForm.js
+│       │   └── Signup.js
 │       ├── index.js
 │       ├── pages
-│       │   ├── about.js
-│       │   └── index.js
-│       ├── service-worker.js
-│       └── Signup.js
+│       │   ├── About.js
+│       │   ├── Home.js
+│       │   └── Settings.js
+│       └── service-worker.js
 ├── docs
 │   ├── digrams
 │   │   ├── image.png
@@ -45,8 +48,6 @@
 ├── SECURITY.md
 ├── src
 │   ├── app.js
-│   ├── components
-│   │   └── SignUpForm.js
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
@@ -64,7 +65,6 @@
 │   │       ├── PersonFactory.js
 │   │       ├── Person.js
 │   │       └── Volunteer.js
-│   ├── index.js
 │   └── middlewares
 │       └── verifyToken.js
 ├── tests
