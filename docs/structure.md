@@ -47,7 +47,6 @@
 │   └── setup_app.sh
 ├── SECURITY.md
 ├── src
-│   ├── app.js
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
@@ -65,8 +64,9 @@
 │   │       ├── PersonFactory.js
 │   │       ├── Person.js
 │   │       └── Volunteer.js
-│   └── middlewares
-│       └── verifyToken.js
+│   ├── middlewares
+│   │   └── verifyToken.js
+│   └── server.js
 ├── tests
 │   └── test.txt
 └── workbox-config.js
