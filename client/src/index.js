@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import './App.css';
+import App from './App';
 
-const HomePage = () => {
-    return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <h1>Welcome to the Beit Hanina Community Center Volunteer App!</h1>
-            <p>We appreciate your contribution to our community.</p>
-        </div>
-    );
-};
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-export default HomePage;
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
