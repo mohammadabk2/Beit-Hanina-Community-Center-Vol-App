@@ -2,10 +2,10 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const compression = require("compression");
-// const controllers = require("./src/controllers");
 const controllers = require("./controllers");
-require("dotenv").config({ path: path.join(__dirname, ".env") });
+const dotenv = require('dotenv');
 
+dotenv.config({ path: path.join(__dirname, '../.env') });
 const app = express();
 const PORT = process.env.PORT || 4000;
 
