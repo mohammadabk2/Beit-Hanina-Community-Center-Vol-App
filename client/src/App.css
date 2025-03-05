@@ -1,8 +1,7 @@
 :root {
-  --common-colour-1: #ffefdc;
+  --common-colour-1: #f5f5f5;
   --common-colour-2: #000000;
   --common-colour-3: #0000001a;
-
 }
 
 .App {
@@ -96,7 +95,7 @@ body {
 
 .dropdown-item a {
   text-decoration: none;
-  color: black;
+  color: var(--common-colour-2);
   display: block;
   padding: 8px 16px;
 }
