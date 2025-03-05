@@ -8,11 +8,13 @@ import DynamicButton from "./components/ButtonComponent";
 // TODO:
 // import About from './pages/About';
 // import Settings from './pages/Settings';
+// add language button
 
 function App() {
   const [username, setUserName] = useState("");
   const [password , setPassword] = useState("");
 
+  //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) =>{
     setUserName(event.target.value);
   }
@@ -31,8 +33,10 @@ function App() {
     console.log("sign up button clicked");
   };
 
+
   return (
-    <div className="App">
+    <div className="App Flex-container">
+      <DynamicButton className="Language-button" text="Ln"/>
       <header className="App-header">
         <h1>Beit Hanina Community Center Volunteer App</h1>
       </header>
@@ -45,13 +49,14 @@ function App() {
         {/* Add other routes here */}
         {/* </Switch> */}
 
-        <div className="Sign-in-box">
+        <div className="Sign-in-box Flex-container Smooth-shadow-box">
           <h2>Welcome to Beit Hanina Community Center</h2>
-          <div className="Input-field-box">
+          <div className="Input-field-box Flex-container">
             <DynamicInput
               className="Input-field"
               type="text"
               value={username}
+              name="username-field"
               onChange={handleUserName}
               placeholder="Enter UserName"
             />
@@ -59,12 +64,12 @@ function App() {
               className="Input-field"
               type="password"
               value={password}
+              name="password-field"
               onChange={handlePassword}
               placeholder="Enter Password"
             />
           </div>
-
-          <div className="Button-box">
+          <div className="Button-box Flex-container">
             <DynamicButton className="Button" onClick={signIn} text="Sign in" />
             <DynamicButton className="Button" onClick={signUp} text="Sign up" />
           </div>

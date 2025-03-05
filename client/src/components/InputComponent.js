@@ -9,6 +9,7 @@ const DynamicInput = ({
   name,
   className,
   style,
+  id,
 }) => {
   return (
     <input
@@ -19,6 +20,7 @@ const DynamicInput = ({
       name={name}
       className={className}
       style={style}
+      id={id}
     />
   );
 };
@@ -31,6 +33,7 @@ DynamicInput.propTypes = {
   name: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
+  id: PropTypes.string,
 };
 
 export default DynamicInput;
