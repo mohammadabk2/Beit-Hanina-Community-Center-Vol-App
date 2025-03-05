@@ -1,20 +1,24 @@
 # Structure of files
 ```
 .
+├── README.md
+├── SECURITY.md
 ├── client
+│   ├── README.md
 │   ├── assets
 │   │   └── logo.jpg
-│   ├── package.json
 │   ├── package-lock.json
+│   ├── package.json
 │   ├── public
 │   │   ├── favicon.ico
 │   │   ├── index.html
 │   │   └── manifest.json
-│   ├── README.md
 │   └── src
 │       ├── App.css
 │       ├── App.js
 │       ├── components
+│       │   ├── ButtonComponent.js
+│       │   ├── InputComponent.js
 │       │   ├── SignUpForm.js
 │       │   └── Signup.js
 │       ├── index.js
@@ -39,30 +43,28 @@
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
-├── package.json
 ├── package-lock.json
-├── README.md
+├── package.json
 ├── scripts
 │   ├── generate_file_struct.sh
 │   └── setup_app.sh
-├── SECURITY.md
 ├── src
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
 │   │   └── validation.js
 │   ├── database
+│   │   ├── db.js
 │   │   ├── dbbuild.js
 │   │   ├── dbbuild.sql
-│   │   ├── db.js
 │   │   └── validation
 │   │       └── users.js
 │   ├── deprecated
 │   │   └── Users
 │   │       ├── Admin.js
 │   │       ├── Organizer.js
-│   │       ├── PersonFactory.js
 │   │       ├── Person.js
+│   │       ├── PersonFactory.js
 │   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
@@ -71,5 +73,5 @@
 │   └── test.txt
 └── workbox-config.js
 
-20 directories, 49 files
+21 directories, 51 files
 ```

@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import components here
 import Home from "./pages/Home";
 // TODO:
-// import Header from './components/Header';
-// import Footer from './components/Footer';
 // import About from './pages/About';
 // import Settings from './pages/Settings';
+let username, password;
+
 function App() {
   return (
     <div className="App">
@@ -23,7 +23,18 @@ function App() {
           {/* Add other routes here */}
         {/* </Switch> */}
         
-        <h2>Welcome to Beit Hanina Community Center</h2>
+
+        <div className="Sign-in-box">
+          <h2>Welcome to Beit Hanina Community Center</h2>
+          <div className="Input-field-box">
+            <input className="Input-field" placeholder="Username" type="text" value={username}></input>
+            <input className="Input-field" placeholder="Password" type="password" value={password}></input>
+          </div>
+          <div className="Button-box">
+            <button className="Button">Sign in</button>
+            <button className="Button">Sign up</button>
+          </div>
+        </div>
       </main>
     </div>
   );

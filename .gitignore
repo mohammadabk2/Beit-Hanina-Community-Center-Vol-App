@@ -1,14 +1,15 @@
-# add files that shouldnt be uploaded to remote
+#add files that shouldnt be uploaded to remote
 /node_modules
 /client/node_modules
 /client/build
+/public/node_modules
 
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# misc
+#misc
 .DS_Store
 .env
 .env.local

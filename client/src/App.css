@@ -7,6 +7,30 @@
     padding: 20px;
     color: white;
   }
+
+  .Flex-container {
+    display: flex;
+  }
+
+  .Sign-in-box {
+    flex-direction: row;
+  }
+
+  .Input-field-box {
+    flex-direction: row;
+  }
+
+  .Button-box {
+    flex-direction: column;
+  }
+
+  .Button {
+    margin: 1rem;
+  }
+
+  .Input-field {
+    margin: 1rem;
+  }
   
   form {
     display: flex;
