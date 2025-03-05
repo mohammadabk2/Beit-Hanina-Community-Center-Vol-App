@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
+import DropDownMenu from "./components/DropDownMenu";
 
 // TODO:
 // import About from './pages/About';
@@ -12,31 +13,47 @@ import DynamicButton from "./components/ButtonComponent";
 
 function App() {
   const [username, setUserName] = useState("");
-  const [password , setPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   //TODO these could be changed so that it doesnt save the value each letter
-  const handleUserName = (event) =>{
+  const handleUserName = (event) => {
     setUserName(event.target.value);
-  }
+  };
 
-  const handlePassword = (event) =>{
+  const handlePassword = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
   const signIn = (event) => {
     console.log("sign in button clicked");
     console.log(username);
-    console.log(password);
+    console.log(password); //! testing only remove security risk
   };
 
   const signUp = (event) => {
     console.log("sign up button clicked");
   };
 
+  const options = [
+    {
+      label: "ar",
+      href: "#option1",
+      onClick: () => console.log("Arabic clicked"),
+    },
+    {
+      label: "en",
+      href: "#option2",
+      onClick: () => console.log("English clicked"),
+    },
+    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
+  ];
 
   return (
     <div className="App Flex-container">
-      <DynamicButton className="Language-button" text="Ln"/>
+      <div className="Drop-down">
+        <DropDownMenu className="Language-button" text="Ln" options={options} />
+      </div>
       <header className="App-header">
         <h1>Beit Hanina Community Center Volunteer App</h1>
       </header>
