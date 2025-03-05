@@ -125,7 +125,6 @@ async function updateUser(userId, updates) {
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
-
 async function getUserByLogin(username, hash) {
   const text =
     "SELECT id FROM users WHERE username = $1 AND password_hash = $2;";
@@ -137,7 +136,7 @@ async function getUserByLogin(username, hash) {
  * Retrieves a user from the database by Serial ID.
  *
  * @async
- * @param {Int} id - The username of the user.
+ * @param {Int} id - The Serial ID of the user.
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
@@ -147,7 +146,14 @@ async function getUserById(id) {
   return res.rows[0];
 }
 
-//TODO create doc string
+/**
+ * Retrieves a user from the database by ID Number.
+ *
+ * @async
+ * @param {Int} id - The ID Number of the user.
+ * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
+ * @throws {Error} If the database query fails.
+ */
 async function getUserByIdNumber(id) {
   const text = "SELECT id FROM users WHERE id_number = $1;";
   const res = await db.query(text, [id]);
@@ -183,7 +189,7 @@ async function assignRoleToUser(userId, roleName) {
 }
 
 /**
- * Retrieves volunteer details (total hours and tags) for a user by their ID.
+ * Retrieves volunteer details (total hours and Orgs name) for a user by their ID.
  *
  * @async
  * @param {number} id - The ID of the user.
@@ -200,7 +206,7 @@ async function getVolunteerDetailsById(id) {
 }
 
 /**
- * Retrieves organizer details (organization name and tags) for a user by their ID.
+ * Retrieves organizer details (organization name and vol_id) for a user by their ID.
  *
  * @async
  * @param {number} id - The ID of the user.
@@ -249,7 +255,7 @@ async function createVolunteer(userId, totalHours = 0) {
 async function addOrgToVolunteer(userId, tag) {
   const text = `
       UPDATE volunteer
-      SET tags = array_append(COALESCE(orgs, '{}'), $2)
+      SET orgs = array_append(COALESCE(orgs, '{}'), $2)
       WHERE user_id = $1
       RETURNING *;
     `;
@@ -362,7 +368,7 @@ async function updateOrgName(userId, newOrgName) {
 async function addVolToOrganizer(userId, vol) {
   const text = `
       UPDATE organizer
-      SET tags = array_append(COALESCE(tags, '{}'), $2)
+      SET vol_id = array_append(COALESCE(vol_id, '{}'), $2)
       WHERE user_id = $1
       RETURNING *;
     `;
@@ -384,7 +390,6 @@ async function addVolToOrganizer(userId, vol) {
  * @async
  * @param {number} userId - The ID of the user.
  * @param {string} orgName - The name of the organization.
- * @param {Array<string>} [tags=[]] - Tags associated with the organizer.
  * @returns {Promise<Object>} A promise that resolves to the newly created organizer object.
  * @throws {Error} If the database query fails.
  */
