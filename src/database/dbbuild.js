@@ -1,5 +1,7 @@
 // to interact with the database
 
+//TODO change some functions to be universal to vol and org tables
+
 const db = require("./db");
 
 /**
@@ -7,13 +9,13 @@ const db = require("./db");
  *
  * @async
  * @param {string} name - The full name of the user.
- * @param {string} birthDate - The birth date of the user (YYYY-MM-DD).
+ * @param {Date} birthDate - The birth date of the user (YYYY-MM-DD).
  * @param {string} sex - The gender of the user (e.g., 'M' or 'F').
- * @param {string} phoneNumber - The user's phone number.
+ * @param {Int} phoneNumber - The user's phone number.
  * @param {string} email - The user's email address.
  * @param {string} address - The user's home address.
  * @param {string} insurance - The user's insurance provider.
- * @param {string} idNumber - The user's government ID number.
+ * @param {Int} idNumber - The user's government ID number.
  * @param {string} username - The chosen username for the user.
  * @param {string} passwordHash - The hashed password.
  * @returns {Promise<Object>} A promise that resolves to the newly created user object.
@@ -126,7 +128,7 @@ async function updateUser(userId, updates) {
 
 async function getUserByLogin(username, hash) {
   const text =
-    "SELECT * FROM users WHERE username = $1 AND password_hash = $2;";
+    "SELECT id FROM users WHERE username = $1 AND password_hash = $2;";
   const res = await db.query(text, [username, hash]);
   return res.rows[0];
 }
@@ -145,36 +147,38 @@ async function getUserById(id) {
   return res.rows[0];
 }
 
+//TODO create doc string
+async function getUserByIdNumber(id) {
+  const text = "SELECT id FROM users WHERE id_number = $1;";
+  const res = await db.query(text, [id]);
+  return res.rows[0];
+}
+
 /**
  * Assigns a role to a user by inserting an entry into the `user_role` table.
  *
  * @async
  * @param {number} userId - The ID of the user.
- * @param {string} roleName - The name of the role to assign.
+ * @param {string} roleName - The name of the role to assign (Admin,Org,Vol).
  * @returns {Promise<Object|null>} A promise that resolves to the assigned role object if successful, or null if not.
  * @throws {Error} If the database query fails.
  */
 async function assignRoleToUser(userId, roleName) {
   const text = `
-      WITH role_cte AS (
-        SELECT id FROM role WHERE name = $1
-      )
-      INSERT INTO user_role (user_id, role_id)
-      SELECT $2, id FROM role_cte
-      RETURNING *;
-    `;
+  UPDATE users
+  SET role = array_append(COALESCE(role, '{}'), $2)
+  WHERE user_id = $1
+  RETURNING *;
+`;
 
-  const values = [roleName, userId];
+  const values = [userId, tag];
 
   try {
     const res = await db.query(text, values);
-    if (res.rowCount === 0) {
-      throw new Error("Role not found");
-    }
-    return res.rows[0];
+    return res.rows[0] || null; // Return updated row or null if no user was found
   } catch (error) {
-    console.error("Error assigning role to user:", error);
-    throw new Error("Failed to assign role");
+    console.error("Error adding tag:", error);
+    throw new Error("Failed to add tag");
   }
 }
 
@@ -188,8 +192,7 @@ async function assignRoleToUser(userId, roleName) {
  */
 async function getVolunteerDetailsById(id) {
   const text = `
-      SELECT v.total_hours, v.tags
-      FROM volunteer v
+      SELECT * FROM volunteer v
       WHERE v.user_id = $1;
     `;
   const res = await db.query(text, [id]);
@@ -206,7 +209,7 @@ async function getVolunteerDetailsById(id) {
  */
 async function getOrganizerDetailsById(id) {
   const text = `
-      SELECT o.org_name, o.tags
+      SELECT *
       FROM organizer o
       WHERE o.user_id = $1;
     `;
@@ -220,23 +223,22 @@ async function getOrganizerDetailsById(id) {
  * @async
  * @param {number} userId - The ID of the user.
  * @param {number} [totalHours=0] - The total hours the volunteer has contributed.
- * @param {Array<string>} [tags=[]] - Tags associated with the volunteer.
  * @returns {Promise<Object>} A promise that resolves to the newly created volunteer object.
  * @throws {Error} If the database query fails.
  */
-async function createVolunteer(userId, totalHours = 0, tags = ["vol"]) {
+async function createVolunteer(userId, totalHours = 0) {
   const text = `
-      INSERT INTO volunteer (user_id, total_hours, tags)
-      VALUES ($1, $2, $3)
+      INSERT INTO volunteer (user_id, total_hours)
+      VALUES ($1, $2)
       RETURNING *;
     `;
-  const values = [userId, totalHours, tags];
+  const values = [userId, totalHours];
   const res = await db.query(text, values);
   return res.rows[0];
 }
 
 /**
- * Adds a tag to the tags array for a volunteer.
+ * Adds a org to the array for a volunteer.
  *
  * @async
  * @param {number} userId - The ID of the user.
@@ -244,10 +246,10 @@ async function createVolunteer(userId, totalHours = 0, tags = ["vol"]) {
  * @returns {Promise<Object|null>} A promise that resolves to the updated volunteer object if successful, or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function addTagToVolunteer(userId, tag) {
+async function addOrgToVolunteer(userId, tag) {
   const text = `
       UPDATE volunteer
-      SET tags = array_append(COALESCE(tags, '{}'), $2)
+      SET tags = array_append(COALESCE(orgs, '{}'), $2)
       WHERE user_id = $1
       RETURNING *;
     `;
@@ -263,33 +265,6 @@ async function addTagToVolunteer(userId, tag) {
   }
 }
 
-/**
- * Removes a tag from the tags array for an organizer.
- *
- * @async
- * @param {number} userId - The ID of the volunteer.
- * @param {string} tag - The tag to be removed.
- * @returns {Promise<Object|null>} The updated volunteer object or null if not found.
- * @throws {Error} If the database query fails.
- */
-async function removeTagFromVolunteer(userId, tag) {
-  const text = `
-        UPDATE volunteer
-        SET tags = array_remove(tags, $2)
-        WHERE user_id = $1
-        RETURNING *;
-      `;
-
-  const values = [userId, tag];
-
-  try {
-    const res = await db.query(text, values);
-    return res.rows[0] || null;
-  } catch (error) {
-    console.error("Error removing tag from organizer:", error);
-    throw new Error("Failed to remove tag");
-  }
-}
 
 /**
  * Increments the total hours for a volunteer.
@@ -376,15 +351,15 @@ async function updateOrgName(userId, newOrgName) {
 }
 
 /**
- * Adds a tag to the tags array for an organizer.
+ * Adds a vol to the array volunteers for an organizer.
  *
  * @async
  * @param {number} userId - The ID of the organizer.
- * @param {string} tag - The tag to be added.
+ * @param {string} vol - The tag to be added.
  * @returns {Promise<Object|null>} The updated organizer object or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function addTagToOrganizer(userId, tag) {
+async function addVolToOrganizer(userId, vol) {
   const text = `
       UPDATE organizer
       SET tags = array_append(COALESCE(tags, '{}'), $2)
@@ -392,7 +367,7 @@ async function addTagToOrganizer(userId, tag) {
       RETURNING *;
     `;
 
-  const values = [userId, tag];
+  const values = [userId, vol];
 
   try {
     const res = await db.query(text, values);
@@ -400,34 +375,6 @@ async function addTagToOrganizer(userId, tag) {
   } catch (error) {
     console.error("Error adding tag to organizer:", error);
     throw new Error("Failed to add tag");
-  }
-}
-
-/**
- * Removes a tag from the tags array for an organizer.
- *
- * @async
- * @param {number} userId - The ID of the organizer.
- * @param {string} tag - The tag to be removed.
- * @returns {Promise<Object|null>} The updated organizer object or null if not found.
- * @throws {Error} If the database query fails.
- */
-async function removeTagFromOrganizer(userId, tag) {
-  const text = `
-      UPDATE organizer
-      SET tags = array_remove(tags, $2)
-      WHERE user_id = $1
-      RETURNING *;
-    `;
-
-  const values = [userId, tag];
-
-  try {
-    const res = await db.query(text, values);
-    return res.rows[0] || null;
-  } catch (error) {
-    console.error("Error removing tag from organizer:", error);
-    throw new Error("Failed to remove tag");
   }
 }
 
@@ -441,13 +388,13 @@ async function removeTagFromOrganizer(userId, tag) {
  * @returns {Promise<Object>} A promise that resolves to the newly created organizer object.
  * @throws {Error} If the database query fails.
  */
-async function createOrganizer(userId, orgName, tags = ["org"]) {
+async function createOrganizer(userId, orgName) {
   const text = `
-      INSERT INTO organizer (user_id, org_name, tags)
-      VALUES ($1, $2, $3)
+      INSERT INTO organizer (user_id, org_name)
+      VALUES ($1, $2)
       RETURNING *;
     `;
-  const values = [userId, orgName, tags];
+  const values = [userId, orgName];
   const res = await db.query(text, values);
   return res.rows[0];
 }
@@ -463,12 +410,11 @@ module.exports = {
   createOrganizer, // tested
   getVolunteerDetailsById, // tested
   getOrganizerDetailsById, // tested
-  addTagToOrganizer, // tested
-  removeTagFromOrganizer, // tested
   updateOrgName, // tested
   incrementGivenHours, // tested
   incrementTotalHours, // tested
-  addTagToVolunteer, // tested
+  addOrgToVolunteer, // tested
   updateUser,
-  removeTagFromVolunteer, // tested
+  getUserByIdNumber,
+  addVolToOrganizer,
 };

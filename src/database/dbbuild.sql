@@ -10,35 +10,37 @@ CREATE TABLE users
     insurance VARCHAR(50),
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
-    password_hash VARCHAR(255)
+    password_hash VARCHAR(255),
+    logs TEXT[],
+    role TEXT[]
 );
 
-CREATE TABLE role (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE
-);
+-- CREATE TABLE role (
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(50) NOT NULL UNIQUE
+-- );
 
-CREATE TABLE user_role (
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    role_id INT REFERENCES role(id) ON DELETE CASCADE,
-    PRIMARY KEY (user_id, role_id)
-);
+-- CREATE TABLE user_role (
+--     user_id INT REFERENCES users(id) ON DELETE CASCADE,
+--     role_id INT REFERENCES role(id) ON DELETE CASCADE,
+--     PRIMARY KEY (user_id, role_id)
+-- );
 
 CREATE TABLE volunteer (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     total_hours INT DEFAULT 0,
-    tags TEXT[]
+    orgs TEXT[]
 );
 
 CREATE TABLE organizer (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     org_name VARCHAR(100) NOT NULL,
     given_hours INT DEFAULT 0,
-    tags TEXT[]
+    vol_id INT[]
 );
 
 -- predefine the Roles
-INSERT INTO role (name) VALUES ('ADMIN'), ('VOLUNTEER'), ('ORGANIZER');
+-- INSERT INTO role (name) VALUES ('ADMIN'), ('VOLUNTEER'), ('ORGANIZER');
 
 -- example
 -- INSERT INTO users (name, birth_date, sex, address, phone_number, id_number, insurance, username, password_hash)
