@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-function InputComponent() {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
+const DynamicInput = ({
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  name,
+  className,
+  style,
+}) => {
   return (
-    <div>
-        <input placeholder='' type="text" value={inputValue} onChange={handleInputChange} />
-        <p>You entered: {inputValue}</p>
-    </div>
+    <input
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      name={name}
+      className={className}
+      style={style}
+    />
   );
-}
+};
 
-export default InputComponent;
+DynamicInput.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+};
+
+export default DynamicInput;
