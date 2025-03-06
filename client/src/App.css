@@ -1,9 +1,4 @@
-:root {
-  --common-colour-1: #f5f5f5;
-  --common-colour-2: #000000;
-  --common-colour-3: #0000001a;
-  --common-colour-4: #ffe7c2;
-}
+@import url("global.css");
 
 .app {
   text-align: center;
