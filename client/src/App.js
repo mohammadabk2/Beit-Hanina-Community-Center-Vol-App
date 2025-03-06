@@ -10,12 +10,6 @@ import {
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
-// import pages here
-import Home from "./pages/HomePage/Home";
-
-// TODO:
-// import About from './pages/About';
-// import Settings from './pages/Settings';
 
 function App() {
   const [username, setUserName] = useState("");
@@ -66,14 +60,6 @@ function App() {
         <h1>Beit Hanina Community Center Volunteer App</h1>
       </header>
       <main>
-        {/* //TODO: add routes as needed*/}
-        {/* <Switch> */}
-        {/* <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/settings" component={Settings} /> */}
-        {/* Add other routes here */}
-        {/* </Switch> */}
-
         <div className="sign-in-box flex-container smooth-shadow-box">
           <h2>Welcome to Beit Hanina Community Center</h2>
           <div className="input-field-box flex-container">
