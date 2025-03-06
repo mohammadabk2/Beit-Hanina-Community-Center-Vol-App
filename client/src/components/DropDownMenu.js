@@ -34,7 +34,7 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
   }, [dropdownRef]);
 
   return (
-    <div className={`dropdown ${className}`} style={style} ref={dropdownRef}>
+    <div className={`${className}`} style={style} ref={dropdownRef}>
       <button onClick={toggleDropdown} name={name} className="dropdown-toggle">
         {text}
       </button>

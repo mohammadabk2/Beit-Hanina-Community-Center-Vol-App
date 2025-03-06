@@ -50,11 +50,11 @@ function App() {
   ];
 
   return (
-    <div className="App Flex-container">
-      <div className="Drop-down">
-        <DropDownMenu className="Language-button" text="Ln" options={options} />
+    <div className="app flex-container">
+      <div className="drop-down">
+        <DropDownMenu className="language-button" text="Ln" options={options} />
       </div>
-      <header className="App-header">
+      <header className="app-header">
         <h1>Beit Hanina Community Center Volunteer App</h1>
       </header>
       <main>
@@ -66,11 +66,11 @@ function App() {
         {/* Add other routes here */}
         {/* </Switch> */}
 
-        <div className="Sign-in-box Flex-container Smooth-shadow-box">
+        <div className="sign-in-box flex-container smooth-shadow-box">
           <h2>Welcome to Beit Hanina Community Center</h2>
-          <div className="Input-field-box Flex-container">
+          <div className="input-field-box flex-container">
             <DynamicInput
-              className="Input-field"
+              className="input-field"
               type="text"
               value={username}
               name="username-field"
@@ -78,7 +78,7 @@ function App() {
               placeholder="Enter UserName"
             />
             <DynamicInput
-              className="Input-field"
+              className="input-field"
               type="password"
               value={password}
               name="password-field"
@@ -86,9 +86,9 @@ function App() {
               placeholder="Enter Password"
             />
           </div>
-          <div className="Button-box Flex-container">
-            <DynamicButton className="Button" onClick={signIn} text="Sign in" />
-            <DynamicButton className="Button" onClick={signUp} text="Sign up" />
+          <div className="button-box flex-container">
+            <DynamicButton className="button" onClick={signIn} text="Sign in" />
+            <DynamicButton className="button" onClick={signUp} text="Sign up" />
           </div>
         </div>
       </main>
