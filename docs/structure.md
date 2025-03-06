@@ -1,31 +1,36 @@
 # Structure of files
 ```
 .
-├── README.md
-├── SECURITY.md
 ├── client
-│   ├── README.md
 │   ├── assets
 │   │   └── logo.jpg
-│   ├── package-lock.json
 │   ├── package.json
+│   ├── package-lock.json
 │   ├── public
 │   │   ├── favicon.ico
 │   │   ├── index.html
 │   │   └── manifest.json
+│   ├── README.md
 │   └── src
 │       ├── App.css
 │       ├── App.js
+│       ├── AppRouter.js
 │       ├── components
 │       │   ├── ButtonComponent.js
-│       │   ├── InputComponent.js
-│       │   ├── SignUpForm.js
-│       │   └── Signup.js
+│       │   ├── DropDownMenu.js
+│       │   └── InputComponent.js
+│       ├── global.css
 │       ├── index.js
 │       ├── pages
-│       │   ├── About.js
-│       │   ├── Home.js
-│       │   └── Settings.js
+│       │   ├── AboutPage
+│       │   │   └── About.js
+│       │   ├── HomePage
+│       │   │   └── Home.js
+│       │   ├── SettingsPage
+│       │   │   └── Settings.js
+│       │   └── SignUpPage
+│       │       ├── SignUp.css
+│       │       └── SignUp.js
 │       └── service-worker.js
 ├── docs
 │   ├── digrams
@@ -43,28 +48,30 @@
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
-├── package-lock.json
 ├── package.json
+├── package-lock.json
+├── README.md
 ├── scripts
 │   ├── generate_file_struct.sh
 │   └── setup_app.sh
+├── SECURITY.md
 ├── src
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
 │   │   └── validation.js
 │   ├── database
-│   │   ├── db.js
 │   │   ├── dbbuild.js
 │   │   ├── dbbuild.sql
+│   │   ├── db.js
 │   │   └── validation
 │   │       └── users.js
 │   ├── deprecated
 │   │   └── Users
 │   │       ├── Admin.js
 │   │       ├── Organizer.js
-│   │       ├── Person.js
 │   │       ├── PersonFactory.js
+│   │       ├── Person.js
 │   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
@@ -73,5 +80,5 @@
 │   └── test.txt
 └── workbox-config.js
 
-21 directories, 51 files
+24 directories, 54 files
 ```

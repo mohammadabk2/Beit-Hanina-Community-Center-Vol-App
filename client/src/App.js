@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Switch,
+  useNavigate,
+} from "react-router-dom";
 // import components here
-import Home from "./pages/Home";
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
+// import pages here
+import Home from "./pages/HomePage/Home";
 
 // TODO:
 // import About from './pages/About';
 // import Settings from './pages/Settings';
-// add language button
 
 function App() {
   const [username, setUserName] = useState("");
@@ -31,8 +37,10 @@ function App() {
     console.log(password); //! testing only remove security risk
   };
 
+  const navigate = useNavigate();
   const signUp = (event) => {
     console.log("sign up button clicked");
+    navigate("/sign-up");
   };
 
   const options = [
