@@ -1,56 +1,107 @@
-.App {
-    text-align: center;
-  }
-  
-  .App-header {
-    padding: 20px;
-    color: rgb(0, 0, 0);
-    margin-bottom: 2rem;
-  }
+:root {
+  --common-colour-1: #f5f5f5;
+  --common-colour-2: #000000;
+  --common-colour-3: #0000001a;
+  --common-colour-4: #ffe7c2;
+}
 
-  .Flex-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.app {
+  text-align: center;
+}
 
-  .Smooth-shadow-box {
-    box-shadow: 0 10px 15px 5px rgba(0, 0, 0, 0.1);
-    max-width: 450px;
-  }
+.app-header {
+  padding: 20px;
+  color: var(--common-colour-2);
+  margin-bottom: 2rem;
+}
 
-  .Sign-in-box {
-    margin-top: 1px;
-    border-radius: 10px;
-  }
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .Input-field-box, .App, .Sign-in-box {
-    flex-direction: column;
-  }
+.smooth-shadow-box, .dropdown-menu {
+  box-shadow: 0 10px 15px 5px var(--common-colour-3);
+}
 
-  .Button {
-    margin: 1rem;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.sign-in-box {
+  margin-top: 1px;
+  border-radius: 10px;
+  background-color: var(--common-colour-1);
+  max-width: 450px;
+}
 
-  .Language-button {
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 10px;
-    font-size: 14px;
-    padding: 5px;
-  }
+.input-field-box,
+.app,
+.sign-in-box {
+  flex-direction: column;
+}
 
-  .Input-field {
-    margin: 1rem;
-    padding: 5px;
-    font-size: 16px;
-  }
+.button {
+  margin: 1rem;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  body {
-    background-color: rgb(255, 239, 220);
-  }
+.language-button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 10px;
+  font-size: 14px;
+  padding: 5px;
+  background-color: var(--common-colour-1);
+  border-radius: 5px;
+}
 
+.input-field {
+  margin: 1rem;
+  padding: 5px;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--common-colour-4);
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-toggle {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  background-color: var(--common-colour-1);
+  z-index: 1;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+  min-width: 100px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-item a {
+  text-decoration: none;
+  color: var(--common-colour-2);
+  display: block;
+  padding: 8px 16px;
+}
+
+.dropdown-item a:hover {
+  background-color: var(--common-colour-3);
+}
