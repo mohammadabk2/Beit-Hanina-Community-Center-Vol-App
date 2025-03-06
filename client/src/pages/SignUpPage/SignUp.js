@@ -7,9 +7,8 @@ import {
 } from "react-router-dom";
 
 // import components here
-import DynamicInput from "../../components/InputComponent";
 import DynamicButton from "../../components/ButtonComponent";
-import DropDownMenu from "../../components/DropDownMenu";
+import FormComponent from "../../components/FormComponent";
 // import pages here
 
 function SignUpPage() {
@@ -22,7 +21,12 @@ function SignUpPage() {
   return (
     <div>
       <h2>Sign Up Page</h2>
-      <DynamicButton className="button" onClick={goBack} text="Back" />
+      <div>
+        <FormComponent></FormComponent>
+      </div>
+      <div>
+        <DynamicButton className="button" onClick={goBack} text="Back" />
+      </div>
     </div>
   );
 }
