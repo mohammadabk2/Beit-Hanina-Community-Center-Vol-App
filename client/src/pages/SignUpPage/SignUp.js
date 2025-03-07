@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 //TODO flip these
-import './SignUp.css';
+import "./SignUp.css";
 // import '../../App.css';
 // import components here
 import DynamicButton from "../../components/ButtonComponent";
@@ -94,12 +94,24 @@ function SignUpPage() {
           />
 
           <label className="block mb-2">Phone: *</label>
+          {/* <DynamicInput
+            className="input-field"
+            type="tel"
+            value={formData.phone}
+            name="phone"
+            onChange={handleChange}
+            placeholder="Enter Phone Number"
+            pattern="[0-9]*"
+            inputMode="numeric"
+          /> */}
           <DynamicInput
             className="input-field"
             type="tel"
             value={formData.phone}
             name="phone"
             onChange={handleChange}
+            pattern="[0-9]*"
+            inputMode="numeric"
             placeholder="Enter Phone Number"
           />
 
