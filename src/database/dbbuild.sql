@@ -15,27 +15,29 @@ CREATE TABLE users
     role TEXT[]
 );
 
--- CREATE TABLE role (
---     id SERIAL PRIMARY KEY,
---     name VARCHAR(50) NOT NULL UNIQUE
--- );
-
--- CREATE TABLE user_role (
---     user_id INT REFERENCES users(id) ON DELETE CASCADE,
---     role_id INT REFERENCES role(id) ON DELETE CASCADE,
---     PRIMARY KEY (user_id, role_id)
--- );
-
-CREATE TABLE volunteer (
+CREATE TABLE volunteer
+(
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     total_hours INT DEFAULT 0,
     orgs TEXT[]
 );
 
-CREATE TABLE organizer (
+CREATE TABLE organizer
+(
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     org_name VARCHAR(100) NOT NULL,
     given_hours INT DEFAULT 0,
+    vol_id INT[]
+);
+
+CREATE TABLE events
+(
+    event_id SERIAL PRIMARY KEY,
+    event_name TEXT NOT NULL,
+    event_date DATE NOT NULL,
+    event_start TIME NOT NULL,
+    event_end TIME NOT NULL,
+    org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[]
 );
 
@@ -51,3 +53,14 @@ CREATE TABLE organizer (
 -- SELECT id, (SELECT id FROM role WHERE name = 'ADMIN') FROM inserted_user;
 -- INSERT INTO user_role (user_id, role_id)
 -- SELECT id, (SELECT id FROM role WHERE name = 'ORGANIZER') FROM inserted_user;
+
+-- CREATE TABLE role (
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(50) NOT NULL UNIQUE
+-- );
+
+-- CREATE TABLE user_role (
+--     user_id INT REFERENCES users(id) ON DELETE CASCADE,
+--     role_id INT REFERENCES role(id) ON DELETE CASCADE,
+--     PRIMARY KEY (user_id, role_id)
+-- );

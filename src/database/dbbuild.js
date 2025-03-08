@@ -21,7 +21,7 @@ const db = require("./db");
  * @returns {Promise<Object>} A promise that resolves to the newly created user object.
  * @throws {Error} If the database query fails.
  */
-async function createUser(
+const createUser = async (
   name,
   birthDate,
   sex,
@@ -32,7 +32,7 @@ async function createUser(
   idNumber,
   username,
   passwordHash
-) {
+) => {
   const text = `
     INSERT INTO users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -51,7 +51,7 @@ async function createUser(
   ];
   const res = await db.query(text, values);
   return res.rows[0];
-}
+};
 
 /**
  * Updates the properties of a user in the users table.
@@ -270,7 +270,6 @@ async function addOrgToVolunteer(userId, tag) {
     throw new Error("Failed to add tag");
   }
 }
-
 
 /**
  * Increments the total hours for a volunteer.
