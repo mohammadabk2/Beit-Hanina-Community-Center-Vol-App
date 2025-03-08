@@ -73,7 +73,7 @@ const createUser = async (
  * @returns {Promise<Object|null>} The updated user object or null if the user does not exist.
  * @throws {Error} If the database query fails.
  */
-async function updateUser(userId, updates) {
+const updateUser = async (userId, updates) => {
   if (!userId || typeof userId !== "number") {
     throw new Error("Invalid user ID");
   }
@@ -114,7 +114,7 @@ async function updateUser(userId, updates) {
     console.error("Error updating user:", error);
     throw new Error("Failed to update user");
   }
-}
+};
 
 /**
  * Retrieves a user from the database by username and password hash.
@@ -125,12 +125,12 @@ async function updateUser(userId, updates) {
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function getUserByLogin(username, hash) {
+const getUserByLogin = async (username, hash) => {
   const text =
     "SELECT id FROM users WHERE username = $1 AND password_hash = $2;";
   const res = await db.query(text, [username, hash]);
   return res.rows[0];
-}
+};
 
 /**
  * Retrieves a user from the database by Serial ID.
@@ -140,11 +140,11 @@ async function getUserByLogin(username, hash) {
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function getUserById(id) {
+const getUserById = async (id) => {
   const text = "SELECT * FROM users WHERE id = $1;";
   const res = await db.query(text, [id]);
   return res.rows[0];
-}
+};
 
 /**
  * Retrieves a user from the database by ID Number.
@@ -154,11 +154,11 @@ async function getUserById(id) {
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function getUserByIdNumber(id) {
+const getUserByIdNumber = async (id) => {
   const text = "SELECT id FROM users WHERE id_number = $1;";
   const res = await db.query(text, [id]);
   return res.rows[0];
-}
+};
 
 /**
  * Assigns a role to a user by inserting an entry into the `user_role` table.
@@ -169,7 +169,7 @@ async function getUserByIdNumber(id) {
  * @returns {Promise<Object|null>} A promise that resolves to the assigned role object if successful, or null if not.
  * @throws {Error} If the database query fails.
  */
-async function assignRoleToUser(userId, roleName) {
+const assignRoleToUser = async (userId, roleName) => {
   const text = `
   UPDATE users
   SET role = array_append(COALESCE(role, '{}'), $2)
@@ -177,16 +177,16 @@ async function assignRoleToUser(userId, roleName) {
   RETURNING *;
 `;
 
-  const values = [userId, tag];
+  const values = [userId, roleName];
 
   try {
     const res = await db.query(text, values);
     return res.rows[0] || null; // Return updated row or null if no user was found
   } catch (error) {
-    console.error("Error adding tag:", error);
-    throw new Error("Failed to add tag");
+    console.error("Error adding roleName:", error);
+    throw new Error("Failed to add roleName");
   }
-}
+};
 
 /**
  * Retrieves volunteer details (total hours and Orgs name) for a user by their ID.
@@ -196,14 +196,14 @@ async function assignRoleToUser(userId, roleName) {
  * @returns {Promise<Object|null>} A promise that resolves to an object containing volunteer details or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function getVolunteerDetailsById(id) {
+const getVolunteerDetailsById = async (id) => {
   const text = `
       SELECT * FROM volunteer v
       WHERE v.user_id = $1;
     `;
   const res = await db.query(text, [id]);
   return res.rows[0];
-}
+};
 
 /**
  * Retrieves organizer details (organization name and vol_id) for a user by their ID.
@@ -213,7 +213,7 @@ async function getVolunteerDetailsById(id) {
  * @returns {Promise<Object|null>} A promise that resolves to an object containing organizer details or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function getOrganizerDetailsById(id) {
+const getOrganizerDetailsById = async (id) => {
   const text = `
       SELECT *
       FROM organizer o
@@ -221,7 +221,7 @@ async function getOrganizerDetailsById(id) {
     `;
   const res = await db.query(text, [id]);
   return res.rows[0];
-}
+};
 
 /**
  * Creates a new volunteer record for a user.
@@ -232,7 +232,7 @@ async function getOrganizerDetailsById(id) {
  * @returns {Promise<Object>} A promise that resolves to the newly created volunteer object.
  * @throws {Error} If the database query fails.
  */
-async function createVolunteer(userId, totalHours = 0) {
+const createVolunteer = async (userId, totalHours = 0) => {
   const text = `
       INSERT INTO volunteer (user_id, total_hours)
       VALUES ($1, $2)
@@ -241,7 +241,7 @@ async function createVolunteer(userId, totalHours = 0) {
   const values = [userId, totalHours];
   const res = await db.query(text, values);
   return res.rows[0];
-}
+};
 
 /**
  * Adds a org to the array for a volunteer.
@@ -252,7 +252,7 @@ async function createVolunteer(userId, totalHours = 0) {
  * @returns {Promise<Object|null>} A promise that resolves to the updated volunteer object if successful, or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function addOrgToVolunteer(userId, tag) {
+const addOrgToVolunteer = async (userId, tag) => {
   const text = `
       UPDATE volunteer
       SET orgs = array_append(COALESCE(orgs, '{}'), $2)
@@ -269,7 +269,7 @@ async function addOrgToVolunteer(userId, tag) {
     console.error("Error adding tag:", error);
     throw new Error("Failed to add tag");
   }
-}
+};
 
 /**
  * Increments the total hours for a volunteer.
@@ -280,7 +280,7 @@ async function addOrgToVolunteer(userId, tag) {
  * @returns {Promise<Object|null>} A promise that resolves to the updated volunteer object if successful, or null if the user is not found.
  * @throws {Error} If the database query fails.
  */
-async function incrementTotalHours(userId, hours) {
+const incrementTotalHours = async (userId, hours) => {
   const text = `
       UPDATE volunteer
       SET total_hours = total_hours + $2
@@ -297,7 +297,7 @@ async function incrementTotalHours(userId, hours) {
     console.error("Error incrementing total hours:", error);
     throw new Error("Failed to update total hours");
   }
-}
+};
 
 /**
  * Increments the given hours for an organizer.
@@ -308,7 +308,7 @@ async function incrementTotalHours(userId, hours) {
  * @returns {Promise<Object|null>} The updated organizer object or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function incrementGivenHours(userId, hours) {
+const incrementGivenHours = async (userId, hours) => {
   const text = `
       UPDATE organizer
       SET given_hours = given_hours + $2
@@ -325,7 +325,7 @@ async function incrementGivenHours(userId, hours) {
     console.error("Error incrementing given hours:", error);
     throw new Error("Failed to update given hours");
   }
-}
+};
 
 /**
  * Updates the organization name for an organizer.
@@ -336,7 +336,7 @@ async function incrementGivenHours(userId, hours) {
  * @returns {Promise<Object|null>} The updated organizer object or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function updateOrgName(userId, newOrgName) {
+const updateOrgName = async (userId, newOrgName) => {
   const text = `
       UPDATE organizer
       SET org_name = $2
@@ -353,7 +353,7 @@ async function updateOrgName(userId, newOrgName) {
     console.error("Error updating organization name:", error);
     throw new Error("Failed to update organization name");
   }
-}
+};
 
 /**
  * Adds a vol to the array volunteers for an organizer.
@@ -364,7 +364,7 @@ async function updateOrgName(userId, newOrgName) {
  * @returns {Promise<Object|null>} The updated organizer object or null if not found.
  * @throws {Error} If the database query fails.
  */
-async function addVolToOrganizer(userId, vol) {
+const addVolToOrganizer = async (userId, vol) => {
   const text = `
       UPDATE organizer
       SET vol_id = array_append(COALESCE(vol_id, '{}'), $2)
@@ -381,7 +381,7 @@ async function addVolToOrganizer(userId, vol) {
     console.error("Error adding tag to organizer:", error);
     throw new Error("Failed to add tag");
   }
-}
+};
 
 /**
  * Creates a new organizer record for a user.
@@ -392,7 +392,7 @@ async function addVolToOrganizer(userId, vol) {
  * @returns {Promise<Object>} A promise that resolves to the newly created organizer object.
  * @throws {Error} If the database query fails.
  */
-async function createOrganizer(userId, orgName) {
+const createOrganizer = async (userId, orgName) => {
   const text = `
       INSERT INTO organizer (user_id, org_name)
       VALUES ($1, $2)
@@ -401,7 +401,7 @@ async function createOrganizer(userId, orgName) {
   const values = [userId, orgName];
   const res = await db.query(text, values);
   return res.rows[0];
-}
+};
 
 // ! all the tests performed only verify that the query is valid and not the function it self.
 // ? maybe add more detailed functions to get certain values form users
