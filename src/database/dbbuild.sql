@@ -37,6 +37,7 @@ CREATE TABLE events
     event_date DATE NOT NULL,
     event_start TIME NOT NULL,
     event_end TIME NOT NULL,
+    is_active BOOLEAN NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[]
 );
