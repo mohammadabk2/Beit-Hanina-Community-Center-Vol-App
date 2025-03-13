@@ -43,12 +43,14 @@
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
+├── eslint.config.mjs
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── before_git.sh
 │   ├── generate_file_struct.sh
-│   └── setup_app.sh
+│   └── setup_server.sh
 ├── SECURITY.md
 ├── src
 │   ├── controllers
@@ -75,5 +77,5 @@
 │   └── test.txt
 └── workbox-config.js
 
-20 directories, 53 files
+20 directories, 55 files
 ```
