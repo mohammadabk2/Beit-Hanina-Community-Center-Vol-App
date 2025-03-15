@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "",
   "main": "src/server.js",
+  "type": "module",
   "scripts": {
     "start": "node src/server.js",
     "dbbuild": "node src/database/dbbuild.js",

@@ -1,4 +1,4 @@
-const { Pool } = require('pg');
+import { Pool } from 'pg';
 
 // Database connection configuration
 //TODO: setup the database on the server and then get these details

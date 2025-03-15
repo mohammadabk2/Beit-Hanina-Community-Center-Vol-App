@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 // import components here
-import Home from "./pages/Home";
+
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
@@ -14,7 +15,7 @@ import DropDownMenu from "./components/DropDownMenu";
 function App() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) => {

@@ -1,6 +1,6 @@
 // to interact with the database
 
-const db = require("./db");
+import db from "./db";
 
 /**
  * Creates a new user in the database.
@@ -454,7 +454,7 @@ async function createOrganizer(userId, orgName, tags = ["org"]) {
 
 // ! all the tests performed only verify that the query is valid and not the function it self.
 // ? maybe add more detailed functions to get certain values form users
-module.exports = {
+export {
   createUser, // tested
   getUserByLogin, // tested
   getUserById, // tested
