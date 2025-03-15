@@ -75,7 +75,7 @@
 │   └── server.js
 ├── tests
 │   └── test.txt
-└── workbox-config.js
+└── workbox-config.cjs
 
 20 directories, 55 files
 ```

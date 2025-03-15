@@ -101,7 +101,7 @@ async function updateUser(userId, updates) {
   const setClause = validUpdates
     .map(([key], index) => `${key} = $${index + 2}`)
     .join(", ");
-  const values = [userId, ...validUpdates.map(([_, value]) => value)];
+  const values = [userId, ...validUpdates.map(([, value]) => value)];
 
   const query = `UPDATE users SET ${setClause} WHERE id = $1 RETURNING *;`;
 
