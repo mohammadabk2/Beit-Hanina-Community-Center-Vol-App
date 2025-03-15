@@ -27,12 +27,14 @@ function App() {
   };
 
   const signIn = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
   };
 
   const signUp = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign up button clicked");
   };
 
