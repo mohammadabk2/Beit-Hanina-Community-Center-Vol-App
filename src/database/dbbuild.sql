@@ -3,9 +3,26 @@ CREATE TABLE users
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     birth_date DATE NOT NULL,
-    sex CHAR(1) NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     phone_number VARCHAR(15) NOT NULL,
-    email TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    address VARCHAR(255) NOT NULL,
+    insurance VARCHAR(50),
+    id_number VARCHAR(20) NOT NULL UNIQUE,
+    username VARCHAR(50) UNIQUE,
+    password_hash VARCHAR(255),
+    logs TEXT[],
+    role TEXT[]
+);
+
+CREATE TABLE users_waiting_list
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    phone_number VARCHAR(15) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL,
     insurance VARCHAR(50),
     id_number VARCHAR(20) NOT NULL UNIQUE,
@@ -41,6 +58,18 @@ CREATE TABLE events
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[]
 );
+
+-- ? maybe add more indexs or change
+-- Indexes for frequently searched fields
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_phone_number ON users(phone_number);
+CREATE INDEX idx_events_event_date ON events(event_date);
+
+-- Indexes for id and id_number columns
+CREATE INDEX idx_users_id_number ON users(id_number);
+CREATE INDEX idx_users_waiting_list_id_number ON users_waiting_list(id_number);
+CREATE INDEX idx_users_id ON users(id);
+CREATE INDEX idx_users_waiting_list_id ON users_waiting_list(id);
 
 -- predefine the Roles
 -- INSERT INTO role (name) VALUES ('ADMIN'), ('VOLUNTEER'), ('ORGANIZER');
