@@ -1,5 +1,6 @@
-const { Pool } = require("pg");
+import { Pool } from "pg";
 const dotenv = require("dotenv");
+
 
 // Database connection configuration
 //TODO: setup the database on the server and then get these details
@@ -22,7 +23,4 @@ const query = async (text, params) => {
 };
 
 // Export the query function
-module.exports = {
-  query,
-  pool,
-};
+export { query, pool };

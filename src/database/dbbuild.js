@@ -1,8 +1,6 @@
 // to interact with the database
-
+import db from "./db";
 //TODO change some functions to be universal to vol and org tables
-
-const db = require("./db");
 
 /**
  * Creates a new user in the database.
@@ -103,7 +101,7 @@ const updateUser = async (userId, updates) => {
   const setClause = validUpdates
     .map(([key], index) => `${key} = $${index + 2}`)
     .join(", ");
-  const values = [userId, ...validUpdates.map(([_, value]) => value)];
+  const values = [userId, ...validUpdates.map(([, value]) => value)];
 
   const query = `UPDATE users SET ${setClause} WHERE id = $1 RETURNING *;`;
 
@@ -405,7 +403,7 @@ const createOrganizer = async (userId, orgName) => {
 
 // ! all the tests performed only verify that the query is valid and not the function it self.
 // ? maybe add more detailed functions to get certain values form users
-module.exports = {
+export {
   createUser, // tested
   getUserByLogin, // tested
   getUserById, // tested

@@ -1,12 +1,11 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-module.exports = (req, res, next) => {
-    jwt.verify(req.headers.token, process.env.SECRET, (error, decoded) => {
-        if (error) {
-            res.status(403);
-            res.end();
-        } else {
-            next();
-        }
-    });
+export default (req, res, next) => {
+  jwt.verify(req.headers.token, process.env.SECRET, (error) => {
+    if (error) {
+      res.status(403).end();
+    } else {
+      next();
+    }
+  });
 };
