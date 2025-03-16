@@ -1,4 +1,6 @@
 import { Pool } from "pg";
+const dotenv = require("dotenv");
+
 
 // Database connection configuration
 //TODO: setup the database on the server and then get these details
@@ -8,7 +10,7 @@ const pool = new Pool({
   host: "localhost",
   database: "your_database_name",
   password: "your_database_password",
-  port: 5432,
+  port: process.env.DBPORT || 5000,
 });
 
 // Function to query the database
