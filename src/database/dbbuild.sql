@@ -35,7 +35,8 @@ CREATE TABLE users_waiting_list
 CREATE TABLE volunteer
 (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-    total_hours INT DEFAULT 0,
+    approved_hours INT DEFAULT 0,
+    unapproved_hours INT DEFAULT 0,
     orgs TEXT[]
 );
 

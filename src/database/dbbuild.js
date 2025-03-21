@@ -1,6 +1,7 @@
 // to interact with the database
 import db from "./db";
-//TODO change some functions to be universal to vol and org tables
+//TODO change the functions to get certain columns instead of *
+//TODO some functions rely on names maybe the should also get id
 
 /**
  * Creates a new user in the database.
@@ -9,11 +10,11 @@ import db from "./db";
  * @param {string} name - The full name of the user.
  * @param {Date} birthDate - The birth date of the user (YYYY-MM-DD).
  * @param {string} sex - The gender of the user (e.g., 'M' or 'F').
- * @param {Int} phoneNumber - The user's phone number.
+ * @param {number} phoneNumber - The user's phone number.
  * @param {string} email - The user's email address.
  * @param {string} address - The user's home address.
  * @param {string} insurance - The user's insurance provider.
- * @param {Int} idNumber - The user's government ID number.
+ * @param {number} idNumber - The user's government ID number.
  * @param {string} username - The chosen username for the user.
  * @param {string} passwordHash - The hashed password.
  * @returns {Promise<Object>} A promise that resolves to the newly created user object.
@@ -134,7 +135,7 @@ const getUserByLogin = async (username, hash) => {
  * Retrieves a user from the database by Serial ID.
  *
  * @async
- * @param {Int} id - The Serial ID of the user.
+ * @param {number} id - The Serial ID of the user.
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
@@ -148,7 +149,7 @@ const getUserById = async (id) => {
  * Retrieves a user from the database by ID Number.
  *
  * @async
- * @param {Int} id - The ID Number of the user.
+ * @param {number} id - The ID Number of the user.
  * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
@@ -196,7 +197,8 @@ const assignRoleToUser = async (userId, roleName) => {
  */
 const getVolunteerDetailsById = async (id) => {
   const text = `
-      SELECT * FROM volunteer v
+      SELECT * 
+      FROM volunteer v
       WHERE v.user_id = $1;
     `;
   const res = await db.query(text, [id]);
@@ -230,13 +232,13 @@ const getOrganizerDetailsById = async (id) => {
  * @returns {Promise<Object>} A promise that resolves to the newly created volunteer object.
  * @throws {Error} If the database query fails.
  */
-const createVolunteer = async (userId, totalHours = 0) => {
+const createVolunteer = async (userId) => {
   const text = `
-      INSERT INTO volunteer (user_id, total_hours)
-      VALUES ($1, $2)
+      INSERT INTO volunteer (user_id)
+      VALUES ($1)
       RETURNING *;
     `;
-  const values = [userId, totalHours];
+  const values = [userId];
   const res = await db.query(text, values);
   return res.rows[0];
 };
@@ -270,18 +272,23 @@ const addOrgToVolunteer = async (userId, tag) => {
 };
 
 /**
- * Increments the total hours for a volunteer.
+ * Increments the hours for a volunteer.
  *
  * @async
  * @param {number} userId - The ID of the user.
+ * @param {String} hourType - The number of hours to add.
  * @param {number} hours - The number of hours to add.
  * @returns {Promise<Object|null>} A promise that resolves to the updated volunteer object if successful, or null if the user is not found.
  * @throws {Error} If the database query fails.
  */
-const incrementTotalHours = async (userId, hours) => {
+const incrementVolHours = async (userId, hourType, hours) => {
+  const allowedFields = ["approved_hours", "unapproved_hours"]; // Add any other allowed fields here
+  if (!allowedFields.includes(hourType)) {
+    throw new Error("Invalid field name");
+  }
   const text = `
       UPDATE volunteer
-      SET total_hours = total_hours + $2
+      SET ${hourType} = ${hourType} + $2
       WHERE user_id = $1
       RETURNING *;
     `;
@@ -401,8 +408,79 @@ const createOrganizer = async (userId, orgName) => {
   return res.rows[0];
 };
 
+/**
+ * adds a new event to the events table.
+ * @param {String} eventName
+ * @param {Date} eventDate
+ * @param {Time} eventStartTime
+ * @param {Time} eventEndTime
+ * @param {number} orgId
+ * @returns
+ */
+const addEvent = async (
+  eventName,
+  eventDate,
+  eventStartTime,
+  eventEndTime,
+  orgId
+) => {
+  const text = `
+  INSERT INTO events (event_name, event_date,event_start,event_end,org_id)
+  VALUES ($1, $2, $3, $4, $5)
+  RETURNING *;
+`;
+
+  const values = [eventName, eventDate, eventStartTime, eventEndTime, orgId];
+  const res = await db.query(text, values);
+  return res.rows[0];
+};
+
+/**
+ * adds a vol id to the array of vol at the events table.
+ * @param {String} eventName
+ * @param {number} volId
+ * @returns
+ */
+const addVolId = async (eventName, volId) => {
+  const text = `
+  UPDATE events
+  SET vol_id = array_append(COALESCE(vol_id, '{}'), $1)
+  WHERE event_name = $2
+  RETURNING *;
+`;
+
+  const values = [volId, eventName];
+  const res = await db.query(text, values);
+  return res.rows[0];
+};
+
+/**
+ * 
+ * @param {String} eventName 
+ * @param {Boolean} status 
+ * @returns 
+ */
+const changeStatus = async (eventName, status) => {
+  const text = `
+  UPDATE events
+  SET is_active = $2
+  WHERE event_name = $1
+  RETURNING *;
+`;
+
+  const values = [eventName, status];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error("Error updating user status:", error);
+    throw new Error("Failed to update user status");
+  }
+};
+
 // ! all the tests performed only verify that the query is valid and not the function it self.
 // ? maybe add more detailed functions to get certain values form users
+
 export {
   createUser, // tested
   getUserByLogin, // tested
@@ -414,9 +492,12 @@ export {
   getOrganizerDetailsById, // tested
   updateOrgName, // tested
   incrementGivenHours, // tested
-  incrementTotalHours, // tested
+  incrementVolHours, // tested
   addOrgToVolunteer, // tested
   updateUser,
   getUserByIdNumber,
   addVolToOrganizer,
+  addEvent,
+  addVolId,
+  changeStatus,
 };

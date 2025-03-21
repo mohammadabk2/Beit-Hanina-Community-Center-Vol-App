@@ -50,6 +50,7 @@
 ├── scripts
 │   ├── before_git.sh
 │   ├── generate_file_struct.sh
+│   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -77,5 +78,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-20 directories, 55 files
+20 directories, 56 files
 ```

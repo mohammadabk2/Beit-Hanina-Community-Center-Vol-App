@@ -1,15 +1,14 @@
 import { Pool } from "pg";
-const dotenv = require("dotenv");
-
+// const dotenv = require("dotenv");
 
 // Database connection configuration
 //TODO: setup the database on the server and then get these details
 // TODO get all these from .en
 const pool = new Pool({
-  user: "your_database_user",
-  host: "localhost",
-  database: "your_database_name",
-  password: "your_database_password",
+  user: process.env.DBUSER || "user",
+  host: process.env.DB_HOST || "local",
+  database: process.env.DB_NAME || "DB_Name",
+  password: process.env.DB_PASS || "password",
   port: process.env.DBPORT || 5000,
 });
 
