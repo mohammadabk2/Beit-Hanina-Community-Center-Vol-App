@@ -1,32 +1,12 @@
-# Structure of files
-```
-.
-├── client
-│   ├── assets
-│   │   └── logo.jpg
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── public
-│   │   ├── favicon.ico
-│   │   ├── index.html
-│   │   ├── logo192.png
-│   │   ├── logo512.png
-│   │   ├── manifest.json
-│   │   └── sw.js
-│   ├── README.md
+
 │   └── src
 │       ├── App.css
 │       ├── App.js
+│       ├── AppRouter.js
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
-│       │   └── InputComponent.js
-│       ├── index.js
-│       ├── installPrompt.js
-│       └── pages
-│           ├── About.js
-│           ├── Home.js
-│           └── Settings.js
+
 ├── docs
 │   ├── digrams
 │   │   ├── image.png
@@ -43,14 +23,14 @@
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
-├── eslint.config.mjs
+
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── scripts
 │   ├── before_git.sh
 │   ├── generate_file_struct.sh
-│   └── setup_server.sh
+
 ├── SECURITY.md
 ├── src
 │   ├── controllers
@@ -77,5 +57,4 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-20 directories, 55 files
 ```
