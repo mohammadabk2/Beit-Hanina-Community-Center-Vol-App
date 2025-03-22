@@ -23,6 +23,7 @@
 .sign-in-box {
   padding-top: 2rem;
   width: 90vw;
+  height: 45vh;
   margin-top: 1px;
   border-radius: 10px;
   background-color: var(--common-colour-1);
