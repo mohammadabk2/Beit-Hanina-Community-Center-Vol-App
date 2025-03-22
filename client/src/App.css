@@ -54,6 +54,8 @@
 
 .input-field {
   border-radius: 5px;
+  border: solid;
+  border-width: 1px;
   margin: 1rem;
   padding: 5px;
   font-size: 16px;
@@ -102,4 +104,17 @@ body {
 
 .dropdown-item a:hover {
   background-color: var(--common-colour-3);
+}
+
+input {
+  border: 1px solid #ccc;
+  transition: outline-color 0.3s ease;
+  outline: 2px solid transparent;
+  padding: 8px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+input:focus {
+  outline-color: blue;
 }
