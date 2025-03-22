@@ -23,7 +23,6 @@
 .sign-in-box {
   padding-top: 2rem;
   width: 90vw;
-  height: 45vh;
   margin-top: 1px;
   border-radius: 10px;
   background-color: var(--common-colour-1);
@@ -40,18 +39,16 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 50px; 
 }
 
 .language-button {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   margin: 10px;
   font-size: 14px;
-  padding: 5px;
   background-color: var(--common-colour-1);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .input-field {
@@ -77,7 +74,6 @@ body {
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
-  border: none;
 }
 
 .dropdown-menu {
@@ -93,7 +89,6 @@ body {
 }
 
 .dropdown-item {
-  padding: 10px;
   cursor: pointer;
 }
 
@@ -119,6 +114,27 @@ input {
 
 input:focus {
   outline-color: blue;
+}
+
+.sex-button {
+  margin: 5px;
+  margin-bottom: 1rem;
+  padding: 5px;
+}
+
+.red-star{
+  color: red;
+}
+
+.circle-item {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  text-align: center;
+  margin: 0 5px;
 }
 
 .circle-item {
