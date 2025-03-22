@@ -1,11 +1,21 @@
 import React, { useState } from "react";
+
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Switch,
+  useNavigate,
+} from "react-router-dom";
+
 
 // import components here
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
+import { lnOptions } from "./components/language";
 
 function App() {
   const [username, setUserName] = useState("");
@@ -27,9 +37,11 @@ function App() {
     console.log(password); //! testing only remove security risk
   };
 
+  const navigate = useNavigate();
   const signUp = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign up button clicked");
+    navigate("/sign-up");
   };
 
   const { t, i18n } = useTranslation("app");
@@ -53,19 +65,22 @@ function App() {
     // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
   ];
 
+
   return (
-    <div className="app flex-container">
+    <div className="app flex-box flex-column">
       <div className="drop-down">
         <DropDownMenu
           className="language-button"
           text={t("ln")}
-          options={options}
+          options={lnOptions}
         />
+
       </div>
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>
       <main>
+
         <div className="sign-in-box flex-container smooth-shadow-box">
           <h1>{t("welcome")}</h1>
           <div className="input-field-box flex-container">
@@ -97,6 +112,7 @@ function App() {
               onClick={signUp}
               text={t("sign-up")}
             />
+
           </div>
         </div>
       </main>

@@ -1,0 +1,213 @@
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useNavigate,
+} from "react-router-dom";
+
+//TODO flip these
+import "./SignUp.css";
+// import '../../App.css';
+// import components here
+import DynamicButton from "../../components/ButtonComponent";
+import DynamicInput from "../../components/InputComponent";
+import DropDownMenu from "../../components/DropDownMenu";
+import { lnOptions } from "../../components/language";
+
+// import pages here
+
+function SignUpPage() {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("/");
+  };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    birthDate: "",
+    sex: "",
+    phone: "",
+    email: "",
+    address: "",
+    insurance: "",
+    idNumber: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+  };
+
+  const handleSexChange = (value) => {
+    setFormData({ ...formData, sex: value });
+  };
+
+  const sexOptions = [
+    {
+      label: "male",
+      href: "#option1",
+      onClick: () => console.log("male clicked"),
+      onClick: () => handleSexChange("male"),
+    },
+    {
+      label: "female",
+      href: "#option2",
+      onClick: () => console.log("female clicked"),
+      onClick: () => handleSexChange("female"),
+    },
+    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
+  ];
+
+  return (
+    <div>
+      <div className="drop-down">
+        <DropDownMenu
+          className="language-button"
+          text="Ln"
+          options={lnOptions}
+        />
+      </div>
+      <div className="flex-box">
+        <form
+          onSubmit={handleSubmit}
+          className="form-container smooth-shadow-box"
+        >
+          <div className="flex-box flex-column">
+            <div>
+              <label>Full Name: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.name}
+              name="name"
+              onChange={handleChange}
+              placeholder="Enter Full Name"
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>BirthDate: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="date"
+              value={formData.birthDate}
+              name="birthDate"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>Sex: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DropDownMenu
+              className="sex-button"
+              text={formData.sex || "Select Sex"}
+              options={sexOptions}
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>Phone Number: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="tel"
+              value={formData.phone}
+              name="phone"
+              onChange={handleChange}
+              pattern="[0-9]*"
+              inputMode="numeric"
+              placeholder="Enter Phone Number"
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>Email Address: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="email"
+              value={formData.email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Enter Email Address"
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>Address: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.address}
+              name="address"
+              onChange={handleChange}
+              placeholder="Enter Address"
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>Insurance: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.insurance}
+              name="insurance"
+              onChange={handleChange}
+              placeholder="Enter Insurance Information"
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>ID Number: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.idNumber}
+              name="idNumber"
+              onChange={handleChange}
+              placeholder="Enter ID Number"
+            />
+          </div>
+
+          <DynamicButton
+            className="button"
+            text="Submit"
+            onClick={handleChange}
+          />
+        </form>
+      </div>
+      <div>
+        <DynamicButton className="button" onClick={goBack} text="Back" />
+      </div>
+    </div>
+  );
+}
+
+export default SignUpPage;
