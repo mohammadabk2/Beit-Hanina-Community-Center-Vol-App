@@ -43,14 +43,13 @@
 }
 
 .language-button {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   margin: 10px;
   font-size: 14px;
-  padding: 5px;
   background-color: var(--common-colour-1);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .input-field {
@@ -76,7 +75,6 @@ body {
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
-  border: none;
 }
 
 .dropdown-menu {
@@ -92,7 +90,6 @@ body {
 }
 
 .dropdown-item {
-  padding: 10px;
   cursor: pointer;
 }
 
@@ -118,4 +115,14 @@ input {
 
 input:focus {
   outline-color: blue;
+}
+
+.sex-button {
+  margin: 5px;
+  margin-bottom: 1rem;
+  padding: 5px;
+}
+
+.red-star{
+  color: red;
 }
