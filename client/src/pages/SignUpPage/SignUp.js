@@ -65,95 +65,103 @@ function SignUpPage() {
 
   return (
     <div>
-      <div>
-        <form onSubmit={handleSubmit} className="form-container">
-          <label className="block mb-2">Full Name: *</label>
-          <DynamicInput
-            className="input-field"
-            type="text"
-            value={formData.name}
-            name="name"
-            onChange={handleChange}
-            placeholder="Enter Full Name"
-          />
+      <div className="flex-box">
+        <form onSubmit={handleSubmit} className="form-container smooth-shadow-box">
+          <div className="flex-box flex-column">
+            <label>Full Name: *</label>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.name}
+              name="name"
+              onChange={handleChange}
+              placeholder="Enter Full Name"
+            />
+          </div>
 
-          <label className="block mb-2">Birth Date: *</label>
-          <DynamicInput
-            className="input-field"
-            type="date"
-            value={formData.birthDate}
-            name="birthDate"
-            onChange={handleChange}
-          />
+          <div className="flex-box flex-column">
+            <label>Birth Date: *</label>
+            <DynamicInput
+              className="input-field"
+              type="date"
+              value={formData.birthDate}
+              name="birthDate"
+              onChange={handleChange}
+            />
+          </div>
 
-          <label className="block mb-2">Sex: *</label>
-          <DropDownMenu
-            className="sex-button"
-            text={formData.sex || "Select Sex"}
-            options={options}
-          />
+          <div className="flex-box flex-column">
+            <div>
+              <label>Sex: </label><label>*</label>
+            </div>
+            <DropDownMenu
+              className="sex-button"
+              text={formData.sex || "Select Sex"}
+              options={options}
+            />
+          </div>
 
-          <label className="block mb-2">Phone: *</label>
-          {/* <DynamicInput
-            className="input-field"
-            type="tel"
-            value={formData.phone}
-            name="phone"
-            onChange={handleChange}
-            placeholder="Enter Phone Number"
-            pattern="[0-9]*"
-            inputMode="numeric"
-          /> */}
-          <DynamicInput
-            className="input-field"
-            type="tel"
-            value={formData.phone}
-            name="phone"
-            onChange={handleChange}
-            pattern="[0-9]*"
-            inputMode="numeric"
-            placeholder="Enter Phone Number"
-          />
+          <div className="flex-box flex-column">
+            <label>Phone: *</label>
+            <DynamicInput
+              className="input-field"
+              type="tel"
+              value={formData.phone}
+              name="phone"
+              onChange={handleChange}
+              pattern="[0-9]*"
+              inputMode="numeric"
+              placeholder="Enter Phone Number"
+            />
+          </div>
 
-          <label className="block mb-2">Email: *</label>
-          <DynamicInput
-            className="input-field"
-            type="email"
-            value={formData.email}
-            name="email"
-            onChange={handleChange}
-            placeholder="Enter Email Address"
-          />
+          <div className="flex-box flex-column">
+            <label>Email: *</label>
+            <DynamicInput
+              className="input-field"
+              type="email"
+              value={formData.email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Enter Email Address"
+            />
+          </div>
 
-          <label className="block mb-2">Address: *</label>
-          <DynamicInput
-            className="input-field"
-            type="text"
-            value={formData.address}
-            name="address"
-            onChange={handleChange}
-            placeholder="Enter Address"
-          />
+          <div className="flex-box flex-column">
+            <label>Address: *</label>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.address}
+              name="address"
+              onChange={handleChange}
+              placeholder="Enter Address"
+            />
+          </div>
 
-          <label className="block mb-2">Insurance: *</label>
-          <DynamicInput
-            className="input-field"
-            type="text"
-            value={formData.insurance}
-            name="insurance"
-            onChange={handleChange}
-            placeholder="Enter Insurance Information"
-          />
+          <div className="flex-box flex-column">
+            <label>Insurance: *</label>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.insurance}
+              name="insurance"
+              onChange={handleChange}
+              placeholder="Enter Insurance Information"
+            />
+          </div>
 
-          <label className="block mb-2">ID Number: *</label>
-          <DynamicInput
-            className="input-field"
-            type="text"
-            value={formData.idNumber}
-            name="idNumber"
-            onChange={handleChange}
-            placeholder="Enter ID Number"
-          />
+          <div className="flex-box flex-column">
+            <label>ID Number: *</label>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.idNumber}
+              name="idNumber"
+              onChange={handleChange}
+              placeholder="Enter ID Number"
+            />
+          </div>
 
           <DynamicButton
             className="button"

@@ -52,7 +52,7 @@ function App() {
   ];
 
   return (
-    <div className="app flex-container">
+    <div className="app flex-box flex-column">
       <div className="drop-down">
         <DropDownMenu className="language-button" text="Ln" options={options} />
       </div>
@@ -60,27 +60,25 @@ function App() {
         <h1>Beit Hanina Community Center Volunteer App</h1>
       </header>
       <main>
-        <div className="sign-in-box flex-container smooth-shadow-box">
+        <div className="sign-in-box flex-box flex-column smooth-shadow-box">
           <h2>Welcome to Beit Hanina Community Center</h2>
-          <div className="input-field-box flex-container">
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={username}
-              name="username-field"
-              onChange={handleUserName}
-              placeholder="Enter UserName"
-            />
-            <DynamicInput
-              className="input-field"
-              type="password"
-              value={password}
-              name="password-field"
-              onChange={handlePassword}
-              placeholder="Enter Password"
-            />
-          </div>
-          <div className="button-box flex-container">
+          <DynamicInput
+            className="input-field"
+            type="text"
+            value={username}
+            name="username-field"
+            onChange={handleUserName}
+            placeholder="Enter UserName"
+          />
+          <DynamicInput
+            className="input-field"
+            type="password"
+            value={password}
+            name="password-field"
+            onChange={handlePassword}
+            placeholder="Enter Password"
+          />
+          <div className="button-box flex-box">
             <DynamicButton className="button" onClick={signIn} text="Sign in" />
             <DynamicButton className="button" onClick={signUp} text="Sign up" />
           </div>
