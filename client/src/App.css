@@ -21,7 +21,8 @@
 }
 
 .sign-in-box {
-  width: 50vw;
+  padding-top: 2rem;
+  width: 90vw;
   height: 45vh;
   margin-top: 1px;
   border-radius: 10px;

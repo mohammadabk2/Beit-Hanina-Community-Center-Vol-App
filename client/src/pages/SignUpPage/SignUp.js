@@ -202,7 +202,7 @@ function SignUpPage() {
         </form>
       </div>
       <div>
-        <DynamicButton className="button" onClick={goBack} text="Back" />
+        <DynamicButton className="button" onClick={goBack} text={t("back")} />
       </div>
     </div>
   );
