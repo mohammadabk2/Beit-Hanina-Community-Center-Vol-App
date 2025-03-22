@@ -1,21 +1,12 @@
 import React, { useState } from "react";
-
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Switch,
-  useNavigate,
-} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 // import components here
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
-import { lnOptions } from "./components/language";
+import { useLnOptions } from "./components/language";
 
 function App() {
   const [username, setUserName] = useState("");
@@ -44,27 +35,8 @@ function App() {
     navigate("/sign-up");
   };
 
-  const { t, i18n } = useTranslation("app");
-  const options = [
-    {
-      label: "ar",
-      href: "#option1",
-      onClick: () => {
-        i18n.changeLanguage("ar"); // Change language
-        console.log("Language changed to Arabic"); // Log message
-      },
-    },
-    {
-      label: "en",
-      href: "#option2",
-      onClick: () => {
-        i18n.changeLanguage("en"); // Change language
-        console.log("Language changed to English"); // Log message
-      },
-    },
-    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
-  ];
-
+  const lnOptions = useLnOptions();
+  const { t } = useTranslation("app");
 
   return (
     <div className="app flex-box flex-column">
@@ -74,13 +46,11 @@ function App() {
           text={t("ln")}
           options={lnOptions}
         />
-
       </div>
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>
       <main>
-
         <div className="sign-in-box flex-container smooth-shadow-box">
           <h1>{t("welcome")}</h1>
           <div className="input-field-box flex-container">
@@ -112,7 +82,6 @@ function App() {
               onClick={signUp}
               text={t("sign-up")}
             />
-
           </div>
         </div>
       </main>

@@ -12,11 +12,11 @@ import signupAR from "./locales/ar/signup.json";
 const resources = {
   en: {
     app: appEN,
-    singup: signupEn,
+    signUp: signupEn,
   },
   ar: {
     app: appAr,
-    singup: signupAR,
+    signUp: signupAR,
   },
 };
 

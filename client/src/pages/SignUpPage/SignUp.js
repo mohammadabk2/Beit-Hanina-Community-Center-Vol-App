@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useNavigate,
-} from "react-router-dom";
-
-//TODO flip these
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
-// import '../../App.css';
-// import components here
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
-import { lnOptions } from "../../components/language";
+import { useLnOptions } from "../../components/language";
+import { useTranslation } from "react-i18next";
 
 // import pages here
 
@@ -48,20 +40,26 @@ function SignUpPage() {
     setFormData({ ...formData, sex: value });
   };
 
+  const lnOptions = useLnOptions();
+  const { t } = useTranslation("signUp");
+
   const sexOptions = [
     {
-      label: "male",
+      label: t("male"),
       href: "#option1",
-      onClick: () => console.log("male clicked"),
-      onClick: () => handleSexChange("male"),
+      onClick: () => {
+        console.log("male clicked");
+        handleSexChange("male");
+      },
     },
     {
-      label: "female",
+      label: t("female"),
       href: "#option2",
-      onClick: () => console.log("female clicked"),
-      onClick: () => handleSexChange("female"),
+      onClick: () => {
+        console.log("female clicked");
+        handleSexChange("female");
+      },
     },
-    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
   ];
 
   return (
@@ -69,7 +67,7 @@ function SignUpPage() {
       <div className="drop-down">
         <DropDownMenu
           className="language-button"
-          text="Ln"
+          text={t("ln")}
           options={lnOptions}
         />
       </div>
@@ -80,7 +78,7 @@ function SignUpPage() {
         >
           <div className="flex-box flex-column">
             <div>
-              <label>Full Name: </label>
+              <label> {t("fullName")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -95,7 +93,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>BirthDate: </label>
+              <label>{t("birthDate")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -109,7 +107,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Sex: </label>
+              <label>{t("sex")} </label>
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
@@ -121,7 +119,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Phone Number: </label>
+              <label>{t("phoneNumber")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -138,7 +136,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Email Address: </label>
+              <label>{t("email")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -153,7 +151,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Address: </label>
+              <label>{t("address")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -168,7 +166,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Insurance: </label>
+              <label>{t("insurance")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -183,7 +181,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>ID Number: </label>
+              <label>{t("idNumber")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -198,7 +196,7 @@ function SignUpPage() {
 
           <DynamicButton
             className="button"
-            text="Submit"
+            text={t("submit")}
             onClick={handleChange}
           />
         </form>
