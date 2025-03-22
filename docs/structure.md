@@ -17,16 +17,33 @@
 │   └── src
 │       ├── App.css
 │       ├── App.js
+│       ├── AppRouter.js
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
-│       │   └── InputComponent.js
+│       │   ├── InputComponent.js
+│       │   └── language.js
+│       ├── global.css
+│       ├── i18n.js
 │       ├── index.js
 │       ├── installPrompt.js
+│       ├── locales
+│       │   ├── ar
+│       │   │   ├── app.json
+│       │   │   └── signup.json
+│       │   └── en
+│       │       ├── app.json
+│       │       └── signup.json
 │       └── pages
-│           ├── About.js
-│           ├── Home.js
-│           └── Settings.js
+│           ├── AboutPage
+│           │   └── About.js
+│           ├── HomePage
+│           │   └── Home.js
+│           ├── SettingsPage
+│           │   └── Settings.js
+│           └── SignUpPage
+│               ├── SignUp.css
+│               └── SignUp.js
 ├── docs
 │   ├── digrams
 │   │   ├── image.png
@@ -78,5 +95,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-20 directories, 56 files
+27 directories, 66 files
 ```

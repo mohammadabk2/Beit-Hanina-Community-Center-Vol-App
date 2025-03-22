@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 // import components here
-
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
-
-// TODO:
-// import About from './pages/About';
-// import Settings from './pages/Settings';
-// add language button
+import { useLnOptions } from "./components/language";
 
 function App() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) => {
@@ -33,44 +28,31 @@ function App() {
     console.log(password); //! testing only remove security risk
   };
 
+  const navigate = useNavigate();
   const signUp = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign up button clicked");
+    navigate("/sign-up");
   };
 
-  const options = [
-    {
-      label: "ar",
-      href: "#option1",
-      onClick: () => console.log("Arabic clicked"),
-    },
-    {
-      label: "en",
-      href: "#option2",
-      onClick: () => console.log("English clicked"),
-    },
-    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
-  ];
+  const lnOptions = useLnOptions();
+  const { t } = useTranslation("app");
 
   return (
-    <div className="app flex-container">
+    <div className="app flex-box flex-column">
       <div className="drop-down">
-        <DropDownMenu className="language-button" text="Ln" options={options} />
+        <DropDownMenu
+          className="language-button"
+          text={t("ln")}
+          options={lnOptions}
+        />
       </div>
       <header className="app-header">
-        <h1>Beit Hanina Community Center Volunteer App</h1>
+        <h1>{t("name")}</h1>
       </header>
       <main>
-        {/* //TODO: add routes as needed*/}
-        {/* <Switch> */}
-        {/* <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/settings" component={Settings} /> */}
-        {/* Add other routes here */}
-        {/* </Switch> */}
-
         <div className="sign-in-box flex-container smooth-shadow-box">
-          <h2>Welcome to Beit Hanina Community Center</h2>
+          <h1>{t("welcome")}</h1>
           <div className="input-field-box flex-container">
             <DynamicInput
               className="input-field"
@@ -78,7 +60,7 @@ function App() {
               value={username}
               name="username-field"
               onChange={handleUserName}
-              placeholder="Enter UserName"
+              placeholder={t("user-name-placeholder")}
             />
             <DynamicInput
               className="input-field"
@@ -86,12 +68,20 @@ function App() {
               value={password}
               name="password-field"
               onChange={handlePassword}
-              placeholder="Enter Password"
+              placeholder={t("password-placeholder")}
             />
           </div>
           <div className="button-box flex-container">
-            <DynamicButton className="button" onClick={signIn} text="Sign in" />
-            <DynamicButton className="button" onClick={signUp} text="Sign up" />
+            <DynamicButton
+              className="button"
+              onClick={signIn}
+              text={t("sign-in")}
+            />
+            <DynamicButton
+              className="button"
+              onClick={signUp}
+              text={t("sign-up")}
+            />
           </div>
         </div>
       </main>

@@ -1,6 +1,7 @@
 import { Pool } from "pg";
 // const dotenv = require("dotenv");
 
+
 // Database connection configuration
 //TODO: setup the database on the server and then get these details
 // TODO get all these from .en

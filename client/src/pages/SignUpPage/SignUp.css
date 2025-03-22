@@ -1,0 +1,22 @@
+@import url("../../App.css");
+
+.form-container {
+  width: 90vw;
+  background-color: var(--common-colour-1);
+  border-radius: 10px;
+  max-width: 700px;
+  padding: 20px;
+  margin-top: 2rem;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.sex-button {
+  margin: 5px;
+  margin-bottom: 1rem;
+  padding: 5px;
+}
+
+.red-star{
+  color: red;
+}

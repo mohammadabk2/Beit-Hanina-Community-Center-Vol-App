@@ -1,9 +1,4 @@
-:root {
-  --common-colour-1: #f5f5f5;
-  --common-colour-2: #000000;
-  --common-colour-3: #0000001a;
-  --common-colour-4: #ffe7c2;
-}
+@import url("global.css");
 
 .app {
   text-align: center;
@@ -15,7 +10,7 @@
   margin-bottom: 2rem;
 }
 
-.flex-container {
+.flex-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,15 +21,17 @@
 }
 
 .sign-in-box {
+  padding-top: 2rem;
+  width: 90vw;
+  height: 45vh;
   margin-top: 1px;
   border-radius: 10px;
   background-color: var(--common-colour-1);
-  max-width: 450px;
+  max-width: 700px;
+  min-height: 320px;
 }
 
-.input-field-box,
-.app,
-.sign-in-box {
+.flex-column {
   flex-direction: column;
 }
 
@@ -57,9 +54,13 @@
 }
 
 .input-field {
+  border-radius: 5px;
+  border: solid;
+  border-width: 1px;
   margin: 1rem;
   padding: 5px;
   font-size: 16px;
+  width: 80%;
 }
 
 body {
@@ -104,4 +105,17 @@ body {
 
 .dropdown-item a:hover {
   background-color: var(--common-colour-3);
+}
+
+input {
+  border: 1px solid #ccc;
+  transition: outline-color 0.3s ease;
+  outline: 2px solid transparent;
+  padding: 8px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+input:focus {
+  outline-color: blue;
 }
