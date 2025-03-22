@@ -6,6 +6,7 @@ import {
   Switch,
   useNavigate,
 } from "react-router-dom";
+
 // import components here
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
@@ -27,6 +28,7 @@ function App() {
   };
 
   const signIn = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
@@ -34,6 +36,7 @@ function App() {
 
   const navigate = useNavigate();
   const signUp = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign up button clicked");
     navigate("/sign-up");
   };

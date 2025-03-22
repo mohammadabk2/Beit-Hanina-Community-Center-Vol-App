@@ -1,9 +1,9 @@
-const dbConnection = require("../database/dbconnection");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const usersValidation = require("../database/validation/users");
+import dbConnection from "../database/dbconnection";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import usersValidation from "../database/validation/users";
 
-module.exports = (req, res) => {
+export default (req, res) => {
     dbConnection.query(
         `SELECT id FROM users WHERE email=$1;`,
         [req.body.email.toLowerCase()],

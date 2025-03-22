@@ -1,9 +1,15 @@
-const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
-const compression = require("compression");
-const controllers = require("./controllers");
-const dotenv = require('dotenv');
+import express from "express";
+import path from "path";
+import bodyParser from "body-parser";
+import compression from "compression";
+// import controllers from "./controllers";
+import controllers from "./controllers/index.js"; // Update this line
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 const app = express();

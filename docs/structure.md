@@ -1,16 +1,4 @@
-# Structure of files
-```
-.
-├── client
-│   ├── assets
-│   │   └── logo.jpg
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── public
-│   │   ├── favicon.ico
-│   │   ├── index.html
-│   │   └── manifest.json
-│   ├── README.md
+
 │   └── src
 │       ├── App.css
 │       ├── App.js
@@ -18,21 +6,7 @@
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
-│       │   ├── InputComponent.js
-│       │   └── language.js
-│       ├── global.css
-│       ├── index.js
-│       ├── pages
-│       │   ├── AboutPage
-│       │   │   └── About.js
-│       │   ├── HomePage
-│       │   │   └── Home.js
-│       │   ├── SettingsPage
-│       │   │   └── Settings.js
-│       │   └── SignUpPage
-│       │       ├── SignUp.css
-│       │       └── SignUp.js
-│       └── service-worker.js
+
 ├── docs
 │   ├── digrams
 │   │   ├── image.png
@@ -49,12 +23,14 @@
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
+
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── before_git.sh
 │   ├── generate_file_struct.sh
-│   └── setup_app.sh
+
 ├── SECURITY.md
 ├── src
 │   ├── controllers
@@ -79,7 +55,6 @@
 │   └── server.js
 ├── tests
 │   └── test.txt
-└── workbox-config.js
+└── workbox-config.cjs
 
-24 directories, 55 files
 ```
