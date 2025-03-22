@@ -56,8 +56,10 @@ CREATE TABLE events
     event_start TIME NOT NULL,
     event_end TIME NOT NULL,
     is_active BOOLEAN NOT NULL,
+    stat TEXT NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
-    vol_id INT[]
+    vol_id INT[],
+    vol_id_waiting_list INT[]
 );
 
 -- ? maybe add more indexs or change
