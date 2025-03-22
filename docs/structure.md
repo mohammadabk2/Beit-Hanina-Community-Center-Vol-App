@@ -1,12 +1,4 @@
 
-│   └── src
-│       ├── App.css
-│       ├── App.js
-│       ├── AppRouter.js
-│       ├── components
-│       │   ├── ButtonComponent.js
-│       │   ├── DropDownMenu.js
-
 ├── docs
 │   ├── digrams
 │   │   ├── image.png

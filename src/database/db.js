@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
 
 // Database connection configuration
