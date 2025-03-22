@@ -10,11 +10,12 @@ import {
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
+import { lnOptions } from "./components/language";
 
 function App() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) => {
@@ -37,24 +38,11 @@ function App() {
     navigate("/sign-up");
   };
 
-  const options = [
-    {
-      label: "ar",
-      href: "#option1",
-      onClick: () => console.log("Arabic clicked"),
-    },
-    {
-      label: "en",
-      href: "#option2",
-      onClick: () => console.log("English clicked"),
-    },
-    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
-  ];
 
   return (
     <div className="app flex-box flex-column">
       <div className="drop-down">
-        <DropDownMenu className="language-button" text="Ln" options={options} />
+        <DropDownMenu className="language-button" text="Ln" options={lnOptions} />
       </div>
       <header className="app-header">
         <h1>Beit Hanina Community Center Volunteer App</h1>

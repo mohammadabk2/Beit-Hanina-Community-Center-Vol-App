@@ -13,6 +13,7 @@ import "./SignUp.css";
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
+import { lnOptions } from "../../components/language";
 
 // import pages here
 
@@ -47,7 +48,7 @@ function SignUpPage() {
     setFormData({ ...formData, sex: value });
   };
 
-  const options = [
+  const sexOptions = [
     {
       label: "male",
       href: "#option1",
@@ -65,10 +66,23 @@ function SignUpPage() {
 
   return (
     <div>
+      <div className="drop-down">
+        <DropDownMenu
+          className="language-button"
+          text="Ln"
+          options={lnOptions}
+        />
+      </div>
       <div className="flex-box">
-        <form onSubmit={handleSubmit} className="form-container smooth-shadow-box">
+        <form
+          onSubmit={handleSubmit}
+          className="form-container smooth-shadow-box"
+        >
           <div className="flex-box flex-column">
-            <label>Full Name: *</label>
+            <div>
+              <label>Full Name: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -80,7 +94,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Birth Date: *</label>
+            <div>
+              <label>BirthDate: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="date"
@@ -92,17 +109,21 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Sex: </label><label>*</label>
+              <label>Sex: </label>
+              <label className="red-star">*</label>
             </div>
             <DropDownMenu
               className="sex-button"
               text={formData.sex || "Select Sex"}
-              options={options}
+              options={sexOptions}
             />
           </div>
 
           <div className="flex-box flex-column">
-            <label>Phone: *</label>
+            <div>
+              <label>Phone Number: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="tel"
@@ -116,7 +137,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Email: *</label>
+            <div>
+              <label>Email Address: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="email"
@@ -128,7 +152,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Address: *</label>
+            <div>
+              <label>Address: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -140,7 +167,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Insurance: *</label>
+            <div>
+              <label>Insurance: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -152,7 +182,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>ID Number: *</label>
+            <div>
+              <label>ID Number: </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"

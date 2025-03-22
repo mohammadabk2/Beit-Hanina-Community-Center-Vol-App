@@ -18,9 +18,8 @@
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
-│       │   ├── FormComponent.js
-│       │   ├── Formcss.css
-│       │   └── InputComponent.js
+│       │   ├── InputComponent.js
+│       │   └── language.js
 │       ├── global.css
 │       ├── index.js
 │       ├── pages
@@ -82,5 +81,5 @@
 │   └── test.txt
 └── workbox-config.js
 
-24 directories, 56 files
+24 directories, 55 files
 ```
