@@ -136,14 +136,3 @@ input:focus {
   text-align: center;
   margin: 0 5px;
 }
-
-.circle-item {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 50%;
-  background-color: #e0e0e0;
-  text-align: center;
-  margin: 0 5px;
-}

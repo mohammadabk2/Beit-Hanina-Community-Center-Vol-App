@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SignUp.css";
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
@@ -72,10 +71,7 @@ function SignUpPage() {
         />
       </div>
       <div className="flex-box">
-        <form
-          onSubmit={handleSubmit}
-          className="form-container smooth-shadow-box"
-        >
+        <form onSubmit={handleSubmit} className="sign-in-box smooth-shadow-box">
           <div className="flex-box flex-column">
             <div>
               <label> {t("fullName")} </label>
@@ -193,16 +189,23 @@ function SignUpPage() {
               placeholder="Enter ID Number"
             />
           </div>
-
-          <DynamicButton
-            className="button"
-            text={t("submit")}
-            onClick={handleChange}
-          />
+          <div className="flex-box">
+            <div>
+              <DynamicButton
+                className="button"
+                text={t("submit")}
+                onClick={handleChange}
+              />
+            </div>
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={goBack}
+                text={t("back")}
+              />
+            </div>
+          </div>
         </form>
-      </div>
-      <div>
-        <DynamicButton className="button" onClick={goBack} text={t("back")} />
       </div>
     </div>
   );
