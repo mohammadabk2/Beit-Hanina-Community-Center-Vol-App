@@ -1,30 +1,35 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
-// Import translation files
-import translationEN from './locales/en/app.json';
-import translationAR from './locales/ar/app.json';
+// Import english translation files
+import appEN from "./locales/en/app.json";
+import signupEn from "./locales/en/signup.json";
+// Import arabic translation files
+import appAr from "./locales/ar/app.json";
+import signupAR from "./locales/ar/signup.json";
 
 // The translations
 const resources = {
   en: {
-    translation: translationEN
+    app: appEN,
+    singup: signupEn,
   },
   ar: {
-    translation: translationAR
-  }
+    app: appAr,
+    singup: signupAR,
+  },
 };
 
 i18n
   .use(initReactI18next) // Passes i18n down to react-i18next
   .init({
     resources,
-    lng: 'en', // Default language
-    fallbackLng: 'en', // Fallback language
+    lng: "en", // Default language
+    fallbackLng: "en", // Fallback language
 
     interpolation: {
-      escapeValue: false // React already does escaping
-    }
+      escapeValue: false, // React already does escaping
+    },
   });
 
 export default i18n;

@@ -32,7 +32,7 @@ function App() {
     console.log("sign up button clicked");
   };
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("app");
   const options = [
     {
       label: "ar",

@@ -26,9 +26,11 @@
 │       ├── installPrompt.js
 │       ├── locales
 │       │   ├── ar
-│       │   │   └── app.json
+│       │   │   ├── app.json
+│       │   │   └── signup.json
 │       │   └── en
-│       │       └── app.json
+│       │       ├── app.json
+│       │       └── signup.json
 │       └── pages
 │           ├── About.js
 │           ├── Home.js
@@ -83,5 +85,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-23 directories, 58 files
+23 directories, 60 files
 ```
