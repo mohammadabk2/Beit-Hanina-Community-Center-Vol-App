@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useNavigate,
-} from "react-router-dom";
-
-//TODO flip these
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
-// import '../../App.css';
-// import components here
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
+import { useLnOptions } from "../../components/language";
+import { useTranslation } from "react-i18next";
 
 // import pages here
 
@@ -47,28 +40,47 @@ function SignUpPage() {
     setFormData({ ...formData, sex: value });
   };
 
-  const options = [
+  const lnOptions = useLnOptions();
+  const { t } = useTranslation("signUp");
+
+  const sexOptions = [
     {
-      label: "male",
+      label: t("male"),
       href: "#option1",
-      onClick: () => console.log("male clicked"),
-      onClick: () => handleSexChange("male"),
+      onClick: () => {
+        console.log("male clicked");
+        handleSexChange("male");
+      },
     },
     {
-      label: "female",
+      label: t("female"),
       href: "#option2",
-      onClick: () => console.log("female clicked"),
-      onClick: () => handleSexChange("female"),
+      onClick: () => {
+        console.log("female clicked");
+        handleSexChange("female");
+      },
     },
-    // { label: "hb", href: "#option3", onClick: () => console.log("hebrew clicked") },
   ];
 
   return (
     <div>
+      <div className="drop-down">
+        <DropDownMenu
+          className="language-button"
+          text={t("ln")}
+          options={lnOptions}
+        />
+      </div>
       <div className="flex-box">
-        <form onSubmit={handleSubmit} className="form-container smooth-shadow-box">
+        <form
+          onSubmit={handleSubmit}
+          className="form-container smooth-shadow-box"
+        >
           <div className="flex-box flex-column">
-            <label>Full Name: *</label>
+            <div>
+              <label> {t("fullName")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -80,7 +92,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Birth Date: *</label>
+            <div>
+              <label>{t("birthDate")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="date"
@@ -92,17 +107,21 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>Sex: </label><label>*</label>
+              <label>{t("sex")} </label>
+              <label className="red-star">*</label>
             </div>
             <DropDownMenu
               className="sex-button"
               text={formData.sex || "Select Sex"}
-              options={options}
+              options={sexOptions}
             />
           </div>
 
           <div className="flex-box flex-column">
-            <label>Phone: *</label>
+            <div>
+              <label>{t("phoneNumber")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="tel"
@@ -116,7 +135,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Email: *</label>
+            <div>
+              <label>{t("email")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="email"
@@ -128,7 +150,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Address: *</label>
+            <div>
+              <label>{t("address")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -140,7 +165,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>Insurance: *</label>
+            <div>
+              <label>{t("insurance")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -152,7 +180,10 @@ function SignUpPage() {
           </div>
 
           <div className="flex-box flex-column">
-            <label>ID Number: *</label>
+            <div>
+              <label>{t("idNumber")} </label>
+              <label className="red-star">*</label>
+            </div>
             <DynamicInput
               className="input-field"
               type="text"
@@ -165,7 +196,7 @@ function SignUpPage() {
 
           <DynamicButton
             className="button"
-            text="Submit"
+            text={t("submit")}
             onClick={handleChange}
           />
         </form>

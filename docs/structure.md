@@ -9,7 +9,10 @@
 │   ├── public
 │   │   ├── favicon.ico
 │   │   ├── index.html
-│   │   └── manifest.json
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── sw.js
 │   ├── README.md
 │   └── src
 │       ├── App.css
@@ -18,22 +21,29 @@
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
-│       │   ├── FormComponent.js
-│       │   ├── Formcss.css
-│       │   └── InputComponent.js
+│       │   ├── InputComponent.js
+│       │   └── language.js
 │       ├── global.css
+│       ├── i18n.js
 │       ├── index.js
-│       ├── pages
-│       │   ├── AboutPage
-│       │   │   └── About.js
-│       │   ├── HomePage
-│       │   │   └── Home.js
-│       │   ├── SettingsPage
-│       │   │   └── Settings.js
-│       │   └── SignUpPage
-│       │       ├── SignUp.css
-│       │       └── SignUp.js
-│       └── service-worker.js
+│       ├── installPrompt.js
+│       ├── locales
+│       │   ├── ar
+│       │   │   ├── app.json
+│       │   │   └── signup.json
+│       │   └── en
+│       │       ├── app.json
+│       │       └── signup.json
+│       └── pages
+│           ├── AboutPage
+│           │   └── About.js
+│           ├── HomePage
+│           │   └── Home.js
+│           ├── SettingsPage
+│           │   └── Settings.js
+│           └── SignUpPage
+│               ├── SignUp.css
+│               └── SignUp.js
 ├── docs
 │   ├── digrams
 │   │   ├── image.png
@@ -50,12 +60,14 @@
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
+├── eslint.config.mjs
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── before_git.sh
 │   ├── generate_file_struct.sh
-│   └── setup_app.sh
+│   └── setup_server.sh
 ├── SECURITY.md
 ├── src
 │   ├── controllers
@@ -80,7 +92,7 @@
 │   └── server.js
 ├── tests
 │   └── test.txt
-└── workbox-config.js
+└── workbox-config.cjs
 
-24 directories, 56 files
+27 directories, 65 files
 ```

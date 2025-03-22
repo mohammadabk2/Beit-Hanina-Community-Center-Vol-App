@@ -1,6 +1,6 @@
-const usersValidation = require("../database/validation/users");
+import usersValidation from "../database/validation/users";
 
-module.exports = {
+export default {
     usersValidation: (req, res) => {
         let obj = {};
         Object.keys(usersValidation).forEach((key) => (obj[key] = usersValidation[key].toString()));
