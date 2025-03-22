@@ -26,6 +26,7 @@ function App() {
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
+    navigate("/home");
   };
 
   const navigate = useNavigate();

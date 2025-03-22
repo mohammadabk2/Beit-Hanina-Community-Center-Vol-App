@@ -40,6 +40,7 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 50px; 
 }
 
 .language-button {
@@ -118,4 +119,15 @@ input {
 
 input:focus {
   outline-color: blue;
+}
+
+.circle-item {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  text-align: center;
+  margin: 0 5px;
 }
