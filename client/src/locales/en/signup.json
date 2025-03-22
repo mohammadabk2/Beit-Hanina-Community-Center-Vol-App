@@ -2,6 +2,8 @@
   "full-name": "Full Name:",
   "birthdate": "Birth Date:",
   "sex": "Sex:",
+  "male":"Male",
+  "female":"Female",
   "phone-number": "Phone Number:",
   "email": "Email:",
   "insurance": "Insurance:",
