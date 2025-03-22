@@ -21,8 +21,14 @@
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
 │       │   └── InputComponent.js
+│       ├── i18n.js
 │       ├── index.js
 │       ├── installPrompt.js
+│       ├── locales
+│       │   ├── ar
+│       │   │   └── app.json
+│       │   └── en
+│       │       └── app.json
 │       └── pages
 │           ├── About.js
 │           ├── Home.js
@@ -77,5 +83,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-20 directories, 55 files
+23 directories, 58 files
 ```
