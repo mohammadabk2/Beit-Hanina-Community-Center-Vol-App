@@ -61,7 +61,9 @@ CREATE TABLE events
     stat TEXT NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[],
-    vol_id_waiting_list INT[]
+    vol_id_waiting_list INT[],
+    max_number_of_vol INT DEFAULT 0,
+    current_number_of_vol INT DEFAULT 0
 );
 
 -- ? maybe add more indexs or change
