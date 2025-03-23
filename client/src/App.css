@@ -45,7 +45,7 @@
   color: black;
 }
 
-.button:hover{
+.button:hover {
   transition: background-color ease 0.5s;
   background-color: rgb(168, 168, 168);
 }
@@ -144,4 +144,9 @@ input:focus {
   background-color: #e0e0e0;
   text-align: center;
   margin: 0 5px;
+}
+
+.event-box {
+  margin: 1rem;
+  border-radius: 10px;
 }

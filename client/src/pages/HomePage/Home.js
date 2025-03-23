@@ -16,7 +16,7 @@ function Home() {
   const { t } = useTranslation("home");
 
   return (
-    <div className="app flex-box flex-column">
+    <div className="app flex-box">
       <div className="drop-down">
         <DropDownMenu
           className="language-button"
@@ -24,13 +24,27 @@ function Home() {
           options={lnOptions}
         />
       </div>
-      <header className="app-header"></header>
       <main>
-        <EventItem
-          name={"test event"}
-          desc={"some desc"}
-          req={["old", "young", "test", "rest"]}
-        ></EventItem>
+        <div className="flex-box flex-column">
+          <EventItem
+            name={"test event1"}
+            desc={"some desc"}
+            req={["old", "young", "test", "rest"]}
+            className="flex-box flex-column event-box smooth-shadow-box"
+          ></EventItem>
+          <EventItem
+            name={"test event2"}
+            desc={"some desc"}
+            req={["old", "young", "test", "rest"]}
+            className="flex-box flex-column event-box smooth-shadow-box"
+          ></EventItem>
+          <EventItem
+            name={"test event3"}
+            desc={"some desc"}
+            req={["old", "young", "test", "rest"]}
+            className="flex-box flex-column event-box smooth-shadow-box"
+          ></EventItem>
+        </div>
       </main>
     </div>
   );

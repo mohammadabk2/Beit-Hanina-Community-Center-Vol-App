@@ -52,7 +52,7 @@ function App() {
         <h1>{t("name")}</h1>
       </header>
       <main>
-        <div className="sign-in-box flex-container smooth-shadow-box">
+        <div className="sign-in-box flex-box flex-column smooth-shadow-box">
           <h1>{t("welcome")}</h1>
           <div className="input-field-box flex-container">
             <DynamicInput
