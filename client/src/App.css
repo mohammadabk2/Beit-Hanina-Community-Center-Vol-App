@@ -152,6 +152,12 @@ input:focus {
   border-radius: 10px;
 }
 
-.buttons-margin{
+.buttons-margin {
   margin: 5px;
+}
+
+.line-break {
+  border-bottom: black;
+  border-width: 1px;
+  border-bottom: solid;
 }

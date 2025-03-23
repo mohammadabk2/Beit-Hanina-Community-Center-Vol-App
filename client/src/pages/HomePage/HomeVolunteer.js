@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import settingsIcon from "../../icons/settings_icon.jpg";
 
 // import components here
 import DropDownMenu from "../../components/DropDownMenu";
@@ -67,8 +68,8 @@ function HomeVolunteer() {
 
   return (
     <div className="app flex-box">
-      <main>
-        <div className="flex-box">
+      <div className="flex-column smooth-shadow-box sign-up-box">
+        <div className="flex-box line-break">
           <div>
             <DynamicButton
               className="button"
@@ -88,6 +89,8 @@ function HomeVolunteer() {
               className="button"
               onClick={goToSettings}
               text={t("settings")}
+              logoSrc={settingsIcon}
+              logoalt={"settings icon"}
             />
           </div>
         </div>
@@ -99,7 +102,7 @@ function HomeVolunteer() {
           />
         </div>
         <div className="flex-box flex-column">{renderEventItems(events)}</div>
-      </main>
+      </div>
     </div>
   );
 }
