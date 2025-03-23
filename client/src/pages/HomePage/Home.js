@@ -45,6 +45,11 @@ function Home() {
       desc: "some desc",
       req: ["old", "young", "test", "rest"],
     },
+    {
+      name: "test event4",
+      desc: "some desc",
+      req: ["old", "young", "test", "rest"],
+    },
   ];
   //!
 
@@ -65,12 +70,12 @@ function Home() {
       <main>
         <div>
           <DynamicButton
-            className="button"
+            className="right-side middle-right"
             onClick={goToPersonalArea}
             text={t("personalArea")}
           />
           <DynamicButton
-            className="button"
+            className="right-side bottom-right"
             onClick={goToSettings}
             text={t("settings")}
           />
@@ -85,7 +90,7 @@ function Home() {
 
         <div>
           <DynamicButton
-            className="button"
+            className="right-side top-right"
             onClick={sortEvents}
             text={t("sort")}
           />
