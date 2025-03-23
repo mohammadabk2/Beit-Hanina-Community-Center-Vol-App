@@ -4,7 +4,7 @@ import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
 
 const EventItem = ({ name, desc, className, style, req }) => {
-  const { t } = useTranslation("home");
+  const { t } = useTranslation("homeVol");
 
   const handleJoinClick = () => {
     console.log("Join button clicked");

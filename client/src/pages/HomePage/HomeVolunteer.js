@@ -8,11 +8,11 @@ import { useLnOptions } from "../../components/language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
 
-function Home() {
+function HomeVolunteer() {
   const navigate = useNavigate();
 
   const lnOptions = useLnOptions();
-  const { t } = useTranslation("home");
+  const { t } = useTranslation("homeVol");
 
   const goToSettings = () => {
     console.log("Settings button clicked");
@@ -68,17 +68,28 @@ function Home() {
   return (
     <div className="app flex-box">
       <main>
-        <div>
-          <DynamicButton
-            className="right-side middle-right"
-            onClick={goToPersonalArea}
-            text={t("personalArea")}
-          />
-          <DynamicButton
-            className="right-side bottom-right"
-            onClick={goToSettings}
-            text={t("settings")}
-          />
+        <div className="flex-box">
+          <div>
+            <DynamicButton
+              className="button"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
+          </div>
+          <div>
+            <DynamicButton
+              className="button"
+              onClick={goToPersonalArea}
+              text={t("personalArea")}
+            />
+          </div>
+          <div>
+            <DynamicButton
+              className="button"
+              onClick={goToSettings}
+              text={t("settings")}
+            />
+          </div>
         </div>
         <div>
           <DropDownMenu
@@ -87,18 +98,10 @@ function Home() {
             options={lnOptions}
           />
         </div>
-
-        <div>
-          <DynamicButton
-            className="right-side top-right"
-            onClick={sortEvents}
-            text={t("sort")}
-          />
-        </div>
         <div className="flex-box flex-column">{renderEventItems(events)}</div>
       </main>
     </div>
   );
 }
 
-export default Home;
+export default HomeVolunteer;

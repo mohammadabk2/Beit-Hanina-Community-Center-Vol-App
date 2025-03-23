@@ -152,24 +152,6 @@ input:focus {
   border-radius: 10px;
 }
 
-.right-side {
-  position: absolute;
-  /* top: 5px; */
-  right: 5px;
-  margin: 10px;
-  font-size: 14px;
-  background-color: var(--common-colour-1);
-  border-radius: 10px;
-}
-
-.top-right {
-  top: 5px;
-}
-
-.middle-right {
-  top: 35px;
-}
-
-.bottom-right {
-  top: 60px;
+.buttons-margin{
+  margin: 5px;
 }

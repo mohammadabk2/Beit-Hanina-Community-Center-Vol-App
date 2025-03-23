@@ -4,23 +4,23 @@ import { initReactI18next } from "react-i18next";
 // Import english translation files
 import appEN from "./locales/en/app.json";
 import signupEn from "./locales/en/signup.json";
-import homeEn from "./locales/en/home.json";
+import homeVolunteerEn from "./locales/en/homeVolunteer.json";
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
 import signupAR from "./locales/ar/signup.json";
-import homeAR from "./locales/ar/home.json";
+import homeVolunteerAR from "./locales/ar/homeVolunteer.json";
 
 // The translations
 const resources = {
   en: {
     app: appEN,
     signUp: signupEn,
-    home:homeEn,
+    homeVol:homeVolunteerEn,
   },
   ar: {
     app: appAr,
     signUp: signupAR,
-    home:homeAR,
+    homeVol:homeVolunteerAR,
   },
 };
 

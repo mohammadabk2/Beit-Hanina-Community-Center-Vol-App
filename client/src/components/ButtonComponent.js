@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const DynamicButton = ({ onClick, name, className, style, text }) => {
   return (
-    // <button onClick={onClick} name={name} className={className} style={style} />
     <button onClick={onClick} name={name} className={className} style={style} > {text} </button>
   );
 };
