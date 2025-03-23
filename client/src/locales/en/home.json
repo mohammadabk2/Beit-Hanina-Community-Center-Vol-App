@@ -3,5 +3,8 @@
   "favorite": "Favorite",
   "share": "Share",
   "hide": "Hide",
-  "ln": "Language"
+  "ln": "Language",
+  "settings":"Settings",
+  "personalArea":"Personal Area",
+  "sort":"Sort"
 }

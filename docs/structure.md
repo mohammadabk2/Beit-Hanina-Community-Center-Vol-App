@@ -21,6 +21,7 @@
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
+│       │   ├── EventItem.js
 │       │   ├── InputComponent.js
 │       │   └── language.js
 │       ├── global.css
@@ -30,19 +31,22 @@
 │       ├── locales
 │       │   ├── ar
 │       │   │   ├── app.json
+│       │   │   ├── home.json
 │       │   │   └── signup.json
 │       │   └── en
 │       │       ├── app.json
+│       │       ├── home.json
 │       │       └── signup.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
 │           ├── HomePage
 │           │   └── Home.js
+│           ├── PersonalAreaPage
+│           │   └── PersonalArea.js
 │           ├── SettingsPage
 │           │   └── Settings.js
 │           └── SignUpPage
-│               ├── SignUp.css
 │               └── SignUp.js
 ├── docs
 │   ├── digrams
@@ -94,5 +98,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-27 directories, 65 files
+28 directories, 68 files
 ```
