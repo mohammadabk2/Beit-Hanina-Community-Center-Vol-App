@@ -42,7 +42,6 @@
 │           ├── SettingsPage
 │           │   └── Settings.js
 │           └── SignUpPage
-│               ├── SignUp.css
 │               └── SignUp.js
 ├── docs
 │   ├── digrams
@@ -77,8 +76,8 @@
 │   │   └── validation.js
 │   ├── database
 │   │   ├── dbbuild.js
-│   │   ├── dbbuild.sql
 │   │   ├── db.js
+│   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
 │   ├── deprecated
@@ -95,5 +94,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-27 directories, 66 files
+27 directories, 65 files
 ```
