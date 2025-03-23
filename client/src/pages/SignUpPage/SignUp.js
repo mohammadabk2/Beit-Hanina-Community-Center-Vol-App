@@ -103,12 +103,12 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("sex")} </label>
+              <label>{t("gender")} </label>
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
-              className="sex-button"
-              text={formData.sex || "Select Sex"}
+              className="gender-button"
+              text={formData.sex || "Select Gender"}
               options={sexOptions}
             />
           </div>
