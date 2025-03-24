@@ -1,13 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import settingsIcon from "../../icons/settings_icon.jpg";
 
 // import components here
 import DropDownMenu from "../../components/DropDownMenu";
 import { useLnOptions } from "../../components/language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
+import ImageComponent from "../../components/imageComponent";
+import settingsIcon from "../../icons/settings_icon.jpg";
+import centreLogo from "../../icons/logo.jpg";
 
 function HomeVolunteer() {
   const navigate = useNavigate();
@@ -69,6 +71,13 @@ function HomeVolunteer() {
   return (
     <div className="app flex-box">
       <div className="flex-column smooth-shadow-box sign-up-box">
+        <div>
+          <ImageComponent
+            name="Centre Logo"
+            src={centreLogo}
+            alt="Centre Logo Image"
+          />
+        </div>
         <div className="flex-box line-break">
           <div>
             <DynamicButton
