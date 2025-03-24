@@ -8,6 +8,7 @@ import SettingsPage from "./pages/SettingsPage/Settings";
 import PersonalAreaPage from "./pages/PersonalAreaPage/PersonalArea"
 import HomeOrganizerPage from "./pages/HomePage/HomeOrganizer";
 import HomeAdminPage from "./pages/HomePage/HomeAdmin";
+import AboutPage from "./pages/AboutPage/About";
 
 function AppRouter() {
   return (
@@ -20,6 +21,8 @@ function AppRouter() {
         <Route path="/home-admin" element={<HomeOrganizerPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/personal-area" element={<PersonalAreaPage />} />
+        <Route path="/About" element={<AboutPage />} />
+
       </Routes>
     </Router>
   );
