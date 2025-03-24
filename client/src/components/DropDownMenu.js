@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import DynamicButton from "./ButtonComponent";
 
 const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,9 +36,12 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
 
   return (
     <div className={`${className}`} style={style} ref={dropdownRef}>
-      <button onClick={toggleDropdown} name={name} className="dropdown-toggle">
-        {text}
-      </button>
+      <DynamicButton
+        onClick={toggleDropdown}
+        name={name}
+        className="button dropdown-toggle"
+        text={text}
+      />
       {options && isOpen && (
         <ul className="dropdown-menu">
           {options.map((option, index) => (
