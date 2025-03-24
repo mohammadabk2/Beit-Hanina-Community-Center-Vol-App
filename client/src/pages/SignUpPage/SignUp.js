@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../components/language";
+import { useLnOptions } from "../../components/Language";
+import { useSkillOptions } from "../../components/Skills";
 import { useTranslation } from "react-i18next";
 
 // import pages here
@@ -24,10 +25,28 @@ function SignUpPage() {
     address: "",
     insurance: "",
     idNumber: "",
+    skills: [], // Initialize skills as an array
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleAddSkill = (value) => {
+    if (!formData.skills.includes(value)) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        skills: [
+          ...(Array.isArray(prevFormData.skills) ? prevFormData.skills : []),
+          value,
+        ],
+      }));
+    }
+  };
+
+  const handleRemoveSkill = (index) => {
+    const newSkills = formData.skills.filter((_, i) => i !== index);
+    setFormData({ ...formData, skills: newSkills });
   };
 
   const handleSubmit = (e) => {
@@ -40,11 +59,13 @@ function SignUpPage() {
   };
 
   const lnOptions = useLnOptions();
-  const { t } = useTranslation("signUp");
+  const skillsOptions = useSkillOptions();
+  const { t: tsignup } = useTranslation("signUp");
+  const { t: tskill } = useTranslation("skills");
 
   const sexOptions = [
     {
-      label: t("male"),
+      label: tsignup("male"),
       href: "#option1",
       onClick: () => {
         console.log("male clicked");
@@ -52,7 +73,7 @@ function SignUpPage() {
       },
     },
     {
-      label: t("female"),
+      label: tsignup("female"),
       href: "#option2",
       onClick: () => {
         console.log("female clicked");
@@ -66,7 +87,7 @@ function SignUpPage() {
       <div className="drop-down">
         <DropDownMenu
           className="language-button"
-          text={t("ln")}
+          text={tsignup("ln")}
           options={lnOptions}
         />
       </div>
@@ -74,7 +95,7 @@ function SignUpPage() {
         <form onSubmit={handleSubmit} className="sign-in-box smooth-shadow-box">
           <div className="flex-box flex-column">
             <div>
-              <label> {t("fullName")} </label>
+              <label> {tsignup("fullName")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -83,13 +104,13 @@ function SignUpPage() {
               value={formData.name}
               name="name"
               onChange={handleChange}
-              placeholder="Enter Full Name"
+              placeholder={tsignup("fullname_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("birthDate")} </label>
+              <label>{tsignup("birthDate")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -103,19 +124,19 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("sex")} </label>
+              <label>{tsignup("sex")} </label>
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
               className="sex-button"
-              text={formData.sex || "Select Sex"}
+              text={formData.sex || tsignup("sexselect")}
               options={sexOptions}
             />
           </div>
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("phoneNumber")} </label>
+              <label>{tsignup("phoneNumber")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -126,13 +147,13 @@ function SignUpPage() {
               onChange={handleChange}
               pattern="[0-9]*"
               inputMode="numeric"
-              placeholder="Enter Phone Number"
+              placeholder={tsignup("phoneNnumber_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("email")} </label>
+              <label>{tsignup("email")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -141,13 +162,13 @@ function SignUpPage() {
               value={formData.email}
               name="email"
               onChange={handleChange}
-              placeholder="Enter Email Address"
+              placeholder={tsignup("email_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("address")} </label>
+              <label>{tsignup("address")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -156,13 +177,13 @@ function SignUpPage() {
               value={formData.address}
               name="address"
               onChange={handleChange}
-              placeholder="Enter Address"
+              placeholder={tsignup("address_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("insurance")} </label>
+              <label>{tsignup("insurance")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -171,13 +192,13 @@ function SignUpPage() {
               value={formData.insurance}
               name="insurance"
               onChange={handleChange}
-              placeholder="Enter Insurance Information"
+              placeholder={tsignup("insurance_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("idNumber")} </label>
+              <label>{tsignup("idNumber")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -186,22 +207,47 @@ function SignUpPage() {
               value={formData.idNumber}
               name="idNumber"
               onChange={handleChange}
-              placeholder="Enter ID Number"
+              placeholder={tsignup("idNumber_placeholder")}
+            />
+          </div>
+
+          <div className="flex-box flex-column">
+            <div>
+              <label>{tsignup("skills")}: </label>
+            </div>
+            {formData.skills.map((skill, index) => (
+              <div key={index} className="flex-box">
+                <label>{skill}</label>
+                <DynamicButton
+                  className="button"
+                  text={tsignup("remove")}
+                  onClick={() => handleRemoveSkill(index)}
+                />
+              </div>
+            ))}
+            <DropDownMenu
+              className="sex-button"
+              text={tsignup("selectskills")}
+              options={skillsOptions.map((skill) => ({
+                label: tskill(`${skill.label}`),
+                href: `#${skill.value}`,
+                onClick: () => handleAddSkill(skill.value),
+              }))}
             />
           </div>
           <div className="flex-box">
             <div>
               <DynamicButton
                 className="button"
-                text={t("submit")}
-                onClick={handleChange}
+                text={tsignup("submit")}
+                type="submit"
               />
             </div>
             <div>
               <DynamicButton
                 className="button"
                 onClick={goBack}
-                text={t("back")}
+                text={tsignup("back")}
               />
             </div>
           </div>
