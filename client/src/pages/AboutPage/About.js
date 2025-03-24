@@ -22,7 +22,7 @@ function About() {
         />
       </div>
       <main>
-        <div className="flex-box-columns">
+        <div className="flex-box-columns smooth-shadow-box sign-up-box">
           <h1>{tAbout("devs")}</h1>
           <h2>{tAbout("mohammadak")}</h2>
           <h2>{tAbout("jad")}</h2>
