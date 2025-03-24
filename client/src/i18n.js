@@ -3,20 +3,24 @@ import { initReactI18next } from "react-i18next";
 
 // Import english translation files
 import appEN from "./locales/en/app.json";
-import signupEn from "./locales/en/signup.json";
+import signupEN from "./locales/en/signup.json";
+import skillsEN from "./locales/en/skills.json";
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
 import signupAR from "./locales/ar/signup.json";
+import skillsAR from "./locales/ar/skills.json";
 
 // The translations
 const resources = {
   en: {
     app: appEN,
-    signUp: signupEn,
+    signUp: signupEN,
+    skills: skillsEN,
   },
   ar: {
     app: appAr,
     signUp: signupAR,
+    skills: skillsAR,
   },
 };
 
