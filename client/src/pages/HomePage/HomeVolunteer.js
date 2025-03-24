@@ -68,7 +68,7 @@ function HomeVolunteer() {
 
   return (
     <div className="app flex-box">
-      <div className="flex-column smooth-shadow-box sign-up-box">
+      <div className="flex-column sign-in-box smooth-shadow-box">
         <div className="flex-box line-break">
           <div>
             <DynamicButton
