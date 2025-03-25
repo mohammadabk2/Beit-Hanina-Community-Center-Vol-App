@@ -1,7 +1,7 @@
 {
   "fullName": "الاسم الكامل",
   "birthDate": "تاريخ الميلاد",
-  "sex": "الجنس",
+  "gender": "الجنس",
   "male": "ذكر",
   "female": "أنثى",
   "phoneNumber": "رقم التليفون",
@@ -11,5 +11,16 @@
   "submit": "إرسال الوثيقة",
   "back": "عودة",
   "address": "العنوان",
-  "ln": "لغة"
+  "ln": "لغة",
+  "skills": "المهارات",
+  "fullname_placeholder": "أدخل الاسم الكامل",
+  "sex_placeholder": "أدخل الجنس",
+  "phoneNnumber_placeholder": "أدخل رقم الهاتف",
+  "email_placeholder": "أدخل البريد الإلكتروني",
+  "insurance_placeholder": "أدخل التأمين",
+  "idNumber_placeholder": "أدخل رقم الهوية",
+  "address_placeholder": "أدخل العنوان",
+  "sexselect": "اختر الجنس",
+  "selectskills": "اختر المهارات",
+  "remove": "إزالة "
 }

@@ -5,9 +5,9 @@ import DropDownMenu from "../../components/DropDownMenu";
 import { useLnOptions } from "../../components/Language";
 // import DynamicButton from "../../components/ButtonComponent";
 
-function Settings() {
+function PersonalArea() {
   const lnOptions = useLnOptions();
-  const { t } = useTranslation("home"); //! change to settings when made
+  const { t } = useTranslation("home"); //! change to PersonalArea when made
 
   return (
     <div className="app flex-box">
@@ -19,10 +19,10 @@ function Settings() {
         />
       </div>
       <main>
-        <h1>Settings page</h1>
+        <h1>Personal Area page</h1>
       </main>
     </div>
   );
 }
 
-export default Settings;
+export default PersonalArea;

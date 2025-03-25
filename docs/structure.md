@@ -21,24 +21,40 @@
 │       ├── components
 │       │   ├── ButtonComponent.js
 │       │   ├── DropDownMenu.js
+│       │   ├── EventItem.js
+│       │   ├── imageComponent.js
 │       │   ├── InputComponent.js
-│       │   └── language.js
+│       │   ├── Language.js
+│       │   └── Skills.js
 │       ├── global.css
 │       ├── i18n.js
+│       ├── icons
+│       │   ├── logo.jpg
+│       │   └── settings_icon.jpg
 │       ├── index.js
 │       ├── installPrompt.js
 │       ├── locales
 │       │   ├── ar
+│       │   │   ├── about.json
 │       │   │   ├── app.json
-│       │   │   └── signup.json
+│       │   │   ├── homeVolunteer.json
+│       │   │   ├── signup.json
+│       │   │   └── skills.json
 │       │   └── en
+│       │       ├── about.json
 │       │       ├── app.json
-│       │       └── signup.json
+│       │       ├── homeVolunteer.json
+│       │       ├── signup.json
+│       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
 │           ├── HomePage
-│           │   └── Home.js
+│           │   ├── HomeAdmin.js
+│           │   ├── HomeOrganizer.js
+│           │   └── HomeVolunteer.js
+│           ├── PersonalAreaPage
+│           │   └── PersonalArea.js
 │           ├── SettingsPage
 │           │   └── Settings.js
 │           └── SignUpPage
@@ -94,5 +110,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-27 directories, 65 files
+29 directories, 75 files
 ```
