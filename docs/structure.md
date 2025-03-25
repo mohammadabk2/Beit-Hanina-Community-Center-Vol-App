@@ -23,12 +23,14 @@
 │       │   ├── DropDownMenu.js
 │       │   ├── EventItem.js
 │       │   ├── imageComponent.js
-│       │   ├── InputComponent.js
+│       │   └── InputComponent.js
+│       ├── config
 │       │   ├── Language.js
 │       │   └── Skills.js
 │       ├── global.css
 │       ├── i18n.js
 │       ├── icons
+│       │   ├── arrow_down.jpg
 │       │   ├── logo.jpg
 │       │   └── settings_icon.jpg
 │       ├── index.js
@@ -110,5 +112,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-29 directories, 75 files
+30 directories, 79 files
 ```

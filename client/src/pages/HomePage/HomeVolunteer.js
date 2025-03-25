@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // import components here
 import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../components/Language";
+import { useLnOptions } from "../../config/Language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
 import settingsIcon from "../../icons/settings_icon.jpg";
