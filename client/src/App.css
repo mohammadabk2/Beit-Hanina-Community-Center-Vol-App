@@ -10,17 +10,20 @@
   margin-bottom: 2rem;
 }
 
+/*Organizes containers in row */
 .flex-box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/*Gives container slight shadow */
 .smooth-shadow-box,
 .dropdown-menu {
   box-shadow: 0 10px 15px 5px var(--common-colour-3);
 }
 
+/*Gives container white background that can resize */
 .sign-in-box {
   padding-top: 2rem;
   width: 90vw;
@@ -31,10 +34,12 @@
   min-height: 320px;
 }
 
+/*Organizes containers in column when combined with flex-box class */
 .flex-column {
   flex-direction: column;
 }
 
+/*General button design for all buttons */
 .button {
   margin: 1rem;
   padding: 10px 20px;
@@ -48,11 +53,18 @@
   color: black;
 }
 
+/*Makes buttons smaller */
+.button-small {
+  padding: 5px 10px !important;
+}
+
+/*Adds button color transition when hovered over */
 .button:hover {
   transition: background-color ease 0.5s;
   background-color: rgb(168, 168, 168);
 }
 
+/*Class for language button only */
 .language-button {
   position: absolute;
   top: 0;
@@ -62,6 +74,7 @@
   border-radius: 10px;
 }
 
+/*General input field class for all input fields */
 .input-field {
   border-radius: 5px;
   border: solid;
@@ -76,13 +89,13 @@ body {
   background-color: var(--common-colour-4);
 }
 
+/*Dropdown menu classes for styling */
 .dropdown {
   display: inline-block;
   position: relative;
 }
 
 .dropdown-toggle {
-  padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
   margin: 0px;
@@ -128,6 +141,7 @@ input:focus {
   outline-color: blue;
 }
 
+/*Styling for gender button */
 .gender-button {
   margin: 5px;
   margin-bottom: 1rem;
@@ -139,14 +153,12 @@ input:focus {
 }
 
 .circle-item {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 50%;
+  padding: 2px 5px;
+  align-content: center;
+  border-radius: 20%;
   background-color: #e0e0e0;
   text-align: center;
-  margin: 0 5px;
+  margin: 0 10px;
 }
 
 .event-box {
@@ -154,12 +166,36 @@ input:focus {
   border-radius: 10px;
 }
 
-.buttons-margin {
-  margin: 5px;
+/*Adds line break to any container */
+.line-break {
+  border-color: #7c7c7c !important;
+  border-width: 2px !important;
+  border-bottom: solid;
+  
 }
 
-.line-break {
-  border-bottom: black;
-  border-width: 1px;
-  border-bottom: solid;
+/*Resizes image in button, no need to add to any element */
+.button-image {
+  width: 15px;
+  margin-left: 5px;
+}
+
+.event-spots-full {
+  background-color: #ff0000cc;
+  box-shadow: 0 0 10px 3px #ff0000;
+  border-radius: 100%;
+  width: 8px;
+  height: 8px;
+  margin: 10px;
+  margin-right: 1rem;
+}
+
+.event-spots-free {
+  background-color: #00c900;
+  box-shadow: 0 0 10px 3px #00ff00;
+  border-radius: 100%;
+  width: 8px;
+  height: 8px;
+  margin: 10px;
+  margin-right: 1rem;
 }

@@ -4,10 +4,15 @@ import { initReactI18next } from "react-i18next";
 // Import english translation files
 import appEN from "./locales/en/app.json";
 import signupEN from "./locales/en/signup.json";
+import homeVolunteerEN from "./locales/en/homeVolunteer.json";
+import aboutEn from "./locales/en/about.json";
+
 import skillsEN from "./locales/en/skills.json";
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
 import signupAR from "./locales/ar/signup.json";
+import homeVolunteerAR from "./locales/ar/homeVolunteer.json";
+import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
 
 // The translations
@@ -16,10 +21,14 @@ const resources = {
     app: appEN,
     signUp: signupEN,
     skills: skillsEN,
+    homeVol: homeVolunteerEN,
+    about: aboutEn,
   },
   ar: {
     app: appAr,
     signUp: signupAR,
+    homeVol: homeVolunteerAR,
+    about: aboutAR,
     skills: skillsAR,
   },
 };
