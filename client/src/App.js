@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import DropDownMenu from "./components/DropDownMenu";
-import { useLnOptions } from "./components/language";
+import { useLnOptions } from "./config/Language";
 
 function App() {
   const [username, setUserName] = useState("");

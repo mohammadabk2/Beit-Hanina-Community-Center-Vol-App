@@ -23,11 +23,14 @@
 │       │   ├── DropDownMenu.js
 │       │   ├── EventItem.js
 │       │   ├── imageComponent.js
-│       │   ├── InputComponent.js
-│       │   └── language.js
+│       │   └── InputComponent.js
+│       ├── config
+│       │   ├── Language.js
+│       │   └── Skills.js
 │       ├── global.css
 │       ├── i18n.js
 │       ├── icons
+│       │   ├── arrow_down.jpg
 │       │   ├── logo.jpg
 │       │   └── settings_icon.jpg
 │       ├── index.js
@@ -37,12 +40,14 @@
 │       │   │   ├── about.json
 │       │   │   ├── app.json
 │       │   │   ├── homeVolunteer.json
-│       │   │   └── signup.json
+│       │   │   ├── signup.json
+│       │   │   └── skills.json
 │       │   └── en
 │       │       ├── about.json
 │       │       ├── app.json
 │       │       ├── homeVolunteer.json
-│       │       └── signup.json
+│       │       ├── signup.json
+│       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
@@ -79,6 +84,7 @@
 ├── scripts
 │   ├── before_git.sh
 │   ├── generate_file_struct.sh
+│   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -88,8 +94,8 @@
 │   │   └── validation.js
 │   ├── database
 │   │   ├── dbbuild.js
-│   │   ├── dbbuild.sql
 │   │   ├── db.js
+│   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
 │   ├── deprecated
@@ -106,5 +112,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-29 directories, 75 files
+30 directories, 79 files
 ```

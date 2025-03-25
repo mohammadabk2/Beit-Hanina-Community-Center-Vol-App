@@ -17,8 +17,7 @@ const DynamicButton = ({
         <img
           src={logoSrc}
           alt={logoalt}
-          style={{ marginLeft: "5px", height: "15px" }}
-          className="" //! jad add a class here
+          className="button-image"
         />
       )}
     </button>

@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../components/language";
+import { useLnOptions } from "../../config/Language";
 // import backgroundImage from "../../icons/logo.jpg";
 
 //TODO add support email and ahmeds family name

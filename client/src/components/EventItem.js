@@ -27,36 +27,39 @@ const EventItem = ({ name, desc, className, style, req }) => {
       <div>
         <h1>{name}</h1>
         <p>{desc}</p>
-        <div>
+        <div className="flex-box">
           {req.map((item, index) => (
-            <span key={index} className="circle-item">
+            <div key={index} className="circle-item">
               {item}
               {index < req.length - 1 && " "}
-            </span>
+            </div>
           ))}
         </div>
       </div>
-      <div>
-        <DynamicButton
-          className="button"
-          text={t("join")}
-          onClick={handleJoinClick}
-        />
-        <DynamicButton
-          className="button"
-          text={t("favorite")}
-          onClick={handleFavoriteClick}
-        />
-        <DynamicButton
-          className="button"
-          text={t("share")}
-          onClick={handleShareClick}
-        />
-        <DynamicButton
-          className="button"
-          text={t("hide")}
-          onClick={handleHideClick}
-        />
+      <div className="flex-box">
+        <div>
+          <DynamicButton
+            className="button button-small"
+            text={t("join")}
+            onClick={handleJoinClick}
+          />
+          <DynamicButton
+            className="button button-small"
+            text={t("favorite")}
+            onClick={handleFavoriteClick}
+          />
+          <DynamicButton
+            className="button button-small"
+            text={t("share")}
+            onClick={handleShareClick}
+          />
+          <DynamicButton
+            className="button button-small"
+            text={t("hide")}
+            onClick={handleHideClick}
+          />
+        </div>
+        <div className="event-spots-free"></div>
       </div>
     </div>
   );
