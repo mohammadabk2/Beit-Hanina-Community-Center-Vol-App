@@ -69,8 +69,8 @@ function HomeVolunteer() {
 
   return (
     <div className="app flex-box">
-      <div className="flex-column smooth-shadow-box sign-in-box">
-        <div className="flex-box line-break">
+      <div className="flex-column">
+        <div className="flex-box line-break top-scroll-box1">
           <div>
             <DynamicButton
               className="button button-small"
@@ -102,7 +102,7 @@ function HomeVolunteer() {
             options={lnOptions}
           />
         </div>
-        <div className="flex-box flex-column">{renderEventItems(events)}</div>
+        <div className="flex-box flex-column bottom-scroll-box1">{renderEventItems(events)}</div>
       </div>
     </div>
   );

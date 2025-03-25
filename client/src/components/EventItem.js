@@ -29,7 +29,7 @@ const EventItem = ({ name, desc, className, style, req }) => {
         <p>{desc}</p>
         <div className="flex-box">
           {req.map((item, index) => (
-            <div key={index} className="circle-item">
+            <div key={index} className="skills">
               {item}
               {index < req.length - 1 && " "}
             </div>

@@ -5,7 +5,7 @@
 }
 
 .app-header {
-  padding: 20px;
+  padding: 1.25rem;
   color: var(--common-colour-2);
   margin-bottom: 2rem;
 }
@@ -20,18 +20,18 @@
 /*Gives container slight shadow */
 .smooth-shadow-box,
 .dropdown-menu {
-  box-shadow: 0 10px 15px 5px var(--common-colour-3);
+  /* box-shadow: 0 0.625rem 0.9375rem 0.3125rem var(--common-colour-3); */
+  box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
 }
 
 /*Gives container white background that can resize */
 .sign-in-box {
   padding-top: 2rem;
-  width: 90vw;
-  margin-top: 1px;
-  border-radius: 10px;
+  width: 50vw;
+  margin-top: 0.0625rem;
+  border-radius: 0.625rem;
   background-color: var(--common-colour-1);
-  max-width: 700px;
-  min-height: 320px;
+  max-width: 34.5625rem;
 }
 
 /*Organizes containers in column when combined with flex-box class */
@@ -42,12 +42,12 @@
 /*General button design for all buttons */
 .button {
   margin: 1rem;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   border: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #c2c2c2;
   background-color: #d1d1d1;
   color: black;
@@ -55,7 +55,7 @@
 
 /*Makes buttons smaller */
 .button-small {
-  padding: 5px 10px !important;
+  padding: 0.3125rem 0.625rem !important;
 }
 
 /*Adds button color transition when hovered over */
@@ -69,19 +69,19 @@
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   background-color: var(--common-colour-1);
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 /*General input field class for all input fields */
 .input-field {
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   border: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   margin: 1rem;
-  padding: 5px;
-  font-size: 16px;
+  padding: 0.3125rem;
+  font-size: 1rem;
   width: 80%;
 }
 
@@ -96,9 +96,9 @@ body {
 }
 
 .dropdown-toggle {
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
-  margin: 0px;
+  margin: 0rem;
 }
 
 .dropdown-menu {
@@ -109,8 +109,8 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  border-radius: 5px;
-  min-width: 100px;
+  border-radius: 0.3125rem;
+  min-width: 6.25rem;
 }
 
 .dropdown-item {
@@ -121,7 +121,7 @@ body {
   text-decoration: none;
   color: var(--common-colour-2);
   display: block;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
 }
 
 .dropdown-item a:hover {
@@ -129,10 +129,10 @@ body {
 }
 
 input {
-  border: 1px solid #ccc;
+  border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
-  outline: 2px solid transparent;
-  padding: 8px;
+  outline: 0.125rem solid transparent;
+  padding: 0.5rem;
   box-sizing: border-box;
   margin: 0;
 }
@@ -143,59 +143,73 @@ input:focus {
 
 /*Styling for gender button */
 .gender-button {
-  margin: 5px;
+  margin: 0.3125rem;
   margin-bottom: 1rem;
-  padding: 5px;
+  padding: 0.3125rem;
 }
 
 .red-star {
   color: red;
 }
 
-.circle-item {
-  padding: 2px 5px;
+.skills {
+  padding: 0.125rem 0.3125rem;
   align-content: center;
   border-radius: 20%;
   background-color: #e0e0e0;
   text-align: center;
-  margin: 0 10px;
+  margin: 0 0.625rem;
 }
 
 .event-box {
   margin: 1rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
+  background-color: var(--common-colour-1);
 }
 
 /*Adds line break to any container */
 .line-break {
   border-color: #7c7c7c !important;
-  border-width: 2px !important;
+  border-width: 0.125rem !important;
   border-bottom: solid;
   
 }
 
 /*Resizes image in button, no need to add to any element */
 .button-image {
-  width: 15px;
-  margin-left: 5px;
+  width: 0.9375rem;
+  margin-left: 0.3125rem;
 }
 
+/*dots with colors to indicate event spots status */
 .event-spots-full {
   background-color: #ff0000cc;
-  box-shadow: 0 0 10px 3px #ff0000;
+  box-shadow: 0 0 0.625rem 0.1875rem #ff0000;
   border-radius: 100%;
-  width: 8px;
-  height: 8px;
-  margin: 10px;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.625rem;
   margin-right: 1rem;
 }
 
 .event-spots-free {
   background-color: #00c900;
-  box-shadow: 0 0 10px 3px #00ff00;
+  box-shadow: 0 0 0.625rem 0.1875rem #00ff00;
   border-radius: 100%;
-  width: 8px;
-  height: 8px;
-  margin: 10px;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.625rem;
   margin-right: 1rem;
+}
+
+/*design for the top of a scrollable list bar (use incremental names) */
+.top-scroll-box1 {
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
+}
+
+.bottom-scroll-box1 {
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
+  background-color: #dddddd;
 }
