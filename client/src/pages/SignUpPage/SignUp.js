@@ -124,7 +124,7 @@ function SignUpPage() {
 
           <div className="flex-box flex-column">
             <div>
-              <label>{t("gender")} </label>
+              <label>{tsignup("gender")} </label>
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
