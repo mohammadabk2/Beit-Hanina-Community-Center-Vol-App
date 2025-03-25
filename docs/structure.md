@@ -24,7 +24,8 @@
 │       │   ├── EventItem.js
 │       │   ├── imageComponent.js
 │       │   ├── InputComponent.js
-│       │   └── language.js
+│       │   ├── Language.js
+│       │   └── Skills.js
 │       ├── global.css
 │       ├── i18n.js
 │       ├── icons
@@ -37,12 +38,14 @@
 │       │   │   ├── about.json
 │       │   │   ├── app.json
 │       │   │   ├── homeVolunteer.json
-│       │   │   └── signup.json
+│       │   │   ├── signup.json
+│       │   │   └── skills.json
 │       │   └── en
 │       │       ├── about.json
 │       │       ├── app.json
 │       │       ├── homeVolunteer.json
-│       │       └── signup.json
+│       │       ├── signup.json
+│       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
