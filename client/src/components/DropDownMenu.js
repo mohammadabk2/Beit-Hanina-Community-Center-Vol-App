@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import DynamicButton from "./ButtonComponent";
+import dropDownArrow from "../icons/arrow_down.jpg"
 
 const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,8 +40,10 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
       <DynamicButton
         onClick={toggleDropdown}
         name={name}
-        className="button dropdown-toggle"
+        className="button dropdown-toggle flex-box button-small"
         text={text}
+        logoSrc={dropDownArrow}
+        logoalt={"drop down arrow"}
       />
       {options && isOpen && (
         <ul className="dropdown-menu">

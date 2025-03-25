@@ -71,31 +71,24 @@ function HomeVolunteer() {
   return (
     <div className="app flex-box">
       <div className="flex-column smooth-shadow-box sign-in-box">
-        <div>
-          <ImageComponent
-            name="Centre Logo"
-            src={centreLogo}
-            alt="Centre Logo Image"
-          />
-        </div>
         <div className="flex-box line-break">
           <div>
             <DynamicButton
-              className="button"
+              className="button button-small"
               onClick={sortEvents}
               text={t("sort")}
             />
           </div>
           <div>
             <DynamicButton
-              className="button"
+              className="button button-small"
               onClick={goToPersonalArea}
               text={t("personalArea")}
             />
           </div>
           <div>
             <DynamicButton
-              className="button"
+              className="button flex-box button-small"
               onClick={goToSettings}
               text={t("settings")}
               logoSrc={settingsIcon}
