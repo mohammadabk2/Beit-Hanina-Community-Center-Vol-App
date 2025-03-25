@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../components/Language";
+import { useLnOptions } from "../../config/Language";
 // import DynamicButton from "../../components/ButtonComponent";
 
 function HomeAdmin() {
