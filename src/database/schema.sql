@@ -1,3 +1,5 @@
+CREATE DATABASE main;
+
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
@@ -35,7 +37,8 @@ CREATE TABLE users_waiting_list
 CREATE TABLE volunteer
 (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-    total_hours INT DEFAULT 0,
+    approved_hours INT DEFAULT 0,
+    unapproved_hours INT DEFAULT 0,
     orgs TEXT[]
 );
 
@@ -55,8 +58,12 @@ CREATE TABLE events
     event_start TIME NOT NULL,
     event_end TIME NOT NULL,
     is_active BOOLEAN NOT NULL,
+    stat TEXT NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
-    vol_id INT[]
+    vol_id INT[],
+    vol_id_waiting_list INT[],
+    max_number_of_vol INT DEFAULT 0,
+    current_number_of_vol INT DEFAULT 0
 );
 
 -- ? maybe add more indexs or change

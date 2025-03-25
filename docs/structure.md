@@ -82,6 +82,7 @@
 ├── scripts
 │   ├── before_git.sh
 │   ├── generate_file_struct.sh
+│   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -91,8 +92,8 @@
 │   │   └── validation.js
 │   ├── database
 │   │   ├── dbbuild.js
-│   │   ├── dbbuild.sql
 │   │   ├── db.js
+│   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
 │   ├── deprecated
