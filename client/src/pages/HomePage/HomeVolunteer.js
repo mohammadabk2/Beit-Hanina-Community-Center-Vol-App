@@ -7,9 +7,8 @@ import DropDownMenu from "../../components/DropDownMenu";
 import { useLnOptions } from "../../components/language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
-import ImageComponent from "../../components/imageComponent";
 import settingsIcon from "../../icons/settings_icon.jpg";
-import centreLogo from "../../icons/logo.jpg";
+
 
 function HomeVolunteer() {
   const navigate = useNavigate();
