@@ -1,3 +1,4 @@
+//TODO change all of this
 import dbConnection from "../database/dbconnection";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
