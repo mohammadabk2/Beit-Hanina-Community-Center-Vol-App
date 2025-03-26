@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
+import logoIcon from "../icons/org_icon.jpg"
 
 const EventItem = ({ name, desc, className, style, req }) => {
   const { t } = useTranslation("homeVol");
@@ -24,16 +25,23 @@ const EventItem = ({ name, desc, className, style, req }) => {
 
   return (
     <div className={className} style={style}>
-      <div>
-        <h1>{name}</h1>
-        <p>{desc}</p>
-        <div className="flex-box">
-          {req.map((item, index) => (
-            <div key={index} className="skills">
-              {item}
-              {index < req.length - 1 && " "}
-            </div>
-          ))}
+      <h2>{name}</h2>
+      <div className="flex-box event-box-content">
+        <div className="event-box-image-pos">
+          <img className="event-box-image" src={logoIcon}></img>
+        </div>
+        <div className="flex-box flex-column">
+          <div>
+            Skills:
+          </div>
+          <div className="flex-box">
+            {req.map((item, index) => (
+              <div key={index} className="skills">
+                {item}
+                {index < req.length - 1 && " "}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="flex-box">
