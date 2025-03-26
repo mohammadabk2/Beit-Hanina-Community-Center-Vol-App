@@ -1,5 +1,13 @@
 @import url("global.css");
 
+/*media queries to adjust sizes with screen sizes */
+@media (max-width: 507px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+
 .app {
   text-align: center;
 }
@@ -198,12 +206,20 @@ input:focus {
 }
 
 .event-box-image-pos {
-  float: left;
+  margin-right: 3rem;
 }
 
-.event-box-content {
-  width: 90%;
+/* @media (min-width: 507px) {
+  .event-box-image-pos {
+    margin-right: 3rem;
+  }
 }
+
+@media (max-width: 360px) {
+  .event-box-image-pos {
+    margin-right: 0;
+  }
+} */
 
 /*Adds line break to any container */
 .line-break {
@@ -249,5 +265,17 @@ input:focus {
 .scroll-box1 {
   width: 90vw;
   max-width: 36.4375rem;
+}
+
+
+/*media query for similar screen size to s24 */
+@media (max-width: 507px) {
+  .event-box-image-pos {
+    margin-right: 0rem;
+  }
+
+  .button {
+    margin: 0.8rem;
+  }
 }
 
