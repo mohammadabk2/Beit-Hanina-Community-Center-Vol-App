@@ -9,7 +9,7 @@ import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
 import settingsIcon from "../../icons/settings_icon.jpg";
 import profileIcon from "../../icons/profile_icon.jpg";
-import orgLogo from "../../icons/org_icon.jpg"
+// import orgLogo from "../../icons/org_icon.jpg"
 
 function HomeVolunteer() {
   const navigate = useNavigate();

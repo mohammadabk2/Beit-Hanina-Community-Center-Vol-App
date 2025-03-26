@@ -4,7 +4,7 @@ import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
 import logoIcon from "../icons/org_icon.jpg"
 
-const EventItem = ({ name, desc, className, style, req }) => {
+const EventItem = ({ name, className, style, req }) => {
   const { t } = useTranslation("homeVol");
 
   const handleJoinClick = () => {
@@ -75,7 +75,6 @@ const EventItem = ({ name, desc, className, style, req }) => {
 
 EventItem.propTypes = {
   name: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
   req: PropTypes.arrayOf(PropTypes.string).isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
