@@ -37,7 +37,7 @@ const EventItem = ({ name, desc, className, style, req }) => {
         </div>
       </div>
       <div className="flex-box">
-        <div>
+        <div className="flex-box">
           <DynamicButton
             className="button button-small"
             text={t("join")}
