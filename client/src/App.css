@@ -163,7 +163,7 @@ input:focus {
 
 /*Styles event containers */
 .event-box {
-  margin: 1rem;
+  margin-top: 1rem;
   border-radius: 0.625rem;
   background-color: var(--common-colour-1);
   width: 95%;
@@ -213,6 +213,7 @@ input:focus {
   border-radius: 0 0 1rem 1rem;
   box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
   background-color: #dddddd;
+  padding-bottom: 1rem;
 }
 
 .scroll-box1 {
