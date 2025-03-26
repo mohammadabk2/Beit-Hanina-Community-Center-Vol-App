@@ -1,31 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 // import components here
-import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../config/Language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
-import settingsIcon from "../../icons/settings_icon.jpg";
-import profileIcon from "../../icons/profile_icon.jpg";
+import NavigationBar from "../../components/NavigationBar";
 // import orgLogo from "../../icons/org_icon.jpg"
 
 function HomeVolunteer() {
-  const navigate = useNavigate();
-
-  const lnOptions = useLnOptions();
   const { t } = useTranslation("homeVol");
-
-  const goToSettings = () => {
-    console.log("Settings button clicked");
-    navigate("/settings");
-  };
-
-  const goToPersonalArea = () => {
-    console.log("Personal Area button clicked");
-    navigate("/personal-area");
-  };
 
   const sortEvents = () => {
     console.log("Sort button clicked");
@@ -70,19 +53,7 @@ function HomeVolunteer() {
 
   return (
     <div className="app flex-box flex-column">
-      <div className="flex-box navigation-box">
-        <DropDownMenu
-          className="language-button"
-          text={t("ln")}
-          options={lnOptions}
-        />
-        <div onClick={goToPersonalArea}>
-          <img className="navigation-button-image" src={profileIcon}></img>
-        </div>
-        <div onClick={goToSettings}>
-          <img className="navigation-button-image" src={settingsIcon}></img>
-        </div>
-      </div>
+      <NavigationBar />
       <div className="scroll-box1">
         <div className="flex-box line-break top-scroll-box1">
           <div>

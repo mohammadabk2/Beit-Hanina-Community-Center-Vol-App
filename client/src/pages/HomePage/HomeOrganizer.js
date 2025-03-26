@@ -1,23 +1,15 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
-import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../config/Language";
+// import DropDownMenu from "../../components/DropDownMenu";
+import NavigationBar from "../../components/NavigationBar";
 // import DynamicButton from "../../components/ButtonComponent";
 
 function HomeOrganizer() {
-  const lnOptions = useLnOptions();
-  const { t } = useTranslation("home"); //! change to Organizer when made
 
   return (
     <div className="app flex-box">
-      <div className="drop-down">
-        <DropDownMenu
-          className="language-button"
-          text={t("ln")}
-          options={lnOptions}
-        />
-      </div>
+      <NavigationBar />
       <main>
         <h1>Home Organizer Page</h1>
       </main>

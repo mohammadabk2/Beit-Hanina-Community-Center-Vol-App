@@ -1,26 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../config/Language";
 // import backgroundImage from "../../icons/logo.jpg";
+import NavigationBar from "../../components/NavigationBar";
 
 //TODO add support email and ahmeds family name
 function About() {
-  const lnOptions = useLnOptions();
-
-  const { t: tApp } = useTranslation("app");
   const { t: tAbout } = useTranslation("about");
 
   return (
     <div className="app flex-box">
-      <div className="drop-down">
-        <DropDownMenu
-          className="language-button"
-          text={tApp("ln")}
-          options={lnOptions}
-        />
-      </div>
+      <NavigationBar />
       <main>
         <div className="flex-box-columns smooth-shadow-box sign-up-box">
           <h1>{tAbout("devs")}</h1>
