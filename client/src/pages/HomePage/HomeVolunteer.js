@@ -68,8 +68,13 @@ function HomeVolunteer() {
   };
 
   return (
-    <div className="app flex-box">
-      <div className="flex-column">
+    <div className="app flex-box flex-column">
+      <DropDownMenu
+        className="language-button"
+        text={t("ln")}
+        options={lnOptions}
+      />
+      <div className="scroll-box1">
         <div className="flex-box line-break top-scroll-box1">
           <div>
             <DynamicButton
@@ -94,13 +99,6 @@ function HomeVolunteer() {
               logoalt={"settings icon"}
             />
           </div>
-        </div>
-        <div>
-          <DropDownMenu
-            className="language-button"
-            text={t("ln")}
-            options={lnOptions}
-          />
         </div>
         <div className="flex-box flex-column bottom-scroll-box1">{renderEventItems(events)}</div>
       </div>

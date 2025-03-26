@@ -41,20 +41,18 @@ function App() {
 
   return (
     <div className="app flex-box flex-column">
-      <div className="drop-down">
-        <DropDownMenu
-          className="language-button"
-          text={t("ln")}
-          options={lnOptions}
-        />
-      </div>
+      <DropDownMenu
+        className="language-button"
+        text={t("ln")}
+        options={lnOptions}
+      />
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>
       <main>
         <div className="sign-in-box flex-box flex-column smooth-shadow-box">
           <h1>{t("welcome")}</h1>
-          <div className="input-field-box flex-container">
+          <div className="input-field-box">
             <DynamicInput
               className="input-field"
               type="text"
@@ -72,17 +70,21 @@ function App() {
               placeholder={t("password-placeholder")}
             />
           </div>
-          <div className="button-box flex-container">
-            <DynamicButton
-              className="button"
-              onClick={signIn}
-              text={t("sign-in")}
-            />
-            <DynamicButton
-              className="button"
-              onClick={signUp}
-              text={t("sign-up")}
-            />
+          <div className="flex-box">
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signIn}
+                text={t("sign-in")}
+              />
+            </div>
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signUp}
+                text={t("sign-up")}
+              />
+            </div>
           </div>
         </div>
       </main>

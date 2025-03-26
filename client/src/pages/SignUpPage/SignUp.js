@@ -83,17 +83,15 @@ function SignUpPage() {
   ];
 
   return (
-    <div>
-      <div className="drop-down">
-        <DropDownMenu
-          className="language-button"
-          text={tsignup("ln")}
-          options={lnOptions}
-        />
-      </div>
-      <div className="flex-box">
-        <form onSubmit={handleSubmit} className="sign-in-box smooth-shadow-box">
-          <div className="flex-box flex-column">
+    <div className="flex-box flex-column">
+      <DropDownMenu
+        className="language-button"
+        text={tsignup("ln")}
+        options={lnOptions}
+      />
+      <div>
+        <form onSubmit={handleSubmit} className="sign-in-box smooth-shadow-box flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label> {tsignup("fullName")}: </label>
               <label className="red-star">*</label>
@@ -108,7 +106,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("birthDate")}: </label>
               <label className="red-star">*</label>
@@ -122,7 +120,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("gender")} </label>
               <label className="red-star">*</label>
@@ -134,7 +132,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("phoneNumber")}: </label>
               <label className="red-star">*</label>
@@ -151,7 +149,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("email")}: </label>
               <label className="red-star">*</label>
@@ -166,7 +164,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("address")}: </label>
               <label className="red-star">*</label>
@@ -181,7 +179,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("insurance")}: </label>
               <label className="red-star">*</label>
@@ -196,7 +194,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("idNumber")}: </label>
               <label className="red-star">*</label>
@@ -211,7 +209,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column">
+          <div className="flex-box flex-column input-field-box">
             <div>
               <label>{tsignup("skills")}: </label>
             </div>
