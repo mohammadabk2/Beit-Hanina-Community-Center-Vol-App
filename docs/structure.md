@@ -63,6 +63,8 @@
 │           │   ├── HomeAdmin.js
 │           │   ├── HomeOrganizer.js
 │           │   └── HomeVolunteer.js
+│           ├── LoadinPage
+│           │   └── LoadingPage.js
 │           ├── PersonalAreaPage
 │           │   └── PersonalAreaVolunteer.js
 │           ├── SettingsPage
@@ -120,5 +122,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-30 directories, 88 files
+31 directories, 89 files
 ```
