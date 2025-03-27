@@ -55,23 +55,23 @@ function PersonalArea() {
   return (
     <div className="app flex-box flex-column smooth-shadow-box">
       <NavigationBar />
-      <div className="flex-box flex-column event-box sign-in-box ">
-        <div className="perosnal-area-margin">
+      <div className="flex-box flex-column event-box">
+        <div className="perosnal-area-content">
           {tsignup("fullName")}: {name}
         </div>
 
-        <div className="perosnal-area-margin">
+        <div className="perosnal-area-content">
           {t("user_name")}: {userName}
         </div>
-        <div className="perosnal-area-margin">
+        <div className="perosnal-area-content">
           {t("approved_hours")}: {approvedHours}
         </div>
-        <div className="perosnal-area-margin">
+        <div className="perosnal-area-content">
           {t("unapproved_hours")}: {unapprovedHours}
         </div>
 
         <div className="flex-box flex-column input-field-box">
-          <div className="perosnal-area-margin">{t("skills")}: </div>
+          <div className="perosnal-area-content">{t("skills")}: </div>
           {userSkills.map((skill, index) => (
             <div key={index} className="flex-box">
               <div>{tskill(skill.label)}</div>

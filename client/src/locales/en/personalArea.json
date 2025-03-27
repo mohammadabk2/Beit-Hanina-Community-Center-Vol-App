@@ -9,5 +9,9 @@
   "events_to_do": "Events Signed Up For",
   "to_pdf":"Print to PDF",
   "user_name":"User Name",
-  "password_change":"Change Password"
+  "password_change":"Change Password",
+  "org_name":"Organization Name",
+  "total_hours":"Hours Given To Org",
+  "number_of_vol":"Number Of People That Have Volunteered Here",
+  "to_excel":"To Excel File"
 }

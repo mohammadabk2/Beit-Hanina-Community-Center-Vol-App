@@ -46,26 +46,29 @@
 │       │   │   ├── about.json
 │       │   │   ├── app.json
 │       │   │   ├── homeVolunteer.json
-│       │   │   ├── personalAreaVolunteer.json
+│       │   │   ├── personalArea.json
 │       │   │   ├── signup.json
 │       │   │   └── skills.json
 │       │   └── en
 │       │       ├── about.json
 │       │       ├── app.json
 │       │       ├── homeVolunteer.json
-│       │       ├── personalAreaVolunteer.json
+│       │       ├── personalArea.json
 │       │       ├── signup.json
 │       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
+│           ├── CommonPages
+│           │   ├── ErrorScreen.js
+│           │   ├── Loading.js
+│           │   └── NoConnection.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
 │           │   ├── HomeOrganizer.js
 │           │   └── HomeVolunteer.js
-│           ├── LoadinPage
-│           │   └── LoadingPage.js
 │           ├── PersonalAreaPage
+│           │   ├── PersonalAreaOrganizer.js
 │           │   └── PersonalAreaVolunteer.js
 │           ├── SettingsPage
 │           │   └── Settings.js
@@ -122,5 +125,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-31 directories, 89 files
+31 directories, 92 files
 ```

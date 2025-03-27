@@ -6,6 +6,7 @@ import SignUpPage from "./pages/SignUpPage/SignUp";
 import HomeVolunteerPage from "./pages/HomePage/HomeVolunteer";
 import SettingsPage from "./pages/SettingsPage/Settings";
 import PersonalAreaVolunteerPage from "./pages/PersonalAreaPage/PersonalAreaVolunteer"
+import PersonalAreaOrganizerPage from "./pages/PersonalAreaPage/PersonalAreaOrganizer"
 import HomeOrganizerPage from "./pages/HomePage/HomeOrganizer";
 import HomeAdminPage from "./pages/HomePage/HomeAdmin";
 import AboutPage from "./pages/AboutPage/About";
@@ -21,6 +22,7 @@ function AppRouter() {
         <Route path="/home-admin" element={<HomeAdminPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/personal-area-vol" element={<PersonalAreaVolunteerPage />} />
+        <Route path="/personal-area-org" element={<PersonalAreaOrganizerPage />} />
         <Route path="/about" element={<AboutPage />} />
 
       </Routes>

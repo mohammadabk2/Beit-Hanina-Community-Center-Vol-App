@@ -251,6 +251,8 @@ input:focus {
   max-width: 36.4375rem;
 }
 
-.perosnal-area-margin {
-  margin-bottom: 0.7rem; /* Adjust the margin value as needed */
+.perosnal-area-content {
+  margin-bottom: 0.7rem; 
+  /* font-size: 20px; */
+  font-size: 1.3rem; 
 }
