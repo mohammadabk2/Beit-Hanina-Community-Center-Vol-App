@@ -77,10 +77,10 @@ function HomeVolunteer() {
           options={lnOptions}
         />
         <div onClick={goToPersonalArea}>
-          <img className="navigation-button-image" src={profileIcon}></img>
+          <img className="navigation-button-image" src={profileIcon} alt="Personal Area Icon"></img>
         </div>
         <div onClick={goToSettings}>
-          <img className="navigation-button-image" src={settingsIcon}></img>
+          <img className="navigation-button-image" src={settingsIcon} alt="nav-bar"></img>
         </div>
       </div>
       <div className="scroll-box1">
