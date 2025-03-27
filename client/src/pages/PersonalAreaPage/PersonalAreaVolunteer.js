@@ -14,6 +14,7 @@ function PersonalArea() {
 
   //TODO change all these to read from database
   const name = "john doe";
+  const userName = "johndoe12";
   // const gender = "male";
   const approvedHours = 10;
   const unapprovedHours = 1;
@@ -47,28 +48,33 @@ function PersonalArea() {
     console.log("print to PDF button clicked");
   };
 
+  const changePassword = () => {
+    console.log("password change button clicked");
+  };
+
   return (
-    <div className="app flex-box flex-column">
+    <div className="app flex-box flex-column smooth-shadow-box">
       <NavigationBar />
-      <div className="flex-column">
-        <h1>{t("desc")}</h1>
-        <h2>
+      <div className="flex-box flex-column event-box sign-in-box ">
+        <div className="perosnal-area-margin">
           {tsignup("fullName")}: {name}
-        </h2>
-        {/* <h2>{tsignup("gender")}: {gender}</h2> */}
-        <h2>
+        </div>
+
+        <div className="perosnal-area-margin">
+          {t("user_name")}: {userName}
+        </div>
+        <div className="perosnal-area-margin">
           {t("approved_hours")}: {approvedHours}
-        </h2>
-        <h2>
+        </div>
+        <div className="perosnal-area-margin">
           {t("unapproved_hours")}: {unapprovedHours}
-        </h2>
+        </div>
+
         <div className="flex-box flex-column input-field-box">
-          <div>
-            <label>{t("skills")}: </label>
-          </div>
+          <div className="perosnal-area-margin">{t("skills")}: </div>
           {userSkills.map((skill, index) => (
             <div key={index} className="flex-box">
-              <label>{tskill(skill.label)}</label>
+              <div>{tskill(skill.label)}</div>
               <DynamicButton
                 className="button"
                 text={tsignup("remove")}
@@ -86,16 +92,18 @@ function PersonalArea() {
             }))}
           />
         </div>
-        <div>
-          <h2>{t("places")}</h2>
-        </div>
-        <div>
-          <DynamicButton
-            className="button"
-            text={t("to_pdf")}
-            onClick={printToPdf}
-          />
-        </div>
+
+        <DynamicButton
+          className="button"
+          text={t("to_pdf")}
+          onClick={printToPdf}
+        />
+
+        <DynamicButton
+          className="button"
+          text={t("password_change")}
+          onClick={changePassword}
+        />
       </div>
     </div>
   );

@@ -3,6 +3,9 @@
   "skills": "المهارات",
   "approved_hours": "الساعات المعتمدة",
   "unapproved_hours": "الساعات غير المعتمدة",
-  "places": "الأماكن",
-  "to_pdf": "PDF طباعة إلى"
+  "events_done": "الأحداث المكتملة",
+  "events_to_do": "الأحداث المسجلة",
+  "to_pdf": "PDF طباعة إلى",
+  "user_name": "اسم المستخدم",
+  "password_change": "تغيير كلمة المرور"
 }
