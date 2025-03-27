@@ -4,6 +4,11 @@
   text-align: center;
 }
 
+/*Removes default border from buttons */
+button {
+  border: none;
+}
+
 .app-header {
   padding: 1.25rem;
   color: var(--common-colour-2);
@@ -15,19 +20,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*Gives container slight shadow */
 .smooth-shadow-box,
 .dropdown-menu {
-  /* box-shadow: 0 0.625rem 0.9375rem 0.3125rem var(--common-colour-3); */
   box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
 }
 
 /*Gives container white background that can resize */
 .sign-in-box {
   padding-top: 2rem;
-  width: 50vw;
+  width: 80vw;
   margin-top: 0.0625rem;
   border-radius: 0.625rem;
   background-color: var(--common-colour-1);
@@ -66,12 +71,29 @@
 
 /*Class for language button only */
 .language-button {
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
   font-size: 0.875rem;
   background-color: var(--common-colour-1);
   border-radius: 0.625rem;
+}
+
+/*Navigation button styles */
+.navigation-button-image {
+  width: 2rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+/*Styling for navigation box*/
+.navigation-box {
+  width: 90vw;
+}
+
+/*Drop down button image */
+.button-image {
+  width: 0.9375rem;
+  margin-left: 0.3125rem;
 }
 
 /*General input field class for all input fields */
@@ -82,6 +104,11 @@
   margin: 1rem;
   padding: 0.3125rem;
   font-size: 1rem;
+  width: 70%;
+}
+
+/*Makes input field container responsive */
+.input-field-box {
   width: 80%;
 }
 
@@ -90,15 +117,10 @@ body {
 }
 
 /*Dropdown menu classes for styling */
-.dropdown {
-  display: inline-block;
-  position: relative;
-}
-
 .dropdown-toggle {
   font-size: 0.875rem;
   cursor: pointer;
-  margin: 0rem;
+  margin: 0rem !important;
 }
 
 .dropdown-menu {
@@ -152,19 +174,35 @@ input:focus {
   color: red;
 }
 
+/*General styling for skills */
 .skills {
   padding: 0.125rem 0.3125rem;
   align-content: center;
   border-radius: 20%;
   background-color: #e0e0e0;
   text-align: center;
-  margin: 0 0.625rem;
+  margin: 0.625rem;
 }
 
+/*Styles event containers */
 .event-box {
-  margin: 1rem;
+  margin-top: 1rem;
   border-radius: 0.625rem;
   background-color: var(--common-colour-1);
+  width: 95%;
+}
+
+.event-box-image {
+  width: 10rem;
+  border-radius: 1rem;
+}
+
+.event-box-image-pos {
+  float: left;
+}
+
+.event-box-content {
+  width: 90%;
 }
 
 /*Adds line break to any container */
@@ -172,13 +210,6 @@ input:focus {
   border-color: #7c7c7c !important;
   border-width: 0.125rem !important;
   border-bottom: solid;
-  
-}
-
-/*Resizes image in button, no need to add to any element */
-.button-image {
-  width: 0.9375rem;
-  margin-left: 0.3125rem;
 }
 
 /*dots with colors to indicate event spots status */
@@ -212,4 +243,16 @@ input:focus {
   border-radius: 0 0 1rem 1rem;
   box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
   background-color: #dddddd;
+  padding-bottom: 1rem;
+}
+
+.scroll-box1 {
+  width: 90vw;
+  max-width: 36.4375rem;
+}
+
+.perosnal-area-content {
+  margin-bottom: 0.7rem; 
+  /* font-size: 20px; */
+  font-size: 1.3rem; 
 }
