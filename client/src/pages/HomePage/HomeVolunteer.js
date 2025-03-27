@@ -7,9 +7,9 @@ import DropDownMenu from "../../components/DropDownMenu";
 import { useLnOptions } from "../../config/Language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
-import settingsIcon from "../../icons/settings_icon.jpg";
-import profileIcon from "../../icons/profile_icon.jpg";
-// import orgLogo from "../../icons/org_icon.jpg"
+import settingsIcon from "../../icons/settings_icon.png";
+import profileIcon from "../../icons/profile_icon.png";
+
 
 function HomeVolunteer() {
   const navigate = useNavigate();
@@ -36,22 +36,22 @@ function HomeVolunteer() {
     {
       name: "test event1",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event2",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event3",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event4",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
   ];
   //!

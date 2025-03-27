@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
-import logoIcon from "../icons/org_icon.jpg"
+import logoIcon from "../icons/org_icon.png";
+import personIcon from "../icons/person_icon.png";
+import fullStar from "../icons/favorite_icon.png";
+import emptyStar from "../icons/not_favorite_icon.png"
 
 const EventItem = ({ name, className, style, req }) => {
   const { t } = useTranslation("homeVol");
@@ -23,17 +26,32 @@ const EventItem = ({ name, className, style, req }) => {
     console.log("Hide button clicked");
   };
 
+  const handleFavorite = () => {
+    console.log("Clicked favorite");
+  
+    const favoriteIcon = document.getElementById("favoriteIcon");
+  
+    if (favoriteIcon.src === emptyStar) {
+      favoriteIcon.src = fullStar;
+    } else {
+      favoriteIcon.src = emptyStar;
+    }
+  };
+
   return (
     <div className={className} style={style}>
-      <h2>{name}</h2>
-      <div className="flex-box event-box-content">
-        <div className="event-box-image-pos">
+      <div className="event-box-content-top">
+        <div className="event-box-title">{name}</div>
+        <div className="event-box-favorite">
+          <img id="favoriteIcon" onClick={handleFavorite} className="favorite-button-image" src={fullStar}></img>
+        </div>
+      </div>
+      <div className="flex-box event-box-content-middle">
+        <div>
           <img className="event-box-image" src={logoIcon}></img>
         </div>
         <div className="flex-box flex-column">
-          <div>
-            Skills:
-          </div>
+          <div>Skills:</div>
           <div className="flex-box">
             {req.map((item, index) => (
               <div key={index} className="skills">
@@ -44,30 +62,19 @@ const EventItem = ({ name, className, style, req }) => {
           </div>
         </div>
       </div>
-      <div className="flex-box">
+      <div className="flex-box event-box-content-bottom">
+        <div className="event-spots-free"></div>
+        <div className="flex-box">
+          <div>5/10</div>
+          <img className="button-image" src={personIcon}></img>
+        </div>
         <div className="flex-box">
           <DynamicButton
-            className="button button-small"
+            className="button"
             text={t("join")}
             onClick={handleJoinClick}
           />
-          <DynamicButton
-            className="button button-small"
-            text={t("favorite")}
-            onClick={handleFavoriteClick}
-          />
-          <DynamicButton
-            className="button button-small"
-            text={t("share")}
-            onClick={handleShareClick}
-          />
-          <DynamicButton
-            className="button button-small"
-            text={t("hide")}
-            onClick={handleHideClick}
-          />
         </div>
-        <div className="event-spots-free"></div>
       </div>
     </div>
   );
