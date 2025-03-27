@@ -24,6 +24,7 @@
 │       │   ├── EventItem.js
 │       │   ├── imageComponent.js
 │       │   ├── InputComponent.js
+│       │   ├── ManageAccountBox.js
 │       │   └── NavigationBar.js
 │       ├── config
 │       │   ├── Language.js
@@ -68,6 +69,7 @@
 │           │   ├── HomeOrganizer.js
 │           │   └── HomeVolunteer.js
 │           ├── PersonalAreaPage
+│           │   ├── PersonalAreaAdmin.js
 │           │   ├── PersonalAreaOrganizer.js
 │           │   └── PersonalAreaVolunteer.js
 │           ├── SettingsPage
@@ -125,5 +127,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-31 directories, 92 files
+31 directories, 94 files
 ```

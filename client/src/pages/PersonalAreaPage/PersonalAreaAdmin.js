@@ -10,10 +10,7 @@ function PersonalArea() {
   const { t } = useTranslation("personal");
 
   //TODO change all these to read from database
-  const name = "Some org";
-  const userName = "org123";
-  const givenHours = 100;
-  const numberOfVolunteers = 50;
+  const name = "Fadi";
 
   const printToPdf = () => {
     console.log("print to PDF button clicked");
@@ -28,17 +25,7 @@ function PersonalArea() {
       <NavigationBar />
       <div className="flex-box flex-column event-box">
         <div className="perosnal-area-content">
-          {t("org_name")}: {name}
-        </div>
-
-        <div className="perosnal-area-content">
-          {t("user_name")}: {userName}
-        </div>
-        <div className="perosnal-area-content">
-          {t("total_hours")}: {givenHours}
-        </div>
-        <div className="perosnal-area-content">
-          {t("number_of_vol")}: {numberOfVolunteers}
+          {t("name")}: {name}
         </div>
 
         <div className="flex-box flex-column input-field-box"></div>

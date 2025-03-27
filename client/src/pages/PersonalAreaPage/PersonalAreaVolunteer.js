@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import DropDownMenu from "../../components/DropDownMenu";
+import ManageAccountBox from "../../components/ManageAccountBox";
 import { useSkillOptions } from "../../config/Skills";
 
 function PersonalArea() {
@@ -46,10 +47,6 @@ function PersonalArea() {
 
   const printToPdf = () => {
     console.log("print to PDF button clicked");
-  };
-
-  const changePassword = () => {
-    console.log("password change button clicked");
   };
 
   return (
@@ -99,11 +96,7 @@ function PersonalArea() {
           onClick={printToPdf}
         />
 
-        <DynamicButton
-          className="button"
-          text={t("password_change")}
-          onClick={changePassword}
-        />
+        <ManageAccountBox/>
       </div>
     </div>
   );
