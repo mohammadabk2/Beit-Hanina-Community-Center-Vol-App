@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
 import logoIcon from "../icons/org_icon.jpg"
@@ -28,11 +29,11 @@ const EventItem = ({ name, className, style, req }) => {
       <h2>{name}</h2>
       <div className="flex-box event-box-content">
         <div className="event-box-image-pos">
-          <img className="event-box-image" src={logoIcon}></img>
+          <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
         <div className="flex-box flex-column">
           <div>
-            Skills:
+            {t("skills")}
           </div>
           <div className="flex-box">
             {req.map((item, index) => (

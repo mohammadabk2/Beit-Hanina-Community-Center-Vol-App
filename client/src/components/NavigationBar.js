@@ -39,6 +39,7 @@ const NavigationBar = () => {
     navigate("/about");
   };
 
+
   return (
     <div className="flex-box navigation-box">
       <DropDownMenu
