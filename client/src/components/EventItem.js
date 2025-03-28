@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+
 import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
-import logoIcon from "../icons/org_icon.jpg"
+import logoIcon from "../icons/org_icon.png";
+import personIcon from "../icons/person_icon.png";
+import fullStar from "../icons/favorite_icon.png";
+import emptyStar from "../icons/not_favorite_icon.png";
 
 const EventItem = ({ name, className, style, req }) => {
   const { t } = useTranslation("homeVol");
@@ -11,29 +15,41 @@ const EventItem = ({ name, className, style, req }) => {
     console.log("Join button clicked");
   };
 
-  const handleFavoriteClick = () => {
-    console.log("Favorite button clicked");
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavorite = () => {
+    console.log("Clicked favorite");
+    setIsFavorite(!isFavorite);
   };
 
-  const handleShareClick = () => {
-    console.log("Share button clicked");
-  };
+  // const handleShareClick = () => {
+  //   console.log("Share button clicked");
+  // };
 
-  const handleHideClick = () => {
-    console.log("Hide button clicked");
-  };
+  // const handleHideClick = () => {
+  //   console.log("Hide button clicked");
+  // };
 
   return (
     <div className={className} style={style}>
-      <h2>{name}</h2>
-      <div className="flex-box event-box-content">
-        <div className="event-box-image-pos">
-          <img className="event-box-image" src={logoIcon}></img>
+      <div className="event-box-content-top">
+        <div className="event-box-title">{name}</div>
+        <div className="event-box-favorite">
+          <img
+            id="favoriteIcon"
+            onClick={handleFavorite}
+            className="favorite-button-image"
+            src={isFavorite ? fullStar : emptyStar}
+            alt="Fav Icon"
+          ></img>
+        </div>
+      </div>
+      <div className="flex-box event-box-content-middle">
+        <div>
+          <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
         <div className="flex-box flex-column">
-          <div>
-            Skills:
-          </div>
+          <div>Skills:</div>
           <div className="flex-box">
             {req.map((item, index) => (
               <div key={index} className="skills">
@@ -44,30 +60,23 @@ const EventItem = ({ name, className, style, req }) => {
           </div>
         </div>
       </div>
-      <div className="flex-box">
+      <div className="flex-box event-box-content-bottom">
+        <div className="event-spots-free"></div>
+        <div className="flex-box">
+          <div>5/10</div>
+          <img
+            className="button-image"
+            src={personIcon}
+            alt="Person Icon"
+          ></img>
+        </div>
         <div className="flex-box">
           <DynamicButton
-            className="button button-small"
+            className="button"
             text={t("join")}
             onClick={handleJoinClick}
           />
-          <DynamicButton
-            className="button button-small"
-            text={t("favorite")}
-            onClick={handleFavoriteClick}
-          />
-          <DynamicButton
-            className="button button-small"
-            text={t("share")}
-            onClick={handleShareClick}
-          />
-          <DynamicButton
-            className="button button-small"
-            text={t("hide")}
-            onClick={handleHideClick}
-          />
         </div>
-        <div className="event-spots-free"></div>
       </div>
     </div>
   );
