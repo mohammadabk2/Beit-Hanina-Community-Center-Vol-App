@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu";
 import { useLnOptions } from "../config/Language";
 
-import settingsIcon from "../icons/settings_icon.png";
-import profileIcon from "../icons/profile_icon.png";
+import settingsIcon from "../icons/settings_icon.svg";
+import profileIcon from "../icons/person_icon.svg";
 import homeIcon from "../icons/home_icon.jpg";
 import aboutIcon from "../icons/about_icon.jpg";
 
