@@ -7,7 +7,8 @@ import DropDownMenu from "../../components/DropDownMenu";
 import { useLnOptions } from "../../config/Language";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
-import settingsIcon from "../../icons/settings_icon.jpg";
+import settingsIcon from "../../icons/settings_icon.png";
+import profileIcon from "../../icons/profile_icon.png";
 
 
 function HomeVolunteer() {
@@ -35,22 +36,22 @@ function HomeVolunteer() {
     {
       name: "test event1",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event2",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event3",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event4",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
   ];
   //!
@@ -69,12 +70,20 @@ function HomeVolunteer() {
 
   return (
     <div className="app flex-box flex-column">
-      <DropDownMenu
-        className="language-button"
-        text={t("ln")}
-        options={lnOptions}
-      />
-      <div className="scroll-box1">
+      <div className="flex-box navigation-box">
+        <DropDownMenu
+          className="language-button"
+          text={t("ln")}
+          options={lnOptions}
+        />
+        <div onClick={goToPersonalArea}>
+          <img className="navigation-button-image" src={profileIcon} alt="Personal Area Icon"></img>
+        </div>
+        <div onClick={goToSettings}>
+          <img className="navigation-button-image" src={settingsIcon} alt="nav-bar"></img>
+        </div>
+      </div>
+      <div className="scroll-box1 general-box flex-box flex-column">
         <div className="flex-box line-break top-scroll-box1">
           <div>
             <DynamicButton
@@ -83,24 +92,10 @@ function HomeVolunteer() {
               text={t("sort")}
             />
           </div>
-          <div>
-            <DynamicButton
-              className="button button-small"
-              onClick={goToPersonalArea}
-              text={t("personalArea")}
-            />
-          </div>
-          <div>
-            <DynamicButton
-              className="button flex-box button-small"
-              onClick={goToSettings}
-              text={t("settings")}
-              logoSrc={settingsIcon}
-              logoalt={"settings icon"}
-            />
-          </div>
         </div>
-        <div className="flex-box flex-column bottom-scroll-box1">{renderEventItems(events)}</div>
+        <div className="bottom-scroll-box1">
+          {renderEventItems(events)}
+        </div>
       </div>
     </div>
   );

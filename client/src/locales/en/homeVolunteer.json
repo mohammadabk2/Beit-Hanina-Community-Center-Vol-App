@@ -1,10 +1,10 @@
 {
-  "join": "Join Event",
+  "join": "Register",
   "favorite": "Favorite",
   "share": "Share",
   "hide": "Hide",
   "ln": "Language",
   "settings":"Settings",
   "personalArea":"Personal Area",
-  "sort":"Sort"
+  "sort":"Sort by"
 }
