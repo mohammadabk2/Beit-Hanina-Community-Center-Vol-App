@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import DynamicButton from "./ButtonComponent";
 import { useTranslation } from "react-i18next";
 import logoIcon from "../icons/org_icon.png";
-import personIcon from "../icons/person_icon.png";
-import fullStar from "../icons/favorite_icon.png";
-import emptyStar from "../icons/not_favorite_icon.png";
+import personIcon from "../icons/person_icon.svg";
+import fullStar from "../icons/favorite_icon.svg";
+import emptyStar from "../icons/not_favorite_icon.svg";
 
 const EventItem = ({ name, className, style, req }) => {
   const { t } = useTranslation("homeVol");

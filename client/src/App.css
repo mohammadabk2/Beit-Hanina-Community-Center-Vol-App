@@ -149,9 +149,9 @@ body {
   padding: 0.5rem 1rem;
 }
 
-.dropdown-item a:hover {
+/* .dropdown-item a:hover {
   background-color: var(--border-hover-color);
-}
+} */
 
 input {
   border: 0.0625rem solid var(--input-border);
@@ -254,6 +254,7 @@ input:focus {
 .top-scroll-box1 {
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0 0 0.5rem 0.0625rem var(--scroll-box-top-bottom);
+  width: 100%;
 }
 
 .bottom-scroll-box1 {

@@ -1,24 +1,27 @@
 import { useState, useEffect } from "react";
 
 export const useColorOptions = () => {
-  const darkColor = "#28242c";
-  const lightColor = "#f1f1f1";
-  const darkText = "#ffffff";
+  const eventColorLight = "#f5f5f5";
   const lightText = "#000000";
-  const darkLine = "#904040"; //! jad set this to what you like best
   const lightLine = "#7c7c7c";
   const lightBlue = "blue";
-  const darkBlue = "#3498db";
   const lightGrey = "#ccc";
-  const darkGrey = "#555";
   const buttonHoveLight = "#a8a8a8";
-  const buttonHoverDark = "#555555";
   const buttonBackgroundLight = "#d1d1d1";
-  const buttonBackgroundDark = "#7a7a7a";
   const buttonColorLight = "#c2c2c2";
-  const buttonColorDark = "#6b6b6b";
   const skillsShadowLight = "#e0e0e0";
+  const bottomScrollBox1 = "#dddddd"
+
+  const darkColor = "#28242c";
+  const darkText = "#ffffff";
+  const darkLine = "#904040";
+  const darkBlue = "#3498db";
+  const darkGrey = "#555";
+  const buttonHoverDark = "#555555";
+  const buttonBackgroundDark = "#7a7a7a";
+  const buttonColorDark = "#6b6b6b";
   const skillsShadowDark = "#7a7a7a";
+  const eventColorDark = "#f5f5f5";
 
   // const [isLightMode, setIsLightMode] = useState(false);
   const [isLightMode, setIsLightMode] = useState(() => {
@@ -36,11 +39,12 @@ export const useColorOptions = () => {
   });
 
   useEffect(() => {
+    // to save option between pages
     localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
 
     document.documentElement.style.setProperty(
       "--general-background-color",
-      isLightMode ? lightColor : darkColor
+      isLightMode ? eventColorLight : darkColor
     );
     document.documentElement.style.setProperty(
       "--drop-down-text-color",
@@ -48,19 +52,19 @@ export const useColorOptions = () => {
     );
     document.documentElement.style.setProperty(
       "--border-hover-color",
-      isLightMode ? lightColor : darkColor
+      isLightMode ? "#0000001a" : darkColor
     );
     document.documentElement.style.setProperty(
       "--scroll-box-top-bottom",
-      isLightMode ? lightColor : darkColor
+      isLightMode ? "#0000001a" : darkColor
     );
     document.documentElement.style.setProperty(
       "--body-color",
-      isLightMode ? lightColor : darkColor
+      isLightMode ? "#f1f1f1" : darkColor
     );
     document.documentElement.style.setProperty(
       "--bottom-scroll-box",
-      isLightMode ? lightColor : darkColor
+      isLightMode ? bottomScrollBox1 : darkColor
     );
 
     document.documentElement.style.setProperty(
