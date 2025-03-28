@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import DropDownMenu from "./DropDownMenu";
 import { useLnOptions } from "../config/Language";
-// import { useColorOptions } from "../config/Colors";
+import { useColorOptions } from "../config/Colors";
+// import InputComponent from "./InputComponent"
 
 import settingsIcon from "../icons/settings_icon.jpg";
 import profileIcon from "../icons/profile_icon.jpg";
@@ -18,7 +19,7 @@ const NavigationBar = () => {
 
   const { t } = useTranslation("app");
   const lnOptions = useLnOptions();
-  // const { isLightMode, handleModeChange } = useColorOptions();
+  const { isLightMode, handleModeChange } = useColorOptions();
 
   const goToSettings = () => {
     console.log("Settings button clicked");
@@ -51,12 +52,12 @@ const NavigationBar = () => {
         text={t("ln")}
         options={lnOptions}
       />
-      {/* <div onClick={handleModeChange}> */}
-      <div>
+      <div onClick={handleModeChange}>
+      {/* <div> */}
         <img
           className="navigation-button-image"
-          // src={isLightMode ? lightModeIcon : darkModeIcon}
-          src ={lightModeIcon}
+          src={isLightMode ? darkModeIcon : lightModeIcon}
+          // src ={lightModeIcon}
           alt="Mode Switch"
         />
       </div>
@@ -89,6 +90,8 @@ const NavigationBar = () => {
           alt="About icon"
         />
       </div>
+
+      {/* <InputComponent className="input"/> */}
     </div>
   );
 };
