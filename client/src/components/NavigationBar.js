@@ -7,10 +7,10 @@ import { useLnOptions } from "../config/Language";
 import { useColorOptions } from "../config/Colors";
 // import InputComponent from "./InputComponent"
 
-import settingsIcon from "../icons/settings_icon.jpg";
-import profileIcon from "../icons/profile_icon.jpg";
-import homeIcon from "../icons/home_icon.jpg";
-import aboutIcon from "../icons/about_icon.jpg";
+import settingsIcon from "../icons/settings_icon.svg";
+import profileIcon from "../icons/profile_icon.svg";
+import homeIcon from "../icons/home_icon.svg";
+import aboutIcon from "../icons/about_icon.svg";
 import darkModeIcon from "../icons/dark_mode.svg";
 import lightModeIcon from "../icons/light_mode.svg";
 
