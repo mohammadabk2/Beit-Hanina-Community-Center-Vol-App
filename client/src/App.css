@@ -297,3 +297,8 @@ input:focus {
     justify-content: center;
   }
 }
+.perosnal-area-content {
+  margin-bottom: 0.7rem; 
+  /* font-size: 20px; */
+  font-size: 1.3rem; 
+}

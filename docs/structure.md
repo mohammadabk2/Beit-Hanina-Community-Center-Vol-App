@@ -23,15 +23,22 @@
 │       │   ├── DropDownMenu.js
 │       │   ├── EventItem.js
 │       │   ├── imageComponent.js
-│       │   └── InputComponent.js
+│       │   ├── InputComponent.js
+│       │   ├── ManageAccountBox.js
+│       │   └── NavigationBar.js
 │       ├── config
 │       │   ├── Language.js
 │       │   └── Skills.js
 │       ├── global.css
 │       ├── i18n.js
 │       ├── icons
+│       │   ├── about_icon.jpg
 │       │   ├── arrow_down.jpg
+│       │   ├── home_icon.jpg
+│       │   ├── language_icon.jpg
 │       │   ├── logo.jpg
+│       │   ├── org_icon.jpg
+│       │   ├── profile_icon.jpg
 │       │   └── settings_icon.jpg
 │       ├── index.js
 │       ├── installPrompt.js
@@ -40,23 +47,31 @@
 │       │   │   ├── about.json
 │       │   │   ├── app.json
 │       │   │   ├── homeVolunteer.json
+│       │   │   ├── personalArea.json
 │       │   │   ├── signup.json
 │       │   │   └── skills.json
 │       │   └── en
 │       │       ├── about.json
 │       │       ├── app.json
 │       │       ├── homeVolunteer.json
+│       │       ├── personalArea.json
 │       │       ├── signup.json
 │       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
+│           ├── CommonPages
+│           │   ├── ErrorScreen.js
+│           │   ├── Loading.js
+│           │   └── NoConnection.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
 │           │   ├── HomeOrganizer.js
 │           │   └── HomeVolunteer.js
 │           ├── PersonalAreaPage
-│           │   └── PersonalArea.js
+│           │   ├── PersonalAreaAdmin.js
+│           │   ├── PersonalAreaOrganizer.js
+│           │   └── PersonalAreaVolunteer.js
 │           ├── SettingsPage
 │           │   └── Settings.js
 │           └── SignUpPage
@@ -112,5 +127,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-30 directories, 79 files
+31 directories, 94 files
 ```
