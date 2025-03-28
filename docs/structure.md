@@ -27,7 +27,6 @@
 │       │   ├── ManageAccountBox.js
 │       │   └── NavigationBar.js
 │       ├── config
-│       │   ├── Colors.js
 │       │   ├── Language.js
 │       │   └── Skills.js
 │       ├── global.css
@@ -35,10 +34,8 @@
 │       ├── icons
 │       │   ├── about_icon.jpg
 │       │   ├── arrow_down.jpg
-│       │   ├── dark_mode.svg
 │       │   ├── home_icon.jpg
 │       │   ├── language_icon.jpg
-│       │   ├── light_mode.svg
 │       │   ├── logo.jpg
 │       │   ├── org_icon.jpg
 │       │   ├── profile_icon.jpg
@@ -51,7 +48,6 @@
 │       │   │   ├── app.json
 │       │   │   ├── homeVolunteer.json
 │       │   │   ├── personalArea.json
-│       │   │   ├── settings.json
 │       │   │   ├── signup.json
 │       │   │   └── skills.json
 │       │   └── en
@@ -59,7 +55,6 @@
 │       │       ├── app.json
 │       │       ├── homeVolunteer.json
 │       │       ├── personalArea.json
-│       │       ├── settings.json
 │       │       ├── signup.json
 │       │       └── skills.json
 │       └── pages
@@ -132,5 +127,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-31 directories, 99 files
+31 directories, 94 files
 ```

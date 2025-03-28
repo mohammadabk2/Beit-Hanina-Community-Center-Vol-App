@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import DynamicButton from "./ButtonComponent";
-import dropDownArrow from "../icons/drop_down_icon.svg"
+import dropDownArrow from "../icons/arrow_down.png"
 
 const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
   const [isOpen, setIsOpen] = useState(false);
