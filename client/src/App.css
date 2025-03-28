@@ -11,8 +11,7 @@ button {
 
 .app-header {
   padding: 1.25rem;
-  /* color: var(--drop-down-text-color);
-  color: blue; */
+  color: var(--common-colour-2);
   margin-bottom: 2rem;
 }
 
@@ -27,7 +26,7 @@ button {
 /*Gives container slight shadow */
 .smooth-shadow-box,
 .dropdown-menu {
-  box-shadow: 0 0 0.5rem 0.0625rem var(--border-hover-color);
+  box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
 }
 
 /*Gives container white background that can resize */
@@ -36,7 +35,7 @@ button {
   width: 80vw;
   margin-top: 0.0625rem;
   border-radius: 0.625rem;
-  background-color: var(--general-background-color);
+  background-color: var(--common-colour-1);
   max-width: 34.5625rem;
 }
 
@@ -54,9 +53,9 @@ button {
   border-radius: 0.625rem;
   border: solid;
   border-width: 0.0625rem;
-  border-color: var(--button-color);
-  background-color: var(--button-background);
-  color: var(--button-border);
+  border-color: #c2c2c2;
+  background-color: #d1d1d1;
+  color: black;
 }
 
 /*Makes buttons smaller */
@@ -67,7 +66,7 @@ button {
 /*Adds button color transition when hovered over */
 .button:hover {
   transition: background-color ease 0.5s;
-  background-color: var(--button-hover);
+  background-color: rgb(168, 168, 168);
 }
 
 /*Class for language button only */
@@ -75,7 +74,7 @@ button {
   margin-right: auto;
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
-  background-color: var(--general-background-color);
+  background-color: var(--common-colour-1);
   border-radius: 0.625rem;
 }
 
@@ -114,9 +113,7 @@ button {
 }
 
 body {
-  background-color: var(--body-color);
-  /* color: var(--text-color); */
-  color: var(--general-text);
+  background-color: var(--common-colour-4);
 }
 
 /*Dropdown menu classes for styling */
@@ -129,7 +126,7 @@ body {
 .dropdown-menu {
   display: block;
   position: absolute;
-  background-color: var(--general-background-color);
+  background-color: var(--common-colour-1);
   z-index: 1;
   list-style-type: none;
   padding: 0;
@@ -144,17 +141,13 @@ body {
 
 .dropdown-item a {
   text-decoration: none;
-  color: var(--drop-down-text-color);
+  color: var(--common-colour-2);
   display: block;
   padding: 0.5rem 1rem;
 }
 
-.dropdown-item a:hover {
-  background-color: var(--border-hover-color);
-}
-
 input {
-  border: 0.0625rem solid var(--input-border);
+  border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
   outline: 0.125rem solid transparent;
   padding: 0.5rem;
@@ -163,7 +156,7 @@ input {
 }
 
 input:focus {
-  outline-color: var(--input-outline);
+  outline-color: blue;
 }
 
 /*Styling for gender button */
@@ -182,7 +175,7 @@ input:focus {
   padding: 0.125rem 0.3125rem;
   align-content: center;
   border-radius: 20%;
-  background-color: var(--skills-shadow);
+  background-color: #e0e0e0;
   text-align: center;
   margin: 0.625rem;
 }
@@ -191,7 +184,7 @@ input:focus {
 .event-box {
   margin-top: 1rem;
   border-radius: 0.625rem;
-  background-color: var(--general-background-color);
+  background-color: var(--common-colour-1);
   width: 95%;
 }
 
@@ -226,7 +219,7 @@ input:focus {
 
 /*Adds line break to any container */
 .line-break {
-  border-color: var(--line-break) !important;
+  border-color: #7c7c7c !important;
   border-width: 0.125rem !important;
   border-bottom: solid;
 }
@@ -253,14 +246,15 @@ input:focus {
 /*design for the top of a scrollable list bar (use incremental names) */
 .top-scroll-box1 {
   border-radius: 1rem 1rem 0 0;
-  box-shadow: 0 0 0.5rem 0.0625rem var(--scroll-box-top-bottom);
+  box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
+  width: 100%;
 }
 
 .bottom-scroll-box1 {
   position: relative;
   border-radius: 0 0 1rem 1rem;
-  box-shadow: 0 0 0.5rem 0.0625rem var(--scroll-box-top-bottom);
-  background-color: var(--bottom-scroll-box);
+  box-shadow: 0 0 0.5rem 0.0625rem var(--common-colour-3);
+  background-color: #dddddd;
   padding-bottom: 1rem;
   overflow-y: auto;
   width: 100%;
@@ -304,7 +298,7 @@ input:focus {
   }
 }
 .perosnal-area-content {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.7rem; 
   /* font-size: 20px; */
-  font-size: 1.3rem;
+  font-size: 1.3rem; 
 }
