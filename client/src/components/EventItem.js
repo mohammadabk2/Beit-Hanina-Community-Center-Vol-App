@@ -49,7 +49,9 @@ const EventItem = ({ name, className, style, req }) => {
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
         <div className="flex-box flex-column">
-          <div>Skills:</div>
+          <div>
+            {t("skills")}
+          </div>
           <div className="flex-box">
             {req.map((item, index) => (
               <div key={index} className="skills">

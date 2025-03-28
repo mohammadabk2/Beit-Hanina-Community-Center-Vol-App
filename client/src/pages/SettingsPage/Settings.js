@@ -8,9 +8,7 @@ function Settings() {
   return (
     <div className="app flex-box">
       <NavigationBar/>
-      <main>
-        <h1>Settings page</h1>
-      </main>
+      <div>settings page</div>
     </div>
   );
 }
