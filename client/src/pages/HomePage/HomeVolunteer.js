@@ -19,22 +19,22 @@ function HomeVolunteer() {
     {
       name: "test event1",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event2",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event3",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
     {
       name: "test event4",
       desc: "some desc",
-      req: ["old", "young", "test", "rest"],
+      req: ["test", "test", "test", "test"],
     },
   ];
   //!
@@ -54,7 +54,7 @@ function HomeVolunteer() {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="scroll-box1">
+      <div className="scroll-box1 general-box flex-box flex-column">
         <div className="flex-box line-break top-scroll-box1">
           <div>
             <DynamicButton
@@ -64,7 +64,7 @@ function HomeVolunteer() {
             />
           </div>
         </div>
-        <div className="flex-box flex-column bottom-scroll-box1">
+        <div className="bottom-scroll-box1">
           {renderEventItems(events)}
         </div>
       </div>
