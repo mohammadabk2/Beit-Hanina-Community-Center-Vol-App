@@ -83,7 +83,7 @@ function HomeVolunteer() {
           <img className="navigation-button-image" src={settingsIcon} alt="nav-bar"></img>
         </div>
       </div>
-      <div className="scroll-box1">
+      <div className="scroll-box1 general-box flex-box flex-column">
         <div className="flex-box line-break top-scroll-box1">
           <div>
             <DynamicButton
@@ -93,7 +93,7 @@ function HomeVolunteer() {
             />
           </div>
         </div>
-        <div className="flex-box flex-column bottom-scroll-box1">
+        <div className="bottom-scroll-box1">
           {renderEventItems(events)}
         </div>
       </div>
