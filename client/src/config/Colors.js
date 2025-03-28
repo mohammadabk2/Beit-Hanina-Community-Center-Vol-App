@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-//TODO problem it defaults to dark mode
 export const useColorOptions = () => {
   const darkColor = "#28242c";
   const lightColor = "#f1f1f1";
@@ -21,9 +20,24 @@ export const useColorOptions = () => {
   const skillsShadowLight = "#e0e0e0";
   const skillsShadowDark = "#7a7a7a";
 
-  const [isLightMode, setIsLightMode] = useState(false);
+  // const [isLightMode, setIsLightMode] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      // Check for saved preference first
+      const savedMode = localStorage.getItem("colorMode");
+      if (savedMode) return savedMode === "light";
+
+      // Fallback to system preference
+      return (
+        window.matchMedia?.("(prefers-color-scheme: light)").matches ?? false
+      );
+    }
+    return false;
+  });
 
   useEffect(() => {
+    localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
+
     document.documentElement.style.setProperty(
       "--general-background-color",
       isLightMode ? lightColor : darkColor
