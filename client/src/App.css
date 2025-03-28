@@ -92,7 +92,7 @@ button {
 
 /*Drop down button image */
 .button-image {
-  width: 0.9375rem;
+  width: 1rem;
   margin-left: 0.3125rem;
 }
 
@@ -144,10 +144,6 @@ body {
   color: var(--common-colour-2);
   display: block;
   padding: 0.5rem 1rem;
-}
-
-.dropdown-item a:hover {
-  background-color: var(--common-colour-3);
 }
 
 input {
