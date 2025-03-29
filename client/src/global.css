@@ -1,17 +1,16 @@
 :root {
-  --general-background-color: #f5f5f5;
+  --box-background-color: #f5f5f5;
   --drop-down-text-color: #000000;
-  --border-hover-color: #0000001a;
-  --scroll-box-top-bottom: #0000001a;
+  --general-shadow: #0000001a;
   --body-color: #f1f1f1;
   --bottom-scroll-box: #dddddd;
   --line-break: #7c7c7c;
-  --input-outline: blue;
-  --input-border: "#ccc";
+  --input-focus: blue;
+  --input-border: "#cccccc";
   --button-hover: #a8a8a8;
-  --button-border: black;
+  --button-text: black;
   --button-background: #d1d1d1;
-  --button-color: #c2c2c2;
+  --button-border: #c2c2c2;
   --general-text: black;
   
   --skills-shadow:#e0e0e0;

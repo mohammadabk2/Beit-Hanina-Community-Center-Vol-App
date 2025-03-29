@@ -3,25 +3,27 @@ import { useState, useEffect } from "react";
 export const useColorOptions = () => {
   const eventColorLight = "#f5f5f5";
   const lightText = "#000000";
-  const lightLine = "#7c7c7c";
-  const lightBlue = "blue";
-  const lightGrey = "#ccc";
-  const buttonHoveLight = "#a8a8a8";
+  const breakLineLight = "#7c7c7c";
+  const inputBorderFocusLight = "blue";
+  const inputBorderLight = "#cccccc";
+  const buttonHoverLight = "#a8a8a8";
   const buttonBackgroundLight = "#d1d1d1";
-  const buttonColorLight = "#c2c2c2";
+  const buttonBorderLight = "#c2c2c2";
   const skillsShadowLight = "#e0e0e0";
-  const bottomScrollBox1 = "#dddddd"
+  const bottomScrollBoxLight = "#dddddd";
+  const backGroundBodyLight = "#f1f1f1";
 
-  const darkColor = "#28242c";
+  const eventColorDark = "#f5f5f5";
   const darkText = "#ffffff";
-  const darkLine = "#904040";
-  const darkBlue = "#3498db";
-  const darkGrey = "#555";
+  const breakLineDark = "#904040";
+  const inputBorderFocusDark = "#3498db";
+  const inputBorderDark = "#555555";
   const buttonHoverDark = "#555555";
   const buttonBackgroundDark = "#7a7a7a";
-  const buttonColorDark = "#6b6b6b";
+  const buttonBorderDark = "#6b6b6b";
   const skillsShadowDark = "#7a7a7a";
-  const eventColorDark = "#f5f5f5";
+  const bottomScrollBoxDark = "#dddddd";
+  const backGroundBodyDark = "#f1f1f1";
 
   // const [isLightMode, setIsLightMode] = useState(false);
   const [isLightMode, setIsLightMode] = useState(() => {
@@ -43,52 +45,44 @@ export const useColorOptions = () => {
     localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
 
     document.documentElement.style.setProperty(
-      "--general-background-color",
-      isLightMode ? eventColorLight : darkColor
+      "--box-background-color",
+      isLightMode ? eventColorLight : eventColorDark
     );
     document.documentElement.style.setProperty(
       "--drop-down-text-color",
       isLightMode ? lightText : darkText
     );
     document.documentElement.style.setProperty(
-      "--border-hover-color",
-      isLightMode ? "#0000001a" : darkColor
-    );
-    document.documentElement.style.setProperty(
-      "--scroll-box-top-bottom",
-      isLightMode ? "#0000001a" : darkColor
-    );
-    document.documentElement.style.setProperty(
       "--body-color",
-      isLightMode ? "#f1f1f1" : darkColor
+      isLightMode ? backGroundBodyLight : backGroundBodyDark
     );
     document.documentElement.style.setProperty(
       "--bottom-scroll-box",
-      isLightMode ? bottomScrollBox1 : darkColor
+      isLightMode ? bottomScrollBoxLight : bottomScrollBoxDark
     );
 
     document.documentElement.style.setProperty(
       "--line-break",
-      isLightMode ? lightLine : darkLine
+      isLightMode ? breakLineLight : breakLineDark
     );
 
     document.documentElement.style.setProperty(
-      "--input-outline",
-      isLightMode ? lightBlue : darkBlue
+      "--input-focus",
+      isLightMode ? inputBorderFocusLight : inputBorderFocusDark
     );
 
     document.documentElement.style.setProperty(
       "--input-border",
-      isLightMode ? lightGrey : darkGrey
+      isLightMode ? inputBorderLight : inputBorderDark
     );
 
     document.documentElement.style.setProperty(
       "--button-hover",
-      isLightMode ? buttonHoveLight : buttonHoverDark
+      isLightMode ? buttonHoverLight : buttonHoverDark
     );
 
     document.documentElement.style.setProperty(
-      "--button-border",
+      "--button-text",
       isLightMode ? lightText : darkText
     );
 
@@ -98,8 +92,8 @@ export const useColorOptions = () => {
     );
 
     document.documentElement.style.setProperty(
-      "--button-color",
-      isLightMode ? buttonColorLight : buttonColorDark
+      "--button-border",
+      isLightMode ? buttonBorderLight : buttonBorderDark
     );
 
     document.documentElement.style.setProperty(
