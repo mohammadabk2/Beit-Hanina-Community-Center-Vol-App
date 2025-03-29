@@ -54,7 +54,7 @@ button {
   border-radius: 0.625rem;
   border: solid;
   border-width: 0.0625rem;
-  border-color: var(--button-color);
+  border-color: var(--button-border);
   background-color: var(--button-background);
   color: var(--button-text);
 }
