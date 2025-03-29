@@ -23,7 +23,7 @@ export const useColorOptions = () => {
   const buttonBorderDark = "#6b6b6b";
   const skillsShadowDark = "#7a7a7a";
   const bottomScrollBoxDark = "#dddddd";
-  const backGroundBodyDark = "#f1f1f1";
+  const backGroundBodyDark = "black";
 
   // const [isLightMode, setIsLightMode] = useState(false);
   const [isLightMode, setIsLightMode] = useState(() => {

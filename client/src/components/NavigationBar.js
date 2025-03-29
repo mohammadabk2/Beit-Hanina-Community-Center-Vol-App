@@ -7,12 +7,17 @@ import { useLnOptions } from "../config/Language";
 import { useColorOptions } from "../config/Colors";
 // import InputComponent from "./InputComponent"
 
-import settingsIcon from "../icons/settings_icon.svg";
-import profileIcon from "../icons/profile_icon.svg";
-import homeIcon from "../icons/home_icon.svg";
-import aboutIcon from "../icons/about_icon.svg";
-import darkModeIcon from "../icons/dark_mode.svg";
-import lightModeIcon from "../icons/light_mode.svg";
+import modeIconDark from "../icons/light/mode_icon.svg";
+import settingsIconLight from "../icons/light/settings_icon.svg";
+import profileIconLight from "../icons/light/profile_icon.svg";
+import homeIconLight from "../icons/light/home_icon.svg";
+import aboutIconLight from "../icons/light/about_icon.svg";
+
+import modeIconLight from "../icons/dark/mode_icon.svg";
+import settingsIconDark from "../icons/dark/settings_icon.svg";
+import profileIconDark from "../icons/dark/profile_icon.svg";
+import homeIconDark from "../icons/dark/home_icon.svg";
+import aboutIconDark from "../icons/dark/about_icon.svg";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -53,11 +58,10 @@ const NavigationBar = () => {
         options={lnOptions}
       />
       <div onClick={handleModeChange}>
-      {/* <div> */}
+        {/* <div> */}
         <img
           className="navigation-button-image"
-          src={isLightMode ? darkModeIcon : lightModeIcon}
-          // src ={lightModeIcon}
+          src={isLightMode ? modeIconDark : modeIconLight}
           alt="Mode Switch"
         />
       </div>
@@ -65,28 +69,31 @@ const NavigationBar = () => {
       <div onClick={goToHome}>
         <img
           className="navigation-button-image"
-          src={homeIcon}
+          src={isLightMode ? homeIconLight : homeIconDark}
           alt="Home icon"
         />
       </div>
       <div onClick={goToPersonalArea}>
         <img
           className="navigation-button-image"
-          src={profileIcon}
+          // src={profileIconLight}
+          src={isLightMode ? profileIconLight : profileIconDark}
           alt="Profile icon"
         />
       </div>
       <div onClick={goToSettings}>
         <img
           className="navigation-button-image"
-          src={settingsIcon}
+          // src={settingsIconLight}
+          src={isLightMode ? settingsIconLight : settingsIconDark}
           alt="Settings icon"
         />
       </div>
       <div onClick={goToAbout}>
         <img
           className="navigation-button-image"
-          src={aboutIcon}
+          // src={aboutIconLight}
+          src={isLightMode ? aboutIconLight : aboutIconDark}
           alt="About icon"
         />
       </div>
