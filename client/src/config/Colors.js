@@ -11,19 +11,21 @@ export const useColorOptions = () => {
   const buttonBorderLight = "#c2c2c2";
   const skillsShadowLight = "#e0e0e0";
   const bottomScrollBoxLight = "#dddddd";
+  const topScrollBoxLight = "#dddddd";
   const backGroundBodyLight = "#f1f1f1";
 
-  const eventColorDark = "#f5f5f5";
+  const eventColorDark = "#333336";
   const darkText = "#ffffff";
-  const breakLineDark = "#904040";
+  const breakLineDark = "#9e9e9e";
   const inputBorderFocusDark = "#3498db";
   const inputBorderDark = "#555555";
-  const buttonHoverDark = "#555555";
-  const buttonBackgroundDark = "#7a7a7a";
-  const buttonBorderDark = "#6b6b6b";
+  const buttonHoverDark = "#5050ba";
+  const buttonBackgroundDark = "#7070ff";
+  const buttonBorderDark = "#7070e0";
   const skillsShadowDark = "#7a7a7a";
-  const bottomScrollBoxDark = "#dddddd";
-  const backGroundBodyDark = "black";
+  const bottomScrollBoxDark = "#292930";
+  const topScrollBoxDark = "#292930"
+  const backGroundBodyDark = "#333336";
 
   // const [isLightMode, setIsLightMode] = useState(false);
   const [isLightMode, setIsLightMode] = useState(() => {
@@ -43,7 +45,10 @@ export const useColorOptions = () => {
   useEffect(() => {
     // to save option between pages
     localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
-
+    document.documentElement.style.setProperty(
+      "--top-scroll-box",
+      isLightMode ? topScrollBoxLight : topScrollBoxDark
+    );
     document.documentElement.style.setProperty(
       "--box-background-color",
       isLightMode ? eventColorLight : eventColorDark

@@ -1,9 +1,10 @@
 :root {
   --box-background-color: #f5f5f5;
   --drop-down-text-color: #000000;
-  --general-shadow: #0000001a;
+  --general-shadow: #0000002c;
   --body-color: #f1f1f1;
   --bottom-scroll-box: #dddddd;
+  --top-scroll-box: #f1f1f1;
   --line-break: #7c7c7c;
   --input-focus: blue;
   --input-border: "#cccccc";
