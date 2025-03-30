@@ -27,7 +27,6 @@
 │       │   ├── ManageAccountBox.js
 │       │   └── NavigationBar.js
 │       ├── config
-│       │   ├── Colors.js
 │       │   ├── Language.js
 │       │   └── Skills.js
 │       ├── global.css
@@ -59,7 +58,6 @@
 │       │   │   ├── app.json
 │       │   │   ├── homeVolunteer.json
 │       │   │   ├── personalArea.json
-│       │   │   ├── settings.json
 │       │   │   ├── signup.json
 │       │   │   └── skills.json
 │       │   └── en
@@ -67,7 +65,6 @@
 │       │       ├── app.json
 │       │       ├── homeVolunteer.json
 │       │       ├── personalArea.json
-│       │       ├── settings.json
 │       │       ├── signup.json
 │       │       └── skills.json
 │       └── pages

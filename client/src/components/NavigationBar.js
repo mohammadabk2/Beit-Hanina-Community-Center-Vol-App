@@ -23,8 +23,8 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   const navigate = useNavigate();
 
   const { t } = useTranslation("app");
+  const navigate = useNavigate();
   const lnOptions = useLnOptions();
-  const { isLightMode, handleModeChange } = useColorOptions();
 
   const goToSettings = () => {
     console.log("Settings button clicked");
@@ -32,13 +32,13 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   };
 
   const goToPersonalArea = () => {
-    //TODO add a check if Admin org or volunteer
+    //TODO add a check if Admin org or voulunteer
     console.log("Personal Area button clicked");
     navigate("/personal-area-vol");
   };
 
   const goToHome = () => {
-    //TODO add a check if Admin org or volunteer
+    //TODO add a check if Admin org or voulunteer
     console.log("Home button clicked");
     navigate("/home-volunteer");
     // navigate("/home-admin");

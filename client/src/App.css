@@ -11,8 +11,7 @@ button {
 
 .app-header {
   padding: 1.25rem;
-  /* color: var(--drop-down-text-color);
-  color: blue; */
+  color: var(--common-colour-2);
   margin-bottom: 2rem;
 }
 
@@ -143,7 +142,7 @@ body {
 
 .dropdown-item a {
   text-decoration: none;
-  color: var(--drop-down-text-color);
+  color: var(--common-colour-2);
   display: block;
   padding: 0.5rem 1rem;
 }
@@ -153,7 +152,7 @@ body {
 }
 
 input {
-  border: 0.0625rem solid var(--input-border);
+  border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
   outline: 0.125rem solid transparent;
   padding: 0.5rem;
@@ -181,7 +180,7 @@ input:focus {
   padding: 0.125rem 0.3125rem;
   align-content: center;
   border-radius: 20%;
-  background-color: var(--skills-shadow);
+  background-color: #e0e0e0;
   text-align: center;
   margin: 0.625rem;
 }
@@ -225,7 +224,7 @@ input:focus {
 
 /*Adds line break to any container */
 .line-break {
-  border-color: var(--line-break) !important;
+  border-color: #7c7c7c !important;
   border-width: 0.125rem !important;
   border-bottom: solid;
   width: 80%;
@@ -309,7 +308,7 @@ input:focus {
   }
 }
 .perosnal-area-content {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.7rem; 
   /* font-size: 20px; */
-  font-size: 1.3rem;
+  font-size: 1.3rem; 
 }
