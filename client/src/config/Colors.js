@@ -47,7 +47,7 @@ export const useColorOptions = () => {
       ".button, .general-box, body, input, .skills, .event-box, .flex-box, .dropdown-menu, .smooth-shadow-box, .flex-column, .navigation-box, .input-field,.line-break  "
     );
     elementsToTransition.forEach((element) => {
-      element.style.transition = "all 0.4s ease-in-out"; // or specify properties
+      element.style.transition = "background-color 0.2s ease-in-out"; // or specify properties
     });
 
     localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
