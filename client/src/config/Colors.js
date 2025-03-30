@@ -24,17 +24,14 @@ export const useColorOptions = () => {
   const buttonBorderDark = "#7070e0";
   const skillsShadowDark = "#7a7a7a";
   const bottomScrollBoxDark = "#292930";
-  const topScrollBoxDark = "#292930"
+  const topScrollBoxDark = "#292930";
   const backGroundBodyDark = "#333336";
 
-  // const [isLightMode, setIsLightMode] = useState(false);
   const [isLightMode, setIsLightMode] = useState(() => {
     if (typeof window !== "undefined") {
-      // Check for saved preference first
       const savedMode = localStorage.getItem("colorMode");
       if (savedMode) return savedMode === "light";
 
-      // Fallback to system preference
       return (
         window.matchMedia?.("(prefers-color-scheme: light)").matches ?? false
       );
@@ -43,73 +40,105 @@ export const useColorOptions = () => {
   });
 
   useEffect(() => {
-    // to save option between pages
+    // Set a transition on the root element for a smooth change
+    // document.body.style.transition = "background-color 0.3s ease-in-out";
+
+    const elementsToTransition = document.querySelectorAll(
+      ".button, .general-box, body, input, .skills, .event-box, .flex-box, .dropdown-menu, .smooth-shadow-box, .flex-column, .navigation-box, .input-field,.line-break  "
+    );
+    elementsToTransition.forEach((element) => {
+      element.style.transition = "all 0.4s ease-in-out"; // or specify properties
+    });
+
     localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
     document.documentElement.style.setProperty(
       "--top-scroll-box",
-      isLightMode ? topScrollBoxLight : topScrollBoxDark
+      isLightMode ? topScrollBoxLight : topScrollBoxDark,
+      "important"
     );
     document.documentElement.style.setProperty(
       "--box-background-color",
-      isLightMode ? eventColorLight : eventColorDark
+      isLightMode ? eventColorLight : eventColorDark,
+      "important"
     );
     document.documentElement.style.setProperty(
       "--drop-down-text-color",
-      isLightMode ? lightText : darkText
+      isLightMode ? lightText : darkText,
+      "important"
     );
     document.documentElement.style.setProperty(
       "--body-color",
-      isLightMode ? backGroundBodyLight : backGroundBodyDark
+      isLightMode ? backGroundBodyLight : backGroundBodyDark,
+      "important"
     );
     document.documentElement.style.setProperty(
       "--bottom-scroll-box",
-      isLightMode ? bottomScrollBoxLight : bottomScrollBoxDark
+      isLightMode ? bottomScrollBoxLight : bottomScrollBoxDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--line-break",
-      isLightMode ? breakLineLight : breakLineDark
+      isLightMode ? breakLineLight : breakLineDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--input-focus",
-      isLightMode ? inputBorderFocusLight : inputBorderFocusDark
+      isLightMode ? inputBorderFocusLight : inputBorderFocusDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--input-border",
-      isLightMode ? inputBorderLight : inputBorderDark
+      isLightMode ? inputBorderLight : inputBorderDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--button-hover",
-      isLightMode ? buttonHoverLight : buttonHoverDark
+      isLightMode ? buttonHoverLight : buttonHoverDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--button-text",
-      isLightMode ? lightText : darkText
+      isLightMode ? lightText : darkText,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--button-background",
-      isLightMode ? buttonBackgroundLight : buttonBackgroundDark
+      isLightMode ? buttonBackgroundLight : buttonBackgroundDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--button-border",
-      isLightMode ? buttonBorderLight : buttonBorderDark
+      isLightMode ? buttonBorderLight : buttonBorderDark,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--general-text",
-      isLightMode ? lightText : darkText
+      isLightMode ? lightText : darkText,
+      "important"
     );
 
     document.documentElement.style.setProperty(
       "--skills-shadow",
-      isLightMode ? skillsShadowLight : skillsShadowDark
+      isLightMode ? skillsShadowLight : skillsShadowDark,
+      "important"
     );
+
+    return () => {
+      // Remove the transition when the component unmounts or the effect re-runs.  This is optional,
+      // but good practice if you want the transition to only apply when changing modes.
+      // document.documentElement.style.transition = "none";
+      elementsToTransition.forEach((element) => {
+        element.style.transition = "none"; // or specify properties
+      });
+    };
   }, [isLightMode]);
 
   const handleModeChange = () => {
