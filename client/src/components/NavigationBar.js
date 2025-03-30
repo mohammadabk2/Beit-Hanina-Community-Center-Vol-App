@@ -1,19 +1,29 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import DropDownMenu from "./DropDownMenu";
 import { useLnOptions } from "../config/Language";
+import { useColorOptions } from "../config/Colors";
 
-import settingsIcon from "../icons/settings_icon.svg";
-import profileIcon from "../icons/person_icon.svg";
-import homeIcon from "../icons/home_icon.jpg";
-import aboutIcon from "../icons/about_icon.jpg";
+import modeIconDark from "../icons/light/mode_icon.svg";
+import settingsIconLight from "../icons/light/settings_icon.svg";
+import profileIconLight from "../icons/light/profile_icon.svg";
+import homeIconLight from "../icons/light/home_icon.svg";
+import aboutIconLight from "../icons/light/about_icon.svg";
 
-const NavigationBar = () => {
+import modeIconLight from "../icons/dark/mode_icon.svg";
+import settingsIconDark from "../icons/dark/settings_icon.svg";
+import profileIconDark from "../icons/dark/profile_icon.svg";
+import homeIconDark from "../icons/dark/home_icon.svg";
+import aboutIconDark from "../icons/dark/about_icon.svg";
+
+const NavigationBar = ({ dontShowPageButtons }) => {
   const { t } = useTranslation("app");
   const navigate = useNavigate();
   const lnOptions = useLnOptions();
+  const { isLightMode, handleModeChange} = useColorOptions();
 
   const goToSettings = () => {
     console.log("Settings button clicked");
@@ -46,36 +56,53 @@ const NavigationBar = () => {
         text={t("ln")}
         options={lnOptions}
       />
-      <div onClick={goToHome}>
+      <div onClick={handleModeChange}>
         <img
           className="navigation-button-image"
-          src={homeIcon}
-          alt="Home icon"
-        ></img>
+          src={isLightMode ? modeIconDark : modeIconLight}
+          alt="Mode Switch"
+        />
       </div>
-      <div onClick={goToPersonalArea}>
-        <img
-          className="navigation-button-image"
-          src={profileIcon}
-          alt="profile icon"
-        ></img>
-      </div>
-      <div onClick={goToSettings}>
-        <img
-          className="navigation-button-image"
-          src={settingsIcon}
-          alt="settings icon"
-        ></img>
-      </div>
+
+      {!dontShowPageButtons && (
+        <>
+          <div onClick={goToHome}>
+            <img
+              className="navigation-button-image"
+              src={isLightMode ? homeIconLight : homeIconDark}
+              alt="Home icon"
+            />
+          </div>
+          <div onClick={goToPersonalArea}>
+            <img
+              className="navigation-button-image"
+              src={isLightMode ? profileIconLight : profileIconDark}
+              alt="Profile icon"
+            />
+          </div>
+          <div onClick={goToSettings}>
+            <img
+              className="navigation-button-image"
+              src={isLightMode ? settingsIconLight : settingsIconDark}
+              alt="Settings icon"
+            />
+          </div>
+        </>
+      )}
+
       <div onClick={goToAbout}>
         <img
           className="navigation-button-image"
-          src={aboutIcon}
-          alt="about icon"
-        ></img>
+          src={isLightMode ? aboutIconLight : aboutIconDark}
+          alt="About icon"
+        />
       </div>
     </div>
   );
+};
+
+NavigationBar.propTypes = {
+  dontShowPageButtons: PropTypes.bool,
 };
 
 export default NavigationBar;

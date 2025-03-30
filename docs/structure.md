@@ -32,14 +32,24 @@
 │       ├── global.css
 │       ├── i18n.js
 │       ├── icons
-│       │   ├── about_icon.jpg
-│       │   ├── arrow_down.jpg
-│       │   ├── home_icon.jpg
-│       │   ├── language_icon.jpg
-│       │   ├── logo.jpg
-│       │   ├── org_icon.jpg
-│       │   ├── profile_icon.jpg
-│       │   └── settings_icon.jpg
+│       │   ├── dark
+│       │   │   ├── about_icon.svg
+│       │   │   ├── home_icon.svg
+│       │   │   ├── mode_icon.svg
+│       │   │   ├── profile_icon.svg
+│       │   │   └── settings_icon.svg
+│       │   ├── dark_mode.svg
+│       │   ├── drop_down_icon.svg
+│       │   ├── favorite_icon.svg
+│       │   ├── light
+│       │   │   ├── about_icon.svg
+│       │   │   ├── home_icon.svg
+│       │   │   ├── mode_icon.svg
+│       │   │   ├── profile_icon.svg
+│       │   │   └── settings_icon.svg
+│       │   ├── not_favorite_icon.svg
+│       │   ├── org_icon.png
+│       │   └── person_icon.svg
 │       ├── index.js
 │       ├── installPrompt.js
 │       ├── locales
@@ -127,5 +137,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-31 directories, 94 files
+33 directories, 105 files
 ```
