@@ -27,20 +27,38 @@
 │       │   ├── ManageAccountBox.js
 │       │   └── NavigationBar.js
 │       ├── config
-│       │   ├── Language.js
-│       │   └── Skills.js
+│       │   ├── i18n.js
+│       │   ├── locales
+│       │   │   ├── ar
+│       │   │   │   ├── about.json
+│       │   │   │   ├── app.json
+│       │   │   │   ├── homeVolunteer.json
+│       │   │   │   ├── personalArea.json
+│       │   │   │   ├── signup.json
+│       │   │   │   └── skills.json
+│       │   │   └── en
+│       │   │       ├── about.json
+│       │   │       ├── app.json
+│       │   │       ├── homeVolunteer.json
+│       │   │       ├── personalArea.json
+│       │   │       ├── signup.json
+│       │   │       └── skills.json
+│       │   └── options
+│       │       ├── Colors.js
+│       │       ├── Language.js
+│       │       └── Skills.js
 │       ├── global.css
-│       ├── i18n.js
 │       ├── icons
+│       │   ├── about_icon.jpg
 │       │   ├── dark
 │       │   │   ├── about_icon.svg
 │       │   │   ├── home_icon.svg
 │       │   │   ├── mode_icon.svg
 │       │   │   ├── profile_icon.svg
 │       │   │   └── settings_icon.svg
-│       │   ├── dark_mode.svg
 │       │   ├── drop_down_icon.svg
 │       │   ├── favorite_icon.svg
+│       │   ├── home_icon.jpg
 │       │   ├── light
 │       │   │   ├── about_icon.svg
 │       │   │   ├── home_icon.svg
@@ -52,21 +70,6 @@
 │       │   └── person_icon.svg
 │       ├── index.js
 │       ├── installPrompt.js
-│       ├── locales
-│       │   ├── ar
-│       │   │   ├── about.json
-│       │   │   ├── app.json
-│       │   │   ├── homeVolunteer.json
-│       │   │   ├── personalArea.json
-│       │   │   ├── signup.json
-│       │   │   └── skills.json
-│       │   └── en
-│       │       ├── about.json
-│       │       ├── app.json
-│       │       ├── homeVolunteer.json
-│       │       ├── personalArea.json
-│       │       ├── signup.json
-│       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
@@ -137,5 +140,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-33 directories, 105 files
+34 directories, 104 files
 ```

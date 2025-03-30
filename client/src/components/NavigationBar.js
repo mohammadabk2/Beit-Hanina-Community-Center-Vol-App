@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import DropDownMenu from "./DropDownMenu";
-import { useLnOptions } from "../config/Language";
-import { useColorOptions } from "../config/Colors";
+import { useLnOptions } from "../config/options/Language";
+import { useColorOptions } from "../config/options/Colors";
 
 import modeIconDark from "../icons/light/mode_icon.svg";
 import settingsIconLight from "../icons/light/settings_icon.svg";

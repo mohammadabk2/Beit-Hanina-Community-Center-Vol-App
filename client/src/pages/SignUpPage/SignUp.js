@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../config/Language";
-import { useSkillOptions } from "../../config/Skills";
+import { useLnOptions } from "../../config/options/Language";
+import { useSkillOptions } from "../../config/options/Skills";
 import { useTranslation } from "react-i18next";
 
 // import pages here
