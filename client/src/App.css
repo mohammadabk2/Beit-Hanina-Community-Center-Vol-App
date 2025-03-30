@@ -14,7 +14,8 @@ input,
 .flex-column,
 .navigation-box,
 .input-field,
-.line-break {
+.line-break,
+.bottom-scroll-box1 {
   transition: background-color 0.2s ease-in-out;
 }
 
