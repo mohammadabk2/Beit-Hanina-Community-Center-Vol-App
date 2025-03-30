@@ -20,11 +20,10 @@ import homeIconDark from "../icons/dark/home_icon.svg";
 import aboutIconDark from "../icons/dark/about_icon.svg";
 
 const NavigationBar = ({ dontShowPageButtons }) => {
-  const navigate = useNavigate();
-
   const { t } = useTranslation("app");
   const navigate = useNavigate();
   const lnOptions = useLnOptions();
+  const { isLightMode, handleModeChange} = useColorOptions();
 
   const goToSettings = () => {
     console.log("Settings button clicked");
