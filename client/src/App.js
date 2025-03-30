@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import components here
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
-import DropDownMenu from "./components/DropDownMenu";
-import { useLnOptions } from "./config/Language";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   const [username, setUserName] = useState("");
@@ -36,16 +35,11 @@ function App() {
     navigate("/sign-up");
   };
 
-  const lnOptions = useLnOptions();
   const { t } = useTranslation("app");
 
   return (
     <div className="app flex-box flex-column">
-      <DropDownMenu
-        className="language-button"
-        text={t("ln")}
-        options={lnOptions}
-      />
+      <NavigationBar dontShowPageButtons={true} />
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>

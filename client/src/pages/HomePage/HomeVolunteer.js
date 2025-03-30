@@ -65,9 +65,7 @@ function HomeVolunteer() {
           </div>
           <div className="line-break"></div>
         </div>
-        <div className="bottom-scroll-box1">
-          {renderEventItems(events)}
-        </div>
+        <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
       </div>
     </div>
   );
