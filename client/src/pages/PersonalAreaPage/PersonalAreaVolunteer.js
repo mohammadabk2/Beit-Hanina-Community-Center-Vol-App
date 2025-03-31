@@ -5,7 +5,7 @@ import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import DropDownMenu from "../../components/DropDownMenu";
 import ManageAccountBox from "../../components/ManageAccountBox";
-import { useSkillOptions } from "../../config/Skills";
+import { useSkillOptions } from "../../config/options/Skills";
 
 function PersonalArea() {
   const { t } = useTranslation("personalVolunteer");
