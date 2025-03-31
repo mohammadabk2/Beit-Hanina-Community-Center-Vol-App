@@ -107,7 +107,7 @@ const HomeOrganizer = () => {
         <div className="general-box smooth-shadow-box flex-box flex-column">
           <form
             onSubmit={handleSubmit}
-            className="general-boxS flex-box flex-column"
+            className="general-box flex-box flex-column"
           >
             <div className="flex-box flex-column input-field-box">
               <div>
