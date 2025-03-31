@@ -127,7 +127,7 @@ function SignUpPage() {
             </div>
             <DropDownMenu
               className="gender-button"
-              text={formData.sex || "Select Gender"}
+              text={tsignup(formData.sex) || tsignup("Select Gender")}
               options={sexOptions}
             />
           </div>

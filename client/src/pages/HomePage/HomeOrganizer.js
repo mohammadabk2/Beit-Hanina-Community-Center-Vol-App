@@ -16,28 +16,36 @@ const HomeOrganizer = () => {
       name: "test event1",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
     {
       name: "test event2",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
     {
       name: "test event3",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
     {
       name: "test event4",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
   ];
   //!
 
   const { t } = useTranslation("homeOrg");
   const skillsOptions = useSkillOptions();
-  const { t: tskill } = useTranslation("skills");
+  const { t: tskill } = useTranslation("signUp");
 
   const [showEvents, setShowEvents] = useState(true); // Use useState!
 
@@ -97,6 +105,8 @@ const HomeOrganizer = () => {
         req={event.req}
         className="flex-box flex-column event-box smooth-shadow-box"
         type="org"
+        count={event.count}
+        size={event.size}
       />
     ));
   };
@@ -161,7 +171,7 @@ const HomeOrganizer = () => {
 
             <div className="flex-box flex-column input-field-box">
               <div>
-                <label>{t("skills")}: </label>
+                <label>{tskill("skills")}: </label>
               </div>
               {formData.skills.map((skill, index) => (
                 <div key={index} className="flex-box">
@@ -175,7 +185,7 @@ const HomeOrganizer = () => {
               ))}
               <DropDownMenu
                 className="sex-button"
-                text={t("selectskills")}
+                text={tskill("selectskills")}
                 options={skillsOptions.map((skill) => ({
                   label: tskill(`${skill.label}`),
                   href: `#${skill.value}`,

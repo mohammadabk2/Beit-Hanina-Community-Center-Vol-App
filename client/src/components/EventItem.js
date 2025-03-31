@@ -8,8 +8,9 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, style, req, type }) => {
+const EventItem = ({ name, className, style, req, type, count, size }) => {
   const { t } = useTranslation("homeVol");
+  const { t: tskill } = useTranslation("skills");
 
   const handleVolClick = () => {
     console.log("Join button clicked");
@@ -56,7 +57,7 @@ const EventItem = ({ name, className, style, req, type }) => {
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
         <div className="flex-box flex-column">
-          <div>Skills:</div>
+          <div>{tskill("skills")}:</div>
           <div className="flex-box">
             {req.map((item, index) => (
               <div key={index} className="skills">
@@ -70,7 +71,9 @@ const EventItem = ({ name, className, style, req, type }) => {
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
         <div className="flex-box">
-          <div>5/10</div>
+          <div>
+            {count}/{size}
+          </div>
           <img
             className="button-image"
             src={personIcon}
@@ -113,6 +116,8 @@ EventItem.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   type: PropTypes.string,
+  count: PropTypes.number,
+  size: PropTypes.number,
 };
 
 EventItem.defaultProps = {

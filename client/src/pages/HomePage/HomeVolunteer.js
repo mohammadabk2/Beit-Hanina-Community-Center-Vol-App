@@ -14,27 +14,34 @@ function HomeVolunteer() {
     console.log("Sort button clicked");
   };
 
-  //! testing only
   const events = [
     {
       name: "test event1",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
     {
       name: "test event2",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
     {
       name: "test event3",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
     {
       name: "test event4",
       desc: "some desc",
       req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
     },
   ];
   //!
@@ -48,6 +55,8 @@ function HomeVolunteer() {
         req={event.req}
         className="flex-box flex-column event-box smooth-shadow-box"
         type="vol"
+        count={event.count}
+        size={event.size}
       />
     ));
   };
