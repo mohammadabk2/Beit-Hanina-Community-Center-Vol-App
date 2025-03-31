@@ -8,11 +8,18 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, style, req }) => {
+const EventItem = ({ name, className, style, req, type }) => {
   const { t } = useTranslation("homeVol");
 
-  const handleJoinClick = () => {
+  const handleVolClick = () => {
     console.log("Join button clicked");
+  };
+
+  const handleOrgClick = () => {
+    console.log("org button clicked");
+  };
+  const handleAdminClick = () => {
+    console.log("admin button clicked");
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -71,11 +78,29 @@ const EventItem = ({ name, className, style, req }) => {
           ></img>
         </div>
         <div className="flex-box">
-          <DynamicButton
-            className="button"
-            text={t("join")}
-            onClick={handleJoinClick}
-          />
+          {type === "vol" && (
+            <DynamicButton
+              className="button"
+              text={t("join")}
+              onClick={handleVolClick}
+            />
+          )}
+
+          {type === "org" && (
+            <DynamicButton
+              className="button"
+              text={t("org_button")}
+              onClick={handleOrgClick}
+            />
+          )}
+
+          {type === "admin" && (
+            <DynamicButton
+              className="button"
+              text={t("admin_button")}
+              onClick={handleAdminClick}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -87,6 +112,7 @@ EventItem.propTypes = {
   req: PropTypes.arrayOf(PropTypes.string).isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
+  type: PropTypes.string,
 };
 
 EventItem.defaultProps = {

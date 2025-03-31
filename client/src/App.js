@@ -25,7 +25,16 @@ function App() {
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
-    navigate("/home-volunteer");
+    //! testing only Ultra security risk
+    if (username === "volunteer") {
+      navigate("/home-volunteer");
+    } else if (username === "org") {
+      navigate("/home-organizer");
+    } else if (username === "admin") {
+      navigate("/home-admin");
+    } else {
+      alert("Enter Valid Sign in details");
+    }
   };
 
   const navigate = useNavigate();

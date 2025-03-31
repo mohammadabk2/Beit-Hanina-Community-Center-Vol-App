@@ -47,6 +47,7 @@ function HomeVolunteer() {
         desc={event.desc}
         req={event.req}
         className="flex-box flex-column event-box smooth-shadow-box"
+        type="vol"
       />
     ));
   };
