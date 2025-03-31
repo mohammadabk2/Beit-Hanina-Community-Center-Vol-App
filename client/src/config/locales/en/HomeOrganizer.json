@@ -1,5 +1,6 @@
 {
-  "show_events": "Show Events",
+  "sort":"Sort",
+  "back": "Back",
   "create_event": "Create Event",
   "event_name": "Name of Event",
   "event_date": "Date of Event",

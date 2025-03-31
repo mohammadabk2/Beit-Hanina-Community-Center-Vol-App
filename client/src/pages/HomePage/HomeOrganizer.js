@@ -104,7 +104,7 @@ const HomeOrganizer = () => {
   const renderCreateEvent = () => {
     return (
       <>
-        <div className="general-box smooth-shadow-box flex-box flex-column">
+        <div className="smooth-shadow-box">
           <form
             onSubmit={handleSubmit}
             className="general-box flex-box flex-column"
@@ -187,6 +187,11 @@ const HomeOrganizer = () => {
             <div>
               <DynamicButton
                 className="button"
+                onClick={handleShowEvents}
+                text={t("back")}
+              />
+              <DynamicButton
+                className="button"
                 text={t("create_event")}
                 type="submit"
               />
@@ -200,13 +205,18 @@ const HomeOrganizer = () => {
   const renderShowEvents = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
+        <div className="general-box">
           <div className="flex-box flex-column top-scroll-box1">
             <div>
               <DynamicButton
                 className="button button-small"
                 onClick={sortEvents}
                 text={t("sort")}
+              />
+              <DynamicButton
+                className="button"
+                onClick={handleCreateEvents}
+                text={t("create_event")}
               />
             </div>
             <div className="line-break"></div>
@@ -220,22 +230,10 @@ const HomeOrganizer = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-
-      <div className="flex-box general-box">
-        <DynamicButton
-          className="button"
-          onClick={handleShowEvents}
-          text={t("show_events")}
-        />
-        <DynamicButton
-          className="button"
-          onClick={handleCreateEvents}
-          text={t("create_event")}
-        />
+      <div className="flex-box flex-column">
+        {showEvents && renderShowEvents()}
+        {!showEvents && renderCreateEvent()}
       </div>
-
-      {showEvents && renderShowEvents()}
-      {!showEvents && renderCreateEvent()}
     </div>
   );
 };
