@@ -40,16 +40,6 @@ export const useColorOptions = () => {
   });
 
   useEffect(() => {
-    // Set a transition on the root element for a smooth change
-    // document.body.style.transition = "background-color 0.3s ease-in-out";
-
-    const elementsToTransition = document.querySelectorAll(
-      ".button, .general-box, body, input, .skills, .event-box, .flex-box, .dropdown-menu, .smooth-shadow-box, .flex-column, .navigation-box, .input-field,.line-break  "
-    );
-    elementsToTransition.forEach((element) => {
-      element.style.transition = "background-color 0.2s ease-in-out"; // or specify properties
-    });
-
     localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
     document.documentElement.style.setProperty(
       "--top-scroll-box",
@@ -131,14 +121,6 @@ export const useColorOptions = () => {
       "important"
     );
 
-    return () => {
-      // Remove the transition when the component unmounts or the effect re-runs.  This is optional,
-      // but good practice if you want the transition to only apply when changing modes.
-      // document.documentElement.style.transition = "none";
-      elementsToTransition.forEach((element) => {
-        element.style.transition = "none"; // or specify properties
-      });
-    };
   }, [isLightMode]);
 
   const handleModeChange = () => {

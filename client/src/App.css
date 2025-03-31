@@ -1,5 +1,24 @@
 @import url("global.css");
 
+
+/*Adds background transition to all classes for dark/light mode*/
+.button,
+.general-box,
+body,
+input,
+.skills,
+.event-box,
+.flex-box,
+.dropdown-menu,
+.smooth-shadow-box,
+.flex-column,
+.navigation-box,
+.input-field,
+.line-break,
+.bottom-scroll-box1 {
+  transition: background-color 0.2s ease-in-out;
+}
+
 .app {
   text-align: center;
 }
@@ -261,7 +280,7 @@ input:focus {
 .bottom-scroll-box1 {
   position: relative;
   border-radius: 0 0 1rem 1rem;
-  box-shadow: 0rem 0rem 1rem 0.0625rem var(--general-shadow);
+  box-shadow: 0rem 0rem 0.5rem 0.0625rem var(--general-shadow);
   background-color: var(--bottom-scroll-box);
   padding-bottom: 1rem;
   overflow-y: auto;
