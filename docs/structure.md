@@ -32,6 +32,7 @@
 │       │   │   ├── ar
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
+│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── homeVolunteer.json
 │       │   │   │   ├── personalArea.json
 │       │   │   │   ├── signup.json
@@ -39,6 +40,8 @@
 │       │   │   └── en
 │       │   │       ├── about.json
 │       │   │       ├── app.json
+│       │   │       ├── events.json
+│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── homeVolunteer.json
 │       │   │       ├── personalArea.json
 │       │   │       ├── signup.json
@@ -140,5 +143,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-34 directories, 104 files
+34 directories, 107 files
 ```

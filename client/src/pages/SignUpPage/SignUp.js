@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
-import { useLnOptions } from "../../config/options/Language";
+import NavigationBar from "../../components/NavigationBar";
 import { useSkillOptions } from "../../config/options/Skills";
-import { useTranslation } from "react-i18next";
 
 // import pages here
 
@@ -58,7 +59,6 @@ function SignUpPage() {
     setFormData({ ...formData, sex: value });
   };
 
-  const lnOptions = useLnOptions();
   const skillsOptions = useSkillOptions();
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
@@ -82,15 +82,15 @@ function SignUpPage() {
     },
   ];
 
+  //TODO change lan from drop down to new nav bar
   return (
     <div className="flex-box flex-column">
-      <DropDownMenu
-        className="language-button"
-        text={tsignup("ln")}
-        options={lnOptions}
-      />
+      <NavigationBar dontShowPageButtons={true} />
       <div>
-        <form onSubmit={handleSubmit} className="general-box smooth-shadow-box flex-box flex-column">
+        <form
+          onSubmit={handleSubmit}
+          className="general-box smooth-shadow-box flex-box flex-column"
+        >
           <div className="flex-box flex-column input-field-box">
             <div>
               <label> {tsignup("fullName")}: </label>
@@ -127,7 +127,7 @@ function SignUpPage() {
             </div>
             <DropDownMenu
               className="gender-button"
-              text={formData.sex || "Select Gender"}
+              text={tsignup(formData.sex) || tsignup("Select Gender")}
               options={sexOptions}
             />
           </div>

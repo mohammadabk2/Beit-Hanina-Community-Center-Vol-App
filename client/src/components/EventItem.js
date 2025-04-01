@@ -8,11 +8,19 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, style, req }) => {
+const EventItem = ({ name, className, style, req, type, count, size }) => {
   const { t } = useTranslation("homeVol");
+  const { t: tskill } = useTranslation("skills");
 
-  const handleJoinClick = () => {
+  const handleVolClick = () => {
     console.log("Join button clicked");
+  };
+
+  const handleOrgClick = () => {
+    console.log("org button clicked");
+  };
+  const handleAdminClick = () => {
+    console.log("admin button clicked");
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -49,7 +57,7 @@ const EventItem = ({ name, className, style, req }) => {
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
         <div className="flex-box flex-column">
-          <div>Skills:</div>
+          <div>{tskill("skills")}:</div>
           <div className="flex-box">
             {req.map((item, index) => (
               <div key={index} className="skills">
@@ -63,7 +71,9 @@ const EventItem = ({ name, className, style, req }) => {
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
         <div className="flex-box">
-          <div>5/10</div>
+          <div>
+            {count}/{size}
+          </div>
           <img
             className="button-image"
             src={personIcon}
@@ -71,11 +81,29 @@ const EventItem = ({ name, className, style, req }) => {
           ></img>
         </div>
         <div className="flex-box">
-          <DynamicButton
-            className="button"
-            text={t("join")}
-            onClick={handleJoinClick}
-          />
+          {type === "vol" && (
+            <DynamicButton
+              className="button"
+              text={t("join")}
+              onClick={handleVolClick}
+            />
+          )}
+
+          {type === "org" && (
+            <DynamicButton
+              className="button"
+              text={t("org_button")}
+              onClick={handleOrgClick}
+            />
+          )}
+
+          {type === "admin" && (
+            <DynamicButton
+              className="button"
+              text={t("admin_button")}
+              onClick={handleAdminClick}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -87,6 +115,9 @@ EventItem.propTypes = {
   req: PropTypes.arrayOf(PropTypes.string).isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
+  type: PropTypes.string,
+  count: PropTypes.number,
+  size: PropTypes.number,
 };
 
 EventItem.defaultProps = {
