@@ -114,26 +114,24 @@ const HomeOrganizer = () => {
   const renderCreateEvent = () => {
     return (
       <>
-        <div className="smooth-shadow-box">
+        <div>
           <form
             onSubmit={handleSubmit}
-            className="general-box flex-box flex-column"
+            className="general-box flex-box flex-column smooth-shadow-box"
           >
             <div className="flex-box flex-column input-field-box">
               <div>
                 <label> {t("event_name")}: </label>
                 <label className="red-star">*</label>
               </div>
-              <div>
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.eventName}
-                  name="eventName"
-                  onChange={handleChange}
-                  placeholder={t("event_name_placeholder")}
-                />
-              </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.eventName}
+                name="eventName"
+                onChange={handleChange}
+                placeholder={t("event_name_placeholder")}
+              />
             </div>
 
             <div className="flex-box flex-column input-field-box">
@@ -155,18 +153,16 @@ const HomeOrganizer = () => {
                 <label> {t("volunteer_count")}: </label>
                 <label className="red-star">*</label>
               </div>
-              <div>
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.eventCount}
-                  name="eventCount"
-                  onChange={handleChange}
-                  placeholder={t("event_count_placeholder")}
-                  pattern="[0-9]*"
-                  inputMode="numeric"
-                />
-              </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.eventCount}
+                name="eventCount"
+                onChange={handleChange}
+                placeholder={t("event_count_placeholder")}
+                pattern="[0-9]*"
+                inputMode="numeric"
+              />
             </div>
 
             <div className="flex-box flex-column input-field-box">
@@ -215,7 +211,7 @@ const HomeOrganizer = () => {
   const renderShowEvents = () => {
     return (
       <>
-        <div className="general-box">
+        <div className="scroll-box1 general-box flex-box flex-column">
           <div className="flex-box flex-column top-scroll-box1">
             <div>
               <DynamicButton
@@ -224,7 +220,7 @@ const HomeOrganizer = () => {
                 text={t("sort")}
               />
               <DynamicButton
-                className="button"
+                className="button button-small"
                 onClick={handleCreateEvents}
                 text={t("create_event")}
               />
@@ -240,10 +236,8 @@ const HomeOrganizer = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="flex-box flex-column">
-        {showEvents && renderShowEvents()}
-        {!showEvents && renderCreateEvent()}
-      </div>
+      {showEvents && renderShowEvents()}
+      {!showEvents && renderCreateEvent()}
     </div>
   );
 };
