@@ -6,6 +6,7 @@ import appEN from "./locales/en/app.json";
 import signupEN from "./locales/en/signup.json";
 import homeVolunteerEN from "./locales/en/homeVolunteer.json";
 import HomeOrganizerEn from "./locales/en/HomeOrganizer.json";
+import HomeAdminEN from "./locales/en/HomeAdmin.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
@@ -15,6 +16,7 @@ import appAr from "./locales/ar/app.json";
 import signupAR from "./locales/ar/signup.json";
 import homeVolunteerAR from "./locales/ar/homeVolunteer.json";
 import HomeOrganizerAR from "./locales/ar/HomeOrganizer.json";
+import HomeAdminAR from "./locales/ar/HomeAdmin.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
@@ -27,6 +29,7 @@ const resources = {
     skills: skillsEN,
     homeVol: homeVolunteerEN,
     homeOrg: HomeOrganizerEn,
+    homeAdmin: HomeAdminEN,
     about: aboutEn,
     personal: personalAreaVolunteerEN,
   },
@@ -35,6 +38,7 @@ const resources = {
     signUp: signupAR,
     homeVol: homeVolunteerAR,
     homeOrg: HomeOrganizerAR,
+    homeAdmin: HomeAdminAR,
     about: aboutAR,
     skills: skillsAR,
     personal: personalAreaVolunteerAR,

@@ -1,6 +1,5 @@
 @import url("global.css");
 
-
 /*Adds background transition to all classes for dark/light mode*/
 .button,
 .general-box,
@@ -217,7 +216,7 @@ input:focus {
   border-radius: 1rem;
 }
 
-.event-box-content-bottom, 
+.event-box-content-bottom,
 .event-box-content-middle {
   justify-content: space-between;
   width: 80%;
@@ -298,10 +297,36 @@ input:focus {
   background-color: var(--body-color);
 }
 
+.button-approve {
+  background-color: green !important;
+}
+
+.button-reject {
+  background-color: red !important;
+}
+
+.left-side {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  padding-right: 10px;
+  width: calc(50% - 5px); /*Dynamic calculation subtracting padding*/
+}
+
+.right-side {
+  position: absolute;
+  right: 0;
+  top: 0;
+  box-sizing: border-box;
+  padding-left: 10px;
+  width: calc(50% - 5px); /*Dynamic calculation subtracting padding*/
+}
+
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
-
-  .event-box-content-bottom, .event-box-content-middle {
+  .event-box-content-bottom,
+  .event-box-content-middle {
     width: 85%;
   }
 
@@ -319,7 +344,6 @@ input:focus {
   }
 }
 
-
 /*for even smaller sizes*/
 @media (max-width: 590px) {
   .event-box-content-middle {
@@ -327,7 +351,7 @@ input:focus {
   }
 }
 .perosnal-area-content {
-  margin-bottom: 0.7rem; 
+  margin-bottom: 0.7rem;
   /* font-size: 20px; */
-  font-size: 1.3rem; 
+  font-size: 1.3rem;
 }

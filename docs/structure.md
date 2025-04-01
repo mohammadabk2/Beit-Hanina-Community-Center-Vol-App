@@ -25,13 +25,15 @@
 │       │   ├── imageComponent.js
 │       │   ├── InputComponent.js
 │       │   ├── ManageAccountBox.js
-│       │   └── NavigationBar.js
+│       │   ├── NavigationBar.js
+│       │   └── PersonItem.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
+│       │   │   │   ├── HomeAdmin.json
 │       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── homeVolunteer.json
 │       │   │   │   ├── personalArea.json
@@ -41,6 +43,7 @@
 │       │   │       ├── about.json
 │       │   │       ├── app.json
 │       │   │       ├── events.json
+│       │   │       ├── HomeAdmin.json
 │       │   │       ├── HomeOrganizer.json
 │       │   │       ├── homeVolunteer.json
 │       │   │       ├── personalArea.json
@@ -143,5 +146,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-34 directories, 107 files
+34 directories, 110 files
 ```
