@@ -114,7 +114,7 @@ const HomeOrganizer = () => {
   const renderCreateEvent = () => {
     return (
       <>
-        <div>
+        <div className="general-box scroll-box1">
           <form
             onSubmit={handleSubmit}
             className="general-box flex-box flex-column smooth-shadow-box"
@@ -190,7 +190,7 @@ const HomeOrganizer = () => {
               />
             </div>
 
-            <div>
+            <div className="flex-box">
               <DynamicButton
                 className="button"
                 onClick={handleShowEvents}
