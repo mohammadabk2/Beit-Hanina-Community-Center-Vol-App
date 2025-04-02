@@ -305,6 +305,11 @@ input:focus {
 }
 
 
+.basic-box-padding{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
 
