@@ -26,34 +26,39 @@ function PersonalArea() {
   return (
     <div className="app flex-box flex-column smooth-shadow-box">
       <NavigationBar />
-      <div className="flex-box flex-column event-box">
-        <div className="perosnal-area-content">
-          {t("org_name")}: {name}
+
+      <div className="flex-box flex-column event-box basic-item-padding">
+        <div className="basic-item-padding">
+          <div className="perosnal-area-content basic-item-padding">
+            {t("org_name")}: {name}
+          </div>
+
+          <div className="perosnal-area-content basic-item-padding">
+            {t("user_name")}: {userName}
+          </div>
+
+          <div className="perosnal-area-content basic-item-padding">
+            {t("total_hours")}: {givenHours}
+          </div>
+
+          <div className="perosnal-area-content basic-item-padding">
+            {t("number_of_vol")}: {numberOfVolunteers}
+          </div>
         </div>
 
-        <div className="perosnal-area-content">
-          {t("user_name")}: {userName}
-        </div>
-        <div className="perosnal-area-content">
-          {t("total_hours")}: {givenHours}
-        </div>
-        <div className="perosnal-area-content">
-          {t("number_of_vol")}: {numberOfVolunteers}
-        </div>
+        <div className="flex-box">
+          <DynamicButton
+            className="button"
+            text={t("to_pdf")}
+            onClick={printToPdf}
+          />
 
-        <div className="flex-box flex-column input-field-box"></div>
-
-        <DynamicButton
-          className="button"
-          text={t("to_pdf")}
-          onClick={printToPdf}
-        />
-
-        <DynamicButton
-          className="button"
-          text={t("to_excel")}
-          onClick={downloadToExcel}
-        />
+          <DynamicButton
+            className="button"
+            text={t("to_excel")}
+            onClick={downloadToExcel}
+          />
+        </div>
 
         <ManageAccountBox />
       </div>

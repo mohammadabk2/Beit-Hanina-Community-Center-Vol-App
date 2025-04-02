@@ -7,7 +7,7 @@ import DropDownMenu from "../../components/DropDownMenu";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import { useSkillOptions } from "../../config/options/Skills";
 
-function PersonalArea() {
+const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");
   const { t: tskill } = useTranslation("skills");
   const { t: tsignup } = useTranslation("signUp");
@@ -23,7 +23,6 @@ function PersonalArea() {
   const [userSkills, setUserSkills] = useState([
     //TODO call to get user skills
   ]);
-
 
   const handleAddSkill = (value) => {
     //TODO call database and check
@@ -56,20 +55,23 @@ function PersonalArea() {
       <NavigationBar />
       <div className="general-box scroll-box1">
         <div className="general-box flex-box flex-column smooth-shadow-box">
-          <div className="personal-area-content">
-            {tsignup("fullName")}: {name}
-          </div>
+          <div className="basic-box-padding">
+            <div className="personal-area-content basic-item-padding">
+              {tsignup("fullName")}: {name}
+            </div>
 
-          <div className="personal-area-content">
-            {t("user_name")}: {userName}
+            <div className="personal-area-content basic-item-padding">
+              {t("user_name")}: {userName}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("approved_hours")}: {approvedHours}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("unapproved_hours")}: {unapprovedHours}
+            </div>
           </div>
-          <div className="personal-area-content">
-            {t("approved_hours")}: {approvedHours}
-          </div>
-          <div className="personal-area-content">
-            {t("unapproved_hours")}: {unapprovedHours}
-          </div>
-          
 
           <div className="flex-box flex-column input-field-box">
             <div className="personal-area-content">{t("skills")}: </div>
@@ -105,6 +107,6 @@ function PersonalArea() {
       </div>
     </div>
   );
-}
+};
 
 export default PersonalArea;

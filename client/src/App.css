@@ -310,6 +310,11 @@ input:focus {
   padding-bottom: 1.5rem;
 }
 
+.basic-item-padding{
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+}
+
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
 

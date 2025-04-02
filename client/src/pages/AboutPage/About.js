@@ -12,19 +12,21 @@ const About = () => {
       <NavigationBar />
       <div className="general-box flex-box flex-column smooth-shadow-box basic-box-padding">
         <div>
-          <div>{tAbout("admins")}</div>
-          <div>{tAbout("fadi")}</div>
-          <div>{tAbout("ahmed")}</div>
-          <div>{tAbout("contact")} add support email</div>
+          <div className="basic-item-padding">{tAbout("admins")}</div>
+          <div className="basic-item-padding">{tAbout("fadi")}</div>
+          <div className="basic-item-padding">{tAbout("ahmed")}</div>
+          <div className="basic-item-padding">
+            {tAbout("contact")} add support email
+          </div>
         </div>
 
         <div className="basic-box-padding">
-          <div>{tAbout("devs")}</div>
-          <div>{tAbout("mohammadak")}</div>
-          <div>{tAbout("jad")}</div>
-          <div>{tAbout("husam")}</div>
-          <div>{tAbout("mohammadqt")}</div>
-          <div>{tAbout("mohammadtb")}</div>
+          <div className="basic-item-padding">{tAbout("devs")}</div>
+          <div className="basic-item-padding">{tAbout("mohammadak")}</div>
+          <div className="basic-item-padding">{tAbout("jad")}</div>
+          <div className="basic-item-padding">{tAbout("husam")}</div>
+          <div className="basic-item-padding">{tAbout("mohammadqt")}</div>
+          <div className="basic-item-padding">{tAbout("mohammadtb")}</div>
         </div>
 
         <div className="basic-box-padding">{tAbout("version")}: 0.5</div>
