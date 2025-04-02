@@ -298,6 +298,13 @@ input:focus {
   background-color: var(--body-color);
 }
 
+.personal-area-content {
+  margin-bottom: 0.7rem; 
+  /* font-size: 20px; */
+  font-size: 1.3rem; 
+}
+
+
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
 
@@ -325,9 +332,4 @@ input:focus {
   .event-box-content-middle {
     justify-content: center;
   }
-}
-.perosnal-area-content {
-  margin-bottom: 0.7rem; 
-  /* font-size: 20px; */
-  font-size: 1.3rem; 
 }
