@@ -26,7 +26,7 @@ function App() {
     console.log(username);
     console.log(password); //! testing only remove security risk
     //! testing only Ultra security risk
-    if (username === "volunteer" && password === "vol") {
+    if (username === "vol" && password === "vol") {
       navigate("/home-volunteer");
     } else if (username === "org" && password === "org") {
       navigate("/home-organizer");
