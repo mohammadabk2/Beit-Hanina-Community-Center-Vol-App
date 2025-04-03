@@ -56,6 +56,7 @@ const HomeAdmin = () => {
       address: "3rd street",
       insurance: "clalit",
       idNumber: "123456789",
+      newUser: true,
     },
     {
       name: "adam",
@@ -70,6 +71,7 @@ const HomeAdmin = () => {
       address: "3rd street",
       insurance: "clalit",
       idNumber: "123456789",
+      newUser: false,
     },    {
       name: "adam",
       sex: "male",
@@ -83,6 +85,7 @@ const HomeAdmin = () => {
       address: "3rd street",
       insurance: "clalit",
       idNumber: "123456789",
+      newUser: true,
     },
     {
       name: "adam",
@@ -97,6 +100,7 @@ const HomeAdmin = () => {
       address: "3rd street",
       insurance: "clalit",
       idNumber: "123456789",
+      newUser: false,
     },
   ];
   //!
@@ -146,6 +150,7 @@ const HomeAdmin = () => {
           address={person.address}
           insurance={person.insurance}
           idNumber={person.idNumber}
+          newUser={person.newUser}
         />
       </>
     ));
