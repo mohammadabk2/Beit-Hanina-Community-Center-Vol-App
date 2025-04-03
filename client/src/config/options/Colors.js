@@ -1,135 +1,81 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext, useMemo } from "react";
+import PropTypes from 'prop-types';
 
-export const useColorOptions = () => {
-  const eventColorLight = "#f5f5f5";
-  const lightText = "#000000";
-  const breakLineLight = "#7c7c7c";
-  const inputBorderFocusLight = "blue";
-  const inputBorderLight = "#cccccc";
-  const buttonHoverLight = "#a8a8a8";
-  const buttonBackgroundLight = "#d1d1d1";
-  const buttonBorderLight = "#c2c2c2";
-  const skillsShadowLight = "#e0e0e0";
-  const bottomScrollBoxLight = "#dddddd";
-  const topScrollBoxLight = "#dddddd";
-  const backGroundBodyLight = "#f1f1f1";
+// 1. Create the Context
+// We initialize with undefined, and add a check in the consumer hook
+// to ensure it's used within the provider.
+const ThemeContext = createContext(undefined);
 
-  const eventColorDark = "#333336";
-  const darkText = "#ffffff";
-  const breakLineDark = "#9e9e9e";
-  const inputBorderFocusDark = "#3498db";
-  const inputBorderDark = "#555555";
-  const buttonHoverDark = "#5050ba";
-  const buttonBackgroundDark = "#7070ff";
-  const buttonBorderDark = "#7070e0";
-  const skillsShadowDark = "#7a7a7a";
-  const bottomScrollBoxDark = "#292930";
-  const topScrollBoxDark = "#292930";
-  const backGroundBodyDark = "#333336";
-
+// 2. Create the Provider Component
+export const ThemeProvider = ({ children }) => {
   const [isLightMode, setIsLightMode] = useState(() => {
+    // Check if running in a browser environment
     if (typeof window !== "undefined") {
-      const savedMode = localStorage.getItem("colorMode");
-      if (savedMode) return savedMode === "light";
-
-      return (
-        window.matchMedia?.("(prefers-color-scheme: light)").matches ?? false
-      );
+      try {
+        const savedMode = localStorage.getItem("colorMode");
+        if (savedMode) {
+          return savedMode === "light";
+        }
+        // Check system preference if no saved mode
+        return window.matchMedia?.("(prefers-color-scheme: light)").matches ?? false;
+      } catch (error) {
+        // Handle potential localStorage access errors (e.g., private Browse)
+        console.error("Error accessing localStorage:", error);
+        // Fallback to system preference or default to dark
+        return window.matchMedia?.("(prefers-color-scheme: light)").matches ?? false;
+      }
     }
-    return false;
+    // Default for non-browser environments (SSR) or if window check fails
+    return false; // Default to dark mode on server or if window unavailable
   });
 
+  // Effect to update localStorage and document attribute when mode changes
   useEffect(() => {
-    localStorage.setItem("colorMode", isLightMode ? "light" : "dark");
-    document.documentElement.style.setProperty(
-      "--top-scroll-box",
-      isLightMode ? topScrollBoxLight : topScrollBoxDark,
-      "important"
-    );
-    document.documentElement.style.setProperty(
-      "--box-background-color",
-      isLightMode ? eventColorLight : eventColorDark,
-      "important"
-    );
-    document.documentElement.style.setProperty(
-      "--drop-down-text-color",
-      isLightMode ? lightText : darkText,
-      "important"
-    );
-    document.documentElement.style.setProperty(
-      "--body-color",
-      isLightMode ? backGroundBodyLight : backGroundBodyDark,
-      "important"
-    );
-    document.documentElement.style.setProperty(
-      "--bottom-scroll-box",
-      isLightMode ? bottomScrollBoxLight : bottomScrollBoxDark,
-      "important"
-    );
+    // Only run this effect in the browser
+    if (typeof window !== "undefined") {
+        const mode = isLightMode ? 'light' : 'dark';
+        try {
+            localStorage.setItem('colorMode', mode);
+        } catch (error) {
+            console.error("Error setting localStorage:", error);
+        }
+        // Apply the theme attribute to the root HTML element
+        document.documentElement.setAttribute('data-theme', mode);
+    }
+  }, [isLightMode]); // Re-run only when isLightMode changes
 
-    document.documentElement.style.setProperty(
-      "--line-break",
-      isLightMode ? breakLineLight : breakLineDark,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--input-focus",
-      isLightMode ? inputBorderFocusLight : inputBorderFocusDark,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--input-border",
-      isLightMode ? inputBorderLight : inputBorderDark,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--button-hover",
-      isLightMode ? buttonHoverLight : buttonHoverDark,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--button-text",
-      isLightMode ? lightText : darkText,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--button-background",
-      isLightMode ? buttonBackgroundLight : buttonBackgroundDark,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--button-border",
-      isLightMode ? buttonBorderLight : buttonBorderDark,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--general-text",
-      isLightMode ? lightText : darkText,
-      "important"
-    );
-
-    document.documentElement.style.setProperty(
-      "--skills-shadow",
-      isLightMode ? skillsShadowLight : skillsShadowDark,
-      "important"
-    );
-
-  }, [isLightMode]);
-
+  // Function to toggle the mode
   const handleModeChange = () => {
-    console.log("Clicked light/dark mode icon");
+    console.log("Toggling theme mode");
     setIsLightMode((prevMode) => !prevMode);
   };
 
-  return {
+  // Memoize the context value to prevent unnecessary re-renders
+  // of consumers if the provider re-renders for other reasons.
+  const value = useMemo(() => ({
     isLightMode,
-    handleModeChange,
-  };
+    toggleTheme: handleModeChange // Renamed for clarity in consumer
+  }), [isLightMode]); // Only recreate the value object when isLightMode changes
+
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+ThemeProvider.propTypes = {
+  // Define 'children' prop type. 'node' accepts anything React can render.
+  // '.isRequired' means this component must receive children.
+  children: PropTypes.node.isRequired
+};
+
+// 3. Create a Custom Hook to Consume the Context
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    // This error is helpful for developers using the hook incorrectly
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
 };
