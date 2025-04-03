@@ -7,7 +7,7 @@ import DropDownMenu from "../../components/DropDownMenu";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import { useSkillOptions } from "../../config/options/Skills";
 
-function PersonalArea() {
+const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");
   const { t: tskill } = useTranslation("skills");
   const { t: tsignup } = useTranslation("signUp");
@@ -19,6 +19,7 @@ function PersonalArea() {
   // const gender = "male";
   const approvedHours = 10;
   const unapprovedHours = 1;
+
   const [userSkills, setUserSkills] = useState([
     //TODO call to get user skills
   ]);
@@ -50,56 +51,62 @@ function PersonalArea() {
   };
 
   return (
-    <div className="app flex-box flex-column smooth-shadow-box">
+    <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="flex-box flex-column event-box">
-        <div className="perosnal-area-content">
-          {tsignup("fullName")}: {name}
-        </div>
-
-        <div className="perosnal-area-content">
-          {t("user_name")}: {userName}
-        </div>
-        <div className="perosnal-area-content">
-          {t("approved_hours")}: {approvedHours}
-        </div>
-        <div className="perosnal-area-content">
-          {t("unapproved_hours")}: {unapprovedHours}
-        </div>
-
-        <div className="flex-box flex-column input-field-box">
-          <div className="perosnal-area-content">{t("skills")}: </div>
-          {userSkills.map((skill, index) => (
-            <div key={index} className="flex-box">
-              <div>{tskill(skill.label)}</div>
-              <DynamicButton
-                className="button"
-                text={tsignup("remove")}
-                onClick={() => handleRemoveSkill(skill.value)}
-              />
+      <div className="general-box scroll-box1">
+        <div className="general-box flex-box flex-column smooth-shadow-box">
+          <div className="basic-box-padding">
+            <div className="personal-area-content basic-item-padding">
+              {tsignup("fullName")}: {name}
             </div>
-          ))}
-          <DropDownMenu
-            className="sex-button"
-            text={t("selectskills")}
-            options={skillsOptions.map((skill) => ({
-              label: tskill(skill.label),
-              href: `#${skill.value}`,
-              onClick: () => handleAddSkill(skill.value),
-            }))}
+
+            <div className="personal-area-content basic-item-padding">
+              {t("user_name")}: {userName}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("approved_hours")}: {approvedHours}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("unapproved_hours")}: {unapprovedHours}
+            </div>
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div className="personal-area-content">{t("skills")}: </div>
+            {userSkills.map((skill, index) => (
+              <div key={index} className="flex-box">
+                <div>{tskill(skill.label)}</div>
+                <DynamicButton
+                  className="button"
+                  text={tsignup("remove")}
+                  onClick={() => handleRemoveSkill(skill.value)}
+                />
+              </div>
+            ))}
+            <DropDownMenu
+              className="sex-button"
+              text={t("selectskills")}
+              options={skillsOptions.map((skill) => ({
+                label: tskill(skill.label),
+                href: `#${skill.value}`,
+                onClick: () => handleAddSkill(skill.value),
+              }))}
+            />
+          </div>
+
+          <DynamicButton
+            className="button"
+            text={t("to_pdf")}
+            onClick={printToPdf}
           />
+
+          <ManageAccountBox />
         </div>
-
-        <DynamicButton
-          className="button"
-          text={t("to_pdf")}
-          onClick={printToPdf}
-        />
-
-        <ManageAccountBox/>
       </div>
     </div>
   );
-}
+};
 
 export default PersonalArea;
