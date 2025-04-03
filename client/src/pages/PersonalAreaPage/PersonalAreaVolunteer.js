@@ -86,7 +86,7 @@ const PersonalArea = () => {
               </div>
             ))}
             <DropDownMenu
-              className="sex-button"
+              className="dropdown-menu"
               text={t("selectskills")}
               options={skillsOptions.map((skill) => ({
                 label: tskill(skill.label),

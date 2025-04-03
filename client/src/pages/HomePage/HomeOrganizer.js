@@ -180,7 +180,7 @@ const HomeOrganizer = () => {
                 </div>
               ))}
               <DropDownMenu
-                className="sex-button"
+                className="dropdown-menu"
                 text={tskill("selectskills")}
                 options={skillsOptions.map((skill) => ({
                   label: tskill(`${skill.label}`),

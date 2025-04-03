@@ -112,7 +112,7 @@ function PersonalArea() {
           /> */}
 
           <DropDownMenu
-            className="sex-button"
+            className="dropdown-menu"
             text={t("select_type")}
             options={eventOptions.map((event) => ({
               label: t(`${event.label}`),
