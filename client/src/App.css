@@ -113,6 +113,7 @@ button {
 .button-image {
   width: 1rem;
   margin-left: 0.3125rem;
+  cursor: pointer;
 }
 
 /*General input field class for all input fields */
@@ -152,7 +153,7 @@ body {
   padding: 0;
   margin: 0;
   border-radius: 0.3125rem;
-  min-width: 6.25rem;
+  width: 7rem;
 }
 
 .dropdown-item {
@@ -196,12 +197,13 @@ input:focus {
 
 /*General styling for skills */
 .skills {
-  padding: 0.125rem 0.3125rem;
+  padding: 0.125rem 0.7rem;
   align-content: center;
-  border-radius: 20%;
-  background-color: #e0e0e0;
+  border-radius: 4rem;
+  background-color: var(--skills-background);
   text-align: center;
-  margin: 0.625rem;
+  margin: 1rem 0.5rem 1rem 0.5rem;
+  height: 1.5rem;
 }
 
 /*Styles event containers */
