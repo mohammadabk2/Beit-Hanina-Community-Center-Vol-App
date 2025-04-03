@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import DropDownMenu from "./DropDownMenu";
 import { useLnOptions } from "../config/options/Language";
-import { useColorOptions } from "../config/options/Colors";
+import { useTheme } from "../config/options/Colors";
 
 import modeIconDark from "../icons/light/mode_icon.svg";
 import settingsIconLight from "../icons/light/settings_icon.svg";
@@ -23,7 +23,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   const { t } = useTranslation("app");
   const navigate = useNavigate();
   const lnOptions = useLnOptions();
-  const { isLightMode, handleModeChange} = useColorOptions();
+  const {isLightMode, toggleTheme} = useTheme();
 
   const goToSettings = () => {
     console.log("Settings button clicked");
@@ -56,7 +56,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
         text={t("ln")}
         options={lnOptions}
       />
-      <div onClick={handleModeChange}>
+      <div onClick={toggleTheme}>
         <img
           className="navigation-button-image"
           src={isLightMode ? modeIconDark : modeIconLight}

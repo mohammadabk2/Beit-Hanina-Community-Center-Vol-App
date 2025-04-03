@@ -7,15 +7,17 @@ import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import { useSkillOptions } from "../../config/options/Skills";
-
+import { useTheme } from "../../config/options/Colors";
 
 import xIconLight from "../../icons/light/x_icon.svg";
+import xIconDark from "../../icons/dark/x_icon.svg";
 
 
 // import pages here
 
 function SignUpPage() {
   const navigate = useNavigate();
+  const {isLightMode} = useTheme();
 
   const goBack = () => {
     navigate("/");
@@ -222,7 +224,7 @@ function SignUpPage() {
               {formData.skills.map((skill, index) => (
                 <div key={index} className="flex-box skills">
                   <div>{skill}</div>
-                  <img onClick={() => handleRemoveSkill(index)} className="button-image" src={xIconLight}></img>
+                  <img alt="x Icon" onClick={() => handleRemoveSkill(index)} className="button-image" src={isLightMode ? xIconLight : xIconDark}></img>
                 </div>
               ))}
             </div>
