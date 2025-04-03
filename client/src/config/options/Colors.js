@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, createContext, useMemo } from "react";
+import PropTypes from 'prop-types';
 
 // 1. Create the Context
 // We initialize with undefined, and add a check in the consumer hook
@@ -61,6 +62,12 @@ export const ThemeProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
+};
+
+ThemeProvider.propTypes = {
+  // Define 'children' prop type. 'node' accepts anything React can render.
+  // '.isRequired' means this component must receive children.
+  children: PropTypes.node.isRequired
 };
 
 // 3. Create a Custom Hook to Consume the Context
