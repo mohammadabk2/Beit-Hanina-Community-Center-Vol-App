@@ -8,16 +8,14 @@ import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import { useSkillOptions } from "../../config/options/Skills";
 import { useTheme } from "../../config/options/Colors";
+import SelectComponent from "../../components/SelectComponent";
 
 import xIconLight from "../../icons/light/x_icon.svg";
 import xIconDark from "../../icons/dark/x_icon.svg";
 
-
-// import pages here
-
-function SignUpPage() {
+const SignUpPage = () => {
   const navigate = useNavigate();
-  const {isLightMode} = useTheme();
+  const { isLightMode } = useTheme();
 
   const goBack = () => {
     navigate("/");
@@ -216,7 +214,7 @@ function SignUpPage() {
             />
           </div>
 
-          <div className="flex-box flex-column input-field-box">
+          {/* <div className="flex-box flex-column input-field-box">
             <div>
               <div>{tsignup("skills")}: </div>
             </div>
@@ -224,7 +222,12 @@ function SignUpPage() {
               {formData.skills.map((skill, index) => (
                 <div key={index} className="flex-box skills">
                   <div>{skill}</div>
-                  <img alt="x Icon" onClick={() => handleRemoveSkill(index)} className="button-image" src={isLightMode ? xIconLight : xIconDark}></img>
+                  <img
+                    alt="x Icon"
+                    onClick={() => handleRemoveSkill(index)}
+                    className="button-image"
+                    src={isLightMode ? xIconLight : xIconDark}
+                  ></img>
                 </div>
               ))}
             </div>
@@ -237,7 +240,10 @@ function SignUpPage() {
                 onClick: () => handleAddSkill(skill.value),
               }))}
             />
-          </div>
+          </div> */}
+
+          <SelectComponent type="skills" onChange={handleChange} choosen={formData.skills}/>
+
           <div className="flex-box">
             <div>
               <DynamicButton
@@ -258,6 +264,6 @@ function SignUpPage() {
       </div>
     </div>
   );
-}
+};
 
 export default SignUpPage;
