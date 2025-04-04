@@ -28,62 +28,61 @@ const PersonItem = ({
 
   //TODO make half appear on the right and half on the left
   return (
-    <div className="top-scroll-box1" style={style}>
-      <div className="event-box-content-top ">
-        <div className="event-box-title">
-          {tsignup("fullName")} {name}
-        </div>
+    <div className="flex-box top-scroll-box1" style={style}>
+      <div className="event-box-title">{name}</div>
 
-        <div className="bottom-scroll-box1">
-          <div className="flex-box flex-column left-side">
-            <div>
-              {tsignup("birthDate")} {birthDate}
-            </div>
+      <div className="flex-box bottom-scroll-box1">
+        <div className="flex-box flex-column">
+          <div>
+            {tsignup("birthDate")} {birthDate}
+          </div>
 
-            <div>
-              {tsignup("address")}
-              {address}
-            </div>
+          <div>
+            {tsignup("address")}
+            {address}
+          </div>
 
-            <div>
-              {tsignup("gender")} {sex}
-            </div>
+          <div>
+            {tsignup("gender")} {sex}
+          </div>
 
-            <div className="flex-box">
-              <div className="flex-box flex-column">
-                <div>{tskill("skills")}:</div>
+          <div className="flex-box">
+            <div className="flex-box flex-column">
+              <div>{tskill("skills")}:</div>
 
-                <div className="flex-box">
-                  {skills.map((person, index) => (
-                    <div key={index} className="skills">
-                      {person}
-                      {index < skills.length - 1 && " "}
-                    </div>
-                  ))}
-                </div>
+              <div className="flex-box">
+                {skills.map((person, index) => (
+                  <div key={index} className="skills">
+                    {person}
+                    {index < skills.length - 1 && " "}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-          <div className="flex-box flex-column right-side">
-            <div>
-              {tsignup("phoneNumber")}
-              {phoneNumber}
-            </div>
-
-            <div>
-              {tsignup("email")}
-              {email}
-            </div>
-
-            <div>
-              {tsignup("insurance")}
-              {insurance}
-            </div>
-
-            <div>
-              {tsignup("idNumber")} {idNumber}
-            </div>
+        </div>
+        <div className="flex-box flex-column">
+          <div>
+            {tsignup("phoneNumber")}
+            {phoneNumber}
           </div>
+
+          <div>
+            {tsignup("email")}
+            {email}
+          </div>
+
+          <div>
+            {tsignup("insurance")}
+            {insurance}
+          </div>
+
+          <div>
+            {tsignup("idNumber")} {idNumber}
+          </div>
+        </div>
+
+        <div>
           {newUser && (
             <>
               <div className="flex-box">
@@ -98,9 +97,9 @@ const PersonItem = ({
                   onClick={handleApprove}
                 />
               </div>
+              {/* //TODO add view events button for user */}
             </>
           )}
-          ;
           {!newUser && (
             <>
               <div className="flex-box">

@@ -297,6 +297,7 @@ input:focus {
   background-color: var(--body-color);
 }
 
+/* TODO add shadow to them */
 .button-approve {
   background-color: green !important;
 }
@@ -305,22 +306,9 @@ input:focus {
   background-color: red !important;
 }
 
-.left-side {
-  position: absolute;
-  left: 0;
-  top: 0;
-  box-sizing: border-box;
-  padding-right: 10px;
-  width: calc(50% - 5px); /*Dynamic calculation subtracting padding*/
-}
-
-.right-side {
-  position: absolute;
-  right: 0;
-  top: 0;
-  box-sizing: border-box;
-  padding-left: 10px;
-  width: calc(50% - 5px); /*Dynamic calculation subtracting padding*/
+.button-reject:hover{
+  transition: background-color ease 0.3s;
+  background-color: blue;
 }
 
 /*media query for mobile screen sizes */

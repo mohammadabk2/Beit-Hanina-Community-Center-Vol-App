@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-// import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
-// import DynamicInput from "../../components/InputComponent";
-// import DropDownMenu from "../../components/DropDownMenu";
 import EventItem from "../../components/EventItem";
 import PersonItem from "../../components/PersonItem";
 
@@ -72,7 +69,8 @@ const HomeAdmin = () => {
       insurance: "clalit",
       idNumber: "123456789",
       newUser: false,
-    },    {
+    },
+    {
       name: "adam",
       sex: "male",
       birthDate: "01/01/2000",
