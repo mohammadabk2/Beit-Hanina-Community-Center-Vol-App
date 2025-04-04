@@ -8,28 +8,41 @@ const About = () => {
   const { t: tAbout } = useTranslation("about");
 
   return (
-    <div className="app flex-box">
+    <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="general-box flex-box flex-column smooth-shadow-box basic-box-padding">
-        <div>
-          <div className="basic-item-padding">{tAbout("admins")}</div>
-          <div className="basic-item-padding">{tAbout("fadi")}</div>
-          <div className="basic-item-padding">{tAbout("ahmed")}</div>
-          <div className="basic-item-padding">
+      <div className="general-box scroll-box1">
+        <div className="general-box flex-box flex-column smooth-shadow-box">
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("admins")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("fadi")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("ahmed")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
             {tAbout("contact")} add support email
           </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("devs")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("mohammadak")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("jad")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("husam")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("mohammadqt")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("mohammadtb")}
+          </div>
         </div>
-
-        <div className="basic-box-padding">
-          <div className="basic-item-padding">{tAbout("devs")}</div>
-          <div className="basic-item-padding">{tAbout("mohammadak")}</div>
-          <div className="basic-item-padding">{tAbout("jad")}</div>
-          <div className="basic-item-padding">{tAbout("husam")}</div>
-          <div className="basic-item-padding">{tAbout("mohammadqt")}</div>
-          <div className="basic-item-padding">{tAbout("mohammadtb")}</div>
-        </div>
-
-        <div className="basic-box-padding">{tAbout("version")}: 0.5</div>
       </div>
     </div>
   );
