@@ -8,27 +8,27 @@ import { useLnOptions } from "../config/options/Language";
 import { useColorOptions } from "../config/options/Colors";
 
 import modeIconDark from "../icons/light/mode_icon.svg";
-import settingsIconLight from "../icons/light/settings_icon.svg";
 import profileIconLight from "../icons/light/profile_icon.svg";
 import homeIconLight from "../icons/light/home_icon.svg";
 import aboutIconLight from "../icons/light/about_icon.svg";
+// import settingsIconLight from "../icons/light/settings_icon.svg";
 
 import modeIconLight from "../icons/dark/mode_icon.svg";
-import settingsIconDark from "../icons/dark/settings_icon.svg";
 import profileIconDark from "../icons/dark/profile_icon.svg";
 import homeIconDark from "../icons/dark/home_icon.svg";
 import aboutIconDark from "../icons/dark/about_icon.svg";
+// import settingsIconDark from "../icons/dark/settings_icon.svg";
 
 const NavigationBar = ({ dontShowPageButtons }) => {
   const { t } = useTranslation("app");
   const navigate = useNavigate();
   const lnOptions = useLnOptions();
-  const { isLightMode, handleModeChange} = useColorOptions();
+  const { isLightMode, handleModeChange } = useColorOptions();
 
-  const goToSettings = () => {
-    console.log("Settings button clicked");
-    navigate("/settings");
-  };
+  // const goToSettings = () => {
+  //   console.log("Settings button clicked");
+  //   navigate("/settings");
+  // };
 
   const goToPersonalArea = () => {
     //TODO add a check if Admin org or voulunteer
@@ -80,13 +80,13 @@ const NavigationBar = ({ dontShowPageButtons }) => {
               alt="Profile icon"
             />
           </div>
-          <div onClick={goToSettings}>
+          {/* <div onClick={goToSettings}>
             <img
               className="navigation-button-image"
               src={isLightMode ? settingsIconLight : settingsIconDark}
               alt="Settings icon"
             />
-          </div>
+          </div> */}
         </>
       )}
 
