@@ -6,16 +6,10 @@ import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
-import { useSkillOptions } from "../../config/options/Skills";
-import { useTheme } from "../../config/options/Colors";
 import SelectComponent from "../../components/SelectComponent";
-
-import xIconLight from "../../icons/light/x_icon.svg";
-import xIconDark from "../../icons/dark/x_icon.svg";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-  const { isLightMode } = useTheme();
 
   const goBack = () => {
     navigate("/");
@@ -37,24 +31,6 @@ const SignUpPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleAddSkill = (value) => {
-    if (!formData.skills.includes(value)) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        skills: [
-          ...(Array.isArray(prevFormData.skills) ? prevFormData.skills : []),
-          value,
-        ],
-      }));
-    }
-  };
-
-  const handleRemoveSkill = (index) => {
-    console.log("clicked remove skill");
-    const newSkills = formData.skills.filter((_, i) => i !== index);
-    setFormData({ ...formData, skills: newSkills });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
@@ -64,13 +40,11 @@ const SignUpPage = () => {
     setFormData({ ...formData, sex: value });
   };
 
-  const skillsOptions = useSkillOptions();
-  const { t: tsignup } = useTranslation("signUp");
-  const { t: tskill } = useTranslation("skills");
+  const { t } = useTranslation("signUp");
 
   const sexOptions = [
     {
-      label: tsignup("male"),
+      label: t("male"),
       href: "#option1",
       onClick: () => {
         console.log("male clicked");
@@ -78,7 +52,7 @@ const SignUpPage = () => {
       },
     },
     {
-      label: tsignup("female"),
+      label: t("female"),
       href: "#option2",
       onClick: () => {
         console.log("female clicked");
@@ -98,7 +72,7 @@ const SignUpPage = () => {
         >
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label> {tsignup("fullName")}: </label>
+              <label> {t("fullName")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -107,13 +81,13 @@ const SignUpPage = () => {
               value={formData.name}
               name="name"
               onChange={handleChange}
-              placeholder={tsignup("fullname_placeholder")}
+              placeholder={t("fullname_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("birthDate")}: </label>
+              <label>{t("birthDate")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -127,19 +101,19 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("gender")} </label>
+              <label>{t("gender")} </label>
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
               className="gender-button"
-              text={tsignup(formData.sex) || tsignup("Select Gender")}
+              text={t(formData.sex) || t("Select Gender")}
               options={sexOptions}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("phoneNumber")}: </label>
+              <label>{t("phoneNumber")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -150,13 +124,13 @@ const SignUpPage = () => {
               onChange={handleChange}
               pattern="[0-9]*"
               inputMode="numeric"
-              placeholder={tsignup("phoneNnumber_placeholder")}
+              placeholder={t("phoneNnumber_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("email")}: </label>
+              <label>{t("email")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -165,13 +139,13 @@ const SignUpPage = () => {
               value={formData.email}
               name="email"
               onChange={handleChange}
-              placeholder={tsignup("email_placeholder")}
+              placeholder={t("email_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("address")}: </label>
+              <label>{t("address")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -180,13 +154,13 @@ const SignUpPage = () => {
               value={formData.address}
               name="address"
               onChange={handleChange}
-              placeholder={tsignup("address_placeholder")}
+              placeholder={t("address_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("insurance")}: </label>
+              <label>{t("insurance")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -195,13 +169,13 @@ const SignUpPage = () => {
               value={formData.insurance}
               name="insurance"
               onChange={handleChange}
-              placeholder={tsignup("insurance_placeholder")}
+              placeholder={t("insurance_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("idNumber")}: </label>
+              <label>{t("idNumber")}: </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -210,45 +184,21 @@ const SignUpPage = () => {
               value={formData.idNumber}
               name="idNumber"
               onChange={handleChange}
-              placeholder={tsignup("idNumber_placeholder")}
+              placeholder={t("idNumber_placeholder")}
             />
           </div>
 
-          {/* <div className="flex-box flex-column input-field-box">
-            <div>
-              <div>{tsignup("skills")}: </div>
-            </div>
-            <div className="flex-box">
-              {formData.skills.map((skill, index) => (
-                <div key={index} className="flex-box skills">
-                  <div>{skill}</div>
-                  <img
-                    alt="x Icon"
-                    onClick={() => handleRemoveSkill(index)}
-                    className="button-image"
-                    src={isLightMode ? xIconLight : xIconDark}
-                  ></img>
-                </div>
-              ))}
-            </div>
-            <DropDownMenu
-              className="gender-button"
-              text={tsignup("selectskills")}
-              options={skillsOptions.map((skill) => ({
-                label: tskill(`${skill.label}`),
-                href: `#${skill.value}`,
-                onClick: () => handleAddSkill(skill.value),
-              }))}
-            />
-          </div> */}
-
-          <SelectComponent type="skills" onChange={handleChange} choosen={formData.skills}/>
+          <SelectComponent
+            type="skills"
+            onChange={handleChange}
+            choosen={formData.skills}
+          />
 
           <div className="flex-box">
             <div>
               <DynamicButton
                 className="button"
-                text={tsignup("submit")}
+                text={t("submit")}
                 type="submit"
               />
             </div>
@@ -256,7 +206,7 @@ const SignUpPage = () => {
               <DynamicButton
                 className="button"
                 onClick={goBack}
-                text={tsignup("back")}
+                text={t("back")}
               />
             </div>
           </div>
