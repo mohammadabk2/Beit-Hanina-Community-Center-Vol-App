@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-export function useLnOptions() {
+
+export const useLnOptions = () => {
   const { i18n } = useTranslation();
   return [
     {
@@ -19,4 +20,4 @@ export function useLnOptions() {
       },
     },
   ];
-}
+};

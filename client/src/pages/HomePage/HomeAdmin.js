@@ -3,7 +3,7 @@ import React from "react";
 import NavigationBar from "../../components/NavigationBar";
 // import DynamicButton from "../../components/ButtonComponent";
 
-function HomeAdmin() {
+const HomeAdmin = () => {
   return (
     <div className="app flex-box">
       <NavigationBar />
@@ -12,6 +12,6 @@ function HomeAdmin() {
       </main>
     </div>
   );
-}
+};
 
 export default HomeAdmin;

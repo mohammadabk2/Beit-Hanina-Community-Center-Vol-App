@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 //TODO talk with fadi about a list of approved skills
-export function useSkillOptions() {
+export const useSkillOptions = () => {
   const { t } = useTranslation("skills");
-  
+
   return [
     {
       label: t("skill_1"),
@@ -21,4 +21,4 @@ export function useSkillOptions() {
       },
     },
   ];
-}
+};

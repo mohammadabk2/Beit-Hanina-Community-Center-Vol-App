@@ -7,7 +7,7 @@ import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import NavigationBar from "./components/NavigationBar";
 
-function App() {
+const App = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -93,6 +93,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;
