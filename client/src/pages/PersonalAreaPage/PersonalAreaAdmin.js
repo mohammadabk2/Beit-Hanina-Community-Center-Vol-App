@@ -2,12 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
-// import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import DropDownMenu from "../../components/DropDownMenu";
-// import DropDownMenu from "../../components/DropDownMenu";
 
-function PersonalArea() {
+const PersonalArea = () => {
   const { t } = useTranslation("personal");
 
   //TODO change all these to read from database
@@ -126,6 +124,6 @@ function PersonalArea() {
       </div>
     </div>
   );
-}
+};
 
 export default PersonalArea;
