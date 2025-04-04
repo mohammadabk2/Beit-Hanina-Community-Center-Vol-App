@@ -26,11 +26,11 @@ function App() {
     console.log(username);
     console.log(password); //! testing only remove security risk
     //! testing only Ultra security risk
-    if (username === "volunteer") {
+    if (username === "vol" && password === "vol") {
       navigate("/home-volunteer");
-    } else if (username === "org") {
+    } else if (username === "org" && password === "org") {
       navigate("/home-organizer");
-    } else if (username === "admin") {
+    } else if (username === "admin" && password === "admin") {
       navigate("/home-admin");
     } else {
       alert("Enter Valid Sign in details");

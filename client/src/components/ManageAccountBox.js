@@ -21,7 +21,7 @@ const ManageAccountBox = () => {
   };
 
   return (
-    <div className="flex-box navigation-box">
+    <div className="flex-box">
       <DynamicButton
         className="button"
         text={t("password_change")}

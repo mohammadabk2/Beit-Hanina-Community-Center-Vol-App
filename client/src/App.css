@@ -112,6 +112,7 @@ button {
 .button-image {
   width: 1rem;
   margin-left: 0.3125rem;
+  cursor: pointer;
 }
 
 /*General input field class for all input fields */
@@ -151,7 +152,7 @@ body {
   padding: 0;
   margin: 0;
   border-radius: 0.3125rem;
-  min-width: 6.25rem;
+  width: 7rem;
 }
 
 .dropdown-item {
@@ -195,12 +196,13 @@ input:focus {
 
 /*General styling for skills */
 .skills {
-  padding: 0.125rem 0.3125rem;
+  padding: 0.125rem 0.7rem;
   align-content: center;
-  border-radius: 20%;
-  background-color: #e0e0e0;
+  border-radius: 4rem;
+  background-color: var(--skills-background);
   text-align: center;
-  margin: 0.625rem;
+  margin: 1rem 0.5rem 1rem 0.5rem;
+  height: 1.5rem;
 }
 
 /*Styles event containers */
@@ -295,6 +297,23 @@ input:focus {
   width: 95%;
   max-width: 36.4375rem;
   background-color: var(--body-color);
+}
+
+.personal-area-content {
+  margin-bottom: 0.7rem; 
+  /* font-size: 20px; */
+  font-size: 1.3rem; 
+}
+
+
+.basic-box-padding{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.basic-item-padding{
+  padding-top: .2rem;
+  padding-bottom: .2rem;
 }
 
 /* TODO add shadow to them */

@@ -7,11 +7,17 @@ import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import { useSkillOptions } from "../../config/options/Skills";
+import { useTheme } from "../../config/options/Colors";
+
+import xIconLight from "../../icons/light/x_icon.svg";
+import xIconDark from "../../icons/dark/x_icon.svg";
+
 
 // import pages here
 
 function SignUpPage() {
   const navigate = useNavigate();
+  const {isLightMode} = useTheme();
 
   const goBack = () => {
     navigate("/");
@@ -46,6 +52,7 @@ function SignUpPage() {
   };
 
   const handleRemoveSkill = (index) => {
+    console.log("clicked remove skill");
     const newSkills = formData.skills.filter((_, i) => i !== index);
     setFormData({ ...formData, skills: newSkills });
   };
@@ -211,20 +218,18 @@ function SignUpPage() {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{tsignup("skills")}: </label>
+              <div>{tsignup("skills")}: </div>
             </div>
-            {formData.skills.map((skill, index) => (
-              <div key={index} className="flex-box">
-                <label>{skill}</label>
-                <DynamicButton
-                  className="button"
-                  text={tsignup("remove")}
-                  onClick={() => handleRemoveSkill(index)}
-                />
-              </div>
-            ))}
+            <div className="flex-box">
+              {formData.skills.map((skill, index) => (
+                <div key={index} className="flex-box skills">
+                  <div>{skill}</div>
+                  <img alt="x Icon" onClick={() => handleRemoveSkill(index)} className="button-image" src={isLightMode ? xIconLight : xIconDark}></img>
+                </div>
+              ))}
+            </div>
             <DropDownMenu
-              className="sex-button"
+              className="gender-button"
               text={tsignup("selectskills")}
               options={skillsOptions.map((skill) => ({
                 label: tskill(`${skill.label}`),
