@@ -5,7 +5,7 @@ import globals from "globals";
 /** @type {import('eslint').Linter.FlatConfig[]} */
 const config = [
   {
-    ignores: ["client/build/**", "client/node_modules/**", "node_modules/**", "src/deprecated/**"],
+    ignores: ["client/build/**", "client/node_modules/**", "node_modules/**", "src/deprecated/**" ,"client/android"],
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
       parserOptions: {

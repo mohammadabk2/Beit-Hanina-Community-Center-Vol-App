@@ -4,6 +4,7 @@
 ├── client
 │   ├── assets
 │   │   └── logo.jpg
+│   ├── capacitor.config.ts
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── public
@@ -12,7 +13,7 @@
 │   │   ├── logo192.png
 │   │   ├── logo512.png
 │   │   ├── manifest.json
-│   │   └── sw.js
+│   │   └── service-worker.cjs
 │   ├── README.md
 │   └── src
 │       ├── App.css
@@ -58,7 +59,8 @@
 │       │   │   ├── home_icon.svg
 │       │   │   ├── mode_icon.svg
 │       │   │   ├── profile_icon.svg
-│       │   │   └── settings_icon.svg
+│       │   │   ├── settings_icon.svg
+│       │   │   └── x_icon.svg
 │       │   ├── drop_down_icon.svg
 │       │   ├── favorite_icon.svg
 │       │   ├── home_icon.jpg
@@ -67,7 +69,8 @@
 │       │   │   ├── home_icon.svg
 │       │   │   ├── mode_icon.svg
 │       │   │   ├── profile_icon.svg
-│       │   │   └── settings_icon.svg
+│       │   │   ├── settings_icon.svg
+│       │   │   └── x_icon.svg
 │       │   ├── not_favorite_icon.svg
 │       │   ├── org_icon.png
 │       │   └── person_icon.svg
@@ -114,6 +117,8 @@
 ├── README.md
 ├── scripts
 │   ├── before_git.sh
+│   ├── convert_to_apk.sh
+│   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
 │   └── setup_server.sh
@@ -143,5 +148,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-34 directories, 107 files
+34 directories, 112 files
 ```
