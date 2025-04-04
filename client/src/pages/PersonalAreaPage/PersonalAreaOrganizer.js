@@ -6,7 +6,7 @@ import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
 // import DropDownMenu from "../../components/DropDownMenu";
 
-function PersonalArea() {
+const PersonalArea = () => {
   const { t } = useTranslation("personal");
 
   //TODO change all these to read from database
@@ -64,6 +64,6 @@ function PersonalArea() {
       </div>
     </div>
   );
-}
+};
 
 export default PersonalArea;

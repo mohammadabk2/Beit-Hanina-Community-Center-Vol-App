@@ -1,8 +1,11 @@
 import { useTranslation } from "react-i18next";
 //TODO talk with fadi about a list of approved skills
-export const useSortOptions = (type) => {
+export const useSortOptions = (UserType) => {
   const { t } = useTranslation("sort");
 
+  if (UserType === "admin") {
+    console.log("add all def here");
+  }
   return [
     {
       label: t("sort_1"),
