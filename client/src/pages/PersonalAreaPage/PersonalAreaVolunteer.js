@@ -3,15 +3,16 @@ import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
-import DropDownMenu from "../../components/DropDownMenu";
+// import DropDownMenu from "../../components/DropDownMenu";
 import ManageAccountBox from "../../components/ManageAccountBox";
-import { useSkillOptions } from "../../config/options/Skills";
+// import { useSkillOptions } from "../../config/options/Skills";
+import SelectComponent from "../../components/SelectComponent";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");
-  const { t: tskill } = useTranslation("skills");
+  // const { t: tskill } = useTranslation("skills");
   const { t: tsignup } = useTranslation("signUp");
-  const skillsOptions = useSkillOptions();
+  // const skillsOptions = useSkillOptions();
 
   //TODO change all these to read from database
   const name = "john doe";
@@ -20,30 +21,12 @@ const PersonalArea = () => {
   const approvedHours = 10;
   const unapprovedHours = 1;
 
-  const [userSkills, setUserSkills] = useState([
-    //TODO call to get user skills
-  ]);
+  //TODO add call to get user skills
+  const [userSkills, setUserSkills] = useState(["cook", "order"]);
 
-  const handleAddSkill = (value) => {
-    //TODO call database and check
-    if (!userSkills.some((skill) => skill.value === value)) {
-      console.log("skill added");
-      setUserSkills([...userSkills, { label: value, value }]);
-      //TODO change to call database and remove the skill
-    } else {
-      console.log("skill already there");
-    }
-  };
-
-  const handleRemoveSkill = (value) => {
-    //TODO call database and check
-    if (userSkills.some((skill) => skill.value === value)) {
-      console.log("skill removed");
-      // Update the state by filtering out the removed skill
-      setUserSkills(userSkills.filter((skill) => skill.value !== value));
-    } else {
-      console.log("skill not there");
-    }
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setUserSkills(value);
   };
 
   const printToPdf = () => {
@@ -73,28 +56,11 @@ const PersonalArea = () => {
             </div>
           </div>
 
-          <div className="flex-box flex-column input-field-box">
-            <div className="personal-area-content">{t("skills")}: </div>
-            {userSkills.map((skill, index) => (
-              <div key={index} className="flex-box">
-                <div>{tskill(skill.label)}</div>
-                <DynamicButton
-                  className="button"
-                  text={tsignup("remove")}
-                  onClick={() => handleRemoveSkill(skill.value)}
-                />
-              </div>
-            ))}
-            <DropDownMenu
-              className="dropdown-menu"
-              text={t("selectskills")}
-              options={skillsOptions.map((skill) => ({
-                label: tskill(skill.label),
-                href: `#${skill.value}`,
-                onClick: () => handleAddSkill(skill.value),
-              }))}
-            />
-          </div>
+          <SelectComponent
+            type="skills"
+            onChange={handleChange}
+            choosen={userSkills}
+          />
 
           <DynamicButton
             className="button"
