@@ -13,7 +13,7 @@ import xIconDark from "../icons/dark/x_icon.svg";
 const SelectComponent = ({
   onChange, // Function to call when skills array changes
   type,
-  choosen,
+  chosen,
 }) => {
   const { isLightMode } = useTheme();
   const { t } = useTranslation("select");
@@ -29,12 +29,12 @@ const SelectComponent = ({
       : [];
 
   const handleAddOption = (optionValueToAdd) => {
-    const currentValues = Array.isArray(choosen) ? choosen : [];
+    const currentValues = Array.isArray(chosen) ? chosen : [];
     if (!currentValues.includes(optionValueToAdd)) {
       const updatedValues = [...currentValues, optionValueToAdd];
       onChange({
         target: {
-          name: type, // or just "skills" if you're not changing the type
+          name: type,
           value: updatedValues,
         },
       });
@@ -42,11 +42,11 @@ const SelectComponent = ({
   };
 
   const handleRemoveOption = (valueToRemove) => {
-    const currentValues = Array.isArray(choosen) ? choosen : [];
+    const currentValues = Array.isArray(chosen) ? chosen : [];
     const updatedValues = currentValues.filter((val) => val !== valueToRemove);
     onChange({
       target: {
-        name: type, // or just "skills" if you're not changing the type
+        name: type,
         value: updatedValues,
       },
     });
@@ -58,7 +58,7 @@ const SelectComponent = ({
         <div>{t("skills")}: </div>
       </div>
       <div className="flex-box">
-        {choosen.map((choice, index) => (
+        {(Array.isArray(chosen) ? chosen : []).map((choice, index) => (
           <div key={index} className="flex-box skills">
             <div>{choice}</div>
             <img
@@ -88,7 +88,7 @@ SelectComponent.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   style: PropTypes.object,
-  choosen: PropTypes.oneOfType([
+  chosen: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(PropTypes.number),
   ]),

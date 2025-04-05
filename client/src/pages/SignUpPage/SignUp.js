@@ -191,7 +191,7 @@ const SignUpPage = () => {
           <SelectComponent
             type="skills"
             onChange={handleChange}
-            choosen={formData.skills}
+            chosen={formData.skills}
           />
 
           <div className="flex-box">

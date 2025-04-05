@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
-import SelectSkills from "../../components/SelectComponent"
+import SelectSkills from "../../components/SelectComponent";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");
@@ -17,13 +17,17 @@ const PersonalArea = () => {
   const approvedHours = 10;
   const unapprovedHours = 1;
 
-  const [userSkills] = useState([
+  const [userSkills, setUserSkills] = useState([
     //TODO call to get user skills
   ]);
 
-  const handleSkills = () => {
-
-  }
+  const handleSkills = (e) => {
+    if (e && e.target && Array.isArray(e.target.value)) {
+      setUserSkills(e.target.value);
+    } else {
+      console.error("Received unexpected event structure in handleSkills:", e);
+    }
+  };
 
   const printToPdf = () => {
     console.log("print to PDF button clicked");
@@ -54,7 +58,7 @@ const PersonalArea = () => {
         <SelectSkills
           type="skills"
           onChange={handleSkills}
-          choosen={userSkills}
+          chosen={userSkills}
         />
 
         <DynamicButton
