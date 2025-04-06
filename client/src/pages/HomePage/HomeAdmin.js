@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import EventItem from "../../components/EventItem";
-import PersonItem from "../../components/PersonItem";
+import PersonItem from "../../components/PersonItem/PersonItem";
 
 const HomeAdmin = () => {
   //! testing only
@@ -119,6 +119,12 @@ const HomeAdmin = () => {
     console.log("Sort people button clicked");
   };
 
+  const [personView, setCardView] = useState(true);
+
+  const handleChange = () => {
+    setCardView(!personView);
+  };
+
   const renderEventItems = (eventsArray) => {
     return eventsArray.map((event, index) => (
       <EventItem
@@ -137,19 +143,41 @@ const HomeAdmin = () => {
   const renderPeopleItems = (peopeArray) => {
     return peopeArray.map((person, index) => (
       <>
-        <PersonItem
-          key={index}
-          name={person.name}
-          birthDate={person.birthDate}
-          sex={person.sex}
-          skills={person.skills}
-          phoneNumber={person.phoneNumber}
-          email={person.email}
-          address={person.address}
-          insurance={person.insurance}
-          idNumber={person.idNumber}
-          newUser={person.newUser}
-        />
+        {personView && (
+          <PersonItem
+            key={index}
+            name={person.name}
+            birthDate={person.birthDate}
+            sex={person.sex}
+            skills={person.skills}
+            phoneNumber={person.phoneNumber}
+            email={person.email}
+            address={person.address}
+            insurance={person.insurance}
+            idNumber={person.idNumber}
+            newUser={person.newUser}
+            type="card"
+          />
+        )}
+
+        {!personView && (
+          <PersonItem
+            key={index}
+            name={person.name}
+            birthDate={person.birthDate}
+            sex={person.sex}
+            skills={person.skills}
+            phoneNumber={person.phoneNumber}
+            email={person.email}
+            address={person.address}
+            insurance={person.insurance}
+            idNumber={person.idNumber}
+            newUser={person.newUser}
+            type="table"
+          />
+        )}
+
+        {/* //TODO add  PersonItemTable */}
       </>
     ));
   };
@@ -186,6 +214,12 @@ const HomeAdmin = () => {
                     className="button button-small"
                     onClick={switchMode}
                     text={t("switch_to_events")}
+                  />
+
+                  <DynamicButton
+                    text={t("switch_modes")}
+                    onClick={handleChange}
+                    className="button button-small"
                   />
                 </>
               )}

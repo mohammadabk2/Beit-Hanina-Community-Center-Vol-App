@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import DynamicButton from "./ButtonComponent";
+import DynamicButton from "../ButtonComponent";
 import { useTranslation } from "react-i18next";
 
-const PersonItem = ({
+const PersonItemCard = ({
   name,
   birthDate,
   sex,
@@ -16,23 +16,14 @@ const PersonItem = ({
   skills,
   style,
   newUser,
+  approveFunction,
+  rejectFunction,
+  viewLogsFunction,
+  addLogFunction,
 }) => {
   const { t } = useTranslation("homeAdmin");
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
-
-  const handleApprove = () => {
-    console.log("approve button clicked");
-  };
-  const handleReject = () => {
-    console.log("reject button clicked");
-  };
-  const handleViewLogs = () => {
-    console.log("view logs button clicked");
-  };
-  const handleAddLogs = () => {
-    console.log("add log button clicked");
-  };
 
   //TODO make half appear on the right and half on the left
   return (
@@ -94,12 +85,12 @@ const PersonItem = ({
                   <DynamicButton
                     className="button button-reject"
                     text={t("reject_button")}
-                    onClick={handleReject}
+                    onClick={rejectFunction}
                   />
                   <DynamicButton
                     className="button button-approve"
                     text={t("approve_button")}
-                    onClick={handleApprove}
+                    onClick={approveFunction}
                   />
                 </div>
                 {/* //TODO add view events button for user */}
@@ -112,13 +103,13 @@ const PersonItem = ({
                   <DynamicButton
                     className="button"
                     text={t("add_log")}
-                    onClick={handleAddLogs}
+                    onClick={addLogFunction}
                   />
 
                   <DynamicButton
                     className="button"
                     text={t("view_log")}
-                    onClick={handleViewLogs}
+                    onClick={viewLogsFunction}
                   />
                 </div>
               </>
@@ -130,7 +121,7 @@ const PersonItem = ({
   );
 };
 
-PersonItem.propTypes = {
+PersonItemCard.propTypes = {
   name: PropTypes.string,
   birthDate: PropTypes.string,
   sex: PropTypes.string,
@@ -142,9 +133,13 @@ PersonItem.propTypes = {
   skills: PropTypes.arrayOf(PropTypes.string).isRequired,
   style: PropTypes.object,
   newUser: PropTypes.bool,
+  approveFunction: PropTypes.func.isRequired,
+  rejectFunction: PropTypes.func.isRequired,
+  viewLogsFunction: PropTypes.func.isRequired,
+  addLogFunction: PropTypes.func.isRequired,
 };
 
-PersonItem.defaultProps = {
+PersonItemCard.defaultProps = {
   style: {},
   email: "",
   address: "",
@@ -156,4 +151,4 @@ PersonItem.defaultProps = {
   name: "",
 };
 
-export default PersonItem;
+export default PersonItemCard;
