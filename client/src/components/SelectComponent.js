@@ -72,7 +72,7 @@ const SelectComponent = ({
       </div>
       <DropDownMenu
         className="gender-button"
-        text={type == "skills" ? t("selectskills") : t("sort")}
+        text={type === "skills" ? t("selectskills") : t("sort")}
         options={availableOptions.map((skill) => ({
           label: t(`${skill.label}`),
           href: `#${skill.value}`,
