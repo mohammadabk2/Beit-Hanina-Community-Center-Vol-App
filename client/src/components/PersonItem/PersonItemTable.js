@@ -27,93 +27,93 @@ const PersonItemTable = ({
 
   //TODO make half appear on the right and half on the left
   return (
-    <div className="flex-box" style={style}>
-      <>
-        <table>
-          <tr>
-            <th>{tsignup("fullName")}</th>
-            <th>{tsignup("birthDate")}</th>
-            <th>{tsignup("address")}</th>
-            <th>{tsignup("gender")}</th>
-            <th>{tsignup("phoneNumber")}</th>
-            <th>{tsignup("email")}</th>
-            <th>{tsignup("insurance")}</th>
-            <th>{tsignup("idNumber")}</th>
-            <th>{t("approve_button")}</th>
-            <th>{t("reject_button")}</th>
-            <th>{t("add_log")}</th>
-            <th>{t("view_log")}</th>
-          </tr>
+    <div className="flex-box line-break" style={style}>
+      <table>
+        <tr>
+          <th className="line-break-vertical-right">{tsignup("fullName")}</th>
+          <th className="line-break-vertical-right">{tsignup("birthDate")}</th>
+          <th className="line-break-vertical-right">{tsignup("address")}</th>
+          <th className="line-break-vertical-right">{tsignup("gender")}</th>
+          <th className="line-break-vertical-right">
+            {tsignup("phoneNumber")}
+          </th>
+          <th className="line-break-vertical-right">{tsignup("email")}</th>
+          <th className="line-break-vertical-right">{tsignup("insurance")}</th>
+          <th className="line-break-vertical-right">{tsignup("idNumber")}</th>
+          <th className="line-break-vertical-right">{t("approve_button")}</th>
+          <th className="line-break-vertical-right">{t("reject_button")}</th>
+          <th className="line-break-vertical-right">{t("add_log")}</th>
+          <th>{t("view_log")}</th>
+        </tr>
 
-          <tr>
-            <td>{name}</td>
-            <td>{birthDate}</td>
-            <td>{address}</td>
-            <td>{sex}</td>
-            <td>{phoneNumber}</td>
-            <td>{email}</td>
-            <td>{insurance}</td>
-            <td>{idNumber}</td>
+        <tr>
+          <td>{name}</td>
+          <td>{birthDate}</td>
+          <td>{address}</td>
+          <td>{sex}</td>
+          <td>{phoneNumber}</td>
+          <td>{email}</td>
+          <td>{insurance}</td>
+          <td>{idNumber}</td>
 
-            <td>
-              {newUser && (
-                <>
-                  <DynamicButton
-                    className="button button-approve"
-                    text={t("approve_button")}
-                    onClick={approveFunction}
-                  />
-                </>
-              )}
-            </td>
+          <td>
+            {newUser && (
+              <>
+                <DynamicButton
+                  className="button button-approve"
+                  text={t("approve_button")}
+                  onClick={approveFunction}
+                />
+              </>
+            )}
+          </td>
 
-            <td>
-              {newUser && (
-                <>
-                  <DynamicButton
-                    className="button button-reject"
-                    text={t("reject_button")}
-                    onClick={rejectFunction}
-                  />
-                </>
-              )}
-            </td>
+          <td>
+            {newUser && (
+              <>
+                <DynamicButton
+                  className="button button-reject"
+                  text={t("reject_button")}
+                  onClick={rejectFunction}
+                />
+              </>
+            )}
+          </td>
 
-            <td>
-              {!newUser && (
-                <>
-                  <DynamicButton
-                    className="button"
-                    text={t("add_log")}
-                    onClick={addLogFunction}
-                  />
-                </>
-              )}
-            </td>
+          <td>
+            {!newUser && (
+              <>
+                <DynamicButton
+                  className="button"
+                  text={t("add_log")}
+                  onClick={addLogFunction}
+                />
+              </>
+            )}
+          </td>
 
-            <td>
-              {!newUser && (
-                <>
-                  <DynamicButton
-                    className="button"
-                    text={t("view_log")}
-                    onClick={viewLogsFunction}
-                  />
-                </>
-              )}
-            </td>
-          </tr>
-        </table>
-      </>
+          <td>
+            {!newUser && (
+              <>
+                <DynamicButton
+                  className="button"
+                  text={t("view_log")}
+                  onClick={viewLogsFunction}
+                />
+              </>
+            )}
+          </td>
+        </tr>
+      </table>
 
       {/* <div className="">
         <div>{tskill("skills")}:</div>
 
         <div className="">
-          {skills.map((person, index) => (
-            <div key={index} className="skills">
+          {skills.map((person, showFirst) => (
+            <div showFirst={showFirst} className="skills">
               {person}
-              {index < skills.length - 1 && " "}
+              {showFirst < skills.length - 1 && " "}
             </div>
           ))}
         </div>

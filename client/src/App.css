@@ -247,7 +247,7 @@ input:focus {
   border-color: #7c7c7c !important;
   border-width: 0.125rem !important;
   border-bottom: solid;
-  width: 80%;
+  width: 100%;
   border-radius: 1px;
 }
 
@@ -339,10 +339,16 @@ input:focus {
   background-color: rgb(135, 29, 29) !important;
 }
 
-.table {
+.line-break-vertical-left {
+  border-color: #7c7c7c !important;
+  border-left: solid;
+  border-left-width: 1px;
 }
 
-.table-item {
+.line-break-vertical-right {
+  border-color: #7c7c7c !important;
+  border-right: solid;
+  border-right-width: 1px;
 }
 
 /*media query for mobile screen sizes */
