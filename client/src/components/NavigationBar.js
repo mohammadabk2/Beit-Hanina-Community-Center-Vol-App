@@ -23,7 +23,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   const { t } = useTranslation("app");
   const navigate = useNavigate();
   const lnOptions = useLnOptions();
-  const {isLightMode, toggleTheme} = useTheme();
+  const { isLightMode, toggleTheme } = useTheme();
 
   const goToSettings = () => {
     console.log("Settings button clicked");
@@ -51,27 +51,21 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   };
 
   return (
-    <div className="flex-box navigation-box">
-      <DropDownMenu
-        className="language-button"
-        text={t("ln")}
-        options={lnOptions}
-      />
-      <div onClick={toggleTheme}>
+    <div className="flex-box navigation-box wrap-reverse">
+      <div onClick={goToAbout}>
         <img
           className="navigation-button-image"
-          src={isLightMode ? modeIconDark : modeIconLight}
-          alt="Mode Switch"
+          src={isLightMode ? aboutIconLight : aboutIconDark}
+          alt="About icon"
         />
       </div>
-
       {!dontShowPageButtons && (
         <>
-          <div onClick={goToHome}>
+          <div onClick={goToSettings}>
             <img
               className="navigation-button-image"
-              src={isLightMode ? homeIconLight : homeIconDark}
-              alt="Home icon"
+              src={isLightMode ? settingsIconLight : settingsIconDark}
+              alt="Settings icon"
             />
           </div>
           <div onClick={goToPersonalArea}>
@@ -80,24 +74,29 @@ const NavigationBar = ({ dontShowPageButtons }) => {
               src={isLightMode ? profileIconLight : profileIconDark}
               alt="Profile icon"
             />
-          </div>
-          <div onClick={goToSettings}>
+          </div>                 
+          <div onClick={goToHome}>
             <img
               className="navigation-button-image"
-              src={isLightMode ? settingsIconLight : settingsIconDark}
-              alt="Settings icon"
+              src={isLightMode ? homeIconLight : homeIconDark}
+              alt="Home icon"
             />
           </div>
         </>
       )}
-
-      <div onClick={goToAbout}>
+      <div onClick={toggleTheme}>
         <img
           className="navigation-button-image"
-          src={isLightMode ? aboutIconLight : aboutIconDark}
-          alt="About icon"
+          src={isLightMode ? modeIconDark : modeIconLight}
+          alt="Mode Switch"
         />
       </div>
+
+      <DropDownMenu
+        className="language-button"
+        text={t("ln")}
+        options={lnOptions}
+      />
     </div>
   );
 };
