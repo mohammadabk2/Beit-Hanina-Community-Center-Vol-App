@@ -36,40 +36,42 @@ const PersonalArea = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="general-box flex-box flex-column smooth-shadow-box">
-        <div className="basic-box-padding">
-          <div className="personal-area-content basic-item-padding">
-            {tsignup("fullName")}: {name}
+      <div className="general-box scroll-box1 flex-box">
+        <div className="general-box flex-box flex-column smooth-shadow-box">
+          <div className="basic-box-padding">
+            <div className="personal-area-content basic-item-padding">
+              {tsignup("fullName")}: {name}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("user_name")}: {userName}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("approved_hours")}: {approvedHours}
+            </div>
+
+            <div className="personal-area-content basic-item-padding">
+              {t("unapproved_hours")}: {unapprovedHours}
+            </div>
           </div>
 
-          <div className="personal-area-content basic-item-padding">
-            {t("user_name")}: {userName}
-          </div>
+          <SelectSkills
+            type="skills"
+            onChange={handleSkills}
+            chosen={userSkills}
+          />
 
-          <div className="personal-area-content basic-item-padding">
-            {t("approved_hours")}: {approvedHours}
-          </div>
+          <DynamicButton
+            className="button"
+            text={t("to_pdf")}
+            onClick={printToPdf}
+          />
 
-          <div className="personal-area-content basic-item-padding">
-            {t("unapproved_hours")}: {unapprovedHours}
-          </div>
+          <ManageAccountBox />
         </div>
-
-        <SelectSkills
-          type="skills"
-          onChange={handleSkills}
-          chosen={userSkills}
-        />
-
-        <DynamicButton
-          className="button"
-          text={t("to_pdf")}
-          onClick={printToPdf}
-        />
-
-        <ManageAccountBox />
       </div>
-    </div>
+    </div>  
   );
 };
 

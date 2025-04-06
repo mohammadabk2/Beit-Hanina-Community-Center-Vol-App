@@ -317,6 +317,10 @@ input:focus {
   padding-bottom: .2rem;
 }
 
+.wrap-reverse {
+  flex-direction: row-reverse;
+}
+
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
 
