@@ -143,107 +143,81 @@ const HomeAdmin = () => {
   const renderPeopleItems = (peopeArray) => {
     return peopeArray.map((person, index) => (
       <>
-        {personView && (
-          <PersonItem
-            key={index}
-            name={person.name}
-            birthDate={person.birthDate}
-            sex={person.sex}
-            skills={person.skills}
-            phoneNumber={person.phoneNumber}
-            email={person.email}
-            address={person.address}
-            insurance={person.insurance}
-            idNumber={person.idNumber}
-            newUser={person.newUser}
-            type="card"
-          />
-        )}
-
-        {!personView && (
-          <PersonItem
-            key={index}
-            name={person.name}
-            birthDate={person.birthDate}
-            sex={person.sex}
-            skills={person.skills}
-            phoneNumber={person.phoneNumber}
-            email={person.email}
-            address={person.address}
-            insurance={person.insurance}
-            idNumber={person.idNumber}
-            newUser={person.newUser}
-            type="table"
-          />
-        )}
-
-        {/* //TODO add  PersonItemTable */}
+        <PersonItem
+          key={index}
+          name={person.name}
+          birthDate={person.birthDate}
+          sex={person.sex}
+          skills={person.skills}
+          phoneNumber={person.phoneNumber}
+          email={person.email}
+          address={person.address}
+          insurance={person.insurance}
+          idNumber={person.idNumber}
+          newUser={person.newUser}
+          type={personView ? "card" : "table"}
+        />
       </>
     ));
-  };
-
-  const renderShowEvents = () => {
-    return (
-      <>
-        <div className="scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box flex-column top-scroll-box1">
-            <div>
-              {showEvents && (
-                <>
-                  <DynamicButton
-                    className="button button-small"
-                    onClick={sortEvents}
-                    text={t("sort")}
-                  />
-
-                  <DynamicButton
-                    className="button button-small"
-                    onClick={switchMode}
-                    text={t("switch_to_people")}
-                  />
-                </>
-              )}
-              {!showEvents && (
-                <>
-                  <DynamicButton
-                    className="button button-small"
-                    onClick={sortPeople}
-                    text={t("sort")}
-                  />
-                  <DynamicButton
-                    className="button button-small"
-                    onClick={switchMode}
-                    text={t("switch_to_events")}
-                  />
-
-                  <DynamicButton
-                    text={t("switch_modes")}
-                    onClick={handleChange}
-                    className="button button-small"
-                  />
-                </>
-              )}
-            </div>
-            <div className="line-break"></div>
-          </div>
-          {showEvents && (
-            <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
-          )}
-
-          {!showEvents && (
-            <div className="bottom-scroll-box1">
-              {renderPeopleItems(people)}
-            </div>
-          )}
-        </div>
-      </>
-    );
   };
 
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      {renderShowEvents()}
+
+      {showEvents && (
+        <>
+          <div className="scroll-box1 general-box flex-box flex-column">
+            <div className="flex-box flex-column top-scroll-box1 line-break">
+              <div>
+                <DynamicButton
+                  className="button button-small"
+                  onClick={sortEvents}
+                  text={t("sort")}
+                />
+
+                <DynamicButton
+                  className="button button-small"
+                  onClick={switchMode}
+                  text={t("switch_to_people")}
+                />
+              </div>
+            </div>
+            <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+          </div>
+        </>
+      )}
+
+      {!showEvents && (
+        <>
+          <div className="perosnal-area-content flex-box flex-column">
+            <div className="flex-box flex-column top-scroll-box1 line-break">
+              <div>
+                <DynamicButton
+                  className="button button-small"
+                  onClick={sortPeople}
+                  text={t("sort")}
+                />
+
+                <DynamicButton
+                  className="button button-small"
+                  onClick={switchMode}
+                  text={t("switch_to_events")}
+                />
+
+                <DynamicButton
+                  text={t("switch_modes")}
+                  onClick={handleChange}
+                  className="button button-small"
+                />
+              </div>
+            </div>
+            <div className="bottom-scroll-box1">
+              {renderPeopleItems(people)}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

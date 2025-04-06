@@ -293,41 +293,56 @@ input:focus {
   align-items: center;
 }
 
-.scroll-box1 {
+.scroll-box1,
+.person-table-content {
   width: 95%;
   max-width: 36.4375rem;
   background-color: var(--body-color);
 }
 
-.personal-area-content {
-  margin-bottom: 0.7rem; 
-  /* font-size: 20px; */
-  font-size: 1.3rem; 
+.perosnal-area-content {
+  max-width: 90vw;
 }
 
+.personal-area-content {
+  margin-bottom: 0.7rem;
+  /* font-size: 20px; */
+  font-size: 1.3rem;
+}
 
-.basic-box-padding{
+.basic-box-padding {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
 
-.basic-item-padding{
-  padding-top: .2rem;
-  padding-bottom: .2rem;
+.basic-item-padding {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
 
 /* TODO add shadow to them */
 .button-approve {
-  background-color: green !important;
+  background-color: rgb(8, 247, 8) !important;
+}
+
+.button-approve:hover {
+  transition: background-color ease 0.3s;
+  background-color: rgb(10, 107, 29) !important;
 }
 
 .button-reject {
   background-color: red !important;
 }
 
-.button-reject:hover{
+.button-reject:hover {
   transition: background-color ease 0.3s;
-  background-color: blue;
+  background-color: rgb(135, 29, 29) !important;
+}
+
+.table {
+}
+
+.table-item {
 }
 
 /*media query for mobile screen sizes */

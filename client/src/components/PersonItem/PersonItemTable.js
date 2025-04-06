@@ -27,96 +27,97 @@ const PersonItemTable = ({
 
   //TODO make half appear on the right and half on the left
   return (
-    <div className="flex-box flex-box flex-column" style={style}>
-      {/* //TODO centre the name in height */}
-      <div className="event-box-title general-box">{name}</div>
+    <div className="flex-box" style={style}>
+      <>
+        <table>
+          <tr>
+            <th>{tsignup("fullName")}</th>
+            <th>{tsignup("birthDate")}</th>
+            <th>{tsignup("address")}</th>
+            <th>{tsignup("gender")}</th>
+            <th>{tsignup("phoneNumber")}</th>
+            <th>{tsignup("email")}</th>
+            <th>{tsignup("insurance")}</th>
+            <th>{tsignup("idNumber")}</th>
+            <th>{t("approve_button")}</th>
+            <th>{t("reject_button")}</th>
+            <th>{t("add_log")}</th>
+            <th>{t("view_log")}</th>
+          </tr>
 
-      <div className="">
-        <div className="general-box flex-box flex-column smooth-shadow-box">
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("birthDate")} {birthDate}
-          </div>
+          <tr>
+            <td>{name}</td>
+            <td>{birthDate}</td>
+            <td>{address}</td>
+            <td>{sex}</td>
+            <td>{phoneNumber}</td>
+            <td>{email}</td>
+            <td>{insurance}</td>
+            <td>{idNumber}</td>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("address")} {address}
-          </div>
-
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("gender")} {sex}
-          </div>
-
-          <div className="basic-item-padding personal-area-content">
-            <div className="flex-box">
-              <div className="flex-box flex-column">
-                <div>{tskill("skills")}:</div>
-
-                <div className="flex-box">
-                  {skills.map((person, index) => (
-                    <div key={index} className="skills">
-                      {person}
-                      {index < skills.length - 1 && " "}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("phoneNumber")}: {phoneNumber}
-          </div>
-
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("email")} {email}
-          </div>
-
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("insurance")} {insurance}
-          </div>
-
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("idNumber")} {idNumber}
-          </div>
-
-          <div>
-            {newUser && (
-              <>
-                <div className="flex-box">
-                  <DynamicButton
-                    className="button button-reject"
-                    text={t("reject_button")}
-                    onClick={rejectFunction}
-                  />
+            <td>
+              {newUser && (
+                <>
                   <DynamicButton
                     className="button button-approve"
                     text={t("approve_button")}
                     onClick={approveFunction}
                   />
-                </div>
-                {/* //TODO add view events button for user */}
-              </>
-            )}
-            {!newUser && (
-              <>
-                <div className="flex-box">
-                  {/* TODO add plus icon */}
+                </>
+              )}
+            </td>
+
+            <td>
+              {newUser && (
+                <>
+                  <DynamicButton
+                    className="button button-reject"
+                    text={t("reject_button")}
+                    onClick={rejectFunction}
+                  />
+                </>
+              )}
+            </td>
+
+            <td>
+              {!newUser && (
+                <>
                   <DynamicButton
                     className="button"
                     text={t("add_log")}
                     onClick={addLogFunction}
                   />
+                </>
+              )}
+            </td>
 
+            <td>
+              {!newUser && (
+                <>
                   <DynamicButton
                     className="button"
                     text={t("view_log")}
                     onClick={viewLogsFunction}
                   />
-                </div>
-              </>
-            )}
-          </div>
+                </>
+              )}
+            </td>
+          </tr>
+        </table>
+      </>
+
+      {/* <div className="">
+        <div>{tskill("skills")}:</div>
+
+        <div className="">
+          {skills.map((person, index) => (
+            <div key={index} className="skills">
+              {person}
+              {index < skills.length - 1 && " "}
+            </div>
+          ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
