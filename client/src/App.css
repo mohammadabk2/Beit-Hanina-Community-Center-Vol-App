@@ -247,7 +247,7 @@ input:focus {
   border-color: #7c7c7c !important;
   border-width: 0.125rem !important;
   border-bottom: solid;
-  width: 80%;
+  width: 100%;
   border-radius: 1px;
 }
 
@@ -330,6 +330,29 @@ input:focus {
   background-color: blue;
 }
 
+.perosnal-area-content {
+  margin-bottom: 0.7rem;
+  /* font-size: 20px; */
+  font-size: 1.3rem;
+}
+
+.top-user-box {
+  border-radius: 1rem 1rem 0 0;
+  font-size: 2.3rem;
+  width: 100%;
+  background-color: var(--box-background-color);
+  margin-top: 1rem;
+}
+
+.bottom-user-box {
+  border-radius: 0 0 1rem 1rem;
+  width: 100%;
+  background-color: var(--box-background-color);
+
+}
+
+
+
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
   .event-box-content-bottom,
@@ -357,8 +380,6 @@ input:focus {
     justify-content: center;
   }
 }
-.perosnal-area-content {
-  margin-bottom: 0.7rem;
-  /* font-size: 20px; */
-  font-size: 1.3rem;
-}
+
+
+

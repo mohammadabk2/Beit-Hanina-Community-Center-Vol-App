@@ -158,7 +158,7 @@ const HomeAdmin = () => {
     return (
       <>
         <div className="scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box flex-column top-scroll-box1">
+          <div className="flex-box flex-column top-scroll-box1 line-break">
             <div>
               {showEvents && (
                 <>
@@ -190,7 +190,6 @@ const HomeAdmin = () => {
                 </>
               )}
             </div>
-            <div className="line-break"></div>
           </div>
           {showEvents && (
             <div className="bottom-scroll-box1">{renderEventItems(events)}</div>

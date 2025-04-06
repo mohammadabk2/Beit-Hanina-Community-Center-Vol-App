@@ -212,7 +212,7 @@ const HomeOrganizer = () => {
     return (
       <>
         <div className="scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box flex-column top-scroll-box1">
+          <div className="flex-box flex-column top-scroll-box1 line-break">
             <div>
               <DynamicButton
                 className="button button-small"
@@ -225,7 +225,6 @@ const HomeOrganizer = () => {
                 text={t("create_event")}
               />
             </div>
-            <div className="line-break"></div>
           </div>
           <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
         </div>

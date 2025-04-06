@@ -36,94 +36,92 @@ const PersonItem = ({
 
   //TODO make half appear on the right and half on the left
   return (
-    <div className="flex-box flex-box flex-column" style={style}>
+    <div className="flex-box flex-column event-box smooth-shadow-box" style={style}>
       {/* //TODO centre the name in height */}
-      <div className="event-box-title general-box">{name}</div>
+      {/* <div className="event-box-title general-box">{name}</div> */}
+      <div className="top-user-box line-break">{name}</div>
+      <div className="bottom-user-box flex-box flex-column">
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("birthDate")} {birthDate}
+        </div>
 
-      <div className="">
-        <div className="general-box flex-box flex-column smooth-shadow-box">
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("birthDate")} {birthDate}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("address")} {address}
+        </div>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("address")} {address}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("gender")} {sex}
+        </div>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("gender")} {sex}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          <div className="flex-box">
+            <div className="flex-box flex-column">
+              <div>{tskill("skills")}:</div>
 
-          <div className="basic-item-padding personal-area-content">
-            <div className="flex-box">
-              <div className="flex-box flex-column">
-                <div>{tskill("skills")}:</div>
-
-                <div className="flex-box">
-                  {skills.map((person, index) => (
-                    <div key={index} className="skills">
-                      {person}
-                      {index < skills.length - 1 && " "}
-                    </div>
-                  ))}
-                </div>
+              <div className="flex-box">
+                {skills.map((person, index) => (
+                  <div key={index} className="skills">
+                    {person}
+                    {index < skills.length - 1 && " "}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("phoneNumber")}: {phoneNumber}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("phoneNumber")}: {phoneNumber}
+        </div>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("email")} {email}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("email")} {email}
+        </div>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("insurance")} {insurance}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("insurance")} {insurance}
+        </div>
 
-          <div className="basic-item-padding personal-area-content">
-            {tsignup("idNumber")} {idNumber}
-          </div>
+        <div className="basic-item-padding personal-area-content">
+          {tsignup("idNumber")} {idNumber}
+        </div>
 
-          <div>
-            {newUser && (
-              <>
-                <div className="flex-box">
-                  <DynamicButton
-                    className="button button-reject"
-                    text={t("reject_button")}
-                    onClick={handleReject}
-                  />
-                  <DynamicButton
-                    className="button button-approve"
-                    text={t("approve_button")}
-                    onClick={handleApprove}
-                  />
-                </div>
-                {/* //TODO add view events button for user */}
-              </>
-            )}
-            {!newUser && (
-              <>
-                <div className="flex-box">
-                  {/* TODO add plus icon */}
-                  <DynamicButton
-                    className="button"
-                    text={t("add_log")}
-                    onClick={handleAddLogs}
-                  />
+        <div>
+          {newUser && (
+            <>
+              <div className="flex-box">
+                <DynamicButton
+                  className="button button-reject"
+                  text={t("reject_button")}
+                  onClick={handleReject}
+                />
+                <DynamicButton
+                  className="button button-approve"
+                  text={t("approve_button")}
+                  onClick={handleApprove}
+                />
+              </div>
+              {/* //TODO add view events button for user */}
+            </>
+          )}
+          {!newUser && (
+            <>
+              <div className="flex-box">
+                {/* TODO add plus icon */}
+                <DynamicButton
+                  className="button"
+                  text={t("add_log")}
+                  onClick={handleAddLogs}
+                />
 
-                  <DynamicButton
-                    className="button"
-                    text={t("view_log")}
-                    onClick={handleViewLogs}
-                  />
-                </div>
-              </>
-            )}
-          </div>
+                <DynamicButton
+                  className="button"
+                  text={t("view_log")}
+                  onClick={handleViewLogs}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
