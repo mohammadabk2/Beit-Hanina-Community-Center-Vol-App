@@ -181,7 +181,7 @@ const SignUpPage = () => {
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
-              className="insurance-button"
+              className="gender-button"
               text={formData.insurance || t("Select Insurance")}
               options={insuranceOptions}
             />
