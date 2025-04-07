@@ -20,15 +20,15 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
         <thead>
           <tr>
             {/* Keep only relevant headers */}
-            <th>{tsignup("fullName")}</th>
+            <th >{tsignup("fullName")}</th>
             <th>{tsignup("birthDate")}</th>
             <th>{tsignup("gender")}</th>
             <th>{tsignup("phoneNumber")}</th>
             <th>{tsignup("email")}</th>
             <th>{tsignup("address")}</th>
             {/* Maybe add Insurance/ID later if needed, or show in details view */}
-            {/*<th>{tsignup("insurance")}</th>*/}
-            {/*<th>{tsignup("idNumber")}</th>*/}
+            <th>{tsignup("insurance")}</th>
+            <th>{tsignup("idNumber")}</th>
             {/*<th>{tskill("skills")}</th>*/} {/* Example skills header */}
             <th colSpan={isNewUserList ? 2 : 2} className="actions-header"> {/* Adjust colSpan */}
               {t("actions")} {/* Single 'Actions' Header */}
