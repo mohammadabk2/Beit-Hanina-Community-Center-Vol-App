@@ -322,7 +322,7 @@ input:focus {
 
 /* TODO add shadow to them */
 .button-approve {
-  background-color: rgb(8, 247, 8) !important;
+  background-color: rgb(27, 179, 27) !important;
 }
 
 .button-approve:hover {
@@ -387,17 +387,17 @@ input:focus {
   border-collapse: collapse; /* Remove gaps between cells */
   margin: 1.25rem 0; /* Add some margin around the table */
   box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  background-color: #fff;
+  background-color: var(--odd-row-table);
 }
 
 /* Table Header Styles */
 .person-table thead th {
-  background-color: #f8f9fa; /* Light background for header */
-  color: #333; /* Darker text for header */
+  background-color: var(--even-row-table); /* Light background for header */
+  color: var(--table-row-text); /* Darker text for header */
   font-weight: bold;
   text-align: left;
   padding: 0.75rem 0.9375rem; /* Generous padding */
-  border-bottom: 0.125rem solid #dee2e6; /* Solid bottom border for header */
+  border-bottom: 0.125rem solid var(--table-line-break); /* Solid bottom border for header */
 }
 
 /* Align action header text */
@@ -408,19 +408,19 @@ input:focus {
 /* Table Body Cell Styles */
 .person-table tbody td {
   padding: 0.625rem 0.9375rem; /* Consistent padding */
-  border-bottom: 0.0625rem solid #eee; /* Light lines between rows */
+  border-bottom: 0.0625rem solid var(--table-line-break); /* Light lines between rows */
   vertical-align: middle; /* Align content vertically */
-  color: #555; /* Slightly lighter text for body */
+  color: var(--table-row-text); /* Slightly lighter text for body */
 }
 
 /* Zebra-striping for readability */
 .person-table tbody tr:nth-of-type(even) {
-  background-color: #f9f9f9;
+  background-color: var(--even-row-table);
 }
 
 /* Hover effect on rows */
 .person-table tbody tr:hover {
-  background-color: #f1f1f1; /* Highlight row on hover */
+  background-color: var(--row-table-hover); /* Highlight row on hover */
 }
 
 /* Action cell alignment */
