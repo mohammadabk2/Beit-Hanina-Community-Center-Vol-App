@@ -27,7 +27,10 @@ const PersonItemCard = ({
 
   //TODO make half appear on the right and half on the left
   return (
-    <div className="flex-box flex-column event-box smooth-shadow-box" style={style}>
+    <div
+      className="flex-box flex-column event-box smooth-shadow-box"
+      style={style}
+    >
       {/* //TODO centre the name in height */}
       {/* <div className="event-box-title general-box">{name}</div> */}
       <div className="top-user-box line-break">{name}</div>
@@ -77,43 +80,42 @@ const PersonItemCard = ({
           {tsignup("idNumber")} {idNumber}
         </div>
 
-          <div>
-            {newUser && (
-              <>
-                <div className="flex-box">
-                  <DynamicButton
-                    className="button button-reject"
-                    text={t("reject_button")}
-                    onClick={rejectFunction}
-                  />
-                  <DynamicButton
-                    className="button button-approve"
-                    text={t("approve_button")}
-                    onClick={approveFunction}
-                  />
-                </div>
-                {/* //TODO add view events button for user */}
-              </>
-            )}
-            {!newUser && (
-              <>
-                <div className="flex-box">
-                  {/* TODO add plus icon */}
-                  <DynamicButton
-                    className="button"
-                    text={t("add_log")}
-                    onClick={addLogFunction}
-                  />
+        <div>
+          {newUser && (
+            <>
+              <div className="flex-box">
+                <DynamicButton
+                  className="button button-reject"
+                  text={t("reject_button")}
+                  onClick={rejectFunction}
+                />
+                <DynamicButton
+                  className="button button-approve"
+                  text={t("approve_button")}
+                  onClick={approveFunction}
+                />
+              </div>
+              {/* //TODO add view events button for user */}
+            </>
+          )}
+          {!newUser && (
+            <>
+              <div className="flex-box">
+                {/* TODO add plus icon */}
+                <DynamicButton
+                  className="button"
+                  text={t("add_log")}
+                  onClick={addLogFunction}
+                />
 
-                  <DynamicButton
-                    className="button"
-                    text={t("view_log")}
-                    onClick={viewLogsFunction}
-                  />
-                </div>
-              </>
-            )}
-          </div>
+                <DynamicButton
+                  className="button"
+                  text={t("view_log")}
+                  onClick={viewLogsFunction}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
