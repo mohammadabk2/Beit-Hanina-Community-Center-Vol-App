@@ -1,11 +1,17 @@
-import React, { useState } from "react"; // Added useEffect if you plan fetching data later
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import EventItem from "../../components/EventItem";
-// 1. Import the correct switcher component
-import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher"; // Adjust path if needed
+import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
+import { useTheme } from "../../config/options/Colors";
+
+import CardIconDark from "../../icons/dark/card_view_icon.svg";
+import TableIconDark from "../../icons/dark/table_view_icon.svg";
+
+import CardIconLight from "../../icons/light/card_view_icon.svg";
+import TableIconLight from "../../icons/light/table_view_icon.svg";
 
 const HomeAdmin = () => {
   //! testing only - Added unique IDs and changed 'newUser' to 'isNew'
@@ -184,6 +190,8 @@ const HomeAdmin = () => {
   // 2. renderPeopleItems function is no longer needed for mapping
   // const renderPeopleItems = (peopleArray) => { ... } // DELETE THIS FUNCTION
 
+  const { isLightMode } = useTheme();
+
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
@@ -224,14 +232,24 @@ const HomeAdmin = () => {
                   onClick={switchMode}
                   text={t("switch_to_events")}
                 />
-                <DynamicButton
-                  text={
+                {/* //TODO give the img a class to make it bigger */}
+                <img
+                  className=""
+                  onClick={handleChange}
+                  src={
+                    personView
+                      ? isLightMode
+                        ? TableIconLight
+                        : TableIconDark
+                      : isLightMode
+                      ? CardIconLight
+                      : CardIconDark
+                  }
+                  alt={
                     personView
                       ? t("switch_to_table_view")
                       : t("switch_to_card_view")
-                  } // More descriptive text
-                  onClick={handleChange}
-                  className="button button-small"
+                  }
                 />
               </div>
             </div>
