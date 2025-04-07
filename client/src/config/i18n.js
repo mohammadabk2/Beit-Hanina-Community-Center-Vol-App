@@ -8,6 +8,7 @@ import homeVolunteerEN from "./locales/en/homeVolunteer.json";
 import HomeOrganizerEn from "./locales/en/HomeOrganizer.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
+import insuranceEN from "./locales/en/insurance.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
 
 // Import arabic translation files
@@ -17,6 +18,7 @@ import homeVolunteerAR from "./locales/ar/homeVolunteer.json";
 import HomeOrganizerAR from "./locales/ar/HomeOrganizer.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
+import insuranceAR from "./locales/ar/insurance.json";
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
 
 // The translations
@@ -29,6 +31,7 @@ const resources = {
     homeOrg: HomeOrganizerEn,
     about: aboutEn,
     personal: personalAreaVolunteerEN,
+    insurance: insuranceEN,
   },
   ar: {
     app: appAr,
@@ -38,6 +41,7 @@ const resources = {
     about: aboutAR,
     skills: skillsAR,
     personal: personalAreaVolunteerAR,
+    insurance: insuranceAR,
   },
 };
 

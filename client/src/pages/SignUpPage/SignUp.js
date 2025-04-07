@@ -8,12 +8,17 @@ import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import SelectComponent from "../../components/SelectComponent";
 
+// Import the insurance options
+import { useInsuranceOptions } from "../../config/options/Insurance";
+
 const SignUpPage = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate("/");
   };
+  
+  const baseInsuranceOptions = useInsuranceOptions();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,11 +41,23 @@ const SignUpPage = () => {
     console.log("Form submitted:", formData);
   };
 
+  const handleInsuranceChange = (value) => {
+    setFormData({ ...formData, insurance: value });
+  };
+
   const handleSexChange = (value) => {
     setFormData({ ...formData, sex: value });
   };
 
   const { t } = useTranslation("signUp");
+
+  const insuranceOptions = baseInsuranceOptions.map(option => ({
+    ...option,
+    onClick: () => {
+      console.log(`${option.value} clicked`);
+      handleInsuranceChange(option.value);
+    }
+  }));
 
   const sexOptions = [
     {
@@ -163,13 +180,10 @@ const SignUpPage = () => {
               <label>{t("insurance")}: </label>
               <label className="red-star">*</label>
             </div>
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.insurance}
-              name="insurance"
-              onChange={handleChange}
-              placeholder={t("insurance_placeholder")}
+            <DropDownMenu
+              className="insurance-button"
+              text={formData.insurance || t("Select Insurance")}
+              options={insuranceOptions}
             />
           </div>
 
