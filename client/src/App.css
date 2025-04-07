@@ -1,5 +1,10 @@
 @import url("global.css");
 
+/*Sets font-family */
+body {
+ font-family: sans-serif;
+}
+
 /*Adds background transition to all classes for dark/light mode*/
 .button,
 .general-box,

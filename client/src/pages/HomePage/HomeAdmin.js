@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Added useEffect if you plan fetching data later
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";

@@ -25,7 +25,7 @@ const PersonItemRow = ({
   // const { t: tskill } = useTranslation("skills"); // Not needed here
 
   // Simple skills display (comma-separated) - adjust as needed
-  const skillsDisplay = skills ? skills.join(", ") : "N/A";
+  // const skillsDisplay = skills ? skills.join(", ") : "N/A";
 
   return (
     // No outer div or table needed here, just the row
