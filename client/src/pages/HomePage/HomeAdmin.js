@@ -1,23 +1,52 @@
-import React, { useState, useEffect } from "react"; // Added useEffect if you plan fetching data later
+import React, { useState } from "react"; // Added useEffect if you plan fetching data later
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import EventItem from "../../components/EventItem";
 // 1. Import the correct switcher component
-import PeopleDisplaySwitcher from "../../components/PersonItem/PersonItem"; // Adjust path if needed
+import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher"; // Adjust path if needed
 
 const HomeAdmin = () => {
   //! testing only - Added unique IDs and changed 'newUser' to 'isNew'
   const events = [
     // ... (your events data remains the same)
-     { id: "evt1", name: "test event1", desc: "some desc", req: ["test", "test", "test", "test"], count: 5, size: 10 },
-     { id: "evt2", name: "test event2", desc: "some desc", req: ["test", "test", "test", "test"], count: 5, size: 10 },
-     { id: "evt3", name: "test event3", desc: "some desc", req: ["test", "test", "test", "test"], count: 5, size: 10 },
-     { id: "evt4", name: "test event4", desc: "some desc", req: ["test", "test", "test", "test"], count: 5, size: 10 },
+    {
+      id: "evt1",
+      name: "test event1",
+      desc: "some desc",
+      req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
+    },
+    {
+      id: "evt2",
+      name: "test event2",
+      desc: "some desc",
+      req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
+    },
+    {
+      id: "evt3",
+      name: "test event3",
+      desc: "some desc",
+      req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
+    },
+    {
+      id: "evt4",
+      name: "test event4",
+      desc: "some desc",
+      req: ["test", "test", "test", "test"],
+      count: 5,
+      size: 10,
+    },
   ];
 
-  const initialPeople = [ // Renamed to initialPeople for clarity if using state later
+  const initialPeople = [
+    // Renamed to initialPeople for clarity if using state later
     {
       id: "person1", // Added unique ID
       name: "Alice", // Changed names for clarity
@@ -50,7 +79,7 @@ const HomeAdmin = () => {
       idNumber: "222222222",
       isNew: false, // Changed from newUser to isNew
     },
-     {
+    {
       id: "person3", // Added unique ID
       name: "Charlie",
       sex: "male",
@@ -106,20 +135,23 @@ const HomeAdmin = () => {
 
   // --- Event Rendering --- (Remains the same)
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map((event) => ( // Use event.id for key
-      <EventItem
-        key={event.id}
-        name={event.name}
-        desc={event.desc}
-        req={event.req}
-        className="flex-box flex-column event-box smooth-shadow-box"
-        type="admin"
-        count={event.count}
-        size={event.size}
-      />
-    ));
+    return eventsArray.map(
+      (
+        event // Use event.id for key
+      ) => (
+        <EventItem
+          key={event.id}
+          name={event.name}
+          desc={event.desc}
+          req={event.req}
+          className="flex-box flex-column event-box smooth-shadow-box"
+          type="admin"
+          count={event.count}
+          size={event.size}
+        />
+      )
+    );
   };
-
 
   // --- People Action Handlers ---
   // 4. Define handlers that PeopleDisplaySwitcher expects
@@ -149,10 +181,8 @@ const HomeAdmin = () => {
     // TODO: Implement actual logic (e.g., show modal, navigate)
   };
 
-
   // 2. renderPeopleItems function is no longer needed for mapping
   // const renderPeopleItems = (peopleArray) => { ... } // DELETE THIS FUNCTION
-
 
   return (
     <div className="app flex-box flex-column">
@@ -179,7 +209,7 @@ const HomeAdmin = () => {
             <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
           </div>
         </>
-        ) : (
+      ) : (
         <>
           <div className="perosnal-area-content flex-box flex-column">
             <div className="flex-box flex-column top-scroll-box1 line-break">
@@ -195,7 +225,11 @@ const HomeAdmin = () => {
                   text={t("switch_to_events")}
                 />
                 <DynamicButton
-                  text={personView ? t("switch_to_table_view") : t("switch_to_card_view")} // More descriptive text
+                  text={
+                    personView
+                      ? t("switch_to_table_view")
+                      : t("switch_to_card_view")
+                  } // More descriptive text
                   onClick={handleChange}
                   className="button button-small"
                 />

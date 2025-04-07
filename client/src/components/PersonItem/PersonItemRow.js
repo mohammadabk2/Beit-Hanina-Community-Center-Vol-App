@@ -12,9 +12,9 @@ const PersonItemRow = ({
   phoneNumber,
   email,
   address,
-  // insurance, // Removed from direct display for brevity, but available if needed
-  // idNumber,  // Removed from direct display for brevity, but available if needed
-  skills,    // Keeping skills prop
+  insurance, // Removed from direct display for brevity, but available if needed
+  idNumber, // Removed from direct display for brevity, but available if needed
+  // skills, //! uncomment when added
   newUser,
   approveFunction,
   rejectFunction,
@@ -25,7 +25,7 @@ const PersonItemRow = ({
   // const { t: tskill } = useTranslation("skills"); // Not needed here
 
   // Simple skills display (comma-separated) - adjust as needed
-  const skillsDisplay = skills ? skills.join(", ") : "N/A";
+  // const skillsDisplay = skills ? skills.join(", ") : "N/A"; //! uncomment when added
 
   return (
     // No outer div or table needed here, just the row
@@ -36,10 +36,9 @@ const PersonItemRow = ({
       <td>{phoneNumber}</td>
       <td>{email}</td>
       <td>{address}</td>
-      {/*<td>{insurance}</td>*/} {/* Example: Can be added back if needed */}
-      {/*<td>{idNumber}</td>*/} {/* Example: Can be added back if needed */}
+      <td>{insurance}</td> {/* Example: Can be added back if needed */}
+      <td>{idNumber}</td> {/* Example: Can be added back if needed */}
       {/* <td>{skillsDisplay}</td> */} {/* Example: Skills cell */}
-
       {/* Action Buttons - Render appropriate buttons in shared cells */}
       {newUser ? (
         <>
@@ -48,7 +47,7 @@ const PersonItemRow = ({
               className="button button-approve" // Use specific classes for styling
               text={t("approve_button")}
               onClick={approveFunction}
-              aria-label={`${t('approve_button')} ${name}`} // Better accessibility
+              aria-label={`${t("approve_button")} ${name}`} // Better accessibility
             />
           </td>
           <td>
@@ -56,7 +55,7 @@ const PersonItemRow = ({
               className="button button-reject"
               text={t("reject_button")}
               onClick={rejectFunction}
-              aria-label={`${t('reject_button')} ${name}`} // Better accessibility
+              aria-label={`${t("reject_button")} ${name}`} // Better accessibility
             />
           </td>
         </>
@@ -67,7 +66,7 @@ const PersonItemRow = ({
               className="button button-add" // Use specific classes
               text={t("add_log")}
               onClick={addLogFunction}
-              aria-label={`${t('add_log')} for ${name}`} // Better accessibility
+              aria-label={`${t("add_log")} for ${name}`} // Better accessibility
             />
           </td>
           <td>
@@ -75,7 +74,7 @@ const PersonItemRow = ({
               className="button button-view" // Use specific classes
               text={t("view_log")}
               onClick={viewLogsFunction}
-              aria-label={`${t('view_log')} for ${name}`} // Better accessibility
+              aria-label={`${t("view_log")} for ${name}`} // Better accessibility
             />
           </td>
         </>
@@ -108,6 +107,5 @@ PersonItemRow.defaultProps = {
   newUser: false,
   // Add other defaults as necessary
 };
-
 
 export default PersonItemRow;
