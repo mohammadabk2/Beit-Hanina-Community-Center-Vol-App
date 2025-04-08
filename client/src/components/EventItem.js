@@ -19,8 +19,12 @@ const EventItem = ({ name, className, style, req, type, count, size }) => {
   const handleOrgClick = () => {
     console.log("org button clicked");
   };
-  const handleAdminClick = () => {
-    console.log("admin button clicked");
+  const handleApproveClick = () => {
+    console.log("approve button clicked");
+  };
+
+  const handleRejectClick = () => {
+    console.log("reject button clicked");
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -98,11 +102,19 @@ const EventItem = ({ name, className, style, req, type, count, size }) => {
           )}
 
           {type === "admin" && (
-            <DynamicButton
-              className="button"
-              text={t("admin_button")}
-              onClick={handleAdminClick}
-            />
+            <>
+              <DynamicButton
+                className="button"
+                text={t("approve_button")}
+                onClick={handleApproveClick}
+              />
+
+              <DynamicButton
+                className="button"
+                text={t("reject_button")}
+                onClick={handleRejectClick}
+              />
+            </>
           )}
         </div>
       </div>

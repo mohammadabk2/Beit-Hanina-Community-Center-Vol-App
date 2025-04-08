@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
-// import DropDownMenu from "../../components/DropDownMenu";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");

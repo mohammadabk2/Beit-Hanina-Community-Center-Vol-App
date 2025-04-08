@@ -3,16 +3,12 @@ import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
-// import DropDownMenu from "../../components/DropDownMenu";
 import ManageAccountBox from "../../components/ManageAccountBox";
-// import { useSkillOptions } from "../../config/options/Skills";
-import SelectComponent from "../../components/SelectComponent";
+import SelectSkills from "../../components/SelectComponent";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");
-  // const { t: tskill } = useTranslation("skills");
   const { t: tsignup } = useTranslation("signUp");
-  // const skillsOptions = useSkillOptions();
 
   //TODO change all these to read from database
   const name = "john doe";
@@ -21,12 +17,16 @@ const PersonalArea = () => {
   const approvedHours = 10;
   const unapprovedHours = 1;
 
-  //TODO add call to get user skills
-  const [userSkills, setUserSkills] = useState(["cook", "order"]);
+  const [userSkills, setUserSkills] = useState([
+    //TODO call to get user skills
+  ]);
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setUserSkills(value);
+  const handleSkills = (e) => {
+    if (e && e.target && Array.isArray(e.target.value)) {
+      setUserSkills(e.target.value);
+    } else {
+      console.error("Received unexpected event structure in handleSkills:", e);
+    }
   };
 
   const printToPdf = () => {
@@ -36,7 +36,7 @@ const PersonalArea = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="general-box scroll-box1">
+      <div className="general-box scroll-box1 flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <div className="basic-box-padding">
             <div className="personal-area-content basic-item-padding">
@@ -56,10 +56,10 @@ const PersonalArea = () => {
             </div>
           </div>
 
-          <SelectComponent
+          <SelectSkills
             type="skills"
-            onChange={handleChange}
-            choosen={userSkills}
+            onChange={handleSkills}
+            chosen={userSkills}
           />
 
           <DynamicButton
@@ -71,7 +71,7 @@ const PersonalArea = () => {
           <ManageAccountBox />
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
