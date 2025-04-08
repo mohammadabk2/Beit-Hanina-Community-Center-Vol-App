@@ -4,6 +4,7 @@
 /client/build
 /client/android
 /public/node_modules
+/client/android
 
 
 npm-debug.log*

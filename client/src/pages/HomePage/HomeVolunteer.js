@@ -7,7 +7,7 @@ import DynamicButton from "../../components/ButtonComponent";
 import NavigationBar from "../../components/NavigationBar";
 // import orgLogo from "../../icons/org_icon.jpg"
 
-function HomeVolunteer() {
+const HomeVolunteer = () => {
   const { t } = useTranslation("homeVol");
 
   const sortEvents = () => {
@@ -78,6 +78,6 @@ function HomeVolunteer() {
       </div>
     </div>
   );
-}
+};
 
 export default HomeVolunteer;

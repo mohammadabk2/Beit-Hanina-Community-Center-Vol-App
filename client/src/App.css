@@ -325,6 +325,10 @@ input:focus {
   padding-bottom: 0.2rem;
 }
 
+.wrap-reverse {
+  flex-direction: row-reverse;
+}
+
 /* TODO add shadow to them */
 .button-approve {
   background-color: rgb(27, 179, 27) !important;

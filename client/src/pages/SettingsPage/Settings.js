@@ -3,16 +3,15 @@ import React from "react";
 import NavigationBar from "../../components/NavigationBar";
 // import DynamicButton from "../../components/ButtonComponent";
 
-function Settings() {
-
+const Settings = () => {
   return (
     <div className="app flex-box">
-      <NavigationBar/>
+      <NavigationBar />
       <main>
         <h1>Settings page</h1>
       </main>
     </div>
   );
-}
+};
 
 export default Settings;

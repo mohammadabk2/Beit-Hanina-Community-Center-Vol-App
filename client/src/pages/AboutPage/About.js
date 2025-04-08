@@ -10,7 +10,7 @@ const About = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="general-box scroll-box1">
+      <div className="general-box scroll-box1 flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <div className="basic-item-padding personal-area-content">
             {tAbout("admins")}

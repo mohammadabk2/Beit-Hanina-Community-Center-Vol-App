@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-// import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
-import DropDownMenu from "../../components/DropDownMenu";
 import EventItem from "../../components/EventItem";
-import { useSkillOptions } from "../../config/options/Skills";
+import SelectComponent from "../../components/SelectComponent";
 
 const HomeOrganizer = () => {
   //! testing only
@@ -44,9 +42,6 @@ const HomeOrganizer = () => {
   //!
 
   const { t } = useTranslation("homeOrg");
-  const skillsOptions = useSkillOptions();
-  const { t: tskill } = useTranslation("signUp");
-
   const [showEvents, setShowEvents] = useState(true); // Use useState!
 
   const [formData, setFormData] = useState({
@@ -73,23 +68,6 @@ const HomeOrganizer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-  };
-
-  const handleRemoveSkill = (index) => {
-    const newSkills = formData.skills.filter((_, i) => i !== index);
-    setFormData({ ...formData, skills: newSkills });
-  };
-
-  const handleAddSkill = (value) => {
-    if (!formData.skills.includes(value)) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        skills: [
-          ...(Array.isArray(prevFormData.skills) ? prevFormData.skills : []),
-          value,
-        ],
-      }));
-    }
   };
 
   const sortEvents = () => {
@@ -121,9 +99,9 @@ const HomeOrganizer = () => {
           >
             <div className="flex-box flex-column input-field-box">
               <div>
-                <label> {t("event_name")}: </label>
-                <label className="red-star">*</label>
+                {t("event_name")}: <label className="red-star">*</label>
               </div>
+
               <DynamicInput
                 className="input-field"
                 type="text"
@@ -136,9 +114,9 @@ const HomeOrganizer = () => {
 
             <div className="flex-box flex-column input-field-box">
               <div>
-                <label>{t("event_date")}: </label>
-                <label className="red-star">*</label>
+                {t("event_date")}: <label className="red-star">*</label>
               </div>
+
               <DynamicInput
                 className="input-field"
                 type="date"
@@ -165,30 +143,11 @@ const HomeOrganizer = () => {
               />
             </div>
 
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label>{tskill("skills")}: </label>
-              </div>
-              {formData.skills.map((skill, index) => (
-                <div key={index} className="flex-box">
-                  <label>{skill}</label>
-                  <DynamicButton
-                    className="button"
-                    text={t("remove")}
-                    onClick={() => handleRemoveSkill(index)}
-                  />
-                </div>
-              ))}
-              <DropDownMenu
-                className="sex-button"
-                text={tskill("selectskills")}
-                options={skillsOptions.map((skill) => ({
-                  label: tskill(`${skill.label}`),
-                  href: `#${skill.value}`,
-                  onClick: () => handleAddSkill(skill.value),
-                }))}
-              />
-            </div>
+            <SelectComponent
+              type="skills"
+              onChange={handleChange}
+              chosen={formData.skills}
+            />
 
             <div className="flex-box">
               <DynamicButton
@@ -196,6 +155,7 @@ const HomeOrganizer = () => {
                 onClick={handleShowEvents}
                 text={t("back")}
               />
+
               <DynamicButton
                 className="button"
                 text={t("create_event")}
@@ -219,6 +179,7 @@ const HomeOrganizer = () => {
                 onClick={sortEvents}
                 text={t("sort")}
               />
+
               <DynamicButton
                 className="button button-small"
                 onClick={handleCreateEvents}
