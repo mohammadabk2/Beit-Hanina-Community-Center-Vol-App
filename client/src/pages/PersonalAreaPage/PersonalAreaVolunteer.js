@@ -36,7 +36,7 @@ const PersonalArea = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="general-box scroll-box1 flex-box">
+      <div className="general-box flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <div className="basic-box-padding">
             <div className="personal-area-content basic-item-padding">

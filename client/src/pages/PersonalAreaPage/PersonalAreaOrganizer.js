@@ -23,43 +23,45 @@ const PersonalArea = () => {
   };
 
   return (
-    <div className="app flex-box flex-column smooth-shadow-box">
+    <div className="app flex-box flex-column">
       <NavigationBar />
+      <div className="general-box flex-box">
+        <div className="general-box flex-box flex-column smooth-shadow-box">
+          <div className="basic-box-padding">
+            <div className="perosnal-area-content basic-item-padding">
+              {t("org_name")}: {name}
+            </div>
 
-      <div className="flex-box flex-column event-box basic-item-padding">
-        <div className="basic-item-padding">
-          <div className="perosnal-area-content basic-item-padding">
-            {t("org_name")}: {name}
+            <div className="perosnal-area-content basic-item-padding">
+              {t("user_name")}: {userName}
+            </div>
+
+            <div className="perosnal-area-content basic-item-padding">
+              {t("total_hours")}: {givenHours}
+            </div>
+
+            <div className="perosnal-area-content basic-item-padding">
+              {t("number_of_vol")}: {numberOfVolunteers}
+            </div>
+          </div>
+        
+
+          <div className="flex-box">
+            <DynamicButton
+              className="button"
+              text={t("to_pdf")}
+              onClick={printToPdf}
+            />
+
+            <DynamicButton
+              className="button"
+              text={t("to_excel")}
+              onClick={downloadToExcel}
+            />
           </div>
 
-          <div className="perosnal-area-content basic-item-padding">
-            {t("user_name")}: {userName}
-          </div>
-
-          <div className="perosnal-area-content basic-item-padding">
-            {t("total_hours")}: {givenHours}
-          </div>
-
-          <div className="perosnal-area-content basic-item-padding">
-            {t("number_of_vol")}: {numberOfVolunteers}
-          </div>
+          <ManageAccountBox />
         </div>
-
-        <div className="flex-box">
-          <DynamicButton
-            className="button"
-            text={t("to_pdf")}
-            onClick={printToPdf}
-          />
-
-          <DynamicButton
-            className="button"
-            text={t("to_excel")}
-            onClick={downloadToExcel}
-          />
-        </div>
-
-        <ManageAccountBox />
       </div>
     </div>
   );
