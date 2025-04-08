@@ -44,6 +44,23 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [isLightMode]); // Re-run only when isLightMode changes
 
+  // Effect to update all css classes to contain transition between light/dark mode
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+        // Use requestAnimationFrame to ensure this runs after the browser
+        // has likely processed the initial theme set by the effect above.
+        // Double RAF is often more robust for waiting for the next paint.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                console.log("Enabling CSS transitions"); // For debugging
+                document.documentElement.classList.add('transition-enabled');
+            });
+        });
+        // No cleanup needed here
+    }
+  }, []);
+
+
   // Function to toggle the mode
   const handleModeChange = () => {
     console.log("Toggling theme mode");

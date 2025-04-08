@@ -6,20 +6,20 @@ body {
 }
 
 /*Adds background transition to all classes for dark/light mode*/
-.button,
-.general-box,
-body,
-input,
-.skills,
-.event-box,
-.flex-box,
-.dropdown-menu,
-.smooth-shadow-box,
-.flex-column,
-.navigation-box,
-.input-field,
-.line-break,
-.bottom-scroll-box1 {
+.transition-enabled .button,
+.transition-enabled .general-box,
+.transition-enabled body,
+.transition-enabled input,
+.transition-enabled .skills,
+.transition-enabled .event-box,
+.transition-enabled .flex-box,
+.transition-enabled .dropdown-menu,
+.transition-enabled .smooth-shadow-box,
+.transition-enabled .flex-column,
+.transition-enabled .navigation-box,
+.transition-enabled .input-field,
+.transition-enabled .line-break,
+.transition-enabled .bottom-scroll-box1 {
   transition: background-color 0.2s ease-in-out;
 }
 
