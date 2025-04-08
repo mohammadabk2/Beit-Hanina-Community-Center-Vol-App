@@ -1,5 +1,10 @@
 @import url("global.css");
 
+/*Sets font-family */
+body {
+ font-family: sans-serif;
+}
+
 /*Adds background transition to all classes for dark/light mode*/
 .button,
 .general-box,
@@ -293,41 +298,62 @@ input:focus {
   align-items: center;
 }
 
-.scroll-box1 {
+.scroll-box1,
+.person-table-content {
   width: 95%;
   max-width: 36.4375rem;
   background-color: var(--body-color);
 }
 
-.personal-area-content {
-  margin-bottom: 0.7rem; 
-  /* font-size: 20px; */
-  font-size: 1.3rem; 
+.perosnal-area-content {
+  max-width: 90vw;
 }
 
+.personal-area-content {
+  margin-bottom: 0.7rem;
+  /* font-size: 20px; */
+  font-size: 1.3rem;
+}
 
-.basic-box-padding{
+.basic-box-padding {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
 
-.basic-item-padding{
-  padding-top: .2rem;
-  padding-bottom: .2rem;
+.basic-item-padding {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
 
 /* TODO add shadow to them */
 .button-approve {
-  background-color: green !important;
+  background-color: rgb(27, 179, 27) !important;
+}
+
+.button-approve:hover {
+  transition: background-color ease 0.3s;
+  background-color: rgb(10, 107, 29) !important;
 }
 
 .button-reject {
   background-color: red !important;
 }
 
-.button-reject:hover{
+.button-reject:hover {
   transition: background-color ease 0.3s;
-  background-color: blue;
+  background-color: rgb(135, 29, 29) !important;
+}
+
+.line-break-vertical-left {
+  border-color: #7c7c7c !important;
+  border-left: solid;
+  border-left-width: 1px;
+}
+
+.line-break-vertical-right {
+  border-color: #7c7c7c !important;
+  border-right: solid;
+  border-right-width: 1px;
 }
 
 .perosnal-area-content {
@@ -350,6 +376,114 @@ input:focus {
   background-color: var(--box-background-color);
 
 }
+
+
+/* PersonList.css */
+
+/* Optional container for responsiveness */
+.person-table-container {
+  width: 100%;
+  overflow-x: auto; /* Add horizontal scroll on small screens if needed */
+}
+
+/* Basic table reset and structure */
+.person-table {
+  width: 100%; /* Make table take full width of its container */
+  border-collapse: collapse; /* Remove gaps between cells */
+  margin: 1.25rem 0; /* Add some margin around the table */
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: var(--odd-row-table);
+}
+
+/* Table Header Styles */
+.person-table thead th {
+  background-color: var(--even-row-table); /* Light background for header */
+  color: var(--table-row-text); /* Darker text for header */
+  font-weight: bold;
+  text-align: center;
+  padding: 0.75rem 0.9375rem; /* Generous padding */
+  border-bottom: 0.125rem solid var(--table-line-break); /* Solid bottom border for header */
+}
+
+/* Align action header text */
+.person-table th.actions-header {
+  text-align: center;
+}
+
+/* Table Body Cell Styles */
+.person-table tbody td {
+  padding: 0.625rem 0.9375rem; /* Consistent padding */
+  border-bottom: 0.0625rem solid var(--table-line-break); /* Light lines between rows */
+  vertical-align: middle; /* Align content vertically */
+  color: var(--table-row-text); /* Slightly lighter text for body */
+}
+
+/* Zebra-striping for readability */
+.person-table tbody tr:nth-of-type(even) {
+  background-color: var(--even-row-table);
+}
+
+/* Hover effect on rows */
+.person-table tbody tr:hover {
+  background-color: var(--row-table-hover); /* Highlight row on hover */
+}
+
+/* Action cell alignment */
+.person-table td.action-cell {
+  text-align: center;
+  white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+/* Basic Button Styling (Assuming DynamicButton doesn't override heavily) */
+.person-table .button {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin: 0 0.25px; /* Add space between buttons */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Specific Button Colors/Styles */
+.person-table .button-approve {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+.person-table .button-approve:hover {
+  background-color: #218838;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+}
+
+.person-table .button-reject {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+.person-table .button-reject:hover {
+  background-color: #c82333;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+}
+
+.person-table .button-add,
+.person-table .button-view {
+  background-color: #007bff; /* Blue */
+  color: white;
+}
+.person-table .button-add:hover,
+.person-table .button-view:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+}
+
+.person-card-container {
+  display: flex; /* Example: Use Flexbox */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  gap: 1rem; /* Space between cards */
+  padding: 1rem; /* Padding around the container */
+  justify-content: center; /* Example: Center cards */
+}
+
+/* Add more styles as needed for skills, specific columns, etc. */
 
 
 

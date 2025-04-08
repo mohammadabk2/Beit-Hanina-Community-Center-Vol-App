@@ -34,9 +34,9 @@
 │   │   │       │   │           │   ├── main.a400368b.css
 │   │   │       │   │           │   └── main.a400368b.css.map
 │   │   │       │   │           ├── js
-│   │   │       │   │           │   ├── main.d3121e11.js
-│   │   │       │   │           │   ├── main.d3121e11.js.LICENSE.txt
-│   │   │       │   │           │   └── main.d3121e11.js.map
+│   │   │       │   │           │   ├── main.8a19e140.js
+│   │   │       │   │           │   ├── main.8a19e140.js.LICENSE.txt
+│   │   │       │   │           │   └── main.8a19e140.js.map
 │   │   │       │   │           └── media
 │   │   │       │   │               ├── about_icon.a353bd81add2a16e385e0ae63a2fb21a.svg
 │   │   │       │   │               ├── about_icon.b6e60ac9d1a43ee6c0357b53c115d5a2.svg
@@ -165,7 +165,10 @@
 │       │   ├── InputComponent.js
 │       │   ├── ManageAccountBox.js
 │       │   ├── NavigationBar.js
-│       │   └── PersonItem.js
+│       │   └── PersonItem
+│       │       ├── PersonItemCard.js
+│       │       ├── PersonItem.js
+│       │       └── PersonItemTable.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
@@ -287,5 +290,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-84 directories, 201 files
+85 directories, 203 files
 ```

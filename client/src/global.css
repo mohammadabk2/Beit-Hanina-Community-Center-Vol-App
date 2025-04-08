@@ -14,7 +14,12 @@
   --button-border: #c2c2c2;
   --general-text: black;
   --skills-shadow:#e0e0e0;
-  --skills-background: #d1d1d1; 
+  --skills-background: #d1d1d1;
+  --even-row-table: #f9f9f9;
+  --row-table-hover: #f1f1f1;
+  --odd-row-table: #ffffff;
+  --table-row-text: #3d3d3d;
+  --table-line-break: #dee2e6;
 }
 
 html[data-theme='dark'] {
@@ -34,4 +39,9 @@ html[data-theme='dark'] {
   --general-text: #ffffff;
   --skills-shadow:#7a7a7a;
   --skills-background: #7070ff;
+  --even-row-table: #333336;
+  --row-table-hover: #29292c;
+  --odd-row-table: #3d3d3d;
+  --table-row-text: #dadada;
+  --table-line-break: #808285;
 }
