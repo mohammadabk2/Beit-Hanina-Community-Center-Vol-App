@@ -200,19 +200,17 @@ const HomeAdmin = () => {
       {showEvents ? (
         <>
           <div className="scroll-box1 general-box flex-box flex-column">
-            <div className="flex-box flex-column top-scroll-box1 line-break">
-              <div>
-                <DynamicButton
-                  className="button button-small"
-                  onClick={sortEvents}
-                  text={t("sort")}
-                />
-                <DynamicButton
-                  className="button button-small"
-                  onClick={switchMode}
-                  text={t("switch_to_people")}
-                />
-              </div>
+            <div className="flex-box top-scroll-box1 line-break">
+              <DynamicButton
+                className="button button-small"
+                onClick={sortEvents}
+                text={t("sort")}
+              />
+              <DynamicButton
+                className="button button-small"
+                onClick={switchMode}
+                text={t("switch_to_people")}
+              />
             </div>
             <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
           </div>
@@ -220,38 +218,36 @@ const HomeAdmin = () => {
       ) : (
         <>
           <div className="perosnal-area-content flex-box flex-column">
-            <div className="flex-box flex-column top-scroll-box1 line-break">
-              <div>
-                <DynamicButton
-                  className="button button-small"
-                  onClick={sortPeople}
-                  text={t("sort")}
-                />
-                <DynamicButton
-                  className="button button-small"
-                  onClick={switchMode}
-                  text={t("switch_to_events")}
-                />
-                {/* //TODO give the img a class to make it bigger */}
-                <img
-                  className=""
-                  onClick={handleChange}
-                  src={
-                    personView
-                      ? isLightMode
-                        ? TableIconLight
-                        : TableIconDark
-                      : isLightMode
-                      ? CardIconLight
-                      : CardIconDark
-                  }
-                  alt={
-                    personView
-                      ? t("switch_to_table_view")
-                      : t("switch_to_card_view")
-                  }
-                />
-              </div>
+            <div className="flex-box top-scroll-box1 line-break">
+              <DynamicButton
+                className="button button-small"
+                onClick={sortPeople}
+                text={t("sort")}
+              />
+              <DynamicButton
+                className="button button-small"
+                onClick={switchMode}
+                text={t("switch_to_events")}
+              />
+              {/* //TODO give the img a class to make it bigger */}
+              <img
+                className="table-img"
+                onClick={handleChange}
+                src={
+                  personView
+                    ? isLightMode
+                      ? TableIconLight
+                      : TableIconDark
+                    : isLightMode
+                    ? CardIconLight
+                    : CardIconDark
+                }
+                alt={
+                  personView
+                    ? t("switch_to_table_view")
+                    : t("switch_to_card_view")
+                }
+              />
             </div>
             <div className="bottom-scroll-box1">
               {/* 3. Render PeopleDisplaySwitcher directly */}

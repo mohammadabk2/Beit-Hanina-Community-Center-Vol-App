@@ -483,6 +483,11 @@ input:focus {
   justify-content: center; /* Example: Center cards */
 }
 
+.table-img {
+  width: 2rem;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
 /* Add more styles as needed for skills, specific columns, etc. */
 
 
