@@ -21,7 +21,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^9.0.2",
     "path": "^0.12.7",
-    "pg": "^8.13.3",
+    "pg": "^8.14.1",
     "react": "^19.0.0",
     "workbox-webpack-plugin": "^6.1.5",
     "xlsx": "^0.18.5"
