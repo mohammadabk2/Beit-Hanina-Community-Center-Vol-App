@@ -2,7 +2,9 @@
 /node_modules
 /client/node_modules
 /client/build
+/client/android
 /public/node_modules
+/client/android
 
 
 npm-debug.log*

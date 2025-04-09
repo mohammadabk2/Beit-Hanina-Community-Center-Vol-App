@@ -1,11 +1,39 @@
 @import url("global.css");
 
+/*Sets font-family */
+body {
+ font-family: sans-serif;
+}
+
+/*Adds background transition to all classes for dark/light mode*/
+.transition-enabled .button,
+.transition-enabled .general-box,
+.transition-enabled body,
+.transition-enabled input,
+.transition-enabled .skills,
+.transition-enabled .event-box,
+.transition-enabled .flex-box,
+.transition-enabled .dropdown-menu,
+.transition-enabled .smooth-shadow-box,
+.transition-enabled .flex-column,
+.transition-enabled .navigation-box,
+.transition-enabled .input-field,
+.transition-enabled .line-break,
+.transition-enabled .bottom-scroll-box1 {
+  transition: background-color 0.2s ease-in-out;
+}
+
 .app {
   text-align: center;
 }
 
+/*Removes default border from buttons */
+button {
+  border: none;
+}
+
 .app-header {
-  padding: 20px;
+  padding: 1.25rem;
   color: var(--common-colour-2);
   margin-bottom: 2rem;
 }
@@ -15,23 +43,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*Gives container slight shadow */
 .smooth-shadow-box,
 .dropdown-menu {
-  box-shadow: 0 10px 15px 5px var(--common-colour-3);
+  box-shadow: 0 0 0.5rem 0.0625rem var(--general-shadow);
 }
 
 /*Gives container white background that can resize */
-.sign-in-box {
+.general-box {
   padding-top: 2rem;
-  width: 90vw;
-  margin-top: 1px;
-  border-radius: 10px;
-  background-color: var(--common-colour-1);
-  max-width: 700px;
-  min-height: 320px;
+  width: 80vw;
+  margin-top: 0.0625rem;
+  border-radius: 0.625rem;
+  background-color: var(--box-background-color);
+  max-width: 34.5625rem;
 }
 
 /*Organizes containers in column when combined with flex-box class */
@@ -42,75 +70,101 @@
 /*General button design for all buttons */
 .button {
   margin: 1rem;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   border: solid;
-  border-width: 1px;
-  border-color: #c2c2c2;
-  background-color: #d1d1d1;
-  color: black;
+  border-width: 0.0625rem;
+  border-color: var(--button-border);
+  background-color: var(--button-background);
+  color: var(--button-text);
 }
 
 /*Makes buttons smaller */
 .button-small {
-  padding: 5px 10px !important;
+  padding: 0.3125rem 0.625rem !important;
 }
 
 /*Adds button color transition when hovered over */
 .button:hover {
-  transition: background-color ease 0.5s;
-  background-color: rgb(168, 168, 168);
+  transition: background-color ease 0.3s;
+  background-color: var(--button-hover);
 }
 
 /*Class for language button only */
 .language-button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 14px;
-  background-color: var(--common-colour-1);
-  border-radius: 10px;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  background-color: var(--box-background-color);
+  border-radius: 0.625rem;
+}
+
+/*Navigation button styles */
+.navigation-button-image {
+  width: 2rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+/*Styling for navigation box*/
+.navigation-box {
+  width: 90vw;
+}
+
+/*Drop down button image */
+.button-image {
+  width: 1rem;
+  margin-left: 0.3125rem;
+  cursor: pointer;
 }
 
 /*General input field class for all input fields */
 .input-field {
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   border: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   margin: 1rem;
-  padding: 5px;
-  font-size: 16px;
+  padding: 0.3125rem;
+  font-size: 1rem;
+  width: 80%;
+}
+
+/*Makes input field container responsive */
+.input-field-box {
   width: 80%;
 }
 
 body {
-  background-color: var(--common-colour-4);
+  background-color: var(--body-color);
+  color: var(--general-text);
 }
 
 /*Dropdown menu classes for styling */
-.dropdown {
-  display: inline-block;
-  position: relative;
-}
-
 .dropdown-toggle {
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
-  margin: 0px;
+  margin: 0rem !important;
 }
 
 .dropdown-menu {
   display: block;
   position: absolute;
-  background-color: var(--common-colour-1);
+  background-color: var(--box-background-color);
   z-index: 1;
   list-style-type: none;
   padding: 0;
   margin: 0;
-  border-radius: 5px;
-  min-width: 100px;
+  border-radius: 0.3125rem;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* min-height: 0.1rem; */
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dropdown-item {
@@ -121,81 +175,362 @@ body {
   text-decoration: none;
   color: var(--common-colour-2);
   display: block;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
 }
 
 .dropdown-item a:hover {
-  background-color: var(--common-colour-3);
+  background-color: var(--button-hover);
 }
 
 input {
-  border: 1px solid #ccc;
+  border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
-  outline: 2px solid transparent;
-  padding: 8px;
+  outline: 0.125rem solid transparent;
+  padding: 0.5rem;
   box-sizing: border-box;
   margin: 0;
 }
 
 input:focus {
-  outline-color: blue;
+  outline-color: var(--input-focus);
 }
 
 /*Styling for gender button */
 .gender-button {
-  margin: 5px;
+  margin: 0.3125rem;
   margin-bottom: 1rem;
-  padding: 5px;
+  padding: 0.3125rem;
 }
 
 .red-star {
   color: red;
 }
 
-.circle-item {
-  padding: 2px 5px;
+/*General styling for skills */
+.skills {
+  padding: 0.125rem 0.7rem;
   align-content: center;
-  border-radius: 20%;
-  background-color: #e0e0e0;
+  border-radius: 4rem;
+  background-color: var(--skills-background);
   text-align: center;
-  margin: 0 10px;
+  margin: 1rem 0.5rem 1rem 0.5rem;
+  height: 1.5rem;
 }
 
+/*Styles event containers */
 .event-box {
-  margin: 1rem;
-  border-radius: 10px;
+  margin-top: 1rem;
+  border-radius: 0.625rem;
+  background-color: var(--box-background-color);
+  width: 95%;
+}
+
+.event-box-image {
+  width: 10rem;
+  border-radius: 1rem;
+}
+
+.event-box-content-bottom,
+.event-box-content-middle {
+  justify-content: space-between;
+  width: 80%;
+}
+
+.event-box-content-top {
+  position: relative;
+  width: 100%;
+}
+
+.event-box-title {
+  font-size: 1.5rem;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.favorite-button-image {
+  width: 2rem;
+  position: absolute;
+  top: 0.3rem;
+  right: 1rem;
+  cursor: pointer;
 }
 
 /*Adds line break to any container */
 .line-break {
   border-color: #7c7c7c !important;
-  border-width: 2px !important;
+  border-width: 0.125rem !important;
   border-bottom: solid;
-  
+  width: 100%;
+  border-radius: 1px;
 }
 
-/*Resizes image in button, no need to add to any element */
-.button-image {
-  width: 15px;
-  margin-left: 5px;
-}
-
+/*dots with colors to indicate event spots status */
 .event-spots-full {
   background-color: #ff0000cc;
-  box-shadow: 0 0 10px 3px #ff0000;
+  box-shadow: 0 0 0.625rem 0.1875rem #ff0000;
   border-radius: 100%;
-  width: 8px;
-  height: 8px;
-  margin: 10px;
-  margin-right: 1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.625rem;
 }
 
 .event-spots-free {
   background-color: #00c900;
-  box-shadow: 0 0 10px 3px #00ff00;
+  box-shadow: 0 0 0.625rem 0.1875rem #00ff00;
   border-radius: 100%;
-  width: 8px;
-  height: 8px;
-  margin: 10px;
-  margin-right: 1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.625rem;
 }
+
+/*design for the top of a scrollable list bar (use incremental names) */
+.top-scroll-box1 {
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 0 0.5rem 0.0625rem var(--general-shadow);
+  width: 100%;
+  background-color: var(--top-scroll-box);
+}
+
+.bottom-scroll-box1 {
+  position: relative;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0rem 0rem 0.5rem 0.0625rem var(--general-shadow);
+  background-color: var(--bottom-scroll-box);
+  padding-bottom: 1rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  width: 100%;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scroll-box1,
+.person-table-content {
+  width: 95%;
+  max-width: 36.4375rem;
+  background-color: var(--body-color);
+}
+
+.perosnal-area-content {
+  max-width: 90vw;
+}
+
+.personal-area-content {
+  margin-bottom: 0.7rem;
+  /* font-size: 20px; */
+  font-size: 1.3rem;
+}
+
+.basic-box-padding {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.basic-item-padding {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.wrap-reverse {
+  flex-direction: row-reverse;
+}
+
+/* TODO add shadow to them */
+.button-approve {
+  background-color: rgb(27, 179, 27) !important;
+}
+
+.button-approve:hover {
+  transition: background-color ease 0.3s;
+  background-color: rgb(10, 107, 29) !important;
+}
+
+.button-reject {
+  background-color: red !important;
+}
+
+.button-reject:hover {
+  transition: background-color ease 0.3s;
+  background-color: rgb(135, 29, 29) !important;
+}
+
+.line-break-vertical-left {
+  border-color: #7c7c7c !important;
+  border-left: solid;
+  border-left-width: 1px;
+}
+
+.line-break-vertical-right {
+  border-color: #7c7c7c !important;
+  border-right: solid;
+  border-right-width: 1px;
+}
+
+.perosnal-area-content {
+  margin-bottom: 0.7rem;
+  /* font-size: 20px; */
+  font-size: 1.3rem;
+}
+
+.top-user-box {
+  border-radius: 1rem 1rem 0 0;
+  font-size: 2.3rem;
+  width: 100%;
+  background-color: var(--box-background-color);
+  margin-top: 1rem;
+}
+
+.bottom-user-box {
+  border-radius: 0 0 1rem 1rem;
+  width: 100%;
+  background-color: var(--box-background-color);
+
+}
+
+
+/* PersonList.css */
+
+/* Optional container for responsiveness */
+.person-table-container {
+  width: 100%;
+  overflow-x: auto; /* Add horizontal scroll on small screens if needed */
+}
+
+/* Basic table reset and structure */
+.person-table {
+  width: 100%; /* Make table take full width of its container */
+  border-collapse: collapse; /* Remove gaps between cells */
+  margin: 1.25rem 0; /* Add some margin around the table */
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: var(--odd-row-table);
+}
+
+/* Table Header Styles */
+.person-table thead th {
+  background-color: var(--even-row-table); /* Light background for header */
+  color: var(--table-row-text); /* Darker text for header */
+  font-weight: bold;
+  text-align: center;
+  padding: 0.75rem 0.9375rem; /* Generous padding */
+  border-bottom: 0.125rem solid var(--table-line-break); /* Solid bottom border for header */
+}
+
+/* Align action header text */
+.person-table th.actions-header {
+  text-align: center;
+}
+
+/* Table Body Cell Styles */
+.person-table tbody td {
+  padding: 0.625rem 0.9375rem; /* Consistent padding */
+  border-bottom: 0.0625rem solid var(--table-line-break); /* Light lines between rows */
+  vertical-align: middle; /* Align content vertically */
+  color: var(--table-row-text); /* Slightly lighter text for body */
+}
+
+/* Zebra-striping for readability */
+.person-table tbody tr:nth-of-type(even) {
+  background-color: var(--even-row-table);
+}
+
+/* Hover effect on rows */
+.person-table tbody tr:hover {
+  background-color: var(--row-table-hover); /* Highlight row on hover */
+}
+
+/* Action cell alignment */
+.person-table td.action-cell {
+  text-align: center;
+  white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+/* Basic Button Styling (Assuming DynamicButton doesn't override heavily) */
+.person-table .button {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin: 0 0.25px; /* Add space between buttons */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Specific Button Colors/Styles */
+.person-table .button-approve {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+.person-table .button-approve:hover {
+  background-color: #218838;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+}
+
+.person-table .button-reject {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+.person-table .button-reject:hover {
+  background-color: #c82333;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+}
+
+.person-table .button-add,
+.person-table .button-view {
+  background-color: #007bff; /* Blue */
+  color: white;
+}
+.person-table .button-add:hover,
+.person-table .button-view:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+}
+
+.person-card-container {
+  display: flex; /* Example: Use Flexbox */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  gap: 1rem; /* Space between cards */
+  padding: 1rem; /* Padding around the container */
+  justify-content: center; /* Example: Center cards */
+}
+
+.table-img {
+  width: 2rem;
+  margin: 0 0.5rem 0 0.5rem;
+  cursor: pointer;
+}
+
+/* Add more styles as needed for skills, specific columns, etc. */
+
+
+
+/*media query for mobile screen sizes */
+@media (max-width: 767px) {
+  .event-box-content-bottom,
+  .event-box-content-middle {
+    width: 85%;
+  }
+
+  .event-box-image {
+    width: 12rem;
+  }
+
+  .button {
+    margin: 0.8em;
+    height: 3rem;
+  }
+
+  .scroll-box1 {
+    max-width: 45rem;
+  }
+}
+
+/*for even smaller sizes*/
+@media (max-width: 590px) {
+  .event-box-content-middle {
+    justify-content: center;
+  }
+}
+
+
+

@@ -5,23 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="manifest" href="manifest.json" />
     <title>BHCC Vol App</title>
+
+    <script>
+      (function() {
+        // Function to apply the theme attribute to <html> and save preference
+        function applyThemePreference(theme) {
+          // Apply the attribute for CSS targeting
+          document.documentElement.setAttribute('data-theme', theme);
+          // Save to localStorage for consistency with your React ThemeProvider
+          try {
+            // Use the SAME KEY as your React context ('colorMode')
+            localStorage.setItem('colorMode', theme);
+          } catch (e) {
+              console.warn('Inline script: localStorage unavailable or error:', e);
+          }
+        }
+
+        let preferredTheme;
+        try {
+          // 1. Check localStorage first (using the same key 'colorMode')
+          preferredTheme = localStorage.getItem('colorMode');
+        } catch (e) {} // Ignore potential localStorage errors
+
+        if (preferredTheme && (preferredTheme === 'light' || preferredTheme === 'dark')) {
+          // 2. Apply the valid theme found in localStorage
+          applyThemePreference(preferredTheme);
+        } else {
+          // 3. If no valid theme in localStorage, check system preference
+          // Check for dark mode preference
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+          // Determine theme: 'dark' if matches, otherwise 'light'
+          preferredTheme = prefersDark.matches ? 'dark' : 'light';
+
+          // Apply the determined theme
+          applyThemePreference(preferredTheme);
+        }
+        // console.log('Inline script determined theme:', preferredTheme);
+      })();
+    </script>
+    <link href="/path/to/your/main.css" rel="stylesheet">
+    <script defer src="/path/to/your/main.js"></script>
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
     <script>
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
-            console.log(
-              "Service Worker registered with scope:",
-              registration.scope
-            );
-          })
-          .catch((error) => {
-            console.error("Service Worker registration failed:", error);
-          });
+        // Optional: Defer SW registration until after page load
+        // window.addEventListener('load', () => {
+            navigator.serviceWorker
+              .register("/sw.js")
+              .then((registration) => {
+                console.log(
+                  "Service Worker registered with scope:",
+                  registration.scope
+                );
+              })
+              .catch((error) => {
+                console.error("Service Worker registration failed:", error);
+              });
+        // });
       }
     </script>
   </body>

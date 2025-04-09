@@ -3,7 +3,7 @@ module.exports = {
     globPatterns: [
       '**/*.{html,js,css,json,svg,png,jpg}'
     ],
-    swSrc: 'client/public/sw.js', // Updated path
-    swDest: 'client/build/sw.js',
+    swSrc: 'public/service-worker.cjs', // Updated path
+    swDest: 'build/service-worker.cjs',
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
   };

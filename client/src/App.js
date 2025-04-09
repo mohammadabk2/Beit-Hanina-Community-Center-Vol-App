@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 // import components here
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
-import DropDownMenu from "./components/DropDownMenu";
-import { useLnOptions } from "./config/Language";
+import NavigationBar from "./components/NavigationBar";
 
-function App() {
+const App = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +25,16 @@ function App() {
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
-    navigate("/home-volunteer");
+    //! testing only Ultra security risk
+    if (username === "vol" && password === "vol") {
+      navigate("/home-volunteer");
+    } else if (username === "org" && password === "org") {
+      navigate("/home-organizer");
+    } else if (username === "admin" && password === "admin") {
+      navigate("/home-admin");
+    } else {
+      alert("Enter Valid Sign in details");
+    }
   };
 
   const navigate = useNavigate();
@@ -36,25 +44,18 @@ function App() {
     navigate("/sign-up");
   };
 
-  const lnOptions = useLnOptions();
   const { t } = useTranslation("app");
 
   return (
     <div className="app flex-box flex-column">
-      <div className="drop-down">
-        <DropDownMenu
-          className="language-button"
-          text={t("ln")}
-          options={lnOptions}
-        />
-      </div>
+      <NavigationBar dontShowPageButtons={true} />
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>
       <main>
-        <div className="sign-in-box flex-box flex-column smooth-shadow-box">
+        <div className="general-box flex-box flex-column smooth-shadow-box">
           <h1>{t("welcome")}</h1>
-          <div className="input-field-box flex-container">
+          <div className="input-field-box">
             <DynamicInput
               className="input-field"
               type="text"
@@ -72,22 +73,26 @@ function App() {
               placeholder={t("password-placeholder")}
             />
           </div>
-          <div className="button-box flex-container">
-            <DynamicButton
-              className="button"
-              onClick={signIn}
-              text={t("sign-in")}
-            />
-            <DynamicButton
-              className="button"
-              onClick={signUp}
-              text={t("sign-up")}
-            />
+          <div className="flex-box">
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signIn}
+                text={t("sign-in")}
+              />
+            </div>
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signUp}
+                text={t("sign-up")}
+              />
+            </div>
           </div>
         </div>
       </main>
     </div>
   );
-}
+};
 
 export default App;
