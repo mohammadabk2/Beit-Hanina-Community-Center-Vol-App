@@ -7,6 +7,7 @@ import controllers from "./controllers/index.js"; // Update this line
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // API routes
+app.use(cors()); //TODO enabled for testing. DELETE LATER AND REFRACTOR
 app.use("/api", controllers);
 
 // Serve static files from 'client/build'
