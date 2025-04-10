@@ -126,7 +126,7 @@ const updateUser = async (userId, updates) => {
  */
 const getUserByLogin = async (username, hash) => {
   const text =
-    "SELECT id FROM users WHERE username = $1 AND password_hash = $2;";
+    "SELECT * FROM users WHERE username = $1 AND password_hash = $2;";
   const res = await db.query(text, [username, hash]);
   return res.rows[0];
 };
