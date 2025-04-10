@@ -1,3 +1,11 @@
-module.exports = (req, res) => {
-    res.send("pong");
+// import dbConnection from "../database/dbconnection.js";
+
+// You can import jwt and bcrypt like this if needed later
+// import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+
+const ping = (res) => {
+  res.send("pong");
 };
+
+export default ping;

@@ -1,5 +1,5 @@
 // to interact with the database
-import db from "./db";
+import db from "./db.js";
 //TODO change the functions to get certain columns instead of *
 //TODO some functions rely on names maybe the should also get id
 
@@ -481,7 +481,7 @@ const changeStatus = async (eventName, status) => {
 // ! all the tests performed only verify that the query is valid and not the function it self.
 // ? maybe add more detailed functions to get certain values form users
 
-export {
+export default {
   createUser, // tested
   getUserByLogin, // tested
   getUserById, // tested

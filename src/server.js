@@ -3,7 +3,7 @@ import path from "path";
 import bodyParser from "body-parser";
 import compression from "compression";
 // import controllers from "./controllers";
-import controllers from "./controllers/index.js"; // Update this line
+import controllers from "./controllers/index.js";
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';

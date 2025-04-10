@@ -1,5 +1,3 @@
-CREATE DATABASE main;
-
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,

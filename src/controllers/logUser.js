@@ -1,25 +1,14 @@
-//TODO change all of this
-const dbConnection = require("../database/dbconnection");
-const jwt = require("jsonwebtoken");
+import dbConnection from "../database/dbconnection.js";
 
-module.exports = (req, res) => {
-    jwt.verify(req.headers.token, process.env.SECRET, (err, decoded) => {
-        if (err) {
-            res.status(401);
-            res.end();
-        } else {
-            dbConnection.query(
-                `SELECT id, first_name, last_name, email FROM users WHERE id=$1;`,
-                [decoded.id],
-                (error, result) => {
-                    if (error) {
-                        res.status(401);
-                        res.end();
-                    } else {
-                        res.json(result.rows[0]);
-                    }
-                }
-            );
-        }
-    });
+// You can import jwt and bcrypt like this if needed later
+// import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+
+const loginUser = (userName, hash) => {
+  dbConnection.getUserByLogin(userName, hash);
+
+  // Future implementation goes here...
+  // (e.g., verifying password with bcrypt, signing token with jwt, etc.)
 };
+
+export default loginUser;

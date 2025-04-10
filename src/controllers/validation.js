@@ -1,9 +1,10 @@
-import usersValidation from "../database/validation/users";
+// import dbConnection from "../database/dbconnection.js";
 
-export default {
-    usersValidation: (req, res) => {
-        let obj = {};
-        Object.keys(usersValidation).forEach((key) => (obj[key] = usersValidation[key].toString()));
-        res.json(obj);
-    },
+// You can import jwt and bcrypt like this if needed later
+// import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+
+const validation = () => {
 };
+
+export default validation;

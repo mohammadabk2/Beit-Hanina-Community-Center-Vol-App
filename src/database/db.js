@@ -1,10 +1,7 @@
-import { Pool } from "pg";
-// const dotenv = require("dotenv");
-
+import pkg from "pg";
+const { Pool } = pkg;
 
 // Database connection configuration
-//TODO: setup the database on the server and then get these details
-// TODO get all these from .en
 const pool = new Pool({
   user: process.env.DBUSER || "user",
   host: process.env.DB_HOST || "local",
@@ -22,5 +19,5 @@ const query = async (text, params) => {
   return res;
 };
 
-// Export the query function
-export { query, pool };
+// Export the query function and pool
+export default { query, pool };
