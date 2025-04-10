@@ -1,40 +1,49 @@
-import express from "express";
-import path from "path";
-import bodyParser from "body-parser";
-import compression from "compression";
-// import controllers from "./controllers";
-import controllers from "./controllers/index.js"; // Update this line
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import cors from 'cors';
+// // src/controllers/index.js (Converted to ESM)
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// // Change require to import
+// import { Router } from "express"; // Use named import for Router
+// import express from "express"; // Import express itself if needed for static middleware
+// import path from "path";
 
-dotenv.config({ path: path.join(__dirname, '../.env') });
-const app = express();
-const PORT = process.env.PORT || 4000;
+// // You'll need to convert these required files as well,
+// // or use dynamic import/createRequire within this file if they *must* remain CJS.
+// // Assuming they are converted or can be imported directly:
+// import pingController from "./controllers/ping.js";
+// import getTitleController from "./controllers/getTitle.js";
+// import { usersValidation } from "./controllers/validation.js"; // Use named import if validation.js uses named export
+// import authenticateController from "./controllers/authenticate.js";
+// import registerController from "./controllers/register.js";
+// import logUserController from "./controllers/logUser.js";
+// import { client as clientError, server as serverError } from "./controllers/error.js"; // Use named imports
 
-// Middleware
-app.use(compression());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// // Need __dirname replacement in ESM
+// import { fileURLToPath } from "url";
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-// API routes
-app.use(cors()); //TODO enabled for testing. DELETE LATER AND REFRACTOR
-app.use("/api", controllers);
+// const router = Router();
 
-// Serve static files from 'client/build'
-app.use(express.static(path.join(__dirname, "../client/build")));
+// // --- Routes ---
+// router.get("/api/ping", pingController); // Assuming pingController is the default export of ping.js
+// router.get("/api/getTitle", getTitleController); // Assuming getTitleController is the default export of getTitle.js
+// router.get("/api/usersvalidation", usersValidation); // Using the imported named export
+// router.post("/api/authenticate", authenticateController); // Assuming default export
+// router.post("/api/register", registerController); // Assuming default export
+// router.get("/api/logUser", logUserController); // Assuming default export
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-});
+// // --- Static Files ---
+// // Ensure express is imported if you use express.static here
+// router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// router.get("*", (req, res) => {
+//   res.sendFile(
+//     path.join(__dirname, "..", "..", "client", "build", "index.html")
+//   );
+// });
+
+// // --- Error Handlers ---
+// router.use(clientError); // Use the imported named export
+// router.use(serverError); // Use the imported named export
+
+// // --- Change module.exports to export default ---
+// export default router;
