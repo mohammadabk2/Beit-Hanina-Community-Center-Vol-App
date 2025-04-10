@@ -1,11 +1,6 @@
-// import dbConnection from "../database/dbconnection.js";
-
-// You can import jwt and bcrypt like this if needed later
-// import jwt from "jsonwebtoken";
-// import bcrypt from "bcrypt";
-
-const ping = (res) => {
-  res.send("pong");
+const ping = (req, res) => {
+  console.log("Executing ping controller");
+  res.status(200).send("pong");
 };
 
 export default ping;
