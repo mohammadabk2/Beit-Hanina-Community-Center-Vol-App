@@ -18,6 +18,11 @@ const loginUser = async (req, res) => {
       res.status(200).send({
         message: `Login successful! ${user.name} ${user.id}`,
         status: "success",
+        userData: { // Add a dedicated object for user data
+          id: user.id,
+          name: user.name,
+          role: user.role,   // Include the user role
+        },
       });
     } else {
       console.log(`Login failed for user: ${userName}`);

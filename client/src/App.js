@@ -9,6 +9,8 @@ import DynamicButton from "./components/ButtonComponent";
 import NavigationBar from "./components/NavigationBar";
 
 const App = () => {
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,21 +29,66 @@ const App = () => {
     console.log(username);
     console.log(password); //! testing only remove security risk
 
-    const API_BASE_URL = "http://localhost:5213"; //TODO change to vite or another secure method
-
     try {
       const response = await axios.post(`${API_BASE_URL}/api/logUser`, {
         userName: username,
         hash: password,
       });
-      if (response.data.status === "success") {
-        alert(`Welcome ${response.data.message}`);
-        navigate("/home-volunteer");
+      if (response.data.status === "success" && response.data.userData) {
+        if (Array.isArray(response.data.userData.role)) {
+          alert(`Welcome ${response.data.message}`);
+          if (response.data.userData.role.includes("admin")) {
+            navigate("/home-admin");
+          } else if (response.data.userData.role.includes("org")) {
+            navigate("/home-organizer");
+          } else if (response.data.userData.role.includes("vol")) {
+            navigate("/home-volunteer");
+          } else {
+            alert("Invalid User Type");
+          }
+        } else {
+          alert("User not registered");
+        }
       } else {
         alert("login fail");
       }
     } catch (err) {
       console.error("Error during sign in:", err);
+
+      // Check if the error is an Axios error with a response from the server
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Server responded with status:", err.response.status);
+        console.error("Response data:", err.response.data);
+
+        // Check for specific error statuses (e.g., 401, 404) indicating login failure
+        if (
+          err.response.status === 401 ||
+          err.response.status === 404 ||
+          err.response.status === 403
+        ) {
+          // Use the error message from the backend if available, otherwise use a generic one
+          const errorMessage =
+            err.response.data?.message || "Invalid username or password.";
+          alert(`Login Failed: ${errorMessage}`);
+        } else {
+          // Handle other server errors (like 500 Internal Server Error)
+          alert(
+            "An unexpected error occurred on the server. Please try again later."
+          );
+        }
+      } else if (err.request) {
+        // The request was made but no response was received (e.g., network error)
+        console.error("No response received:", err.request);
+        alert(
+          "Login Failed: Could not connect to the server. Please check your network connection."
+        );
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error setting up request:", err.message);
+        alert("Login Failed: An error occurred before sending the request.");
+      }
     }
   };
 
