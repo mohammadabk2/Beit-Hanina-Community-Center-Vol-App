@@ -3,14 +3,14 @@
 INSERT INTO users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, role) VALUES
 ('Alice Wonderland', '1995-03-15', 'F', '555-1234', 'alice.w@example.com', '123 Rabbit Hole Lane', 'WonderCare', 'IDALICE001', 'alicew', 'hash_alice_pw', ARRAY['Logged in 2024-01-10', 'Updated profile 2024-01-11'], ARRAY['volunteer']),
 ('Bob The Builder', '1988-07-20', 'M', '555-5678', 'bob.b@example.com', '456 Construction Ave', 'BuildWell', 'IDBOB002', 'bobtheb', 'hash_bob_pw', ARRAY['Logged in 2024-01-09'], ARRAY['organizer']),
-('Charlie Chaplin', '1992-11-01', 'M', '555-9101', 'charlie.c@example.com', '789 Silent Film St', NULL, 'IDCHARLIE003', 'charliec', 'hash_charlie_pw', ARRAY['Logged in 2024-01-12'], ARRAY['volunteer']),
+('Charlie Chaplin', '1992-11-01', 'M', '555-9101', 'charlie.c@example.com', '789 Silent Film St', 'BuildWell', 'IDCHARLIE003', 'charliec', 'hash_charlie_pw', ARRAY['Logged in 2024-01-12'], ARRAY['volunteer']),
 ('Diana Prince', '1985-05-25', 'F', '555-1121', 'diana.p@example.com', '1 Amazon Circle', 'Justice Insure', 'IDDIANA004', 'dianap', 'hash_diana_pw', ARRAY['Logged in 2024-01-11', 'Created event 2024-01-12'], ARRAY['organizer', 'admin']);
 
 -- Insert into users_waiting_list table
 -- Assuming IDs will be 1, 2
 INSERT INTO users_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, role) VALUES
 ('Eve Pending', '2000-01-01', 'F', '555-2233', 'eve.p@example.com', '10 Waiting Way', 'FutureCare', 'IDEVE005', 'evep', 'hash_eve_pw', ARRAY[]::TEXT[], ARRAY['volunteer']),
-('Frank Waiting', '1998-09-10', 'M', '555-4455', 'frank.w@example.com', '11 Approval Ave', NULL, 'IDFRANK006', 'frankw', 'hash_frank_pw', ARRAY[]::TEXT[], ARRAY['volunteer']);
+('Frank Waiting', '1998-09-10', 'M', '555-4455', 'frank.w@example.com', '11 Approval Ave', 'FutureCare', 'IDFRANK006', 'frankw', 'hash_frank_pw', ARRAY[]::TEXT[], ARRAY['volunteer']);
 
 -- Insert into organizer table
 -- Reference user IDs from the users table (Bob=2, Diana=4)
