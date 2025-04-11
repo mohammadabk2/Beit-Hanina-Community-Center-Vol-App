@@ -1,8 +1,9 @@
 import dbConnection from "../database/dbconnection.js";
+import bcrypt from "bcrypt";
 
 const loginUser = async (req, res) => {
-  const { userName, hash } = req.body;
-  if (!userName || !hash) {
+  const { userName, password } = req.body;
+  if (!userName || !password) {
     return res.status(400).send({
       message: "Username and password are required.",
       status: "fail",
@@ -12,22 +13,29 @@ const loginUser = async (req, res) => {
   console.log(`Attempting login for user: ${userName}`);
 
   try {
-    const user = await dbConnection.getUserByLogin(userName, hash); // Await the result
-    if (user) {
-      console.log(`Login successful for user: ${user.email}`);
+    const storedHash = await dbConnection.getUserHash(userName); // Await the result
+    //TODO register isnt setup yet
+    //! will always fail
+    const isPasswordMatch = await bcrypt.compare(
+      password,
+      storedHash.password_hash
+    ); // hash the password and compare to the stored hash
+
+    if (isPasswordMatch) {
+      console.log(`Login successful for user: ${userName}`);
       res.status(200).send({
-        message: `Login successful! ${user.name} ${user.id}`,
+        message: `Login successful! ${userName} ${storedHash.id}`,
         status: "success",
-        userData: { // Add a dedicated object for user data
-          id: user.id,
-          name: user.name,
-          role: user.role,   // Include the user role
+        userData: {
+          // Add a dedicated object for user data
+          id: storedHash.id,
+          role: storedHash.role, // Include the user role
         },
       });
     } else {
       console.log(`Login failed for user: ${userName}`);
       res.status(401).send({
-        message: "Invalid username or password/hash.",
+        message: "Invalid username or password.",
         status: "fail",
       });
     }
