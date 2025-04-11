@@ -1,4 +1,4 @@
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -15,7 +15,8 @@ CREATE TABLE users
     role TEXT[]
 );
 
-CREATE TABLE users_waiting_list
+/*New uses waiting for approval of account*/
+CREATE TABLE IF NOT EXISTS users_waiting_list
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE users_waiting_list
     role TEXT[]
 );
 
-CREATE TABLE volunteer
+CREATE TABLE IF NOT EXISTS volunteer
 (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     approved_hours INT DEFAULT 0,
@@ -40,15 +41,15 @@ CREATE TABLE volunteer
     orgs TEXT[]
 );
 
-CREATE TABLE organizer
+CREATE TABLE IF NOT EXISTS organizer
 (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     org_name VARCHAR(100) NOT NULL,
-    given_hours INT DEFAULT 0,
+    given_hours INT DEFAULT 0,/*Ask Fadi*/
     vol_id INT[]
 );
 
-CREATE TABLE events
+CREATE TABLE IF NOT EXISTS events
 (
     event_id SERIAL PRIMARY KEY,
     event_name TEXT NOT NULL,
@@ -56,7 +57,6 @@ CREATE TABLE events
     event_start TIME NOT NULL,
     event_end TIME NOT NULL,
     is_active BOOLEAN NOT NULL,
-    stat TEXT NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[],
     vol_id_waiting_list INT[],
@@ -64,17 +64,26 @@ CREATE TABLE events
     current_number_of_vol INT DEFAULT 0
 );
 
+CREATE TABLE IF NOT EXISTS events_status
+(
+    approved INT[],
+    rejected INT[], /*Check if Fadi wants this*/
+    pending INT[],
+    ongoing INT[],
+    finished INT[]
+);
+
 -- ? maybe add more indexs or change
 -- Indexes for frequently searched fields
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_users_phone_number ON users(phone_number);
-CREATE INDEX idx_events_event_date ON events(event_date);
+-- CREATE INDEX idx_users_email ON users(email);
+-- CREATE INDEX idx_users_phone_number ON users(phone_number);
+-- CREATE INDEX idx_events_event_date ON events(event_date);
 
--- Indexes for id and id_number columns
-CREATE INDEX idx_users_id_number ON users(id_number);
-CREATE INDEX idx_users_waiting_list_id_number ON users_waiting_list(id_number);
-CREATE INDEX idx_users_id ON users(id);
-CREATE INDEX idx_users_waiting_list_id ON users_waiting_list(id);
+-- -- Indexes for id and id_number columns
+-- CREATE INDEX idx_users_id_number ON users(id_number);
+-- CREATE INDEX idx_users_waiting_list_id_number ON users_waiting_list(id_number);
+-- CREATE INDEX idx_users_id ON users(id);
+-- CREATE INDEX idx_users_waiting_list_id ON users_waiting_list(id);
 
 -- predefine the Roles
 -- INSERT INTO role (name) VALUES ('ADMIN'), ('VOLUNTEER'), ('ORGANIZER');
@@ -89,12 +98,12 @@ CREATE INDEX idx_users_waiting_list_id ON users_waiting_list(id);
 -- INSERT INTO user_role (user_id, role_id)
 -- SELECT id, (SELECT id FROM role WHERE name = 'ORGANIZER') FROM inserted_user;
 
--- CREATE TABLE role (
+-- CREATE TABLE IF NOT EXISTS role (
 --     id SERIAL PRIMARY KEY,
 --     name VARCHAR(50) NOT NULL UNIQUE
 -- );
 
--- CREATE TABLE user_role (
+-- CREATE TABLE IF NOT EXISTS user_role (
 --     user_id INT REFERENCES users(id) ON DELETE CASCADE,
 --     role_id INT REFERENCES role(id) ON DELETE CASCADE,
 --     PRIMARY KEY (user_id, role_id)
