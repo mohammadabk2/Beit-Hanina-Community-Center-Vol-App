@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users
     insurance VARCHAR(50) NOT NULL,
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password_hash NOT NULL VARCHAR(255),
+    password_hash VARCHAR(255) NOT NULL,
     logs TEXT[],
     role TEXT[]
 );
