@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // import components here
 import DynamicInput from "./components/InputComponent";
@@ -20,20 +21,27 @@ const App = () => {
     setPassword(event.target.value);
   };
 
-  const signIn = (event) => {
+  const signIn = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
-    //! testing only Ultra security risk
-    if (username === "vol" && password === "vol") {
-      navigate("/home-volunteer");
-    } else if (username === "org" && password === "org") {
-      navigate("/home-organizer");
-    } else if (username === "admin" && password === "admin") {
-      navigate("/home-admin");
-    } else {
-      alert("Enter Valid Sign in details");
+
+    const API_BASE_URL = "http://localhost:5213"; //TODO change to vite or another secure method
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/logUser`, {
+        userName: username,
+        hash: password,
+      });
+      if (response.data.status === "success") {
+        alert(`Welcome ${response.data.message}`);
+        navigate("/home-volunteer");
+      } else {
+        alert("login fail");
+      }
+    } catch (err) {
+      console.error("Error during sign in:", err);
     }
   };
 

@@ -16,7 +16,7 @@ const loginUser = async (req, res) => {
     if (user) {
       console.log(`Login successful for user: ${user.email}`);
       res.status(200).send({
-        message: `Login successful! user-id = ${user.id}`,
+        message: `Login successful! ${user.name} ${user.id}`,
         status: "success",
       });
     } else {
