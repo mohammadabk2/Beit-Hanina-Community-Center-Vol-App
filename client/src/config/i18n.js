@@ -10,6 +10,7 @@ import HomeAdminEN from "./locales/en/HomeAdmin.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
+import navBarEN from "./locales/en/navBar.json";
 
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
@@ -20,6 +21,7 @@ import HomeAdminAR from "./locales/ar/HomeAdmin.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
+import navBarAR from "./locales/ar/navBar.json";
 
 // The translations
 const resources = {
@@ -32,6 +34,7 @@ const resources = {
     homeAdmin: HomeAdminEN,
     about: aboutEn,
     personal: personalAreaVolunteerEN,
+    navBar: navBarEN,
   },
   ar: {
     app: appAr,
@@ -42,6 +45,7 @@ const resources = {
     about: aboutAR,
     skills: skillsAR,
     personal: personalAreaVolunteerAR,
+    navBar: navBarAR,
   },
 };
 

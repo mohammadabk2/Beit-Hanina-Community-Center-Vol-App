@@ -2,7 +2,7 @@
 
 /*Sets font-family */
 body {
- font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 /*Adds background transition to all classes for dark/light mode*/
@@ -44,6 +44,10 @@ button {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.flex-box-gap{
+  gap: 0.7rem;
 }
 
 /*Gives container slight shadow */
@@ -385,9 +389,7 @@ input:focus {
   border-radius: 0 0 1rem 1rem;
   width: 100%;
   background-color: var(--box-background-color);
-
 }
-
 
 /* PersonList.css */
 
@@ -463,7 +465,7 @@ input:focus {
 }
 .person-table .button-approve:hover {
   background-color: #218838;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .person-table .button-reject {
@@ -472,7 +474,7 @@ input:focus {
 }
 .person-table .button-reject:hover {
   background-color: #c82333;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .person-table .button-add,
@@ -483,7 +485,7 @@ input:focus {
 .person-table .button-add:hover,
 .person-table .button-view:hover {
   background-color: #0056b3;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .person-card-container {
@@ -501,8 +503,6 @@ input:focus {
 }
 
 /* Add more styles as needed for skills, specific columns, etc. */
-
-
 
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
@@ -531,6 +531,3 @@ input:focus {
     justify-content: center;
   }
 }
-
-
-
