@@ -9,6 +9,7 @@ import HomeOrganizerEn from "./locales/en/HomeOrganizer.json";
 import HomeAdminEN from "./locales/en/HomeAdmin.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
+import insuranceEN from "./locales/en/insurance.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
 import navBarEN from "./locales/en/navBar.json";
 
@@ -20,6 +21,7 @@ import HomeOrganizerAR from "./locales/ar/HomeOrganizer.json";
 import HomeAdminAR from "./locales/ar/HomeAdmin.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
+import insuranceAR from "./locales/ar/insurance.json";
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
 import navBarAR from "./locales/ar/navBar.json";
 
@@ -34,6 +36,7 @@ const resources = {
     homeAdmin: HomeAdminEN,
     about: aboutEn,
     personal: personalAreaVolunteerEN,
+    insurance: insuranceEN,
     navBar: navBarEN,
   },
   ar: {
@@ -46,6 +49,7 @@ const resources = {
     skills: skillsAR,
     personal: personalAreaVolunteerAR,
     navBar: navBarAR,
+    insurance: insuranceAR,
   },
 };
 
