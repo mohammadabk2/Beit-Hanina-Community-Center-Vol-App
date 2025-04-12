@@ -45,7 +45,7 @@ const SignUpPage = () => {
   const sexOptions = [
     {
       label: t("male"),
-      href: "#option1",
+      href: "#male",
       onClick: () => {
         console.log("male clicked");
         handleSexChange("male");
@@ -53,7 +53,7 @@ const SignUpPage = () => {
     },
     {
       label: t("female"),
-      href: "#option2",
+      href: "#female",
       onClick: () => {
         console.log("female clicked");
         handleSexChange("female");
