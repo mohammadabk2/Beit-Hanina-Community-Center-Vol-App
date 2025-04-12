@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import NavigationBar from "./components/NavigationBar";
+// import centreLogo from "./icons/org_icon.png";
 
 const App = () => {
   const [username, setUserName] = useState("");
@@ -49,12 +50,17 @@ const App = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar dontShowPageButtons={true} />
-      <header className="app-header">
-        <h1>{t("name")}</h1>
+      <header className="app-header basic-box-padding">
+        {/* <div className="basic-item-padding">
+          <img className="centre-img" src={centreLogo} alt="Centre Logo"></img>
+        </div> */}
+
+        <div className="basic-item-padding">{t("name")}</div>
+        <div className="basic-item-padding">{t("desc")}</div>
       </header>
       <main>
         <div className="general-box flex-box flex-column smooth-shadow-box">
-          <h1>{t("welcome")}</h1>
+          <div>{t("welcome")}</div>
           <div className="input-field-box">
             <DynamicInput
               className="input-field"
