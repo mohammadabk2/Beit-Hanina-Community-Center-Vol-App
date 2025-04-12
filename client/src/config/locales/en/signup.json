@@ -22,5 +22,6 @@
   "address_placeholder": "Enter Address",
   "genderselect": "Select Gender",
   "selectskills": "Select Skills",
-  "remove": "Remove"
+  "remove": "Remove",
+  "selectinsurance":"Select Insurance"
 }

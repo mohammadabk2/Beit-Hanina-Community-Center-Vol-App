@@ -17,7 +17,7 @@ const SignUpPage = () => {
   const goBack = () => {
     navigate("/");
   };
-  
+
   const baseInsuranceOptions = useInsuranceOptions();
 
   const [formData, setFormData] = useState({
@@ -51,12 +51,12 @@ const SignUpPage = () => {
 
   const { t } = useTranslation("signUp");
 
-  const insuranceOptions = baseInsuranceOptions.map(option => ({
+  const insuranceOptions = baseInsuranceOptions.map((option) => ({
     ...option,
     onClick: () => {
       console.log(`${option.value} clicked`);
       handleInsuranceChange(option.value);
-    }
+    },
   }));
 
   const sexOptions = [
@@ -182,7 +182,7 @@ const SignUpPage = () => {
             </div>
             <DropDownMenu
               className="gender-button"
-              text={formData.insurance || t("Select Insurance")}
+              text={formData.insurance || t("selectinsurance")}
               options={insuranceOptions}
             />
           </div>
@@ -192,6 +192,7 @@ const SignUpPage = () => {
               <label>{t("idNumber")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="text"
