@@ -18,10 +18,6 @@ const PersonalArea = () => {
     console.log("print to PDF button clicked");
   };
 
-  const downloadToExcel = () => {
-    console.log("Excel button clicked");
-  };
-
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
@@ -44,19 +40,12 @@ const PersonalArea = () => {
               {t("number_of_vol")}: {numberOfVolunteers}
             </div>
           </div>
-        
 
           <div className="flex-box">
             <DynamicButton
               className="button"
               text={t("to_pdf")}
               onClick={printToPdf}
-            />
-
-            <DynamicButton
-              className="button"
-              text={t("to_excel")}
-              onClick={downloadToExcel}
             />
           </div>
 
