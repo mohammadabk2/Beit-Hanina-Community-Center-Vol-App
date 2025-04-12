@@ -16,7 +16,7 @@ const SelectComponent = ({
   chosen,
 }) => {
   const { isLightMode } = useTheme();
-  const { t } = useTranslation("select");
+  const { t } = useTranslation("skills");
 
   const skillOptions = useSkillOptions();
   const sortOptions = useSortOptions();
@@ -72,7 +72,7 @@ const SelectComponent = ({
       </div>
       <DropDownMenu
         className="gender-button"
-        text={type === "skills" ? t("selectskills") : t("sort")}
+        text={type === "skills" ? t("select_skills") : t("sort")}
         options={availableOptions.map((skill) => ({
           label: t(`${skill.label}`),
           href: `#${skill.value}`,

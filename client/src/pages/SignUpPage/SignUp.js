@@ -106,7 +106,7 @@ const SignUpPage = () => {
             </div>
             <DropDownMenu
               className="gender-button"
-              text={t(formData.sex) || t("Select Gender")}
+              text={t(formData.sex) || t("genderselect")}
               options={sexOptions}
             />
           </div>
