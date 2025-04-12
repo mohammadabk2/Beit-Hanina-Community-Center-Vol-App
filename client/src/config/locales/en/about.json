@@ -5,9 +5,8 @@
   "husam": "Husam Halawani",
   "mohammadqt": "Mohammad Quttaineh",
   "mohammadtb": "Mohammad Tbakhy",
-  "version":"Version",
-  "contact":"Contact Information",
-  "admins":"Admins",
-  "fadi":"Fadi Awida",
-  "ahmed":"Ahmed"
+  "version": "Version",
+  "contact": "Contact Information",
+  "admins": "Admins",
+  "desc":"add app desc"
 }
