@@ -68,6 +68,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
               src={isLightMode ? profileIconLight : profileIconDark}
               alt="Profile icon"
             />
+            <div className="navigation-button-text">{t("profile")}</div>
           </div>                 
           <div onClick={goToHome}>
             <img
