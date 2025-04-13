@@ -58,6 +58,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
           src={isLightMode ? aboutIconLight : aboutIconDark}
           alt="About icon"
         />
+        <div className="navigation-button-text">{t("about")}</div>
       </div>
       {!dontShowPageButtons && (
         <>
