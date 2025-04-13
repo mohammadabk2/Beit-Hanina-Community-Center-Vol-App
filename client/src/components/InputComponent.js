@@ -8,11 +8,10 @@ const DynamicInput = ({
   placeholder,
   name,
   className,
-  style,
-  id,
-  pattern,
-  inputMode,
 }) => {
+  // نقرأ اتجاه الصفحة من <html dir="rtl">
+  const direction = document.documentElement.dir || "ltr";
+
   return (
     <input
       type={type}
@@ -21,25 +20,27 @@ const DynamicInput = ({
       placeholder={placeholder}
       name={name}
       className={className}
-      style={style}
-      id={id}
-      pattern={pattern}
-      inputMode={inputMode}
+      style={{
+        width: "100%",
+        padding: "10px",
+        fontSize: "1rem",
+        borderRadius: "6px",
+        border: "1px solid #ccc",
+        margin: "5px 0",
+        direction: direction, // يتبع RTL أو LTR تلقائيًا
+        textAlign: direction === "rtl" ? "right" : "left", // لضبط محاذاة النص
+      }}
     />
   );
 };
 
 DynamicInput.propTypes = {
   type: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   name: PropTypes.string,
   className: PropTypes.string,
-  style: PropTypes.object,
-  id: PropTypes.string,
-  pattern: PropTypes.string,
-  inputMode: PropTypes.string,
 };
 
 export default DynamicInput;

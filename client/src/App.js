@@ -7,11 +7,13 @@ import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import NavigationBar from "./components/NavigationBar";
 
+// ✅ الشعار من مجلد icons
+import logo from "./icons/org_icon.png";
+
 const App = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) => {
     setUserName(event.target.value);
   };
@@ -20,12 +22,12 @@ const App = () => {
     setPassword(event.target.value);
   };
 
+  const navigate = useNavigate();
+
   const signIn = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
+    event.preventDefault();
     console.log("sign in button clicked");
-    console.log(username);
-    console.log(password); //! testing only remove security risk
-    //! testing only Ultra security risk
+    console.log(username, password);
     if (username === "vol" && password === "vol") {
       navigate("/home-volunteer");
     } else if (username === "org" && password === "org") {
@@ -37,9 +39,8 @@ const App = () => {
     }
   };
 
-  const navigate = useNavigate();
   const signUp = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
+    event.preventDefault();
     console.log("sign up button clicked");
     navigate("/sign-up");
   };
@@ -49,9 +50,17 @@ const App = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar dontShowPageButtons={true} />
+
       <header className="app-header">
+        {/* ✅ الشعار */}
+        <img
+          src={logo}
+          alt="Center Logo"
+          style={{ width: "130px", marginBottom: "1rem" }}
+        />
         <h1>{t("name")}</h1>
       </header>
+
       <main>
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <h1>{t("welcome")}</h1>
@@ -74,20 +83,16 @@ const App = () => {
             />
           </div>
           <div className="flex-box">
-            <div>
-              <DynamicButton
-                className="button"
-                onClick={signIn}
-                text={t("sign-in")}
-              />
-            </div>
-            <div>
-              <DynamicButton
-                className="button"
-                onClick={signUp}
-                text={t("sign-up")}
-              />
-            </div>
+            <DynamicButton
+              className="button"
+              onClick={signIn}
+              text={t("sign-in")}
+            />
+            <DynamicButton
+              className="button"
+              onClick={signUp}
+              text={t("sign-up")}
+            />
           </div>
         </div>
       </main>

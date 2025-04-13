@@ -7,17 +7,12 @@ import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import SelectComponent from "../../components/SelectComponent";
-
-// Import the insurance options
 import { useInsuranceOptions } from "../../config/options/Insurance";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation("signUp");
 
-  const goBack = () => {
-    navigate("/");
-  };
-  
   const baseInsuranceOptions = useInsuranceOptions();
 
   const [formData, setFormData] = useState({
@@ -29,7 +24,9 @@ const SignUpPage = () => {
     address: "",
     insurance: "",
     idNumber: "",
-    skills: [], // Initialize skills as an array
+    skills: [],
+    occupation: "",
+    occupationOther: "" // ✅ حقل المهنة في حال "أخرى"
   });
 
   const handleChange = (e) => {
@@ -49,36 +46,55 @@ const SignUpPage = () => {
     setFormData({ ...formData, sex: value });
   };
 
-  const { t } = useTranslation("signUp");
+  const goBack = () => {
+    navigate("/");
+  };
 
   const insuranceOptions = baseInsuranceOptions.map(option => ({
     ...option,
-    onClick: () => {
-      console.log(`${option.value} clicked`);
-      handleInsuranceChange(option.value);
-    }
+    onClick: () => handleInsuranceChange(option.value),
   }));
 
   const sexOptions = [
     {
       label: t("male"),
-      href: "#option1",
-      onClick: () => {
-        console.log("male clicked");
-        handleSexChange("male");
-      },
+      href: "#male",
+      onClick: () => handleSexChange("male"),
     },
     {
       label: t("female"),
-      href: "#option2",
-      onClick: () => {
-        console.log("female clicked");
-        handleSexChange("female");
-      },
+      href: "#female",
+      onClick: () => handleSexChange("female"),
     },
   ];
 
-  //TODO change lan from drop down to new nav bar
+  const occupationOptions = [
+    {
+      label: t("occupation.school_student"),
+      href: "#school",
+      onClick: () =>
+        setFormData({ ...formData, occupation: "school_student", occupationOther: "" }),
+    },
+    {
+      label: t("occupation.university_student"),
+      href: "#university",
+      onClick: () =>
+        setFormData({ ...formData, occupation: "university_student", occupationOther: "" }),
+    },
+    {
+      label: t("occupation.professional"),
+      href: "#professional",
+      onClick: () =>
+        setFormData({ ...formData, occupation: "professional", occupationOther: "" }),
+    },
+    {
+      label: t("occupation.other"),
+      href: "#other",
+      onClick: () =>
+        setFormData({ ...formData, occupation: "other" }), // نترك الأخرى مفتوحة للكتابة
+    },
+  ];
+
   return (
     <div className="flex-box flex-column">
       <NavigationBar dontShowPageButtons={true} />
@@ -88,56 +104,44 @@ const SignUpPage = () => {
           className="general-box smooth-shadow-box flex-box flex-column"
         >
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label> {t("fullName")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("fullName")}: <span className="red-star">*</span></label>
             <DynamicInput
               className="input-field"
               type="text"
-              value={formData.name}
               name="name"
+              value={formData.name}
               onChange={handleChange}
               placeholder={t("fullname_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("birthDate")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("birthDate")}: <span className="red-star">*</span></label>
             <DynamicInput
               className="input-field"
               type="date"
-              value={formData.birthDate}
               name="birthDate"
+              value={formData.birthDate}
               onChange={handleChange}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("gender")} </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("gender")} <span className="red-star">*</span></label>
             <DropDownMenu
               className="gender-button"
-              text={t(formData.sex) || t("Select Gender")}
+              text={formData.sex ? t(formData.sex) : t("genderselect")}
               options={sexOptions}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("phoneNumber")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("phoneNumber")}: <span className="red-star">*</span></label>
             <DynamicInput
               className="input-field"
               type="tel"
-              value={formData.phone}
               name="phone"
+              value={formData.phone}
               onChange={handleChange}
               pattern="[0-9]*"
               inputMode="numeric"
@@ -146,61 +150,78 @@ const SignUpPage = () => {
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("email")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("email")}: <span className="red-star">*</span></label>
             <DynamicInput
               className="input-field"
               type="email"
-              value={formData.email}
               name="email"
+              value={formData.email}
               onChange={handleChange}
               placeholder={t("email_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("address")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("address")}: <span className="red-star">*</span></label>
             <DynamicInput
               className="input-field"
               type="text"
-              value={formData.address}
               name="address"
+              value={formData.address}
               onChange={handleChange}
               placeholder={t("address_placeholder")}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("insurance")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("insurance")}: <span className="red-star">*</span></label>
             <DropDownMenu
               className="gender-button"
-              text={formData.insurance || t("Select Insurance")}
+              text={formData.insurance || t("insurance_placeholder")}
               options={insuranceOptions}
             />
           </div>
 
           <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("idNumber")}: </label>
-              <label className="red-star">*</label>
-            </div>
+            <label>{t("idNumber")}: <span className="red-star">*</span></label>
             <DynamicInput
               className="input-field"
               type="text"
-              value={formData.idNumber}
               name="idNumber"
+              value={formData.idNumber}
               onChange={handleChange}
               placeholder={t("idNumber_placeholder")}
             />
           </div>
+
+          {/* ✅ اختيار المهنة */}
+          <div className="flex-box flex-column input-field-box">
+            <label>{t("occupation.label")}: <span className="red-star">*</span></label>
+            <DropDownMenu
+              className="gender-button"
+              text={
+                formData.occupation
+                  ? t(`occupation.${formData.occupation}`)
+                  : t("occupation.select")
+              }
+              options={occupationOptions}
+            />
+          </div>
+
+          {/* ✅ حقل إضافي يظهر عند اختيار "أخرى" */}
+          {formData.occupation === "other" && (
+            <div className="flex-box flex-column input-field-box">
+              <label>{t("occupation.other_placeholder")}</label>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                name="occupationOther"
+                value={formData.occupationOther}
+                onChange={handleChange}
+                placeholder={t("occupation.other_placeholder")}
+              />
+            </div>
+          )}
 
           <SelectComponent
             type="skills"
@@ -209,20 +230,8 @@ const SignUpPage = () => {
           />
 
           <div className="flex-box">
-            <div>
-              <DynamicButton
-                className="button"
-                text={t("submit")}
-                type="submit"
-              />
-            </div>
-            <div>
-              <DynamicButton
-                className="button"
-                onClick={goBack}
-                text={t("back")}
-              />
-            </div>
+            <DynamicButton className="button" type="submit" text={t("submit")} />
+            <DynamicButton className="button" onClick={goBack} text={t("back")} />
           </div>
         </form>
       </div>

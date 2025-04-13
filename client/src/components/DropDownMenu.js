@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import DynamicButton from "./ButtonComponent";
-import dropDownArrow from "../icons/drop_down_icon.svg"
+import dropDownArrow from "../icons/drop_down_icon.svg";
 
 const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,6 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
     setIsOpen(false);
   };
 
-  // handles outside clicks
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,17 +32,17 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, []);
 
   return (
-    <div className={`${className}`} style={style} ref={dropdownRef}>
+    <div className={className} style={style} ref={dropdownRef}>
       <DynamicButton
         onClick={toggleDropdown}
         name={name}
         className="button dropdown-toggle flex-box button-small"
         text={text}
         logoSrc={dropDownArrow}
-        logoalt={"drop down arrow"}
+        logoalt="drop down arrow"
       />
       {options && isOpen && (
         <ul className="dropdown-menu">

@@ -532,5 +532,15 @@ input:focus {
   }
 }
 
+.event-box-description {
+  font-size: 0.95rem;
+  color: var(--general-text);
+  margin-top: 0.75rem;
+  padding: 0 1rem 1rem;
+  width: 100%;
+  text-align: left;
+}
+
+
 
 

@@ -22,5 +22,16 @@
   "address_placeholder": "أدخل العنوان",
   "sexselect": "اختر الجنس",
   "selectskills": "اختر المهارات",
-  "remove": "إزالة "
+  "remove": "إزالة ",
+  
+  "occupation": {
+  "label": "المهنة",
+  "select": "اختر المهنة",
+  "school_student": "طالب مدرسة",
+  "university_student": "طالب جامعي",
+  "professional": "حرفي / مهني",
+  "other": "أخرى",
+  "other_placeholder": "يرجى تحديد المهنة"
+}
+
 }

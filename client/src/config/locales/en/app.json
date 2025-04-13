@@ -5,5 +5,12 @@
   "user-name-placeholder": "Enter UserName",
   "password-placeholder": "Enter password",
   "sign-in": "Sign in",
-  "sign-up": "Sign up"
+  "sign-up": "Sign up",
+  "about-label": "About",
+  "profile-label": "Profile",
+  "home-label": "Home",
+  "theme-label": "Theme",
+"usage-policy": "Usage Policy",
+"usage-agreement": "User Agreement"
+
 }
