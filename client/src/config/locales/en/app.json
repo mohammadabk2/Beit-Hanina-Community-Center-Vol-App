@@ -5,5 +5,9 @@
   "user-name-placeholder": "Enter UserName",
   "password-placeholder": "Enter password",
   "sign-in": "Sign in",
-  "sign-up": "Sign up"
+  "sign-up": "Sign up",
+  "about": "About",
+  "profile": "Profile",
+  "home": "Home",
+  "theme": "Theme"
 }
