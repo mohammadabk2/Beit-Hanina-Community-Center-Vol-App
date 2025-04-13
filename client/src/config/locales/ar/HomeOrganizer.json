@@ -6,5 +6,7 @@
   "event_date": "تاريخ الفعالية",
   "volunteer_count": "عدد المتطوعين المطلوبين",
   "event_name_placeholder": "أدخل اسم الفعالية",
-  "event_count_placeholder": "أدخل عدد المتطوعين"
+  "event_count_placeholder": "أدخل عدد المتطوعين",
+  "event_description": "وصف الحدث",
+"event_description_placeholder": "أدخل وصفًا مختصرًا لهذا الحدث"
 }

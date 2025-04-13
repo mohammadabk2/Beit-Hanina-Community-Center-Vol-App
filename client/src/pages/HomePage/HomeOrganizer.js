@@ -49,6 +49,7 @@ const HomeOrganizer = () => {
     eventCount: "",
     eventDate: "",
     skills: [], // Initialize skills as an array
+    description: "" // Event description field
   });
 
   const handleChange = (e) => {
@@ -111,6 +112,21 @@ const HomeOrganizer = () => {
                 placeholder={t("event_name_placeholder")}
               />
             </div>
+<div className="flex-box flex-column input-field-box">
+  <div>
+    <label>{t("event_description")}</label>
+    <label className="red-star">*</label>
+  </div>
+  <textarea
+    className="input-field"
+    name="description"
+    value={formData.description}
+    onChange={handleChange}
+    placeholder={t("event_description_placeholder")}
+    rows={4}
+    style={{ resize: "vertical" }}
+  />
+</div>
 
             <div className="flex-box flex-column input-field-box">
               <div>
