@@ -86,6 +86,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
           src={isLightMode ? modeIconDark : modeIconLight}
           alt="Mode Switch"
         />
+        <div className="navigation-button-text">{t("theme")}</div>
       </div>
 
       <DropDownMenu
