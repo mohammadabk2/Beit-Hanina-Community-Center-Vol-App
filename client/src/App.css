@@ -108,6 +108,13 @@ button {
   cursor: pointer;
 }
 
+/*Navigation button text */
+.navigation-button-text {
+  font-size: 0.75rem;
+  margin: 0rem;
+  color: var(--common-colour-2);
+}
+
 /*Styling for navigation box*/
 .navigation-box {
   width: 90vw;
