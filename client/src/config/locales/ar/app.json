@@ -5,5 +5,9 @@
   "user-name-placeholder": "أدخل اسم المستخدم",
   "password-placeholder": "أدخل كلمة المرور",
   "sign-in": "تسجيل الدخول",
-  "sign-up": "اشتراك"
+  "sign-up": "اشتراك",
+  "about": "حول",
+  "profile": "الملف الشخصي",
+  "home": "الصفحة الرئيسية",
+  "theme": "المظهر"
 }
