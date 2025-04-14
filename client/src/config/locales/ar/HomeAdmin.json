@@ -1,3 +1,7 @@
 {
-    
+    "sort":"صنف",
+    "switch_to_people": "التبديل إلى الأشخاص",
+    "switch_to_events": "التبديل إلى الأحداث",
+    "switch_to_table_view": "التبديل إلى عرض الجدول",
+    "switch_to_card_view": "التبديل إلى عرض البطاقة"
 }
