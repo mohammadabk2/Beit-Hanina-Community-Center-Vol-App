@@ -224,6 +224,19 @@ input:focus {
   background-color: var(--box-background-color);
   width: 95%;
 }
+/* Description section at bottom of event card */
+.event-box-description {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  text-align: start;
+  color: var(--general-text);
+  background-color: var(--box-background-color);
+  border-top: 1px solid var(--general-shadow);
+  border-radius: 0 0 0.625rem 0.625rem;
+  box-sizing: border-box;
+}
+
 
 .event-box-image {
   width: 10rem;
