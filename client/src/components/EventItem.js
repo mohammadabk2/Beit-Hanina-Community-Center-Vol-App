@@ -8,7 +8,20 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
+<<<<<<< Updated upstream
 const EventItem = ({ name, desc, className, style, req, type, count, size }) => {
+=======
+const EventItem = ({
+  name,
+  desc,
+  className,
+  style,
+  req,
+  type,
+  count,
+  size,
+}) => {
+>>>>>>> Stashed changes
   const { t } = useTranslation("homeVol");
   const { t: tskill } = useTranslation("skills");
 
@@ -97,6 +110,23 @@ const EventItem = ({ name, desc, className, style, req, type, count, size }) => 
               onClick={handleOrgClick}
             />
           )}
+<<<<<<< Updated upstream
+=======
+          {/* Display event description if provided */}
+          {desc && (
+            <div
+              className="event-box-description"
+              style={{
+                padding: "0.75rem 1rem",
+                fontSize: "0.95rem",
+                textAlign: "left",
+              }}
+            >
+              {desc}
+            </div>
+          )}
+
+>>>>>>> Stashed changes
           {type === "admin" && (
             <>
               <DynamicButton
@@ -141,6 +171,7 @@ EventItem.propTypes = {
   type: PropTypes.string,
   count: PropTypes.number,
   size: PropTypes.number,
+  desc: PropTypes.string,
 };
 
 EventItem.defaultProps = {

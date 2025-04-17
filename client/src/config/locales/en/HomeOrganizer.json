@@ -1,5 +1,5 @@
 {
-  "sort":"Sort",
+  "sort": "Sort",
   "back": "Back",
   "create_event": "Create Event",
   "event_name": "Name of Event",
@@ -8,5 +8,9 @@
   "event_name_placeholder": "Enter Name of the Event",
   "event_count_placeholder": "Enter Number of Volunteers",
   "event_description": "Event Description",
+<<<<<<< Updated upstream
 "event_description_placeholder": "Enter a short description of the event"
+=======
+  "event_description_placeholder": "Enter a short description of the event"
+>>>>>>> Stashed changes
 }
