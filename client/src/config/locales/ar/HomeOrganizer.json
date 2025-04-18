@@ -8,9 +8,5 @@
   "event_name_placeholder": "أدخل اسم الفعالية",
   "event_count_placeholder": "أدخل عدد المتطوعين",
   "event_description": "وصف الحدث",
-<<<<<<< Updated upstream
-"event_description_placeholder": "أدخل وصفًا مختصرًا لهذا الحدث"
-=======
   "event_description_placeholder": "أدخل وصفًا مختصرًا لهذا الحدث"
->>>>>>> Stashed changes
 }

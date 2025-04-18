@@ -8,9 +8,6 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-<<<<<<< Updated upstream
-const EventItem = ({ name, desc, className, style, req, type, count, size }) => {
-=======
 const EventItem = ({
   name,
   desc,
@@ -21,7 +18,6 @@ const EventItem = ({
   count,
   size,
 }) => {
->>>>>>> Stashed changes
   const { t } = useTranslation("homeVol");
   const { t: tskill } = useTranslation("skills");
 
@@ -69,7 +65,7 @@ const EventItem = ({
           />
         </div>
       </div>
-  
+
       <div className="flex-box event-box-content-middle">
         <div>
           <img className="event-box-image" src={logoIcon} alt="Logo Icon" />
@@ -86,7 +82,7 @@ const EventItem = ({
           </div>
         </div>
       </div>
-  
+
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
         <div className="flex-box">
@@ -110,23 +106,7 @@ const EventItem = ({
               onClick={handleOrgClick}
             />
           )}
-<<<<<<< Updated upstream
-=======
-          {/* Display event description if provided */}
-          {desc && (
-            <div
-              className="event-box-description"
-              style={{
-                padding: "0.75rem 1rem",
-                fontSize: "0.95rem",
-                textAlign: "left",
-              }}
-            >
-              {desc}
-            </div>
-          )}
 
->>>>>>> Stashed changes
           {type === "admin" && (
             <>
               <DynamicButton
@@ -143,7 +123,7 @@ const EventItem = ({
           )}
         </div>
       </div>
-  
+
       {/* Display event description if provided */}
       {desc && (
         <div
@@ -159,19 +139,17 @@ const EventItem = ({
       )}
     </div>
   );
-  
 };
 
 EventItem.propTypes = {
   name: PropTypes.string.isRequired,
-  desc: PropTypes.string, 
+  desc: PropTypes.string,
   req: PropTypes.arrayOf(PropTypes.string).isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
   type: PropTypes.string,
   count: PropTypes.number,
   size: PropTypes.number,
-  desc: PropTypes.string,
 };
 
 EventItem.defaultProps = {
