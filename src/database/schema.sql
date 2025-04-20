@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
+    banned BOOLEAN DEFAULT FALSE,
     logs TEXT[],
     role TEXT[]
 );
@@ -30,7 +31,6 @@ CREATE TABLE IF NOT EXISTS users_waiting_list
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
     logs TEXT[],
-    role TEXT[]
 );
 
 CREATE TABLE IF NOT EXISTS volunteer

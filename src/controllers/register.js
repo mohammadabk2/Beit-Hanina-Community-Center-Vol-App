@@ -1,67 +1,53 @@
-//TODO change all of this
 import dbConnection from "../database/dbconnection.js";
-import jwt from "jsonwebtoken";
+import validation from "./validation.js";
 import bcrypt from "bcrypt";
-import usersValidation from "../database/validation/users.js";
 
-export default (req, res) => {
-  dbConnection.query(
-    `SELECT id FROM users WHERE email=$1;`,
-    [req.body.email.toLowerCase()],
-    (errorEmail, resultEmail) => {
-      if (resultEmail.rows[0]) {
-        res.status(400);
-        res.end();
-        return;
+//TODO validation check for front end
+
+const registerUser = async (req, res) => {
+  const userData = req.body;
+  const errors = validation(userData);
+
+  if (Object.keys(errors).length > 0) {
+    res.status(400).send({
+      message: "Invalid registration data.",
+      status: "error",
+    });
+  } else {
+    try {
+      const saltRounds = 10;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const passwordHash = await bcrypt.hash(userData.password, salt);
+
+      const reg = await dbConnection.createUser(
+        userData.fullName,
+        userData.birthDate,
+        userData.sex,
+        userData.phoneNumber,
+        userData.email,
+        userData.address,
+        userData.insurance,
+        userData.idNumber,
+        userData.username,
+        passwordHash
+      );
+      if (reg) {
+        res.status(200).send({
+          message: `Signed up successfully`,
+          status: "success",
+        });
+      } else {
+        res.status(503).send({
+          message: "Database temporarily unavailable. Please try again later.",
+          status: "error",
+        });
       }
-
-      if (
-        !usersValidation.firstName.test(req.body.firstName) ||
-        !usersValidation.lastName.test(req.body.lastName) ||
-        !usersValidation.email.test(req.body.email) ||
-        !usersValidation.password.test(req.body.password)
-      ) {
-        res.status(400);
-        res.end();
-        return;
-      }
-
-      bcrypt.hash(req.body.password, 10, (err, hashed) => {
-        if (err) {
-          res.status(400);
-          res.end();
-        } else {
-          dbConnection.query(
-            `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING id, first_name, last_name;`,
-            [
-              req.body.firstName.charAt(0).toUpperCase() +
-                req.body.firstName.slice(1),
-              req.body.lastName.charAt(0).toUpperCase() +
-                req.body.lastName.slice(1),
-              req.body.email.toLowerCase(),
-              hashed,
-            ],
-            (error, result) => {
-              if (error) {
-                res.status(400);
-                res.end();
-              } else {
-                jwt.sign(
-                  {
-                    id: result.rows[0].id,
-                    firstName: result.rows[0].first_name,
-                    lastName: result.rows[0].last_name,
-                  },
-                  process.env.SECRET,
-                  (x, token) => {
-                    res.send(token);
-                  }
-                );
-              }
-            }
-          );
-        }
+    } catch (error) {
+      res.status(500).send({
+        message: "An internal server error occurred during login.",
+        status: "error",
       });
     }
-  );
+  }
 };
+export default registerUser;

@@ -8,10 +8,10 @@ const __dirname = path.dirname(__filename);
 
 
 import pingController from "./ping.js";
+import registerController from "./register.js";
 import logUserController from "./logUser.js";
 // import getTitleController from "./getTitle.js";
 // import authenticateController from "./authenticate.js";
-// import registerController from "./register.js";
 // import { usersValidation } from "./validation.js";
 // import {
 //   client as clientErrorHandler,
@@ -23,11 +23,11 @@ const router = Router();
 // --- API Routes ---
 // Assigning the imported controllers/handlers
 router.get("/ping", pingController);
+router.post("/register", registerController);
 router.post("/logUser", logUserController);
 // router.get("/getTitle", getTitleController);
 // router.get("/usersvalidation", usersValidation); // Use the imported named export
 // router.post("/authenticate", authenticateController);
-// router.post("/register", registerController);
 
 // --- Static File Serving for React ---
 // Uses the imported 'express' and the calculated '__dirname'

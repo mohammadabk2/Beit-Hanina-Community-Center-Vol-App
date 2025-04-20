@@ -1,0 +1,28 @@
+{
+    {
+        "fullName": "jad jaraisy",
+        "birthDate": "2000-09-25",
+        "sex": "M",
+        "phoneNumber": "1111111111",
+        "email": "jad@gmail.com",
+        "address": "nazareth",
+        "insurance": "clalit",
+        "idNumber": "211211211",
+        "username": "jadosh123",
+        "password": "Jadosh123!"
+    }
+    
+    {
+        "fullName": "mohammad abu khdier",
+        "birthDate": "2002-04-29",
+        "sex": "M",
+        "phoneNumber": "2222222222",
+        "email": "mohammad@gmail.com",
+        "address": "nazareth",
+        "insurance": "clalit",
+        "idNumber": "212212212",
+        "username": "mohammad1A",
+        "password": "Jadosh123!"
+    }
+
+}
