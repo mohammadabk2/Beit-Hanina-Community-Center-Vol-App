@@ -455,10 +455,10 @@ const addVolId = async (eventName, volId) => {
 };
 
 /**
- * 
- * @param {String} eventName 
- * @param {Boolean} status 
- * @returns 
+ *
+ * @param {String} eventName
+ * @param {Boolean} status
+ * @returns
  */
 const changeStatus = async (eventName, status) => {
   const text = `
@@ -478,6 +478,20 @@ const changeStatus = async (eventName, status) => {
   }
 };
 
+/**
+ * Retrieves user hash by userName
+ *
+ * @async
+ * @param {string} username - The username of the user.
+ * @returns {Promise<string|null>} A promise that resolves to the user hash object if found, or null if not found.
+ * @throws {Error} If the database query fails.
+ */
+const getUserHash = async (username) => {
+  const text = "SELECT id, password_hash, role FROM users WHERE username = $1;";
+  const res = await db.query(text, [username]);
+  return res.rows[0];
+};
+
 // ! all the tests performed only verify that the query is valid and not the function it self.
 // ? maybe add more detailed functions to get certain values form users
 
@@ -485,6 +499,7 @@ export default {
   createUser, // tested
   getUserByLogin, // tested
   getUserById, // tested
+  getUserHash,
   assignRoleToUser,
   createVolunteer, // tested
   createOrganizer, // tested
