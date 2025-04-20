@@ -5,21 +5,9 @@ import bcrypt from "bcrypt";
 //TODO validation check for front end
 
 const registerUser = async (req, res) => {
-  const userData = {
-    fullName,
-    birthDate,
-    sex,
-    phoneNumber,
-    email,
-    address,
-    insurance,
-    idNumber,
-    username,
-    password,
-  };
-
-  userData = req.body;
+  const userData = req.body;
   const errors = validation(userData);
+
   if (Object.keys(errors).length > 0) {
     res.status(400).send({
       message: "Invalid registration data.",
@@ -29,18 +17,18 @@ const registerUser = async (req, res) => {
     try {
       const saltRounds = 10;
       const salt = await bcrypt.genSalt(saltRounds);
-      const passwordHash = await bcrypt.hash(password, salt);
+      const passwordHash = await bcrypt.hash(userData.password, salt);
 
       const reg = await dbConnection.createUser(
-        fullName,
-        birthDate,
-        sex,
-        phoneNumber,
-        email,
-        address,
-        insurance,
-        idNumber,
-        username,
+        userData.fullName,
+        userData.birthDate,
+        userData.sex,
+        userData.phoneNumber,
+        userData.email,
+        userData.address,
+        userData.insurance,
+        userData.idNumber,
+        userData.username,
         passwordHash
       );
       if (reg) {

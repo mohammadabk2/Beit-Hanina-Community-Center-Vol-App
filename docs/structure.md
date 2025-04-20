@@ -171,9 +171,12 @@
 │   │   └── verifyToken.js
 │   └── server.js
 ├── tests
+│   ├── drop_tables.sql
 │   ├── populate.sql
-│   └── README.md
+│   ├── README.md
+│   ├── register_test
+│   └── test_data.sql
 └── workbox-config.cjs
 
-39 directories, 134 files
+39 directories, 137 files
 ```
