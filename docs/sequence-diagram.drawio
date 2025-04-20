@@ -1,0 +1,130 @@
+<mxfile host="65bd71144e">
+    <diagram id="sequence-diagram" name="Volunteer App Flow">
+        <mxGraphModel dx="674" dy="856" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="sd VolunteerAppSequence" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="20" width="700" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="volunteer" value="Volunteer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="80" width="100" height="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="application" value="Application" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="80" width="100" height="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="database" value="Database" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="80" width="100" height="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="login1" value="1 : Login" style="endArrow=block;endFill=1;html=1;" edge="1" parent="1" source="volunteer" target="application">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="130" y="160" as="sourcePoint"/>
+                        <mxPoint x="370" y="160" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="160"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="validate" value="2 : Validate Credentials" style="endArrow=block;endFill=1;html=1;" edge="1" parent="1" source="application" target="database">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="180" as="sourcePoint"/>
+                        <mxPoint x="610" y="180" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="180"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="valid" value="3 : Credentials Valid" style="endArrow=block;endFill=1;html=1;dashed=1;" edge="1" parent="1" source="database" target="application">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="610" y="200" as="sourcePoint"/>
+                        <mxPoint x="370" y="200" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="welcome" value="4 : Show Homepage" style="endArrow=block;endFill=1;html=1;dashed=1;" edge="1" parent="1" source="application" target="volunteer">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="220" as="sourcePoint"/>
+                        <mxPoint x="130" y="220" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="220"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="invalid" value="5 : Invalid Credentials" style="endArrow=block;endFill=1;html=1;dashed=1;" edge="1" parent="1" source="database" target="application">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="610" y="260" as="sourcePoint"/>
+                        <mxPoint x="370" y="260" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="260"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="tryAgain" value="6 : Try Again" style="endArrow=block;endFill=1;html=1;dashed=1;" edge="1" parent="1" source="application" target="volunteer">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="280" as="sourcePoint"/>
+                        <mxPoint x="130" y="280" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="browseEvents" value="7 : Browse Events" style="endArrow=block;endFill=1;html=1;" edge="1" parent="1" source="volunteer" target="application">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="130" y="320" as="sourcePoint"/>
+                        <mxPoint x="370" y="320" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="320"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="fetchEvents" value="8 : Fetch Events" style="endArrow=block;endFill=1;html=1;" edge="1" parent="1" source="application" target="database">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="340" as="sourcePoint"/>
+                        <mxPoint x="610" y="340" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="340"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="eventList" value="9 : Return Events List" style="endArrow=block;endFill=1;html=1;dashed=1;" edge="1" parent="1" source="database" target="application">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="610" y="380" as="sourcePoint"/>
+                        <mxPoint x="370" y="380" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="380"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="register" value="10 : Register for Event" style="endArrow=block;endFill=1;html=1;" edge="1" parent="1" source="volunteer" target="application">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="130" y="400" as="sourcePoint"/>
+                        <mxPoint x="370" y="400" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="400"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="saveReg" value="11 : Save Registration" style="endArrow=block;endFill=1;html=1;" edge="1" parent="1" source="application" target="database">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="420" as="sourcePoint"/>
+                        <mxPoint x="610" y="420" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="success" value="12 : Registration Success" style="endArrow=block;endFill=1;html=1;dashed=1;" edge="1" parent="1" source="database" target="volunteer">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="610" y="440" as="sourcePoint"/>
+                        <mxPoint x="130" y="440" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="370" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
