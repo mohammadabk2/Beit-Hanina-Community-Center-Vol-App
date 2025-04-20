@@ -1,0 +1,1 @@
+DROP TABLE users, users_waiting_list, volunteer, organizer, events, events_status;
