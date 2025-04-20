@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
+import CopyRight from "../../components/CopyRight";
 
 const About = () => {
   const { t: tAbout } = useTranslation("about");
@@ -35,6 +36,8 @@ const About = () => {
           </div>
         </div>
       </div>
+
+      <CopyRight />
     </div>
   );
 };

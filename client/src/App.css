@@ -503,6 +503,11 @@ input:focus {
   cursor: pointer;
 }
 
+.link-button{
+  color: #0056b3 !important;
+  /* background-color: var(--button-background) */
+}
+
 /* Add more styles as needed for skills, specific columns, etc. */
 
 /*media query for mobile screen sizes */
