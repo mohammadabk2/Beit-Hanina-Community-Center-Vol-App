@@ -537,3 +537,13 @@ input:focus {
     justify-content: center;
   }
 }
+
+html[lang="ar"] input[type="text"],
+html[lang="ar"] input[type="password"],
+html[lang="ar"] input[type="email"],
+html[lang="ar"] input[type="search"],
+html[lang="ar"] input[type="tel"],
+html[lang="ar"] textarea {
+  direction: rtl;
+  text-align: right;
+}

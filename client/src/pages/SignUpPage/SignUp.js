@@ -92,7 +92,7 @@ const SignUpPage = () => {
         >
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label> {t("fullName")}: </label>
+              <label> {t("fullName")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -107,7 +107,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("birthDate")}: </label>
+              <label>{t("birthDate")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -133,7 +133,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("phoneNumber")}: </label>
+              <label>{t("phoneNumber")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -150,7 +150,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("email")}: </label>
+              <label>{t("email")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -165,7 +165,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("address")}: </label>
+              <label>{t("address")} </label>
               <label className="red-star">*</label>
             </div>
             <DynamicInput
@@ -180,7 +180,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("insurance")}: </label>
+              <label>{t("insurance")} </label>
               <label className="red-star">*</label>
             </div>
             <DropDownMenu
@@ -192,7 +192,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("idNumber")}: </label>
+              <label>{t("idNumber")} </label>
               <label className="red-star">*</label>
             </div>
 
@@ -208,7 +208,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("userName")}: </label>
+              <label>{t("userName")} </label>
               <label className="red-star">*</label>
             </div>
 
@@ -224,7 +224,7 @@ const SignUpPage = () => {
 
           <div className="flex-box flex-column input-field-box">
             <div>
-              <label>{t("password")}: </label>
+              <label>{t("password")} </label>
               <label className="red-star">*</label>
             </div>
 
