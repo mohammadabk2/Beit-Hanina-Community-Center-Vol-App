@@ -21,7 +21,7 @@ const SignUpPage = () => {
   const baseInsuranceOptions = useInsuranceOptions();
 
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     birthDate: "",
     sex: "",
     phone: "",
@@ -29,6 +29,8 @@ const SignUpPage = () => {
     address: "",
     insurance: "",
     idNumber: "",
+    userName: "",
+    password: "",
     skills: [], // Initialize skills as an array
   });
 
@@ -50,6 +52,7 @@ const SignUpPage = () => {
   };
 
   const { t } = useTranslation("signUp");
+  const { t: tApp } = useTranslation("app");
 
   const insuranceOptions = baseInsuranceOptions.map((option) => ({
     ...option,
@@ -95,7 +98,7 @@ const SignUpPage = () => {
             <DynamicInput
               className="input-field"
               type="text"
-              value={formData.name}
+              value={formData.fullName}
               name="name"
               onChange={handleChange}
               placeholder={t("fullname_placeholder")}
@@ -200,6 +203,38 @@ const SignUpPage = () => {
               name="idNumber"
               onChange={handleChange}
               placeholder={t("idNumber_placeholder")}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              <label>{t("userName")}: </label>
+              <label className="red-star">*</label>
+            </div>
+
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.userName}
+              name="userName"
+              onChange={handleChange}
+              placeholder={tApp("user-name-placeholder")}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              <label>{t("password")}: </label>
+              <label className="red-star">*</label>
+            </div>
+
+            <DynamicInput
+              className="input-field"
+              type="password"
+              value={formData.password}
+              name="password"
+              onChange={handleChange}
+              placeholder={tApp("password-placeholder")}
             />
           </div>
 

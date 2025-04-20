@@ -2,8 +2,8 @@
   "fullName": "Full Name",
   "birthDate": "Birth Date",
   "gender": "Gender",
-  "male":"Male",
-  "female":"Female",
+  "male": "Male",
+  "female": "Female",
   "phoneNumber": "Phone Number",
   "email": "Email",
   "insurance": "Insurance",
@@ -23,5 +23,7 @@
   "genderselect": "Select Gender",
   "selectskills": "Select Skills",
   "remove": "Remove",
-  "selectinsurance":"Select Insurance"
+  "selectinsurance": "Select Insurance",
+  "userName": "User Name",
+  "password": "Password"
 }

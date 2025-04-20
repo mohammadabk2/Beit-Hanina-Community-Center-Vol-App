@@ -23,5 +23,7 @@
   "genderselect": "اختر الجنس",
   "selectskills": "اختر المهارات",
   "remove": "إزالة ",
-  "selectinsurance": "اختيار التأمين"
+  "selectinsurance": "اختيار التأمين",
+  "userName": "اسم المستخدم",
+  "password": "كلمة المرور"
 }
