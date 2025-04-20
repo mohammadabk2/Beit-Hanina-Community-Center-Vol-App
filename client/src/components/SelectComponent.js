@@ -55,7 +55,7 @@ const SelectComponent = ({
   return (
     <div className="flex-box flex-column input-field-box">
       <div>
-        <div>{t("skills")}: </div>
+        <div>{t("skills")} </div>
       </div>
       <div className="flex-box">
         {(Array.isArray(chosen) ? chosen : []).map((choice, index) => (

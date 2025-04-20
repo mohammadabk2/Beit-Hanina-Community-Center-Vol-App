@@ -81,7 +81,6 @@ const SignUpPage = () => {
     },
   ];
 
-  //TODO change lan from drop down to new nav bar
   return (
     <div className="flex-box flex-column">
       <NavigationBar dontShowPageButtons={true} />
