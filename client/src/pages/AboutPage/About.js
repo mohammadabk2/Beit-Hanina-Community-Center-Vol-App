@@ -12,9 +12,9 @@ const About = () => {
       <NavigationBar />
       <div className="general-box scroll-box1 flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
-          <div className="basic-item-padding personal-area-content">
+          {/* <div className="basic-item-padding personal-area-content">
             {tAbout("admins")}
-          </div>
+          </div> */}
           <div className="basic-item-padding personal-area-content">
             {tAbout("desc")}
           </div>
