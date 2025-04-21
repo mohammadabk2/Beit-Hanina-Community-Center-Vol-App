@@ -159,6 +159,80 @@ const HomeAdmin = () => {
     );
   };
 
+  const renderEvents = () => {
+    return (
+      <>
+        <div className="scroll-box1 general-box flex-box flex-column">
+          <div className="flex-box top-scroll-box1 line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchMode}
+              text={t("switch_to_people")}
+            />
+          </div>
+          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+        </div>
+      </>
+    );
+  };
+
+  const renderPeople = () => {
+    return (
+      <>
+        <div className="perosnal-area-content flex-box flex-column">
+          <div className="flex-box top-scroll-box1 line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortPeople}
+              text={t("sort")}
+            />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchMode}
+              text={t("switch_to_events")}
+            />
+            {/* //TODO give the img a class to make it bigger */}
+            <img
+              className="table-img"
+              onClick={handleChange}
+              src={
+                personView
+                  ? isLightMode
+                    ? TableIconLight
+                    : TableIconDark
+                  : isLightMode
+                  ? CardIconLight
+                  : CardIconDark
+              }
+              alt={
+                personView
+                  ? t("switch_to_table_view")
+                  : t("switch_to_card_view")
+              }
+            />
+          </div>
+          <div className="bottom-scroll-box1">
+            {/* 3. Render PeopleDisplaySwitcher directly */}
+            <PeopleDisplaySwitcher
+              people={people} // Pass the whole array
+              type={personView ? "card" : "table"} // Calculate type
+              // Pass the handler functions
+              approveUser={handleApprove}
+              rejectUser={handleReject}
+              addLog={handleAddLog}
+              viewLogs={handleViewLogs}
+            />
+          </div>
+        </div>
+      </>
+    );
+  };
+
   // --- People Action Handlers ---
   // 4. Define handlers that PeopleDisplaySwitcher expects
   const handleApprove = (personId) => {
@@ -195,75 +269,8 @@ const HomeAdmin = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-
-      {/* --- Events Section --- */}
-      {showEvents ? (
-        <>
-          <div className="scroll-box1 general-box flex-box flex-column">
-            <div className="flex-box top-scroll-box1 line-break">
-              <DynamicButton
-                className="button button-small"
-                onClick={sortEvents}
-                text={t("sort")}
-              />
-              <DynamicButton
-                className="button button-small"
-                onClick={switchMode}
-                text={t("switch_to_people")}
-              />
-            </div>
-            <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="perosnal-area-content flex-box flex-column">
-            <div className="flex-box top-scroll-box1 line-break">
-              <DynamicButton
-                className="button button-small"
-                onClick={sortPeople}
-                text={t("sort")}
-              />
-              <DynamicButton
-                className="button button-small"
-                onClick={switchMode}
-                text={t("switch_to_events")}
-              />
-              {/* //TODO give the img a class to make it bigger */}
-              <img
-                className="table-img"
-                onClick={handleChange}
-                src={
-                  personView
-                    ? isLightMode
-                      ? TableIconLight
-                      : TableIconDark
-                    : isLightMode
-                    ? CardIconLight
-                    : CardIconDark
-                }
-                alt={
-                  personView
-                    ? t("switch_to_table_view")
-                    : t("switch_to_card_view")
-                }
-              />
-            </div>
-            <div className="bottom-scroll-box1">
-              {/* 3. Render PeopleDisplaySwitcher directly */}
-              <PeopleDisplaySwitcher
-                people={people} // Pass the whole array
-                type={personView ? "card" : "table"} // Calculate type
-                // Pass the handler functions
-                approveUser={handleApprove}
-                rejectUser={handleReject}
-                addLog={handleAddLog}
-                viewLogs={handleViewLogs}
-              />
-            </div>
-          </div>
-        </>
-      )}
+      {showEvents ? renderEvents() : renderPeople()}
+      
     </div>
   );
 };
