@@ -120,9 +120,18 @@ const HomeAdmin = () => {
 
   const [showEvents, setShowEvents] = useState(true);
   const [personView, setPersonView] = useState(true); // true = card, false = table
+  const [showCreateOrg, setShowCreateOrg] = useState(false);
 
   const switchMode = () => {
     setShowEvents(!showEvents);
+  };
+
+  const handleChange = () => {
+    setPersonView(!personView);
+  };
+
+  const switchToCreateOrg = () => {
+    setShowCreateOrg(!showCreateOrg);
   };
 
   const sortEvents = () => {
@@ -133,10 +142,6 @@ const HomeAdmin = () => {
   const sortPeople = () => {
     console.log("Sort people button clicked");
     // Add sorting logic for people array here if needed
-  };
-
-  const handleChange = () => {
-    setPersonView(!personView);
   };
 
   // --- Event Rendering --- (Remains the same)
@@ -233,6 +238,10 @@ const HomeAdmin = () => {
     );
   };
 
+  const renderCreateOrg = ()=>{
+
+  }
+
   // --- People Action Handlers ---
   // 4. Define handlers that PeopleDisplaySwitcher expects
   const handleApprove = (personId) => {
@@ -269,8 +278,8 @@ const HomeAdmin = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      {showEvents ? renderEvents() : renderPeople()}
-      
+      {showEvents && !showCreateOrg ? renderEvents() : renderPeople()}
+      {!showEvents && showCreateOrg && renderCreateOrg() }
     </div>
   );
 };
