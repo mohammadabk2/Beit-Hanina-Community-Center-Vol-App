@@ -6,6 +6,7 @@ import DynamicButton from "../../components/ButtonComponent";
 import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
 import { useTheme } from "../../config/options/Colors";
+import DynamicInput from "../../components/InputComponent";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
@@ -103,36 +104,23 @@ const HomeAdmin = () => {
     },
     // Add more unique people as needed
   ];
-  //!
-
-  // If you fetch data, you'll use useState:
-  // const [people, setPeople] = useState([]);
-  // const [events, setEvents] = useState([]);
-  // useEffect(() => {
-  //   fetchPeopleData().then(data => setPeople(data || []));
-  //   fetchEventsData().then(data => setEvents(data || []));
-  // }, []);
 
   // Using static data for now
   const people = initialPeople;
+  //!
 
   const { t } = useTranslation("homeAdmin");
 
-  const [showEvents, setShowEvents] = useState(true);
-  const [personView, setPersonView] = useState(true); // true = card, false = table
-  const [showCreateOrg, setShowCreateOrg] = useState(false);
+  const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
+  const [personView, setPersonView] = useState(true);
 
-  const switchMode = () => {
-    setShowEvents(!showEvents);
+  const switchToEvents = () => setViewMode("events");
+  const switchToPeople = () => {
+    setViewMode("people"); // Switch view mode to "people"
+    setPersonView(true); // Set personView to true by default when switching to "people"
   };
-
-  const handleChange = () => {
-    setPersonView(!personView);
-  };
-
-  const switchToCreateOrg = () => {
-    setShowCreateOrg(!showCreateOrg);
-  };
+  const switchToCreateOrg = () => setViewMode("createOrg");
+  const togglePersonView = () => setPersonView(!personView); // Toggle between card and table view
 
   const sortEvents = () => {
     console.log("Sort events button clicked");
@@ -176,14 +164,39 @@ const HomeAdmin = () => {
             />
             <DynamicButton
               className="button button-small"
-              onClick={switchMode}
+              onClick={switchToPeople}
               text={t("switch_to_people")}
+            />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToCreateOrg}
+              text={t("switch_to_create_org")}
             />
           </div>
           <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
         </div>
       </>
     );
+  };
+
+  const handleApprove = (personId) => {
+    console.log(`Approving person ${personId}`);
+    // TODO: Implement actual logic (e.g., API call, update state)
+  };
+
+  const handleReject = (personId) => {
+    console.log(`Rejecting person ${personId}`);
+    // TODO: Implement actual logic (e.g., API call, update state)
+  };
+
+  const handleAddLog = (personId) => {
+    console.log(`Adding log for person ${personId}`);
+    // TODO: Implement actual logic (e.g., show modal, navigate)
+  };
+
+  const handleViewLogs = (personId) => {
+    console.log(`Viewing logs for person ${personId}`);
+    // TODO: Implement actual logic (e.g., show modal, navigate)
   };
 
   const renderPeople = () => {
@@ -198,13 +211,13 @@ const HomeAdmin = () => {
             />
             <DynamicButton
               className="button button-small"
-              onClick={switchMode}
+              onClick={switchToEvents}
               text={t("switch_to_events")}
             />
             {/* //TODO give the img a class to make it bigger */}
             <img
               className="table-img"
-              onClick={handleChange}
+              onClick={togglePersonView}
               src={
                 personView
                   ? isLightMode
@@ -219,6 +232,12 @@ const HomeAdmin = () => {
                   ? t("switch_to_table_view")
                   : t("switch_to_card_view")
               }
+            />
+
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToCreateOrg}
+              text={t("switch_to_create_org")}
             />
           </div>
           <div className="bottom-scroll-box1">
@@ -238,48 +257,86 @@ const HomeAdmin = () => {
     );
   };
 
-  const renderCreateOrg = ()=>{
+  const [formData, setFormData] = useState({
+    orgName: "",
+    orgAddress: "",
+    orgAdmin: "",
+  });
 
-  }
-
-  // --- People Action Handlers ---
-  // 4. Define handlers that PeopleDisplaySwitcher expects
-  const handleApprove = (personId) => {
-    console.log(`Approving person ${personId}`);
-    // TODO: Implement actual logic (e.g., API call, update state)
-    // Example state update (if using state):
-    // setPeople(prevPeople => prevPeople.map(p =>
-    //   p.id === personId ? { ...p, isNew: false } : p
-    // ));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleReject = (personId) => {
-    console.log(`Rejecting person ${personId}`);
-    // TODO: Implement actual logic (e.g., API call, update state)
-    // Example state update (if using state):
-    // setPeople(prevPeople => prevPeople.filter(p => p.id !== personId));
+  const handleSubmit = () => {
+    console.log("Create Org Submit clicked");
   };
 
-  const handleAddLog = (personId) => {
-    console.log(`Adding log for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
-  };
+  const renderCreateOrg = () => {
+    return (
+      <>
+        <div className="perosnal-area-content flex-box flex-column">
+          <form
+            onSubmit={handleSubmit}
+            className="general-box smooth-shadow-box flex-box flex-column"
+          >
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgName")} </label>
+                <label className="red-star">*</label>
+              </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgName}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgName_placeholder")}
+              />
+            </div>
 
-  const handleViewLogs = (personId) => {
-    console.log(`Viewing logs for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
-  };
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgAddress")} </label>
+                <label className="red-star">*</label>
+              </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgAddress}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgAddress_placeholder")}
+              />
+            </div>
 
-  // 2. renderPeopleItems function is no longer needed for mapping
-  // const renderPeopleItems = (peopleArray) => { ... } // DELETE THIS FUNCTION
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgAdmin")} </label>
+                <label className="red-star">*</label>
+              </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgAdmin}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgAdmin_placeholder")}
+              />
+            </div>
+          </form>
+        </div>
+      </>
+    );
+  };
 
   const { isLightMode } = useTheme();
 
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      {showEvents && !showCreateOrg ? renderEvents() : renderPeople()}
-      {!showEvents && showCreateOrg && renderCreateOrg() }
+      {viewMode === "events" && renderEvents()}
+      {viewMode === "people" && renderPeople()}
+      {viewMode === "createOrg" && renderCreateOrg()}
     </div>
   );
 };
