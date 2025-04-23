@@ -64,12 +64,13 @@ const UploadFile = () => {
                 <img
                   src={previewUrl}
                   alt={t("image_preview_alt")}
-                  style={{
-                    maxWidth: "200px",
-                    maxHeight: "200px",
-                    marginTop: "10px",
-                    border: "1px solid #ccc",
-                  }}
+                  className="table-img"
+                //   style={{
+                //     maxWidth: "200px",
+                //     maxHeight: "200px",
+                //     marginTop: "10px",
+                //     border: "1px solid #ccc",
+                //   }}
                 />
               </div>
             )}
