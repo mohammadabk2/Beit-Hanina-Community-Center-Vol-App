@@ -6,6 +6,7 @@ import DynamicButton from "../../components/ButtonComponent";
 import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
 import { useTheme } from "../../config/options/Colors";
+import DynamicInput from "../../components/InputComponent";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
@@ -103,27 +104,23 @@ const HomeAdmin = () => {
     },
     // Add more unique people as needed
   ];
-  //!
-
-  // If you fetch data, you'll use useState:
-  // const [people, setPeople] = useState([]);
-  // const [events, setEvents] = useState([]);
-  // useEffect(() => {
-  //   fetchPeopleData().then(data => setPeople(data || []));
-  //   fetchEventsData().then(data => setEvents(data || []));
-  // }, []);
 
   // Using static data for now
   const people = initialPeople;
+  //!
 
   const { t } = useTranslation("homeAdmin");
 
-  const [showEvents, setShowEvents] = useState(true);
-  const [personView, setPersonView] = useState(true); // true = card, false = table
+  const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
+  const [personView, setPersonView] = useState(true);
 
-  const switchMode = () => {
-    setShowEvents(!showEvents);
+  const switchToEvents = () => setViewMode("events");
+  const switchToPeople = () => {
+    setViewMode("people"); // Switch view mode to "people"
+    setPersonView(true); // Set personView to true by default when switching to "people"
   };
+  const switchToCreateOrg = () => setViewMode("createOrg");
+  const togglePersonView = () => setPersonView(!personView); // Toggle between card and table view
 
   const sortEvents = () => {
     console.log("Sort events button clicked");
@@ -133,10 +130,6 @@ const HomeAdmin = () => {
   const sortPeople = () => {
     console.log("Sort people button clicked");
     // Add sorting logic for people array here if needed
-  };
-
-  const handleChange = () => {
-    setPersonView(!personView);
   };
 
   // --- Event Rendering --- (Remains the same)
@@ -159,22 +152,43 @@ const HomeAdmin = () => {
     );
   };
 
-  // --- People Action Handlers ---
-  // 4. Define handlers that PeopleDisplaySwitcher expects
+  const renderEvents = () => {
+    return (
+      <>
+        <div className="scroll-box1 general-box flex-box flex-column">
+          <div className="flex-box top-scroll-box1 line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
+
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToPeople}
+              text={t("switch_to_people")}
+            />
+
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToCreateOrg}
+              text={t("switch_to_create_org")}
+            />
+          </div>
+          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+        </div>
+      </>
+    );
+  };
+
   const handleApprove = (personId) => {
     console.log(`Approving person ${personId}`);
     // TODO: Implement actual logic (e.g., API call, update state)
-    // Example state update (if using state):
-    // setPeople(prevPeople => prevPeople.map(p =>
-    //   p.id === personId ? { ...p, isNew: false } : p
-    // ));
   };
 
   const handleReject = (personId) => {
     console.log(`Rejecting person ${personId}`);
     // TODO: Implement actual logic (e.g., API call, update state)
-    // Example state update (if using state):
-    // setPeople(prevPeople => prevPeople.filter(p => p.id !== personId));
   };
 
   const handleAddLog = (personId) => {
@@ -187,83 +201,179 @@ const HomeAdmin = () => {
     // TODO: Implement actual logic (e.g., show modal, navigate)
   };
 
-  // 2. renderPeopleItems function is no longer needed for mapping
-  // const renderPeopleItems = (peopleArray) => { ... } // DELETE THIS FUNCTION
+  const renderPeople = () => {
+    return (
+      <>
+        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
+          <div className="flex-box top-scroll-box1 line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortPeople}
+              text={t("sort")}
+            />
 
-  const { isLightMode } = useTheme();
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToEvents}
+              text={t("switch_to_events")}
+            />
+            {/* //TODO give the img a class to make it bigger */}
+            <img
+              className="table-img"
+              onClick={togglePersonView}
+              src={
+                personView
+                  ? isLightMode
+                    ? TableIconLight
+                    : TableIconDark
+                  : isLightMode
+                  ? CardIconLight
+                  : CardIconDark
+              }
+              alt={
+                personView
+                  ? t("switch_to_table_view")
+                  : t("switch_to_card_view")
+              }
+            />
 
-  return (
-    <div className="app flex-box flex-column">
-      <NavigationBar />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToCreateOrg}
+              text={t("switch_to_create_org")}
+            />
+          </div>
 
-      {/* --- Events Section --- */}
-      {showEvents ? (
-        <>
-          <div className="scroll-box1 general-box flex-box flex-column">
+          <div className="bottom-scroll-box1">
+            <PeopleDisplaySwitcher
+              people={people}
+              type={personView ? "card" : "table"}
+              approveUser={handleApprove}
+              rejectUser={handleReject}
+              addLog={handleAddLog}
+              viewLogs={handleViewLogs}
+            />
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  const [formData, setFormData] = useState({
+    orgName: "",
+    orgAddress: "",
+    orgAdmin: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    console.log("Create Org Submit clicked");
+  };
+
+  const renderCreateOrg = () => {
+    return (
+      <>
+        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
+          <div className="flex-box top-scroll-box1">
             <div className="flex-box top-scroll-box1 line-break">
               <DynamicButton
                 className="button button-small"
                 onClick={sortEvents}
                 text={t("sort")}
               />
+
               <DynamicButton
                 className="button button-small"
-                onClick={switchMode}
+                onClick={switchToPeople}
                 text={t("switch_to_people")}
               />
-            </div>
-            <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="perosnal-area-content flex-box flex-column">
-            <div className="flex-box top-scroll-box1 line-break">
+
               <DynamicButton
                 className="button button-small"
-                onClick={sortPeople}
-                text={t("sort")}
-              />
-              <DynamicButton
-                className="button button-small"
-                onClick={switchMode}
-                text={t("switch_to_events")}
-              />
-              {/* //TODO give the img a class to make it bigger */}
-              <img
-                className="table-img"
-                onClick={handleChange}
-                src={
-                  personView
-                    ? isLightMode
-                      ? TableIconLight
-                      : TableIconDark
-                    : isLightMode
-                    ? CardIconLight
-                    : CardIconDark
-                }
-                alt={
-                  personView
-                    ? t("switch_to_table_view")
-                    : t("switch_to_card_view")
-                }
+                onClick={switchToEvents}
+                text={t("switch_to_Events")}
               />
             </div>
-            <div className="bottom-scroll-box1">
-              {/* 3. Render PeopleDisplaySwitcher directly */}
-              <PeopleDisplaySwitcher
-                people={people} // Pass the whole array
-                type={personView ? "card" : "table"} // Calculate type
-                // Pass the handler functions
-                approveUser={handleApprove}
-                rejectUser={handleReject}
-                addLog={handleAddLog}
-                viewLogs={handleViewLogs}
-              />
-            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className="general-box smooth-shadow-box flex-box flex-column "
+            >
+              <div className="flex-box flex-column input-field-box">
+                <div>
+                  <label> {t("orgName")} </label>
+                  <label className="red-star">*</label>
+                </div>
+
+                <DynamicInput
+                  className="input-field"
+                  type="text"
+                  value={formData.orgName}
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={t("orgName_placeholder")}
+                />
+              </div>
+
+              <div className="flex-box flex-column input-field-box">
+                <div>
+                  <label> {t("orgAddress")} </label>
+                  <label className="red-star">*</label>
+                </div>
+
+                <DynamicInput
+                  className="input-field"
+                  type="text"
+                  value={formData.orgAddress}
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={t("orgAddress_placeholder")}
+                />
+              </div>
+
+              <div className="flex-box flex-column input-field-box">
+                <div>
+                  <label> {t("orgAdmin")} </label>
+                  <label className="red-star">*</label>
+                </div>
+
+                <DynamicInput
+                  className="input-field"
+                  type="text"
+                  value={formData.orgAdmin}
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={t("orgAdmin_placeholder")}
+                />
+              </div>
+
+              {/* //TODO add org pic */}
+
+              <div className="flex-box">
+                <DynamicButton
+                  className="button button-small"
+                  onClick={handleSubmit}
+                  text={t("submit_button")}
+                />
+              </div>
+            </form>
           </div>
-        </>
-      )}
+        </div>
+      </>
+    );
+  };
+
+  const { isLightMode } = useTheme();
+
+  return (
+    <div className="app flex-box flex-column">
+      <NavigationBar />
+      {viewMode === "events" && renderEvents()}
+      {viewMode === "people" && renderPeople()}
+      {viewMode === "createOrg" && renderCreateOrg()}
     </div>
   );
 };
