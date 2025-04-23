@@ -162,11 +162,13 @@ const HomeAdmin = () => {
               onClick={sortEvents}
               text={t("sort")}
             />
+
             <DynamicButton
               className="button button-small"
               onClick={switchToPeople}
               text={t("switch_to_people")}
             />
+
             <DynamicButton
               className="button button-small"
               onClick={switchToCreateOrg}
@@ -240,12 +242,11 @@ const HomeAdmin = () => {
               text={t("switch_to_create_org")}
             />
           </div>
+
           <div className="bottom-scroll-box1">
-            {/* 3. Render PeopleDisplaySwitcher directly */}
             <PeopleDisplaySwitcher
-              people={people} // Pass the whole array
-              type={personView ? "card" : "table"} // Calculate type
-              // Pass the handler functions
+              people={people}
+              type={personView ? "card" : "table"}
               approveUser={handleApprove}
               rejectUser={handleReject}
               addLog={handleAddLog}
@@ -275,6 +276,24 @@ const HomeAdmin = () => {
     return (
       <>
         <div className="perosnal-area-content flex-box flex-column">
+          <div className="flex-box top-scroll-box1 line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToPeople}
+              text={t("switch_to_people")}
+            />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToEvents}
+              text={t("switch_to_Events")}
+            />
+          </div>
+
           <form
             onSubmit={handleSubmit}
             className="general-box smooth-shadow-box flex-box flex-column"
@@ -284,6 +303,7 @@ const HomeAdmin = () => {
                 <label> {t("orgName")} </label>
                 <label className="red-star">*</label>
               </div>
+
               <DynamicInput
                 className="input-field"
                 type="text"
@@ -321,6 +341,16 @@ const HomeAdmin = () => {
                 name="name"
                 onChange={handleChange}
                 placeholder={t("orgAdmin_placeholder")}
+              />
+            </div>
+
+            {/* //TODO add org pic */}
+
+            <div className="flex-box">
+              <DynamicButton
+                className="button button-small"
+                onClick={handleSubmit}
+                text={t("submit_button")}
               />
             </div>
           </form>
