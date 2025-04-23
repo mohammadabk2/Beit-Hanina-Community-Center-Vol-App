@@ -204,7 +204,7 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div className="perosnal-area-content flex-box flex-column">
+        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
@@ -275,85 +275,87 @@ const HomeAdmin = () => {
   const renderCreateOrg = () => {
     return (
       <>
-        <div className="perosnal-area-content flex-box flex-column">
-          <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToPeople}
-              text={t("switch_to_people")}
-            />
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToEvents}
-              text={t("switch_to_Events")}
-            />
-          </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className="general-box smooth-shadow-box flex-box flex-column"
-          >
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgName")} </label>
-                <label className="red-star">*</label>
-              </div>
-
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgName}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgName_placeholder")}
-              />
-            </div>
-
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgAddress")} </label>
-                <label className="red-star">*</label>
-              </div>
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgAddress}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgAddress_placeholder")}
-              />
-            </div>
-
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgAdmin")} </label>
-                <label className="red-star">*</label>
-              </div>
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgAdmin}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgAdmin_placeholder")}
-              />
-            </div>
-
-            {/* //TODO add org pic */}
-
-            <div className="flex-box">
+        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
+          <div className="flex-box top-scroll-box1">
+            <div className="flex-box top-scroll-box1 line-break">
               <DynamicButton
                 className="button button-small"
-                onClick={handleSubmit}
-                text={t("submit_button")}
+                onClick={sortEvents}
+                text={t("sort")}
+              />
+              <DynamicButton
+                className="button button-small"
+                onClick={switchToPeople}
+                text={t("switch_to_people")}
+              />
+              <DynamicButton
+                className="button button-small"
+                onClick={switchToEvents}
+                text={t("switch_to_Events")}
               />
             </div>
-          </form>
+
+            <form
+              onSubmit={handleSubmit}
+              className="general-box smooth-shadow-box flex-box flex-column "
+            >
+              <div className="flex-box flex-column input-field-box">
+                <div>
+                  <label> {t("orgName")} </label>
+                  <label className="red-star">*</label>
+                </div>
+
+                <DynamicInput
+                  className="input-field"
+                  type="text"
+                  value={formData.orgName}
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={t("orgName_placeholder")}
+                />
+              </div>
+
+              <div className="flex-box flex-column input-field-box">
+                <div>
+                  <label> {t("orgAddress")} </label>
+                  <label className="red-star">*</label>
+                </div>
+                <DynamicInput
+                  className="input-field"
+                  type="text"
+                  value={formData.orgAddress}
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={t("orgAddress_placeholder")}
+                />
+              </div>
+
+              <div className="flex-box flex-column input-field-box">
+                <div>
+                  <label> {t("orgAdmin")} </label>
+                  <label className="red-star">*</label>
+                </div>
+                <DynamicInput
+                  className="input-field"
+                  type="text"
+                  value={formData.orgAdmin}
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={t("orgAdmin_placeholder")}
+                />
+              </div>
+
+              {/* //TODO add org pic */}
+
+              <div className="flex-box">
+                <DynamicButton
+                  className="button button-small"
+                  onClick={handleSubmit}
+                  text={t("submit_button")}
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </>
     );
