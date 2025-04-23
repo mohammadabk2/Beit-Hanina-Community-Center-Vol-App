@@ -211,6 +211,7 @@ const HomeAdmin = () => {
               onClick={sortPeople}
               text={t("sort")}
             />
+
             <DynamicButton
               className="button button-small"
               onClick={switchToEvents}
@@ -283,11 +284,13 @@ const HomeAdmin = () => {
                 onClick={sortEvents}
                 text={t("sort")}
               />
+
               <DynamicButton
                 className="button button-small"
                 onClick={switchToPeople}
                 text={t("switch_to_people")}
               />
+
               <DynamicButton
                 className="button button-small"
                 onClick={switchToEvents}
@@ -320,6 +323,7 @@ const HomeAdmin = () => {
                   <label> {t("orgAddress")} </label>
                   <label className="red-star">*</label>
                 </div>
+
                 <DynamicInput
                   className="input-field"
                   type="text"
@@ -335,6 +339,7 @@ const HomeAdmin = () => {
                   <label> {t("orgAdmin")} </label>
                   <label className="red-star">*</label>
                 </div>
+
                 <DynamicInput
                   className="input-field"
                   type="text"
