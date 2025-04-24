@@ -148,13 +148,13 @@ const HomeOrganizer = () => {
               <div>
                 {t("event_description")}: <label className="red-star">*</label>
               </div>
-              <textarea
+              <DynamicInput
                 className="input-field"
+                type="text"
                 value={formData.eventDescription}
                 name="eventDescription"
                 onChange={handleChange}
                 placeholder={t("event_description_placeholder")}
-                rows="4"
               />
             </div>
 

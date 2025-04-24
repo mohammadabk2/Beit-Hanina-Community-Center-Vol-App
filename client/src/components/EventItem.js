@@ -65,20 +65,28 @@ const EventItem = ({
           ></img>
         </div>
       </div>
-      <div className="event-box-description">{desc}</div>
-      <div className="flex-box event-box-content-middle">
-        <div>
-          <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
-        </div>
+      <div className="event-box-content-middle">
         <div className="flex-box flex-column">
-          <div>{tskill("skills")}:</div>
+          <div>{desc}</div>
           <div className="flex-box">
-            {req.map((item, index) => (
-              <div key={index} className="skills">
-                {item}
-                {index < req.length - 1 && " "}
+            <div>
+              <img
+                className="event-box-image"
+                src={logoIcon}
+                alt="Logo Icon"
+              ></img>
+            </div>
+            <div className="flex-box flex-column">
+              <div>{tskill("skills")}:</div>
+              <div className="flex-box">
+                {req.map((item, index) => (
+                  <div key={index} className="skills">
+                    {item}
+                    {index < req.length - 1 && " "}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
