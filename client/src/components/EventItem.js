@@ -8,7 +8,16 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, style, req, type, count, size }) => {
+const EventItem = ({
+  name,
+  className,
+  style,
+  req,
+  type,
+  count,
+  size,
+  desc,
+}) => {
   const { t } = useTranslation("homeVol");
   const { t: tskill } = useTranslation("skills");
 
@@ -56,6 +65,7 @@ const EventItem = ({ name, className, style, req, type, count, size }) => {
           ></img>
         </div>
       </div>
+      <div className="event-box-description">{desc}</div>
       <div className="flex-box event-box-content-middle">
         <div>
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
@@ -130,6 +140,7 @@ EventItem.propTypes = {
   type: PropTypes.string,
   count: PropTypes.number,
   size: PropTypes.number,
+  desc: PropTypes.string,
 };
 
 EventItem.defaultProps = {

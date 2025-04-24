@@ -48,6 +48,7 @@ const HomeOrganizer = () => {
     eventName: "",
     eventCount: "",
     eventDate: "",
+    eventDescription: "",
     skills: [], // Initialize skills as an array
   });
 
@@ -140,6 +141,20 @@ const HomeOrganizer = () => {
                 placeholder={t("event_count_placeholder")}
                 pattern="[0-9]*"
                 inputMode="numeric"
+              />
+            </div>
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_description")}: <label className="red-star">*</label>
+              </div>
+              <textarea
+                className="input-field"
+                value={formData.eventDescription}
+                name="eventDescription"
+                onChange={handleChange}
+                placeholder={t("event_description_placeholder")}
+                rows="4"
               />
             </div>
 
