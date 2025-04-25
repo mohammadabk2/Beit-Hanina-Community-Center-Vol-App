@@ -1,3 +1,19 @@
 {
-    
+  "switch_to_events": "التبديل إلى الفعاليات",
+  "switch_to_people": "التبديل إلى الأشخاص",
+  "switch_to_create_org": "إنشاء منظمة جديدة",
+  "sort": "ترتيب",
+  "approve_button": "موافقة",
+  "reject_button": "رفض",
+  "add_log": "إضافة سجل",
+  "view_log": "عرض السجلات",
+  "switch_to_table_view": "التبديل إلى عرض الجدول",
+  "switch_to_card_view": "التبديل إلى عرض البطاقات",
+  "orgName": "اسم المنظمة",
+  "orgAddress": "عنوان المنظمة",
+  "orgAdmin": "مسؤول المنظمة",
+  "orgName_placeholder": "أدخل اسم المنظمة",
+  "orgAddress_placeholder": "أدخل عنوان المنظمة",
+  "orgAdmin_placeholder": "أدخل اسم مسؤول المنظمة",
+  "submit_button": "إرسال"
 }
