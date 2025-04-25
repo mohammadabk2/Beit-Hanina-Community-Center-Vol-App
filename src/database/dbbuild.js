@@ -422,15 +422,23 @@ const addEvent = async (
   eventDate,
   eventStartTime,
   eventEndTime,
-  orgId
+  orgId,
+  location
 ) => {
   const text = `
-  INSERT INTO events (event_name, event_date,event_start,event_end,org_id)
-  VALUES ($1, $2, $3, $4, $5)
+  INSERT INTO events (event_name, event_date, event_start, event_end, org_id, location)
+  VALUES ($1, $2, $3, $4, $5, $6)
   RETURNING *;
 `;
 
-  const values = [eventName, eventDate, eventStartTime, eventEndTime, orgId];
+  const values = [
+    eventName,
+    eventDate,
+    eventStartTime,
+    eventEndTime,
+    orgId,
+    location,
+  ];
   const res = await db.query(text, values);
   return res.rows[0];
 };
@@ -455,10 +463,10 @@ const addVolId = async (eventName, volId) => {
 };
 
 /**
- * 
- * @param {String} eventName 
- * @param {Boolean} status 
- * @returns 
+ *
+ * @param {String} eventName
+ * @param {Boolean} status
+ * @returns
  */
 const changeStatus = async (eventName, status) => {
   const text = `

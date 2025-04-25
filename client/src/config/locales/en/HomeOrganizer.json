@@ -8,5 +8,7 @@
   "event_name_placeholder": "Enter Name of the Event",
   "event_count_placeholder": "Enter Number of Volunteers",
   "event_description": "Event Description",
-  "event_description_placeholder": "Enter a detailed description of the event"
+  "event_description_placeholder": "Enter a detailed description of the event",
+  "event_location": "Event Location",
+  "event_location_placeholder": "Enter the event location"
 }

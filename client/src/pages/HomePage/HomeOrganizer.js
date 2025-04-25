@@ -49,6 +49,7 @@ const HomeOrganizer = () => {
     eventCount: "",
     eventDate: "",
     eventDescription: "",
+    eventLocation: "",
     skills: [], // Initialize skills as an array
   });
 
@@ -155,6 +156,20 @@ const HomeOrganizer = () => {
                 name="eventDescription"
                 onChange={handleChange}
                 placeholder={t("event_description_placeholder")}
+              />
+            </div>
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_location")}: <label className="red-star">*</label>
+              </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.eventLocation}
+                name="eventLocation"
+                onChange={handleChange}
+                placeholder={t("event_location_placeholder")}
               />
             </div>
 

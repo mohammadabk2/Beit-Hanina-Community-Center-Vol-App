@@ -17,6 +17,7 @@ const EventItem = ({
   count,
   size,
   desc,
+  location,
 }) => {
   const { t } = useTranslation("homeVol");
   const { t: tskill } = useTranslation("skills");
@@ -86,6 +87,7 @@ const EventItem = ({
                   </div>
                 ))}
               </div>
+              <div className="event-location">{location}</div>
             </div>
           </div>
         </div>
@@ -149,6 +151,7 @@ EventItem.propTypes = {
   count: PropTypes.number,
   size: PropTypes.number,
   desc: PropTypes.string,
+  location: PropTypes.string,
 };
 
 EventItem.defaultProps = {
