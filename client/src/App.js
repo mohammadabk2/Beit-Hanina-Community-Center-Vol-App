@@ -31,8 +31,8 @@ const App = () => {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/api/logUser`, {
-        userName: username,
-        hash: password,
+        username: username,
+        password: password,
       });
       if (response.data.status === "success" && response.data.userData) {
         if (Array.isArray(response.data.userData.role)) {

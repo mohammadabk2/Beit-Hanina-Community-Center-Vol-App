@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS users_waiting_list
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[],
+    logs TEXT[]
 );
 
 CREATE TABLE IF NOT EXISTS volunteer

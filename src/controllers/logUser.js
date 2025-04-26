@@ -2,6 +2,7 @@ import dbConnection from "../database/dbconnection.js";
 import bcrypt from "bcrypt";
 
 const loginUser = async (req, res) => {
+  console.log("User login started");
   const { userName, password } = req.body;
   if (!userName || !password) {
     return res.status(400).send({
