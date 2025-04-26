@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 
 const UploadFile = () => {
   const { t } = useTranslation("file");
-  //   const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
@@ -52,26 +51,21 @@ const UploadFile = () => {
         {error && (
           <div style={{ color: "red", marginTop: "10px" }}>{error}</div>
         )}
+
         {file && (
           <div className="flex-box flex-column">
-            <div className="basic-item-padding">
-              {t("file_size")}: {(file.size / (1024 * 1024)).toFixed(2)}{" "}
-              {t("MB")}
-            </div>
-
             {previewUrl && (
-              <div className="basic-item-padding">
+              <div className="">
                 <img
                   src={previewUrl}
                   alt={t("image_preview_alt")}
-                  className="table-img"
-                //   style={{
-                //     maxWidth: "200px",
-                //     maxHeight: "200px",
-                //     marginTop: "10px",
-                //     border: "1px solid #ccc",
-                //   }}
+                  className="table-img preview-img"
                 />
+
+                {/* <div className="">
+                  {t("file_size")}: {(file.size / (1024 * 1024)).toFixed(2)}{" "}
+                  {t("MB")}
+                </div> */}
               </div>
             )}
           </div>

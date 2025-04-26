@@ -508,6 +508,12 @@ input:focus {
   /* background-color: var(--button-background) */
 }
 
+.preview-img{
+  width: 20rem;
+  height: 20rem;
+  margin-top: 0.2rem;
+}
+
 /* Add more styles as needed for skills, specific columns, etc. */
 
 /*media query for mobile screen sizes */
