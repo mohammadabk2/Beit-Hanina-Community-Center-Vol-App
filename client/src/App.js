@@ -31,7 +31,7 @@ const App = () => {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/api/logUser`, {
-        username: username,
+        userName: username,
         password: password,
       });
       if (response.data.status === "success" && response.data.userData) {
