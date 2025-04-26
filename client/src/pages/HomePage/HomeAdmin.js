@@ -16,93 +16,85 @@ import TableIconLight from "../../icons/light/table_view_icon.svg";
 
 const HomeAdmin = () => {
   //! testing only - Added unique IDs and changed 'newUser' to 'isNew'
-  const events = [
-    // ... (your events data remains the same)
+  const initialEvents = [
     {
-      id: "evt1",
-      name: "test event1",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
+      id: "event1",
+      name: "تنظيف الحديقة العامة",
+      desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
+      req: ["التنظيف", "البستنة"],
       count: 5,
-      size: 10,
+      size: 20,
+      location: "الحديقة العامة - بيت حنينا",
     },
     {
-      id: "evt2",
-      name: "test event2",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
+      id: "event2",
+      name: "دروس تقوية للطلاب",
+      desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
+      req: ["التدريس", "الرياضيات", "العلوم"],
+      count: 3,
       size: 10,
+      location: "مركز المجتمع - بيت حنينا",
     },
     {
-      id: "evt3",
-      name: "test event3",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      id: "evt4",
-      name: "test event4",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
+      id: "event3",
+      name: "يوم رياضي للأطفال",
+      desc: "تنظيم يوم رياضي ترفيهي للأطفال",
+      req: ["الرياضة", "تنظيم الفعاليات"],
+      count: 8,
+      size: 15,
+      location: "الملعب الرياضي - بيت حنينا",
     },
   ];
 
   const initialPeople = [
-    // Renamed to initialPeople for clarity if using state later
     {
-      id: "person1", // Added unique ID
-      name: "Alice", // Changed names for clarity
-      sex: "female",
-      birthDate: "01/01/2000",
-      age: 25, // Age might be derived from birthDate usually
-      approvedhous: 10,
-      unapprovedhous: 10,
-      skills: ["skill1", "skill2"],
-      phoneNumber: "1234567891",
-      email: "alice@gmail.com",
-      address: "1st street",
+      id: "person1",
+      name: "أحمد محمود",
+      sex: "male",
+      birthDate: "1995-03-15",
+      age: 28,
+      approvedhous: 25,
+      unapprovedhous: 5,
+      skills: ["التدريس", "الحاسوب", "اللغة الإنجليزية"],
+      phoneNumber: "0591234567",
+      email: "ahmad@example.com",
+      address: "بيت حنينا - شارع الرئيسي",
       insurance: "clalit",
-      idNumber: "111111111",
-      isNew: true, // Changed from newUser to isNew
+      idNumber: "123456789",
+      isNew: true,
     },
     {
-      id: "person2", // Added unique ID
-      name: "Bob",
-      sex: "male",
-      birthDate: "05/05/1995",
-      age: 29,
-      approvedhous: 10,
-      unapprovedhous: 10,
-      skills: ["skill3", "skill4"],
-      phoneNumber: "9876543210",
-      email: "bob@gmail.com",
-      address: "2nd street",
+      id: "person2",
+      name: "سارة خالد",
+      sex: "female",
+      birthDate: "1998-08-22",
+      age: 25,
+      approvedhous: 15,
+      unapprovedhous: 0,
+      skills: ["الفنون", "العمل مع الأطفال", "التنظيم"],
+      phoneNumber: "0597654321",
+      email: "sara@example.com",
+      address: "بيت حنينا - حي المدارس",
       insurance: "maccabi",
-      idNumber: "222222222",
-      isNew: false, // Changed from newUser to isNew
+      idNumber: "987654321",
+      isNew: false,
     },
     {
-      id: "person3", // Added unique ID
-      name: "Charlie",
+      id: "person3",
+      name: "محمد عبد الله",
       sex: "male",
-      birthDate: "10/10/2002",
-      age: 22,
-      approvedhous: 10,
-      unapprovedhous: 10,
-      skills: ["skill1", "skill5"],
-      phoneNumber: "1231231234",
-      email: "charlie@gmail.com",
-      address: "3rd avenue",
+      birthDate: "1992-11-10",
+      age: 31,
+      approvedhous: 40,
+      unapprovedhous: 8,
+      skills: ["الرياضة", "الإسعافات الأولية", "تنظيم الفعاليات"],
+      phoneNumber: "0598765432",
+      email: "mohammad@example.com",
+      address: "بيت حنينا - حي السلام",
       insurance: "leumit",
-      idNumber: "333333333",
-      isNew: true, // Changed from newUser to isNew
+      idNumber: "456789123",
+      isNew: true,
     },
-    // Add more unique people as needed
   ];
 
   // Using static data for now
@@ -134,22 +126,19 @@ const HomeAdmin = () => {
 
   // --- Event Rendering --- (Remains the same)
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map(
-      (
-        event // Use event.id for key
-      ) => (
-        <EventItem
-          key={event.id}
-          name={event.name}
-          desc={event.desc}
-          req={event.req}
-          className="flex-box flex-column event-box smooth-shadow-box"
-          type="admin"
-          count={event.count}
-          size={event.size}
-        />
-      )
-    );
+    return eventsArray.map((event) => (
+      <EventItem
+        key={event.id}
+        name={event.name}
+        desc={event.desc}
+        req={event.req}
+        className="flex-box flex-column event-box smooth-shadow-box"
+        type="admin"
+        count={event.count}
+        size={event.size}
+        location={event.location}
+      />
+    ));
   };
 
   const renderEvents = () => {
@@ -175,7 +164,9 @@ const HomeAdmin = () => {
               text={t("switch_to_create_org")}
             />
           </div>
-          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+          <div className="bottom-scroll-box1">
+            {renderEventItems(initialEvents)}
+          </div>
         </div>
       </>
     );
