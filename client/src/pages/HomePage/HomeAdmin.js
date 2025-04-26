@@ -7,6 +7,7 @@ import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
 import { useTheme } from "../../config/options/Colors";
 import DynamicInput from "../../components/InputComponent";
+import CopyRight from "../../components/CopyRight";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
@@ -374,6 +375,7 @@ const HomeAdmin = () => {
       {viewMode === "events" && renderEvents()}
       {viewMode === "people" && renderPeople()}
       {viewMode === "createOrg" && renderCreateOrg()}
+      <CopyRight />
     </div>
   );
 };
