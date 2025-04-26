@@ -6,6 +6,7 @@ import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import EventItem from "../../components/EventItem";
 import SelectComponent from "../../components/SelectComponent";
+import CopyRight from "../../components/CopyRight";
 
 const HomeOrganizer = () => {
   //! testing only
@@ -198,6 +199,7 @@ const HomeOrganizer = () => {
       <NavigationBar />
       {showEvents && renderShowEvents()}
       {!showEvents && renderCreateEvent()}
+      <CopyRight />
     </div>
   );
 };
