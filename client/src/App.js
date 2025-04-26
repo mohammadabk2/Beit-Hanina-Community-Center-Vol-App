@@ -18,8 +18,8 @@ const App = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("app");
 
-  const { login, isAuthenticated, loadingInitial } = useAuth();
-  const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
+  const { login } = useAuth();
+  // const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
   const [error, setError] = useState(null);
 
   //TODO these could be changed so that it doesnt save the value each letter
@@ -33,7 +33,7 @@ const App = () => {
 
   const signIn = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    // setIsLoading(true);
     setError(null);
     console.log("sign in button clicked");
 
@@ -50,7 +50,7 @@ const App = () => {
         const message =
           response.data?.message || "Login failed. Please check credentials.";
         setError(message);
-        alert(`Login Failed: ${message}`);
+        alert(`Login Failed: ${error}`);
       }
     } catch (err) {
       console.error("Error during sign in:", err);
@@ -82,7 +82,7 @@ const App = () => {
         errorMessage = "An error occurred before sending the request.";
       }
       setError(errorMessage);
-      alert(`Login Failed: ${errorMessage}`);
+      alert(`Login Failed: ${error}`);
     }
   };
 
@@ -94,7 +94,7 @@ const App = () => {
 
   return (
     <div className="app flex-box flex-column">
-      <NavigationBar dontShowPageButtons={true} />
+      <NavigationBar />
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>
