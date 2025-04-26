@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 // import pages here
 import App from "./App";
 import SignUpPage from "./pages/SignUpPage/SignUp";
@@ -14,29 +14,24 @@ import AboutPage from "./pages/AboutPage/About";
 
 const AppRouter = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/home-volunteer" element={<HomeVolunteerPage />} />
-        <Route path="/home-organizer" element={<HomeOrganizerPage />} />
-        <Route path="/home-admin" element={<HomeAdminPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route
-          path="/personal-area-vol"
-          element={<PersonalAreaVolunteerPage />}
-        />
-        <Route
-          path="/personal-area-org"
-          element={<PersonalAreaOrganizerPage />}
-        />
-        <Route
-          path="/personal-area-admin"
-          element={<PersonalAreaAdminPage />}
-        />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/sign-up" element={<SignUpPage />} />
+      <Route path="/home-volunteer" element={<HomeVolunteerPage />} />
+      <Route path="/home-organizer" element={<HomeOrganizerPage />} />
+      <Route path="/home-admin" element={<HomeAdminPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route
+        path="/personal-area-vol"
+        element={<PersonalAreaVolunteerPage />}
+      />
+      <Route
+        path="/personal-area-org"
+        element={<PersonalAreaOrganizerPage />}
+      />
+      <Route path="/personal-area-admin" element={<PersonalAreaAdminPage />} />
+      <Route path="/about" element={<AboutPage />} />
+    </Routes>
   );
 };
 

@@ -8,11 +8,19 @@ import DynamicInput from "./components/InputComponent";
 import DynamicButton from "./components/ButtonComponent";
 import NavigationBar from "./components/NavigationBar";
 
+import { useAuth } from "./config/Context/auth";
+
 const App = () => {
   const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { t } = useTranslation("app");
+
+  const { login } = useAuth();
+  // const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
+  const [error, setError] = useState(null);
 
   //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) => {
@@ -24,41 +32,33 @@ const App = () => {
   };
 
   const signIn = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
+    event.preventDefault();
+    // setIsLoading(true);
+    setError(null);
     console.log("sign in button clicked");
-    console.log(username);
-    console.log(password); //! testing only remove security risk
 
     try {
       const response = await axios.post(`${API_BASE_URL}/api/logUser`, {
         userName: username,
         password: password,
       });
+
       if (response.data.status === "success" && response.data.userData) {
-        if (Array.isArray(response.data.userData.role)) {
-          alert(`Welcome ${response.data.message}`);
-          if (response.data.userData.role.includes("admin")) {
-            navigate("/home-admin");
-          } else if (response.data.userData.role.includes("org")) {
-            navigate("/home-organizer");
-          } else if (response.data.userData.role.includes("vol")) {
-            navigate("/home-volunteer");
-          } else {
-            alert("Invalid User Type");
-          }
-        } else {
-          alert("User not registered");
-        }
+        login(response.data.userData);
+        alert(`Welcome ${response.data.message}`);
       } else {
-        alert("login fail");
+        const message =
+          response.data?.message || "Login failed. Please check credentials.";
+        setError(message);
+        alert(`Login Failed: ${error}`);
       }
     } catch (err) {
       console.error("Error during sign in:", err);
+      let errorMessage =
+        "An unexpected error occurred. Please try again later.";
 
       // Check if the error is an Axios error with a response from the server
       if (err.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         console.error("Server responded with status:", err.response.status);
         console.error("Response data:", err.response.data);
 
@@ -68,42 +68,33 @@ const App = () => {
           err.response.status === 404 ||
           err.response.status === 403
         ) {
-          // Use the error message from the backend if available, otherwise use a generic one
-          const errorMessage =
+          errorMessage =
             err.response.data?.message || "Invalid username or password.";
-          alert(`Login Failed: ${errorMessage}`);
         } else {
-          // Handle other server errors (like 500 Internal Server Error)
-          alert(
-            "An unexpected error occurred on the server. Please try again later."
-          );
+          errorMessage = `Server error (${err.response.status}). Please try again later.`;
         }
       } else if (err.request) {
-        // The request was made but no response was received (e.g., network error)
         console.error("No response received:", err.request);
-        alert(
-          "Login Failed: Could not connect to the server. Please check your network connection."
-        );
+        errorMessage =
+          "Could not connect to the server. Please check your network.";
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.error("Error setting up request:", err.message);
-        alert("Login Failed: An error occurred before sending the request.");
+        errorMessage = "An error occurred before sending the request.";
       }
+      setError(errorMessage);
+      alert(`Login Failed: ${error}`);
     }
   };
 
-  const navigate = useNavigate();
   const signUp = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
     console.log("sign up button clicked");
     navigate("/sign-up");
   };
 
-  const { t } = useTranslation("app");
-
   return (
     <div className="app flex-box flex-column">
-      <NavigationBar dontShowPageButtons={true} />
+      <NavigationBar />
       <header className="app-header">
         <h1>{t("name")}</h1>
       </header>
