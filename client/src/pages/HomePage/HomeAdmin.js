@@ -24,6 +24,7 @@ const HomeAdmin = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       id: "evt2",
@@ -32,6 +33,7 @@ const HomeAdmin = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       id: "evt3",
@@ -40,6 +42,7 @@ const HomeAdmin = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       id: "evt4",
@@ -48,6 +51,7 @@ const HomeAdmin = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
   ];
 
@@ -154,6 +158,7 @@ const HomeAdmin = () => {
           type="admin"
           count={event.count}
           size={event.size}
+          location={event.location}
         />
       )
     );
