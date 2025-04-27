@@ -250,14 +250,6 @@ input:focus {
   margin: 0.5rem 0 0.5rem 0;
 }
 
-.event-box-description {
-  font-size: 1rem;
-  margin: 0.5rem 1rem;
-  color: var(--text-color);
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
 .favorite-button-image {
   width: 2rem;
   position: absolute;

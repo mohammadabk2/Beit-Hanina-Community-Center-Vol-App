@@ -14,42 +14,43 @@ const HomeVolunteer = () => {
     console.log("Sort button clicked");
   };
 
-  const events = [
+  const initialEvents = [
     {
-      name: "test event1",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
+      id: "event1",
+      name: "تنظيف الحديقة العامة",
+      desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
+      req: ["التنظيف", "البستنة"],
       count: 5,
-      size: 10,
+      size: 20,
+      location: "الحديقة العامة - بيت حنينا",
     },
     {
-      name: "test event2",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
+      id: "event2",
+      name: "دروس تقوية للطلاب",
+      desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
+      req: ["التدريس", "الرياضيات", "العلوم"],
+      count: 3,
       size: 10,
+      location: "مركز المجتمع - بيت حنينا",
     },
     {
-      name: "test event3",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event4",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
+      id: "event3",
+      name: "يوم رياضي للأطفال",
+      desc: "تنظيم يوم رياضي ترفيهي للأطفال",
+      req: ["الرياضة", "تنظيم الفعاليات"],
+      count: 8,
+      size: 15,
+      location: "الملعب الرياضي - بيت حنينا",
     },
   ];
-  //!
+
+  // Using static data for now
+  const events = initialEvents;
 
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map((event, index) => (
+    return eventsArray.map((event) => (
       <EventItem
-        key={index}
+        key={event.id}
         name={event.name}
         desc={event.desc}
         req={event.req}
@@ -57,6 +58,7 @@ const HomeVolunteer = () => {
         type="vol"
         count={event.count}
         size={event.size}
+        location={event.location}
       />
     ));
   };
