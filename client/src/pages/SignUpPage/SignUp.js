@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
@@ -9,38 +10,24 @@ import NavigationBar from "../../components/NavigationBar";
 import SelectComponent from "../../components/SelectComponent";
 
 const SignUpPage = () => {
+  //TODO handle if already signed in maybe do that in App.js
   const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate("/");
-  };
+  const { t } = useTranslation("signUp");
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     birthDate: "",
     sex: "",
-    phone: "",
+    phoneNumber: "",
     email: "",
     address: "",
     insurance: "",
     idNumber: "",
-    skills: [], // Initialize skills as an array
+    skills: [],
+    userName: "",
+    password: "",
   });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-  };
-
-  const handleSexChange = (value) => {
-    setFormData({ ...formData, sex: value });
-  };
-
-  const { t } = useTranslation("signUp");
 
   const sexOptions = [
     {
@@ -48,7 +35,7 @@ const SignUpPage = () => {
       href: "#option1",
       onClick: () => {
         console.log("male clicked");
-        handleSexChange("male");
+        handleSexChange("M");
       },
     },
     {
@@ -56,12 +43,43 @@ const SignUpPage = () => {
       href: "#option2",
       onClick: () => {
         console.log("female clicked");
-        handleSexChange("female");
+        handleSexChange("F");
       },
     },
   ];
 
-  //TODO change lan from drop down to new nav bar
+  const goBack = () => {
+    navigate("/");
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSexChange = (value) => {
+    setFormData({ ...formData, sex: value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/register`,
+        formData
+      );
+
+      if (response.data.status === "success") {
+        alert(t("sign_up_message"));
+        //TODO add wait here
+        goBack();
+      } else {
+        alert(`Login Failed: ${response.data.message}`);
+      }
+    } catch (err) {
+      console.error("Error during sign in:", err);
+    }
+  };
+
   return (
     <div className="flex-box flex-column">
       <NavigationBar />
@@ -75,11 +93,12 @@ const SignUpPage = () => {
               <label> {t("fullName")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="text"
-              value={formData.name}
-              name="name"
+              value={formData.fullName}
+              name="fullName"
               onChange={handleChange}
               placeholder={t("fullname_placeholder")}
             />
@@ -90,6 +109,7 @@ const SignUpPage = () => {
               <label>{t("birthDate")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="date"
@@ -104,6 +124,7 @@ const SignUpPage = () => {
               <label>{t("gender")} </label>
               <label className="red-star">*</label>
             </div>
+
             <DropDownMenu
               className="gender-button"
               text={t(formData.sex) || t("Select Gender")}
@@ -116,11 +137,12 @@ const SignUpPage = () => {
               <label>{t("phoneNumber")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="tel"
-              value={formData.phone}
-              name="phone"
+              value={formData.phoneNumber}
+              name="phoneNumber"
               onChange={handleChange}
               pattern="[0-9]*"
               inputMode="numeric"
@@ -133,6 +155,7 @@ const SignUpPage = () => {
               <label>{t("email")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="email"
@@ -148,6 +171,7 @@ const SignUpPage = () => {
               <label>{t("address")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="text"
@@ -163,6 +187,7 @@ const SignUpPage = () => {
               <label>{t("insurance")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="text"
@@ -178,6 +203,7 @@ const SignUpPage = () => {
               <label>{t("idNumber")}: </label>
               <label className="red-star">*</label>
             </div>
+
             <DynamicInput
               className="input-field"
               type="text"
@@ -194,6 +220,38 @@ const SignUpPage = () => {
             chosen={formData.skills}
           />
 
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              <label>{t("user_name")}: </label>
+              <label className="red-star">*</label>
+            </div>
+
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.userName}
+              name="userName"
+              onChange={handleChange}
+              placeholder={t("username_placeholder")}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              <label>{t("password")}: </label>
+              <label className="red-star">*</label>
+            </div>
+
+            <DynamicInput
+              className="input-field"
+              type="password"
+              value={formData.password}
+              name="password"
+              onChange={handleChange}
+              placeholder={t("password_placeholder")}
+            />
+          </div>
+
           <div className="flex-box">
             <div>
               <DynamicButton
@@ -202,6 +260,7 @@ const SignUpPage = () => {
                 type="submit"
               />
             </div>
+
             <div>
               <DynamicButton
                 className="button"
