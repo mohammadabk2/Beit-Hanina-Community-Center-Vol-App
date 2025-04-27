@@ -121,7 +121,7 @@ button {
 }
 
 /*General input field class for all input fields */
-.input-field {
+.input-field, textarea{
   border-radius: 0.3125rem;
   border: solid;
   border-width: 0.0625rem;
@@ -132,7 +132,7 @@ button {
 }
 
 /*Makes input field container responsive */
-.input-field-box {
+.input-field-box, textarea{
   width: 80%;
 }
 
@@ -182,7 +182,7 @@ body {
   background-color: var(--button-hover);
 }
 
-input {
+input, textarea {
   border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
   outline: 0.125rem solid transparent;
@@ -191,7 +191,7 @@ input {
   margin: 0;
 }
 
-input:focus {
+input:focus, textarea:focus{
   outline-color: var(--input-focus);
 }
 
