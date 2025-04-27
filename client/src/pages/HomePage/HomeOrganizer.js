@@ -17,6 +17,7 @@ const HomeOrganizer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       name: "test event2",
@@ -24,6 +25,7 @@ const HomeOrganizer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       name: "test event3",
@@ -31,6 +33,7 @@ const HomeOrganizer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       name: "test event4",
@@ -38,6 +41,7 @@ const HomeOrganizer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
   ];
   //!
@@ -49,6 +53,8 @@ const HomeOrganizer = () => {
     eventName: "",
     eventCount: "",
     eventDate: "",
+    eventLocation: "",
+    eventDescription: "",
     skills: [], // Initialize skills as an array
   });
 
@@ -86,6 +92,7 @@ const HomeOrganizer = () => {
         type="org"
         count={event.count}
         size={event.size}
+        location={event.location}
       />
     ));
   };
@@ -122,8 +129,23 @@ const HomeOrganizer = () => {
                 className="input-field"
                 type="date"
                 value={formData.birthDate}
-                name="Eventdate"
+                name="eventDate"
                 onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_location")}: <label className="red-star">*</label>
+              </div>
+
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.eventLocation}
+                name="eventLocation"
+                onChange={handleChange}
+                placeholder={t("event_location_placeholder")}
               />
             </div>
 
@@ -149,6 +171,16 @@ const HomeOrganizer = () => {
               onChange={handleChange}
               chosen={formData.skills}
             />
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_description")}: <label className="red-star">*</label>
+              </div>
+
+              <textarea value={formData.eventDescription}
+               name="eventDescription" rows={5} cols={50} 
+               className="input-field" onChange={handleChange}></textarea>
+            </div>
 
             <div className="flex-box">
               <DynamicButton

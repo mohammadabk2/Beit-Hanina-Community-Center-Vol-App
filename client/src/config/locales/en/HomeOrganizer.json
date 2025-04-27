@@ -6,5 +6,7 @@
   "event_date": "Date of Event",
   "volunteer_count": "Number of Volunteers Needed",
   "event_name_placeholder": "Enter Name of the Event",
-  "event_count_placeholder": "Enter Number of Volunteers"
+  "event_count_placeholder": "Enter Number of Volunteers",
+  "event_location": "Event Location",
+  "event_description": "Event Description"
 }

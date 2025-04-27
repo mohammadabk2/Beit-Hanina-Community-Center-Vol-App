@@ -22,6 +22,7 @@ const HomeVolunteer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       name: "test event2",
@@ -29,6 +30,7 @@ const HomeVolunteer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       name: "test event3",
@@ -36,6 +38,7 @@ const HomeVolunteer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
     {
       name: "test event4",
@@ -43,6 +46,7 @@ const HomeVolunteer = () => {
       req: ["test", "test", "test", "test"],
       count: 5,
       size: 10,
+      location: "some loc",
     },
   ];
   //!
@@ -58,6 +62,7 @@ const HomeVolunteer = () => {
         type="vol"
         count={event.count}
         size={event.size}
+        location={event.location}
       />
     ));
   };
