@@ -18,7 +18,7 @@ const App = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("app");
 
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   // const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
   const [error, setError] = useState(null);
 
@@ -82,14 +82,21 @@ const App = () => {
         errorMessage = "An error occurred before sending the request.";
       }
       setError(errorMessage);
-      alert(`Login Failed: ${error}`);
+      alert(`${t("login_failed_message")} ${error}`);
     }
   };
 
   const signUp = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior //! probaibly change this
+    event.preventDefault();
     console.log("sign up button clicked");
-    navigate("/sign-up");
+    setError(null);
+
+    if (isAuthenticated) {
+      console.log("User already logged in. Cannot navigate to sign up.");
+      alert(`${t("sign_out_first_message")}`);
+    } else {
+      navigate("/sign-up");
+    }
   };
 
   return (
