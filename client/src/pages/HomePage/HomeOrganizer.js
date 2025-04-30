@@ -6,6 +6,7 @@ import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import EventItem from "../../components/EventItem";
 import SelectComponent from "../../components/SelectComponent";
+import CopyRight from "../../components/CopyRight";
 
 const HomeOrganizer = () => {
   const initialEvents = [
@@ -48,8 +49,8 @@ const HomeOrganizer = () => {
     eventName: "",
     eventCount: "",
     eventDate: "",
-    eventDescription: "",
     eventLocation: "",
+    eventDescription: "",
     skills: [], // Initialize skills as an array
   });
 
@@ -124,8 +125,23 @@ const HomeOrganizer = () => {
                 className="input-field"
                 type="date"
                 value={formData.birthDate}
-                name="Eventdate"
+                name="eventDate"
                 onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_location")}: <label className="red-star">*</label>
+              </div>
+
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.eventLocation}
+                name="eventLocation"
+                onChange={handleChange}
+                placeholder={t("event_location_placeholder")}
               />
             </div>
 
@@ -180,6 +196,16 @@ const HomeOrganizer = () => {
               chosen={formData.skills}
             />
 
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_description")}: <label className="red-star">*</label>
+              </div>
+
+              <textarea value={formData.eventDescription}
+               name="eventDescription" rows={5} cols={50} 
+               className="input-field" onChange={handleChange}></textarea>
+            </div>
+
             <div className="flex-box">
               <DynamicButton
                 className="button"
@@ -229,6 +255,7 @@ const HomeOrganizer = () => {
       <NavigationBar />
       {showEvents && renderShowEvents()}
       {!showEvents && renderCreateEvent()}
+      <CopyRight />
     </div>
   );
 };

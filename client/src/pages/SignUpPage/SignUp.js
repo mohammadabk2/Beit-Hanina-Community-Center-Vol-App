@@ -7,6 +7,8 @@ import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
 import NavigationBar from "../../components/NavigationBar";
 import SelectComponent from "../../components/SelectComponent";
+import UploadFile from "../../components/UploadComponent";
+import CopyRight from "../../components/CopyRight";
 
 // Import the insurance options
 import { useInsuranceOptions } from "../../config/options/Insurance";
@@ -244,6 +246,8 @@ const SignUpPage = () => {
             chosen={formData.skills}
           />
 
+          <UploadFile />
+
           <div className="flex-box">
             <div>
               <DynamicButton
@@ -262,6 +266,7 @@ const SignUpPage = () => {
           </div>
         </form>
       </div>
+      <CopyRight />
     </div>
   );
 };

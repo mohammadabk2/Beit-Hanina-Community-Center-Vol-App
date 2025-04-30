@@ -7,6 +7,7 @@ import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
 import { useTheme } from "../../config/options/Colors";
 import DynamicInput from "../../components/InputComponent";
+import CopyRight from "../../components/CopyRight";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
@@ -126,19 +127,23 @@ const HomeAdmin = () => {
 
   // --- Event Rendering --- (Remains the same)
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map((event) => (
-      <EventItem
-        key={event.id}
-        name={event.name}
-        desc={event.desc}
-        req={event.req}
-        className="flex-box flex-column event-box smooth-shadow-box"
-        type="admin"
-        count={event.count}
-        size={event.size}
-        location={event.location}
-      />
-    ));
+    return eventsArray.map(
+      (
+        event // Use event.id for key
+      ) => (
+        <EventItem
+          key={event.id}
+          name={event.name}
+          desc={event.desc}
+          req={event.req}
+          className="flex-box flex-column event-box smooth-shadow-box"
+          type="admin"
+          count={event.count}
+          size={event.size}
+          location={event.location}
+        />
+      )
+    );
   };
 
   const renderEvents = () => {
@@ -365,6 +370,7 @@ const HomeAdmin = () => {
       {viewMode === "events" && renderEvents()}
       {viewMode === "people" && renderPeople()}
       {viewMode === "createOrg" && renderCreateOrg()}
+      <CopyRight />
     </div>
   );
 };
