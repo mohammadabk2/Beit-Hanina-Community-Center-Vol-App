@@ -8,7 +8,7 @@ import NavigationBar from "../../components/NavigationBar";
 // import orgLogo from "../../icons/org_icon.jpg"
 
 const HomeVolunteer = () => {
-  const { t } = useTranslation("homeVol");
+  const { t } = useTranslation("home");
 
   const sortEvents = () => {
     console.log("Sort button clicked");

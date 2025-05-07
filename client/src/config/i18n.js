@@ -4,9 +4,7 @@ import { initReactI18next } from "react-i18next";
 // Import english translation files
 import appEN from "./locales/en/app.json";
 import signupEN from "./locales/en/signup.json";
-import homeVolunteerEN from "./locales/en/homeVolunteer.json";
-import HomeOrganizerEn from "./locales/en/HomeOrganizer.json";
-import HomeAdminEN from "./locales/en/HomeAdmin.json";
+import HomeEN from "./locales/en/home.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
 import insuranceEN from "./locales/en/insurance.json";
@@ -17,9 +15,7 @@ import copyRightEN from "./locales/en/copyright.json";
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
 import signupAR from "./locales/ar/signup.json";
-import homeVolunteerAR from "./locales/ar/homeVolunteer.json";
-import HomeOrganizerAR from "./locales/ar/HomeOrganizer.json";
-import HomeAdminAR from "./locales/ar/HomeAdmin.json";
+import HomeAR from "./locales/ar/home.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
 import insuranceAR from "./locales/ar/insurance.json";
@@ -33,9 +29,7 @@ const resources = {
     app: appEN,
     signUp: signupEN,
     skills: skillsEN,
-    homeVol: homeVolunteerEN,
-    homeOrg: HomeOrganizerEn,
-    homeAdmin: HomeAdminEN,
+    home: HomeEN,
     about: aboutEn,
     personal: personalAreaVolunteerEN,
     insurance: insuranceEN,
@@ -45,9 +39,7 @@ const resources = {
   ar: {
     app: appAr,
     signUp: signupAR,
-    homeVol: homeVolunteerAR,
-    homeOrg: HomeOrganizerAR,
-    homeAdmin: HomeAdminAR,
+    home: HomeAR,
     about: aboutAR,
     skills: skillsAR,
     personal: personalAreaVolunteerAR,

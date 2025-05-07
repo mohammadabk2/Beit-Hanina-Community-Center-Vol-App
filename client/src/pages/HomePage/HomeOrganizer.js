@@ -41,7 +41,7 @@ const HomeOrganizer = () => {
   ];
   //!
 
-  const { t } = useTranslation("homeOrg");
+  const { t } = useTranslation("home");
   const [showEvents, setShowEvents] = useState(true); // Use useState!
 
   const [formData, setFormData] = useState({

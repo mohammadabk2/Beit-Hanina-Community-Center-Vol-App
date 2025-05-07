@@ -109,7 +109,7 @@ const HomeAdmin = () => {
   const people = initialPeople;
   //!
 
-  const { t } = useTranslation("homeAdmin");
+  const { t } = useTranslation("home");
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);

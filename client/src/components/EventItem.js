@@ -9,7 +9,7 @@ import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
 const EventItem = ({ name, className, style, req, type, count, size }) => {
-  const { t } = useTranslation("homeVol");
+  const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
 
   const handleVolClick = () => {
