@@ -1,3 +1,19 @@
 {
-    
+  "switch_to_events": "Switch to Events",
+  "switch_to_people": "Switch to People",
+  "switch_to_create_org": "Create New Organization",
+  "sort": "Sort",
+  "approve_button": "Approve",
+  "reject_button": "Reject",
+  "add_log": "Add Log",
+  "view_log": "View Logs",
+  "switch_to_table_view": "Switch to Table View",
+  "switch_to_card_view": "Switch to Card View",
+  "orgName": "Organization Name",
+  "orgAddress": "Organization Address",
+  "orgAdmin": "Organization Admin",
+  "orgName_placeholder": "Enter Organization Name",
+  "orgAddress_placeholder": "Enter Organization Address",
+  "orgAdmin_placeholder": "Enter Organization Admin Name",
+  "submit_button": "Submit"
 }

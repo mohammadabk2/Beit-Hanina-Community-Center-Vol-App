@@ -1,10 +1,14 @@
 {
-  "sort":"فرز",
+  "sort": "فرز",
   "back": "رجوع",
   "create_event": "إنشاء فعالية",
   "event_name": "اسم الفعالية",
   "event_date": "تاريخ الفعالية",
   "volunteer_count": "عدد المتطوعين المطلوبين",
   "event_name_placeholder": "أدخل اسم الفعالية",
-  "event_count_placeholder": "أدخل عدد المتطوعين"
+  "event_count_placeholder": "أدخل عدد المتطوعين",
+  "event_description": "وصف الفعالية",
+  "event_description_placeholder": "أدخل وصفاً مفصلاً للفعالية",
+  "event_location": "موقع الفعالية",
+  "event_location_placeholder": "أدخل موقع الفعالية"
 }
