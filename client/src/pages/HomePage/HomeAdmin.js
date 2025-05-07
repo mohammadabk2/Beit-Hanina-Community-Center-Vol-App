@@ -204,7 +204,7 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
+        <div className="scroll-box1 general-box flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
@@ -276,8 +276,8 @@ const HomeAdmin = () => {
   const renderCreateOrg = () => {
     return (
       <>
-        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box top-scroll-box1">
+        <div className="scroll-box1 general-box flex-box flex-column">
+        <div className="flex-box top-scroll-box1 line-break">
             <div className="flex-box top-scroll-box1 line-break">
               <DynamicButton
                 className="button button-small"
