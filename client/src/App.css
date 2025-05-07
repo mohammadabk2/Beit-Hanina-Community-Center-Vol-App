@@ -553,16 +553,3 @@ html[lang="ar"] textarea {
   direction: rtl;
   text-align: right;
 }
-
-.event-location {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-color);
-  display: flex;
-  align-items: center;
-}
-
-.event-location::before {
-  content: "📍";
-  margin-right: 0.3rem;
-}

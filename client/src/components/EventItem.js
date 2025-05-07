@@ -8,7 +8,17 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, description, location, style, req, type, count, size }) => {
+const EventItem = ({
+  name,
+  className,
+  description,
+  location,
+  style,
+  req,
+  type,
+  count,
+  size,
+}) => {
   const { t } = useTranslation("homeVol");
   const { t: tskill } = useTranslation("skills");
 
@@ -64,7 +74,7 @@ const EventItem = ({ name, className, description, location, style, req, type, c
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
         <div className="flex-box flex-column">
-          <div>{desc}</div>
+          <div>{description}</div>
           <div className="flex-box">
             <div>
               <img
@@ -83,13 +93,13 @@ const EventItem = ({ name, className, description, location, style, req, type, c
                   </div>
                 ))}
               </div>
-              <div className="event-location">{location}</div>
+              <div>{location}</div>
             </div>
           </div>
         </div>
       </div>
       <div>
-      📍{location} {/*Location, can be styled or not */}
+        📍{location} {/*Location, can be styled or not */}
       </div>
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
@@ -150,7 +160,7 @@ EventItem.propTypes = {
   count: PropTypes.number,
   size: PropTypes.number,
   description: PropTypes.string,
-  location: PropTypes.string
+  location: PropTypes.string,
 };
 
 EventItem.defaultProps = {
