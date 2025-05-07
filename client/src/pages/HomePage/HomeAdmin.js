@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
@@ -21,8 +22,42 @@ const HomeAdmin = () => {
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
 
-  const people = initialPeople; //! Using static data for now
-  
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  // const people = initialPeople; //! Using static data for now
+  const loadPeople = async () => {
+    const body = {
+      userID: 4,
+      userRequest: "//TODO",
+      tableName: "users_waiting_list",
+    };
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/loadUsers`, body);
+      if (response.data.status === "success") {
+        console.log("loading passed");
+        console.log(response.data.userData);
+        return response.data.userData;
+      } else {
+        alert(`load Failed: ${response.data.message}`);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error during loading people:", error);
+      return null;
+    }
+  };
+
+  const [people, setPeople] = useState(null);
+  useEffect(() => {
+    const fetchPeople = async () => {
+      const loadedPeople = await loadPeople();
+      setPeople(loadedPeople);
+    };
+
+    fetchPeople();
+  }, []);
+
+  const events = initEvents;
+
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
     setViewMode("people"); // Switch view mode to "people"
@@ -292,7 +327,7 @@ const HomeAdmin = () => {
 export default HomeAdmin;
 
 // ! temp examples
-const events = [
+const initEvents = [
   {
     id: "event1",
     name: "تنظيف الحديقة العامة",
@@ -328,7 +363,6 @@ const initialPeople = [
     name: "أحمد محمود",
     sex: "male",
     birthDate: "1995-03-15",
-    age: 28,
     approvedhous: 25,
     unapprovedhous: 5,
     skills: ["التدريس", "الحاسوب", "اللغة الإنجليزية"],
@@ -337,14 +371,13 @@ const initialPeople = [
     address: "بيت حنينا - شارع الرئيسي",
     insurance: "clalit",
     idNumber: "123456789",
-    isNew: true,
+    // isNew: true,
   },
   {
     id: "person2",
     name: "سارة خالد",
     sex: "female",
     birthDate: "1998-08-22",
-    age: 25,
     approvedhous: 15,
     unapprovedhous: 0,
     skills: ["الفنون", "العمل مع الأطفال", "التنظيم"],
@@ -353,14 +386,13 @@ const initialPeople = [
     address: "بيت حنينا - حي المدارس",
     insurance: "maccabi",
     idNumber: "987654321",
-    isNew: false,
+    // isNew: false,
   },
   {
     id: "person3",
     name: "محمد عبد الله",
     sex: "male",
     birthDate: "1992-11-10",
-    age: 31,
     approvedhous: 40,
     unapprovedhous: 8,
     skills: ["الرياضة", "الإسعافات الأولية", "تنظيم الفعاليات"],
@@ -369,6 +401,6 @@ const initialPeople = [
     address: "بيت حنينا - حي السلام",
     insurance: "leumit",
     idNumber: "456789123",
-    isNew: true,
+    // isNew: true,
   },
 ];
