@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import NavigationBar from "../../components/NavigationBar";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import DropDownMenu from "../../components/DropDownMenu";
+import CopyRight from "../../components/CopyRight";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
@@ -125,6 +126,8 @@ const PersonalArea = () => {
             <ManageAccountBox />
           </div>
         </div>
+
+        <CopyRight />
       </div>
     </div>
   );
