@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "ce2cdcb8-d7b1-4bc6-9fff-8a9c45fb3771",
+		"name": "App-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37083041"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5213/api/logUser",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5213/api/logUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5213",
+					"path": [
+						"api",
+						"logUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5213/api/register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"jad jaraisy\",\r\n    \"birthDate\": \"2000-09-25\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0528558889\",\r\n    \"email\": \"jadosh2000@gmail.com\",\r\n    \"address\": \"nazareth\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"211758057\",\r\n    \"username\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5213/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5213",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5213/api/loadUsers",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userID\": 4,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"users_waiting_list\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5213/api/loadUsers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5213",
+					"path": [
+						"api",
+						"loadUsers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -55,6 +55,24 @@ const createUser = async (
 };
 
 /**
+ * return the users table
+ * @async
+ * @param {string} tableName
+ * @param {string} columnNames
+ * @returns  {Promise<Object|null>}
+ */
+const getUsers = async (tableName, columnNames) => {
+  try {
+    const text = `SELECT ${columnNames} FROM ${tableName};`;
+    const res = await db.query(text);
+    return res.rows;
+  } catch (error) {
+    console.error("Error during getUsers query:", error);
+    return null;
+  }
+};
+
+/**
  * Updates the properties of a user in the users table.
  * Fields with null values are ignored and remain unchanged.
  *
@@ -499,9 +517,11 @@ const getUserHash = async (username) => {
 
 export default {
   createUser, // tested
-  getUserByLogin, // tested
-  getUserById, // tested
+  getUsers,
   getUserHash,
+  getUserByLogin, // tested
+
+  getUserById, // tested
   assignRoleToUser,
   createVolunteer, // tested
   createOrganizer, // tested
