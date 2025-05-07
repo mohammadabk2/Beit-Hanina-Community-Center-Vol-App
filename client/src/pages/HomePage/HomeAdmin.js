@@ -24,18 +24,33 @@ const HomeAdmin = () => {
 
   const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   // const people = initialPeople; //! Using static data for now
-  const loadPeople = async () => {
-    const body = {
-      userID: 4,
-      userRequest: "//TODO",
-      tableName: "users_waiting_list",
-    };
+  const loadPeople = async (type) => {
+    // TODO change to get userId from memo and context
+
+    const body =
+      type === "new"
+        ? {
+            userID: 4,
+            userRequest: `add conditions from sort for new users`,
+            tableName: "users_waiting_list",
+          }
+        : type === "current"
+        ? {
+            userID: 5,
+            userRequest: `add conditions from sort for current users`,
+            tableName: "users",
+          }
+        : {};
+
     try {
       const response = await axios.post(`${API_BASE_URL}/api/loadUsers`, body);
       if (response.data.status === "success") {
         console.log("loading passed");
-        console.log(response.data.userData);
-        return response.data.userData;
+        let peopleArray = response.data.userData;
+        peopleArray.forEach((person) => {
+          person.isNew = true;
+        });
+        return peopleArray;
       } else {
         alert(`load Failed: ${response.data.message}`);
         return null;
@@ -49,7 +64,7 @@ const HomeAdmin = () => {
   const [people, setPeople] = useState(null);
   useEffect(() => {
     const fetchPeople = async () => {
-      const loadedPeople = await loadPeople();
+      const loadedPeople = await loadPeople("new");
       setPeople(loadedPeople);
     };
 
@@ -68,15 +83,14 @@ const HomeAdmin = () => {
 
   const sortEvents = () => {
     console.log("Sort events button clicked");
-    // Add sorting logic for events array here if needed
+    //TODO Add sorting logic for events array here if needed
   };
 
   const sortPeople = () => {
     console.log("Sort people button clicked");
-    // Add sorting logic for people array here if needed
+    //TODO Add sorting logic for people array here if needed
   };
 
-  // --- Event Rendering --- (Remains the same)
   const renderEventItems = (eventsArray) => {
     return eventsArray.map(
       (
