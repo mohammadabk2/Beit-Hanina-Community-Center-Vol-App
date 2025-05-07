@@ -8,39 +8,6 @@ import EventItem from "../../components/EventItem";
 import SelectComponent from "../../components/SelectComponent";
 
 const HomeOrganizer = () => {
-  //! testing only
-  const events = [
-    {
-      name: "test event1",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event2",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event3",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event4",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-  ];
-  //!
-
   const { t } = useTranslation("home");
   const [showEvents, setShowEvents] = useState(true); // Use useState!
 
@@ -203,3 +170,35 @@ const HomeOrganizer = () => {
 };
 
 export default HomeOrganizer;
+
+
+// ! temp data
+const events = [
+  {
+    id: "event1",
+    name: "تنظيف الحديقة العامة",
+    desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
+    req: ["التنظيف", "البستنة"],
+    count: 5,
+    size: 20,
+    location: "الحديقة العامة - بيت حنينا",
+  },
+  {
+    id: "event2",
+    name: "دروس تقوية للطلاب",
+    desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
+    req: ["التدريس", "الرياضيات", "العلوم"],
+    count: 3,
+    size: 10,
+    location: "مركز المجتمع - بيت حنينا",
+  },
+  {
+    id: "event3",
+    name: "يوم رياضي للأطفال",
+    desc: "تنظيم يوم رياضي ترفيهي للأطفال",
+    req: ["الرياضة", "تنظيم الفعاليات"],
+    count: 8,
+    size: 15,
+    location: "الملعب الرياضي - بيت حنينا",
+  },
+];
