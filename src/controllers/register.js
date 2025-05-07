@@ -20,6 +20,7 @@ const registerUser = async (req, res) => {
       const passwordHash = await bcrypt.hash(userData.password, salt);
 
       const reg = await dbConnection.createUser(
+        "users_waiting_list",
         userData.fullName,
         userData.birthDate,
         userData.sex,

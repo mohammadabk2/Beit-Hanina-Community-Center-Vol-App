@@ -269,38 +269,6 @@ const SignUpPage = () => {
             chosen={formData.skills}
           />
 
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("user_name")}: </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.userName}
-              name="userName"
-              onChange={handleChange}
-              placeholder={t("username_placeholder")}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("password")}: </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="password"
-              value={formData.password}
-              name="password"
-              onChange={handleChange}
-              placeholder={t("password_placeholder")}
-            />
-          </div>
-
           <UploadFile />
 
           <div className="flex-box">
