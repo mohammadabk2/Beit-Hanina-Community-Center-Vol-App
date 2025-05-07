@@ -25,6 +25,7 @@
 │       ├── AppRouter.js
 │       ├── components
 │       │   ├── ButtonComponent.js
+│       │   ├── CopyRight.js
 │       │   ├── DropDownMenu.js
 │       │   ├── EventItem.js
 │       │   ├── InputComponent.js
@@ -35,16 +36,18 @@
 │       │   │   ├── PersonItemCard.js
 │       │   │   ├── PersonItemRow.js
 │       │   │   └── PersonList.js
-│       │   └── SelectComponent.js
+│       │   ├── SelectComponent.js
+│       │   └── UploadComponent.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
+│       │   │   │   ├── copyright.json
 │       │   │   │   ├── HomeAdmin.json
+│       │   │   │   ├── home.json
 │       │   │   │   ├── HomeOrganizer.json
-│       │   │   │   ├── homeVolunteer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
 │       │   │   │   ├── personalArea.json
@@ -53,10 +56,11 @@
 │       │   │   └── en
 │       │   │       ├── about.json
 │       │   │       ├── app.json
+│       │   │       ├── copyright.json
 │       │   │       ├── events.json
 │       │   │       ├── HomeAdmin.json
+│       │   │       ├── home.json
 │       │   │       ├── HomeOrganizer.json
-│       │   │       ├── homeVolunteer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
 │       │   │       ├── personalArea.json
@@ -115,8 +119,6 @@
 │           │   ├── PersonalAreaAdmin.js
 │           │   ├── PersonalAreaOrganizer.js
 │           │   └── PersonalAreaVolunteer.js
-│           ├── SettingsPage
-│           │   └── Settings.js
 │           └── SignUpPage
 │               └── SignUp.js
 ├── docs
@@ -146,6 +148,7 @@
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
+│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -173,5 +176,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-39 directories, 132 files
+38 directories, 136 files
 ```
