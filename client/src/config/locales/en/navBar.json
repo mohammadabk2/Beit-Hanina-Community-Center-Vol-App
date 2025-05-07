@@ -1,8 +1,11 @@
 {
   "ln": "Language",
-  "light_mode": "Light Mode",
-  "dark_mode": "Dark Mode",
+  "light_mode": "Day Mode",
+  "dark_mode": "Night Mode",
   "home_page": "Home Page",
-  "perosnal_area": "Perosnal Area",
-  "about_page": "About App"
+  "about_page": "About App",
+  "personal_area": "Personal Area",
+  "settings": "Settings",
+  "logout": "Logout",
+  "login": "Login"
 }

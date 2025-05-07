@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 
 const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
-  const { t } = useTranslation("homeAdmin");
+  const { t } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
   // const { t: tskill } = useTranslation("skills"); // For skills column if needed
 
