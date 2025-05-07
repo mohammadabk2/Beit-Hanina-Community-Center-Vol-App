@@ -21,7 +21,7 @@ const PersonItemCard = ({
   viewLogsFunction,
   addLogFunction,
 }) => {
-  const { t } = useTranslation("homeAdmin");
+  const { t } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
 

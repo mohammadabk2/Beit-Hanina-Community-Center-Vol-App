@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
+import CopyRight from "../../components/CopyRight";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
@@ -16,10 +17,6 @@ const PersonalArea = () => {
 
   const printToPdf = () => {
     console.log("print to PDF button clicked");
-  };
-
-  const downloadToExcel = () => {
-    console.log("Excel button clicked");
   };
 
   return (
@@ -44,7 +41,6 @@ const PersonalArea = () => {
               {t("number_of_vol")}: {numberOfVolunteers}
             </div>
           </div>
-        
 
           <div className="flex-box">
             <DynamicButton
@@ -52,16 +48,12 @@ const PersonalArea = () => {
               text={t("to_pdf")}
               onClick={printToPdf}
             />
-
-            <DynamicButton
-              className="button"
-              text={t("to_excel")}
-              onClick={downloadToExcel}
-            />
           </div>
 
           <ManageAccountBox />
         </div>
+        
+        <CopyRight />
       </div>
     </div>
   );

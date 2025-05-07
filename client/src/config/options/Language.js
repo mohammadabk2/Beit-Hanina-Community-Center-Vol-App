@@ -5,7 +5,7 @@ export const useLnOptions = () => {
   return [
     {
       label: "ar",
-      href: "#option1",
+      href: "#ar",
       onClick: () => {
         i18n.changeLanguage("ar");
         console.log("Language changed to Arabic");
@@ -13,7 +13,7 @@ export const useLnOptions = () => {
     },
     {
       label: "en",
-      href: "#option2",
+      href: "#en",
       onClick: () => {
         i18n.changeLanguage("en");
         console.log("Language changed to English");

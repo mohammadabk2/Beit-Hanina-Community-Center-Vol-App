@@ -4,24 +4,24 @@ import { initReactI18next } from "react-i18next";
 // Import english translation files
 import appEN from "./locales/en/app.json";
 import signupEN from "./locales/en/signup.json";
-import homeVolunteerEN from "./locales/en/homeVolunteer.json";
-import HomeOrganizerEn from "./locales/en/HomeOrganizer.json";
-import HomeAdminEN from "./locales/en/HomeAdmin.json";
+import HomeEN from "./locales/en/home.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
 import insuranceEN from "./locales/en/insurance.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
+import navBarEN from "./locales/en/navBar.json";
+import copyRightEN from "./locales/en/copyright.json";
 
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
 import signupAR from "./locales/ar/signup.json";
-import homeVolunteerAR from "./locales/ar/homeVolunteer.json";
-import HomeOrganizerAR from "./locales/ar/HomeOrganizer.json";
-import HomeAdminAR from "./locales/ar/HomeAdmin.json";
+import HomeAR from "./locales/ar/home.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
 import insuranceAR from "./locales/ar/insurance.json";
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
+import navBarAR from "./locales/ar/navBar.json";
+import copyRightAR from "./locales/ar/copyright.json";
 
 // The translations
 const resources = {
@@ -29,23 +29,23 @@ const resources = {
     app: appEN,
     signUp: signupEN,
     skills: skillsEN,
-    homeVol: homeVolunteerEN,
-    homeOrg: HomeOrganizerEn,
-    homeAdmin: HomeAdminEN,
+    home: HomeEN,
     about: aboutEn,
     personal: personalAreaVolunteerEN,
     insurance: insuranceEN,
+    navBar: navBarEN,
+    copyRight: copyRightEN,
   },
   ar: {
     app: appAr,
     signUp: signupAR,
-    homeVol: homeVolunteerAR,
-    homeOrg: HomeOrganizerAR,
-    homeAdmin: HomeAdminAR,
+    home: HomeAR,
     about: aboutAR,
     skills: skillsAR,
     personal: personalAreaVolunteerAR,
+    navBar: navBarAR,
     insurance: insuranceAR,
+    copyRight: copyRightAR,
   },
 };
 
@@ -53,7 +53,7 @@ i18n
   .use(initReactI18next) // Passes i18n down to react-i18next
   .init({
     resources,
-    lng: "en", // Default language
+    lng: "ar", // Default language
     fallbackLng: "en", // Fallback language
 
     interpolation: {
@@ -61,4 +61,10 @@ i18n
     },
   });
 
+document.documentElement.setAttribute("lang", i18n.language);
+// document.documentElement.setAttribute("dir", i18n.language === "ar" ? "rtl" : "ltr");
+
+i18n.on("languageChanged", (lng) => {
+  document.documentElement.setAttribute("lang", lng);
+});
 export default i18n;

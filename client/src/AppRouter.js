@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./App";
 import SignUpPage from "./pages/SignUpPage/SignUp";
 import HomeVolunteerPage from "./pages/HomePage/HomeVolunteer";
-import SettingsPage from "./pages/SettingsPage/Settings";
 import PersonalAreaVolunteerPage from "./pages/PersonalAreaPage/PersonalAreaVolunteer";
 import PersonalAreaOrganizerPage from "./pages/PersonalAreaPage/PersonalAreaOrganizer";
 import PersonalAreaAdminPage from "./pages/PersonalAreaPage/PersonalAreaAdmin";
@@ -21,7 +20,6 @@ const AppRouter = () => {
         <Route path="/home-volunteer" element={<HomeVolunteerPage />} />
         <Route path="/home-organizer" element={<HomeOrganizerPage />} />
         <Route path="/home-admin" element={<HomeAdminPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
         <Route
           path="/personal-area-vol"
           element={<PersonalAreaVolunteerPage />}

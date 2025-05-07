@@ -5,6 +5,7 @@ import NavigationBar from "../../components/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import SelectSkills from "../../components/SelectComponent";
+import CopyRight from "../../components/CopyRight";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");
@@ -70,6 +71,8 @@ const PersonalArea = () => {
 
           <ManageAccountBox />
         </div>
+
+        <CopyRight />
       </div>
     </div>  
   );

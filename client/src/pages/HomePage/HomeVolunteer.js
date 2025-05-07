@@ -5,50 +5,15 @@ import { useTranslation } from "react-i18next";
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
 import NavigationBar from "../../components/NavigationBar";
+import CopyRight from "../../components/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
 
 const HomeVolunteer = () => {
-  const { t } = useTranslation("homeVol");
+  const { t } = useTranslation("home");
 
   const sortEvents = () => {
     console.log("Sort button clicked");
   };
-
-  const events = [
-    {
-      name: "test event1",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-      location: "some loc",
-    },
-    {
-      name: "test event2",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-      location: "some loc",
-    },
-    {
-      name: "test event3",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-      location: "some loc",
-    },
-    {
-      name: "test event4",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-      location: "some loc",
-    },
-  ];
-  //!
 
   const renderEventItems = (eventsArray) => {
     return eventsArray.map((event, index) => (
@@ -69,6 +34,7 @@ const HomeVolunteer = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
+
       <div className="scroll-box1 general-box flex-box flex-column">
         <div className="flex-box flex-column top-scroll-box1 line-break">
           <div>
@@ -80,9 +46,41 @@ const HomeVolunteer = () => {
           </div>
         </div>
         <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+        <CopyRight />
       </div>
     </div>
   );
 };
 
 export default HomeVolunteer;
+
+//! temp data
+const events = [
+  {
+    id: "event1",
+    name: "تنظيف الحديقة العامة",
+    desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
+    req: ["التنظيف", "البستنة"],
+    count: 5,
+    size: 20,
+    location: "الحديقة العامة - بيت حنينا",
+  },
+  {
+    id: "event2",
+    name: "دروس تقوية للطلاب",
+    desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
+    req: ["التدريس", "الرياضيات", "العلوم"],
+    count: 3,
+    size: 10,
+    location: "مركز المجتمع - بيت حنينا",
+  },
+  {
+    id: "event3",
+    name: "يوم رياضي للأطفال",
+    desc: "تنظيم يوم رياضي ترفيهي للأطفال",
+    req: ["الرياضة", "تنظيم الفعاليات"],
+    count: 8,
+    size: 15,
+    location: "الملعب الرياضي - بيت حنينا",
+  },
+];
