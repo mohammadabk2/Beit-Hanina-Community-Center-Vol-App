@@ -21,7 +21,7 @@ const PersonItemRow = ({
   viewLogsFunction,
   addLogFunction,
 }) => {
-  const { t } = useTranslation("homeAdmin");
+  const { t } = useTranslation("home");
   // const { t: tskill } = useTranslation("skills"); // Not needed here
 
   // Simple skills display (comma-separated) - adjust as needed

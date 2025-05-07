@@ -2,7 +2,7 @@
 
 /*Sets font-family */
 body {
- font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 /*Adds background transition to all classes for dark/light mode*/
@@ -44,6 +44,10 @@ button {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.flex-box-gap{
+  gap: 0.7rem;
 }
 
 /*Gives container slight shadow */
@@ -121,7 +125,7 @@ button {
 }
 
 /*General input field class for all input fields */
-.input-field {
+.input-field, textarea{
   border-radius: 0.3125rem;
   border: solid;
   border-width: 0.0625rem;
@@ -132,7 +136,7 @@ button {
 }
 
 /*Makes input field container responsive */
-.input-field-box {
+.input-field-box, textarea{
   width: 80%;
 }
 
@@ -182,7 +186,7 @@ body {
   background-color: var(--button-hover);
 }
 
-input {
+input, textarea {
   border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
   outline: 0.125rem solid transparent;
@@ -191,7 +195,7 @@ input {
   margin: 0;
 }
 
-input:focus {
+input:focus, textarea:focus{
   outline-color: var(--input-focus);
 }
 
@@ -328,8 +332,9 @@ input:focus {
 }
 
 .basic-item-padding {
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+  /* padding-top: 0.2rem;
+  padding-bottom: 0.2rem; */
+  padding: 0.5rem;
 }
 
 .wrap-reverse {
@@ -385,9 +390,7 @@ input:focus {
   border-radius: 0 0 1rem 1rem;
   width: 100%;
   background-color: var(--box-background-color);
-
 }
-
 
 /* PersonList.css */
 
@@ -463,7 +466,7 @@ input:focus {
 }
 .person-table .button-approve:hover {
   background-color: #218838;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .person-table .button-reject {
@@ -472,7 +475,7 @@ input:focus {
 }
 .person-table .button-reject:hover {
   background-color: #c82333;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .person-table .button-add,
@@ -483,7 +486,7 @@ input:focus {
 .person-table .button-add:hover,
 .person-table .button-view:hover {
   background-color: #0056b3;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .person-card-container {
@@ -500,9 +503,18 @@ input:focus {
   cursor: pointer;
 }
 
+.link-button{
+  color: #0056b3 !important;
+  /* background-color: var(--button-background) */
+}
+
+.preview-img{
+  width: 20rem;
+  height: 20rem;
+  margin-top: 0.2rem;
+}
+
 /* Add more styles as needed for skills, specific columns, etc. */
-
-
 
 /*media query for mobile screen sizes */
 @media (max-width: 767px) {
@@ -532,5 +544,12 @@ input:focus {
   }
 }
 
-
-
+html[lang="ar"] input[type="text"],
+html[lang="ar"] input[type="password"],
+html[lang="ar"] input[type="email"],
+html[lang="ar"] input[type="search"],
+html[lang="ar"] input[type="tel"],
+html[lang="ar"] textarea {
+  direction: rtl;
+  text-align: right;
+}

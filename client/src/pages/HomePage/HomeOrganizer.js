@@ -6,48 +6,18 @@ import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import EventItem from "../../components/EventItem";
 import SelectComponent from "../../components/SelectComponent";
+import CopyRight from "../../components/CopyRight";
 
 const HomeOrganizer = () => {
-  //! testing only
-  const events = [
-    {
-      name: "test event1",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event2",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event3",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-    {
-      name: "test event4",
-      desc: "some desc",
-      req: ["test", "test", "test", "test"],
-      count: 5,
-      size: 10,
-    },
-  ];
-  //!
-
-  const { t } = useTranslation("homeOrg");
+  const { t } = useTranslation("home");
   const [showEvents, setShowEvents] = useState(true); // Use useState!
 
   const [formData, setFormData] = useState({
     eventName: "",
     eventCount: "",
     eventDate: "",
+    eventLocation: "",
+    eventDescription: "",
     skills: [], // Initialize skills as an array
   });
 
@@ -85,6 +55,7 @@ const HomeOrganizer = () => {
         type="org"
         count={event.count}
         size={event.size}
+        location={event.location}
       />
     ));
   };
@@ -121,8 +92,23 @@ const HomeOrganizer = () => {
                 className="input-field"
                 type="date"
                 value={formData.birthDate}
-                name="Eventdate"
+                name="eventDate"
                 onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_location")}: <label className="red-star">*</label>
+              </div>
+
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.eventLocation}
+                name="eventLocation"
+                onChange={handleChange}
+                placeholder={t("event_location_placeholder")}
               />
             </div>
 
@@ -148,6 +134,16 @@ const HomeOrganizer = () => {
               onChange={handleChange}
               chosen={formData.skills}
             />
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                {t("event_description")}: <label className="red-star">*</label>
+              </div>
+
+              <textarea value={formData.eventDescription}
+               name="eventDescription" rows={5} cols={50} 
+               className="input-field" onChange={handleChange}></textarea>
+            </div>
 
             <div className="flex-box">
               <DynamicButton
@@ -198,8 +194,41 @@ const HomeOrganizer = () => {
       <NavigationBar />
       {showEvents && renderShowEvents()}
       {!showEvents && renderCreateEvent()}
+      <CopyRight />
     </div>
   );
 };
 
 export default HomeOrganizer;
+
+
+// ! temp data
+const events = [
+  {
+    id: "event1",
+    name: "تنظيف الحديقة العامة",
+    desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
+    req: ["التنظيف", "البستنة"],
+    count: 5,
+    size: 20,
+    location: "الحديقة العامة - بيت حنينا",
+  },
+  {
+    id: "event2",
+    name: "دروس تقوية للطلاب",
+    desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
+    req: ["التدريس", "الرياضيات", "العلوم"],
+    count: 3,
+    size: 10,
+    location: "مركز المجتمع - بيت حنينا",
+  },
+  {
+    id: "event3",
+    name: "يوم رياضي للأطفال",
+    desc: "تنظيم يوم رياضي ترفيهي للأطفال",
+    req: ["الرياضة", "تنظيم الفعاليات"],
+    count: 8,
+    size: 15,
+    location: "الملعب الرياضي - بيت حنينا",
+  },
+];

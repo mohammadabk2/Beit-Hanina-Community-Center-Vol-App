@@ -25,9 +25,9 @@
 │       ├── AppRouter.js
 │       ├── components
 │       │   ├── ButtonComponent.js
+│       │   ├── CopyRight.js
 │       │   ├── DropDownMenu.js
 │       │   ├── EventItem.js
-│       │   ├── imageComponent.js
 │       │   ├── InputComponent.js
 │       │   ├── ManageAccountBox.js
 │       │   ├── NavigationBar.js
@@ -36,31 +36,41 @@
 │       │   │   ├── PersonItemCard.js
 │       │   │   ├── PersonItemRow.js
 │       │   │   └── PersonList.js
-│       │   └── SelectComponent.js
+│       │   ├── SelectComponent.js
+│       │   └── UploadComponent.js
 │       ├── config
+│       │   ├── Context
+│       │   │   └── auth.js
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
+│       │   │   │   ├── copyright.json
 │       │   │   │   ├── HomeAdmin.json
+│       │   │   │   ├── home.json
 │       │   │   │   ├── HomeOrganizer.json
-│       │   │   │   ├── homeVolunteer.json
+│       │   │   │   ├── insurance.json
+│       │   │   │   ├── navBar.json
 │       │   │   │   ├── personalArea.json
 │       │   │   │   ├── signup.json
 │       │   │   │   └── skills.json
 │       │   │   └── en
 │       │   │       ├── about.json
 │       │   │       ├── app.json
+│       │   │       ├── copyright.json
 │       │   │       ├── events.json
 │       │   │       ├── HomeAdmin.json
+│       │   │       ├── home.json
 │       │   │       ├── HomeOrganizer.json
-│       │   │       ├── homeVolunteer.json
+│       │   │       ├── insurance.json
+│       │   │       ├── navBar.json
 │       │   │       ├── personalArea.json
 │       │   │       ├── signup.json
 │       │   │       └── skills.json
 │       │   └── options
 │       │       ├── Colors.js
+│       │       ├── Insurance.js
 │       │       ├── Language.js
 │       │       ├── Skills.js
 │       │       └── Sort.js
@@ -111,8 +121,6 @@
 │           │   ├── PersonalAreaAdmin.js
 │           │   ├── PersonalAreaOrganizer.js
 │           │   └── PersonalAreaVolunteer.js
-│           ├── SettingsPage
-│           │   └── Settings.js
 │           └── SignUpPage
 │               └── SignUp.js
 ├── docs
@@ -142,6 +150,7 @@
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
+│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -178,5 +187,5 @@
 │   └── test_data.sql
 └── workbox-config.cjs
 
-39 directories, 137 files
+39 directories, 146 files
 ```
