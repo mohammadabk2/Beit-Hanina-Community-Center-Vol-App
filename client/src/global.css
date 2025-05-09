@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --box-background-color: #f5f5f5;
   --drop-down-text-color: #000000;
   --general-shadow: #0000002c;
@@ -20,9 +20,59 @@
   --odd-row-table: #ffffff;
   --table-row-text: #3d3d3d;
   --table-line-break: #dee2e6;
+} */
+
+/* Idea one */
+/* :root {
+  --box-background-color: #e0b341;
+  --drop-down-text-color: #000000;
+  --general-shadow: #0000002c;
+  --body-color: #f97b15;
+  --bottom-scroll-box: #dddddd;
+  --top-scroll-box: #dddddd;
+  --line-break: #7c7c7c;
+  --input-focus: #2196f3;
+  --input-border: #cccccc;
+  --button-hover: #ffa500;
+  --button-text: black;
+  --button-background: #4caf50;
+  --button-border: #388e3c;
+  --general-text: black;
+  --skills-shadow: #e0e0e0;
+  --skills-background: #64b5f6;
+  --even-row-table: #f0f4c3;
+  --row-table-hover: #dcedc8;
+  --odd-row-table: #ffffff;
+  --table-row-text: #3d3d3d;
+  --table-line-break: #dee2e6;
+} */
+
+/* Idea 2 */
+:root {
+  --box-background-color: #e0b341;
+  --drop-down-text-color: #000000;
+  --general-shadow: #0000002c;
+  --body-color: #64b5f6;
+  --bottom-scroll-box: #dddddd;
+  --top-scroll-box: #dddddd;
+  --line-break: #7c7c7c;
+  --input-focus: #f97b15;
+  --input-border: #cccccc;
+  --button-hover: #e59300;
+  --button-text: black;
+  --button-background: #4caf50;
+  --button-border: #388e3c;
+  --general-text: black;
+  --skills-shadow: #e0e0e0;
+  --skills-background: #ffa500;
+  --even-row-table: #f0f4c3;
+  --row-table-hover: #dcedc8;
+  --odd-row-table: #ffffff;
+  --table-row-text: #3d3d3d;
+  --table-line-break: #dee2e6;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --box-background-color: #333336;
   --drop-down-text-color: #000000;
   --general-shadow: #0000002c;
@@ -37,7 +87,7 @@ html[data-theme='dark'] {
   --button-background: #7070ff;
   --button-border: #7070e0;
   --general-text: #ffffff;
-  --skills-shadow:#7a7a7a;
+  --skills-shadow: #7a7a7a;
   --skills-background: #7070ff;
   --even-row-table: #333336;
   --row-table-hover: #29292c;
