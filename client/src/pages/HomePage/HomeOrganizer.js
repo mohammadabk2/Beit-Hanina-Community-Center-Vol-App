@@ -55,7 +55,7 @@ const HomeOrganizer = () => {
         type="org"
         count={event.count}
         size={event.size}
-        location={event.location}
+        eventLocation={event.eventLocation}
       />
     ));
   };
@@ -211,7 +211,7 @@ const events = [
     req: ["التنظيف", "البستنة"],
     count: 5,
     size: 20,
-    location: "الحديقة العامة - بيت حنينا",
+    eventLocation: "الحديقة العامة - بيت حنينا",
   },
   {
     id: "event2",
@@ -220,7 +220,7 @@ const events = [
     req: ["التدريس", "الرياضيات", "العلوم"],
     count: 3,
     size: 10,
-    location: "مركز المجتمع - بيت حنينا",
+    eventLocation: "مركز المجتمع - بيت حنينا",
   },
   {
     id: "event3",
@@ -229,6 +229,6 @@ const events = [
     req: ["الرياضة", "تنظيم الفعاليات"],
     count: 8,
     size: 15,
-    location: "الملعب الرياضي - بيت حنينا",
+    eventLocation: "الملعب الرياضي - بيت حنينا",
   },
 ];

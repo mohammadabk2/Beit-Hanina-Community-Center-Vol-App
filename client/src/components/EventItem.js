@@ -8,7 +8,7 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, style, req, type, count, size,description }) => {
+const EventItem = ({ name, className, style, req, type, count, size, eventLocation, description}) => {
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
 
@@ -76,7 +76,7 @@ const EventItem = ({ name, className, style, req, type, count, size,description 
         </div>
       </div>
       <div>
-      📍{location} {/*Location, can be styled or not */}
+      📍{eventLocation} {/*Location, can be styled or not */}
       </div>
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
@@ -137,7 +137,7 @@ EventItem.propTypes = {
   count: PropTypes.number,
   size: PropTypes.number,
   description: PropTypes.string,
-  location: PropTypes.string
+  eventLocation: PropTypes.string
 };
 
 EventItem.defaultProps = {
