@@ -27,11 +27,16 @@ const PersonItemRow = ({
   // Simple skills display (comma-separated) - adjust as needed
   // const skillsDisplay = skills ? skills.join(", ") : "N/A"; //! uncomment when added
 
+  const formatBirthDate = (dateString) => {
+    if (!dateString) return "";
+    return dateString.split("T")[0]; // Get only the date part before the 'T'
+  };
+
   return (
     // No outer div or table needed here, just the row
     <tr>
       <td>{name}</td>
-      <td>{birthDate}</td>
+      <td>{formatBirthDate(birthDate)}</td>
       <td>{sex}</td>
       <td>{phoneNumber}</td>
       <td>{email}</td>

@@ -25,6 +25,11 @@ const PersonItemCard = ({
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
 
+  const formatBirthDate = (dateString) => {
+    if (!dateString) return '';
+    return dateString.split('T')[0]; // Get only the date part before the 'T'
+  };
+
   //TODO make half appear on the right and half on the left
   return (
     <div
@@ -36,7 +41,7 @@ const PersonItemCard = ({
       <div className="top-user-box line-break">{name}</div>
       <div className="bottom-user-box flex-box flex-column">
         <div className="basic-item-padding personal-area-content">
-          {tsignup("birthDate")} {birthDate}
+          {tsignup("birthDate")} {formatBirthDate(birthDate)}
         </div>
 
         <div className="basic-item-padding personal-area-content">
