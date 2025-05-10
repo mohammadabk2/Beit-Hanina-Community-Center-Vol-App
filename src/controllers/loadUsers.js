@@ -23,7 +23,7 @@ const loadUsers = async (req, res) => {
       const allUserData = users.map((user) => ({
         id: user.id,
         name: user.name,
-        birthDate: user.birth_date,
+        birthDate: new Date(user.birth_date).toISOString().split('T')[0],
         sex: user.sex,
         phoneNumber: user.phone_number,
         email: user.email,
