@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS users
     password_hash VARCHAR(255) NOT NULL,
     banned BOOLEAN DEFAULT FALSE,
     logs TEXT[],
-    role TEXT[]
+    role TEXT,
+    profile_image_url TEXT
 );
 
 /*New uses waiting for approval of account*/
@@ -30,7 +31,8 @@ CREATE TABLE IF NOT EXISTS users_waiting_list
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[]
+    logs TEXT[],
+    profile_image_url TEXT
 );
 
 CREATE TABLE IF NOT EXISTS volunteer
@@ -61,7 +63,9 @@ CREATE TABLE IF NOT EXISTS events
     vol_id INT[],
     vol_id_waiting_list INT[],
     max_number_of_vol INT DEFAULT 0,
-    current_number_of_vol INT DEFAULT 0
+    current_number_of_vol INT DEFAULT 0,
+    event_location TEXT NOT NULL,
+    event_description TEXT DEFAULT ''
 );
 
 CREATE TABLE IF NOT EXISTS events_status
