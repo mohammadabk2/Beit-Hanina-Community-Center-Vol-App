@@ -67,7 +67,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
               src={isLightMode ? profileIconLight : profileIconDark}
               alt="Profile icon"
             />
-            {t("perosnal_area")}
+            {t("personal_area")}
           </div>
 
           <div onClick={goToHome} className="flex-box flex-column">
