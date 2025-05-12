@@ -11,32 +11,29 @@ const About = () => {
     <div className="app flex-box flex-column">
       {/* //TODO add check if signed in or not and use the right nav bar according to it */}
       <NavigationBar />
-      <div className="general-box scroll-box1 flex-box">
-        <div className="general-box flex-box flex-column smooth-shadow-box">
-          {/* <div className="basic-item-padding personal-area-content">
-            {tAbout("admins")}
-          </div> */}
-          <div className="basic-item-padding personal-area-content">
-            {tAbout("desc")}
+      <div className="about-container">
+        <div className="about-desc">{tAbout("desc")}</div>
+        <hr className="about-divider" />
+        <div className="about-section">
+          <div className="about-section-title">
+            {tAbout("contact") || "Contact Information"}
           </div>
-          <div className="basic-item-padding personal-area-content">
-            {tAbout("contact")} support@email.com
+          <div className="about-contact">support@email.com</div>
+        </div>
+        <hr className="about-divider" />
+        <div className="about-section">
+          <div className="about-section-title">
+            {tAbout("devs") || "Developers"}
           </div>
-          <div className="basic-item-padding personal-area-content">
-            {tAbout("devs")}
-          </div>
-          <div className="basic-item-padding personal-area-content">
-            {tAbout("mohammadak")} {tAbout("jad")}
-          </div>
-          <div className="basic-item-padding personal-area-content">
-            {tAbout("husam")} {tAbout("mohammadqt")}
-          </div>
-          <div className="basic-item-padding personal-area-content">
-            {tAbout("mohammadtb")}
-          </div>
+          <ul className="about-dev-list">
+            <li>Mohammad Abu Khdier</li>
+            <li>Jad Jaraisy</li>
+            <li>Husam Halawani</li>
+            <li>Mohammad Quttaineh</li>
+            <li>Mohammad Tbakhy</li>
+          </ul>
         </div>
       </div>
-
       <CopyRight />
     </div>
   );
