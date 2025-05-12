@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import DynamicButton from "./ButtonComponent";
+import DynamicButton from "../ButtonComponent";
 
 const CopyRight = () => {
   const { t } = useTranslation("copyRight");

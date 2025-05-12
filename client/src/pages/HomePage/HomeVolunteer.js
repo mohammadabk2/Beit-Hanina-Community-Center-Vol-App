@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 // import components here
 import EventItem from "../../components/EventItem";
 import DynamicButton from "../../components/ButtonComponent";
-import NavigationBar from "../../components/NavigationBar";
-import CopyRight from "../../components/CopyRight";
+import NavigationBar from "../../components/layout/NavigationBar";
+import CopyRight from "../../components/layout/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
 
 const HomeVolunteer = () => {

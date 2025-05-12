@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/NavigationBar";
+import NavigationBar from "../../components/layout/NavigationBar";
 import DynamicButton from "../../components/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import SelectSkills from "../../components/SelectComponent";
-import CopyRight from "../../components/CopyRight";
+import CopyRight from "../../components/layout/CopyRight";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personalVolunteer");

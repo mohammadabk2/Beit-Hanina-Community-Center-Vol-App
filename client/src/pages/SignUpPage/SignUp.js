@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 import DynamicButton from "../../components/ButtonComponent";
 import DynamicInput from "../../components/InputComponent";
 import DropDownMenu from "../../components/DropDownMenu";
-import NavigationBar from "../../components/NavigationBar";
+import NavigationBar from "../../components/layout/NavigationBar";
 import SelectComponent from "../../components/SelectComponent";
 import UploadFile from "../../components/UploadComponent";
-import CopyRight from "../../components/CopyRight";
+import CopyRight from "../../components/layout/CopyRight";
 
 // Import the insurance options
 import { useInsuranceOptions } from "../../config/options/Insurance";

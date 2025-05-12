@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/NavigationBar";
+import NavigationBar from "../../components/layout/NavigationBar";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import DropDownMenu from "../../components/DropDownMenu";
-import CopyRight from "../../components/CopyRight";
+import CopyRight from "../../components/layout/CopyRight";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");

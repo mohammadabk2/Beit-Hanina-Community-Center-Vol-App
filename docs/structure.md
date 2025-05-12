@@ -25,12 +25,13 @@
 │       ├── AppRouter.js
 │       ├── components
 │       │   ├── ButtonComponent.js
-│       │   ├── CopyRight.js
 │       │   ├── DropDownMenu.js
 │       │   ├── EventItem.js
 │       │   ├── InputComponent.js
+│       │   ├── layout
+│       │   │   ├── CopyRight.js
+│       │   │   └── NavigationBar.js
 │       │   ├── ManageAccountBox.js
-│       │   ├── NavigationBar.js
 │       │   ├── PersonItem
 │       │   │   ├── PeopleDisplaySwitcher.js
 │       │   │   ├── PersonItemCard.js
@@ -176,5 +177,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-38 directories, 136 files
+39 directories, 136 files
 ```
