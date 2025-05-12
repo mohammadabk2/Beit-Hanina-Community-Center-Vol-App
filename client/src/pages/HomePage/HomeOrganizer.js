@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/layout/NavigationBar";
-import DynamicButton from "../../components/ButtonComponent";
-import DynamicInput from "../../components/InputComponent";
+
+import DynamicButton from "../../components/common/ButtonComponent";
+import DynamicInput from "../../components/common/InputComponent";
 import EventItem from "../../components/EventItem";
-import SelectComponent from "../../components/SelectComponent";
+import SelectComponent from "../../components/common/SelectComponent";
+import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
 const HomeOrganizer = () => {

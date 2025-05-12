@@ -1,9 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/layout/NavigationBar";
-import DynamicButton from "../../components/ButtonComponent";
+
+import DynamicButton from "../../components/common/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
+import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
 const PersonalArea = () => {

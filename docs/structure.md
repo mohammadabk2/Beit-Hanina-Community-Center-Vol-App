@@ -24,21 +24,22 @@
 │       ├── App.js
 │       ├── AppRouter.js
 │       ├── components
-│       │   ├── ButtonComponent.js
-│       │   ├── DropDownMenu.js
+│       │   ├── common
+│       │   │   ├── ButtonComponent.js
+│       │   │   ├── DropDownMenu.js
+│       │   │   ├── InputComponent.js
+│       │   │   ├── SelectComponent.js
+│       │   │   └── UploadComponent.js
 │       │   ├── EventItem.js
-│       │   ├── InputComponent.js
 │       │   ├── layout
 │       │   │   ├── CopyRight.js
 │       │   │   └── NavigationBar.js
 │       │   ├── ManageAccountBox.js
-│       │   ├── PersonItem
-│       │   │   ├── PeopleDisplaySwitcher.js
-│       │   │   ├── PersonItemCard.js
-│       │   │   ├── PersonItemRow.js
-│       │   │   └── PersonList.js
-│       │   ├── SelectComponent.js
-│       │   └── UploadComponent.js
+│       │   └── PersonItem
+│       │       ├── PeopleDisplaySwitcher.js
+│       │       ├── PersonItemCard.js
+│       │       ├── PersonItemRow.js
+│       │       └── PersonList.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
@@ -177,5 +178,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-39 directories, 136 files
+40 directories, 136 files
 ```

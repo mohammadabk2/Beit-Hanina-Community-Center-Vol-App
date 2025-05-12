@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import DropDownMenu from "../DropDownMenu";
+import DropDownMenu from "../common/DropDownMenu";
 import { useLnOptions } from "../../config/options/Language";
 import { useTheme } from "../../config/options/Colors";
 

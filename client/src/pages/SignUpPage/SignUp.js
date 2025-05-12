@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import DynamicButton from "../../components/ButtonComponent";
-import DynamicInput from "../../components/InputComponent";
-import DropDownMenu from "../../components/DropDownMenu";
+import DynamicButton from "../../components/common/ButtonComponent";
+import DynamicInput from "../../components/common/InputComponent";
+import DropDownMenu from "../../components/common/DropDownMenu";
+import SelectComponent from "../../components/common/SelectComponent";
+import UploadFile from "../../components/common/UploadComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
-import SelectComponent from "../../components/SelectComponent";
-import UploadFile from "../../components/UploadComponent";
 import CopyRight from "../../components/layout/CopyRight";
 
 // Import the insurance options
