@@ -33,7 +33,7 @@ button {
 }
 
 .app-header {
-  padding: 1.25rem;
+  padding: 1.5rem;
   color: var(--common-colour-2);
   margin-bottom: 2rem;
 }
@@ -46,7 +46,7 @@ button {
   flex-wrap: wrap;
 }
 
-.flex-box-gap{
+.flex-box-gap {
   gap: 0.7rem;
 }
 
@@ -62,7 +62,7 @@ button {
   width: 80vw;
   margin-top: 0.0625rem;
   border-radius: 0.625rem;
-  background-color: var(--box-background-color);
+  /* background-color: var(--box-background-color); */
   max-width: 34.5625rem;
 }
 
@@ -125,7 +125,8 @@ button {
 }
 
 /*General input field class for all input fields */
-.input-field, textarea{
+.input-field,
+textarea {
   border-radius: 0.3125rem;
   border: solid;
   border-width: 0.0625rem;
@@ -136,7 +137,8 @@ button {
 }
 
 /*Makes input field container responsive */
-.input-field-box, textarea{
+.input-field-box,
+textarea {
   width: 80%;
 }
 
@@ -172,21 +174,29 @@ body {
 }
 
 .dropdown-item {
-  cursor: pointer;
+  width: 100%;
 }
 
 .dropdown-item a {
   text-decoration: none;
   color: var(--common-colour-2);
   display: block;
-  padding: 0.5rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.7rem;
+  transition: background 0.2s;
 }
 
+.dropdown-item:hover a,
 .dropdown-item a:hover {
-  background-color: var(--button-hover);
+  background-color: #b2dfdb;
+  color: var(--common-colour-2);
+  text-decoration: none;
 }
 
-input, textarea {
+input,
+textarea {
   border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
   outline: 0.125rem solid transparent;
@@ -195,7 +205,8 @@ input, textarea {
   margin: 0;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
   outline-color: var(--input-focus);
 }
 
@@ -503,12 +514,12 @@ input:focus, textarea:focus{
   cursor: pointer;
 }
 
-.link-button{
+.link-button {
   color: #0056b3 !important;
   /* background-color: var(--button-background) */
 }
 
-.preview-img{
+.preview-img {
   width: 20rem;
   height: 20rem;
   margin-top: 0.2rem;
@@ -552,4 +563,83 @@ html[lang="ar"] input[type="tel"],
 html[lang="ar"] textarea {
   direction: rtl;
   text-align: right;
+}
+
+.flex-box.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  box-shadow: 0 0 10px #ffd700;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.navigation-button-image.active {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px #ffd700;
+  padding: 0.6rem;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.icon-circle.active {
+  background: rgba(102, 187, 106, 0.12);
+  box-shadow: 0 0 24px 8px #388e3c;
+}
+[data-theme="dark"] .icon-circle.active {
+  box-shadow: 0 0 24px 8px var(--primary-orange);
+}
+
+.about-container {
+  width: 80vw;
+  max-width: 34.5625rem;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 16px #0001;
+  text-align: center;
+}
+.about-desc {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.about-section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 0.5rem;
+}
+.about-contact {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.about-divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 1.5rem 0;
+}
+.about-dev-list {
+  list-style: disc inside;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  text-align: left;
+  display: inline-block;
+}
+.about-dev-list li {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+}
+
+[data-theme="dark"] .about-container {
+  background: rgba(40, 40, 50, 0.92);
+  color: #fff;
 }
