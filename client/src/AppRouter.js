@@ -10,6 +10,7 @@ import PersonalAreaAdminPage from "./pages/PersonalAreaPage/PersonalAreaAdmin";
 import HomeOrganizerPage from "./pages/HomePage/HomeOrganizer";
 import HomeAdminPage from "./pages/HomePage/HomeAdmin";
 import AboutPage from "./pages/AboutPage/About";
+import ULAPage from "./pages/CommonPages/ULA";
 
 const AppRouter = () => {
   return (
@@ -33,6 +34,7 @@ const AppRouter = () => {
           element={<PersonalAreaAdminPage />}
         />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/user-license-agreement" element={<ULAPage />} />       
       </Routes>
     </Router>
   );
