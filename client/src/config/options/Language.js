@@ -4,7 +4,7 @@ export const useLnOptions = () => {
   const { i18n } = useTranslation();
   return [
     {
-      label: "ar",
+      label: "العربية",
       href: "#ar",
       onClick: () => {
         i18n.changeLanguage("ar");
@@ -12,7 +12,7 @@ export const useLnOptions = () => {
       },
     },
     {
-      label: "en",
+      label: "English",
       href: "#en",
       onClick: () => {
         i18n.changeLanguage("en");
