@@ -33,14 +33,13 @@ const loginUser = async (req, res) => {
       console.log(`Login successful for user: ${userName}`);
 
       const token = generateToken(response.id, response.role);
-      res.status(200).send({
+      res.header('Authorization', `Bearer ${token}`).status(200).send({
         message: `Login successful! ${userName} ${response.id}`,
         status: "success",
         userData: {
           // Add a dedicated object for user data
           id: response.id,
           role: response.role, // Include the user role
-          token: token,
         },
       });
     } else {
