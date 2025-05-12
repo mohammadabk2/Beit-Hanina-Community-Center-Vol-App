@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import DropDownMenu from "./DropDownMenu";
@@ -21,6 +21,7 @@ import aboutIconDark from "../icons/dark/NavBar/about_icon.svg";
 const NavigationBar = ({ dontShowPageButtons }) => {
   const { t } = useTranslation("navBar");
   const navigate = useNavigate();
+  const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
 
@@ -30,14 +31,11 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   // };
 
   const goToPersonalArea = () => {
-    //TODO add a check if Admin org or voulunteer
     console.log("Personal Area button clicked");
     navigate("/personal-area-vol");
   };
 
   const goToHome = () => {
-    //TODO add a check if Admin org or voulunteer
-    //TODO check if signed in
     console.log("Home button clicked");
     navigate("/home-volunteer");
     // navigate("/home-admin");
@@ -49,44 +47,68 @@ const NavigationBar = ({ dontShowPageButtons }) => {
     navigate("/about");
   };
 
+  const handleToggleTheme = () => {
+    toggleTheme();
+  };
+
+  const getActive = () => {
+    if (location.pathname.startsWith("/about")) return "about";
+    if (location.pathname.startsWith("/personal-area")) return "personal";
+    if (location.pathname.startsWith("/home")) return "home";
+    return null;
+  };
+  const active = getActive();
+
   return (
     <div className="flex-box navigation-box wrap-reverse flex-box-gap">
       <div onClick={goToAbout} className="flex-box flex-column">
-        <img
-          className="navigation-button-image"
-          src={isLightMode ? aboutIconLight : aboutIconDark}
-          alt="About icon"
-        />
+        <span className={`icon-circle${active === "about" ? " active" : ""}`}>
+          <img
+            className="navigation-button-image"
+            src={isLightMode ? aboutIconLight : aboutIconDark}
+            alt="About icon"
+          />
+        </span>
         {t("about_page")}
       </div>
       {!dontShowPageButtons && (
         <>
           <div onClick={goToPersonalArea} className="flex-box flex-column">
-            <img
-              className="navigation-button-image"
-              src={isLightMode ? profileIconLight : profileIconDark}
-              alt="Profile icon"
-            />
+            <span
+              className={`icon-circle${active === "personal" ? " active" : ""}`}
+            >
+              <img
+                className="navigation-button-image"
+                src={isLightMode ? profileIconLight : profileIconDark}
+                alt="Profile icon"
+              />
+            </span>
             {t("personal_area")}
           </div>
 
           <div onClick={goToHome} className="flex-box flex-column">
-            <img
-              className="navigation-button-image"
-              src={isLightMode ? homeIconLight : homeIconDark}
-              alt="Home icon"
-            />
+            <span
+              className={`icon-circle${active === "home" ? " active" : ""}`}
+            >
+              <img
+                className="navigation-button-image"
+                src={isLightMode ? homeIconLight : homeIconDark}
+                alt="Home icon"
+              />
+            </span>
             {t("home_page")}
           </div>
         </>
       )}
 
-      <div onClick={toggleTheme} className="flex-box flex-column">
-        <img
-          className="navigation-button-image"
-          src={isLightMode ? modeIconDark : modeIconLight}
-          alt="Mode Switch"
-        />
+      <div onClick={handleToggleTheme} className="flex-box flex-column">
+        <span className="icon-circle">
+          <img
+            className="navigation-button-image"
+            src={isLightMode ? modeIconDark : modeIconLight}
+            alt="Mode Switch"
+          />
+        </span>
         {!isLightMode && t("light_mode")}
         {isLightMode && t("dark_mode")}
       </div>
