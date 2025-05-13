@@ -53,7 +53,7 @@ i18n
   .use(initReactI18next) // Passes i18n down to react-i18next
   .init({
     resources,
-    lng: "ar", // Default language
+    lng: "العربية", // Default language
     fallbackLng: "en", // Fallback language
 
     interpolation: {

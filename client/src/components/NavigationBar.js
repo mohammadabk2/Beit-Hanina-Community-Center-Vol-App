@@ -49,9 +49,16 @@ const NavigationBar = ({ dontShowPageButtons }) => {
     navigate("/about");
   };
 
+  const currentPath = window.location.pathname;
+
   return (
     <div className="flex-box navigation-box wrap-reverse flex-box-gap">
-      <div onClick={goToAbout} className="flex-box flex-column">
+      <div
+        onClick={goToAbout}
+        className={`flex-box flex-column${
+          currentPath === "/about" ? " active-nav" : ""
+        }`}
+      >
         <img
           className="navigation-button-image"
           src={isLightMode ? aboutIconLight : aboutIconDark}
@@ -61,7 +68,12 @@ const NavigationBar = ({ dontShowPageButtons }) => {
       </div>
       {!dontShowPageButtons && (
         <>
-          <div onClick={goToPersonalArea} className="flex-box flex-column">
+          <div
+            onClick={goToPersonalArea}
+            className={`flex-box flex-column${
+              currentPath === "/personal-area-vol" ? " active-nav" : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? profileIconLight : profileIconDark}
@@ -70,7 +82,12 @@ const NavigationBar = ({ dontShowPageButtons }) => {
             {t("personal_area")}
           </div>
 
-          <div onClick={goToHome} className="flex-box flex-column">
+          <div
+            onClick={goToHome}
+            className={`flex-box flex-column${
+              currentPath === "/home-volunteer" ? " active-nav" : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? homeIconLight : homeIconDark}

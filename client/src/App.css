@@ -46,7 +46,7 @@ button {
   flex-wrap: wrap;
 }
 
-.flex-box-gap{
+.flex-box-gap {
   gap: 0.7rem;
 }
 
@@ -125,7 +125,8 @@ button {
 }
 
 /*General input field class for all input fields */
-.input-field, textarea{
+.input-field,
+textarea {
   border-radius: 0.3125rem;
   border: solid;
   border-width: 0.0625rem;
@@ -136,7 +137,8 @@ button {
 }
 
 /*Makes input field container responsive */
-.input-field-box, textarea{
+.input-field-box,
+textarea {
   width: 80%;
 }
 
@@ -186,7 +188,8 @@ body {
   background-color: var(--button-hover);
 }
 
-input, textarea {
+input,
+textarea {
   border: 0.0625rem solid #ccc;
   transition: outline-color 0.3s ease;
   outline: 0.125rem solid transparent;
@@ -195,7 +198,8 @@ input, textarea {
   margin: 0;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
   outline-color: var(--input-focus);
 }
 
@@ -503,12 +507,12 @@ input:focus, textarea:focus{
   cursor: pointer;
 }
 
-.link-button{
+.link-button {
   color: #0056b3 !important;
   /* background-color: var(--button-background) */
 }
 
-.preview-img{
+.preview-img {
   width: 20rem;
   height: 20rem;
   margin-top: 0.2rem;
@@ -552,4 +556,18 @@ html[lang="ar"] input[type="tel"],
 html[lang="ar"] textarea {
   direction: rtl;
   text-align: right;
+}
+
+.active-nav {
+  border-bottom: 3px solid var(--button-background);
+  background-color: var(--box-background-color);
+  border-radius: 0.5rem 0.5rem 0 0;
+  box-shadow: 0 2px 8px 0 var(--general-shadow);
+}
+
+html[data-theme="dark"] .active-nav {
+  border-bottom: 3px solid var(--button-background);
+  background-color: #292930;
+  border-radius: 0.5rem 0.5rem 0 0;
+  box-shadow: 0 2px 8px 0 var(--general-shadow);
 }
