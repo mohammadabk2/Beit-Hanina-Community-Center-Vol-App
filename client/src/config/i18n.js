@@ -8,6 +8,7 @@ import HomeEN from "./locales/en/home.json";
 import aboutEn from "./locales/en/about.json";
 import skillsEN from "./locales/en/skills.json";
 import insuranceEN from "./locales/en/insurance.json";
+import occupationEN from "./locales/en/occupation.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
 import navBarEN from "./locales/en/navBar.json";
 import copyRightEN from "./locales/en/copyright.json";
@@ -19,6 +20,7 @@ import HomeAR from "./locales/ar/home.json";
 import aboutAR from "./locales/ar/about.json";
 import skillsAR from "./locales/ar/skills.json";
 import insuranceAR from "./locales/ar/insurance.json";
+import occupationAR from "./locales/ar/occupation.json"
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
 import navBarAR from "./locales/ar/navBar.json";
 import copyRightAR from "./locales/ar/copyright.json";
@@ -33,6 +35,7 @@ const resources = {
     about: aboutEn,
     personal: personalAreaVolunteerEN,
     insurance: insuranceEN,
+    occupation: occupationEN,
     navBar: navBarEN,
     copyRight: copyRightEN,
   },
@@ -45,6 +48,7 @@ const resources = {
     personal: personalAreaVolunteerAR,
     navBar: navBarAR,
     insurance: insuranceAR,
+    occupation: occupationAR,
     copyRight: copyRightAR,
   },
 };

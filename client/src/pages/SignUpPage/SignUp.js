@@ -10,8 +10,10 @@ import UploadFile from "../../components/common/UploadComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
-// Import the insurance options
+// Import the insurance and occupation options
 import { useInsuranceOptions } from "../../config/options/Insurance";
+import { useOccupationOptions } from "../../config/options/Occupation";
+
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ const SignUpPage = () => {
   };
 
   const baseInsuranceOptions = useInsuranceOptions();
+  const baseOccupationOptions = useOccupationOptions();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -30,6 +33,7 @@ const SignUpPage = () => {
     email: "",
     address: "",
     insurance: "",
+    occupation: "",
     idNumber: "",
     userName: "",
     password: "",
@@ -49,6 +53,10 @@ const SignUpPage = () => {
     setFormData({ ...formData, insurance: value });
   };
 
+  const handleOccupationChange = (value) => {
+    setFormData({ ...formData, occupation: value });
+  };
+
   const handleSexChange = (value) => {
     setFormData({ ...formData, sex: value });
   };
@@ -61,6 +69,14 @@ const SignUpPage = () => {
     onClick: () => {
       console.log(`${option.value} clicked`);
       handleInsuranceChange(option.value);
+    },
+  }));
+
+  const occupationOptions = baseOccupationOptions.map((option) => ({
+    ...option,
+    onClick: () => {
+      console.log(`${option.value} clicked`);
+      handleOccupationChange(option.value);
     },
   }));
 
@@ -189,6 +205,18 @@ const SignUpPage = () => {
               className="gender-button"
               text={formData.insurance || t("selectinsurance")}
               options={insuranceOptions}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              <label>{t("occupation")} </label>
+              <label className="red-star">*</label>
+            </div>
+            <DropDownMenu
+              className="gender-button"
+              text={formData.occupation || t("selectoccupation")}
+              options={occupationOptions}
             />
           </div>
 
