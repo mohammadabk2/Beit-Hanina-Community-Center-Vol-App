@@ -1,7 +1,10 @@
 # Structure of files
 ```
 .
+├── README.md
+├── SECURITY.md
 ├── client
+│   ├── README.md
 │   ├── app
 │   │   └── apk
 │   │       ├── app-debug-2.apk
@@ -9,8 +12,8 @@
 │   ├── assets
 │   │   └── logo.jpg
 │   ├── capacitor.config.ts
-│   ├── package.json
 │   ├── package-lock.json
+│   ├── package.json
 │   ├── public
 │   │   ├── favicon.ico
 │   │   ├── index.html
@@ -18,53 +21,54 @@
 │   │   ├── logo512.png
 │   │   ├── manifest.json
 │   │   └── service-worker.cjs
-│   ├── README.md
 │   └── src
 │       ├── App.css
 │       ├── App.js
 │       ├── AppRouter.js
 │       ├── components
+│       │   ├── EventItem.js
+│       │   ├── ManageAccountBox.js
+│       │   ├── PersonItem
+│       │   │   ├── PeopleDisplaySwitcher.js
+│       │   │   ├── PersonItemCard.js
+│       │   │   ├── PersonItemRow.js
+│       │   │   └── PersonList.js
 │       │   ├── common
 │       │   │   ├── ButtonComponent.js
 │       │   │   ├── DropDownMenu.js
 │       │   │   ├── InputComponent.js
 │       │   │   ├── SelectComponent.js
 │       │   │   └── UploadComponent.js
-│       │   ├── EventItem.js
-│       │   ├── layout
-│       │   │   ├── CopyRight.js
-│       │   │   └── NavigationBar.js
-│       │   ├── ManageAccountBox.js
-│       │   └── PersonItem
-│       │       ├── PeopleDisplaySwitcher.js
-│       │       ├── PersonItemCard.js
-│       │       ├── PersonItemRow.js
-│       │       └── PersonList.js
+│       │   └── layout
+│       │       ├── CopyRight.js
+│       │       └── NavigationBar.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
+│       │   │   │   ├── HomeAdmin.json
+│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
 │       │   │   │   ├── copyright.json
-│       │   │   │   ├── HomeAdmin.json
 │       │   │   │   ├── home.json
-│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
+│       │   │   │   ├── occupation.json
 │       │   │   │   ├── personalArea.json
 │       │   │   │   ├── signup.json
 │       │   │   │   └── skills.json
 │       │   │   └── en
+│       │   │       ├── HomeAdmin.json
+│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── about.json
 │       │   │       ├── app.json
 │       │   │       ├── copyright.json
 │       │   │       ├── events.json
-│       │   │       ├── HomeAdmin.json
 │       │   │       ├── home.json
-│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
+│       │   │       ├── occupation.json
 │       │   │       ├── personalArea.json
 │       │   │       ├── signup.json
 │       │   │       └── skills.json
@@ -72,26 +76,26 @@
 │       │       ├── Colors.js
 │       │       ├── Insurance.js
 │       │       ├── Language.js
+│       │       ├── Occupation.js
 │       │       ├── Skills.js
 │       │       └── Sort.js
 │       ├── global.css
 │       ├── icons
 │       │   ├── about_icon.jpg
 │       │   ├── dark
-│       │   │   ├── card_view_icon.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
 │       │   │   │   ├── mode_icon.svg
 │       │   │   │   ├── profile_icon.svg
 │       │   │   │   └── settings_icon.svg
+│       │   │   ├── card_view_icon.svg
 │       │   │   ├── table_view_icon.svg
 │       │   │   └── x_icon.svg
 │       │   ├── drop_down_icon.svg
 │       │   ├── favorite_icon.svg
 │       │   ├── home_icon.jpg
 │       │   ├── light
-│       │   │   ├── card_view_icon.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -99,6 +103,7 @@
 │       │   │   │   ├── profile_icon.svg
 │       │   │   │   ├── settings_icon.svg
 │       │   │   │   └── view_icon.svg
+│       │   │   ├── card_view_icon.svg
 │       │   │   ├── table_view_icon.svg
 │       │   │   └── x_icon.svg
 │       │   ├── not_favorite_icon.svg
@@ -133,17 +138,16 @@
 │   │   ├── FIRST-MEETING-QUESTIONS.md
 │   │   └── FIRST-MEETING-SUMMARY.md
 │   ├── help
-│   │   ├── git_help.md
 │   │   ├── PostGreSql_help.md
+│   │   ├── git_help.md
 │   │   ├── setup.md
 │   │   ├── standards.md
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
 ├── eslint.config.mjs
-├── package.json
 ├── package-lock.json
-├── README.md
+├── package.json
 ├── scripts
 │   ├── before_git.sh
 │   ├── convert_to_apk.sh
@@ -152,15 +156,14 @@
 │   ├── run_frontEnd.sh
 │   ├── setup_for_android.sh
 │   └── setup_server.sh
-├── SECURITY.md
 ├── src
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
 │   │   └── validation.js
 │   ├── database
-│   │   ├── dbbuild.js
 │   │   ├── db.js
+│   │   ├── dbbuild.js
 │   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
@@ -168,8 +171,8 @@
 │   │   └── Users
 │   │       ├── Admin.js
 │   │       ├── Organizer.js
-│   │       ├── PersonFactory.js
 │   │       ├── Person.js
+│   │       ├── PersonFactory.js
 │   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
@@ -178,5 +181,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-40 directories, 136 files
+41 directories, 139 files
 ```
