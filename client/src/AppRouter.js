@@ -34,7 +34,7 @@ const AppRouter = () => {
           element={<PersonalAreaAdminPage />}
         />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/user-license-agreement" element={<ULAPage />} />       
+        <Route path="/ULA" element={<ULAPage />} />       
       </Routes>
     </Router>
   );
