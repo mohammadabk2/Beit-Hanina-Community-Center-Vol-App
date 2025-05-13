@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/NavigationBar";
-import CopyRight from "../../components/CopyRight";
+import NavigationBar from "../../components/layout/NavigationBar";
+import CopyRight from "../../components/layout/CopyRight";
 
 const About = () => {
   const { t: tAbout } = useTranslation("about");

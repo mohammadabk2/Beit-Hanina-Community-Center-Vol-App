@@ -1,8 +1,9 @@
 // PersonItemRow.js
 import React from "react";
 import PropTypes from "prop-types";
-import DynamicButton from "../ButtonComponent";
 import { useTranslation } from "react-i18next";
+
+import DynamicButton from "../common/ButtonComponent";
 
 // Renamed component to reflect its purpose (rendering a row)
 const PersonItemRow = ({
