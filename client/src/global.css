@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --box-background-color: #f5f5f5;
   --drop-down-text-color: #000000;
   --general-shadow: #0000002c;
@@ -20,9 +20,43 @@
   --odd-row-table: #ffffff;
   --table-row-text: #3d3d3d;
   --table-line-break: #dee2e6;
+} */
+
+:root {
+  --primary-orange: #ffe0b2;
+  --primary-blue: #e3f2fd;
+  --primary-green: #e8f5e9;
+
+  --body-color: #f4fbff;
+  --box-background-color: #fffaf3;
+  --skills-background: #f1fdf4;
+
+  --input-border: #cfd8dc;
+  --general-shadow: #0000001a;
+  --skills-shadow: #e0f2f1;
+
+  --general-text: #424242;
+  --drop-down-text-color: #2e2e2e;
+  --table-row-text: #455a64;
+
+  --input-focus: #ffb74d;
+  --line-break: #cfd8dc;
+  --table-line-break: #eeeeee;
+
+  --button-background: #c8e6c9;
+  --button-hover: #a5d6a7;
+  --button-text: #1b1b1b;
+  --button-border: #aed581;
+
+  --top-scroll-box: #f0faff;
+  --bottom-scroll-box: #f0faff;
+
+  --even-row-table: #f9fbe7;
+  --odd-row-table: #ffffff;
+  --row-table-hover: #f1f8e9;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --box-background-color: #333336;
   --drop-down-text-color: #000000;
   --general-shadow: #0000002c;
@@ -37,7 +71,7 @@ html[data-theme='dark'] {
   --button-background: #7070ff;
   --button-border: #7070e0;
   --general-text: #ffffff;
-  --skills-shadow:#7a7a7a;
+  --skills-shadow: #7a7a7a;
   --skills-background: #7070ff;
   --even-row-table: #333336;
   --row-table-hover: #29292c;

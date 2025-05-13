@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import DropDownMenu from "./DropDownMenu";
-import { useLnOptions } from "../config/options/Language";
-import { useTheme } from "../config/options/Colors";
+import DropDownMenu from "../common/DropDownMenu";
+import { useLnOptions } from "../../config/options/Language";
+import { useTheme } from "../../config/options/Colors";
 
-import modeIconDark from "../icons/light/NavBar/mode_icon.svg";
-import profileIconLight from "../icons/light/NavBar/profile_icon.svg";
-import homeIconLight from "../icons/light/NavBar/home_icon.svg";
-import aboutIconLight from "../icons/light/NavBar/about_icon.svg";
+import modeIconDark from "../../icons/light/NavBar/mode_icon.svg";
+import profileIconLight from "../../icons/light/NavBar/profile_icon.svg";
+import homeIconLight from "../../icons/light/NavBar/home_icon.svg";
+import aboutIconLight from "../../icons/light/NavBar/about_icon.svg";
 
-import modeIconLight from "../icons/dark/NavBar/mode_icon.svg";
-import profileIconDark from "../icons/dark/NavBar/profile_icon.svg";
-import homeIconDark from "../icons/dark/NavBar/home_icon.svg";
-import aboutIconDark from "../icons/dark/NavBar/about_icon.svg";
+import modeIconLight from "../../icons/dark/NavBar/mode_icon.svg";
+import profileIconDark from "../../icons/dark/NavBar/profile_icon.svg";
+import homeIconDark from "../../icons/dark/NavBar/home_icon.svg";
+import aboutIconDark from "../../icons/dark/NavBar/about_icon.svg";
 // import settingsIconDark from "../icons/dark/settings_icon.svg";
 
 const NavigationBar = ({ dontShowPageButtons }) => {
@@ -67,7 +67,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
               src={isLightMode ? profileIconLight : profileIconDark}
               alt="Profile icon"
             />
-            {t("perosnal_area")}
+            {t("personal_area")}
           </div>
 
           <div onClick={goToHome} className="flex-box flex-column">

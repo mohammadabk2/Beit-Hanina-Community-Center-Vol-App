@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 // import components here
-import DynamicInput from "./components/InputComponent";
-import DynamicButton from "./components/ButtonComponent";
-import NavigationBar from "./components/NavigationBar";
-import CopyRight from "./components/CopyRight";
+import DynamicInput from "./components/common/InputComponent";
+import DynamicButton from "./components/common/ButtonComponent";
+import NavigationBar from "./components/layout/NavigationBar";
+import CopyRight from "./components/layout/CopyRight";
 // import centreLogo from "./icons/org_icon.png";
 
 const App = () => {

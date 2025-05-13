@@ -1,7 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import DynamicButton from "./ButtonComponent";
+
+import DynamicButton from "../common/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 
 const CopyRight = () => {

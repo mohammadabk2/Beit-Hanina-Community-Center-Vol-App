@@ -24,20 +24,22 @@
 │       ├── App.js
 │       ├── AppRouter.js
 │       ├── components
-│       │   ├── ButtonComponent.js
-│       │   ├── CopyRight.js
-│       │   ├── DropDownMenu.js
+│       │   ├── common
+│       │   │   ├── ButtonComponent.js
+│       │   │   ├── DropDownMenu.js
+│       │   │   ├── InputComponent.js
+│       │   │   ├── SelectComponent.js
+│       │   │   └── UploadComponent.js
 │       │   ├── EventItem.js
-│       │   ├── InputComponent.js
+│       │   ├── layout
+│       │   │   ├── CopyRight.js
+│       │   │   └── NavigationBar.js
 │       │   ├── ManageAccountBox.js
-│       │   ├── NavigationBar.js
-│       │   ├── PersonItem
-│       │   │   ├── PeopleDisplaySwitcher.js
-│       │   │   ├── PersonItemCard.js
-│       │   │   ├── PersonItemRow.js
-│       │   │   └── PersonList.js
-│       │   ├── SelectComponent.js
-│       │   └── UploadComponent.js
+│       │   └── PersonItem
+│       │       ├── PeopleDisplaySwitcher.js
+│       │       ├── PersonItemCard.js
+│       │       ├── PersonItemRow.js
+│       │       └── PersonList.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
@@ -50,6 +52,7 @@
 │       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
+│       │   │   │   ├── occupation.json
 │       │   │   │   ├── personalArea.json
 │       │   │   │   ├── signup.json
 │       │   │   │   └── skills.json
@@ -63,6 +66,7 @@
 │       │   │       ├── HomeOrganizer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
+│       │   │       ├── occupation.json
 │       │   │       ├── personalArea.json
 │       │   │       ├── signup.json
 │       │   │       └── skills.json
@@ -70,6 +74,7 @@
 │       │       ├── Colors.js
 │       │       ├── Insurance.js
 │       │       ├── Language.js
+│       │       ├── Occupation.js
 │       │       ├── Skills.js
 │       │       └── Sort.js
 │       ├── global.css
@@ -177,5 +182,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-38 directories, 137 files
+40 directories, 140 files
 ```

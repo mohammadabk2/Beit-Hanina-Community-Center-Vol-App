@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/NavigationBar";
+import NavigationBar from "../../components/layout/NavigationBar";
 
 const ULAPage = () => {
   const { t } = useTranslation("copyRight");
