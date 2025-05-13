@@ -2,8 +2,13 @@
 ```
 .
 ├── client
+│   ├── app
+│   │   └── apk
+│   │       ├── app-debug-2.apk
+│   │       └── app-debug.apk
 │   ├── assets
 │   │   └── logo.jpg
+│   ├── capacitor.config.ts
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── public
@@ -12,53 +17,114 @@
 │   │   ├── logo192.png
 │   │   ├── logo512.png
 │   │   ├── manifest.json
-│   │   └── sw.js
+│   │   └── service-worker.cjs
 │   ├── README.md
 │   └── src
 │       ├── App.css
 │       ├── App.js
 │       ├── AppRouter.js
 │       ├── components
-│       │   ├── ButtonComponent.js
-│       │   ├── DropDownMenu.js
+│       │   ├── common
+│       │   │   ├── ButtonComponent.js
+│       │   │   ├── DropDownMenu.js
+│       │   │   ├── InputComponent.js
+│       │   │   ├── SelectComponent.js
+│       │   │   └── UploadComponent.js
 │       │   ├── EventItem.js
-│       │   ├── imageComponent.js
-│       │   └── InputComponent.js
+│       │   ├── layout
+│       │   │   ├── CopyRight.js
+│       │   │   └── NavigationBar.js
+│       │   ├── ManageAccountBox.js
+│       │   └── PersonItem
+│       │       ├── PeopleDisplaySwitcher.js
+│       │       ├── PersonItemCard.js
+│       │       ├── PersonItemRow.js
+│       │       └── PersonList.js
 │       ├── config
-│       │   ├── Language.js
-│       │   └── Skills.js
+│       │   ├── i18n.js
+│       │   ├── locales
+│       │   │   ├── ar
+│       │   │   │   ├── about.json
+│       │   │   │   ├── app.json
+│       │   │   │   ├── copyright.json
+│       │   │   │   ├── HomeAdmin.json
+│       │   │   │   ├── home.json
+│       │   │   │   ├── HomeOrganizer.json
+│       │   │   │   ├── insurance.json
+│       │   │   │   ├── navBar.json
+│       │   │   │   ├── occupation.json
+│       │   │   │   ├── personalArea.json
+│       │   │   │   ├── signup.json
+│       │   │   │   └── skills.json
+│       │   │   └── en
+│       │   │       ├── about.json
+│       │   │       ├── app.json
+│       │   │       ├── copyright.json
+│       │   │       ├── events.json
+│       │   │       ├── HomeAdmin.json
+│       │   │       ├── home.json
+│       │   │       ├── HomeOrganizer.json
+│       │   │       ├── insurance.json
+│       │   │       ├── navBar.json
+│       │   │       ├── occupation.json
+│       │   │       ├── personalArea.json
+│       │   │       ├── signup.json
+│       │   │       └── skills.json
+│       │   └── options
+│       │       ├── Colors.js
+│       │       ├── Insurance.js
+│       │       ├── Language.js
+│       │       ├── Occupation.js
+│       │       ├── Skills.js
+│       │       └── Sort.js
 │       ├── global.css
-│       ├── i18n.js
 │       ├── icons
-│       │   ├── arrow_down.jpg
-│       │   ├── logo.jpg
-│       │   └── settings_icon.jpg
+│       │   ├── about_icon.jpg
+│       │   ├── dark
+│       │   │   ├── card_view_icon.svg
+│       │   │   ├── NavBar
+│       │   │   │   ├── about_icon.svg
+│       │   │   │   ├── home_icon.svg
+│       │   │   │   ├── mode_icon.svg
+│       │   │   │   ├── profile_icon.svg
+│       │   │   │   └── settings_icon.svg
+│       │   │   ├── table_view_icon.svg
+│       │   │   └── x_icon.svg
+│       │   ├── drop_down_icon.svg
+│       │   ├── favorite_icon.svg
+│       │   ├── home_icon.jpg
+│       │   ├── light
+│       │   │   ├── card_view_icon.svg
+│       │   │   ├── NavBar
+│       │   │   │   ├── about_icon.svg
+│       │   │   │   ├── home_icon.svg
+│       │   │   │   ├── mode_icon.svg
+│       │   │   │   ├── profile_icon.svg
+│       │   │   │   ├── settings_icon.svg
+│       │   │   │   └── view_icon.svg
+│       │   │   ├── table_view_icon.svg
+│       │   │   └── x_icon.svg
+│       │   ├── not_favorite_icon.svg
+│       │   ├── org_icon.png
+│       │   └── person_icon.svg
 │       ├── index.js
 │       ├── installPrompt.js
-│       ├── locales
-│       │   ├── ar
-│       │   │   ├── about.json
-│       │   │   ├── app.json
-│       │   │   ├── homeVolunteer.json
-│       │   │   ├── signup.json
-│       │   │   └── skills.json
-│       │   └── en
-│       │       ├── about.json
-│       │       ├── app.json
-│       │       ├── homeVolunteer.json
-│       │       ├── signup.json
-│       │       └── skills.json
 │       └── pages
 │           ├── AboutPage
 │           │   └── About.js
+│           ├── CommonPages
+│           │   ├── ErrorScreen.js
+│           │   ├── Loading.js
+│           │   ├── NoConnection.js
+│           │   └── ULA.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
 │           │   ├── HomeOrganizer.js
 │           │   └── HomeVolunteer.js
 │           ├── PersonalAreaPage
-│           │   └── PersonalArea.js
-│           ├── SettingsPage
-│           │   └── Settings.js
+│           │   ├── PersonalAreaAdmin.js
+│           │   ├── PersonalAreaOrganizer.js
+│           │   └── PersonalAreaVolunteer.js
 │           └── SignUpPage
 │               └── SignUp.js
 ├── docs
@@ -72,6 +138,7 @@
 │   │   └── FIRST-MEETING-SUMMARY.md
 │   ├── help
 │   │   ├── git_help.md
+│   │   ├── PostGreSql_help.md
 │   │   ├── setup.md
 │   │   ├── standards.md
 │   │   └── usefull_tools.md
@@ -83,8 +150,11 @@
 ├── README.md
 ├── scripts
 │   ├── before_git.sh
+│   ├── convert_to_apk.sh
+│   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
+│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -112,5 +182,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-30 directories, 79 files
+40 directories, 140 files
 ```

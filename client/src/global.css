@@ -1,8 +1,81 @@
-:root {
-    --common-colour-1: #f5f5f5;
-    --common-colour-2: #000000;
-    --common-colour-3: #0000001a;
-    --common-colour-4: #f1f1f1;
-  }
+/* :root {
+  --box-background-color: #f5f5f5;
+  --drop-down-text-color: #000000;
+  --general-shadow: #0000002c;
+  --body-color: #f1f1f1;
+  --bottom-scroll-box: #dddddd;
+  --top-scroll-box: #dddddd;
+  --line-break: #7c7c7c;
+  --input-focus: blue;
+  --input-border: "#cccccc";
+  --button-hover: #a8a8a8;
+  --button-text: black;
+  --button-background: #d1d1d1;
+  --button-border: #c2c2c2;
+  --general-text: black;
+  --skills-shadow:#e0e0e0;
+  --skills-background: #d1d1d1;
+  --even-row-table: #f9f9f9;
+  --row-table-hover: #f1f1f1;
+  --odd-row-table: #ffffff;
+  --table-row-text: #3d3d3d;
+  --table-line-break: #dee2e6;
+} */
 
-  
+:root {
+  --primary-orange: #ffe0b2;
+  --primary-blue: #e3f2fd;
+  --primary-green: #e8f5e9;
+
+  --body-color: #f4fbff;
+  --box-background-color: #fffaf3;
+  --skills-background: #f1fdf4;
+
+  --input-border: #cfd8dc;
+  --general-shadow: #0000001a;
+  --skills-shadow: #e0f2f1;
+
+  --general-text: #424242;
+  --drop-down-text-color: #2e2e2e;
+  --table-row-text: #455a64;
+
+  --input-focus: #ffb74d;
+  --line-break: #cfd8dc;
+  --table-line-break: #eeeeee;
+
+  --button-background: #c8e6c9;
+  --button-hover: #a5d6a7;
+  --button-text: #1b1b1b;
+  --button-border: #aed581;
+
+  --top-scroll-box: #f0faff;
+  --bottom-scroll-box: #f0faff;
+
+  --even-row-table: #f9fbe7;
+  --odd-row-table: #ffffff;
+  --row-table-hover: #f1f8e9;
+}
+
+html[data-theme="dark"] {
+  --box-background-color: #333336;
+  --drop-down-text-color: #000000;
+  --general-shadow: #0000002c;
+  --body-color: #333336;
+  --bottom-scroll-box: #292930;
+  --top-scroll-box: #292930;
+  --line-break: #9e9e9e;
+  --input-focus: #3498db;
+  --input-border: #555555;
+  --button-hover: #5050ba;
+  --button-text: #ffffff;
+  --button-background: #7070ff;
+  --button-border: #7070e0;
+  --general-text: #ffffff;
+  --skills-shadow: #7a7a7a;
+  --skills-background: #7070ff;
+  --even-row-table: #333336;
+  --row-table-hover: #29292c;
+  --odd-row-table: #3d3d3d;
+  --table-row-text: #dadada;
+  --table-line-break: #808285;
+}

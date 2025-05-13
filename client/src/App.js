@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 // import components here
-import DynamicInput from "./components/InputComponent";
-import DynamicButton from "./components/ButtonComponent";
-import DropDownMenu from "./components/DropDownMenu";
-import { useLnOptions } from "./config/Language";
+import DynamicInput from "./components/common/InputComponent";
+import DynamicButton from "./components/common/ButtonComponent";
+import NavigationBar from "./components/layout/NavigationBar";
+import CopyRight from "./components/layout/CopyRight";
+// import centreLogo from "./icons/org_icon.png";
 
-function App() {
+const App = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +27,16 @@ function App() {
     console.log("sign in button clicked");
     console.log(username);
     console.log(password); //! testing only remove security risk
-    navigate("/home-volunteer");
+    //! testing only Ultra security risk
+    if (username === "vol" && password === "vol") {
+      navigate("/home-volunteer");
+    } else if (username === "org" && password === "org") {
+      navigate("/home-organizer");
+    } else if (username === "admin" && password === "admin") {
+      navigate("/home-admin");
+    } else {
+      alert("Enter Valid Sign in details");
+    }
   };
 
   const navigate = useNavigate();
@@ -36,48 +46,53 @@ function App() {
     navigate("/sign-up");
   };
 
-  const lnOptions = useLnOptions();
   const { t } = useTranslation("app");
 
   return (
     <div className="app flex-box flex-column">
-      <div className="drop-down">
-        <DropDownMenu
-          className="language-button"
-          text={t("ln")}
-          options={lnOptions}
-        />
-      </div>
-      <header className="app-header">
-        <h1>{t("name")}</h1>
+      <NavigationBar dontShowPageButtons={true} />
+      <header className="app-header basic-box-padding">
+        {/* <div className="basic-item-padding">
+          <img className="centre-img" src={centreLogo} alt="Centre Logo"></img>
+        </div> */}
+
+        <div className="basic-item-padding">{t("name")}</div>
+        <div className="basic-item-padding">{t("desc")}</div>
       </header>
-      <main>
-        <div className="sign-in-box flex-box flex-column smooth-shadow-box">
-          <h1>{t("welcome")}</h1>
-          <div className="input-field-box flex-container">
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={username}
-              name="username-field"
-              onChange={handleUserName}
-              placeholder={t("user-name-placeholder")}
-            />
-            <DynamicInput
-              className="input-field"
-              type="password"
-              value={password}
-              name="password-field"
-              onChange={handlePassword}
-              placeholder={t("password-placeholder")}
-            />
-          </div>
-          <div className="button-box flex-container">
+
+      <div className="general-box flex-box flex-column smooth-shadow-box">
+        <div>{t("welcome")}</div>
+
+        <div className="input-field-box">
+          <DynamicInput
+            className="input-field"
+            type="text"
+            value={username}
+            name="username-field"
+            onChange={handleUserName}
+            placeholder={t("user-name-placeholder")}
+          />
+
+          <DynamicInput
+            className="input-field"
+            type="password"
+            value={password}
+            name="password-field"
+            onChange={handlePassword}
+            placeholder={t("password-placeholder")}
+          />
+        </div>
+
+        <div className="flex-box">
+          <div>
             <DynamicButton
               className="button"
               onClick={signIn}
               text={t("sign-in")}
             />
+          </div>
+
+          <div>
             <DynamicButton
               className="button"
               onClick={signUp}
@@ -85,9 +100,11 @@ function App() {
             />
           </div>
         </div>
-      </main>
+      </div>
+
+      <CopyRight />
     </div>
   );
-}
+};
 
 export default App;
