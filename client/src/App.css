@@ -505,6 +505,7 @@ input:focus, textarea:focus{
 
 .link-button{
   color: #0056b3 !important;
+  background-color: transparent;
   /* background-color: var(--button-background) */
 }
 
@@ -512,6 +513,10 @@ input:focus, textarea:focus{
   width: 20rem;
   height: 20rem;
   margin-top: 0.2rem;
+}
+
+.bold-text{
+  font-weight: bold;
 }
 
 /* Add more styles as needed for skills, specific columns, etc. */

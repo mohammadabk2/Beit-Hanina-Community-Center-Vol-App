@@ -1,10 +1,7 @@
 # Structure of files
 ```
 .
-├── README.md
-├── SECURITY.md
 ├── client
-│   ├── README.md
 │   ├── app
 │   │   └── apk
 │   │       ├── app-debug-2.apk
@@ -12,8 +9,8 @@
 │   ├── assets
 │   │   └── logo.jpg
 │   ├── capacitor.config.ts
-│   ├── package-lock.json
 │   ├── package.json
+│   ├── package-lock.json
 │   ├── public
 │   │   ├── favicon.ico
 │   │   ├── index.html
@@ -21,37 +18,38 @@
 │   │   ├── logo512.png
 │   │   ├── manifest.json
 │   │   └── service-worker.cjs
+│   ├── README.md
 │   └── src
 │       ├── App.css
 │       ├── App.js
 │       ├── AppRouter.js
 │       ├── components
-│       │   ├── EventItem.js
-│       │   ├── ManageAccountBox.js
-│       │   ├── PersonItem
-│       │   │   ├── PeopleDisplaySwitcher.js
-│       │   │   ├── PersonItemCard.js
-│       │   │   ├── PersonItemRow.js
-│       │   │   └── PersonList.js
 │       │   ├── common
 │       │   │   ├── ButtonComponent.js
 │       │   │   ├── DropDownMenu.js
 │       │   │   ├── InputComponent.js
 │       │   │   ├── SelectComponent.js
 │       │   │   └── UploadComponent.js
-│       │   └── layout
-│       │       ├── CopyRight.js
-│       │       └── NavigationBar.js
+│       │   ├── EventItem.js
+│       │   ├── layout
+│       │   │   ├── CopyRight.js
+│       │   │   └── NavigationBar.js
+│       │   ├── ManageAccountBox.js
+│       │   └── PersonItem
+│       │       ├── PeopleDisplaySwitcher.js
+│       │       ├── PersonItemCard.js
+│       │       ├── PersonItemRow.js
+│       │       └── PersonList.js
 │       ├── config
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
-│       │   │   │   ├── HomeAdmin.json
-│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
 │       │   │   │   ├── copyright.json
+│       │   │   │   ├── HomeAdmin.json
 │       │   │   │   ├── home.json
+│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
 │       │   │   │   ├── occupation.json
@@ -59,13 +57,13 @@
 │       │   │   │   ├── signup.json
 │       │   │   │   └── skills.json
 │       │   │   └── en
-│       │   │       ├── HomeAdmin.json
-│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── about.json
 │       │   │       ├── app.json
 │       │   │       ├── copyright.json
 │       │   │       ├── events.json
+│       │   │       ├── HomeAdmin.json
 │       │   │       ├── home.json
+│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
 │       │   │       ├── occupation.json
@@ -83,19 +81,20 @@
 │       ├── icons
 │       │   ├── about_icon.jpg
 │       │   ├── dark
+│       │   │   ├── card_view_icon.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
 │       │   │   │   ├── mode_icon.svg
 │       │   │   │   ├── profile_icon.svg
 │       │   │   │   └── settings_icon.svg
-│       │   │   ├── card_view_icon.svg
 │       │   │   ├── table_view_icon.svg
 │       │   │   └── x_icon.svg
 │       │   ├── drop_down_icon.svg
 │       │   ├── favorite_icon.svg
 │       │   ├── home_icon.jpg
 │       │   ├── light
+│       │   │   ├── card_view_icon.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -103,7 +102,6 @@
 │       │   │   │   ├── profile_icon.svg
 │       │   │   │   ├── settings_icon.svg
 │       │   │   │   └── view_icon.svg
-│       │   │   ├── card_view_icon.svg
 │       │   │   ├── table_view_icon.svg
 │       │   │   └── x_icon.svg
 │       │   ├── not_favorite_icon.svg
@@ -117,7 +115,8 @@
 │           ├── CommonPages
 │           │   ├── ErrorScreen.js
 │           │   ├── Loading.js
-│           │   └── NoConnection.js
+│           │   ├── NoConnection.js
+│           │   └── ULA.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
 │           │   ├── HomeOrganizer.js
@@ -138,16 +137,17 @@
 │   │   ├── FIRST-MEETING-QUESTIONS.md
 │   │   └── FIRST-MEETING-SUMMARY.md
 │   ├── help
-│   │   ├── PostGreSql_help.md
 │   │   ├── git_help.md
+│   │   ├── PostGreSql_help.md
 │   │   ├── setup.md
 │   │   ├── standards.md
 │   │   └── usefull_tools.md
 │   ├── logic.png
 │   └── structure.md
 ├── eslint.config.mjs
-├── package-lock.json
 ├── package.json
+├── package-lock.json
+├── README.md
 ├── scripts
 │   ├── before_git.sh
 │   ├── convert_to_apk.sh
@@ -156,14 +156,15 @@
 │   ├── run_frontEnd.sh
 │   ├── setup_for_android.sh
 │   └── setup_server.sh
+├── SECURITY.md
 ├── src
 │   ├── controllers
 │   │   ├── index.js
 │   │   ├── register.js
 │   │   └── validation.js
 │   ├── database
-│   │   ├── db.js
 │   │   ├── dbbuild.js
+│   │   ├── db.js
 │   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
@@ -171,8 +172,8 @@
 │   │   └── Users
 │   │       ├── Admin.js
 │   │       ├── Organizer.js
-│   │       ├── Person.js
 │   │       ├── PersonFactory.js
+│   │       ├── Person.js
 │   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
@@ -181,5 +182,5 @@
 │   └── test.txt
 └── workbox-config.cjs
 
-41 directories, 139 files
+40 directories, 140 files
 ```
