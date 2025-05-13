@@ -7,6 +7,7 @@
   "phoneNumber": "Phone Number:",
   "email": "Email:",
   "insurance": "Insurance:",
+  "occupation": "Occupation",
   "idNumber": "ID Number:",
   "submit": "Submit",
   "back": "Back",
@@ -24,6 +25,7 @@
   "selectskills": "Select Skills",
   "remove": "Remove",
   "selectinsurance": "Select Insurance",
+  "selectoccupation": "Select Occupation",
   "userName": "User Name",
   "password": "Password"
 }
