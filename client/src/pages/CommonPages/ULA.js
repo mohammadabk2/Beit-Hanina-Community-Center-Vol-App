@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
-import { useLnOptions } from "../../config/options/Language";
 
 const ULAPage = () => {
   const { t } = useTranslation("copyRight");
