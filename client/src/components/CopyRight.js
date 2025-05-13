@@ -10,15 +10,14 @@ const CopyRight = () => {
 
   const ulaRedirect = () => {
     console.log("Copy Right Link clicked.")
-    navigate("/user-license-agreement");
+    navigate("/ULA");
   }
 
   return (
     <>
       <div className="general-box flex-box flex-column basic-box-padding">
         <div className="basic-item-padding">&copy; {t("owner")}</div>
-        <DynamicButton className="link-button"
-        style={{background: 'transparent'}} text={t("privacy")} onClick={ulaRedirect} />
+        <DynamicButton className="link-button" text={t("privacy")} onClick={ulaRedirect} />
       </div>
     </>
   );

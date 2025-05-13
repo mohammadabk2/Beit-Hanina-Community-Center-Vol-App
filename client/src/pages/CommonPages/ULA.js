@@ -10,8 +10,10 @@ const ULAPage = () => {
     <div className="app flex-box flex-column">
       <NavigationBar /> 
       <div className="general-box flex-box">
-        <div className="general-box flex-box flex-column smooth-shadow-box">
-          <h1 className="ula-title">{t("ula")}</h1>          
+        <div className="general-box flex-box flex-column smooth-shadow-box basic-box-padding">
+          <div className="bold-text"> {t("ula")} </div>
+          {/* //TODO add to translation legal document */}
+          <div >some legal text</div>
         </div>
       </div> 
     </div>
