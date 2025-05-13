@@ -3,12 +3,10 @@ import { useTranslation } from "react-i18next";
 
 import DynamicButton from "./ButtonComponent";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../config/options/Colors";
 
 const CopyRight = () => {
   const { t } = useTranslation("copyRight");
   const navigate = useNavigate();
-  const { isLightMode } = useTheme();
 
   const ulaRedirect = () => {
     console.log("Copy Right Link clicked.")

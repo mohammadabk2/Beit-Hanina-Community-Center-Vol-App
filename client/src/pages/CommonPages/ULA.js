@@ -2,14 +2,9 @@ import React from 'react';
 import { useTranslation } from "react-i18next";
 
 import NavigationBar from "../../components/NavigationBar";
-import { useLnOptions } from "../../config/options/Language";
-import { useTheme } from "../../config/options/Colors";
 
 const ULAPage = () => {
   const { t } = useTranslation("copyRight");
-
-  const lnOptions = useLnOptions();
-  const { isLightMode } = useTheme();
 
   return (
     <div className="app flex-box flex-column">
