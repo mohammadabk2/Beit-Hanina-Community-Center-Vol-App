@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import DynamicButton from "./ButtonComponent";
+import DynamicButton from "./common/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import logoIcon from "../icons/org_icon.png";
 import personIcon from "../icons/person_icon.svg";

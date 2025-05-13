@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import NavigationBar from "../../components/NavigationBar";
-import DynamicButton from "../../components/ButtonComponent";
+
+import DynamicButton from "../../components/common/ButtonComponent";
 import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
 import { useTheme } from "../../config/options/Colors";
-import DynamicInput from "../../components/InputComponent";
-import CopyRight from "../../components/CopyRight";
+import DynamicInput from "../../components/common/InputComponent";
+import NavigationBar from "../../components/layout/NavigationBar";
+import CopyRight from "../../components/layout/CopyRight";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
