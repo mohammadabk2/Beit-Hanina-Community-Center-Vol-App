@@ -16,69 +16,23 @@ const About = () => {
           className="general-box flex-box flex-column smooth-shadow-box"
           style={{ maxWidth: "700px", width: "100%" }}
         >
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{ marginBottom: "1.5rem" }}
-          >
+          <div className="basic-item-padding personal-area-content">
             {tAbout("desc")}
           </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.2em",
-              marginBottom: "0.5rem",
-            }}
-          >
-            {tAbout("contact")}{" "}
-            <span style={{ fontWeight: "normal", fontSize: "0.95em" }}>
-              support@email.com
-            </span>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("contact")}
+            <div className="personal-area-content">support@email.com</div>
           </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.2em",
-              marginTop: "1.5rem",
-              marginBottom: "0.5rem",
-            }}
-          >
+          <div className="basic-item-padding personal-area-content">
             {tAbout("devs")}
-          </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{ marginBottom: "0.5rem" }}
-          >
-            {tAbout("mohammadak")}
-          </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{ marginBottom: "0.5rem" }}
-          >
-            {tAbout("jad")}
-          </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{ marginBottom: "0.5rem" }}
-          >
-            {tAbout("husam")}
-          </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{ marginBottom: "0.5rem" }}
-          >
-            {tAbout("mohammadqt")}
-          </div>
-          <div
-            className="basic-item-padding personal-area-content"
-            style={{ marginBottom: "0.5rem" }}
-          >
-            {tAbout("mohammadtb")}
+            <div className="personal-area-content">{tAbout("mohammadak")}</div>
+            <div className="personal-area-content">{tAbout("jad")}</div>
+            <div className="personal-area-content">{tAbout("husam")}</div>
+            <div className="personal-area-content">{tAbout("mohammadqt")}</div>
+            <div className="personal-area-content">{tAbout("mohammadtb")}</div>
           </div>
         </div>
       </div>
-
       <CopyRight />
     </div>
   );
