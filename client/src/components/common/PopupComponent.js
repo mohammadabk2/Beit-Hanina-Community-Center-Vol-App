@@ -6,8 +6,6 @@ const PopupComponent = ({
   isOpen, 
   onClose, 
   message, 
-  className, 
-  style, 
   buttonText,
   children,
   showCloseButton = true,
@@ -15,18 +13,16 @@ const PopupComponent = ({
 }) => {
   const popupRef = useRef(null);
 
-  // Close popup when clicking outside or pressing Escape
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+      if (event.key === "Escape") onClose();
     };
 
     const handleClickOutside = (event) => {
-      if (closeOnOutsideClick && popupRef.current && !popupRef.current.contains(event.target)) {
+      if (closeOnOutsideClick && popupRef.current && 
+          !popupRef.current.contains(event.target)) {
         onClose();
       }
     };
@@ -40,43 +36,31 @@ const PopupComponent = ({
     };
   }, [isOpen, onClose, closeOnOutsideClick]);
 
-  // Add active class when open for transitions
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = '';
-      };
-    }
-  }, [isOpen]);
-
   if (!isOpen) return null;
 
   return (
-    <div className={`popup-overlay ${isOpen ? 'active' : ''}`}>
+    <div className="flex-box flex-column general-box bottom-scroll-box1 app-header">
       <div 
         ref={popupRef}
-        className={`popup-container smooth-shadow-box ${className || ""}`} 
-        style={style}
-        role="dialog"
-        aria-modal="true"
+        className="general-box smooth-shadow-box flex-column basic-box-padding"
       >
         {showCloseButton && (
-          <button 
-            className="popup-close" 
-            onClick={onClose}
-            aria-label="Close popup"
-          >
-            &times;
-          </button>
+          <div className="flex-box justify-end full-width">
+            <DynamicButton
+              onClick={onClose}
+              className="button button-small"
+              text="×"
+              ariaLabel="Close popup"
+            />
+          </div>
         )}
         
-        <div className="popup-content">
-          {message && <p>{message}</p>}
+        <div className="flex-box flex-column basic-box-padding">
+          {message && <p className="personal-area-content">{message}</p>}
           {children}
         </div>
         
-        <div className="popup-footer flex-box">
+        <div className="flex-box flex-box-gap basic-box-padding">
           <DynamicButton
             onClick={onClose}
             className="button button-small"
@@ -88,26 +72,15 @@ const PopupComponent = ({
   );
 };
 
+// Add prop type validation
 PopupComponent.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   message: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
   buttonText: PropTypes.string,
   children: PropTypes.node,
   showCloseButton: PropTypes.bool,
   closeOnOutsideClick: PropTypes.bool
-};
-
-PopupComponent.defaultProps = {
-  className: "",
-  style: {},
-  buttonText: "Close",
-  message: "",
-  children: null,
-  showCloseButton: true,
-  closeOnOutsideClick: true
 };
 
 export default PopupComponent;
