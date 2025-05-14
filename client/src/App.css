@@ -559,7 +559,6 @@ html[lang="ar"] textarea {
   text-align: right;
 }
 
-
 /* Popup styles */
 .popup-overlay {
   position: fixed;
@@ -584,7 +583,7 @@ html[lang="ar"] textarea {
 }
 
 .popup-container {
-  background-color: var(--box-background-color);
+  background-color: #fffaf3; /* Cream white background */
   border-radius: 0.625rem;
   padding: 1.5rem;
   width: 90%;
@@ -595,6 +594,8 @@ html[lang="ar"] textarea {
   transition: transform 0.3s ease, opacity 0.3s ease;
   position: relative;
   opacity: 0;
+  border: 1px solid #e3f2fd; /* Light blue border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .popup-overlay.active .popup-container {
@@ -606,27 +607,30 @@ html[lang="ar"] textarea {
   position: absolute;
   top: 0.625rem;
   right: 0.625rem;
-  background: none;
+  background: #e3f2fd; /* Light blue background */
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--general-text);
-  padding: 0.3125rem;
+  color: #333;
+  padding: 0.3125rem 0.625rem;
   line-height: 1;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 50%;
 }
 
 .popup-close:hover {
-  color: var(--button-hover);
+  background: #bbdefb; /* Slightly darker blue on hover */
+  color: #000;
 }
 
 .popup-content {
   margin-bottom: 1.25rem;
-  color: var(--general-text);
+  color: #333; /* Dark text for contrast */
 }
 
 .popup-content p {
   margin: 0 0 1rem 0;
+  color: #555;
 }
 
 .popup-footer {
@@ -634,6 +638,19 @@ html[lang="ar"] textarea {
   justify-content: center;
   gap: 0.625rem;
   flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid #e3f2fd; /* Light blue separator */
+}
+
+/* Update button styles to match color scheme */
+.button {
+  background-color: #e3f2fd !important; /* Light blue */
+  color: #1976d2 !important; /* Dark blue text */
+  border: 1px solid #bbdefb !important;
+}
+
+.button:hover {
+  background-color: #bbdefb !important; /* Darker blue on hover */
 }
 
 @media (max-width: 30rem) {
