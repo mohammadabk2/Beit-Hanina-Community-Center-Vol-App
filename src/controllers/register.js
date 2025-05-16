@@ -33,21 +33,9 @@ const registerVolunteer = async (req, res) => {
           userData.orgUserName,
           passwordHash
         );
-        if (reg) {
-          res.status(200).send({
-            message: `Signed up successfully`,
-            status: "success",
-          });
-        } else {
-          res.status(503).send({
-            message:
-              "Database temporarily unavailable. Please try again later.",
-            status: "error",
-          });
-        }
       } else if (userData.type === "vol") {
         console.log("adding a Volunteer");
-        reg = await dbConnection.createUser(
+        reg = await dbConnection.createVolunteer(
           "volunteer_waiting_list",
           userData.fullName,
           userData.birthDate,
@@ -60,18 +48,17 @@ const registerVolunteer = async (req, res) => {
           userData.username,
           passwordHash
         );
-        if (reg) {
-          res.status(200).send({
-            message: `Signed up successfully`,
-            status: "success",
-          });
-        } else {
-          res.status(503).send({
-            message:
-              "Database temporarily unavailable. Please try again later.",
-            status: "error",
-          });
-        }
+      }
+      if (reg) {
+        res.status(200).send({
+          message: `Signed up successfully`,
+          status: "success",
+        });
+      } else {
+        res.status(503).send({
+          message: "Database temporarily unavailable. Please try again later.",
+          status: "error",
+        });
       }
     } catch (error) {
       res.status(500).send({

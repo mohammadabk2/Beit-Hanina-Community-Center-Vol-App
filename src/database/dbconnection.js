@@ -21,7 +21,7 @@ import db from "./db.js";
  * @returns {Promise<Object>} A promise that resolves to the newly created user object.
  * @throws {Error} If the database query fails.
  */
-const createUser = async (
+const createVolunteer = async (
   tableName,
   name,
   birthDate,
@@ -32,7 +32,7 @@ const createUser = async (
   insurance,
   idNumber,
   username,
-  passwordHash,
+  passwordHash
 ) => {
   const text = `
     INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
@@ -240,26 +240,6 @@ const getOrganizerDetailsById = async (id) => {
       WHERE o.user_id = $1;
     `;
   const res = await db.query(text, [id]);
-  return res.rows[0];
-};
-
-/**
- * Creates a new volunteer record for a user.
- *
- * @async
- * @param {number} userId - The ID of the user.
- * @param {number} [totalHours=0] - The total hours the volunteer has contributed.
- * @returns {Promise<Object>} A promise that resolves to the newly created volunteer object.
- * @throws {Error} If the database query fails.
- */
-const createVolunteer = async (userId) => {
-  const text = `
-      INSERT INTO volunteer (user_id)
-      VALUES ($1)
-      RETURNING *;
-    `;
-  const values = [userId];
-  const res = await db.query(text, values);
   return res.rows[0];
 };
 
@@ -472,7 +452,6 @@ const createOrganizer = async (
     console.error("Error creating user and organizer:", error);
     throw error;
   }
-
 };
 
 /**
@@ -563,7 +542,6 @@ const getUserHash = async (username) => {
 // ? maybe add more detailed functions to get certain values form users
 
 export default {
-  createUser, // tested
   getUsers,
   getUserHash,
   getUserByLogin, // tested
