@@ -24,7 +24,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5213/api/logUser",
+					"raw": "http://localhost:5213/api/auth/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -32,7 +32,8 @@
 					"port": "5213",
 					"path": [
 						"api",
-						"logUser"
+						"auth",
+						"login"
 					]
 				}
 			},
@@ -48,7 +49,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"fullName\": \"jad jaraisy\",\r\n    \"birthDate\": \"2000-09-25\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0528558889\",\r\n    \"email\": \"jadosh2000@gmail.com\",\r\n    \"address\": \"nazareth\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"211758057\",\r\n    \"username\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+					"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"jad jaraisy\",\r\n    \"birthDate\": \"2000-09-25\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0528558889\",\r\n    \"email\": \"jadosh2000@gmail.com\",\r\n    \"address\": \"nazareth\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"211758057\",\r\n    \"username\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +57,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5213/api/register",
+					"raw": "http://localhost:5213/api/users/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -64,6 +65,40 @@
 					"port": "5213",
 					"path": [
 						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5213/api/register  org",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\":\"org\",\r\n    \"orgName\": \"some org\",\r\n    \"orgAddress\":\"some street\",\r\n    \"orgAdmin\":\"ahmed admin\",\r\n    \"orgPhoneNumber\": \"0528558898\",\r\n    \"orgEmail\": \"centreemail11@gmail.com\",\r\n    \"orgUserName\": \"org123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5213/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5213",
+					"path": [
+						"api",
+						"users",
 						"register"
 					]
 				}
@@ -72,11 +107,14 @@
 		},
 		{
 			"name": "http://localhost:5213/api/loadUsers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -88,7 +126,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5213/api/loadUsers",
+					"raw": "http://localhost:5213/api//users",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -96,7 +134,8 @@
 					"port": "5213",
 					"path": [
 						"api",
-						"loadUsers"
+						"",
+						"users"
 					]
 				}
 			},
