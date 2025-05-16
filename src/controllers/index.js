@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 
 import pingController from "./ping.js";
-import registerController from "./register.js";
+import registerVolunteerController from "./register.js";
 import logUserController from "./logUser.js";
 import loadUsers from "./loadUsers.js";
 
@@ -16,7 +16,7 @@ const router = Router();
 
 // --- API Routes ---
 router.get("/ping", pingController);
-router.post("/users/register", registerController);
+router.post("/users/register", registerVolunteerController);
 router.get("/users",loadUsers);
 router.post("/auth/login", logUserController);
 

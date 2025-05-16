@@ -32,7 +32,7 @@ const createUser = async (
   insurance,
   idNumber,
   username,
-  passwordHash
+  passwordHash,
 ) => {
   const text = `
     INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
@@ -409,23 +409,70 @@ const addVolToOrganizer = async (userId, vol) => {
 };
 
 /**
- * Creates a new organizer record for a user.
+ * Creates a new user and an associated organizer record.
  *
  * @async
- * @param {number} userId - The ID of the user.
  * @param {string} orgName - The name of the organization.
- * @returns {Promise<Object>} A promise that resolves to the newly created organizer object.
- * @throws {Error} If the database query fails.
+ * @param {string} orgAddress - The address of the organization.
+ * @param {string} orgAdmin - The username of the organization admin.
+ * @param {string} orgPhoneNumber - The phone number of the organization.
+ * @param {string} orgEmail - The email of the organization.
+ * @param {string} username - The desired username for the organization admin.
+ * @param {string} password - The password for the organization admin.
+ * @returns {Promise<Object>} A promise that resolves to an object containing the newly created user and organizer data.
+ * @throws {Error} If any of the database queries fail.
  */
-const createOrganizer = async (userId, orgName) => {
-  const text = `
+const createOrganizer = async (
+  orgName,
+  orgAddress,
+  orgAdmin,
+  orgPhoneNumber,
+  orgEmail,
+  username,
+  password
+) => {
+  try {
+    // First, insert the user data into the users table
+    const userInsertText = `
+      INSERT INTO users (phone_number, email, address, username, password_hash, role)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING id;
+    `;
+    const userInsertValues = [
+      orgPhoneNumber,
+      orgEmail,
+      orgAddress,
+      username,
+      password,
+      "organizer",
+    ];
+    const userResult = await db.query(userInsertText, userInsertValues);
+
+    if (userResult.rows.length === 0) {
+      throw new Error("Failed to insert user data.");
+    }
+
+    const userId = userResult.rows[0].id;
+    const organizerInsertText = `
       INSERT INTO organizer (user_id, org_name)
       VALUES ($1, $2)
       RETURNING *;
     `;
-  const values = [userId, orgName];
-  const res = await db.query(text, values);
-  return res.rows[0];
+    const organizerInsertValues = [userId, orgName];
+    const organizerResult = await db.query(
+      organizerInsertText,
+      organizerInsertValues
+    );
+
+    if (organizerResult.rows.length === 0) {
+      throw new Error("Failed to insert organizer data.");
+    }
+    return userResult.rows[0];
+  } catch (error) {
+    console.error("Error creating user and organizer:", error);
+    throw error;
+  }
+
 };
 
 /**
