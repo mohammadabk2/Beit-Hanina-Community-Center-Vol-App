@@ -1,14 +1,9 @@
 CREATE TABLE IF NOT EXISTS users
 (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    birth_date DATE NOT NULL,
-    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     phone_number VARCHAR(15) NOT NULL,
     email TEXT NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL,
-    insurance VARCHAR(50) NOT NULL,
-    id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     banned BOOLEAN DEFAULT FALSE,
@@ -17,27 +12,27 @@ CREATE TABLE IF NOT EXISTS users
     profile_image_url TEXT
 );
 
-/*New uses waiting for approval of account*/
-CREATE TABLE IF NOT EXISTS users_waiting_list
-(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    birth_date DATE NOT NULL,
-    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
-    phone_number VARCHAR(15) NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    address VARCHAR(255) NOT NULL,
-    insurance VARCHAR(50) NOT NULL,
-    id_number VARCHAR(20) NOT NULL UNIQUE,
-    username VARCHAR(50) UNIQUE,
-    password_hash VARCHAR(255),
-    logs TEXT[],
-    profile_image_url TEXT
-);
-
 CREATE TABLE IF NOT EXISTS volunteer
 (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    insurance VARCHAR(50) NOT NULL,
+    id_number VARCHAR(20) NOT NULL UNIQUE,
+    approved_hours INT DEFAULT 0,
+    unapproved_hours INT DEFAULT 0,
+    orgs TEXT[]
+);
+
+CREATE TABLE IF NOT EXISTS volunteer_waiting_list
+(
+    user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    insurance VARCHAR(50) NOT NULL,
+    id_number VARCHAR(20) NOT NULL UNIQUE,
     approved_hours INT DEFAULT 0,
     unapproved_hours INT DEFAULT 0,
     orgs TEXT[]
