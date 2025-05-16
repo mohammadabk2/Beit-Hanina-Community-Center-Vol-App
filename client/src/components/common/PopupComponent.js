@@ -42,7 +42,7 @@ const PopupComponent = ({
     <div className="flex-box flex-column general-box bottom-scroll-box1 app-header">
       <div 
         ref={popupRef}
-        className="general-box smooth-shadow-box flex-column basic-box-padding"
+        className="general-box smooth-shadow-box flex-column basic-box-padding popup-entrance-animation popup-content-elevation"
       >
         {showCloseButton && (
           <div className="flex-box justify-end full-width">
@@ -72,7 +72,6 @@ const PopupComponent = ({
   );
 };
 
-// Add prop type validation
 PopupComponent.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
