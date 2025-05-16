@@ -558,3 +558,30 @@ html[lang="ar"] textarea {
   direction: rtl;
   text-align: right;
 }
+
+/* New popup enhancement styles */
+.popup-entrance-animation {
+  animation: popupEntrance 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transform-origin: center;
+}
+
+@keyframes popupEntrance {
+  0% {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.popup-content-elevation {
+  border: 1px solid var(--button-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background-image: linear-gradient(
+    to bottom right,
+    var(--box-background-color),
+    var(--bottom-scroll-box)
+  );
+}
