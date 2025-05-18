@@ -11,6 +11,7 @@ import pingController from "./ping.js";
 import registerVolunteerController from "./register.js";
 import logUserController from "./logUser.js";
 import loadUsers from "./loadUsers.js";
+import loadEvents from "./loadEvents.js";
 
 const router = Router();
 
@@ -19,6 +20,7 @@ router.get("/ping", pingController);
 router.post("/users/register", registerVolunteerController);
 router.get("/users",loadUsers);
 router.post("/auth/login", logUserController);
+router.get("/events",loadEvents);
 
 // --- Static File Serving for React --- //! might turn off
 router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));
