@@ -155,13 +155,18 @@
 ├── SECURITY.md
 ├── src
 │   ├── controllers
-│   │   ├── authenticate.js
-│   │   ├── error.js
-│   │   ├── getTitle.js
+│   │   ├── auth
+│   │   │   └── login.js
+│   │   ├── common
+│   │   │   ├── authenticate.js
+│   │   │   ├── error.js
+│   │   │   └── ping.js
+│   │   ├── Events
+│   │   │   └── loadEvents.js
 │   │   ├── index.js
-│   │   ├── logUser.js
-│   │   ├── ping.js
-│   │   ├── register.js
+│   │   ├── Users
+│   │   │   ├── loadUsers.js
+│   │   │   └── register.js
 │   │   └── validation.js
 │   ├── database
 │   │   ├── dbconnection.js
@@ -181,11 +186,14 @@
 │   └── server.js
 ├── tests
 │   ├── drop_tables.sql
+│   ├── events.sql
 │   ├── populate.sql
+│   ├── postman
+│   │   └── App-test.postman_collection.json
 │   ├── README.md
 │   ├── register_test
 │   └── test_data.sql
 └── workbox-config.cjs
 
-39 directories, 146 files
+44 directories, 149 files
 ```

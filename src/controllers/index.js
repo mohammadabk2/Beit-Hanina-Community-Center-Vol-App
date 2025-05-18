@@ -8,10 +8,10 @@ const __dirname = path.dirname(__filename);
 
 
 import pingController from "./ping.js";
-import registerVolunteerController from "./register.js";
-import logUserController from "./logUser.js";
-import loadUsers from "./loadUsers.js";
-import loadEvents from "./loadEvents.js";
+import registerVolunteerController from "./Users/register.js";
+import logUserController from "./auth/login.js";
+import loadUsers from "./Users/loadUsers.js";
+import loadEvents from "./Events/loadEvents.js";
 
 const router = Router();
 

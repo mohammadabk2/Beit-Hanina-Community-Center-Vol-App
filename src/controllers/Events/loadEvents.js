@@ -1,4 +1,4 @@
-import dbConnection from "../database/dbconnection.js";
+import dbConnection from "../../database/dbconnection.js";
 
 const loadEvents = async (req, res) => {
   console.log("Loading Events from DB");

@@ -1,5 +1,5 @@
-import dbConnection from "../database/dbconnection.js";
-import validation from "./validation.js";
+import dbConnection from "../../database/dbconnection.js";
+import validation from "../validation.js";
 import bcrypt from "bcrypt";
 
 //TODO validation check for front end
