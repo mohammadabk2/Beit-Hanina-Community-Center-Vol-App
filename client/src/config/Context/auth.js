@@ -34,12 +34,12 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
     localStorage.setItem("userData", JSON.stringify(userData)); // Persist user data
 
-    if (Array.isArray(userData.role)) {
-      if (userData.role.includes("admin")) {
+    if (userData.role) {
+      if (userData.role === "admin") {
         navigate("/home-admin");
-      } else if (userData.role.includes("org")) {
+      } else if (userData.role === "organizer") {
         navigate("/home-organizer");
-      } else if (userData.role.includes("vol")) {
+      } else if (userData.role === "volunteer") {
         navigate("/home-volunteer");
       } else {
         console.warn(
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/");
       }
     } else {
-      console.error("User data role is not an array:", userData.role);
+      console.error("Userdata.role is not a valid object:", userData.role);
       //TODO change to error message
       navigate("/");
     }
