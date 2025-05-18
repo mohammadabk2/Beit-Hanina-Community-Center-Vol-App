@@ -1,13 +1,37 @@
 import dbConnection from "../../database/dbconnection.js";
+import jwt from "jsonwebtoken"; // Import the jsonwebtoken library
 
 const loadEvents = async (req, res) => {
   console.log("Loading Events from DB");
-//   const userData = req.body;
 
   const { userID, userRequest } = req.body;
+  const authHeader = req.headers.authorization;
+
   if (!userID || !userRequest) {
+    const message = "User Id or Request Failed.";
+    console.log(message);
     return res.status(400).send({
-      message: "User Id or Request Failed.",
+      message: message,
+      status: "fail",
+    });
+  }
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    const message = "Authorization header missing or invalid format.";
+    console.log(message);
+    return res.status(401).send({
+      message: message,
+      status: "fail",
+    });
+  }
+
+  const token = authHeader.split(" ")[1]; // Extract the token from the Bearer string
+
+  if (!token) {
+    const message = "Token not provided in the Authorization header.";
+    console.log(message);
+    return res.status(401).send({
+      message: message,
       status: "fail",
     });
   }
@@ -16,6 +40,18 @@ const loadEvents = async (req, res) => {
 
   //TODO verify token and id
   try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    console.log(`decoded = ${decoded.id} actual = ${userID}`);
+    if (decoded.id !== userID) {
+      const message = "Unauthorized: Token does not match the requested user.";
+      console.log(message);
+      return res.status(403).send({
+        message: message,
+        status: "fail",
+      });
+    }
+
     const events = await dbConnection.getEvents("*");
 
     if (events && events.length > 0) {
@@ -34,15 +70,18 @@ const loadEvents = async (req, res) => {
         description: event.event_description,
       }));
 
+      const message = `Loading Events successful!`;
+      console.log(message);
       res.status(200).send({
-        message: `Loading Events successful!`,
+        message: message,
         status: "success",
         userData: allEvents,
       });
     } else {
-      console.log(`loading failed!!`);
+      const message = `loading failed!! invalid query struct`;
+      console.log(message);
       res.status(401).send({
-        message: "invalid query struct",
+        message: message,
         status: "fail",
       });
     }
