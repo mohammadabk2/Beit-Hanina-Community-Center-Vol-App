@@ -15,34 +15,41 @@ const PopupComponent = ({
 
   useEffect(() => {
     if (!isOpen) return;
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") onClose();
+    
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') onClose();
     };
 
-    const handleClickOutside = (event) => {
-      if (closeOnOutsideClick && popupRef.current && 
-          !popupRef.current.contains(event.target)) {
+    const handleOutsideClick = (e) => {
+      if (closeOnOutsideClick && popupRef.current && !popupRef.current.contains(e.target)) {
         onClose();
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('mousedown', handleOutsideClick);
+    
+    // Prevent body scrolling when popup is open
+    document.body.style.overflow = 'hidden';
     
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.body.style.overflow = '';
     };
   }, [isOpen, onClose, closeOnOutsideClick]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="flex-box flex-column general-box bottom-scroll-box1 app-header">
+    <div className="fixed-overlay">
       <div 
         ref={popupRef}
-        className="general-box smooth-shadow-box flex-column basic-box-padding popup-entrance-animation popup-content-elevation"
+        className="general-box smooth-shadow-box flex-box flex-column basic-box-padding popup-entrance-animation popup-content-elevation"
+        style={{ maxWidth: '90vw', width: '600px' }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-title"
       >
         {showCloseButton && (
           <div className="flex-box justify-end full-width">
@@ -55,12 +62,12 @@ const PopupComponent = ({
           </div>
         )}
         
-        <div className="flex-box flex-column basic-box-padding">
-          {message && <p className="personal-area-content">{message}</p>}
+        <div className="flex-box flex-column basic-box-padding gap-1">
+          {message && <div id="popup-title" className="bold-text personal-area-content">{message}</div>}
           {children}
         </div>
         
-        <div className="flex-box flex-box-gap basic-box-padding">
+        <div className="flex-box justify-center">
           <DynamicButton
             onClick={onClose}
             className="button button-small"
@@ -76,7 +83,7 @@ PopupComponent.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   message: PropTypes.string,
-  buttonText: PropTypes.string,
+  buttonText: PropTypes.string.isRequired,
   children: PropTypes.node,
   showCloseButton: PropTypes.bool,
   closeOnOutsideClick: PropTypes.bool
