@@ -7,207 +7,222 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:5213/api/logUser user_1",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Login",
+			"item": [
+				{
+					"name": "login org123",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"org123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5213/api/auth/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5213",
-					"path": [
-						"api",
-						"auth",
-						"login"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "http://localhost:5213/api/register user_1",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"jad jaraisy\",\r\n    \"birthDate\": \"2000-09-25\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0528558889\",\r\n    \"email\": \"jadosh2000@gmail.com\",\r\n    \"address\": \"nazareth\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"211758057\",\r\n    \"username\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "register",
+			"item": [
+				{
+					"name": "register jad",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"jad jaraisy\",\r\n    \"birthDate\": \"2000-09-25\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0528558889\",\r\n    \"email\": \"jadosh2000@gmail.com\",\r\n    \"address\": \"nazareth\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"211758057\",\r\n    \"username\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5213/api/users/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5213",
-					"path": [
-						"api",
-						"users",
-						"register"
-					]
+				{
+					"name": "register tbakhy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"mohammad tbakhy\",\r\n    \"birthDate\": \"2001-05-07\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0524334065\",\r\n    \"email\": \"mohammadismat12378@gmail.com\",\r\n    \"address\": \"kofrakb\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"341366896\",\r\n    \"username\": \"mohammadt\",\r\n    \"password\": \"Solo0@m7md!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register  org123",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"org\",\r\n    \"orgName\": \"some org\",\r\n    \"orgAddress\":\"some street\",\r\n    \"orgAdmin\":\"ahmed admin\",\r\n    \"orgPhoneNumber\": \"0528558898\",\r\n    \"orgEmail\": \"centreemail11@gmail.com\",\r\n    \"orgUserName\": \"org123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "http://localhost:5213/api/register user_2",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"mohammad tbakhy\",\r\n    \"birthDate\": \"2001-05-07\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0524334065\",\r\n    \"email\": \"mohammadismat12378@gmail.com\",\r\n    \"address\": \"kofrakb\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"341366896\",\r\n    \"username\": \"mohammadt\",\r\n    \"password\": \"Solo0@m7md!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "general",
+			"item": [
+				{
+					"name": "Load Events",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"userRequest\":\"add later\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5213/api/users/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5213",
-					"path": [
-						"api",
-						"users",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:5213/api/register  org",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"type\":\"org\",\r\n    \"orgName\": \"some org\",\r\n    \"orgAddress\":\"some street\",\r\n    \"orgAdmin\":\"ahmed admin\",\r\n    \"orgPhoneNumber\": \"0528558898\",\r\n    \"orgEmail\": \"centreemail11@gmail.com\",\r\n    \"orgUserName\": \"org123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "loadUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 4,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"users_waiting_list\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api//users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"",
+								"users"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5213/api/users/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5213",
-					"path": [
-						"api",
-						"users",
-						"register"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:5213/api/loadUsers",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userID\": 4,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"users_waiting_list\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5213/api//users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5213",
-					"path": [
-						"api",
-						"",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Load Events",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userID\": 6,\r\n    \"userRequest\":\"add later\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5213/api/events",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5213",
-					"path": [
-						"api",
-						"events"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
