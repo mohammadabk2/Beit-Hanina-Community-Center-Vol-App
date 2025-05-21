@@ -86,11 +86,11 @@ CREATE TABLE IF NOT EXISTS events
 
 CREATE TABLE IF NOT EXISTS events_status
 (
-    approved INT[],
-    rejected INT[], /*Check if Fadi wants this*/
-    pending INT[],
-    ongoing INT[],
-    finished INT[]
+    approved INT[] DEFAULT '{}',
+    rejected INT[] DEFAULT '{}', /*Check if Fadi wants this*/
+    pending INT[] DEFAULT '{}',
+    ongoing INT[] DEFAULT '{}',
+    finished INT[] DEFAULT '{}'
 );
 
 -- ? maybe add more indexs or change
