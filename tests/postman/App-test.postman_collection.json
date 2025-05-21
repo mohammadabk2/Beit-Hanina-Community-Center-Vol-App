@@ -41,6 +41,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "login john",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"john123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -338,13 +371,20 @@
 					},
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3ODQyMTk1LCJleHAiOjE3NDc5Mjg1OTV9.3fzI_gpL947BPBUeFH8LMM3b7t5vjvskCBzLX4LLMUc",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\": 4,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"users_waiting_list\"\r\n}",
+							"raw": "{\r\n    \"userID\": 9,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"volunteer_waiting_list\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -352,7 +392,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5213/api//users",
+							"raw": "http://localhost:5213/api/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -360,7 +400,6 @@
 							"port": "5213",
 							"path": [
 								"api",
-								"",
 								"users"
 							]
 						}
