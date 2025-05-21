@@ -12,6 +12,7 @@ import logUserController from "./auth/login.js";
 import loadUsers from "./Users/load.js";
 import userActions from "./Users/actions.js";
 import loadEvents from "./Events/loadEvents.js";
+import createEvent from "./Events/createEvent.js";
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.get("/users", loadUsers);
 router.post("/users", userActions);
 
 router.get("/events", loadEvents);
+router.post("/events", createEvent);
 
 // --- Static File Serving for React --- //! might turn off
 router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));

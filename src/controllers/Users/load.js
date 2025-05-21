@@ -14,6 +14,7 @@ const loadUsers = async (req, res) => {
   console.log(`Attempting load Uers from DB for userId: ${userID} for Table ${tableName}`);
 
   //TODO verify id as a correct role
+  //TODO add token
   try {
     const users = await dbConnection.getUsers(tableName, "*");
 
