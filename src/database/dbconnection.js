@@ -564,7 +564,7 @@ const getUserHash = async (username) => {
  * @returns {Promise<string|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
-const getEvents = async (columnNames) => {
+const getEvents = async (columnNames, orgId) => {
   // Return query for fetching event ids from each field
   const unionQueries = columnNames.map(colName => {
     return `SELECT UNNEST(${colName}) FROM events_status
