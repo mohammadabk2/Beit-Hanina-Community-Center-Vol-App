@@ -492,7 +492,7 @@ const addEvent = async (
   eventLocation,
   eventDescription
 ) => {
-  const text = `
+  const eventsText = `
   INSERT INTO events (event_name, event_date, event_start, event_end, 
   is_active, org_id, max_number_of_vol,
   event_location, event_description)
@@ -500,7 +500,7 @@ const addEvent = async (
   RETURNING *;
 `;
 
-  const values = [
+  const eventsValues = [
     eventName,
     eventDate,
     eventStartTime,
@@ -511,9 +511,25 @@ const addEvent = async (
     eventLocation,
     eventDescription,
   ];
+
   try {
-    const res = await db.query(text, values);
-    return res.rows[0];
+    const eventResult = await db.query(eventsText, eventsValues);
+    if (eventResult.rows.length === 0) {
+      throw new Error("Failed to insert event data.");
+    }
+
+    const eventId = eventResult.rows[0].event_id;
+
+    const updateStatusText = `
+      UPDATE events_status
+      SET pending = array_append(COALESCE(pending, '{}'), $1)
+      WHERE true 
+      RETURNING *;`;
+
+    const updateStatusValues = [eventId];
+    const statusResult =  await db.query(updateStatusText, updateStatusValues);
+
+    return statusResult.rows[0];
   } catch (error) {
     console.error("Error in addEvent:", error);
     throw error; // Re-throw the error to be handled by the caller
@@ -587,21 +603,21 @@ const getUserHash = async (username) => {
  */
 //TODO commented this to fix eslint issue
 // const getEvents = async (columnNames, orgId) => {
-  const getEvents = async (columnNames) => {
+const getEvents = async (columnNames) => {
   // Return query for fetching event ids from each field
-  const unionQueries = columnNames.map(colName => {
+  const unionQueries = columnNames.map((colName) => {
     return `SELECT UNNEST(${colName}) FROM events_status
-    WHERE ${colName} IS NOT NULL AND array_length(${colName}, 1) > 0`
+    WHERE ${colName} IS NOT NULL AND array_length(${colName}, 1) > 0`;
   });
   // Join queries together
-  const idsQuery = unionQueries.join(' UNION ALL ');
-  console.log(`full query: ${idsQuery}`)
+  const idsQuery = unionQueries.join(" UNION ALL ");
+  console.log(`full query: ${idsQuery}`);
   try {
     // Stores event ids in values as array
     const values = await db.query(idsQuery);
-    const idsToFetch = values.rows.map(row => row.unnest);
+    const idsToFetch = values.rows.map((row) => row.unnest);
     // Fetches requested events from events table
-    const eventsQuery = `SELECT * FROM events WHERE event_id = ANY($1::int[]);`
+    const eventsQuery = `SELECT * FROM events WHERE event_id = ANY($1::int[]);`;
     const res = await db.query(eventsQuery, [idsToFetch]);
 
     return res.rows; // Return the entire array of rows
