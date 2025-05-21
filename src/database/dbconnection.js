@@ -486,17 +486,38 @@ const addEvent = async (
   eventDate,
   eventStartTime,
   eventEndTime,
-  orgId
+  isActive,
+  orgId,
+  maxNumberOfVolunteers,
+  eventLocation,
+  eventDescription
 ) => {
   const text = `
-  INSERT INTO events (event_name, event_date,event_start,event_end,org_id)
-  VALUES ($1, $2, $3, $4, $5)
+  INSERT INTO events (event_name, event_date, event_start, event_end, 
+  is_active, org_id, max_number_of_vol,
+  event_location, event_description)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING *;
 `;
 
-  const values = [eventName, eventDate, eventStartTime, eventEndTime, orgId];
-  const res = await db.query(text, values);
-  return res.rows[0];
+  const values = [
+    eventName,
+    eventDate,
+    eventStartTime,
+    eventEndTime,
+    isActive,
+    orgId,
+    maxNumberOfVolunteers,
+    eventLocation,
+    eventDescription,
+  ];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error("Error in addEvent:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
 };
 
 /**
@@ -653,7 +674,7 @@ const createUser = async (
   try {
     const res = await db.query(text, values);
     return res.rows[0];
-  } catch(error) {
+  } catch (error) {
     console.error("Error in createUser:", error);
     throw error; // Re-throw the error to be handled by the caller
   }
@@ -662,11 +683,9 @@ const createUser = async (
 /**
  * Moves user from waiting list to rejected list.
  *
- * 
+ *
  */
-const rejectUser = async (
-  userId
-) => {
+const rejectUser = async (userId) => {
   const text = `
   INSERT INTO rejected_users
   SELECT * FROM volunteer_waiting_list
@@ -677,11 +696,11 @@ const rejectUser = async (
   try {
     const res = await db.query(text, values);
     return res.rows[0];
-  } catch(error) {
+  } catch (error) {
     console.error("Error in rejectUser:", error);
     throw error; // Re-throw the error to be handled by the caller
   }
-}
+};
 
 export default {
   // Currently using
@@ -693,7 +712,7 @@ export default {
   createUser,
   rejectUser,
   createOrganizer,
-
+  addEvent,
 
   // Currently for testing unused
   getUserById, // tested
@@ -707,7 +726,6 @@ export default {
   updateUser,
   getUserByIdNumber,
   addVolToOrganizer,
-  addEvent,
   addVolId,
   changeStatus,
 };
