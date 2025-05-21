@@ -158,10 +158,24 @@
 					},
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NzAyOSwiZXhwIjoxNzQ3NTgwNjI5fQ.hydrPY3jYZ70nhBvMf1NqwU93k1pI8mB0bUiM8vG9Io",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NjAwOSwiZXhwIjoxNzQ3NTc5NjA5fQ.IejvRsTPcGe0Pv2OHqNJ5MuEpuzMAcmkKO_3y2mNbK0",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userID\": 6,\r\n    \"userRequest\":\"add later\"\r\n}",
@@ -200,6 +214,91 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userID\": 4,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"users_waiting_list\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api//users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Approve Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgxMzUyMywiZXhwIjoxNzQ3ODE3MTIzfQ.pJ4RCcgcgV2FTMF_QuatUmsw8SQUPJ0nPLxz_Zw8Gf4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"actionID\": 3,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api//users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgxMzUyMywiZXhwIjoxNzQ3ODE3MTIzfQ.pJ4RCcgcgV2FTMF_QuatUmsw8SQUPJ0nPLxz_Zw8Gf4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"actionID\": 7,\r\n    \"action\": \"log-user\",\r\n    \"actionValue\":\"User always come on time\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

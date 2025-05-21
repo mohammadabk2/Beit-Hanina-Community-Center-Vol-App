@@ -86,24 +86,6 @@ const createVolunteer = async (waitingListId) => {
   } finally {
     client.release();
   }
-  const text = `
-    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-    RETURNING *;`;
-  const values = [
-    name,
-    birthDate,
-    sex,
-    phoneNumber,
-    email,
-    address,
-    insurance,
-    idNumber,
-    username,
-    passwordHash,
-  ];
-  const res = await db.query(text, values);
-  return res.rows[0];
 };
 
 /**
@@ -185,22 +167,6 @@ const updateUser = async (userId, updates) => {
     console.error("Error updating user:", error);
     throw new Error("Failed to update user");
   }
-};
-
-/**
- * Retrieves a user from the database by username and password hash.
- *
- * @async
- * @param {string} username - The username of the user.
- * @param {string} hash - The hashed password.
- * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
- * @throws {Error} If the database query fails.
- */
-const getUserByLogin = async (username, hash) => {
-  const text =
-    "SELECT * FROM users WHERE username = $1 AND password_hash = $2;";
-  const res = await db.query(text, [username, hash]);
-  return res.rows[0];
 };
 
 /**
@@ -595,7 +561,7 @@ const getUserHash = async (username) => {
  *
  * @async
  * @param {string} username - The username of the user.
- * @returns {Promise<string|null>} A promise that resolves to the user hash object if found, or null if not found.
+ * @returns {Promise<string|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
 const getEvents = async (columnNames) => {
@@ -609,15 +575,43 @@ const getEvents = async (columnNames) => {
   }
 };
 
+/**
+ * Adds a log to the Logs array of a user
+ *
+ * @async
+ * @param {number} userID - The ID of the user.
+ * @param {string} logMessage - new entry to the logs array
+ * @returns {Promise<string|null>} A promise that resolves to the user object if found, or null if not found.
+ * @throws {Error} If the database query fails.
+ */
+const addLog = async (userId, logMessage) => {
+  const text = `UPDATE users SET logs = array_append(COALESCE(logs, ARRAY[]::TEXT[]), $1) WHERE id = $2 RETURNING *;`;
+  const values = [logMessage, userId];
+
+  try {
+    const res = await db.query(text, values);
+
+    if (res.rows.length === 0) {
+      console.warn(`User with id ${userId} not found`);
+      return null;
+    }
+
+    return res.rows[0];
+  } catch (error) {
+    console.error("Error in addLog:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
 export default {
   getUsers,
   getUserHash,
   getEvents,
+  createVolunteer,
+  addLog,
 
-  getUserByLogin, // !Dont need anymore
   getUserById, // tested
   assignRoleToUser,
-  createVolunteer, // tested
   createOrganizer, // tested
   getVolunteerDetailsById, // tested
   getOrganizerDetailsById, // tested

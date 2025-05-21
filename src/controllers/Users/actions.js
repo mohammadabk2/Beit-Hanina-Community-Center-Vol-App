@@ -4,10 +4,10 @@ import jwt from "jsonwebtoken"; // Import the jsonwebtoken library
 const userActions = async (req, res) => {
   console.log("approve/reject users");
 
-  const { userID, actionID, action } = req.body;
+  const { userID, actionID, action, actionValue } = req.body;
 
-  if (!userID || !actionID || !action) {
-    const message = "User Id or Request Failed.";
+  if (!userID || !actionID || !action || !actionValue) {
+    const message = "Request body Failed.";
     console.log(message);
     return res.status(400).send({
       message: message,
@@ -53,7 +53,7 @@ const userActions = async (req, res) => {
 
     let answer;
 
-    if (action === "approve") {
+    if (action === "approve" && actionValue === "NA") {
       console.log("approving User");
       answer = await dbConnection.createVolunteer(actionID);
     }
@@ -63,7 +63,8 @@ const userActions = async (req, res) => {
     }
 
     if (action === "log-user") {
-      console.log("logging about User");
+      console.log(`logging about User ${actionValue}`);
+      answer = await dbConnection.addLog(actionID, actionValue);
     }
 
     if (!answer) {
