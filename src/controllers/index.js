@@ -7,10 +7,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-import pingController from "./ping.js";
-import registerVolunteerController from "./register.js";
-import logUserController from "./logUser.js";
-import loadUsers from "./loadUsers.js";
+import pingController from "./common/ping.js";
+import registerVolunteerController from "./Users/register.js";
+import logUserController from "./auth/login.js";
+import loadUsers from "./Users/loadUsers.js";
+import loadEvents from "./Events/loadEvents.js";
 
 const router = Router();
 
@@ -19,6 +20,7 @@ router.get("/ping", pingController);
 router.post("/users/register", registerVolunteerController);
 router.get("/users",loadUsers);
 router.post("/auth/login", logUserController);
+router.get("/events",loadEvents);
 
 // --- Static File Serving for React --- //! might turn off
 router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));

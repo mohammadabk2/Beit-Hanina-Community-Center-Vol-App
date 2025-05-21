@@ -1,4 +1,4 @@
-import dbConnection from "../database/dbconnection.js";
+import dbConnection from "../../database/dbconnection.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';

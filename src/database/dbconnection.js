@@ -538,14 +538,31 @@ const getUserHash = async (username) => {
   return res.rows[0];
 };
 
-// ! all the tests performed only verify that the query is valid and not the function it self.
-// ? maybe add more detailed functions to get certain values form users
+/**
+ * Retrieves user hash by userName
+ *
+ * @async
+ * @param {string} username - The username of the user.
+ * @returns {Promise<string|null>} A promise that resolves to the user hash object if found, or null if not found.
+ * @throws {Error} If the database query fails.
+ */
+const getEvents = async (columnNames) => {
+  const text = `SELECT ${columnNames} FROM events;`;
+  try {
+    const res = await db.query(text);
+    return res.rows; // Return the entire array of rows
+  } catch (error) {
+    console.error("Error in getEvents:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
 
 export default {
   getUsers,
   getUserHash,
-  getUserByLogin, // tested
+  getEvents,
 
+  getUserByLogin, // !Dont need anymore
   getUserById, // tested
   assignRoleToUser,
   createVolunteer, // tested
