@@ -650,22 +650,54 @@ const createUser = async (
     username,
     passwordHash,
   ];
-  const res = await db.query(text, values);
-  return res.rows[0];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch(error) {
+    console.error("Error in createUser:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
 };
 
+/**
+ * Moves user from waiting list to rejected list.
+ *
+ * 
+ */
+const rejectUser = async (
+  userId
+) => {
+  const text = `
+  INSERT INTO rejected_users
+  SELECT * FROM volunteer_waiting_list
+  WHERE id = $1
+  RETURNING *;`;
+
+  const values = [userId];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch(error) {
+    console.error("Error in rejectUser:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+}
+
 export default {
+  // Currently using
   getUsers,
   getUserHash,
   getEvents,
   createVolunteer,
   addLog,
-
   createUser,
+  rejectUser,
+  createOrganizer,
 
+
+  // Currently for testing unused
   getUserById, // tested
   assignRoleToUser,
-  createOrganizer, // tested
   getVolunteerDetailsById, // tested
   getOrganizerDetailsById, // tested
   updateOrgName, // tested

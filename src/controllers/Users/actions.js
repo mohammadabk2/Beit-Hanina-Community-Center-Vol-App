@@ -58,8 +58,9 @@ const userActions = async (req, res) => {
       answer = await dbConnection.createVolunteer(actionID);
     }
 
-    if (action === "reject") {
+    if (action === "reject" && actionValue === "NA") {
       console.log("rejecting User");
+      answer = await dbConnection.rejectUser(actionID)
     }
 
     if (action === "log-user") {

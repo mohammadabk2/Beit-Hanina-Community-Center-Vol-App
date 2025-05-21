@@ -42,6 +42,23 @@ CREATE TABLE IF NOT EXISTS volunteer_waiting_list
     profile_image_url TEXT
 );
 
+CREATE TABLE IF NOT EXISTS rejected_users
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    phone_number VARCHAR(15) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    address VARCHAR(255) NOT NULL,
+    insurance VARCHAR(50) NOT NULL,
+    id_number VARCHAR(20) NOT NULL UNIQUE,
+    username VARCHAR(50) UNIQUE,
+    password_hash VARCHAR(255),
+    logs TEXT[],
+    profile_image_url TEXT
+);
+
 CREATE TABLE IF NOT EXISTS organizer
 (
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
