@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     banned BOOLEAN DEFAULT FALSE,
-    logs TEXT[],
+    logs TEXT[] DEFAULT '{}',
     role TEXT,
     profile_image_url TEXT
 );
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS volunteer
     id_number VARCHAR(20) NOT NULL UNIQUE,
     approved_hours INT DEFAULT 0,
     unapproved_hours INT DEFAULT 0,
-    orgs TEXT[]
+    orgs TEXT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS volunteer_waiting_list
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS volunteer_waiting_list
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[],
+    logs TEXT[] DEFAULT '{}',
     profile_image_url TEXT
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS rejected_users
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[],
+    logs TEXT[] DEFAULT '{}',
     profile_image_url TEXT
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS organizer
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     org_name VARCHAR(100) NOT NULL,
     given_hours INT DEFAULT 0,/*Ask Fadi*/
-    vol_id INT[]
+    vol_id INT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS events
@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS events
     event_end TIME NOT NULL,
     is_active BOOLEAN NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
-    vol_id INT[],
-    vol_id_waiting_list INT[],
+    vol_id INT[] DEFAULT '{}',
+    vol_id_waiting_list INT[] DEFAULT '{}',
     max_number_of_vol INT,
     current_number_of_vol INT DEFAULT 0,
     event_location TEXT NOT NULL,

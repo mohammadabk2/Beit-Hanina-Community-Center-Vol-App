@@ -1,11 +1,11 @@
 WITH inserted_events AS (
 INSERT INTO events (event_name, event_date, event_start, event_end, is_active, org_id, max_number_of_vol, current_number_of_vol, event_location, event_description)
 VALUES
-    ('Community Cleanup Drive', '2025-06-10', '09:00:00', '12:00:00', TRUE, 6, 30, 10, 'Central Park', 'Help us keep our park clean and green!'),
-    ('Summer Music Festival', '2025-07-15', '18:00:00', '22:00:00', TRUE, 6, 200, 80, 'Amphitheater', 'Annual festival featuring local bands.'),
-    ('Senior Citizen Brunch', '2025-06-25', '11:00:00', '13:00:00', FALSE, 6, 50, 45, 'Community Hall', 'A delightful brunch for our beloved seniors.'),
-    ('Youth Coding Workshop', '2025-07-01', '10:00:00', '16:00:00', TRUE, 6, 25, 15, 'Library Auditorium', 'Learn the basics of coding with fun projects.'),
-    ('Neighborhood Watch Meeting', '2025-06-05', '19:00:00', '20:30:00', TRUE, 6, 20, 18, 'Online via Zoom', 'Discussing local safety initiatives.')
+    ('Community Cleanup Drive', '2025-06-10', '09:00:00', '12:00:00', TRUE, 1, 30, 10, 'Central Park', 'Help us keep our park clean and green!'),
+    ('Summer Music Festival', '2025-07-15', '18:00:00', '22:00:00', TRUE, 1, 200, 80, 'Amphitheater', 'Annual festival featuring local bands.'),
+    ('Senior Citizen Brunch', '2025-06-25', '11:00:00', '13:00:00', FALSE, 1, 50, 45, 'Community Hall', 'A delightful brunch for our beloved seniors.'),
+    ('Youth Coding Workshop', '2025-07-01', '10:00:00', '16:00:00', TRUE, 1, 25, 15, 'Library Auditorium', 'Learn the basics of coding with fun projects.'),
+    ('Neighborhood Watch Meeting', '2025-06-05', '19:00:00', '20:30:00', TRUE, 1, 20, 18, 'Online via Zoom', 'Discussing local safety initiatives.')
 RETURNING event_id, event_name, is_active -- Return IDs for further use
 )
 -- ---
