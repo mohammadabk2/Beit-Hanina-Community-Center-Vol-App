@@ -603,12 +603,65 @@ const addLog = async (userId, logMessage) => {
   }
 };
 
+/**
+ * Creates a new user in the database.
+ *
+ * @async
+ * @param {string} tableName - Name of the table to be add to users_waiting_list or users
+ * @param {string} name - The full name of the user.
+ * @param {Date} birthDate - The birth date of the user (YYYY-MM-DD).
+ * @param {string} sex - The gender of the user (e.g., 'M' or 'F').
+ * @param {number} phoneNumber - The user's phone number.
+ * @param {string} email - The user's email address.
+ * @param {string} address - The user's home address.
+ * @param {string} insurance - The user's insurance provider.
+ * @param {number} idNumber - The user's government ID number.
+ * @param {string} username - The chosen username for the user.
+ * @param {string} passwordHash - The hashed password.
+ * @returns {Promise<Object>} A promise that resolves to the newly created user object.
+ * @throws {Error} If the database query fails.
+ */
+const createUser = async (
+  tableName,
+  name,
+  birthDate,
+  sex,
+  phoneNumber,
+  email,
+  address,
+  insurance,
+  idNumber,
+  username,
+  passwordHash
+) => {
+  const text = `
+    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    RETURNING *;`;
+  const values = [
+    name,
+    birthDate,
+    sex,
+    phoneNumber,
+    email,
+    address,
+    insurance,
+    idNumber,
+    username,
+    passwordHash,
+  ];
+  const res = await db.query(text, values);
+  return res.rows[0];
+};
+
 export default {
   getUsers,
   getUserHash,
   getEvents,
   createVolunteer,
   addLog,
+
+  createUser,
 
   getUserById, // tested
   assignRoleToUser,

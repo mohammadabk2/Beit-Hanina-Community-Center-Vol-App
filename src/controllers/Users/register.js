@@ -35,7 +35,7 @@ const registerVolunteer = async (req, res) => {
         );
       } else if (userData.type === "vol") {
         console.log("adding a Volunteer");
-        reg = await dbConnection.createVolunteer(
+        reg = await dbConnection.createUser(
           "volunteer_waiting_list",
           userData.fullName,
           userData.birthDate,
