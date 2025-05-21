@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS events
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[],
     vol_id_waiting_list INT[],
-    max_number_of_vol INT DEFAULT 0,
+    max_number_of_vol INT,
     current_number_of_vol INT DEFAULT 0,
     event_location TEXT NOT NULL,
     event_description TEXT DEFAULT ''

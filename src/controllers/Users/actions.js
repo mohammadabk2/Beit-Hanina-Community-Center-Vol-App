@@ -2,7 +2,7 @@ import dbConnection from "../../database/dbconnection.js";
 import jwt from "jsonwebtoken"; // Import the jsonwebtoken library
 
 const userActions = async (req, res) => {
-  console.log("approve/reject users");
+  console.log("approve/reject/log users");
 
   const { userID, actionID, action, actionValue } = req.body;
 
