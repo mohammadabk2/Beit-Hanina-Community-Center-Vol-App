@@ -28,7 +28,7 @@ const loadUsers = async (req, res) => {
     `Attempting load Uers from DB for userId: ${userID} for Table ${tableName}`
   );
 
-  const roles = ["volunteer", "organizer", "admin"];
+  const roles = ["organizer", "admin"];
   if (roles.includes(roleType.role)) {
     try {
       const users = await dbConnection.getUsers(tableName, "*");
@@ -36,24 +36,38 @@ const loadUsers = async (req, res) => {
       if (users && users.length > 0) {
         // console.log(users); // !testing only
 
-        const allUserData = users.map((user) => ({
-          id: user.id,
-          name: user.name,
-          birthDate: new Date(user.birth_date).toISOString().split("T")[0],
-          sex: user.sex,
-          phoneNumber: user.phone_number,
-          email: user.email,
-          address: user.address,
-          insurance: user.insurance,
-          idNumber: user.id_number,
-          userName: user.username,
-          logs: user.logs,
-        }));
+        let allUsers;
+
+        if (roleType.role === "admin") {
+          allUsers = users.map((user) => ({
+            id: user.id,
+            name: user.name,
+            birthDate: new Date(user.birth_date).toISOString().split("T")[0],
+            sex: user.sex,
+            phoneNumber: user.phone_number,
+            email: user.email,
+            address: user.address,
+            insurance: user.insurance,
+            idNumber: user.id_number,
+            userName: user.username,
+            logs: user.logs,
+          }));
+        }
+
+        if (roleType.role === "organizer") {
+          allUsers = users.map((user) => ({
+            id: user.id,
+            name: user.name,
+            birthDate: new Date(user.birth_date).toISOString().split("T")[0],
+            sex: user.sex,
+            phoneNumber: user.phone_number,
+          }));
+        }
 
         res.status(200).send({
           message: `Loading users successful!`,
           status: "success",
-          userData: allUserData,
+          userData: allUsers,
         });
       } else {
         console.log(`loading failed!!`);
