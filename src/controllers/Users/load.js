@@ -1,4 +1,5 @@
 import dbConnection from "../../database/dbconnection.js";
+import validateToken from "../common/validateToken.js";
 
 const loadUsers = async (req, res) => {
   console.log("Loading users from DB");
@@ -11,48 +12,63 @@ const loadUsers = async (req, res) => {
     });
   }
 
-  console.log(`Attempting load Uers from DB for userId: ${userID} for Table ${tableName}`);
-
-  //TODO verify id as a correct role
-  //TODO add token
+  let roleType;
   try {
-    const users = await dbConnection.getUsers(tableName, "*");
+    roleType = await validateToken(req);
+    console.log(`role type: ${roleType.role}`);
+  } catch (error) {
+    console.log(error);
+    return res.status(error.statusCode).send({
+      message: error,
+      status: "fail",
+    });
+  }
 
-    if (users && users.length > 0) {
-      console.log(users); // !testing only
+  console.log(
+    `Attempting load Uers from DB for userId: ${userID} for Table ${tableName}`
+  );
 
-      const allUserData = users.map((user) => ({
-        id: user.id,
-        name: user.name,
-        birthDate: new Date(user.birth_date).toISOString().split('T')[0],
-        sex: user.sex,
-        phoneNumber: user.phone_number,
-        email: user.email,
-        address: user.address,
-        insurance: user.insurance,
-        idNumber: user.id_number,
-        userName: user.username,
-        logs: user.logs,
-      }));
+  const roles = ["volunteer", "organizer", "admin"];
+  if (roles.includes(roleType.role)) {
+    try {
+      const users = await dbConnection.getUsers(tableName, "*");
 
-      res.status(200).send({
-        message: `Loading users successful!`,
-        status: "success",
-        userData: allUserData,
-      });
-    } else {
-      console.log(`loading failed!!`);
-      res.status(401).send({
-        message: "invalid query struct",
-        status: "fail",
+      if (users && users.length > 0) {
+        // console.log(users); // !testing only
+
+        const allUserData = users.map((user) => ({
+          id: user.id,
+          name: user.name,
+          birthDate: new Date(user.birth_date).toISOString().split("T")[0],
+          sex: user.sex,
+          phoneNumber: user.phone_number,
+          email: user.email,
+          address: user.address,
+          insurance: user.insurance,
+          idNumber: user.id_number,
+          userName: user.username,
+          logs: user.logs,
+        }));
+
+        res.status(200).send({
+          message: `Loading users successful!`,
+          status: "success",
+          userData: allUserData,
+        });
+      } else {
+        console.log(`loading failed!!`);
+        res.status(401).send({
+          message: "invalid query struct",
+          status: "fail",
+        });
+      }
+    } catch (error) {
+      console.error("Error during loading:", error);
+      res.status(500).send({
+        message: "An internal server error occurred during login.",
+        status: "error",
       });
     }
-  } catch (error) {
-    console.error("Error during loading:", error);
-    res.status(500).send({
-      message: "An internal server error occurred during login.",
-      status: "error",
-    });
   }
 };
 export default loadUsers;

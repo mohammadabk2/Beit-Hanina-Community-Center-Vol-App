@@ -5,7 +5,6 @@ const loadEvents = async (req, res) => {
   console.log("Loading Events from DB");
 
   const { userID, userRequest } = req.body;
-  // const authHeader = req.headers.authorization;
 
   if (!userID || !userRequest) {
     const message = "User Id or Request Failed.";
