@@ -160,8 +160,10 @@
 │   │   ├── common
 │   │   │   ├── authenticate.js
 │   │   │   ├── error.js
-│   │   │   └── ping.js
+│   │   │   ├── ping.js
+│   │   │   └── validateToken.js
 │   │   ├── Events
+│   │   │   ├── actions.js
 │   │   │   ├── createEvent.js
 │   │   │   └── loadEvents.js
 │   │   ├── index.js
@@ -197,5 +199,5 @@
 │   └── test_data.sql
 └── workbox-config.cjs
 
-44 directories, 151 files
+44 directories, 153 files
 ```

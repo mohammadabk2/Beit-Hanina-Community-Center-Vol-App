@@ -1,5 +1,4 @@
 import dbConnection from "../../database/dbconnection.js";
-import jwt from "jsonwebtoken"; // Import the jsonwebtoken library
 import validateToken from "../common/validateToken.js";
 
 const loadEvents = async (req, res) => {
