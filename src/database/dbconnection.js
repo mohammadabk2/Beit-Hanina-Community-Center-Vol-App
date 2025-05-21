@@ -4,36 +4,88 @@ import db from "./db.js";
 //TODO some functions rely on names maybe the should also get id
 
 /**
- * Creates a new user in the database.
+ * Moves a volunteer from the waiting list to the main users and volunteer tables.
  *
  * @async
- * @param {string} tableName - Name of the table to be add to users_waiting_list or users
- * @param {string} name - The full name of the user.
- * @param {Date} birthDate - The birth date of the user (YYYY-MM-DD).
- * @param {string} sex - The gender of the user (e.g., 'M' or 'F').
- * @param {number} phoneNumber - The user's phone number.
- * @param {string} email - The user's email address.
- * @param {string} address - The user's home address.
- * @param {string} insurance - The user's insurance provider.
- * @param {number} idNumber - The user's government ID number.
- * @param {string} username - The chosen username for the user.
- * @param {string} passwordHash - The hashed password.
- * @returns {Promise<Object>} A promise that resolves to the newly created user object.
- * @throws {Error} If the database query fails.
+ * @param {number} waitingListId - The ID of the volunteer in the volunteer_waiting_list table.
+ * @returns {Promise<Object>} The combined user and volunteer data after insertion.
+ * @throws {Error} If any database operation fails.
  */
-const createVolunteer = async (
-  tableName,
-  name,
-  birthDate,
-  sex,
-  phoneNumber,
-  email,
-  address,
-  insurance,
-  idNumber,
-  username,
-  passwordHash
-) => {
+const createVolunteer = async (waitingListId) => {
+  const client = await db.pool.connect();
+  try {
+    await client.query("BEGIN");
+
+    // Fetch data from waiting list table
+    const fetchText = `
+      SELECT *
+      FROM volunteer_waiting_list
+      WHERE id = $1
+      FOR UPDATE;`;
+    const fetchRes = await client.query(fetchText, [waitingListId]);
+
+    if (fetchRes.rows.length === 0) {
+      throw new Error(
+        `No volunteer found with id ${waitingListId} in waiting list.`
+      );
+    }
+
+    const v = fetchRes.rows[0];
+
+    // Insert into users table
+    const userInsertText = `
+      INSERT INTO users (phone_number, email, address, username, password_hash, logs, profile_image_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;`;
+    const userValues = [
+      v.phone_number,
+      v.email,
+      v.address,
+      v.username,
+      v.password_hash,
+      v.logs || [],
+      v.profile_image_url || null,
+    ];
+    const userRes = await client.query(userInsertText, userValues);
+    const user = userRes.rows[0];
+
+    // Insert into Volunteer table
+    const volunteerInsertText = `
+      INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;`;
+    const volunteerValues = [
+      user.id,
+      v.name,
+      v.birth_date,
+      v.sex,
+      v.insurance,
+      v.id_number,
+    ];
+    const volunteerRes = await client.query(
+      volunteerInsertText,
+      volunteerValues
+    );
+    const volunteer = volunteerRes.rows[0];
+
+    //  Delete from waiting list
+    const deleteText = `DELETE FROM volunteer_waiting_list WHERE id = $1;`;
+    await client.query(deleteText, [waitingListId]);
+
+    await client.query("COMMIT");
+
+    return {
+      ...user,
+      ...volunteer,
+    };
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw new Error(
+      "Failed to move volunteer from waiting list: " + err.message
+    );
+  } finally {
+    client.release();
+  }
   const text = `
     INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
