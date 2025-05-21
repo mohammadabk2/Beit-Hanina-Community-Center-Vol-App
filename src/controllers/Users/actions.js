@@ -31,8 +31,7 @@ const userActions = async (req, res) => {
     `Attempting Action ${action} From User: ${userID} on User ${actionID}`
   );
 
-  const roles = ["volunteer", "organizer", "admin"];
-  if (roles.includes(roleType.role)) {
+  if (roleType.role === "admin") {
     try {
       let answer;
 
@@ -74,6 +73,13 @@ const userActions = async (req, res) => {
         status: "error",
       });
     }
+  } else {
+    const message = "User lacks permissions";
+    console.log(message);
+    res.status(401).send({
+      message: message,
+      status: "error",
+    });
   }
 };
 
