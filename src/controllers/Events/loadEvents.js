@@ -52,7 +52,7 @@ const loadEvents = async (req, res) => {
       });
     }
 
-    const events = await dbConnection.getEvents("*");
+    const events = await dbConnection.getEvents(["approved", "finished"]);
 
     if (events && events.length > 0) {
       const allEvents = events.map((event) => ({
@@ -78,11 +78,11 @@ const loadEvents = async (req, res) => {
         userData: allEvents,
       });
     } else {
-      const message = `loading failed!! invalid query struct`;
+      const message = `There does not exist any events under this category.`;
       console.log(message);
-      res.status(401).send({
+      res.status(200).send({
         message: message,
-        status: "fail",
+        status: "success",
       });
     }
   } catch (error) {

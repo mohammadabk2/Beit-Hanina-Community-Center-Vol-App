@@ -565,9 +565,22 @@ const getUserHash = async (username) => {
  * @throws {Error} If the database query fails.
  */
 const getEvents = async (columnNames) => {
-  const text = `SELECT ${columnNames} FROM events;`;
+  // Return query for fetching event ids from each field
+  const unionQueries = columnNames.map(colName => {
+    return `SELECT UNNEST(${colName}) FROM events_status
+    WHERE ${colName} IS NOT NULL AND array_length(${colName}, 1) > 0`
+  });
+  // Join queries together
+  const idsQuery = unionQueries.join(' UNION ALL ');
+  console.log(`full query: ${idsQuery}`)
   try {
-    const res = await db.query(text);
+    // Stores event ids in values as array
+    const values = await db.query(idsQuery);
+    const idsToFetch = values.rows.map(row => row.unnest);
+    // Fetches requested events from events table
+    const eventsQuery = `SELECT * FROM events WHERE event_id = ANY($1::int[]);`
+    const res = await db.query(eventsQuery, [idsToFetch]);
+
     return res.rows; // Return the entire array of rows
   } catch (error) {
     console.error("Error in getEvents:", error);
@@ -661,8 +674,9 @@ const createUser = async (
 
 /**
  * Moves user from waiting list to rejected list.
- *
- * 
+ * @param {number} userId - User id to reject.
+ * @returns {Promise<Object>} A promise that resolves to the newly rejected user object.
+ * @throws {Error} If the database query fails.
  */
 const rejectUser = async (
   userId
