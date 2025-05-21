@@ -2,13 +2,13 @@
 
 -- Users
 INSERT INTO users (phone_number, email, address, username, password_hash, banned, logs, role, profile_image_url) VALUES
-('123-456-7890', 'john.doe@example.com', '123 Main St, Anytown, USA', 'johndoe', 'hashed_password_1', FALSE, ARRAY['User created', 'Logged in'], 'volunteer', 'http://example.com/profiles/johndoe.jpg'),
-('987-654-3210', 'jane.smith@example.com', '456 Oak Ave, Anytown, USA', 'janesmith', 'hashed_password_2', FALSE, ARRAY['User created'], 'organizer', 'http://example.com/profiles/janesmith.jpg'),
-('555-123-4567', 'alice.wonder@example.com', '789 Pine Ln, Anytown, USA', 'alicew', 'hashed_password_3', FALSE, ARRAY['User created', 'Updated profile'], 'volunteer', 'http://example.com/profiles/alicew.jpg'),
-('555-987-6543', 'bob.builder@example.com', '101 Builder Rd, Buildsville, USA', 'bobthebuilder', 'hashed_password_4', TRUE, ARRAY['User created', 'Banned due to inactivity'], 'volunteer', 'http://example.com/profiles/bob.jpg'),
-('555-555-5555', 'carol.danvers@example.com', '202 Sky High, Metropolis, USA', 'captainmarvel', 'hashed_password_5', FALSE, ARRAY['User created'], 'organizer', NULL),
-('111-222-3333', 'pending.user@example.com', '303 Waitlist Way, Temp Town, USA', 'pendinguser', 'hashed_password_6', FALSE, ARRAY['Registration attempt'], NULL, 'http://example.com/profiles/pending.jpg'),
-('444-555-6666', 'rejected.user@example.com', '404 Reject Rd, Outcast City, USA', 'rejecteduser', 'hashed_password_7', FALSE, ARRAY['Registration attempt', 'Application rejected'], NULL, 'http://example.com/profiles/rejected.jpg');
+('123-456-7890', 'john.doe@example.com', '123 Main St, Anytown, USA', 'admin', 'password', FALSE, ARRAY['User created', 'Logged in'], 'admin', 'http://example.com/profiles/johndoe.jpg'),
+('987-654-3210', 'jane.smith@example.com', '456 Oak Ave, Anytown, USA', 'org', 'password', FALSE, ARRAY['User created'], 'organizer', 'http://example.com/profiles/janesmith.jpg'),
+('555-123-4567', 'alice.wonder@example.com', '789 Pine Ln, Anytown, USA', 'vol', 'password', FALSE, ARRAY['User created', 'Updated profile'], 'volunteer', 'http://example.com/profiles/alicew.jpg'),
+('555-987-6543', 'bob.builder@example.com', '101 Builder Rd, Buildsville, USA', 'bobthebuilder', 'password', TRUE, ARRAY['User created', 'Banned due to inactivity'], 'volunteer', 'http://example.com/profiles/bob.jpg'),
+('555-555-5555', 'carol.danvers@example.com', '202 Sky High, Metropolis, USA', 'captainmarvel', 'password', FALSE, ARRAY['User created'], 'volunteer', NULL),
+('111-222-3333', 'pending.user@example.com', '303 Waitlist Way, Temp Town, USA', 'pendinguser', 'password', FALSE, ARRAY['Registration attempt'], 'volunteer', 'http://example.com/profiles/pending.jpg'),
+('444-555-6666', 'rejected.user@example.com', '404 Reject Rd, Outcast City, USA', 'rejecteduser', 'password', FALSE, ARRAY['Registration attempt', 'Application rejected'], 'volunteer', 'http://example.com/profiles/rejected.jpg');
 
 -- Volunteer
 -- Assuming user_id 1 (johndoe) and 3 (alicew) are volunteers
@@ -40,11 +40,11 @@ INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address,
 -- Events
 -- Assuming org_id 2 (Helping Hands Org - Jane Smith) and 5 (Planeteers Foundation - Carol Danvers)
 INSERT INTO events (event_name, event_date, event_start, event_end, is_active, org_id, vol_id, vol_id_waiting_list, max_number_of_vol, current_number_of_vol, event_location, event_description) VALUES
-('Community Clean-Up Day', '2025-06-15', '09:00:00', '14:00:00', TRUE, 2, ARRAY[1], ARRAY[], 50, 1, 'Central Park, Anytown', 'Join us to clean up Central Park and make our city greener!'),
-('Animal Shelter Adoption Drive', '2025-07-20', '11:00:00', '16:00:00', TRUE, 5, ARRAY[3], ARRAY[], 30, 1, 'Anytown Animal Shelter', 'Help find forever homes for our lovely animals. Volunteers needed for various roles.'),
-('Fundraising Gala Prep', '2025-08-01', '10:00:00', '18:00:00', FALSE, 2, ARRAY[], ARRAY[], 20, 0, 'Grand Ballroom, Anytown', 'Assist with setting up and organizing our annual fundraising gala. This event is in planning (is_active=FALSE).'),
-('Tree Planting Initiative', '2025-09-10', '08:00:00', '13:00:00', TRUE, 5, ARRAY[], ARRAY[], 100, 0, 'Green Valley National Park', 'Participate in our massive tree planting event to combat deforestation.'),
-('Soup Kitchen Service', '2025-06-05', '17:00:00', '20:00:00', TRUE, 2, ARRAY[1], ARRAY[], 15, 1, 'Downtown Soup Kitchen', 'Serve meals to those in need. This event has finished based on date, but is_active could be used differently.');
+('Community Clean-Up Day', '2025-06-15', '09:00:00', '14:00:00', TRUE, 2, ARRAY[1], ARRAY[]::INT[], 50, 1, 'Central Park, Anytown', 'Join us to clean up Central Park and make our city greener!'),
+('Animal Shelter Adoption Drive', '2025-07-20', '11:00:00', '16:00:00', TRUE, 5, ARRAY[3], ARRAY[]::INT[], 30, 1, 'Anytown Animal Shelter', 'Help find forever homes for our lovely animals. Volunteers needed for various roles.'),
+('Fundraising Gala Prep', '2025-08-01', '10:00:00', '18:00:00', FALSE, 2, ARRAY[]::INT[], ARRAY[]::INT[], 20, 0, 'Grand Ballroom, Anytown', 'Assist with setting up and organizing our annual fundraising gala. This event is in planning (is_active=FALSE).'),
+('Tree Planting Initiative', '2025-09-10', '08:00:00', '13:00:00', TRUE, 5, ARRAY[]::INT[], ARRAY[]::INT[], 100, 0, 'Green Valley National Park', 'Participate in our massive tree planting event to combat deforestation.'),
+('Soup Kitchen Service', '2025-06-05', '17:00:00', '20:00:00', TRUE, 2, ARRAY[1], ARRAY[]::INT[], 15, 1, 'Downtown Soup Kitchen', 'Serve meals to those in need. This event has finished based on date, but is_active could be used differently.');
 
 -- Events Status
 -- This table structure is a bit unconventional. It assumes a single row holding arrays of event_ids.
