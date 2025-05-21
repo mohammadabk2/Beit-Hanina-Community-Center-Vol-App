@@ -4,54 +4,88 @@ import db from "./db.js";
 //TODO some functions rely on names maybe the should also get id
 
 /**
- * Creates a new user in the database.
+ * Moves a volunteer from the waiting list to the main users and volunteer tables.
  *
  * @async
- * @param {string} tableName - Name of the table to be add to users_waiting_list or users
- * @param {string} name - The full name of the user.
- * @param {Date} birthDate - The birth date of the user (YYYY-MM-DD).
- * @param {string} sex - The gender of the user (e.g., 'M' or 'F').
- * @param {number} phoneNumber - The user's phone number.
- * @param {string} email - The user's email address.
- * @param {string} address - The user's home address.
- * @param {string} insurance - The user's insurance provider.
- * @param {number} idNumber - The user's government ID number.
- * @param {string} username - The chosen username for the user.
- * @param {string} passwordHash - The hashed password.
- * @returns {Promise<Object>} A promise that resolves to the newly created user object.
- * @throws {Error} If the database query fails.
+ * @param {number} waitingListId - The ID of the volunteer in the volunteer_waiting_list table.
+ * @returns {Promise<Object>} The combined user and volunteer data after insertion.
+ * @throws {Error} If any database operation fails.
  */
-const createVolunteer = async (
-  tableName,
-  name,
-  birthDate,
-  sex,
-  phoneNumber,
-  email,
-  address,
-  insurance,
-  idNumber,
-  username,
-  passwordHash
-) => {
-  const text = `
-    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-    RETURNING *;`;
-  const values = [
-    name,
-    birthDate,
-    sex,
-    phoneNumber,
-    email,
-    address,
-    insurance,
-    idNumber,
-    username,
-    passwordHash,
-  ];
-  const res = await db.query(text, values);
-  return res.rows[0];
+const createVolunteer = async (waitingListId) => {
+  const client = await db.pool.connect();
+  try {
+    await client.query("BEGIN");
+
+    // Fetch data from waiting list table
+    const fetchText = `
+      SELECT *
+      FROM volunteer_waiting_list
+      WHERE id = $1
+      FOR UPDATE;`;
+    const fetchRes = await client.query(fetchText, [waitingListId]);
+
+    if (fetchRes.rows.length === 0) {
+      throw new Error(
+        `No volunteer found with id ${waitingListId} in waiting list.`
+      );
+    }
+
+    const v = fetchRes.rows[0];
+
+    // Insert into users table
+    const userInsertText = `
+      INSERT INTO users (phone_number, email, address, username, password_hash, logs, profile_image_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;`;
+    const userValues = [
+      v.phone_number,
+      v.email,
+      v.address,
+      v.username,
+      v.password_hash,
+      v.logs || [],
+      v.profile_image_url || null,
+    ];
+    const userRes = await client.query(userInsertText, userValues);
+    const user = userRes.rows[0];
+
+    // Insert into Volunteer table
+    const volunteerInsertText = `
+      INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;`;
+    const volunteerValues = [
+      user.id,
+      v.name,
+      v.birth_date,
+      v.sex,
+      v.insurance,
+      v.id_number,
+    ];
+    const volunteerRes = await client.query(
+      volunteerInsertText,
+      volunteerValues
+    );
+    const volunteer = volunteerRes.rows[0];
+
+    //  Delete from waiting list
+    const deleteText = `DELETE FROM volunteer_waiting_list WHERE id = $1;`;
+    await client.query(deleteText, [waitingListId]);
+
+    await client.query("COMMIT");
+
+    return {
+      ...user,
+      ...volunteer,
+    };
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw new Error(
+      "Failed to move volunteer from waiting list: " + err.message
+    );
+  } finally {
+    client.release();
+  }
 };
 
 /**
@@ -133,22 +167,6 @@ const updateUser = async (userId, updates) => {
     console.error("Error updating user:", error);
     throw new Error("Failed to update user");
   }
-};
-
-/**
- * Retrieves a user from the database by username and password hash.
- *
- * @async
- * @param {string} username - The username of the user.
- * @param {string} hash - The hashed password.
- * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
- * @throws {Error} If the database query fails.
- */
-const getUserByLogin = async (username, hash) => {
-  const text =
-    "SELECT * FROM users WHERE username = $1 AND password_hash = $2;";
-  const res = await db.query(text, [username, hash]);
-  return res.rows[0];
 };
 
 /**
@@ -543,7 +561,7 @@ const getUserHash = async (username) => {
  *
  * @async
  * @param {string} username - The username of the user.
- * @returns {Promise<string|null>} A promise that resolves to the user hash object if found, or null if not found.
+ * @returns {Promise<string|null>} A promise that resolves to the user object if found, or null if not found.
  * @throws {Error} If the database query fails.
  */
 const getEvents = async (columnNames) => {
@@ -557,16 +575,129 @@ const getEvents = async (columnNames) => {
   }
 };
 
+/**
+ * Adds a log to the Logs array of a user
+ *
+ * @async
+ * @param {number} userID - The ID of the user.
+ * @param {string} logMessage - new entry to the logs array
+ * @returns {Promise<string|null>} A promise that resolves to the user object if found, or null if not found.
+ * @throws {Error} If the database query fails.
+ */
+const addLog = async (userId, logMessage) => {
+  const text = `UPDATE users SET logs = array_append(COALESCE(logs, ARRAY[]::TEXT[]), $1) WHERE id = $2 RETURNING *;`;
+  const values = [logMessage, userId];
+
+  try {
+    const res = await db.query(text, values);
+
+    if (res.rows.length === 0) {
+      console.warn(`User with id ${userId} not found`);
+      return null;
+    }
+
+    return res.rows[0];
+  } catch (error) {
+    console.error("Error in addLog:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
+/**
+ * Creates a new user in the database.
+ *
+ * @async
+ * @param {string} tableName - Name of the table to be add to users_waiting_list or users
+ * @param {string} name - The full name of the user.
+ * @param {Date} birthDate - The birth date of the user (YYYY-MM-DD).
+ * @param {string} sex - The gender of the user (e.g., 'M' or 'F').
+ * @param {number} phoneNumber - The user's phone number.
+ * @param {string} email - The user's email address.
+ * @param {string} address - The user's home address.
+ * @param {string} insurance - The user's insurance provider.
+ * @param {number} idNumber - The user's government ID number.
+ * @param {string} username - The chosen username for the user.
+ * @param {string} passwordHash - The hashed password.
+ * @returns {Promise<Object>} A promise that resolves to the newly created user object.
+ * @throws {Error} If the database query fails.
+ */
+const createUser = async (
+  tableName,
+  name,
+  birthDate,
+  sex,
+  phoneNumber,
+  email,
+  address,
+  insurance,
+  idNumber,
+  username,
+  passwordHash
+) => {
+  const text = `
+    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    RETURNING *;`;
+  const values = [
+    name,
+    birthDate,
+    sex,
+    phoneNumber,
+    email,
+    address,
+    insurance,
+    idNumber,
+    username,
+    passwordHash,
+  ];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch(error) {
+    console.error("Error in createUser:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
+/**
+ * Moves user from waiting list to rejected list.
+ *
+ * 
+ */
+const rejectUser = async (
+  userId
+) => {
+  const text = `
+  INSERT INTO rejected_users
+  SELECT * FROM volunteer_waiting_list
+  WHERE id = $1
+  RETURNING *;`;
+
+  const values = [userId];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch(error) {
+    console.error("Error in rejectUser:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+}
+
 export default {
+  // Currently using
   getUsers,
   getUserHash,
   getEvents,
+  createVolunteer,
+  addLog,
+  createUser,
+  rejectUser,
+  createOrganizer,
 
-  getUserByLogin, // !Dont need anymore
+
+  // Currently for testing unused
   getUserById, // tested
   assignRoleToUser,
-  createVolunteer, // tested
-  createOrganizer, // tested
   getVolunteerDetailsById, // tested
   getOrganizerDetailsById, // tested
   updateOrgName, // tested
