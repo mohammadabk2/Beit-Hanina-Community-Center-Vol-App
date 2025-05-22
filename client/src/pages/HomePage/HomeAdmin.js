@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 
@@ -21,6 +21,7 @@ const HomeAdmin = () => {
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
+  const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
   const people = initialPeople; //! Using static data for now
   
@@ -30,10 +31,22 @@ const HomeAdmin = () => {
     setPersonView(true); // Set personView to true by default when switching to "people"
   };
   const switchToCreateOrg = () => setViewMode("createOrg");
+ 
+  // To switch between card to table view whith appropriate sizes
   const togglePersonView = () => {
-    setPersonView(!personView); // Toggle between card and table view
-  }
-  
+    setPersonView(personView => {
+      const newPersonView = !personView;
+      if (personContainerRef.current) {
+        if (personView) {
+          personContainerRef.current.classList.add('perosnal-area-content');
+        } else {
+          personContainerRef.current.classList.remove('perosnal-area-content');
+        }
+      }
+      return newPersonView;
+    });
+  };
+
   const sortEvents = () => {
     console.log("Sort events button clicked");
     // Add sorting logic for events array here if needed
@@ -117,14 +130,13 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div id="user-table" className="scroll-box1 flex-box flex-column">
+        <div ref={personContainerRef} className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
               onClick={sortPeople}
               text={t("sort")}
             />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToEvents}
@@ -149,7 +161,6 @@ const HomeAdmin = () => {
                   : t("switch_to_card_view")
               }
             />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToCreateOrg}

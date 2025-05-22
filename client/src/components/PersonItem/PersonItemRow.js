@@ -37,10 +37,8 @@ const PersonItemRow = ({
       <td>{phoneNumber}</td>
       <td>{email}</td>
       <td>{address}</td>
-      <td>{insurance}</td> {/* Example: Can be added back if needed */}
-      <td>{idNumber}</td> {/* Example: Can be added back if needed */}
-      {/* <td>{skillsDisplay}</td> */} {/* Example: Skills cell */}
-      {/* Action Buttons - Render appropriate buttons in shared cells */}
+      <td>{insurance}</td>
+      <td>{idNumber}</td>
       {newUser ? (
         <>
           <td>

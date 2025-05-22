@@ -29,9 +29,8 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
             {/* Maybe add Insurance/ID later if needed, or show in details view */}
             <th>{tsignup("insurance")}</th>
             <th>{tsignup("idNumber")}</th>
-            {/*<th>{tskill("skills")}</th>*/} {/* Example skills header */}
             <th colSpan={isNewUserList ? 2 : 2} className="actions-header"> {/* Adjust colSpan */}
-              {t("actions")} {/* Single 'Actions' Header */}
+              {t("actions")}
             </th>
           </tr>
         </thead>
