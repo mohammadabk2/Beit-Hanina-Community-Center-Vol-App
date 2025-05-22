@@ -68,7 +68,6 @@ const HomeAdmin = () => {
           name={event.name}
           desc={event.desc}
           req={event.req}
-          className="flex-box flex-column event-box smooth-shadow-box"
           type="admin"
           count={event.count}
           size={event.size}

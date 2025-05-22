@@ -52,7 +52,6 @@ const HomeOrganizer = () => {
         name={event.name}
         desc={event.desc}
         req={event.req}
-        className="flex-box flex-column event-box smooth-shadow-box"
         type="org"
         count={event.count}
         size={event.size}
