@@ -115,7 +115,7 @@ button {
 
 /*Styling for navigation box*/
 .navigation-box {
-  width: 90vw;
+  width: 90%;
   background-color: var(--bottom-scroll-box);
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -536,7 +536,7 @@ input:focus, textarea:focus{
   .event-box-content-middle {
     width: 85%;
   }
-
+  
   .bottom-scroll-box1 {
     height: 60vh;
   }
