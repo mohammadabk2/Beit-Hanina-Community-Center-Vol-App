@@ -58,12 +58,13 @@ button {
 
 /*Gives container white background that can resize */
 .general-box {
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
   width: 80vw;
   margin-top: 0.0625rem;
   border-radius: 0.625rem;
   background-color: var(--box-background-color);
   max-width: 34.5625rem;
+  overflow-y: auto;
 }
 
 /*Organizes containers in column when combined with flex-box class */
@@ -129,7 +130,7 @@ button {
   border-radius: 0.3125rem;
   border: solid;
   border-width: 0.0625rem;
-  margin: 1rem;
+  margin: 0.6rem;
   padding: 0.3125rem;
   font-size: 1rem;
   width: 80%;
@@ -138,11 +139,13 @@ button {
 /*Makes input field container responsive */
 .input-field-box, textarea{
   width: 80%;
+  margin-top: 0.5rem;
 }
 
 body {
-  background-color: var(--body-color);
-  color: var(--general-text);
+  background-color: #e5e5f7;
+  opacity: 1;
+  background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #444cf7 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
 }
 
 /*Dropdown menu classes for styling */
@@ -311,6 +314,7 @@ input:focus, textarea:focus{
 
 .scroll-box1,
 .person-table-content {
+  border-radius: 1rem;
   width: 95%;
   max-width: 36.4375rem;
   background-color: var(--body-color);

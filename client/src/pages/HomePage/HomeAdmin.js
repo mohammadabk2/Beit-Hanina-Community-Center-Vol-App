@@ -30,8 +30,10 @@ const HomeAdmin = () => {
     setPersonView(true); // Set personView to true by default when switching to "people"
   };
   const switchToCreateOrg = () => setViewMode("createOrg");
-  const togglePersonView = () => setPersonView(!personView); // Toggle between card and table view
-
+  const togglePersonView = () => {
+    setPersonView(!personView); // Toggle between card and table view
+  }
+  
   const sortEvents = () => {
     console.log("Sort events button clicked");
     // Add sorting logic for events array here if needed
@@ -66,7 +68,7 @@ const HomeAdmin = () => {
   const renderEvents = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
+        <div className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
@@ -115,7 +117,7 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
+        <div id="user-table" className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"

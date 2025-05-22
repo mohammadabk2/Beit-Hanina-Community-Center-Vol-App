@@ -49,61 +49,63 @@ const App = () => {
   const { t } = useTranslation("app");
 
   return (
-    <div className="app flex-box flex-column">
-      <NavigationBar dontShowPageButtons={true} />
-      <header className="app-header basic-box-padding">
-        {/* <div className="basic-item-padding">
-          <img className="centre-img" src={centreLogo} alt="Centre Logo"></img>
-        </div> */}
+    <>
+      <div className="app flex-box flex-column">
+        <NavigationBar dontShowPageButtons={true} />
+        <header className="app-header basic-box-padding">
+          {/* <div className="basic-item-padding">
+            <img className="centre-img" src={centreLogo} alt="Centre Logo"></img>
+          </div> */}
 
-        <div className="basic-item-padding">{t("name")}</div>
-        <div className="basic-item-padding">{t("desc")}</div>
-      </header>
+          <h1>{t("name")}</h1>
+          <h3>{t("desc")}</h3>
+        </header>
 
-      <div className="general-box flex-box flex-column smooth-shadow-box">
-        <div>{t("welcome")}</div>
+        <div className="general-box flex-box flex-column smooth-shadow-box">
+          <h2>{t("welcome")}</h2>
 
-        <div className="input-field-box">
-          <DynamicInput
-            className="input-field"
-            type="text"
-            value={username}
-            name="username-field"
-            onChange={handleUserName}
-            placeholder={t("user-name-placeholder")}
-          />
+          <div className="input-field-box">
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={username}
+              name="username-field"
+              onChange={handleUserName}
+              placeholder={t("user-name-placeholder")}
+            />
 
-          <DynamicInput
-            className="input-field"
-            type="password"
-            value={password}
-            name="password-field"
-            onChange={handlePassword}
-            placeholder={t("password-placeholder")}
-          />
-        </div>
-
-        <div className="flex-box">
-          <div>
-            <DynamicButton
-              className="button"
-              onClick={signIn}
-              text={t("sign-in")}
+            <DynamicInput
+              className="input-field"
+              type="password"
+              value={password}
+              name="password-field"
+              onChange={handlePassword}
+              placeholder={t("password-placeholder")}
             />
           </div>
 
-          <div>
-            <DynamicButton
-              className="button"
-              onClick={signUp}
-              text={t("sign-up")}
-            />
+          <div className="flex-box">
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signIn}
+                text={t("sign-in")}
+              />
+            </div>
+
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signUp}
+                text={t("sign-up")}
+              />
+            </div>
           </div>
         </div>
+
+        <CopyRight />
       </div>
-
-      <CopyRight />
-    </div>
+    </>
   );
 };
 
