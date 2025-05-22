@@ -4,9 +4,9 @@ import validateToken from "../common/validateToken.js";
 const eventActions = async (req, res) => {
   console.log("Event Actions");
 
-  const { userID, eventID, action, actionValue } = req.body;
+  const { userID, eventID, action } = req.body;
 
-  if (!userID || !eventID || !action || !actionValue) {
+  if (!userID || !eventID || !action) {
     const message = "Request body Failed.";
     console.log(message);
     return res.status(400).send({
@@ -34,15 +34,23 @@ const eventActions = async (req, res) => {
   const roles = ["volunteer", "organizer", "admin"];
   if (roles.includes(roleType.role)) {
     try {
-      let answer ="temp";
+      let answer;
 
       if (roleType.role === "admin") {
         console.log("Events Admin action");
         if (action === "approve") {
-          //TODO approve event
+          answer = dbConnection.updateEventStatus(
+            eventID,
+            "approved",
+            "pending"
+          );
         }
         if (action === "reject") {
-          //TODO reject event
+          answer = dbConnection.updateEventStatus(
+            eventID,
+            "rejected",
+            "pending"
+          );
         }
       }
 

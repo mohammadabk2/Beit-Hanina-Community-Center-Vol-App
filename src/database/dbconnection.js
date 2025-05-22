@@ -527,7 +527,7 @@ const addEvent = async (
       RETURNING *;`;
 
     const updateStatusValues = [eventId];
-    const statusResult =  await db.query(updateStatusText, updateStatusValues);
+    const statusResult = await db.query(updateStatusText, updateStatusValues);
 
     return statusResult.rows[0];
   } catch (error) {
@@ -734,6 +734,30 @@ const rejectUser = async (userId) => {
   }
 };
 
+/**
+ * @param {number} eventID
+ * @param {string} newStatus
+ * @param {string} currentStatus
+ */
+const updateEventStatus = async (eventID, newStatus, currentStatus) => {
+  const text = `
+  UPDATE events_status
+  SET
+      ${currentStatus} = ARRAY_REMOVE(${currentStatus}, $1),
+      ${newStatus} = ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
+  WHERE TRUE
+  RETURNING *;`;
+
+  const values = [eventID];
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error("Error in updateEventStatus:", error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -745,6 +769,7 @@ export default {
   rejectUser,
   createOrganizer,
   addEvent,
+  updateEventStatus,
 
   // Currently for testing unused
   getUserById, // tested

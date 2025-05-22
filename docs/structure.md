@@ -189,15 +189,13 @@
 │   │   └── verifyToken.js
 │   └── server.js
 ├── tests
+│   ├── addAdmin.sql
 │   ├── drop_tables.sql
 │   ├── events.sql
 │   ├── populate.sql
-│   ├── postman
-│   │   └── App-test.postman_collection.json
-│   ├── README.md
-│   ├── register_test
-│   └── test_data.sql
+│   └── postman
+│       └── App-test.postman_collection.json
 └── workbox-config.cjs
 
-44 directories, 153 files
+44 directories, 151 files
 ```
