@@ -63,7 +63,7 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
         <div>
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
-        <div className="flex-box flex-column">
+        <div className="flex-box flex-column skills-box">
           <div>{tskill("skills")}:</div>
           <div className="flex-box wrap-reverse">
             {req.map((item, index) => (
@@ -76,7 +76,7 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
         </div>
       </div>
       <div>
-      📍{eventLocation} {/*Location, can be styled or not */}
+      {eventLocation} {/*Location, can be styled or not */}
       </div>
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>

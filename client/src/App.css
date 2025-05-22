@@ -4,7 +4,14 @@
 body {
   font-family: sans-serif;
   color: var(--text);
+  font-weight: bold;
 }
+
+button {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
 
 /*Adds background transition to all classes for dark/light mode*/
 .transition-enabled .button,
@@ -100,10 +107,14 @@ button {
 /*Class for language button only */
 .language-button {
   margin-right: auto;
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.5rem; */
   font-size: 0.875rem;
   background-color: var(--box-background-color);
   border-radius: 0.625rem;
+}
+
+.skills-box {
+  margin-left: 10%;
 }
 
 /*Navigation button styles */
@@ -225,7 +236,6 @@ input:focus, textarea:focus{
   background-color: var(--skills-background);
   text-align: center;
   margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-  height: 1.5rem;
 }
 
 /*Styles event containers */
@@ -535,6 +545,11 @@ input:focus, textarea:focus{
   .event-box-content-middle {
     width: 85%;
   }
+
+  .event-box-content-middle {
+    justify-content: center;
+  }
+
   
   .bottom-scroll-box1 {
     height: 60vh;
@@ -542,6 +557,10 @@ input:focus, textarea:focus{
 
   html {
     font-size: 14px;
+  }
+
+  .skills {
+    font-weight: normal;
   }
 }
 
