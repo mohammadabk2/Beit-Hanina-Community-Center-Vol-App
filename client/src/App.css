@@ -63,7 +63,7 @@ button {
   width: 80vw;
   margin-top: 0.0625rem;
   border-radius: 0.625rem;
-  background-color: var(--box-background-color);
+  background-color: var(--bottom-scroll-box);
   max-width: 34.5625rem;
 }
 
