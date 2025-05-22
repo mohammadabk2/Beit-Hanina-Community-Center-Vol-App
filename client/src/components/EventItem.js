@@ -65,7 +65,7 @@ const EventItem = ({ name, className, style, req, type, count, size, eventLocati
         </div>
         <div className="flex-box flex-column">
           <div>{tskill("skills")}:</div>
-          <div className="flex-box">
+          <div className="flex-box wrap-reverse">
             {req.map((item, index) => (
               <div key={index} className="skills">
                 {item}

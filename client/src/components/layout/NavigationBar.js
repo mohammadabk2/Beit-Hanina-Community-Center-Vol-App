@@ -50,7 +50,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
   };
 
   return (
-    <div className="flex-box navigation-box wrap-reverse flex-box-gap">
+    <div className="flex-box navigation-box wrap-reverse flex-box-gap smooth-shadow-box">
       <div onClick={goToAbout} className="flex-box flex-column">
         <img
           className="navigation-button-image"
