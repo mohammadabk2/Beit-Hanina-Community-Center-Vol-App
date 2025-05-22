@@ -22,7 +22,6 @@ const HomeVolunteer = () => {
         name={event.name}
         desc={event.desc}
         req={event.req}
-        className="flex-box flex-column event-box smooth-shadow-box"
         type="vol"
         count={event.count}
         size={event.size}
@@ -35,7 +34,7 @@ const HomeVolunteer = () => {
     <div className="app flex-box flex-column">
       <NavigationBar />
 
-      <div className="scroll-box1 general-box flex-box flex-column">
+      <div className="scroll-box1 flex-box flex-column">
         <div className="flex-box flex-column top-scroll-box1 line-break">
           <div>
             <DynamicButton
@@ -46,8 +45,8 @@ const HomeVolunteer = () => {
           </div>
         </div>
         <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
-        <CopyRight />
       </div>
+      <CopyRight />
     </div>
   );
 };

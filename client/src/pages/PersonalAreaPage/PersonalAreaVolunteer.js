@@ -72,9 +72,8 @@ const PersonalArea = () => {
 
           <ManageAccountBox />
         </div>
-
-        <CopyRight />
       </div>
+      <CopyRight />
     </div>  
   );
 };

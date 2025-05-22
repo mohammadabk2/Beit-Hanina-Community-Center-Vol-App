@@ -16,7 +16,7 @@ const CopyRight = () => {
 
   return (
     <>
-      <div className="general-box flex-box flex-column basic-box-padding">
+      <div className="flex-box flex-column basic-box-padding">
         <div className="basic-item-padding">&copy; {t("owner")}</div>
         <DynamicButton className="link-button" text={t("privacy")} onClick={ulaRedirect} />
       </div>

@@ -52,7 +52,6 @@ const HomeOrganizer = () => {
         name={event.name}
         desc={event.desc}
         req={event.req}
-        className="flex-box flex-column event-box smooth-shadow-box"
         type="org"
         count={event.count}
         size={event.size}
@@ -64,103 +63,101 @@ const HomeOrganizer = () => {
   const renderCreateEvent = () => {
     return (
       <>
-        <div className="general-box scroll-box1">
-          <form
-            onSubmit={handleSubmit}
-            className="general-box flex-box flex-column smooth-shadow-box"
-          >
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                {t("event_name")}: <label className="red-star">*</label>
-              </div>
-
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.eventName}
-                name="eventName"
-                onChange={handleChange}
-                placeholder={t("event_name_placeholder")}
-              />
+        <form
+          onSubmit={handleSubmit}
+          className="general-box flex-box flex-column smooth-shadow-box"
+        >
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              {t("event_name")}: <label className="red-star">*</label>
             </div>
 
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                {t("event_date")}: <label className="red-star">*</label>
-              </div>
-
-              <DynamicInput
-                className="input-field"
-                type="date"
-                value={formData.birthDate}
-                name="eventDate"
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                {t("event_location")}: <label className="red-star">*</label>
-              </div>
-
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.eventLocation}
-                name="eventLocation"
-                onChange={handleChange}
-                placeholder={t("event_location_placeholder")}
-              />
-            </div>
-
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("volunteer_count")}: </label>
-                <label className="red-star">*</label>
-              </div>
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.eventCount}
-                name="eventCount"
-                onChange={handleChange}
-                placeholder={t("event_count_placeholder")}
-                pattern="[0-9]*"
-                inputMode="numeric"
-              />
-            </div>
-
-            <SelectComponent
-              type="skills"
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.eventName}
+              name="eventName"
               onChange={handleChange}
-              chosen={formData.skills}
+              placeholder={t("event_name_placeholder")}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              {t("event_date")}: <label className="red-star">*</label>
+            </div>
+
+            <DynamicInput
+              className="input-field"
+              type="date"
+              value={formData.birthDate}
+              name="eventDate"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              {t("event_location")}: <label className="red-star">*</label>
+            </div>
+
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.eventLocation}
+              name="eventLocation"
+              onChange={handleChange}
+              placeholder={t("event_location_placeholder")}
+            />
+          </div>
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              <label> {t("volunteer_count")}: </label>
+              <label className="red-star">*</label>
+            </div>
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={formData.eventCount}
+              name="eventCount"
+              onChange={handleChange}
+              placeholder={t("event_count_placeholder")}
+              pattern="[0-9]*"
+              inputMode="numeric"
+            />
+          </div>
+
+          <SelectComponent
+            type="skills"
+            onChange={handleChange}
+            chosen={formData.skills}
+          />
+
+          <div className="flex-box flex-column input-field-box">
+            <div>
+              {t("event_description")}: <label className="red-star">*</label>
+            </div>
+
+            <textarea value={formData.eventDescription}
+              name="eventDescription" rows={5} cols={50} 
+              className="input-field" onChange={handleChange}></textarea>
+          </div>
+
+          <div className="flex-box">
+            <DynamicButton
+              className="button"
+              onClick={handleShowEvents}
+              text={t("back")}
             />
 
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                {t("event_description")}: <label className="red-star">*</label>
-              </div>
-
-              <textarea value={formData.eventDescription}
-               name="eventDescription" rows={5} cols={50} 
-               className="input-field" onChange={handleChange}></textarea>
-            </div>
-
-            <div className="flex-box">
-              <DynamicButton
-                className="button"
-                onClick={handleShowEvents}
-                text={t("back")}
-              />
-
-              <DynamicButton
-                className="button"
-                text={t("create_event")}
-                type="submit"
-              />
-            </div>
-          </form>
-        </div>
+            <DynamicButton
+              className="button"
+              text={t("create_event")}
+              type="submit"
+            />
+          </div>
+        </form>
       </>
     );
   };
@@ -168,7 +165,7 @@ const HomeOrganizer = () => {
   const renderShowEvents = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
+        <div className="scroll-box1 flex-box flex-column">
           <div className="flex-box flex-column top-scroll-box1 line-break">
             <div>
               <DynamicButton

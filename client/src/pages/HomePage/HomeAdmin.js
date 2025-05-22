@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 
@@ -21,6 +21,7 @@ const HomeAdmin = () => {
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
+  const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
   const people = initialPeople; //! Using static data for now
   
@@ -30,7 +31,21 @@ const HomeAdmin = () => {
     setPersonView(true); // Set personView to true by default when switching to "people"
   };
   const switchToCreateOrg = () => setViewMode("createOrg");
-  const togglePersonView = () => setPersonView(!personView); // Toggle between card and table view
+ 
+  // To switch between card to table view whith appropriate sizes
+  const togglePersonView = () => {
+    setPersonView(personView => {
+      const newPersonView = !personView;
+      if (personContainerRef.current) {
+        if (personView) {
+          personContainerRef.current.classList.add('perosnal-area-content');
+        } else {
+          personContainerRef.current.classList.remove('perosnal-area-content');
+        }
+      }
+      return newPersonView;
+    });
+  };
 
   const sortEvents = () => {
     console.log("Sort events button clicked");
@@ -53,7 +68,6 @@ const HomeAdmin = () => {
           name={event.name}
           desc={event.desc}
           req={event.req}
-          className="flex-box flex-column event-box smooth-shadow-box"
           type="admin"
           count={event.count}
           size={event.size}
@@ -66,7 +80,7 @@ const HomeAdmin = () => {
   const renderEvents = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
+        <div className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
@@ -115,14 +129,13 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div className="perosnal-area-content scroll-box1 general-box flex-box flex-column">
+        <div ref={personContainerRef} className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
               onClick={sortPeople}
               text={t("sort")}
             />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToEvents}
@@ -147,7 +160,6 @@ const HomeAdmin = () => {
                   : t("switch_to_card_view")
               }
             />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToCreateOrg}
@@ -187,91 +199,89 @@ const HomeAdmin = () => {
   const renderCreateOrg = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box top-scroll-box1 line-break">
-            <div className="flex-box top-scroll-box1 line-break">
-              <DynamicButton
-                className="button button-small"
-                onClick={sortEvents}
-                text={t("sort")}
-              />
+        <div className="general-box flex-box flex-column">
+          <div className="flex-box line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
 
-              <DynamicButton
-                className="button button-small"
-                onClick={switchToPeople}
-                text={t("switch_to_people")}
-              />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToPeople}
+              text={t("switch_to_people")}
+            />
 
-              <DynamicButton
-                className="button button-small"
-                onClick={switchToEvents}
-                text={t("switch_to_Events")}
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToEvents}
+              text={t("switch_to_Events")}
+            />
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="flex-box flex-column input-field-box"
+          >
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgName")} </label>
+                <label className="red-star">*</label>
+              </div>
+
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgName}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgName_placeholder")}
               />
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="general-box smooth-shadow-box flex-box flex-column "
-            >
-              <div className="flex-box flex-column input-field-box">
-                <div>
-                  <label> {t("orgName")} </label>
-                  <label className="red-star">*</label>
-                </div>
-
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.orgName}
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={t("orgName_placeholder")}
-                />
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgAddress")} </label>
+                <label className="red-star">*</label>
               </div>
 
-              <div className="flex-box flex-column input-field-box">
-                <div>
-                  <label> {t("orgAddress")} </label>
-                  <label className="red-star">*</label>
-                </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgAddress}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgAddress_placeholder")}
+              />
+            </div>
 
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.orgAddress}
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={t("orgAddress_placeholder")}
-                />
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgAdmin")} </label>
+                <label className="red-star">*</label>
               </div>
 
-              <div className="flex-box flex-column input-field-box">
-                <div>
-                  <label> {t("orgAdmin")} </label>
-                  <label className="red-star">*</label>
-                </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgAdmin}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgAdmin_placeholder")}
+              />
+            </div>
 
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.orgAdmin}
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={t("orgAdmin_placeholder")}
-                />
-              </div>
+            {/* //TODO add org pic */}
 
-              {/* //TODO add org pic */}
-
-              <div className="flex-box">
-                <DynamicButton
-                  className="button button-small"
-                  onClick={handleSubmit}
-                  text={t("submit_button")}
-                />
-              </div>
-            </form>
-          </div>
+            <div className="flex-box">
+              <DynamicButton
+                className="button button-small"
+                onClick={handleSubmit}
+                text={t("submit_button")}
+              />
+            </div>
+          </form>
         </div>
       </>
     );
