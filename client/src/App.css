@@ -347,21 +347,32 @@ textarea:focus {
 
 /* TODO add shadow to them */
 .button-approve {
-  background-color: rgb(27, 179, 27) !important;
+  background-color: var(--success-color, #1bb31b) !important;
+  border: none !important;
 }
 
 .button-approve:hover {
-  transition: background-color ease 0.3s;
-  background-color: rgb(10, 107, 29) !important;
+  background-color: var(--success-hover-color, #0a6b1d) !important;
 }
 
 .button-reject {
-  background-color: red !important;
+  background-color: var(--danger-color, #ff0000) !important;
+  border: none !important;
 }
 
 .button-reject:hover {
-  transition: background-color ease 0.3s;
-  background-color: rgb(135, 29, 29) !important;
+  background-color: var(--danger-hover-color, #872d2d) !important;
+}
+
+.button-add,
+.button-view {
+  background-color: var(--primary-color, #007bff) !important;
+  border: none !important;
+}
+
+.button-add:hover,
+.button-view:hover {
+  background-color: var(--primary-hover-color, #007bff) !important;
 }
 
 .line-break-vertical-left {
@@ -570,4 +581,26 @@ html[data-theme="dark"] .active-nav {
   background-color: #292930;
   border-radius: 0.5rem 0.5rem 0 0;
   box-shadow: 0 2px 8px 0 var(--general-shadow);
+}
+
+/* Icon-only button styles */
+.button-icon-only {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 0.8rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 0.25rem !important;
+}
+
+.button-icon-only .button-image {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+}
+
+.icon-svg {
+  width: 2rem;
+  height: 2rem;
+  display: block;
 }

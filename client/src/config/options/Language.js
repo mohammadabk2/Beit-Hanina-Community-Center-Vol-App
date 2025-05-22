@@ -4,7 +4,7 @@ export const useLnOptions = () => {
   const { i18n } = useTranslation();
   return [
     {
-      label: "عربي",
+      label: "العربية",
       href: "#ar",
       onClick: () => {
         i18n.changeLanguage("ar");

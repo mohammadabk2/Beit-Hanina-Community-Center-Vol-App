@@ -13,13 +13,7 @@ const DynamicButton = ({
   return (
     <button onClick={onClick} name={name} className={className} style={style}>
       {text}
-      {logoSrc && (
-        <img
-          src={logoSrc}
-          alt={logoalt}
-          className="button-image"
-        />
-      )}
+      {logoSrc && <img src={logoSrc} alt={logoalt} className="button-image" />}
     </button>
   );
 };
