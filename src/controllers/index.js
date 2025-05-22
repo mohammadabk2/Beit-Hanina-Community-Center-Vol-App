@@ -6,32 +6,29 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-import pingController from "./ping.js";
-import registerController from "./register.js";
-import logUserController from "./logUser.js";
-import loadUsers from "./loadUsers.js";
-// import getTitleController from "./getTitle.js";
-// import authenticateController from "./authenticate.js";
-// import { usersValidation } from "./validation.js";
-// import {
-//   client as clientErrorHandler,
-//   server as serverErrorHandler,
-// } from "./error.js";
+import pingController from "./common/ping.js";
+import registerVolunteerController from "./Users/register.js";
+import logUserController from "./auth/login.js";
+import loadUsers from "./Users/load.js";
+import userActions from "./Users/actions.js";
+import loadEvents from "./Events/loadEvents.js";
+import createEvent from "./Events/createEvent.js";
 
 const router = Router();
 
 // --- API Routes ---
-// Assigning the imported controllers/handlers
 router.get("/ping", pingController);
-router.post("/register", registerController);
-router.post("/loadUsers",loadUsers);
-router.post("/logUser", logUserController);
-// router.get("/usersvalidation", usersValidation); // Use the imported named export
-// router.post("/authenticate", authenticateController);
 
-// --- Static File Serving for React ---
-// Uses the imported 'express' and the calculated '__dirname'
+router.post("/auth/login", logUserController);
+
+router.post("/users/register", registerVolunteerController);
+router.get("/users", loadUsers);
+router.post("/users", userActions);
+
+router.get("/events", loadEvents);
+router.post("/events", createEvent);
+
+// --- Static File Serving for React --- //! might turn off
 router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));
 
 // Catch-all route for client-side routing

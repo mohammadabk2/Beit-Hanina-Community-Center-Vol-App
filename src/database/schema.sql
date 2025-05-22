@@ -1,24 +1,31 @@
 CREATE TABLE IF NOT EXISTS users
 (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    birth_date DATE NOT NULL,
-    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
     phone_number VARCHAR(15) NOT NULL,
     email TEXT NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL,
-    insurance VARCHAR(50) NOT NULL,
-    id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     banned BOOLEAN DEFAULT FALSE,
-    logs TEXT[],
+    logs TEXT[] DEFAULT '{}',
     role TEXT,
     profile_image_url TEXT
 );
 
-/*New uses waiting for approval of account*/
-CREATE TABLE IF NOT EXISTS users_waiting_list
+CREATE TABLE IF NOT EXISTS volunteer
+(
+    user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    insurance VARCHAR(50) NOT NULL,
+    id_number VARCHAR(20) NOT NULL UNIQUE,
+    approved_hours INT DEFAULT 0,
+    unapproved_hours INT DEFAULT 0,
+    orgs TEXT[] DEFAULT '{}'
+);
+
+CREATE TABLE IF NOT EXISTS volunteer_waiting_list
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -31,16 +38,25 @@ CREATE TABLE IF NOT EXISTS users_waiting_list
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[],
+    logs TEXT[] DEFAULT '{}',
     profile_image_url TEXT
 );
 
-CREATE TABLE IF NOT EXISTS volunteer
+CREATE TABLE IF NOT EXISTS rejected_users
 (
-    user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-    approved_hours INT DEFAULT 0,
-    unapproved_hours INT DEFAULT 0,
-    orgs TEXT[]
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F')),
+    phone_number VARCHAR(15) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    address VARCHAR(255) NOT NULL,
+    insurance VARCHAR(50) NOT NULL,
+    id_number VARCHAR(20) NOT NULL UNIQUE,
+    username VARCHAR(50) UNIQUE,
+    password_hash VARCHAR(255),
+    logs TEXT[] DEFAULT '{}',
+    profile_image_url TEXT
 );
 
 CREATE TABLE IF NOT EXISTS organizer
@@ -48,7 +64,7 @@ CREATE TABLE IF NOT EXISTS organizer
     user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     org_name VARCHAR(100) NOT NULL,
     given_hours INT DEFAULT 0,/*Ask Fadi*/
-    vol_id INT[]
+    vol_id INT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS events
@@ -60,9 +76,9 @@ CREATE TABLE IF NOT EXISTS events
     event_end TIME NOT NULL,
     is_active BOOLEAN NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
-    vol_id INT[],
-    vol_id_waiting_list INT[],
-    max_number_of_vol INT DEFAULT 0,
+    vol_id INT[] DEFAULT '{}',
+    vol_id_waiting_list INT[] DEFAULT '{}',
+    max_number_of_vol INT,
     current_number_of_vol INT DEFAULT 0,
     event_location TEXT NOT NULL,
     event_description TEXT DEFAULT ''
@@ -70,11 +86,11 @@ CREATE TABLE IF NOT EXISTS events
 
 CREATE TABLE IF NOT EXISTS events_status
 (
-    approved INT[],
-    rejected INT[], /*Check if Fadi wants this*/
-    pending INT[],
-    ongoing INT[],
-    finished INT[]
+    approved INT[] DEFAULT '{}',
+    rejected INT[] DEFAULT '{}', /*Check if Fadi wants this*/
+    pending INT[] DEFAULT '{}',
+    ongoing INT[] DEFAULT '{}',
+    finished INT[] DEFAULT '{}'
 );
 
 -- ? maybe add more indexs or change

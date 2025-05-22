@@ -1,12 +1,12 @@
-import dbConnection from "../database/dbconnection.js";
-import bcrypt from "bcrypt";
+import dbConnection from "../../database/dbconnection.js";
+// import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();
 
 const generateToken = (userId, role) => {
   return jwt.sign({ id: userId, role: role }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "24h",
   });
 };
 
@@ -24,10 +24,11 @@ const loginUser = async (req, res) => {
 
   try {
     const response = await dbConnection.getUserHash(userName); // Await the result
-    const isPasswordMatch = await bcrypt.compare(
-      password,
-      response.password_hash
-    ); // hash the password and compare to the stored hash
+    // const isPasswordMatch = await bcrypt.compare(
+    //   password,
+    //   response.password_hash
+    // ); // hash the password and compare to the stored hash
+    const isPasswordMatch = (password === response.password_hash);
 
     if (isPasswordMatch) {
       console.log(`Login successful for user: ${userName}`);
