@@ -31,7 +31,7 @@
   --bg-surface: #ffffff4b;
 
   --body-color: #ffffff;
-  --box-background-color: #f9ffe9;
+  --box-background-color: #fffaf5;
   --skills-background: #d8d8d8;
 
   --input-border: #cfd8dc;
@@ -51,8 +51,8 @@
   --button-text: #1b1b1b;
   --button-border: #d1d1d1;
 
-  --top-scroll-box: #f0faff;
-  --bottom-scroll-box: #f0faff;
+  --top-scroll-box: #3b548a33;
+  --bottom-scroll-box: #3b548a33;
 
   --even-row-table: #f9fbe7;
   --odd-row-table: #ffffff;
