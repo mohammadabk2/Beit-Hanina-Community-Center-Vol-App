@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 // import axios from "axios";
 
@@ -16,32 +16,36 @@ import TableIconDark from "../../icons/dark/table_view_icon.svg";
 import CardIconLight from "../../icons/light/card_view_icon.svg";
 import TableIconLight from "../../icons/light/table_view_icon.svg";
 
+// import context and hooks
+import { useAuth } from "../../config/Context/auth";
+import useLoadEvents from "../../config/hooks/useEvent";
+
 const HomeAdmin = () => {
   // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { t } = useTranslation("home");
+  const { isLightMode } = useTheme();
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
   const people = [""]; //! change it wont work like this
-  
+
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
     setViewMode("people"); // Switch view mode to "people"
     setPersonView(true); // Set personView to true by default when switching to "people"
   };
   const switchToCreateOrg = () => setViewMode("createOrg");
- 
   // To switch between card to table view whith appropriate sizes
   const togglePersonView = () => {
-    setPersonView(personView => {
+    setPersonView((personView) => {
       const newPersonView = !personView;
       if (personContainerRef.current) {
         if (personView) {
-          personContainerRef.current.classList.add('perosnal-area-content');
+          personContainerRef.current.classList.add("perosnal-area-content");
         } else {
-          personContainerRef.current.classList.remove('perosnal-area-content');
+          personContainerRef.current.classList.remove("perosnal-area-content");
         }
       }
       return newPersonView;
@@ -59,53 +63,22 @@ const HomeAdmin = () => {
   };
 
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map(
-      (
-        event // Use event.id for key
-      ) => (
-        <EventItem
-          key={event.id}
-          name={event.name}
-          desc={event.desc}
-          req={event.req}
-          type="admin"
-          count={event.count}
-          size={event.size}
-          eventLocation={event.eventLocation}
-        />
-      )
-    );
-  };
+    if (!Array.isArray(eventsArray) || eventsArray.length === 0) {
+      return <p>{t("no_events_found")}</p>; // Or any other placeholder
+    }
 
-  const renderEvents = () => {
-    return (
-      <>
-        <div className="scroll-box1 flex-box flex-column">
-          <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
-
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToPeople}
-              text={t("switch_to_people")}
-            />
-
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToCreateOrg}
-              text={t("switch_to_create_org")}
-            />
-          </div>
-          <div className="bottom-scroll-box1">
-            {renderEventItems(initEvents)}
-          </div>
-        </div>
-      </>
-    );
+    return eventsArray.map((event) => (
+      <EventItem
+        key={event.id}
+        name={event.name}
+        desc={event.description}
+        req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
+        type="admin"
+        count={event.currentSize}
+        size={event.maxSize}
+        eventLocation={event.location}
+      />
+    ));
   };
 
   const handleApprove = (personId) => {
@@ -197,8 +170,9 @@ const HomeAdmin = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    console.log("Create Org Submit clicked");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Create Org Submit clicked", formData);
   };
 
   const renderCreateOrg = () => {
@@ -255,7 +229,7 @@ const HomeAdmin = () => {
                 className="input-field"
                 type="text"
                 value={formData.orgAddress}
-                name="name"
+                name="address"
                 onChange={handleChange}
                 placeholder={t("orgAddress_placeholder")}
               />
@@ -292,12 +266,63 @@ const HomeAdmin = () => {
     );
   };
 
-  const { isLightMode } = useTheme();
+  const renderEvents = () => {
+    return (
+      <>
+        <div className="scroll-box1 general-box flex-box flex-column">
+          <div className="flex-box top-scroll-box1 line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
 
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToPeople}
+              text={t("switch_to_people")}
+            />
+
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToCreateOrg}
+              text={t("switch_to_create_org")}
+            />
+          </div>
+          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+        </div>
+      </>
+    );
+  };
+
+  const { userId, loadingInitial, isAuthenticated } = useAuth();
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+
+  useEffect(() => {
+    if (userId && isAuthenticated) {
+      loadEvents(["approved"]);
+    }
+  }, [userId, isAuthenticated, loadEvents]);
+
+  if (loadingInitial) {
+    return <div>Loading user data...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <div>You need to be logged in to view this data.</div>;
+  }
+
+  console.log("Current viewMode:", viewMode);
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      {viewMode === "events" && renderEvents()}
+      {viewMode === "events" && (
+        <>
+          {eventsLoading && <p>{t("loading_events")}</p>}
+          {eventsError && <p style={{ color: "red" }}>{eventsError}</p>}
+          {!eventsLoading && !eventsError && renderEvents()}
+        </>
+      )}
       {viewMode === "people" && renderPeople()}
       {viewMode === "createOrg" && renderCreateOrg()}
       <CopyRight />
@@ -306,34 +331,3 @@ const HomeAdmin = () => {
 };
 
 export default HomeAdmin;
-
-// ! temp examples
-const initEvents = [
-  {
-    id: "event1",
-    name: "تنظيف الحديقة العامة",
-    desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
-    req: ["التنظيف", "البستنة"],
-    count: 5,
-    size: 20,
-    eventLocation: "الحديقة العامة - بيت حنينا",
-  },
-  {
-    id: "event2",
-    name: "دروس تقوية للطلاب",
-    desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
-    req: ["التدريس", "الرياضيات", "العلوم"],
-    count: 3,
-    size: 10,
-    eventLocation: "مركز المجتمع - بيت حنينا",
-  },
-  {
-    id: "event3",
-    name: "يوم رياضي للأطفال",
-    desc: "تنظيم يوم رياضي ترفيهي للأطفال",
-    req: ["الرياضة", "تنظيم الفعاليات"],
-    count: 8,
-    size: 15,
-    eventLocation: "الملعب الرياضي - بيت حنينا",
-  },
-];
