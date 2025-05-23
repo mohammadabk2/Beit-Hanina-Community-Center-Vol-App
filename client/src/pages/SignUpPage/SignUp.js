@@ -325,7 +325,6 @@ const SignUpPage = () => {
                 className="button"
                 onClick={goBack}
                 text={t("back")}
-                type = "button"
               />
             </div>
           </div>

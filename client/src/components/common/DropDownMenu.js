@@ -9,6 +9,7 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
   const dropdownRef = useRef(null);
 
   const toggleDropdown = (e) => {
+    e.preventDefault();
     setIsOpen(!isOpen);
     if (onClick) {
       onClick(e);
@@ -45,7 +46,7 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
         text={text}
         logoSrc={dropDownArrow}
         logoalt={"drop down arrow"}
-        type="button"
+        // type="button"
       />
       {options && isOpen && (
         <ul className="dropdown-menu">
