@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"; // Import useState and useEffect
+import React, { useEffect } from "react"; // Import useState and useEffect
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 
 // import components here
 import EventItem from "../../components/EventItem";
@@ -9,27 +8,24 @@ import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
 
-// import context
+// import context and hooks
 import { useAuth } from "../../config/Context/auth";
+import useLoadEvents from "../../config/hooks/useEvent"; // Adjust the path as needed
 
 const HomeVolunteer = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
-  const { userId, loadingInitial, isAuthenticated, logout } = useAuth();
-  const token = localStorage.getItem("authToken");
+  const { userId, loadingInitial, isAuthenticated } = useAuth();
 
   const { t } = useTranslation("home");
 
-  const [events, setEvents] = useState([]);
-  const [eventsLoading, setEventsLoading] = useState(true); // State to manage the loading status of events
-  const [eventsError, setEventsError] = useState(null); // State to manage any errors during event fetching
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
 
   useEffect(() => {
-    // Only fetch if userId is available and authenticated
     if (userId && isAuthenticated) {
       loadEvents(["approved"]);
     }
-  }, [userId, isAuthenticated, token, API_BASE_URL, logout]);
+  }, [userId, isAuthenticated, loadEvents]);
 
   if (loadingInitial) {
     return <div>Loading user data...</div>;
@@ -43,45 +39,7 @@ const HomeVolunteer = () => {
 
   const sortEvents = () => {
     console.log("Sort button clicked");
-  };
-
-  const loadEvents = async (request) => {
-    if (!token) {
-      console.log("error with token login in again");
-      logout();
-    }
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/events`, {
-        params: {
-          // Data for the query parameters
-          userID: userId,
-          type: "events",
-          userRequest: request,
-        },
-        headers: {
-          // Add the headers object
-          Authorization: `Bearer ${token}`, // This is the standard way to send a Bearer token
-        },
-      });
-
-      if (response.data && response.data.userData) {
-        // console.log(response.data.userData);
-        setEvents(response.data.userData);
-      } else {
-        setEvents([]); // If no data, set to empty array
-        console.log("No events found or unexpected data format.");
-      }
-      setEventsError(null); // Clear any previous errors
-    } catch (error) {
-      console.error("Error loading events:", error);
-      if (error.response && error.response.status === 401) {
-        console.error("Unauthorized: Token might be invalid or expired.");
-        logout();
-      }
-      throw error; // Re-throw the error for further handling up the call stack
-    } finally {
-      setEventsLoading(false); // Set loading to false after request completes (success or error)
-    }
+    //TODO call loadevents with arguemnt as needed
   };
 
   const renderEventItems = (eventsArray) => {
