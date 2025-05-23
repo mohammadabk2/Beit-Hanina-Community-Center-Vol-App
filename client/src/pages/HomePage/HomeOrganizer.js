@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
 
 import DynamicButton from "../../components/common/ButtonComponent";
 import DynamicInput from "../../components/common/InputComponent";
@@ -9,10 +8,17 @@ import SelectComponent from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
+// import context and hooks
+import { useAuth } from "../../config/Context/auth";
+import useLoadEvents from "../../config/hooks/useEvent";
+
 const HomeOrganizer = () => {
   const { t } = useTranslation("home");
-  const [showEvents, setShowEvents] = useState(true); // Use useState!
 
+  const { userId, loadingInitial, isAuthenticated } = useAuth();
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+
+  const [showEvents, setShowEvents] = useState(true); // Use useState!
   const [formData, setFormData] = useState({
     eventName: "",
     eventCount: "",
@@ -21,6 +27,20 @@ const HomeOrganizer = () => {
     eventDescription: "",
     skills: [], // Initialize skills as an array
   });
+
+  useEffect(() => {
+    if (userId && isAuthenticated) {
+      loadEvents(["approved"]);
+    }
+  }, [userId, isAuthenticated, loadEvents]);
+
+  if (loadingInitial) {
+    return <div>Loading user data...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <div>You need to be logged in to view this data.</div>;
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,16 +66,20 @@ const HomeOrganizer = () => {
   };
 
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map((event, index) => (
+    if (!Array.isArray(eventsArray) || eventsArray.length === 0) {
+      return <p>{t("no_events_found")}</p>; // Or any other placeholder
+    }
+
+    return eventsArray.map((event) => (
       <EventItem
-        key={index}
+        key={event.id}
         name={event.name}
-        desc={event.desc}
-        req={event.req}
+        desc={event.description}
+        req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
         type="org"
-        count={event.count}
-        size={event.size}
-        eventLocation={event.eventLocation}
+        count={event.currentSize}
+        size={event.maxSize}
+        eventLocation={event.location}
       />
     ));
   };
@@ -139,9 +163,14 @@ const HomeOrganizer = () => {
               {t("event_description")}: <label className="red-star">*</label>
             </div>
 
-            <textarea value={formData.eventDescription}
-              name="eventDescription" rows={5} cols={50} 
-              className="input-field" onChange={handleChange}></textarea>
+            <textarea
+              value={formData.eventDescription}
+              name="eventDescription"
+              rows={5}
+              cols={50}
+              className="input-field"
+              onChange={handleChange}
+            ></textarea>
           </div>
 
           <div className="flex-box">
@@ -190,7 +219,9 @@ const HomeOrganizer = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      {showEvents && renderShowEvents()}
+      {eventsLoading && <p>{t("loading_events")}</p>}
+      {eventsError && <p style={{ color: "red" }}>{eventsError}</p>}
+      {!eventsLoading && !eventsError && renderShowEvents()}
       {!showEvents && renderCreateEvent()}
       <CopyRight />
     </div>
@@ -198,35 +229,3 @@ const HomeOrganizer = () => {
 };
 
 export default HomeOrganizer;
-
-
-// ! temp data
-const events = [
-  {
-    id: "event1",
-    name: "تنظيف الحديقة العامة",
-    desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
-    req: ["التنظيف", "البستنة"],
-    count: 5,
-    size: 20,
-    eventLocation: "الحديقة العامة - بيت حنينا",
-  },
-  {
-    id: "event2",
-    name: "دروس تقوية للطلاب",
-    desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
-    req: ["التدريس", "الرياضيات", "العلوم"],
-    count: 3,
-    size: 10,
-    eventLocation: "مركز المجتمع - بيت حنينا",
-  },
-  {
-    id: "event3",
-    name: "يوم رياضي للأطفال",
-    desc: "تنظيم يوم رياضي ترفيهي للأطفال",
-    req: ["الرياضة", "تنظيم الفعاليات"],
-    count: 8,
-    size: 15,
-    eventLocation: "الملعب الرياضي - بيت حنينا",
-  },
-];

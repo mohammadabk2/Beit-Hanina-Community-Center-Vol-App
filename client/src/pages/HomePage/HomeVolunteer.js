@@ -14,11 +14,9 @@ import useLoadEvents from "../../config/hooks/useEvent"; // Adjust the path as n
 
 const HomeVolunteer = () => {
   // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
-
-  const { userId, loadingInitial, isAuthenticated } = useAuth();
-
   const { t } = useTranslation("home");
 
+  const { userId, loadingInitial, isAuthenticated } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
 
   useEffect(() => {
@@ -34,8 +32,6 @@ const HomeVolunteer = () => {
   if (!isAuthenticated) {
     return <div>You need to be logged in to view this data.</div>;
   }
-  console.log("userid = ");
-  console.log(userId);
 
   const sortEvents = () => {
     console.log("Sort button clicked");
