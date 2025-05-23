@@ -45,6 +45,7 @@ const DropDownMenu = ({ onClick, name, className, style, text, options }) => {
         text={text}
         logoSrc={dropDownArrow}
         logoalt={"drop down arrow"}
+        type="button"
       />
       {options && isOpen && (
         <ul className="dropdown-menu">
