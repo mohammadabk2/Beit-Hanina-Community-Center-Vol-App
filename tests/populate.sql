@@ -40,7 +40,7 @@ INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address,
 -- Events
 -- Assuming org_id 2 (Helping Hands Org - Jane Smith) and 5 (Planeteers Foundation - Carol Danvers)
 INSERT INTO events (event_name, event_date, event_start, event_end, is_active, org_id, vol_id, vol_id_waiting_list, max_number_of_vol, current_number_of_vol, event_location, event_description) VALUES
-('Community Clean-Up Day', '2025-06-15', '09:00:00', '14:00:00', TRUE, 2, ARRAY[1], ARRAY[]::INT[], 50, 1, 'Central Park, Anytown', 'Join us to clean up Central Park and make our city greener!'),
+('Community Clean-Up Day', '2025-06-15', '09:00:00', '14:00:00', TRUE, 2, ARRAY[1], ARRAY[5]::INT[], 50, 1, 'Central Park, Anytown', 'Join us to clean up Central Park and make our city greener!'),
 ('Animal Shelter Adoption Drive', '2025-07-20', '11:00:00', '16:00:00', TRUE, 5, ARRAY[3], ARRAY[]::INT[], 30, 1, 'Anytown Animal Shelter', 'Help find forever homes for our lovely animals. Volunteers needed for various roles.'),
 ('Fundraising Gala Prep', '2025-08-01', '10:00:00', '18:00:00', FALSE, 2, ARRAY[]::INT[], ARRAY[]::INT[], 20, 0, 'Grand Ballroom, Anytown', 'Assist with setting up and organizing our annual fundraising gala. This event is in planning (is_active=FALSE).'),
 ('Tree Planting Initiative', '2025-09-10', '08:00:00', '13:00:00', TRUE, 5, ARRAY[]::INT[], ARRAY[]::INT[], 100, 0, 'Green Valley National Park', 'Participate in our massive tree planting event to combat deforestation.'),
@@ -66,7 +66,7 @@ INSERT INTO events (event_name, event_date, event_start, event_end, is_active, o
 DELETE FROM events_status;
 
 INSERT INTO events_status (approved, rejected, pending, ongoing, finished) VALUES
-(ARRAY[1, 2, 4], ARRAY[]::INT[], ARRAY[3], ARRAY[]::INT[], ARRAY[5]);
+(ARRAY[1, 2, 4], ARRAY[11, 12]::INT[], ARRAY[3, 6], ARRAY[7, 8, 9]::INT[], ARRAY[5]);
 
 -- Note on event_status.ongoing:
 -- For 'ongoing', this would typically be determined by a query comparing current_timestamp

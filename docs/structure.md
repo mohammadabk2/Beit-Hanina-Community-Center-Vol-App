@@ -145,12 +145,12 @@
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── android_setup.sh
 │   ├── before_git.sh
 │   ├── convert_to_apk.sh
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
-│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -164,13 +164,13 @@
 │   │   │   └── validateToken.js
 │   │   ├── Events
 │   │   │   ├── actions.js
-│   │   │   ├── createEvent.js
-│   │   │   └── loadEvents.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   ├── index.js
 │   │   ├── Users
 │   │   │   ├── actions.js
-│   │   │   ├── load.js
-│   │   │   └── register.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   └── validation.js
 │   ├── database
 │   │   ├── dbconnection.js
@@ -189,15 +189,14 @@
 │   │   └── verifyToken.js
 │   └── server.js
 ├── tests
+│   ├── addAdmin.sql
 │   ├── drop_tables.sql
 │   ├── events.sql
+│   ├── master.sql
 │   ├── populate.sql
-│   ├── postman
-│   │   └── App-test.postman_collection.json
-│   ├── README.md
-│   ├── register_test
-│   └── test_data.sql
+│   └── postman
+│       └── App-test.postman_collection.json
 └── workbox-config.cjs
 
-44 directories, 153 files
+44 directories, 152 files
 ```
