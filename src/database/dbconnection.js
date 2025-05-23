@@ -89,16 +89,40 @@ const createVolunteer = async (waitingListId) => {
 };
 
 /**
- * return the users table
+ * Return user data by joining users table with volunteer or organizer table.
  * @async
+ * @param {string} role - "volunteer" or "organizer"
  * @param {string} tableName
- * @param {string} columnNames
- * @returns  {Promise<Object|null>}
+ * @returns {Promise<Object[]|null>}
  */
-const getUsers = async (tableName, columnNames) => {
+const getUsers = async (role, tableName) => {
+  let query = "";
+
+  if (role === "admin") {
+    if (tableName === "volunteer_waiting_list") {
+      query = `
+      SELECT *
+      FROM volunteer_waiting_list;`;
+    } else {
+      query = `
+      SELECT users.*, volunteer.*
+      FROM users
+      JOIN volunteer ON users.id = volunteer.user_id;
+    `;
+    }
+  } else if (role === "organizer") {
+    query = `
+      SELECT users.*, organizer.*
+      FROM users
+      JOIN organizer ON users.id = organizer.user_id;
+    `;
+  } else {
+    console.error("Unsupported role in getUsers:", role);
+    return null;
+  }
+
   try {
-    const text = `SELECT ${columnNames} FROM ${tableName};`;
-    const res = await db.query(text);
+    const res = await db.query(query);
     return res.rows;
   } catch (error) {
     console.error("Error during getUsers query:", error);

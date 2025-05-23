@@ -10,7 +10,7 @@ import CopyRight from "../../components/layout/CopyRight";
 
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
-import useLoadEvents from "../../config/hooks/useEvent";
+import useLoadEvents from "../../config/hooks/loadEvent";
 
 const HomeOrganizer = () => {
   const { t } = useTranslation("home");

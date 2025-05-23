@@ -18,7 +18,8 @@ import TableIconLight from "../../icons/light/table_view_icon.svg";
 
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
-import useLoadEvents from "../../config/hooks/useEvent";
+import useLoadEvents from "../../config/hooks/loadEvent";
+import useLoadUsers from "../../config/hooks/loadUsers";
 
 const HomeAdmin = () => {
   // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -28,8 +29,6 @@ const HomeAdmin = () => {
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
-
-  const people = [""]; //! change it wont work like this
 
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
@@ -147,7 +146,7 @@ const HomeAdmin = () => {
 
           <div className="bottom-scroll-box1">
             <PeopleDisplaySwitcher
-              people={people}
+              people={users}
               type={personView ? "card" : "table"}
               approveUser={handleApprove}
               rejectUser={handleReject}
@@ -296,7 +295,8 @@ const HomeAdmin = () => {
   };
 
   const { userId, loadingInitial, isAuthenticated } = useAuth();
-  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents(); // load events hook
+  const { users, usersLoading, userError, loadUsers } = useLoadUsers(); // load users hook
 
   useEffect(() => {
     if (userId && isAuthenticated) {
@@ -304,14 +304,31 @@ const HomeAdmin = () => {
     }
   }, [userId, isAuthenticated, loadEvents]);
 
+  useEffect(() => {
+    if (userId && isAuthenticated) {
+      loadUsers("users");
+    }
+  }, [userId, isAuthenticated, loadUsers]);
+
   if (loadingInitial) {
-    return <div>Loading user data...</div>;
+    if (viewMode === "people") {
+      return <div>Loading user data...</div>;
+    }
+    if (viewMode === "events") {
+      return <div>Loading Event data...</div>;
+    }
+    if (viewMode === "createOrg") {
+      return <div>Loading create org ...</div>;
+    }
   }
 
   if (!isAuthenticated) {
     return <div>You need to be logged in to view this data.</div>;
   }
 
+  if (!isAuthenticated) {
+    return <div>You need to be logged in to view this data.</div>;
+  }
   console.log("Current viewMode:", viewMode);
   return (
     <div className="app flex-box flex-column">
@@ -323,7 +340,13 @@ const HomeAdmin = () => {
           {!eventsLoading && !eventsError && renderEvents()}
         </>
       )}
-      {viewMode === "people" && renderPeople()}
+      {viewMode === "people" && (
+        <>
+          {usersLoading && <p>{t("loading_users")}</p>}
+          {userError && <p style={{ color: "red" }}>{userError}</p>}
+          {!usersLoading && !userError && renderPeople()}
+        </>
+      )}
       {viewMode === "createOrg" && renderCreateOrg()}
       <CopyRight />
     </div>

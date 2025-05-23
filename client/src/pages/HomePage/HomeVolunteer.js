@@ -10,7 +10,7 @@ import CopyRight from "../../components/layout/CopyRight";
 
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
-import useLoadEvents from "../../config/hooks/useEvent";
+import useLoadEvents from "../../config/hooks/loadEvent";
 
 const HomeVolunteer = () => {
   // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
