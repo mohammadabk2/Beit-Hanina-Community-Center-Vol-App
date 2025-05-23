@@ -644,19 +644,35 @@ const createUser = async (
  * @throws {Error} If the database query fails.
  */
 const rejectUser = async (userId) => {
-  const text = `
-  INSERT INTO rejected_users
-  SELECT * FROM volunteer_waiting_list
+  const insertQuery = `
+  INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance,
+  id_number, username, password_hash, profile_image_url)
+  SELECT
+  name, birth_date, sex, phone_number, email, address, insurance,
+  id_number, username, password_hash, profile_image_url
+  FROM volunteer_waiting_list
   WHERE id = $1
-  RETURNING *;`;
+  RETURNING *;
+`;
+
+  const deleteQuery = `DELETE FROM volunteer_waiting_list WHERE id = $1;`;
 
   const values = [userId];
+
+  const client = await db.pool.connect();
   try {
-    const res = await db.query(text, values);
-    return res.rows[0];
+    await client.query("BEGIN");
+    const insertResult = await client.query(insertQuery, values); // ✅ Now used
+    await client.query(deleteQuery, values);
+
+    await client.query("COMMIT");
+    return insertResult.rows[0];
   } catch (error) {
+    await client.query("ROLLBACK");
     console.error("Error in rejectUser:", error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error;
+  } finally {
+    client.release();
   }
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-// import axios from "axios";
+import axios from "axios";
 
 import DynamicButton from "../../components/common/ButtonComponent";
 import EventItem from "../../components/EventItem";
@@ -22,9 +22,13 @@ import useLoadEvents from "../../config/hooks/loadEvent";
 import useLoadUsers from "../../config/hooks/loadUsers";
 
 const HomeAdmin = () => {
-  // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
+
+  const { userId, loadingInitial, isAuthenticated, token } = useAuth();
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents(); // load events hook
+  const { users, usersLoading, userError, loadUsers } = useLoadUsers(); // load users hook
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
@@ -80,14 +84,37 @@ const HomeAdmin = () => {
     ));
   };
 
+  const sendAxiod = async (userIDClicked, actiontoPerform, actionValue) => {
+    const response = await axios.post(
+      `${API_BASE_URL}/api/users`,
+      {
+        userID: userId,
+        actionID: userIDClicked,
+        action: actiontoPerform,
+        actionValue: actionValue,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.status !== 200) {
+      console.log(`${response.status} ${response.message}`);
+    }
+  };
+
   const handleApprove = (personId) => {
     console.log(`Approving person ${personId}`);
-    // TODO: Implement actual logic (e.g., API call, update state)
+    sendAxiod(personId, "approve", "NA");
+    //TODO force refresh of page
   };
 
   const handleReject = (personId) => {
     console.log(`Rejecting person ${personId}`);
-    // TODO: Implement actual logic (e.g., API call, update state)
+    sendAxiod(personId, "reject", "NA");
+    //TODO force refresh of page
   };
 
   const handleAddLog = (personId) => {
@@ -294,10 +321,6 @@ const HomeAdmin = () => {
     );
   };
 
-  const { userId, loadingInitial, isAuthenticated } = useAuth();
-  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents(); // load events hook
-  const { users, usersLoading, userError, loadUsers } = useLoadUsers(); // load users hook
-
   useEffect(() => {
     if (userId && isAuthenticated) {
       loadEvents(["approved"]);
@@ -306,7 +329,7 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadUsers("users;");
+      loadUsers("volunteer_waiting_list");
     }
   }, [userId, isAuthenticated, loadUsers]);
 
