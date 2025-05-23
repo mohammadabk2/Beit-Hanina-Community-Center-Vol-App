@@ -65,6 +65,17 @@ const HomeAdmin = () => {
     //TODO Add sorting logic for people array here if needed
   };
 
+  const approveEvent = (id) => {
+    console.log(`approve event clicked event id:${id}`);
+    sendAxiod("events/actions", id, "approve", "NA");
+    //TODO force refresh
+  };
+
+  const rejectEvent = (id) => {
+    console.log(`reject event clicked event id:${id}`);
+    sendAxiod("events/actions", id, "reject", "NA");
+  };
+
   const renderEventItems = (eventsArray) => {
     if (!Array.isArray(eventsArray) || eventsArray.length === 0) {
       return <p>{t("no_events_found")}</p>; // Or any other placeholder
@@ -73,6 +84,7 @@ const HomeAdmin = () => {
     return eventsArray.map((event) => (
       <EventItem
         key={event.id}
+        id={event.id}
         name={event.name}
         desc={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
@@ -80,16 +92,18 @@ const HomeAdmin = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        approveEvent={() => approveEvent(event.id)}
+        rejectEvent={() => rejectEvent(event.id)}
       />
     ));
   };
 
-  const sendAxiod = async (userIDClicked, actiontoPerform, actionValue) => {
+  const sendAxiod = async (path, actionID, actiontoPerform, actionValue) => {
     const response = await axios.post(
-      `${API_BASE_URL}/api/users`,
+      `${API_BASE_URL}/api/${path}`,
       {
         userID: userId,
-        actionID: userIDClicked,
+        actionID: actionID,
         action: actiontoPerform,
         actionValue: actionValue,
       },
@@ -107,13 +121,13 @@ const HomeAdmin = () => {
 
   const handleApprove = (personId) => {
     console.log(`Approving person ${personId}`);
-    sendAxiod(personId, "approve", "NA");
+    sendAxiod("users", personId, "approve", "NA");
     //TODO force refresh of page
   };
 
   const handleReject = (personId) => {
     console.log(`Rejecting person ${personId}`);
-    sendAxiod(personId, "reject", "NA");
+    sendAxiod("users", personId, "reject", "NA");
     //TODO force refresh of page
   };
 
@@ -323,7 +337,7 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents(["approved"]);
+      loadEvents(["pending"]);
     }
   }, [userId, isAuthenticated, loadEvents]);
 
