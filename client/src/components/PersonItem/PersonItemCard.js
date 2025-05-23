@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import DynamicButton from "../ButtonComponent";
 import { useTranslation } from "react-i18next";
+
+import DynamicButton from "../common/ButtonComponent";
+
 
 const PersonItemCard = ({
   name,

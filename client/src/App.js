@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // import components here
-import DynamicInput from "./components/InputComponent";
-import DynamicButton from "./components/ButtonComponent";
-import NavigationBar from "./components/NavigationBar";
-import CopyRight from "./components/CopyRight";
+import DynamicInput from "./components/common/InputComponent";
+import DynamicButton from "./components/common/ButtonComponent";
+import NavigationBar from "./components/layout/NavigationBar";
+import CopyRight from "./components/layout/CopyRight";
 // import centreLogo from "./icons/org_icon.png";
 
 import { useAuth } from "./config/Context/auth";
@@ -102,61 +102,63 @@ const App = () => {
   };
 
   return (
-    <div className="app flex-box flex-column">
-      <NavigationBar dontShowPageButtons={true} />
-      <header className="app-header basic-box-padding">
-        {/* <div className="basic-item-padding">
-          <img className="centre-img" src={centreLogo} alt="Centre Logo"></img>
-        </div> */}
+    <>
+      <div className="app flex-box flex-column">
+        <NavigationBar dontShowPageButtons={true} />
+        <header className="app-header basic-box-padding">
+          {/* <div className="basic-item-padding">
+            <img className="centre-img" src={centreLogo} alt="Centre Logo"></img>
+          </div> */}
 
-        <div className="basic-item-padding">{t("name")}</div>
-        <div className="basic-item-padding">{t("desc")}</div>
-      </header>
+          <h1>{t("name")}</h1>
+          <h3>{t("desc")}</h3>
+        </header>
 
-      <div className="general-box flex-box flex-column smooth-shadow-box">
-        <div>{t("welcome")}</div>
+        <div className="general-box flex-box flex-column smooth-shadow-box">
+          <h2>{t("welcome")}</h2>
 
-        <div className="input-field-box">
-          <DynamicInput
-            className="input-field"
-            type="text"
-            value={username}
-            name="username-field"
-            onChange={handleUserName}
-            placeholder={t("user-name-placeholder")}
-          />
+          <div className="input-field-box">
+            <DynamicInput
+              className="input-field"
+              type="text"
+              value={username}
+              name="username-field"
+              onChange={handleUserName}
+              placeholder={t("user-name-placeholder")}
+            />
 
-          <DynamicInput
-            className="input-field"
-            type="password"
-            value={password}
-            name="password-field"
-            onChange={handlePassword}
-            placeholder={t("password-placeholder")}
-          />
-        </div>
-
-        <div className="flex-box">
-          <div>
-            <DynamicButton
-              className="button"
-              onClick={signIn}
-              text={t("sign-in")}
+            <DynamicInput
+              className="input-field"
+              type="password"
+              value={password}
+              name="password-field"
+              onChange={handlePassword}
+              placeholder={t("password-placeholder")}
             />
           </div>
 
-          <div>
-            <DynamicButton
-              className="button"
-              onClick={signUp}
-              text={t("sign-up")}
-            />
+          <div className="flex-box">
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signIn}
+                text={t("sign-in")}
+              />
+            </div>
+
+            <div>
+              <DynamicButton
+                className="button"
+                onClick={signUp}
+                text={t("sign-up")}
+              />
+            </div>
           </div>
         </div>
+
+        <CopyRight />
       </div>
-
-      <CopyRight />
-    </div>
+    </>
   );
 };
 

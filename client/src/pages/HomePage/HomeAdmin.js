@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 
-import NavigationBar from "../../components/NavigationBar";
-import DynamicButton from "../../components/ButtonComponent";
+
+import DynamicButton from "../../components/common/ButtonComponent";
 import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
 import { useTheme } from "../../config/options/Colors";
-import DynamicInput from "../../components/InputComponent";
-import CopyRight from "../../components/CopyRight";
+import DynamicInput from "../../components/common/InputComponent";
+import NavigationBar from "../../components/layout/NavigationBar";
+import CopyRight from "../../components/layout/CopyRight";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
@@ -21,65 +21,31 @@ const HomeAdmin = () => {
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
+  const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
-  // const people = initialPeople; //! Using static data for now
-  const loadPeople = async (type) => {
-    // TODO change to get userId from memo and context
-
-    const body =
-      type === "new"
-        ? {
-            userID: 4,
-            userRequest: `add conditions from sort for new users`,
-            tableName: "users_waiting_list",
-          }
-        : type === "current"
-        ? {
-            userID: 5,
-            userRequest: `add conditions from sort for current users`,
-            tableName: "users",
-          }
-        : {};
-
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/loadUsers`, body);
-      if (response.data.status === "success") {
-        console.log("loading passed");
-        let peopleArray = response.data.userData;
-        peopleArray.forEach((person) => {
-          person.isNew = true;
-        });
-        return peopleArray;
-      } else {
-        alert(`load Failed: ${response.data.message}`);
-        return null;
-      }
-    } catch (error) {
-      console.error("Error during loading people:", error);
-      return null;
-    }
-  };
-
-  const [people, setPeople] = useState(null);
-  useEffect(() => {
-    const fetchPeople = async () => {
-      const loadedPeople = await loadPeople("new");
-      setPeople(loadedPeople);
-    };
-
-    fetchPeople();
-  }, []);
-
-  const events = initEvents;
-
+  const people = [""]; //! change it wont work like this
+  
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
     setViewMode("people"); // Switch view mode to "people"
     setPersonView(true); // Set personView to true by default when switching to "people"
   };
   const switchToCreateOrg = () => setViewMode("createOrg");
-  const togglePersonView = () => setPersonView(!personView); // Toggle between card and table view
+ 
+  // To switch between card to table view whith appropriate sizes
+  const togglePersonView = () => {
+    setPersonView(personView => {
+      const newPersonView = !personView;
+      if (personContainerRef.current) {
+        if (personView) {
+          personContainerRef.current.classList.add('perosnal-area-content');
+        } else {
+          personContainerRef.current.classList.remove('perosnal-area-content');
+        }
+      }
+      return newPersonView;
+    });
+  };
 
   const sortEvents = () => {
     console.log("Sort events button clicked");
@@ -101,11 +67,10 @@ const HomeAdmin = () => {
           name={event.name}
           desc={event.desc}
           req={event.req}
-          className="flex-box flex-column event-box smooth-shadow-box"
           type="admin"
           count={event.count}
           size={event.size}
-          location={event.location}
+          eventLocation={event.eventLocation}
         />
       )
     );
@@ -114,7 +79,7 @@ const HomeAdmin = () => {
   const renderEvents = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
+        <div className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
@@ -134,7 +99,7 @@ const HomeAdmin = () => {
               text={t("switch_to_create_org")}
             />
           </div>
-          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+          <div className="bottom-scroll-box1">{renderEventItems(initEvents)}</div>
         </div>
       </>
     );
@@ -163,14 +128,13 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
+        <div ref={personContainerRef} className="scroll-box1 flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"
               onClick={sortPeople}
               text={t("sort")}
             />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToEvents}
@@ -195,7 +159,6 @@ const HomeAdmin = () => {
                   : t("switch_to_card_view")
               }
             />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToCreateOrg}
@@ -235,91 +198,89 @@ const HomeAdmin = () => {
   const renderCreateOrg = () => {
     return (
       <>
-        <div className="scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box top-scroll-box1 line-break">
-            <div className="flex-box top-scroll-box1 line-break">
-              <DynamicButton
-                className="button button-small"
-                onClick={sortEvents}
-                text={t("sort")}
-              />
+        <div className="general-box flex-box flex-column">
+          <div className="flex-box line-break">
+            <DynamicButton
+              className="button button-small"
+              onClick={sortEvents}
+              text={t("sort")}
+            />
 
-              <DynamicButton
-                className="button button-small"
-                onClick={switchToPeople}
-                text={t("switch_to_people")}
-              />
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToPeople}
+              text={t("switch_to_people")}
+            />
 
-              <DynamicButton
-                className="button button-small"
-                onClick={switchToEvents}
-                text={t("switch_to_Events")}
+            <DynamicButton
+              className="button button-small"
+              onClick={switchToEvents}
+              text={t("switch_to_Events")}
+            />
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="flex-box flex-column input-field-box"
+          >
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgName")} </label>
+                <label className="red-star">*</label>
+              </div>
+
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgName}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgName_placeholder")}
               />
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="general-box smooth-shadow-box flex-box flex-column "
-            >
-              <div className="flex-box flex-column input-field-box">
-                <div>
-                  <label> {t("orgName")} </label>
-                  <label className="red-star">*</label>
-                </div>
-
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.orgName}
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={t("orgName_placeholder")}
-                />
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgAddress")} </label>
+                <label className="red-star">*</label>
               </div>
 
-              <div className="flex-box flex-column input-field-box">
-                <div>
-                  <label> {t("orgAddress")} </label>
-                  <label className="red-star">*</label>
-                </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgAddress}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgAddress_placeholder")}
+              />
+            </div>
 
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.orgAddress}
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={t("orgAddress_placeholder")}
-                />
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label> {t("orgAdmin")} </label>
+                <label className="red-star">*</label>
               </div>
 
-              <div className="flex-box flex-column input-field-box">
-                <div>
-                  <label> {t("orgAdmin")} </label>
-                  <label className="red-star">*</label>
-                </div>
+              <DynamicInput
+                className="input-field"
+                type="text"
+                value={formData.orgAdmin}
+                name="name"
+                onChange={handleChange}
+                placeholder={t("orgAdmin_placeholder")}
+              />
+            </div>
 
-                <DynamicInput
-                  className="input-field"
-                  type="text"
-                  value={formData.orgAdmin}
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={t("orgAdmin_placeholder")}
-                />
-              </div>
+            {/* //TODO add org pic */}
 
-              {/* //TODO add org pic */}
-
-              <div className="flex-box">
-                <DynamicButton
-                  className="button button-small"
-                  onClick={handleSubmit}
-                  text={t("submit_button")}
-                />
-              </div>
-            </form>
-          </div>
+            <div className="flex-box">
+              <DynamicButton
+                className="button button-small"
+                onClick={handleSubmit}
+                text={t("submit_button")}
+              />
+            </div>
+          </form>
         </div>
       </>
     );
@@ -349,7 +310,7 @@ const initEvents = [
     req: ["التنظيف", "البستنة"],
     count: 5,
     size: 20,
-    location: "الحديقة العامة - بيت حنينا",
+    eventLocation: "الحديقة العامة - بيت حنينا",
   },
   {
     id: "event2",
@@ -358,7 +319,7 @@ const initEvents = [
     req: ["التدريس", "الرياضيات", "العلوم"],
     count: 3,
     size: 10,
-    location: "مركز المجتمع - بيت حنينا",
+    eventLocation: "مركز المجتمع - بيت حنينا",
   },
   {
     id: "event3",
@@ -367,6 +328,6 @@ const initEvents = [
     req: ["الرياضة", "تنظيم الفعاليات"],
     count: 8,
     size: 15,
-    location: "الملعب الرياضي - بيت حنينا",
+    eventLocation: "الملعب الرياضي - بيت حنينا",
   },
 ];

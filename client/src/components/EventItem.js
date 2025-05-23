@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import DynamicButton from "./ButtonComponent";
+import DynamicButton from "./common/ButtonComponent";
 import { useTranslation } from "react-i18next";
 import logoIcon from "../icons/org_icon.png";
 import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, className, style, req, type, count, size,description,location }) => {
+const EventItem = ({ name, req, type, count, size, eventLocation, description}) => {
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
 
@@ -43,7 +43,7 @@ const EventItem = ({ name, className, style, req, type, count, size,description,
   // };
 
   return (
-    <div className={className} style={style}>
+    <div className="flex-box flex-column event-box smooth-shadow-box">
       <div className="event-box-content-top">
         <div className="event-box-title">{name}</div>
         <div className="event-box-favorite">
@@ -63,9 +63,9 @@ const EventItem = ({ name, className, style, req, type, count, size,description,
         <div>
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
-        <div className="flex-box flex-column">
+        <div className="flex-box flex-column skills-box">
           <div>{tskill("skills")}:</div>
-          <div className="flex-box">
+          <div className="flex-box wrap-reverse">
             {req.map((item, index) => (
               <div key={index} className="skills">
                 {item}
@@ -76,7 +76,7 @@ const EventItem = ({ name, className, style, req, type, count, size,description,
         </div>
       </div>
       <div>
-      📍{location} {/*Location, can be styled or not */}
+      {eventLocation} {/*Location, can be styled or not */}
       </div>
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
@@ -131,13 +131,11 @@ const EventItem = ({ name, className, style, req, type, count, size,description,
 EventItem.propTypes = {
   name: PropTypes.string.isRequired,
   req: PropTypes.arrayOf(PropTypes.string).isRequired,
-  className: PropTypes.string,
-  style: PropTypes.object,
   type: PropTypes.string,
   count: PropTypes.number,
   size: PropTypes.number,
   description: PropTypes.string,
-  location: PropTypes.string
+  eventLocation: PropTypes.string
 };
 
 EventItem.defaultProps = {

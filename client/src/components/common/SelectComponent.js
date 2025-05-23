@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import DropDownMenu from "./DropDownMenu";
-import { useSkillOptions } from "../config/options/Skills";
-import { useSortOptions } from "../config/options/Sort";
-import { useTheme } from "../config/options/Colors";
+import { useSkillOptions } from "../../config/options/Skills";
+import { useSortOptions } from "../../config/options/Sort";
+import { useTheme } from "../../config/options/Colors";
 
-import xIconLight from "../icons/light/x_icon.svg";
-import xIconDark from "../icons/dark/x_icon.svg";
+import xIconLight from "../../icons/light/x_icon.svg";
+import xIconDark from "../../icons/dark/x_icon.svg";
 
 const SelectComponent = ({
   onChange, // Function to call when skills array changes

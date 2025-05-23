@@ -7,9 +7,10 @@
   "phoneNumber": ":رقم الهاتف",
   "email": ":بريد إلكتروني",
   "insurance": ":التأمين الصحي",
+  "occupation": "المهنة",
   "idNumber": ":رقم الهوية",
-  "submit": ":إرسال الطلب",
-  "back": ":عودة",
+  "submit": "إرسال الطلب",
+  "back": "عودة",
   "address": ":العنوان",
   "ln": ":لغة",
   "skills": ":المهارات",
@@ -24,6 +25,7 @@
   "selectskills": "اختر المهارات",
   "remove": "إزالة ",
   "selectinsurance": "اختيار التأمين",
+  "selectoccupation": "اختيار المهنة",
   "userName": ":اسم المستخدم",
   "password": ":كلمة المرور"
 }

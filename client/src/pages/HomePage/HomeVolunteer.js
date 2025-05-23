@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 
 // import components here
 import EventItem from "../../components/EventItem";
-import DynamicButton from "../../components/ButtonComponent";
-import NavigationBar from "../../components/NavigationBar";
-import CopyRight from "../../components/CopyRight";
+import DynamicButton from "../../components/common/ButtonComponent";
+import NavigationBar from "../../components/layout/NavigationBar";
+import CopyRight from "../../components/layout/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
 
 const HomeVolunteer = () => {
@@ -22,11 +22,10 @@ const HomeVolunteer = () => {
         name={event.name}
         desc={event.desc}
         req={event.req}
-        className="flex-box flex-column event-box smooth-shadow-box"
         type="vol"
         count={event.count}
         size={event.size}
-        location={event.location}
+        eventLocation={event.eventLocation}
       />
     ));
   };
@@ -35,7 +34,7 @@ const HomeVolunteer = () => {
     <div className="app flex-box flex-column">
       <NavigationBar />
 
-      <div className="scroll-box1 general-box flex-box flex-column">
+      <div className="scroll-box1 flex-box flex-column">
         <div className="flex-box flex-column top-scroll-box1 line-break">
           <div>
             <DynamicButton
@@ -46,8 +45,8 @@ const HomeVolunteer = () => {
           </div>
         </div>
         <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
-        <CopyRight />
       </div>
+      <CopyRight />
     </div>
   );
 };
@@ -63,7 +62,7 @@ const events = [
     req: ["التنظيف", "البستنة"],
     count: 5,
     size: 20,
-    location: "الحديقة العامة - بيت حنينا",
+    eventLocation: "الحديقة العامة - بيت حنينا",
   },
   {
     id: "event2",
@@ -72,7 +71,7 @@ const events = [
     req: ["التدريس", "الرياضيات", "العلوم"],
     count: 3,
     size: 10,
-    location: "مركز المجتمع - بيت حنينا",
+    eventLocation: "مركز المجتمع - بيت حنينا",
   },
   {
     id: "event3",
@@ -81,6 +80,6 @@ const events = [
     req: ["الرياضة", "تنظيم الفعاليات"],
     count: 8,
     size: 15,
-    location: "الملعب الرياضي - بيت حنينا",
+    eventLocation: "الملعب الرياضي - بيت حنينا",
   },
 ];

@@ -24,20 +24,23 @@
 │       ├── App.js
 │       ├── AppRouter.js
 │       ├── components
-│       │   ├── ButtonComponent.js
-│       │   ├── CopyRight.js
-│       │   ├── DropDownMenu.js
+│       │   ├── common
+│       │   │   ├── ButtonComponent.js
+│       │   │   ├── DropDownMenu.js
+│       │   │   ├── InputComponent.js
+│       │   │   ├── PopupComponent.js
+│       │   │   ├── SelectComponent.js
+│       │   │   └── UploadComponent.js
 │       │   ├── EventItem.js
-│       │   ├── InputComponent.js
+│       │   ├── layout
+│       │   │   ├── CopyRight.js
+│       │   │   └── NavigationBar.js
 │       │   ├── ManageAccountBox.js
-│       │   ├── NavigationBar.js
-│       │   ├── PersonItem
-│       │   │   ├── PeopleDisplaySwitcher.js
-│       │   │   ├── PersonItemCard.js
-│       │   │   ├── PersonItemRow.js
-│       │   │   └── PersonList.js
-│       │   ├── SelectComponent.js
-│       │   └── UploadComponent.js
+│       │   └── PersonItem
+│       │       ├── PeopleDisplaySwitcher.js
+│       │       ├── PersonItemCard.js
+│       │       ├── PersonItemRow.js
+│       │       └── PersonList.js
 │       ├── config
 │       │   ├── Context
 │       │   │   └── auth.js
@@ -52,6 +55,7 @@
 │       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
+│       │   │   │   ├── occupation.json
 │       │   │   │   ├── personalArea.json
 │       │   │   │   ├── signup.json
 │       │   │   │   └── skills.json
@@ -65,6 +69,7 @@
 │       │   │       ├── HomeOrganizer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
+│       │   │       ├── occupation.json
 │       │   │       ├── personalArea.json
 │       │   │       ├── signup.json
 │       │   │       └── skills.json
@@ -72,6 +77,7 @@
 │       │       ├── Colors.js
 │       │       ├── Insurance.js
 │       │       ├── Language.js
+│       │       ├── Occupation.js
 │       │       ├── Skills.js
 │       │       └── Sort.js
 │       ├── global.css
@@ -112,7 +118,8 @@
 │           ├── CommonPages
 │           │   ├── ErrorScreen.js
 │           │   ├── Loading.js
-│           │   └── NoConnection.js
+│           │   ├── NoConnection.js
+│           │   └── ULA.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
 │           │   ├── HomeOrganizer.js
@@ -125,9 +132,15 @@
 │               └── SignUp.js
 ├── docs
 │   ├── digrams
+│   │   ├── database-digram.png
+│   │   ├── dataFlow.png
+│   │   ├── h3
+│   │   │   └── user_auth_sequence.png
 │   │   ├── image.png
 │   │   └── logic.drawio
 │   ├── editable
+│   │   ├── h3
+│   │   │   └── user_auth_sequence.drawio
 │   │   └── SignUp.drawio.svg
 │   ├── first-meeting
 │   │   ├── FIRST-MEETING-QUESTIONS.md
@@ -198,5 +211,5 @@
 │       └── App-test.postman_collection.json
 └── workbox-config.cjs
 
-44 directories, 152 files
+48 directories, 161 files
 ```

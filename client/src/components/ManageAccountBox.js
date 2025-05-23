@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 // import DropDownMenu from "./DropDownMenu";
-import DynamicButton from "./ButtonComponent";
+import DynamicButton from "./common/ButtonComponent";
 
 const ManageAccountBox = () => {
   const { t } = useTranslation("personal");

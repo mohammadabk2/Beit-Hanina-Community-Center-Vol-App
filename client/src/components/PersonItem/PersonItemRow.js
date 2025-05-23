@@ -1,8 +1,9 @@
 // PersonItemRow.js
 import React from "react";
 import PropTypes from "prop-types";
-import DynamicButton from "../ButtonComponent";
 import { useTranslation } from "react-i18next";
+
+import DynamicButton from "../common/ButtonComponent";
 
 // Renamed component to reflect its purpose (rendering a row)
 const PersonItemRow = ({
@@ -36,10 +37,8 @@ const PersonItemRow = ({
       <td>{phoneNumber}</td>
       <td>{email}</td>
       <td>{address}</td>
-      <td>{insurance}</td> {/* Example: Can be added back if needed */}
-      <td>{idNumber}</td> {/* Example: Can be added back if needed */}
-      {/* <td>{skillsDisplay}</td> */} {/* Example: Skills cell */}
-      {/* Action Buttons - Render appropriate buttons in shared cells */}
+      <td>{insurance}</td>
+      <td>{idNumber}</td>
       {newUser ? (
         <>
           <td>
