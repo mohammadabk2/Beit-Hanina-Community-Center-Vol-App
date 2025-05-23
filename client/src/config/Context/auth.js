@@ -5,72 +5,49 @@ import PropTypes from "prop-types";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [token, setToken] = useState(null); // Add token state
+
   const navigate = useNavigate();
 
   // Check localStorage on initial load for persistent login
   // Runs once on login only
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("UserID");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
-    } catch (error) {
-      console.error("Failed to parse user data from localStorage", error);
-      localStorage.removeItem("UserID");
-    } finally {
-      setLoading(false);
+    const storedUserData = localStorage.getItem("userData");
+    const storedToken = localStorage.getItem("authToken"); // Load token
+    if (storedUserData && storedToken) {
+      setUserData(JSON.parse(storedUserData));
+      setToken(storedToken); // Set token
+      setIsAuthenticated(true);
     }
   }, []);
 
-  const login = (userData) => {
-    if (!userData || !userData.role) {
-      console.error("Login attempted with invalid userData:", userData);
-      // Handle this error appropriately, maybe show a message
-      return;
-    }
-    setUser(userData);
-    localStorage.setItem("userData", JSON.stringify(userData)); // Persist user data
-
-    if (userData.role) {
-      if (userData.role === "admin") {
-        navigate("/home-admin");
-      } else if (userData.role === "organizer") {
-        navigate("/home-organizer");
-      } else if (userData.role === "volunteer") {
-        navigate("/home-volunteer");
-      } else {
-        console.warn(
-          "User logged in but role is not recognized for navigation:",
-          userData.role
-        );
-        //TODO change to error message
-        navigate("/");
-      }
-    } else {
-      console.error("Userdata.role is not a valid object:", userData.role);
-      //TODO change to error message
-      navigate("/");
-    }
+  const login = (data, authToken) => {
+    // Accept authToken as an argument
+    setUserData(data);
+    setToken(authToken); // Set the token in state
+    setIsAuthenticated(true);
+    localStorage.setItem("userData", JSON.stringify(data));
+    localStorage.setItem("authToken", authToken); // Store token in localStorage
   };
 
   const logout = () => {
-    setUser(null);
+    setUserData(null);
+    setToken(null); // Clear token on logout
+    setIsAuthenticated(false);
     localStorage.removeItem("userData");
+    localStorage.removeItem("authToken"); // Remove token from localStorage
     navigate("/");
   };
 
-  const value = {
-    user,
-    isAuthenticated: !!user,
-    loadingInitial: loading,
-    login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{ isAuthenticated, userData, token, login, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 AuthProvider.propTypes = {
@@ -78,9 +55,5 @@ AuthProvider.propTypes = {
 };
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  return useContext(AuthContext);
 };

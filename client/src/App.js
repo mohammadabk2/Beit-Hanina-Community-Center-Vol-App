@@ -45,8 +45,29 @@ const App = () => {
         password: password,
       });
 
+      const authHeader = response.headers["authorization"]; // Get the token from the Authorization header
+      let authToken = null;
+
+      if (authHeader && authHeader.startsWith("Bearer ")) {
+        authToken = authHeader.split(" ")[1]; // Extract the token
+      } else {
+        console.warn(
+          "Authorization header not found or not in 'Bearer <token>' format. Checking response body for token."
+        );
+        authToken = response.data.token || response.data.accessToken; // Fallback
+      }
+
       if (response.data.status === "success" && response.data.userData) {
-        login(response.data.userData);
+        login(response.data.userData, authToken); // pass token to login
+
+        if (response.data.userData.role === "admin") {
+          navigate("home-admin");
+        } else if (response.data.userData.role === "organizer") {
+          navigate("home-organizer");
+        } else {
+          navigate("home-volunteer");
+        }
+
         alert(`Welcome ${response.data.message}`);
       } else {
         const message =
