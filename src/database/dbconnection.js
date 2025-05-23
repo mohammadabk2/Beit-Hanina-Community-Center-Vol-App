@@ -758,6 +758,29 @@ const updateEventStatus = async (eventID, newStatus, currentStatus) => {
   }
 };
 
+/**
+ * @param {number} eventID - ID of Event Volunteer wants to join
+ * @param {number} userID - ID of Volunteer
+ * @param {string} arrayName - arrayName to add the Volunteer to (enrolled / waiting list)
+ */
+const enrollUserToEvent = async (eventID, userID, arrayName) => {
+  const text = `
+  UPDATE events
+  SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
+  WHERE event_id = $1
+  RETURNING *;`;
+
+  const values = [eventID, userID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(`Error in enrollUserToEvent on array ${arrayName}:`, error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -770,6 +793,7 @@ export default {
   createOrganizer,
   addEvent,
   updateEventStatus,
+  enrollUserToEvent,
 
   // Currently for testing unused
   getUserById, // tested

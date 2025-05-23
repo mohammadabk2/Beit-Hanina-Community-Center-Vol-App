@@ -10,7 +10,7 @@
 			"name": "Login",
 			"item": [
 				{
-					"name": "login org123",
+					"name": "Volunteer",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"org123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"raw": "{\r\n    \"userName\": \"vol\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -415,7 +415,47 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 6,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 6,\r\n    \"action\": \"approve\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup To Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InZvbHVudGVlciIsImlhdCI6MTc0Nzk4Mzg3NSwiZXhwIjoxNzQ4MDcwMjc1fQ.mzEy9UkII48ye40MPwrMXjwk09GNKxPZ93SWHDa5xw0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 3,\r\n    \"eventID\": 1,\r\n    \"action\": \"enroll\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

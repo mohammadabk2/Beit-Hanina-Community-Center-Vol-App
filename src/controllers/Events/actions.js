@@ -54,6 +54,22 @@ const eventActions = async (req, res) => {
         }
       }
 
+      if (roleType.role === "volunteer") {
+        console.log("Events Volunteer action");
+        //TODO check event status
+        //TODO check if user meets conditions (much later phase 2 or 3)
+
+        if (action === "enroll") {
+          answer = dbConnection.enrollUserToEvent(
+            eventID,
+            userID,
+            "vol_id_waiting_list"
+          );
+        }
+        
+        //TODO maybe add a unenroll from event
+      }
+
       if (!answer) {
         const message = `action failed!! invalid action type`;
         console.log(message);
