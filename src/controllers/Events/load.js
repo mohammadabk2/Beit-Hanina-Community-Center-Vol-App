@@ -1,12 +1,12 @@
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
 
-const loadEvents = async (req, res) => {
+const load = async (req, res) => {
   console.log("Loading Events from DB");
 
-  const { userID, userRequest } = req.body;
+  const { userID, userRequest, type, eventID } = req.body;
 
-  if (!userID || !userRequest) {
+  if (!userID || !userRequest || !type) {
     const message = "User Id or Request Failed.";
     console.log(message);
     return res.status(400).send({
@@ -19,8 +19,8 @@ const loadEvents = async (req, res) => {
   try {
     roleType = await validateToken(req);
     console.log(`role type: ${roleType.role}`);
-  } catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
     return res.status(error.statusCode).send({
       message: error,
       status: "fail",
@@ -29,35 +29,46 @@ const loadEvents = async (req, res) => {
 
   const roles = ["volunteer", "organizer", "admin"];
   if (roles.includes(roleType.role)) {
-
     console.log(`Attempting load Events from DB for userId: ${userID}`);
 
     //TODO verify token and id
     try {
-      const events = await dbConnection.getEvents(userRequest);
+      let answer;
+      let response;
 
-      if (events && events.length > 0) {
-        const allEvents = events.map((event) => ({
-          id: event.event_id,
-          name: event.event_name,
-          birthDate: new Date(event.event_date).toISOString().split("T")[0],
-          startTime: event.event_start,
-          endTime: event.event_end,
-          active: event.is_active,
-          orgId: event.org_id,
-          //TODO Implement different data return for vol/org/admin
-          maxSize: event.max_number_of_vol,
-          currentSize: event.current_number_of_vol,
-          location: event.event_location,
-          description: event.event_description,
-        }));
+      if (type === "events") {
+        answer = await dbConnection.getEvents(userRequest);
 
-        const message = `Loading Events successful!`;
+        if (answer && answer.length > 0) {
+          response = answer.map((event) => ({
+            id: event.event_id,
+            name: event.event_name,
+            birthDate: new Date(event.event_date).toISOString().split("T")[0],
+            startTime: event.event_start,
+            endTime: event.event_end,
+            active: event.is_active,
+            orgId: event.org_id,
+            //TODO Implement different data return for vol/org/admin
+            maxSize: event.max_number_of_vol,
+            currentSize: event.current_number_of_vol,
+            location: event.event_location,
+            description: event.event_description,
+          }));
+        }
+      }
+
+      if (type === "event-list" && eventID) {
+        answer = await dbConnection.fetchVolunteerlist(eventID, userRequest);
+        response = answer;
+      }
+
+      if (answer && response) {
+        const message = `Loading ${type} successful!`;
         console.log(message);
         res.status(200).send({
           message: message,
           status: "success",
-          userData: allEvents,
+          userData: response,
         });
       } else {
         const message = `There does not exist any events under this category.`;
@@ -76,4 +87,4 @@ const loadEvents = async (req, res) => {
     }
   }
 };
-export default loadEvents;
+export default load;

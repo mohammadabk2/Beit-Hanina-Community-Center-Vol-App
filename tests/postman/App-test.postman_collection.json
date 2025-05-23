@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"vol\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"userName\": \"captainmarvel\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 					"response": []
 				},
 				{
-					"name": "login john",
+					"name": "organizer",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -52,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"john123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"raw": "{\r\n    \"userName\": \"org\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,7 +228,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NzAyOSwiZXhwIjoxNzQ3NTgwNjI5fQ.hydrPY3jYZ70nhBvMf1NqwU93k1pI8mB0bUiM8vG9Io",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTkyMjgwLCJleHAiOjE3NDgwNzg2ODB9.EOzKpIL_SUlRk8gC48UoMW08xMdKOvHfDdXXIOnV7ck",
 									"type": "string"
 								}
 							]
@@ -244,7 +244,56 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\": 6,\r\n    \"userRequest\":\"add later\"\r\n}",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"type\": \"events\",\r\n    \"userRequest\": [\r\n        \"approved\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load Event list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTkyMjgwLCJleHAiOjE3NDgwNzg2ODB9.EOzKpIL_SUlRk8gC48UoMW08xMdKOvHfDdXXIOnV7ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NjAwOSwiZXhwIjoxNzQ3NTc5NjA5fQ.IejvRsTPcGe0Pv2OHqNJ5MuEpuzMAcmkKO_3y2mNbK0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"type\": \"event-list\",\r\n    \"userRequest\": \"vol_id\",\r\n    \"eventID\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -415,7 +464,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 6,\r\n    \"action\": \"approve\"\r\n}",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 6,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -446,7 +495,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InZvbHVudGVlciIsImlhdCI6MTc0Nzk4Mzg3NSwiZXhwIjoxNzQ4MDcwMjc1fQ.mzEy9UkII48ye40MPwrMXjwk09GNKxPZ93SWHDa5xw0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6InZvbHVudGVlciIsImlhdCI6MTc0Nzk4ODMxMCwiZXhwIjoxNzQ4MDc0NzEwfQ.EIktOwg1_KJ61say9e14WunuAK2I-U5WRdGA7M9mYQw",
 									"type": "string"
 								}
 							]
@@ -455,7 +504,47 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\": 3,\r\n    \"eventID\": 1,\r\n    \"action\": \"enroll\"\r\n}",
+							"raw": "{\r\n    \"userID\": 5,\r\n    \"eventID\": 1,\r\n    \"action\": \"enroll\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve volunteer to event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0Nzk4NjQ2MSwiZXhwIjoxNzQ4MDcyODYxfQ.dX4zM96Am8JZbPOxmBmHPA2RKM6sbeYBXumCRn1LB_s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 2,\r\n    \"eventID\": 1,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

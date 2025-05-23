@@ -164,13 +164,13 @@
 │   │   │   └── validateToken.js
 │   │   ├── Events
 │   │   │   ├── actions.js
-│   │   │   ├── createEvent.js
-│   │   │   └── loadEvents.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   ├── index.js
 │   │   ├── Users
 │   │   │   ├── actions.js
-│   │   │   ├── load.js
-│   │   │   └── register.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   └── validation.js
 │   ├── database
 │   │   ├── dbconnection.js

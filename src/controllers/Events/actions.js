@@ -74,11 +74,6 @@ const eventActions = async (req, res) => {
       if (roleType.role === "organizer") {
         console.log("Events Organizer action");
 
-        //TODO action works but this is a post request move this to a get
-        // if (action === "fetch") {
-        //   answer = await dbConnection.fetchVolunteerlist(eventID, actionValue);
-        // }
-
         if (action === "approve") {
           answer = await dbConnection.decideUserEventStatus(
             eventID,
