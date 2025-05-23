@@ -1,4 +1,5 @@
 // to interact with the database
+import { skipPartiallyEmittedExpressions } from "typescript";
 import db from "./db.js";
 //TODO change the functions to get certain columns instead of *
 //TODO some functions rely on names maybe the should also get id
@@ -585,13 +586,15 @@ const createUser = async (
   email,
   address,
   insurance,
+  occupation,
   idNumber,
   username,
-  passwordHash
+  passwordHash,
+  skills
 ) => {
   const text = `
-    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, skills)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     RETURNING *;`;
   const values = [
     name,
@@ -601,9 +604,11 @@ const createUser = async (
     email,
     address,
     insurance,
+    occupation,
     idNumber,
     username,
     passwordHash,
+    skills,
   ];
   try {
     const res = await db.query(text, values);
