@@ -40,7 +40,7 @@ const App = () => {
     console.log("sign in button clicked");
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/logUser`, {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         userName: username,
         password: password,
       });
