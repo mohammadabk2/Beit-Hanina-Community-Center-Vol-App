@@ -145,12 +145,12 @@
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── android_setup.sh
 │   ├── before_git.sh
 │   ├── convert_to_apk.sh
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
-│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
@@ -192,10 +192,11 @@
 │   ├── addAdmin.sql
 │   ├── drop_tables.sql
 │   ├── events.sql
+│   ├── master.sql
 │   ├── populate.sql
 │   └── postman
 │       └── App-test.postman_collection.json
 └── workbox-config.cjs
 
-44 directories, 151 files
+44 directories, 152 files
 ```
