@@ -32,9 +32,13 @@ const useLoadUsers = () => {
           },
         });
 
-        const data = response.data?.userData;
+        let data = response.data?.userData;
         if (Array.isArray(data)) {
-          setUsers(data);
+          const people = data.map((person) => ({
+            ...person,
+            isNew: tableName === "volunteer_waiting_list",
+          }));
+          setUsers(people);
         } else {
           setUsers([]);
           console.log("Unexpected data format or no users found.");

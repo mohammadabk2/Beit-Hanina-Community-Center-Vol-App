@@ -11,12 +11,14 @@ import CopyRight from "../../components/layout/CopyRight";
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
+// import useLoadUsers from "../../config/hooks/loadUsers";
 
 const HomeOrganizer = () => {
   const { t } = useTranslation("home");
 
   const { userId, loadingInitial, isAuthenticated } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+  // const { users, usersLoading, userError, loadUsers } = useLoadUsers();
 
   const [showEvents, setShowEvents] = useState(true); // Use useState!
   const [formData, setFormData] = useState({
@@ -34,6 +36,12 @@ const HomeOrganizer = () => {
     }
   }, [userId, isAuthenticated, loadEvents]);
 
+  // useEffect(() => {
+  //   if (userId && isAuthenticated) {
+  //     loadUsers("users");
+  //   }
+  // }, [userId, isAuthenticated, loadUsers]);
+  
   if (loadingInitial) {
     return <div>Loading user data...</div>;
   }

@@ -306,30 +306,18 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadUsers("users");
+      loadUsers("users;");
     }
   }, [userId, isAuthenticated, loadUsers]);
 
   if (loadingInitial) {
-    if (viewMode === "people") {
-      return <div>Loading user data...</div>;
-    }
-    if (viewMode === "events") {
-      return <div>Loading Event data...</div>;
-    }
-    if (viewMode === "createOrg") {
-      return <div>Loading create org ...</div>;
-    }
+    return <div>Loading Event data...</div>;
   }
 
   if (!isAuthenticated) {
     return <div>You need to be logged in to view this data.</div>;
   }
 
-  if (!isAuthenticated) {
-    return <div>You need to be logged in to view this data.</div>;
-  }
-  console.log("Current viewMode:", viewMode);
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
