@@ -184,84 +184,6 @@ const getUserById = async (id) => {
 };
 
 /**
- * Retrieves a user from the database by ID Number.
- *
- * @async
- * @param {number} id - The ID Number of the user.
- * @returns {Promise<Object|null>} A promise that resolves to the user object if found, or null if not found.
- * @throws {Error} If the database query fails.
- */
-const getUserByIdNumber = async (id) => {
-  const text = "SELECT id FROM users WHERE id_number = $1;";
-  const res = await db.query(text, [id]);
-  return res.rows[0];
-};
-
-/**
- * Assigns a role to a user by inserting an entry into the `user_role` table.
- *
- * @async
- * @param {number} userId - The ID of the user.
- * @param {string} roleName - The name of the role to assign (Admin,Org,Vol).
- * @returns {Promise<Object|null>} A promise that resolves to the assigned role object if successful, or null if not.
- * @throws {Error} If the database query fails.
- */
-const assignRoleToUser = async (userId, roleName) => {
-  const text = `
-  UPDATE users
-  SET role = array_append(COALESCE(role, '{}'), $2)
-  WHERE user_id = $1
-  RETURNING *;
-`;
-
-  const values = [userId, roleName];
-
-  try {
-    const res = await db.query(text, values);
-    return res.rows[0] || null; // Return updated row or null if no user was found
-  } catch (error) {
-    console.error("Error adding roleName:", error);
-    throw new Error("Failed to add roleName");
-  }
-};
-
-/**
- * Retrieves volunteer details (total hours and Orgs name) for a user by their ID.
- *
- * @async
- * @param {number} id - The ID of the user.
- * @returns {Promise<Object|null>} A promise that resolves to an object containing volunteer details or null if not found.
- * @throws {Error} If the database query fails.
- */
-const getVolunteerDetailsById = async (id) => {
-  const text = `
-      SELECT * 
-      FROM volunteer v
-      WHERE v.user_id = $1;
-    `;
-  const res = await db.query(text, [id]);
-  return res.rows[0];
-};
-
-/**
- * Retrieves organizer details (organization name and vol_id) for a user by their ID.
- *
- * @async
- * @param {number} id - The ID of the user.
- * @returns {Promise<Object|null>} A promise that resolves to an object containing organizer details or null if not found.
- * @throws {Error} If the database query fails.
- */
-const getOrganizerDetailsById = async (id) => {
-  const text = `
-      SELECT *
-      FROM organizer o
-      WHERE o.user_id = $1;
-    `;
-  const res = await db.query(text, [id]);
-  return res.rows[0];
-};
-
-/**
  * Adds a org to the array for a volunteer.
  *
  * @async
@@ -537,25 +459,6 @@ const addEvent = async (
 };
 
 /**
- * adds a vol id to the array of vol at the events table.
- * @param {String} eventName
- * @param {number} volId
- * @returns
- */
-const addVolId = async (eventName, volId) => {
-  const text = `
-  UPDATE events
-  SET vol_id = array_append(COALESCE(vol_id, '{}'), $1)
-  WHERE event_name = $2
-  RETURNING *;
-`;
-
-  const values = [volId, eventName];
-  const res = await db.query(text, values);
-  return res.rows[0];
-};
-
-/**
  *
  * @param {String} eventName
  * @param {Boolean} status
@@ -738,6 +641,8 @@ const rejectUser = async (userId) => {
  * @param {number} eventID
  * @param {string} newStatus
  * @param {string} currentStatus
+ * @returns {Promise<Object>} A promise that resolves to the Event status object.
+ * @throws {Error} If the database query fails.
  */
 const updateEventStatus = async (eventID, newStatus, currentStatus) => {
   const text = `
@@ -759,22 +664,82 @@ const updateEventStatus = async (eventID, newStatus, currentStatus) => {
 };
 
 /**
- * @param {number} eventID - ID of Event Volunteer wants to join
- * @param {number} userID - ID of Volunteer
- * @param {string} arrayName - arrayName to add the Volunteer to (enrolled / waiting list)
+ *
+ * @param {number} eventID
+ * @param {string} listName
+ * @returns {Promise<Object>} A promise that resolves to the fetched event user list object.
+ * @throws {Error} If the database query fails.
  */
-const enrollUserToEvent = async (eventID, userID, arrayName) => {
+const fetchVolunteerlist = async (eventID, listName) => {
   const text = `
-  UPDATE events
-  SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
-  WHERE event_id = $1
-  RETURNING *;`;
+  SELECT ${listName} FROM events
+  WHERE event_id = $1;`;
 
-  const values = [eventID, userID];
+  const values = [eventID];
 
   try {
     const res = await db.query(text, values);
     return res.rows[0];
+  } catch (error) {
+    console.error(`Error in fetchVolunteerlist ${listName}:`, error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
+/**
+ * @param {number} eventID - ID of Event
+ * @param {number} userID - ID of Volunteer to move
+ * @param {string} arrayName - arrayName to move the Volunteer to (enrolled/waiting list)
+ * @param {string} status - status of the user (approved/rejected)
+ * @returns {Promise<Object>} A promise that resolves to the volunteer array object.
+ * @throws {Error} If the database query fails.
+ */
+const decideUserEventStatus = async (eventID, userID, arrayName, status) => {
+  const queries = [];
+  const values = [eventID, userID];
+
+  if (status === "waiting") {
+    queries.push(`
+      UPDATE events
+      SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
+      WHERE event_id = $1
+      RETURNING *;
+    `);
+  }
+
+  if (status === "approved") {
+    // Add to approved list
+    queries.push(`
+      UPDATE events
+      SET vol_id = ARRAY_APPEND(COALESCE(vol_id, ARRAY[]::INT[]), $2)
+      WHERE event_id = $1
+      RETURNING *;
+    `);
+    // Remove from waiting list
+    queries.push(`
+      UPDATE events
+      SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
+      WHERE event_id = $1
+      RETURNING *;
+    `);
+  }
+
+  if (status === "rejected") {
+    // Remove from waiting list
+    queries.push(`
+      UPDATE events
+      SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
+      WHERE event_id = $1
+      RETURNING *;
+    `);
+  }
+  try {
+    let result;
+    for (const text of queries) {
+      const res = await db.query(text, values);
+      result = res.rows[0]; // Optional: update only the last result
+    }
+    return result;
   } catch (error) {
     console.error(`Error in enrollUserToEvent on array ${arrayName}:`, error);
     throw error; // Re-throw the error to be handled by the caller
@@ -793,20 +758,16 @@ export default {
   createOrganizer,
   addEvent,
   updateEventStatus,
-  enrollUserToEvent,
+  fetchVolunteerlist,
+  decideUserEventStatus,
 
   // Currently for testing unused
   getUserById, // tested
-  assignRoleToUser,
-  getVolunteerDetailsById, // tested
-  getOrganizerDetailsById, // tested
-  updateOrgName, // tested
+  updateOrgName, // tested //! probaibly dont need
   incrementGivenHours, // tested
   incrementVolHours, // tested
   addOrgToVolunteer, // tested
   updateUser,
-  getUserByIdNumber,
   addVolToOrganizer,
-  addVolId,
   changeStatus,
 };

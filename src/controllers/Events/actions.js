@@ -4,9 +4,9 @@ import validateToken from "../common/validateToken.js";
 const eventActions = async (req, res) => {
   console.log("Event Actions");
 
-  const { userID, eventID, action } = req.body;
+  const { userID, eventID, action, actionValue } = req.body;
 
-  if (!userID || !eventID || !action) {
+  if (!userID || !eventID || !action || !actionValue) {
     const message = "Request body Failed.";
     console.log(message);
     return res.status(400).send({
@@ -39,14 +39,14 @@ const eventActions = async (req, res) => {
       if (roleType.role === "admin") {
         console.log("Events Admin action");
         if (action === "approve") {
-          answer = dbConnection.updateEventStatus(
+          answer = await dbConnection.updateEventStatus(
             eventID,
             "approved",
             "pending"
           );
         }
         if (action === "reject") {
-          answer = dbConnection.updateEventStatus(
+          answer = await dbConnection.updateEventStatus(
             eventID,
             "rejected",
             "pending"
@@ -60,14 +60,33 @@ const eventActions = async (req, res) => {
         //TODO check if user meets conditions (much later phase 2 or 3)
 
         if (action === "enroll") {
-          answer = dbConnection.enrollUserToEvent(
+          answer = await dbConnection.decideUserEventStatus(
             eventID,
             userID,
-            "vol_id_waiting_list"
+            "vol_id_waiting_list",
+            "waiting"
           );
         }
-        
+
         //TODO maybe add a unenroll from event
+      }
+
+      if (roleType.role === "organizer") {
+        console.log("Events Organizer action");
+
+        //TODO action works but this is a post request move this to a get
+        // if (action === "fetch") {
+        //   answer = await dbConnection.fetchVolunteerlist(eventID, actionValue);
+        // }
+
+        if (action === "approve") {
+          answer = await dbConnection.decideUserEventStatus(
+            eventID,
+            actionValue,
+            "vol_id",
+            "approved"
+          );
+        }
       }
 
       if (!answer) {
