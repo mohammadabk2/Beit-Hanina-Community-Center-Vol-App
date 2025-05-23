@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-
+// import axios from "axios";
 
 import DynamicButton from "../../components/common/ButtonComponent";
 import EventItem from "../../components/EventItem";
@@ -17,6 +17,7 @@ import CardIconLight from "../../icons/light/card_view_icon.svg";
 import TableIconLight from "../../icons/light/table_view_icon.svg";
 
 const HomeAdmin = () => {
+  // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { t } = useTranslation("home");
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
@@ -99,7 +100,9 @@ const HomeAdmin = () => {
               text={t("switch_to_create_org")}
             />
           </div>
-          <div className="bottom-scroll-box1">{renderEventItems(initEvents)}</div>
+          <div className="bottom-scroll-box1">
+            {renderEventItems(initEvents)}
+          </div>
         </div>
       </>
     );
@@ -128,7 +131,10 @@ const HomeAdmin = () => {
   const renderPeople = () => {
     return (
       <>
-        <div ref={personContainerRef} className="scroll-box1 flex-box flex-column">
+        <div
+          ref={personContainerRef}
+          className="scroll-box1 flex-box flex-column"
+        >
           <div className="flex-box top-scroll-box1 line-break">
             <DynamicButton
               className="button button-small"

@@ -57,7 +57,11 @@ const App = () => {
         authToken = response.data.token || response.data.accessToken; // Fallback
       }
 
-      if (response.data.status === "success" && response.data.userData) {
+      if (
+        response.data.status === "success" &&
+        response.data.userData &&
+        authToken
+      ) {
         login(response.data.userData, authToken); // pass token to login
 
         if (response.data.userData.role === "admin") {
