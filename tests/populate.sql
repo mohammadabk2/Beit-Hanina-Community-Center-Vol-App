@@ -66,7 +66,7 @@ INSERT INTO events (event_name, event_date, event_start, event_end, is_active, o
 DELETE FROM events_status;
 
 INSERT INTO events_status (approved, rejected, pending, ongoing, finished) VALUES
-(ARRAY[1, 2, 4], ARRAY[]::INT[], ARRAY[3], ARRAY[]::INT[], ARRAY[5]);
+(ARRAY[1, 2, 4], ARRAY[11, 12]::INT[], ARRAY[3, 6], ARRAY[7, 8, 9]::INT[], ARRAY[5]);
 
 -- Note on event_status.ongoing:
 -- For 'ongoing', this would typically be determined by a query comparing current_timestamp

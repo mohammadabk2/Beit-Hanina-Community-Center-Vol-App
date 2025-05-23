@@ -366,7 +366,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgxMzUyMywiZXhwIjoxNzQ3ODE3MTIzfQ.pJ4RCcgcgV2FTMF_QuatUmsw8SQUPJ0nPLxz_Zw8Gf4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTQ4MTU5LCJleHAiOjE3NDgwMzQ1NTl9._ko7W-oWObNxMyORIHnGvQXz_aOdlUuCzYatNbSRWy8",
 									"type": "string"
 								}
 							]
@@ -376,6 +376,46 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 3,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTgyNDUyLCJleHAiOjE3NDgwNjg4NTJ9.WMq20q3yOc92gICaAktzm462nZ7o8zP-fxijULTQr48",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 6,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
