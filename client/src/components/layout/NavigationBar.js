@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../config/Context/auth"; // <-- Adjust the path based on your file structure
+import { useAuth } from "../../config/Context/auth"; // <-- Adjust the path based on your file structure
 
 import DropDownMenu from "../common/DropDownMenu";
 import { useLnOptions } from "../../config/options/Language";
