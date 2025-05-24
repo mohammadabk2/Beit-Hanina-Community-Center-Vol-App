@@ -418,30 +418,39 @@ const createOrganizer = async (
 };
 
 /**
- * adds a new event to the events table.
- * @param {String} eventName
- * @param {Date} eventDate
- * @param {Time} eventStartTime
- * @param {Time} eventEndTime
- * @param {number} orgId
- * @returns
+ * Adds a new event to the `events` table and updates the `events_status` table by adding
+ * the new event ID to the pending events list.
+ *
+ * @param {string} eventName - The name of the event.
+ * @param {Date|string} eventDate - The date of the event. Can be a Date object or ISO date string.
+ * @param {string} eventStartTime - The start time of the event (format: HH:mm:ss or similar).
+ * @param {string} eventEndTime - The end time of the event (format: HH:mm:ss or similar).
+ * @param {number} orgId - The ID of the organizer creating the event.
+ * @param {number} maxNumberOfVolunteers - Maximum number of volunteers allowed for the event.
+ * @param {string} eventDescription - A description of the event.
+ * @param {string} eventLocation - The location where the event will take place.
+ * @param {Array<string>} eventSkills - An array of skills required or associated with the event.
+ *
+ * @returns {Promise<Object>} Returns a promise that resolves to the updated `events_status` row
+ * after the new event ID is appended to the pending array.
+ *
+ * @throws Will throw an error if the insertion or status update fails.
  */
 const addEvent = async (
   eventName,
   eventDate,
   eventStartTime,
   eventEndTime,
-  isActive,
   orgId,
   maxNumberOfVolunteers,
+  eventDescription,
   eventLocation,
-  eventDescription
+  eventSkills
 ) => {
   const eventsText = `
   INSERT INTO events (event_name, event_date, event_start, event_end, 
-  is_active, org_id, max_number_of_vol,
-  event_location, event_description)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  is_active, org_id, max_number_of_vol, event_location, event_description, event_skills)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
   RETURNING *;
 `;
 
@@ -450,11 +459,12 @@ const addEvent = async (
     eventDate,
     eventStartTime,
     eventEndTime,
-    isActive,
+    0,
     orgId,
     maxNumberOfVolunteers,
     eventLocation,
     eventDescription,
+    eventSkills,
   ];
 
   try {
