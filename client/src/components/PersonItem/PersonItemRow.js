@@ -1,7 +1,6 @@
 // PersonItemRow.js
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { useTheme } from "../../config/options/Colors";
 import { ReactComponent as CheckDark } from "../../icons/dark/check-dark.svg";
 import { ReactComponent as CheckLight } from "../../icons/light/check-light.svg";
@@ -29,12 +28,7 @@ const PersonItemRow = ({
   viewLogsFunction,
   addLogFunction,
 }) => {
-  const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
-  // const { t: tskill } = useTranslation("skills"); // Not needed here
-
-  // Simple skills display (comma-separated) - adjust as needed
-  // const skillsDisplay = skills ? skills.join(", ") : "N/A"; //! uncomment when added
 
   return (
     // No outer div or table needed here, just the row
