@@ -6,6 +6,8 @@ const userActions = async (req, res) => {
 
   const { userID, actionID, action, actionValue } = req.body;
 
+  // console.log(`${userID} , ${actionID} , ${action}, ${actionValue}`);
+
   if (!userID || !actionID || !action || !actionValue) {
     const message = "Request body Failed.";
     console.log(message);

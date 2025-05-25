@@ -89,16 +89,39 @@ const createVolunteer = async (waitingListId) => {
 };
 
 /**
- * return the users table
+ * Return user data by joining users table with volunteer or organizer table.
  * @async
+ * @param {string} role - "volunteer" or "organizer"
  * @param {string} tableName
- * @param {string} columnNames
- * @returns  {Promise<Object|null>}
+ * @returns {Promise<Object[]|null>}
  */
-const getUsers = async (tableName, columnNames) => {
+const getUsers = async (role, tableName) => {
+  let query = "";
+
+  if (role === "admin") {
+    if (tableName === "volunteer_waiting_list") {
+      query = `SELECT * FROM volunteer_waiting_list;`;
+    } else {
+      query = `
+      SELECT users.*, volunteer.*
+      FROM users
+      JOIN volunteer ON users.id = volunteer.user_id;
+    `;
+    }
+  } else if (role === "organizer") {
+    query = `
+      SELECT users.phone_number, users.profile_image_url, volunteer.name, volunteer.birth_date, volunteer.sex
+      FROM users
+      JOIN organizer ON users.id = volunteer.user_id
+      WHERE users.role = 'volunteer';
+    `;
+  } else {
+    console.error("Unsupported role in getUsers:", role);
+    return null;
+  }
+
   try {
-    const text = `SELECT ${columnNames} FROM ${tableName};`;
-    const res = await db.query(text);
+    const res = await db.query(query);
     return res.rows;
   } catch (error) {
     console.error("Error during getUsers query:", error);
@@ -395,30 +418,39 @@ const createOrganizer = async (
 };
 
 /**
- * adds a new event to the events table.
- * @param {String} eventName
- * @param {Date} eventDate
- * @param {Time} eventStartTime
- * @param {Time} eventEndTime
- * @param {number} orgId
- * @returns
+ * Adds a new event to the `events` table and updates the `events_status` table by adding
+ * the new event ID to the pending events list.
+ *
+ * @param {string} eventName - The name of the event.
+ * @param {Date|string} eventDate - The date of the event. Can be a Date object or ISO date string.
+ * @param {string} eventStartTime - The start time of the event (format: HH:mm:ss or similar).
+ * @param {string} eventEndTime - The end time of the event (format: HH:mm:ss or similar).
+ * @param {number} orgId - The ID of the organizer creating the event.
+ * @param {number} maxNumberOfVolunteers - Maximum number of volunteers allowed for the event.
+ * @param {string} eventDescription - A description of the event.
+ * @param {string} eventLocation - The location where the event will take place.
+ * @param {Array<string>} eventSkills - An array of skills required or associated with the event.
+ *
+ * @returns {Promise<Object>} Returns a promise that resolves to the updated `events_status` row
+ * after the new event ID is appended to the pending array.
+ *
+ * @throws Will throw an error if the insertion or status update fails.
  */
 const addEvent = async (
   eventName,
   eventDate,
   eventStartTime,
   eventEndTime,
-  isActive,
   orgId,
   maxNumberOfVolunteers,
+  eventDescription,
   eventLocation,
-  eventDescription
+  eventSkills
 ) => {
   const eventsText = `
   INSERT INTO events (event_name, event_date, event_start, event_end, 
-  is_active, org_id, max_number_of_vol,
-  event_location, event_description)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  is_active, org_id, max_number_of_vol, event_location, event_description, event_skills)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
   RETURNING *;
 `;
 
@@ -427,11 +459,12 @@ const addEvent = async (
     eventDate,
     eventStartTime,
     eventEndTime,
-    isActive,
+    0,
     orgId,
     maxNumberOfVolunteers,
     eventLocation,
     eventDescription,
+    eventSkills,
   ];
 
   try {
@@ -621,19 +654,35 @@ const createUser = async (
  * @throws {Error} If the database query fails.
  */
 const rejectUser = async (userId) => {
-  const text = `
-  INSERT INTO rejected_users
-  SELECT * FROM volunteer_waiting_list
+  const insertQuery = `
+  INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance,
+  id_number, username, password_hash, profile_image_url)
+  SELECT
+  name, birth_date, sex, phone_number, email, address, insurance,
+  id_number, username, password_hash, profile_image_url
+  FROM volunteer_waiting_list
   WHERE id = $1
-  RETURNING *;`;
+  RETURNING *;
+`;
+
+  const deleteQuery = `DELETE FROM volunteer_waiting_list WHERE id = $1;`;
 
   const values = [userId];
+
+  const client = await db.pool.connect();
   try {
-    const res = await db.query(text, values);
-    return res.rows[0];
+    await client.query("BEGIN");
+    const insertResult = await client.query(insertQuery, values); // ✅ Now used
+    await client.query(deleteQuery, values);
+
+    await client.query("COMMIT");
+    return insertResult.rows[0];
   } catch (error) {
+    await client.query("ROLLBACK");
     console.error("Error in rejectUser:", error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error;
+  } finally {
+    client.release();
   }
 };
 

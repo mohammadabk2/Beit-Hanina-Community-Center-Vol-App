@@ -8,24 +8,21 @@ import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 
-const EventItem = ({ name, req, type, count, size, eventLocation, description}) => {
+const EventItem = ({
+  name,
+  req,
+  type,
+  count,
+  size,
+  eventLocation,
+  description,
+  rejectEvent,
+  approveEvent,
+  joinEvent,
+  editEvent,
+}) => {
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
-
-  const handleVolClick = () => {
-    console.log("Join button clicked");
-  };
-
-  const handleOrgClick = () => {
-    console.log("org button clicked");
-  };
-  const handleApproveClick = () => {
-    console.log("approve button clicked");
-  };
-
-  const handleRejectClick = () => {
-    console.log("reject button clicked");
-  };
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -34,18 +31,11 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
     setIsFavorite(!isFavorite);
   };
 
-  // const handleShareClick = () => {
-  //   console.log("Share button clicked");
-  // };
-
-  // const handleHideClick = () => {
-  //   console.log("Hide button clicked");
-  // };
-
   return (
     <div className="flex-box flex-column event-box smooth-shadow-box">
       <div className="event-box-content-top">
         <div className="event-box-title">{name}</div>
+
         <div className="event-box-favorite">
           <img
             id="favoriteIcon"
@@ -59,12 +49,15 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
       <div>
         {description} {/*Desc, could be styled or not*/}
       </div>
+
       <div className="flex-box event-box-content-middle">
         <div>
           <img className="event-box-image" src={logoIcon} alt="Logo Icon"></img>
         </div>
+
         <div className="flex-box flex-column skills-box">
           <div>{tskill("skills")}:</div>
+
           <div className="flex-box wrap-reverse">
             {req.map((item, index) => (
               <div key={index} className="skills">
@@ -75,27 +68,32 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
           </div>
         </div>
       </div>
+
       <div>
-      {eventLocation} {/*Location, can be styled or not */}
+        {eventLocation} {/*Location, can be styled or not */}
       </div>
+
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
+
         <div className="flex-box">
           <div>
             {count}/{size}
           </div>
+
           <img
             className="button-image"
             src={personIcon}
             alt="Person Icon"
           ></img>
         </div>
+
         <div className="flex-box">
           {type === "vol" && (
             <DynamicButton
               className="button"
               text={t("join")}
-              onClick={handleVolClick}
+              onClick={joinEvent}
             />
           )}
 
@@ -103,7 +101,7 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
             <DynamicButton
               className="button"
               text={t("org_button")}
-              onClick={handleOrgClick}
+              onClick={editEvent}
             />
           )}
 
@@ -112,13 +110,13 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
               <DynamicButton
                 className="button"
                 text={t("approve_button")}
-                onClick={handleApproveClick}
+                onClick={approveEvent}
               />
 
               <DynamicButton
                 className="button"
                 text={t("reject_button")}
-                onClick={handleRejectClick}
+                onClick={rejectEvent}
               />
             </>
           )}
@@ -129,13 +127,18 @@ const EventItem = ({ name, req, type, count, size, eventLocation, description}) 
 };
 
 EventItem.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   req: PropTypes.arrayOf(PropTypes.string).isRequired,
   type: PropTypes.string,
   count: PropTypes.number,
   size: PropTypes.number,
   description: PropTypes.string,
-  eventLocation: PropTypes.string
+  eventLocation: PropTypes.string,
+  approveEvent: PropTypes.func,
+  rejectEvent: PropTypes.func,
+  joinEvent: PropTypes.func,
+  editEvent: PropTypes.func,
 };
 
 EventItem.defaultProps = {

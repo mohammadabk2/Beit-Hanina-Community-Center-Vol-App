@@ -2,13 +2,13 @@
 
 cd client # move to client
 
-npm install --legacy-peer-deps # install needed libs
+# npm install --legacy-peer-deps # install needed libs
 
 npm run build # build the app in client side
 
 cd .. # move back to root
 
-npm install --legacy-peer-deps # install needed libs
+# npm install --legacy-peer-deps # install needed libs
 
 npm run build # build the app in server side
 

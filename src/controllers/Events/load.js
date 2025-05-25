@@ -4,7 +4,11 @@ import validateToken from "../common/validateToken.js";
 const load = async (req, res) => {
   console.log("Loading Events from DB");
 
-  const { userID, userRequest, type, eventID } = req.body;
+  const { userID, userRequest, type, eventID } = req.query;
+
+  console.log(
+    `userID:${userID}, userRequest:${userRequest}, type:${type} eventID:${eventID} `
+  );
 
   if (!userID || !userRequest || !type) {
     const message = "User Id or Request Failed.";

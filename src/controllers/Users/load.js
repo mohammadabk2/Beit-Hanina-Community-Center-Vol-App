@@ -4,7 +4,7 @@ import validateToken from "../common/validateToken.js";
 const loadUsers = async (req, res) => {
   console.log("Loading users from DB");
 
-  const { userID, userRequest, tableName } = req.body;
+  const { userID, userRequest, tableName } = req.query;
   if (!userID || !userRequest || !tableName) {
     return res.status(400).send({
       message: "User Id or Request Failed.",
@@ -28,10 +28,18 @@ const loadUsers = async (req, res) => {
     `Attempting load Uers from DB for userId: ${userID} for Table ${tableName}`
   );
 
+  const safeDateOnly = (date) => {
+    try {
+      return new Date(date).toISOString().split("T")[0];
+    } catch (err) {
+      return null; // Or return "" if you want empty string instead
+    }
+  };
+
   const roles = ["organizer", "admin"];
   if (roles.includes(roleType.role)) {
     try {
-      const users = await dbConnection.getUsers(tableName, "*");
+      const users = await dbConnection.getUsers(roleType.role, tableName);
 
       if (users && users.length > 0) {
         // console.log(users); // !testing only
@@ -42,7 +50,7 @@ const loadUsers = async (req, res) => {
           allUsers = users.map((user) => ({
             id: user.id,
             name: user.name,
-            birthDate: new Date(user.birth_date).toISOString().split("T")[0],
+            birthDate: safeDateOnly(user.birth_date),
             sex: user.sex,
             phoneNumber: user.phone_number,
             email: user.email,

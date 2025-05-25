@@ -74,14 +74,15 @@ CREATE TABLE IF NOT EXISTS events
     event_date DATE NOT NULL,
     event_start TIME NOT NULL,
     event_end TIME NOT NULL,
-    is_active BOOLEAN NOT NULL,
+    is_active BOOLEAN DEFAULT FALSE NOT NULL,
     org_id INT REFERENCES organizer(user_id) ON DELETE SET NULL,
     vol_id INT[] DEFAULT '{}',
     vol_id_waiting_list INT[] DEFAULT '{}',
     max_number_of_vol INT,
     current_number_of_vol INT DEFAULT 0,
     event_location TEXT NOT NULL,
-    event_description TEXT DEFAULT ''
+    event_description TEXT DEFAULT '',
+    event_skills TEXT [] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS events_status

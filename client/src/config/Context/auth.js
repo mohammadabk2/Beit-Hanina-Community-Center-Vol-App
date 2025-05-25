@@ -5,72 +5,78 @@ import PropTypes from "prop-types";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [token, setToken] = useState(null); // Add token state
+  const [userId, setUserId] = useState(null); // Load userId
+
   const navigate = useNavigate();
 
   // Check localStorage on initial load for persistent login
   // Runs once on login only
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("UserID");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
-    } catch (error) {
-      console.error("Failed to parse user data from localStorage", error);
-      localStorage.removeItem("UserID");
-    } finally {
-      setLoading(false);
+    const storedUserData = localStorage.getItem("userData");
+    const storedToken = localStorage.getItem("authToken"); // Load token
+    const storedUserId = localStorage.getItem("userId");
+
+    if (storedUserData && storedToken) {
+      setUserData(JSON.parse(storedUserData));
+      setToken(storedToken); // Set token
+      setUserId(storedUserId);
+      setIsAuthenticated(true);
+    } else {
+      // Clear any incomplete stored data if one piece is missing
+      localStorage.removeItem("userData");
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userId");
+      setIsAuthenticated(false);
+      setUserData(null);
+      setToken(null);
+      setUserId(null);
     }
   }, []);
 
-  const login = (userData) => {
-    if (!userData || !userData.role) {
-      console.error("Login attempted with invalid userData:", userData);
-      // Handle this error appropriately, maybe show a message
+  const login = (data, authToken) => {
+    const newUserId = data?.id || data?.userId; // Extract userId from data
+
+    if (!newUserId) {
+      console.error(
+        "Login attempted, but userId is missing from userData:",
+        data
+      );
+      // You might want to throw an error or handle this more gracefully
       return;
     }
-    setUser(userData);
-    localStorage.setItem("userData", JSON.stringify(userData)); // Persist user data
 
-    if (userData.role) {
-      if (userData.role === "admin") {
-        navigate("/home-admin");
-      } else if (userData.role === "organizer") {
-        navigate("/home-organizer");
-      } else if (userData.role === "volunteer") {
-        navigate("/home-volunteer");
-      } else {
-        console.warn(
-          "User logged in but role is not recognized for navigation:",
-          userData.role
-        );
-        //TODO change to error message
-        navigate("/");
-      }
-    } else {
-      console.error("Userdata.role is not a valid object:", userData.role);
-      //TODO change to error message
-      navigate("/");
-    }
+    // Accept authToken as an argument
+    setUserData(data);
+    setToken(authToken); // Set the token in state
+    setUserId(newUserId);
+    setIsAuthenticated(true);
+
+    localStorage.setItem("userData", JSON.stringify(data));
+    localStorage.setItem("authToken", authToken); // Store token in localStorage
+    localStorage.setItem("userId", newUserId); // Store userId in localStorage
   };
 
   const logout = () => {
-    setUser(null);
+    setUserData(null);
+    setToken(null); // Clear token on logout
+    setUserId(null); // CLear userId on logout
+    setIsAuthenticated(false);
     localStorage.removeItem("userData");
+    localStorage.removeItem("authToken"); // Remove token from localStorage
+    localStorage.removeItem("userId"); // Remove userID from localStorage
     navigate("/");
   };
 
-  const value = {
-    user,
-    isAuthenticated: !!user,
-    loadingInitial: loading,
-    login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{ isAuthenticated, userData, token, userId, login, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 AuthProvider.propTypes = {
@@ -78,9 +84,5 @@ AuthProvider.propTypes = {
 };
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  return useContext(AuthContext);
 };
