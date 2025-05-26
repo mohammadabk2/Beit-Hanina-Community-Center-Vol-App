@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import DropDownMenu from "../common/DropDownMenu";
@@ -21,6 +21,7 @@ import aboutIconDark from "../../icons/dark/NavBar/about_icon.svg";
 const NavigationBar = ({ dontShowPageButtons }) => {
   const { t } = useTranslation("navBar");
   const navigate = useNavigate();
+  const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
 
@@ -51,7 +52,12 @@ const NavigationBar = ({ dontShowPageButtons }) => {
 
   return (
     <div className="flex-box navigation-box wrap-reverse flex-box-gap smooth-shadow-box">
-      <div onClick={goToAbout} className="flex-box flex-column">
+      <div
+        onClick={goToAbout}
+        className={`flex-box flex-column${
+          location.pathname === "/about" ? " active-nav" : ""
+        }`}
+      >
         <img
           className="navigation-button-image"
           src={isLightMode ? aboutIconLight : aboutIconDark}
@@ -61,7 +67,14 @@ const NavigationBar = ({ dontShowPageButtons }) => {
       </div>
       {!dontShowPageButtons && (
         <>
-          <div onClick={goToPersonalArea} className="flex-box flex-column">
+          <div
+            onClick={goToPersonalArea}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/personal-area")
+                ? " active-nav"
+                : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? profileIconLight : profileIconDark}
@@ -70,7 +83,12 @@ const NavigationBar = ({ dontShowPageButtons }) => {
             {t("personal_area")}
           </div>
 
-          <div onClick={goToHome} className="flex-box flex-column">
+          <div
+            onClick={goToHome}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/home") ? " active-nav" : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? homeIconLight : homeIconDark}

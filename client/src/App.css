@@ -687,3 +687,40 @@ html[lang="ar"] textarea {
   font-size: inherit;
   line-height: 1;
 }
+
+.active-nav {
+  position: relative;
+  background: var(--box-background-color);
+  color: var(--button-text);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.07);
+  border-radius: 0.7rem 0.7rem 0 0;
+  font-weight: bold;
+
+  filter: brightness(1.08);
+}
+
+.active-nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2rem;
+  height: 6px;
+  border-radius: 0 0 6px 6px;
+  background: #1969d2;
+  opacity: 0.25;
+  transition: background 0.2s, opacity 0.2s;
+  z-index: 3;
+}
+
+html[data-theme="dark"] .active-nav {
+  background: #23272f;
+  color: #90caf9;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.18);
+  filter: brightness(1.15);
+}
+
+html[data-theme="dark"] .active-nav::after {
+  background: #1969d2;
+  opacity: 0.35;
+}
