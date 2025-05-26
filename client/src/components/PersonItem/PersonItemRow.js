@@ -1,9 +1,17 @@
 // PersonItemRow.js
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { useTheme } from "../../config/options/Colors";
 
 import DynamicButton from "../common/ButtonComponent";
+import checkLight from "../../icons/light/check-light.svg";
+import checkDark from "../../icons/dark/check-dark.svg";
+import crossLight from "../../icons/light/cross-light.svg";
+import crossDark from "../../icons/dark/cross-dark.svg";
+import docPlusLight from "../../icons/light/document-plus-light.svg";
+import docPlusDark from "../../icons/dark/document-plus-dark.svg";
+import docFilledLight from "../../icons/light/document-filled-light.svg";
+import docFilledDark from "../../icons/dark/document-filled-dark.svg";
 
 // Renamed component to reflect its purpose (rendering a row)
 const PersonItemRow = ({
@@ -22,7 +30,7 @@ const PersonItemRow = ({
   viewLogsFunction,
   addLogFunction,
 }) => {
-  const { t } = useTranslation("home");
+  const { isLightMode } = useTheme();
   // const { t: tskill } = useTranslation("skills"); // Not needed here
 
   // Simple skills display (comma-separated) - adjust as needed
@@ -43,18 +51,18 @@ const PersonItemRow = ({
         <>
           <td>
             <DynamicButton
-              className="button button-approve" // Use specific classes for styling
-              text={t("approve_button")}
+              className="button button-approve"
+              logoSrc={isLightMode ? checkLight : checkDark}
+              logoalt="approve"
               onClick={approveFunction}
-              aria-label={`${t("approve_button")} ${name}`} // Better accessibility
             />
           </td>
           <td>
             <DynamicButton
               className="button button-reject"
-              text={t("reject_button")}
+              logoSrc={isLightMode ? crossLight : crossDark}
+              logoalt="reject"
               onClick={rejectFunction}
-              aria-label={`${t("reject_button")} ${name}`} // Better accessibility
             />
           </td>
         </>
@@ -62,18 +70,18 @@ const PersonItemRow = ({
         <>
           <td>
             <DynamicButton
-              className="button button-add" // Use specific classes
-              text={t("add_log")}
+              className="button button-add"
+              logoSrc={isLightMode ? docPlusLight : docPlusDark}
+              logoalt="add log"
               onClick={addLogFunction}
-              aria-label={`${t("add_log")} for ${name}`} // Better accessibility
             />
           </td>
           <td>
             <DynamicButton
-              className="button button-view" // Use specific classes
-              text={t("view_log")}
+              className="button button-view"
+              logoSrc={isLightMode ? docFilledLight : docFilledDark}
+              logoalt="view logs"
               onClick={viewLogsFunction}
-              aria-label={`${t("view_log")} for ${name}`} // Better accessibility
             />
           </td>
         </>
