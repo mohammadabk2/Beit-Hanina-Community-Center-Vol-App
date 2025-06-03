@@ -4,9 +4,11 @@ import validateToken from "../common/validateToken.js";
 const eventActions = async (req, res) => {
   console.log("Event Actions");
 
-  const { userID, eventID, action, actionValue } = req.body;
+  const { userID, actionID, action, actionValue } = req.body;
 
-  if (!userID || !eventID || !action || !actionValue) {
+  console.log(`${userID} , ${actionID} , ${action}, ${actionValue}`);
+
+  if (!userID || !actionID || !action || !actionValue) {
     const message = "Request body Failed.";
     console.log(message);
     return res.status(400).send({
@@ -28,7 +30,7 @@ const eventActions = async (req, res) => {
   }
 
   console.log(
-    `Attempting Action ${action} From User: ${userID} on Event ${eventID}`
+    `Attempting Action ${action} From User: ${userID} on Event ${actionID}`
   );
 
   const roles = ["volunteer", "organizer", "admin"];
@@ -40,14 +42,14 @@ const eventActions = async (req, res) => {
         console.log("Events Admin action");
         if (action === "approve") {
           answer = await dbConnection.updateEventStatus(
-            eventID,
+            actionID,
             "approved",
             "pending"
           );
         }
         if (action === "reject") {
           answer = await dbConnection.updateEventStatus(
-            eventID,
+            actionID,
             "rejected",
             "pending"
           );
@@ -61,7 +63,7 @@ const eventActions = async (req, res) => {
 
         if (action === "enroll") {
           answer = await dbConnection.decideUserEventStatus(
-            eventID,
+            actionID,
             userID,
             "vol_id_waiting_list",
             "waiting"
@@ -76,7 +78,7 @@ const eventActions = async (req, res) => {
 
         if (action === "approve") {
           answer = await dbConnection.decideUserEventStatus(
-            eventID,
+            actionID,
             actionValue,
             "vol_id",
             "approved"
