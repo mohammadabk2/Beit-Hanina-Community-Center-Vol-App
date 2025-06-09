@@ -165,6 +165,26 @@ const HomeAdmin = () => {
     );
   };
 
+  const renderInput = (upperName, value, name, placeholder) => {
+    return (
+      <div className="flex-box flex-column input-field-box">
+        <div>
+          <label> {upperName} </label>
+          <label className="red-star">*</label>
+        </div>
+
+        <DynamicInput
+          className="input-field"
+          type="text"
+          value={value}
+          name={name}
+          onChange={handleChange}
+          placeholder={placeholder}
+        />
+      </div>
+    );
+  };
+
   const renderPeople = () => {
     return (
       <>
@@ -242,53 +262,26 @@ const HomeAdmin = () => {
             onSubmit={handleSubmit}
             className="flex-box flex-column input-field-box"
           >
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgName")} </label>
-                <label className="red-star">*</label>
-              </div>
+            {renderInput(
+              t("orgName"),
+              formData.orgName,
+              "name",
+              t("orgName_placeholder")
+            )}
 
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgName}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgName_placeholder")}
-              />
-            </div>
+            {renderInput(
+              t("orgAddress"),
+              formData.orgAddress,
+              "address",
+              t("orgAddress_placeholder")
+            )}
 
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgAddress")} </label>
-                <label className="red-star">*</label>
-              </div>
-
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgAddress}
-                name="address"
-                onChange={handleChange}
-                placeholder={t("orgAddress_placeholder")}
-              />
-            </div>
-
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgAdmin")} </label>
-                <label className="red-star">*</label>
-              </div>
-
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgAdmin}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgAdmin_placeholder")}
-              />
-            </div>
+            {renderInput(
+              t("orgAdmin"),
+              formData.orgAdmin,
+              "name",
+              t("orgAdmin_placeholder")
+            )}
 
             {/* //TODO add org pic */}
 
