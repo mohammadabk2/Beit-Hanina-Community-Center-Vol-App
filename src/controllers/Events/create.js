@@ -14,19 +14,19 @@ const createEvent = async (req, res) => {
     });
   }
 
+  console.log("checking data");
   const requiredFields = [
     "eventName",
     "eventDate",
     "eventStartTime",
     "eventEndTime",
-    "isActive",
-    "orgId",
     "maxNumberOfVolunteers",
     "eventLocation",
     "eventDescription",
   ];
   for (const field of requiredFields) {
-    if (!userData[field]) {
+    if (userData[field] === undefined || userData[field] === null) {
+      console.log(`field Missing:${field}`);
       return res.status(400).send({
         message: `Missing field: ${field}`,
         status: "fail",
@@ -34,6 +34,7 @@ const createEvent = async (req, res) => {
     }
   }
 
+  console.log("check role");
   let roleType;
   try {
     roleType = await validateToken(req);
@@ -56,7 +57,6 @@ const createEvent = async (req, res) => {
         userData.eventDate,
         userData.eventStartTime,
         userData.eventEndTime,
-        userData.isActive,
         userData.orgId,
         userData.maxNumberOfVolunteers,
         userData.eventLocation,

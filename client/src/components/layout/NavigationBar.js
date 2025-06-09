@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../config/Context/auth"; // <-- Adjust the path based on your file structure
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../config/Context/auth";
 
 import DropDownMenu from "../common/DropDownMenu";
 import { useLnOptions } from "../../config/options/Language";
@@ -21,6 +21,7 @@ import aboutIconDark from "../../icons/dark/NavBar/about_icon.svg";
 const NavigationBar = () => {
   const { t } = useTranslation("navBar");
   const navigate = useNavigate();
+  const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
   const { isAuthenticated } = useAuth();
@@ -47,7 +48,12 @@ const NavigationBar = () => {
 
   return (
     <div className="flex-box navigation-box wrap-reverse flex-box-gap smooth-shadow-box">
-      <div onClick={goToAbout} className="flex-box flex-column">
+      <div
+        onClick={goToAbout}
+        className={`flex-box flex-column${
+          location.pathname === "/about" ? " active-nav" : ""
+        }`}
+      >
         <img
           className="navigation-button-image"
           src={isLightMode ? aboutIconLight : aboutIconDark}
@@ -57,7 +63,14 @@ const NavigationBar = () => {
       </div>
       {isAuthenticated && (
         <>
-          <div onClick={goToPersonalArea} className="flex-box flex-column">
+          <div
+            onClick={goToPersonalArea}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/personal-area")
+                ? " active-nav"
+                : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? profileIconLight : profileIconDark}
@@ -66,7 +79,12 @@ const NavigationBar = () => {
             {t("personal_area")}
           </div>
 
-          <div onClick={goToHome} className="flex-box flex-column">
+          <div
+            onClick={goToHome}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/home") ? " active-nav" : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? homeIconLight : homeIconDark}

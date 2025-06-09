@@ -26,10 +26,16 @@ const About = () => {
             {tAbout("devs")}
           </div>
           <div className="basic-item-padding personal-area-content">
-            {tAbout("mohammadak")} {tAbout("jad")}
+            {tAbout("mohammadak")}
           </div>
           <div className="basic-item-padding personal-area-content">
-            {tAbout("husam")} {tAbout("mohammadqt")}
+            {tAbout("jad")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("husam")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("mohammadqt")}
           </div>
           <div className="basic-item-padding personal-area-content">
             {tAbout("mohammadtb")}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 // import DropDownMenu from "./DropDownMenu";
 // import DynamicButton from "./ButtonComponent";
@@ -20,7 +21,7 @@ const UploadFile = ({ onFileSelect }) => {
     const selectedFile = e.target.files?.[0]; // pass the first file only
 
     if (selectedFile) {
-      if (!selectedFile.type.startsWith('image/')) {
+      if (!selectedFile.type.startsWith("image/")) {
         // Indicate an invalid selection
         setError(t("error_invalid_image_type"));
         if (onFileSelect) {
@@ -92,6 +93,10 @@ const UploadFile = ({ onFileSelect }) => {
       </div>
     </>
   );
+};
+
+UploadFile.propTypes = {
+  onFileSelect: PropTypes.func, //TODO check if this is right
 };
 
 export default UploadFile;

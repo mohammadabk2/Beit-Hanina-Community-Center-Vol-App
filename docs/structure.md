@@ -5,6 +5,7 @@
 │   ├── app
 │   │   └── apk
 │   │       ├── app-debug-2.apk
+│   │       ├── app-debug-3.apk
 │   │       └── app-debug.apk
 │   ├── assets
 │   │   └── logo.jpg
@@ -44,6 +45,9 @@
 │       ├── config
 │       │   ├── Context
 │       │   │   └── auth.js
+│       │   ├── hooks
+│       │   │   ├── loadEvent.js
+│       │   │   └── loadUsers.js
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
@@ -85,6 +89,10 @@
 │       │   ├── about_icon.jpg
 │       │   ├── dark
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-dark.svg
+│       │   │   ├── cross-dark.svg
+│       │   │   ├── document-filled-dark.svg
+│       │   │   ├── document-plus-dark.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -98,6 +106,10 @@
 │       │   ├── home_icon.jpg
 │       │   ├── light
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-light.svg
+│       │   │   ├── cross-light.svg
+│       │   │   ├── document-filled-light.svg
+│       │   │   ├── document-plus-light.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -169,6 +181,7 @@
 ├── src
 │   ├── controllers
 │   │   ├── auth
+│   │   │   ├── changePassword.js
 │   │   │   └── login.js
 │   │   ├── common
 │   │   │   ├── authenticate.js
@@ -207,9 +220,10 @@
 │   ├── events.sql
 │   ├── master.sql
 │   ├── populate.sql
-│   └── postman
-│       └── App-test.postman_collection.json
+│   ├── postman
+│   │   └── App-test.postman_collection.json
+│   └── test_cases.md
 └── workbox-config.cjs
 
-48 directories, 161 files
+49 directories, 174 files
 ```
