@@ -34,6 +34,8 @@ const HomeAdmin = () => {
   const [personView, setPersonView] = useState(true);
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
+  const [searchQuery, setSearchQuery] = useState(""); // search query
+
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
     setViewMode("people"); // Switch view mode to "people"
@@ -141,6 +143,28 @@ const HomeAdmin = () => {
     // TODO: Implement actual logic (e.g., show modal, navigate)
   };
 
+  const renderSearch = () => {
+    return (
+      <DynamicInput
+        type="text"
+        placeholder={"..."}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="input-field"
+      />
+    );
+  };
+
+  const renderButton = (func, text) => {
+    return (
+      <DynamicButton
+        className="button button-small"
+        onClick={func}
+        text={text}
+      />
+    );
+  };
+
   const renderPeople = () => {
     return (
       <>
@@ -149,16 +173,9 @@ const HomeAdmin = () => {
           className="scroll-box1 flex-box flex-column"
         >
           <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortPeople}
-              text={t("sort")}
-            />
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToEvents}
-              text={t("switch_to_events")}
-            />
+            {renderButton(sortPeople, t("sort"))}
+
+            {renderButton(switchToEvents, t("switch_to_events"))}
             {/* //TODO give the img a class to make it bigger */}
             <img
               className="table-img"
@@ -178,11 +195,7 @@ const HomeAdmin = () => {
                   : t("switch_to_card_view")
               }
             />
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToCreateOrg}
-              text={t("switch_to_create_org")}
-            />
+            {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
           </div>
 
           <div className="bottom-scroll-box1">
@@ -220,23 +233,9 @@ const HomeAdmin = () => {
       <>
         <div className="general-box flex-box flex-column">
           <div className="flex-box line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
+            {renderButton(switchToPeople, t("switch_to_people"))}
 
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToPeople}
-              text={t("switch_to_people")}
-            />
-
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToEvents}
-              text={t("switch_to_Events")}
-            />
+            {renderButton(switchToEvents, t("switch_to_events"))}
           </div>
 
           <form
@@ -294,11 +293,7 @@ const HomeAdmin = () => {
             {/* //TODO add org pic */}
 
             <div className="flex-box">
-              <DynamicButton
-                className="button button-small"
-                onClick={handleSubmit}
-                text={t("submit_button")}
-              />
+              {renderButton(handleSubmit, t("submit_button"))}
             </div>
           </form>
         </div>
@@ -311,25 +306,29 @@ const HomeAdmin = () => {
       <>
         <div className="scroll-box1 general-box flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
+            {renderSearch()}
 
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToPeople}
-              text={t("switch_to_people")}
-            />
+            {renderButton(sortEvents, t("sort"))}
 
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToCreateOrg}
-              text={t("switch_to_create_org")}
-            />
+            {renderButton(switchToPeople, t("switch_to_people"))}
+
+            {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
           </div>
-          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+
+          {/* <div className="bottom-scroll-box1">{renderEventItems(events)}</div> */}
+          <div className="bottom-scroll-box1">
+            {renderEventItems(
+              events.filter(
+                (event) =>
+                  event.name
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  event.description
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase())
+              )
+            )}
+          </div>
         </div>
       </>
     );
