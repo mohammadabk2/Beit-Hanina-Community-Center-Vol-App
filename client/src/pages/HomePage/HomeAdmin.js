@@ -234,24 +234,36 @@ const HomeAdmin = () => {
   };
 
   const [formData, setFormData] = useState({
-    orgName: "",
-    orgPhone: "",
-    orgEmail: "",
-    orgAddress: "",
-    orgUsername: "",
-    orgPassword: "",
-    role: "organizer",
-    orgAdmin: "",
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
+    username: "",
+    password: "",
+    type: "org",
+    // orgAdmin: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Create Org Submit clicked", formData);
-    //TODO send the request
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/users/register`,
+        formData
+      );
+      if (response.data.status === "success") {
+        alert(t("org_sign_up_message"));
+      } else {
+        alert(`Create organizer Failed: ${response.data.message}`);
+      }
+    } catch (error) {
+      console.error("Error during sign in:", error);
+    }
   };
 
   const renderCreateOrg = () => {
@@ -269,53 +281,53 @@ const HomeAdmin = () => {
             className="flex-box flex-column input-field-box"
           >
             {renderInput(
-              t("orgName"),
-              formData.orgName,
-              "orgName",
-              t("orgName_placeholder")
+              t("fullName"),
+              formData.fullName,
+              "fullName",
+              t("fullName_placeholder")
             )}
 
             {renderInput(
-              t("orgPhone"),
-              formData.orgPhone,
-              "orgPhone",
-              t("orgName_phone_placeholder")
+              t("phoneNumber"),
+              formData.phoneNumber,
+              "phoneNumber",
+              t("fullName_phone_placeholder")
             )}
 
             {renderInput(
-              t("orgEmail"),
-              formData.orgEmail,
-              "orgEmail",
-              t("orgEmail_phone_placeholder")
+              t("email"),
+              formData.email,
+              "email",
+              t("email_phone_placeholder")
             )}
 
             {renderInput(
-              t("orgAddress"),
-              formData.orgAddress,
-              "orgAddress",
-              t("orgAddress_placeholder")
+              t("address"),
+              formData.address,
+              "address",
+              t("address_placeholder")
             )}
 
             {renderInput(
               t("orgUserName"),
-              formData.orgUsername,
-              "orgUsername",
-              t("orgUsername_phone_placeholder")
+              formData.username,
+              "username",
+              t("username_phone_placeholder")
             )}
 
             {renderInput(
-              t("orgPassword"),
-              formData.orgPassword,
-              "orgPassword",
-              t("orgPassword_phone_placeholder")
+              t("password"),
+              formData.password,
+              "password",
+              t("password_phone_placeholder")
             )}
 
-            {renderInput(
+            {/* {renderInput(
               t("orgAdmin"),
               formData.orgAdmin,
               "orgAdmin",
               t("orgAdmin_placeholder")
-            )}
+            )} */}
 
             {/* //TODO add org pic */}
 

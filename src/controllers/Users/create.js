@@ -28,12 +28,11 @@ const registerVolunteer = async (req, res) => {
       if (userData.type === "org") {
         console.log("adding an org");
         reg = await dbConnection.createOrganizer(
-          userData.orgName,
-          userData.orgAddress,
-          userData.orgAdmin,
-          userData.orgPhoneNumber,
-          userData.orgEmail,
-          userData.orgUserName,
+          userData.fullName,
+          userData.address,
+          userData.phoneNumber,
+          userData.email,
+          userData.username,
           passwordHash
         );
       } else if (userData.type === "vol") {
