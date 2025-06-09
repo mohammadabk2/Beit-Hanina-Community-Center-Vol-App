@@ -22,7 +22,7 @@ const router = Router();
 router.get("/ping", pingController);
 
 router.post("/auth/login", logUserController);
-router.post("/auth/changePassword", changePassword);
+router.post("/auth/change-password", changePassword);
 
 router.post("/users/register", registerVolunteerController);
 router.get("/users", loadUsers);
