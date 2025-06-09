@@ -5,10 +5,11 @@ import axios from "axios";
 import DynamicButton from "../../components/common/ButtonComponent";
 import EventItem from "../../components/EventItem";
 import PeopleDisplaySwitcher from "../../components/PersonItem/PeopleDisplaySwitcher";
-import { useTheme } from "../../config/options/Colors";
 import DynamicInput from "../../components/common/InputComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
+import { useTheme } from "../../config/options/Colors";
+import { useSortOptions } from "../../config/options/Sort";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";

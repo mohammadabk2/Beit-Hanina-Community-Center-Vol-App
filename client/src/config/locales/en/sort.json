@@ -1,11 +1,11 @@
 {
-  "sort_1": "Approved Users",
-  "sort_2": "Unapproved Users",
-  "sort_3": "Approved Events",
-  "sort_4": "Unapproved Events",
+  "sort_9": "Approved Users",
+  "sort_8": "Unapproved Users",
+  "sort_7": "Approved Events",
+  "sort_6": "Unapproved Events",
   "sort_5": "Sort By Time",
-  "sort_6": "Open Events",
-  "sort_7": "Closed Events",
-  "sort_8": "My Events",
-  "sort_9": "Favorites"
+  "sort_4": "Open Events",
+  "sort_3": "Closed Events",
+  "sort_2": "My Events",
+  "sort_1": "Favorites"
 }

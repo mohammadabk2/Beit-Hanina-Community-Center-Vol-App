@@ -1,41 +1,22 @@
 import { useTranslation } from "react-i18next";
-export const useSortOptions = (UserType) => {
+export const useSortOptions = (UserType, callbacks = {}) => {
   const { t } = useTranslation("sort");
 
-  const adminKeys = [],
-    orgKeys = [],
-    volKeys = [];
+  const baseKeys = ["sort_1", "sort_2", "sort_3", "sort_4", "sort_5"];
+  const orgKeys = ["sort_6", "sort_7"];
+  const adminKeys = ["sort_8", "sort_9"];
 
-  for (let i = 1; i <= 9; i++) {
-    let string = `sort_${i}`;
-    adminKeys.push(string);
-    if (i >= 3) orgKeys.push(string);
-    if (i >= 5) volKeys.push(string);
+  let combinedKeys = [...baseKeys];
+  if (UserType === "organizer" || UserType === "admin") {
+    combinedKeys = [...combinedKeys, ...orgKeys];
+  }
+  if (UserType === "admin") {
+    combinedKeys = [...combinedKeys, ...adminKeys];
   }
 
-  let keyToReturn = [];
-
-  console.log(`${UserType} sort option loaded`);
-  switch (UserType) {
-    case "admin":
-      keyToReturn = adminKeys;
-      break;
-    case "organizer":
-      keyToReturn = orgKeys;
-      break;
-    case "volunteer":
-      keyToReturn = volKeys;
-      break;
-    default:
-      keyToReturn = volKeys; //fallback
-  }
-
-  return keyToReturn.map((key) => ({
-    label: t(`${key}`),
-    value: t(`${key}`),
-    // href: `#option${key}`,
-    onClick: () => {
-      console.log(`Sort ${t(key)} clicked`);
-    },
+  return combinedKeys.map((key) => ({
+    label: t(key),
+    value: key,
+    onClick: callbacks[key] || (() => console.log(`No callback for ${key}`)),
   }));
 };
