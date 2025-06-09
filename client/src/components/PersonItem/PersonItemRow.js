@@ -1,6 +1,7 @@
 // PersonItemRow.js
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "../../config/options/Colors";
 
 import DynamicButton from "../common/ButtonComponent";
@@ -30,6 +31,7 @@ const PersonItemRow = ({
   viewLogsFunction,
   addLogFunction,
 }) => {
+  const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
   // const { t: tskill } = useTranslation("skills"); // Not needed here
 
@@ -53,16 +55,18 @@ const PersonItemRow = ({
             <DynamicButton
               className="button button-approve"
               logoSrc={isLightMode ? checkLight : checkDark}
-              logoalt="approve"
+              logoalt={t("approve_button")}
               onClick={approveFunction}
+              aria-label={`${t("approve_button")} ${name}`}
             />
           </td>
           <td>
             <DynamicButton
               className="button button-reject"
               logoSrc={isLightMode ? crossLight : crossDark}
-              logoalt="reject"
+              logoalt={t("reject_button")}
               onClick={rejectFunction}
+              aria-label={`${t("reject_button")} ${name}`}
             />
           </td>
         </>
@@ -72,16 +76,18 @@ const PersonItemRow = ({
             <DynamicButton
               className="button button-add"
               logoSrc={isLightMode ? docPlusLight : docPlusDark}
-              logoalt="add log"
+              logoalt={t("add_log")}
               onClick={addLogFunction}
+              aria-label={`${t("add_log")} for ${name}`}
             />
           </td>
           <td>
             <DynamicButton
               className="button button-view"
               logoSrc={isLightMode ? docFilledLight : docFilledDark}
-              logoalt="view logs"
+              logoalt={t("view_log")}
               onClick={viewLogsFunction}
+              aria-label={`${t("view_log")} for ${name}`}
             />
           </td>
         </>
