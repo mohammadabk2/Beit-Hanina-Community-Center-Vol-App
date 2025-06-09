@@ -663,29 +663,12 @@ html[lang="ar"] textarea {
   justify-content: center;
 }
 
-/* Center content in button using flexbox */
-.button-flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
 /* Standardize icon size and remove extra margin */
 .button-icon {
   width: 1.5rem;
   height: 1.5rem;
   display: block;
   margin: 0;
-}
-
-/* Ensure text is vertically centered */
-.button-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: inherit;
-  line-height: 1;
 }
 
 .active-nav {
