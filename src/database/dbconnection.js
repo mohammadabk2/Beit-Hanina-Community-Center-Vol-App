@@ -795,6 +795,31 @@ const decideUserEventStatus = async (eventID, userID, arrayName, status) => {
   }
 };
 
+/**
+ * Changes user password hash
+ * @param {number} userID
+ * @param {string} newPasswordHash
+ * @returns {Promise<Object>} A promise that resolves to the new user password object.
+ * @throws {Error} If the database query fails.
+ */
+const changePassword = async (userID, newPasswordHash) => {
+  const text = `
+  UPDATE users
+  SET password_hash = $2
+  WHERE id = $1
+  RETURNING *`;
+
+  const values = [userID, newPasswordHash];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(`Error in password Change for user ${userID}:`, error);
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -809,6 +834,7 @@ export default {
   updateEventStatus,
   fetchVolunteerlist,
   decideUserEventStatus,
+  changePassword,
 
   // Currently for testing unused
   getUserById, // tested
