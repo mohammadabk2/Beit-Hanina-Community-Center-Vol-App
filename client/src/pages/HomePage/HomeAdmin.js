@@ -9,7 +9,9 @@ import DynamicInput from "../../components/common/InputComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 import { useTheme } from "../../config/options/Colors";
-import { useSortOptions } from "../../config/options/Sort";
+// import SelectComponent from "../../components/common/SelectComponent";
+import useSortOptions from "../../config/options/Sort";
+import DropDownMenu from "../../components/common/DropDownMenu";
 
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
 import TableIconDark from "../../icons/dark/table_view_icon.svg";
@@ -21,7 +23,6 @@ import TableIconLight from "../../icons/light/table_view_icon.svg";
 import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 import useLoadUsers from "../../config/hooks/loadUsers";
-
 const HomeAdmin = () => {
   const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { t } = useTranslation("home");
@@ -34,6 +35,24 @@ const HomeAdmin = () => {
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
+
+  useEffect(() => {
+    if (userId && isAuthenticated) {
+      loadEvents(["pending"]);
+    }
+  }, [userId, isAuthenticated, loadEvents]);
+
+  useEffect(() => {
+    if (userId && isAuthenticated) {
+      loadUsers("volunteer_waiting_list");
+    }
+  }, [userId, isAuthenticated, loadUsers]);
+
+  // const sortOptions = useSortOptions({ type: "admin", data: events });
+  const sortOptions = useSortOptions({
+    type: "admin",
+    data: events && events.length > 0 ? events : [],
+  });
 
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
@@ -155,6 +174,8 @@ const HomeAdmin = () => {
               onClick={sortPeople}
               text={t("sort")}
             />
+
+            {/* <SelectComponent type="sort" /> */}
             <DynamicButton
               className="button button-small"
               onClick={switchToEvents}
@@ -207,7 +228,7 @@ const HomeAdmin = () => {
     orgAdmin: "",
   });
 
-  const handleChange = (e) => {
+  const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -226,6 +247,7 @@ const HomeAdmin = () => {
               onClick={sortEvents}
               text={t("sort")}
             />
+            {/* <SelectComponent type="sort" /> */}
 
             <DynamicButton
               className="button button-small"
@@ -255,7 +277,7 @@ const HomeAdmin = () => {
                 type="text"
                 value={formData.orgName}
                 name="name"
-                onChange={handleChange}
+                onChange={handleFormChange}
                 placeholder={t("orgName_placeholder")}
               />
             </div>
@@ -271,7 +293,7 @@ const HomeAdmin = () => {
                 type="text"
                 value={formData.orgAddress}
                 name="address"
-                onChange={handleChange}
+                onChange={handleFormChange}
                 placeholder={t("orgAddress_placeholder")}
               />
             </div>
@@ -287,7 +309,7 @@ const HomeAdmin = () => {
                 type="text"
                 value={formData.orgAdmin}
                 name="name"
-                onChange={handleChange}
+                onChange={handleFormChange}
                 placeholder={t("orgAdmin_placeholder")}
               />
             </div>
@@ -307,17 +329,23 @@ const HomeAdmin = () => {
     );
   };
 
+  //! testing idea
+  // const [sortCurrent, setSortCurrent] = useState([]);
+  // const handleSortChange = (e) => {
+  //   const newArray = e.target.value;
+  //   setSortCurrent(newArray); // Replace the whole array with the updated one
+  //   console.log("Updated sort array:", newArray);
+  // };
+  //!
+
+  if (!events || events.length === 0) {
+    return <div>Loading events...</div>;
+  }
   const renderEvents = () => {
     return (
       <>
         <div className="scroll-box1 general-box flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
-
             <DynamicButton
               className="button button-small"
               onClick={switchToPeople}
@@ -329,24 +357,26 @@ const HomeAdmin = () => {
               onClick={switchToCreateOrg}
               text={t("switch_to_create_org")}
             />
+
+            {/* <SelectComponent
+              type="sort"
+              userType="admin"
+              dataToPass={events}
+              onChange={handleSortChange}
+              chosen={sortCurrent}
+            /> */}
+
+            <DropDownMenu
+              className="gender-button"
+              text={t("sort")}
+              options={sortOptions}
+            />
           </div>
           <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
         </div>
       </>
     );
   };
-
-  useEffect(() => {
-    if (userId && isAuthenticated) {
-      loadEvents(["pending"]);
-    }
-  }, [userId, isAuthenticated, loadEvents]);
-
-  useEffect(() => {
-    if (userId && isAuthenticated) {
-      loadUsers("volunteer_waiting_list");
-    }
-  }, [userId, isAuthenticated, loadUsers]);
 
   if (loadingInitial) {
     return <div>Loading Event data...</div>;

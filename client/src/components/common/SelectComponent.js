@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import DropDownMenu from "./DropDownMenu";
 import { useSkillOptions } from "../../config/options/Skills";
-import { useSortOptions } from "../../config/options/Sort";
+import useSortOptions from "../../config/options/Sort";
 import { useTheme } from "../../config/options/Colors";
 
 import xIconLight from "../../icons/light/x_icon.svg";
@@ -14,12 +14,15 @@ const SelectComponent = ({
   onChange, // Function to call when skills array changes
   type,
   chosen,
+  userType,
+  dataToPass,
+  //todo Maybe add userID
 }) => {
   const { isLightMode } = useTheme();
   const { t } = useTranslation("skills");
 
   const skillOptions = useSkillOptions();
-  const sortOptions = useSortOptions();
+  const sortOptions = useSortOptions({ type: userType, data: dataToPass });
 
   const availableOptions =
     type === "skills"
@@ -55,7 +58,7 @@ const SelectComponent = ({
   return (
     <div className="flex-box flex-column input-field-box">
       <div>
-        <div>{t("skills")}: </div>
+        <div>{type === "skills" ? t("skills") : ""}</div>
       </div>
       <div className="flex-box">
         {(Array.isArray(chosen) ? chosen : []).map((choice, index) => (
@@ -72,11 +75,11 @@ const SelectComponent = ({
       </div>
       <DropDownMenu
         className="gender-button"
-        text={type === "skills" ? t("select_skills") : t("sort")}
-        options={availableOptions.map((skill) => ({
-          label: t(`${skill.label}`),
-          href: `#${skill.value}`,
-          onClick: () => handleAddOption(skill.value),
+        text={type === "skills" ? t("select_skills") : t("select_sort")}
+        options={availableOptions.map((item) => ({
+          label: t(`${item.label}`),
+          href: `#${item.value}`,
+          onClick: () => handleAddOption(item.value),
         }))}
       />
     </div>
@@ -84,11 +87,16 @@ const SelectComponent = ({
 };
 
 SelectComponent.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   className: PropTypes.string,
   type: PropTypes.string,
+  userType: PropTypes.string,
   style: PropTypes.object,
   chosen: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
+  dataToPass: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(PropTypes.number),
   ]),

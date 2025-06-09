@@ -78,13 +78,15 @@
 │       │   │       ├── signup.json
 │       │   │       ├── skills.json
 │       │   │       └── sort.json
-│       │   └── options
-│       │       ├── Colors.js
-│       │       ├── Insurance.js
-│       │       ├── Language.js
-│       │       ├── Occupation.js
-│       │       ├── Skills.js
-│       │       └── Sort.js
+│       │   ├── options
+│       │   │   ├── Colors.js
+│       │   │   ├── Insurance.js
+│       │   │   ├── Language.js
+│       │   │   ├── Occupation.js
+│       │   │   ├── Skills.js
+│       │   │   └── Sort.js
+│       │   └── utils
+│       │       └── sortFunctions.js
 │       ├── global.css
 │       ├── icons
 │       │   ├── about_icon.jpg
@@ -216,5 +218,5 @@
 │       └── App-test.postman_collection.json
 └── workbox-config.cjs
 
-49 directories, 165 files
+50 directories, 166 files
 ```
