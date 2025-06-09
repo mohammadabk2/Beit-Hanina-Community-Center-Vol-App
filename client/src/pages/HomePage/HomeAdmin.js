@@ -235,7 +235,12 @@ const HomeAdmin = () => {
 
   const [formData, setFormData] = useState({
     orgName: "",
+    orgPhone: "",
+    orgEmail: "",
     orgAddress: "",
+    orgUsername: "",
+    orgPassword: "",
+    role: "organizer",
     orgAdmin: "",
   });
 
@@ -246,6 +251,7 @@ const HomeAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Create Org Submit clicked", formData);
+    //TODO send the request
   };
 
   const renderCreateOrg = () => {
@@ -265,21 +271,49 @@ const HomeAdmin = () => {
             {renderInput(
               t("orgName"),
               formData.orgName,
-              "name",
+              "orgName",
               t("orgName_placeholder")
+            )}
+
+            {renderInput(
+              t("orgPhone"),
+              formData.orgPhone,
+              "orgPhone",
+              t("orgName_phone_placeholder")
+            )}
+
+            {renderInput(
+              t("orgEmail"),
+              formData.orgEmail,
+              "orgEmail",
+              t("orgEmail_phone_placeholder")
             )}
 
             {renderInput(
               t("orgAddress"),
               formData.orgAddress,
-              "address",
+              "orgAddress",
               t("orgAddress_placeholder")
+            )}
+
+            {renderInput(
+              t("orgUserName"),
+              formData.orgUsername,
+              "orgUsername",
+              t("orgUsername_phone_placeholder")
+            )}
+
+            {renderInput(
+              t("orgPassword"),
+              formData.orgPassword,
+              "orgPassword",
+              t("orgPassword_phone_placeholder")
             )}
 
             {renderInput(
               t("orgAdmin"),
               formData.orgAdmin,
-              "name",
+              "orgAdmin",
               t("orgAdmin_placeholder")
             )}
 
