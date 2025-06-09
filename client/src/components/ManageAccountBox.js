@@ -1,20 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
-// import DropDownMenu from "./DropDownMenu";
 import DynamicButton from "./common/ButtonComponent";
+import { useAuth } from "../config/Context/auth";
 
 const ManageAccountBox = () => {
   const { t } = useTranslation("personal");
-  const navigate = useNavigate();
-
-  const signOutHandler = () => {
-    console.log("Sign Out button clicked");
-    navigate("/"); // go to Landing Page
-    //TODO delete whatever cashed info
-    //TODO reset user token to null
-  };
+  const { logout } = useAuth();
 
   const changePassword = () => {
     console.log("Change Password button clicked");
@@ -28,11 +20,7 @@ const ManageAccountBox = () => {
         onClick={changePassword}
       />
 
-      <DynamicButton
-        className="button"
-        text={t("sign_out")}
-        onClick={signOutHandler}
-      />
+      <DynamicButton className="button" text={t("sign_out")} onClick={logout} />
     </div>
   );
 };
