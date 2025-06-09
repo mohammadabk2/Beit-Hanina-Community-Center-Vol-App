@@ -14,7 +14,7 @@ const DynamicButton = ({
     <button
       onClick={onClick}
       name={name}
-      className={`button-flex-center ${className || ""}`.trim()}
+      className={className}
       style={style}
     >
       {logoSrc && <img src={logoSrc} alt={logoalt} className="button-icon" />}
