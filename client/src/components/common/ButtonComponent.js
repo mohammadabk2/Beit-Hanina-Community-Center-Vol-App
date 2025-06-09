@@ -9,6 +9,7 @@ const DynamicButton = ({
   text,
   logoSrc,
   logoalt,
+  type,
 }) => {
   return (
     <button
@@ -16,6 +17,7 @@ const DynamicButton = ({
       name={name}
       className={className}
       style={style}
+      type={type}
     >
       {logoSrc && <img src={logoSrc} alt={logoalt} className="button-icon" />}
       {text}
@@ -31,6 +33,11 @@ DynamicButton.propTypes = {
   text: PropTypes.string,
   logoSrc: PropTypes.string,
   logoalt: PropTypes.string,
+  type: PropTypes.string,
+};
+
+DynamicButton.defaultProps = {
+  type: "button",
 };
 
 export default DynamicButton;

@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS volunteer
     id_number VARCHAR(20) NOT NULL UNIQUE,
     approved_hours INT DEFAULT 0,
     unapproved_hours INT DEFAULT 0,
-    orgs TEXT[] DEFAULT '{}'
+    skills TEXT[] DEFAULT '{}',
+    orgs INT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS volunteer_waiting_list
@@ -35,10 +36,12 @@ CREATE TABLE IF NOT EXISTS volunteer_waiting_list
     email TEXT NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL,
     insurance VARCHAR(50) NOT NULL,
+    occupation VARCHAR(20) NOT NULL,
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255),
     logs TEXT[] DEFAULT '{}',
+    skills TEXT[] DEFAULT '{}',
     profile_image_url TEXT
 );
 

@@ -13,12 +13,12 @@ INSERT INTO users (phone_number, email, address, username, password_hash, banned
 -- Volunteer
 -- Assuming user_id 1 (johndoe) and 3 (alicew) are volunteers
 INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, orgs) VALUES
-(1, 'John Doe', '1990-05-15', 'M', 'Global Health Insurance', 'IDN123456789', 150, 10, ARRAY['Community Helpers', 'Green Earth Initiative']),
-(3, 'Alice Wonderland', '1995-11-20', 'F', 'SecureLife Coverage', 'IDN987654321', 75, 5, ARRAY['Animal Shelter Volunteers']);
+(1, 'John Doe', '1990-05-15', 'M', 'Global Health Insurance', 'IDN123456789', 150, 10, ARRAY[2]),
+(3, 'Alice Wonderland', '1995-11-20', 'F', 'SecureLife Coverage', 'IDN987654321', 75, 5, ARRAY[5]);
 -- Note: bob.builder (user_id 4) is banned, so might not be in the volunteer table or have 0 hours.
 -- For this example, let's assume banned users might still have a record if they were previously a volunteer.
 INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, orgs) VALUES
-(4, 'Bob Builder', '1985-02-10', 'M', 'BuildWell Insurance', 'IDNBUILDER001', 20, 0, ARRAY['Habitat Builders']);
+(4, 'Bob Builder', '1985-02-10', 'M', 'BuildWell Insurance', 'IDNBUILDER001', 20, 0, ARRAY[2]);
 
 
 -- Organizer
@@ -28,9 +28,9 @@ INSERT INTO organizer (user_id, org_name, given_hours, vol_id) VALUES
 (5, 'Planeteers Foundation', 300, ARRAY[3]); -- Carol Danvers' org, Alice Wonderland is associated
 
 -- Volunteer Waiting List
-INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, profile_image_url) VALUES
-('Peter Parker', '2001-08-10', 'M', '234-567-8901', 'peter.parker@newyork.com', '20 Ingram St, Queens, NY', 'Daily Bugle Health', 'IDNPP001', 'spidey', 'hashed_spidey_pass', ARRAY['Application submitted'], 'http://example.com/profiles/spidey_wait.jpg'),
-('Diana Prince', '1970-03-22', 'F', '345-678-9012', 'diana.prince@themyscira.com', 'Themyscira Island', 'Amazonian Shield', 'IDNDP002', 'wonderwoman', 'hashed_wonder_pass', ARRAY['Application submitted', 'Awaiting review'], NULL);
+INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, logs, profile_image_url) VALUES
+('Peter Parker', '2001-08-10', 'M', '234-567-8901', 'peter.parker@newyork.com', '20 Ingram St, Queens, NY', 'Daily Bugle Health', 'Clalit', 'IDNPP001', 'spidey', 'hashed_spidey_pass', ARRAY['Application submitted'], 'http://example.com/profiles/spidey_wait.jpg'),
+('Diana Prince', '1970-03-22', 'F', '345-678-9012', 'diana.prince@themyscira.com', 'Themyscira Island', 'Amazonian Shield', 'Clalit','IDNDP002', 'wonderwoman', 'hashed_wonder_pass', ARRAY['Application submitted', 'Awaiting review'], NULL);
 
 -- Rejected Users
 INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, profile_image_url) VALUES

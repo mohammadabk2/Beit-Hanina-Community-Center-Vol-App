@@ -23,6 +23,7 @@ const SignUpPage = () => {
   const { t: tApp } = useTranslation("app");
   const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
+
   const baseInsuranceOptions = useInsuranceOptions();
   const baseOccupationOptions = useOccupationOptions();
 
@@ -39,6 +40,8 @@ const SignUpPage = () => {
     userName: "",
     password: "",
     skills: [], // Initialize skills as an array
+    imageFile: null,
+    type: "vol",
   });
 
   const handleInsuranceChange = (value) => {
@@ -101,7 +104,7 @@ const SignUpPage = () => {
     console.log("Form submitted:", formData);
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/register`,
+        `${API_BASE_URL}/api/users/register`,
         formData
       );
 
@@ -116,6 +119,14 @@ const SignUpPage = () => {
       console.error("Error during sign in:", err);
     }
   };
+
+  // Stores image in form to send
+  const handleImageFileSelect = (file) => {
+    setFormData(prevData => ({
+      ...prevData,
+      imageFile: file
+    }));
+  }
 
   return (
     <>
@@ -298,7 +309,7 @@ const SignUpPage = () => {
             chosen={formData.skills}
           />
 
-          <UploadFile />
+          <UploadFile onFileSelect={handleImageFileSelect} />
 
           <div className="flex-box">
             <div>

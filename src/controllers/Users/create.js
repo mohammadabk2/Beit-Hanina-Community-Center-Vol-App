@@ -8,6 +8,9 @@ const registerVolunteer = async (req, res) => {
   const userData = req.body;
   const errors = validation(userData);
 
+  // const file_path = "../../../images"
+  // req.imageFile
+
   if (Object.keys(errors).length > 0) {
     res.status(400).send({
       message: "Invalid registration data.",
@@ -44,9 +47,11 @@ const registerVolunteer = async (req, res) => {
           userData.email,
           userData.address,
           userData.insurance,
+          userData.occupation,
           userData.idNumber,
           userData.username,
-          passwordHash
+          passwordHash,
+          userData.skills,
         );
       }
       if (reg) {
