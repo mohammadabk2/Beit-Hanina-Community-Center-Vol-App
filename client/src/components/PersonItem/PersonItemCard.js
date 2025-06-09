@@ -54,12 +54,16 @@ const PersonItemCard = ({
               <div>{tskill("skills")}:</div>
 
               <div className="flex-box">
-                {skills.map((person, index) => (
-                  <div key={index} className="skills">
-                    {person}
-                    {index < skills.length - 1 && " "}
-                  </div>
-                ))}
+                {Array.isArray(skills) ? (
+                  skills.map((person, index) => (
+                    <div key={index} className="skills">
+                      {person}
+                      {index < skills.length - 1 && " "}
+                    </div>
+                  ))
+                ) : (
+                  <div>N/A</div>
+                )}
               </div>
             </div>
           </div>

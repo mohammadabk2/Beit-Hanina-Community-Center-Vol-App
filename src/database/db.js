@@ -1,16 +1,15 @@
-import { Pool } from "pg";
-// const dotenv = require("dotenv");
+import pkg from "pg";
+const { Pool } = pkg;
 
-
+import dotenv from 'dotenv';
+dotenv.config(); // Load variables from .env into process.env
 // Database connection configuration
-//TODO: setup the database on the server and then get these details
-// TODO get all these from .en
 const pool = new Pool({
-  user: process.env.DBUSER || "user",
-  host: process.env.DB_HOST || "local",
-  database: process.env.DB_NAME || "DB_Name",
-  password: process.env.DB_PASS || "password",
-  port: process.env.DBPORT || 5000,
+  user: process.env.DBUSER,
+  host: process.env.DBHOST,
+  database: process.env.DBNAME,
+  password: process.env.DBPASS,
+  port: process.env.DBPORT,
 });
 
 // Function to query the database
@@ -22,5 +21,5 @@ const query = async (text, params) => {
   return res;
 };
 
-// Export the query function
-export { query, pool };
+// Export the query function and pool
+export default { query, pool };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react"; // Import useState and useEffect
 import { useTranslation } from "react-i18next";
 
 // import components here
@@ -8,24 +8,51 @@ import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
 
+// import context and hooks
+import { useAuth } from "../../config/Context/auth";
+import useLoadEvents from "../../config/hooks/loadEvent";
+
 const HomeVolunteer = () => {
+  // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { t } = useTranslation("home");
+
+  const { userId, loadingInitial, isAuthenticated } = useAuth();
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+
+  useEffect(() => {
+    if (userId && isAuthenticated) {
+      loadEvents(["approved"]);
+    }
+  }, [userId, isAuthenticated, loadEvents]);
+
+  if (loadingInitial) {
+    return <div>Loading user data...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <div>You need to be logged in to view this data.</div>;
+  }
 
   const sortEvents = () => {
     console.log("Sort button clicked");
+    //TODO call loadevents with arguemnt as needed
   };
 
   const renderEventItems = (eventsArray) => {
-    return eventsArray.map((event, index) => (
+    if (!Array.isArray(eventsArray) || eventsArray.length === 0) {
+      return <p>{t("no_events_found")}</p>; // Or any other placeholder
+    }
+
+    return eventsArray.map((event) => (
       <EventItem
-        key={index}
+        key={event.id}
         name={event.name}
-        desc={event.desc}
-        req={event.req}
+        desc={event.description}
+        req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
         type="vol"
-        count={event.count}
-        size={event.size}
-        eventLocation={event.eventLocation}
+        count={event.currentSize}
+        size={event.maxSize}
+        eventLocation={event.location}
       />
     ));
   };
@@ -44,7 +71,12 @@ const HomeVolunteer = () => {
             />
           </div>
         </div>
-        <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+        {/* <div className="bottom-scroll-box1">{renderEventItems(events)}</div> */}
+        <div className="bottom-scroll-box1">
+          {eventsLoading && <p>{t("loading_events")}</p>}
+          {eventsError && <p style={{ color: "red" }}>{eventsError}</p>}
+          {!eventsLoading && !eventsError && renderEventItems(events)}
+        </div>
       </div>
       <CopyRight />
     </div>
@@ -52,34 +84,3 @@ const HomeVolunteer = () => {
 };
 
 export default HomeVolunteer;
-
-//! temp data
-const events = [
-  {
-    id: "event1",
-    name: "تنظيف الحديقة العامة",
-    desc: "حملة تنظيف وتجميل الحديقة العامة في بيت حنينا",
-    req: ["التنظيف", "البستنة"],
-    count: 5,
-    size: 20,
-    eventLocation: "الحديقة العامة - بيت حنينا",
-  },
-  {
-    id: "event2",
-    name: "دروس تقوية للطلاب",
-    desc: "دروس تقوية في الرياضيات والعلوم لطلاب المدارس",
-    req: ["التدريس", "الرياضيات", "العلوم"],
-    count: 3,
-    size: 10,
-    eventLocation: "مركز المجتمع - بيت حنينا",
-  },
-  {
-    id: "event3",
-    name: "يوم رياضي للأطفال",
-    desc: "تنظيم يوم رياضي ترفيهي للأطفال",
-    req: ["الرياضة", "تنظيم الفعاليات"],
-    count: 8,
-    size: 15,
-    eventLocation: "الملعب الرياضي - بيت حنينا",
-  },
-];

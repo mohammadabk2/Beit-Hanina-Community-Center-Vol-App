@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useAuth } from "../../config/Context/auth";
 
 import DropDownMenu from "../common/DropDownMenu";
 import { useLnOptions } from "../../config/options/Language";
@@ -18,17 +18,13 @@ import homeIconDark from "../../icons/dark/NavBar/home_icon.svg";
 import aboutIconDark from "../../icons/dark/NavBar/about_icon.svg";
 // import settingsIconDark from "../icons/dark/settings_icon.svg";
 
-const NavigationBar = ({ dontShowPageButtons }) => {
+const NavigationBar = () => {
   const { t } = useTranslation("navBar");
   const navigate = useNavigate();
   const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
-
-  // const goToSettings = () => {
-  //   console.log("Settings button clicked");
-  //   navigate("/settings");
-  // };
+  const { isAuthenticated } = useAuth();
 
   const goToPersonalArea = () => {
     //TODO add a check if Admin org or voulunteer
@@ -65,7 +61,7 @@ const NavigationBar = ({ dontShowPageButtons }) => {
         />
         {t("about_page")}
       </div>
-      {!dontShowPageButtons && (
+      {isAuthenticated && (
         <>
           <div
             onClick={goToPersonalArea}
@@ -116,10 +112,6 @@ const NavigationBar = ({ dontShowPageButtons }) => {
       />
     </div>
   );
-};
-
-NavigationBar.propTypes = {
-  dontShowPageButtons: PropTypes.bool,
 };
 
 export default NavigationBar;

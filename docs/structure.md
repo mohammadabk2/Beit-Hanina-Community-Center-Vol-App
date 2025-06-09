@@ -28,6 +28,7 @@
 │       │   │   ├── ButtonComponent.js
 │       │   │   ├── DropDownMenu.js
 │       │   │   ├── InputComponent.js
+│       │   │   ├── PopupComponent.js
 │       │   │   ├── SelectComponent.js
 │       │   │   └── UploadComponent.js
 │       │   ├── EventItem.js
@@ -41,6 +42,11 @@
 │       │       ├── PersonItemRow.js
 │       │       └── PersonList.js
 │       ├── config
+│       │   ├── Context
+│       │   │   └── auth.js
+│       │   ├── hooks
+│       │   │   ├── loadEvent.js
+│       │   │   └── loadUsers.js
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
@@ -82,6 +88,10 @@
 │       │   ├── about_icon.jpg
 │       │   ├── dark
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-dark.svg
+│       │   │   ├── cross-dark.svg
+│       │   │   ├── document-filled-dark.svg
+│       │   │   ├── document-plus-dark.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -95,6 +105,10 @@
 │       │   ├── home_icon.jpg
 │       │   ├── light
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-light.svg
+│       │   │   ├── cross-light.svg
+│       │   │   ├── document-filled-light.svg
+│       │   │   ├── document-plus-light.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -129,9 +143,15 @@
 │               └── SignUp.js
 ├── docs
 │   ├── digrams
+│   │   ├── database-digram.png
+│   │   ├── dataFlow.png
+│   │   ├── h3
+│   │   │   └── user_auth_sequence.png
 │   │   ├── image.png
 │   │   └── logic.drawio
 │   ├── editable
+│   │   ├── h3
+│   │   │   └── user_auth_sequence.drawio
 │   │   └── SignUp.drawio.svg
 │   ├── first-meeting
 │   │   ├── FIRST-MEETING-QUESTIONS.md
@@ -149,21 +169,36 @@
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── android_setup.sh
 │   ├── before_git.sh
 │   ├── convert_to_apk.sh
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
-│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── src
 │   ├── controllers
+│   │   ├── auth
+│   │   │   ├── changePassword.js
+│   │   │   └── login.js
+│   │   ├── common
+│   │   │   ├── authenticate.js
+│   │   │   ├── error.js
+│   │   │   ├── ping.js
+│   │   │   └── validateToken.js
+│   │   ├── Events
+│   │   │   ├── actions.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   ├── index.js
-│   │   ├── register.js
+│   │   ├── Users
+│   │   │   ├── actions.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   └── validation.js
 │   ├── database
-│   │   ├── dbbuild.js
+│   │   ├── dbconnection.js
 │   │   ├── db.js
 │   │   ├── schema.sql
 │   │   └── validation
@@ -179,8 +214,15 @@
 │   │   └── verifyToken.js
 │   └── server.js
 ├── tests
-│   └── test.txt
+│   ├── addAdmin.sql
+│   ├── drop_tables.sql
+│   ├── events.sql
+│   ├── master.sql
+│   ├── populate.sql
+│   ├── postman
+│   │   └── App-test.postman_collection.json
+│   └── test_cases.md
 └── workbox-config.cjs
 
-40 directories, 140 files
+49 directories, 173 files
 ```

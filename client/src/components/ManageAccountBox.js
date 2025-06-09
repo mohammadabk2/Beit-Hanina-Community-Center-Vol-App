@@ -1,23 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-// import DropDownMenu from "./DropDownMenu";
 import DynamicButton from "./common/ButtonComponent";
+import { useAuth } from "../config/Context/auth";
+import PopupComponent from "./common/PopupComponent";
+import DynamicInput from "./common/InputComponent";
 
 const ManageAccountBox = () => {
   const { t } = useTranslation("personal");
-  const navigate = useNavigate();
+  const { logout, userId, token } = useAuth();
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
-  const signOutHandler = () => {
-    console.log("Sign Out button clicked");
-    navigate("/"); // go to Landing Page
-    //TODO delete whatever cashed info
-    //TODO reset user token to null
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleChangePasswordClick = () => {
+    setIsPopupOpen(true);
   };
 
-  const changePassword = () => {
-    console.log("Change Password button clicked");
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+  };
+
+  const handlePasswordChange = async () => {
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      alert("All fields are required.");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      alert("New passwords do not match.");
+      return;
+    }
+
+    try {
+      console.log("Change Password button clicked");
+      const response = await axios.post(
+        `${API_BASE_URL}/api/auth/change-password`,
+        {
+          userID: userId,
+          action: "password-change",
+          newPassword: newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        alert("Password changed successfully!");
+        handlePopupClose();
+      } else {
+        alert("Failed to change password.");
+      }
+    } catch (error) {
+      alert("Error: " + (error.response?.data?.message || error.message));
+    }
   };
 
   return (
@@ -25,14 +69,46 @@ const ManageAccountBox = () => {
       <DynamicButton
         className="button"
         text={t("password_change")}
-        onClick={changePassword}
+        onClick={handleChangePasswordClick}
       />
 
-      <DynamicButton
-        className="button"
-        text={t("sign_out")}
-        onClick={signOutHandler}
-      />
+      <DynamicButton className="button" text={t("sign_out")} onClick={logout} />
+
+      <PopupComponent
+        isOpen={isPopupOpen}
+        onClose={handlePopupClose}
+        message="Change Your Password"
+        buttonText="Cancel"
+      >
+        <div className="flex-box flex-column gap-1">
+          <DynamicInput
+            type="password"
+            placeholder="Old Password"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
+            className="input-field"
+          />
+          <DynamicInput
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="input-field"
+          />
+          <DynamicInput
+            type="password"
+            placeholder="Confirm New Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="input-field"
+          />
+          <DynamicButton
+            text="Submit"
+            onClick={handlePasswordChange}
+            className="button"
+          />
+        </div>
+      </PopupComponent>
     </div>
   );
 };

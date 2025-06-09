@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "ce2cdcb8-d7b1-4bc6-9fff-8a9c45fb3771",
+		"name": "App-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37083041"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Volunteer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"captainmarvel\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "organizer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"org\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "register Users",
+			"item": [
+				{
+					"name": "register jad",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"jad jaraisy\",\r\n    \"birthDate\": \"2000-09-25\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0528558889\",\r\n    \"email\": \"jadosh2000@gmail.com\",\r\n    \"address\": \"nazareth\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"211758057\",\r\n    \"username\": \"jadosh123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register tbakhy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"vol\",\r\n    \"fullName\": \"mohammad tbakhy\",\r\n    \"birthDate\": \"2001-05-07\",\r\n    \"sex\": \"M\",\r\n    \"phoneNumber\": \"0524334065\",\r\n    \"email\": \"mohammadismat12378@gmail.com\",\r\n    \"address\": \"kofrakb\",\r\n    \"insurance\": \"clalit\",\r\n    \"idNumber\": \"341366896\",\r\n    \"username\": \"mohammadt\",\r\n    \"password\": \"Solo0@m7md!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register  org123",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"org\",\r\n    \"orgName\": \"some org\",\r\n    \"orgAddress\":\"some street\",\r\n    \"orgAdmin\":\"ahmed admin\",\r\n    \"orgPhoneNumber\": \"0528558898\",\r\n    \"orgEmail\": \"centreemail11@gmail.com\",\r\n    \"orgUserName\": \"org123\",\r\n    \"password\": \"Jadosh123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Load Events",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTkyMjgwLCJleHAiOjE3NDgwNzg2ODB9.EOzKpIL_SUlRk8gC48UoMW08xMdKOvHfDdXXIOnV7ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NjAwOSwiZXhwIjoxNzQ3NTc5NjA5fQ.IejvRsTPcGe0Pv2OHqNJ5MuEpuzMAcmkKO_3y2mNbK0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"type\": \"events\",\r\n    \"userRequest\": [\r\n        \"approved\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load Event list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTkyMjgwLCJleHAiOjE3NDgwNzg2ODB9.EOzKpIL_SUlRk8gC48UoMW08xMdKOvHfDdXXIOnV7ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NjAwOSwiZXhwIjoxNzQ3NTc5NjA5fQ.IejvRsTPcGe0Pv2OHqNJ5MuEpuzMAcmkKO_3y2mNbK0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"type\": \"event-list\",\r\n    \"userRequest\": \"vol_id\",\r\n    \"eventID\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make event 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgzNDIwMywiZXhwIjoxNzQ3OTIwNjAzfQ.MDmrcxH3cZVW5xuuJHsr1dshgGV_Bo1SJxXD0WSacIY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NjAwOSwiZXhwIjoxNzQ3NTc5NjA5fQ.IejvRsTPcGe0Pv2OHqNJ5MuEpuzMAcmkKO_3y2mNbK0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"userData\": {\r\n        \"eventName\": \"Tree Planting\",\r\n        \"eventDate\": \"2025-06-10\",\r\n        \"eventStartTime\": \"09:00\",\r\n        \"eventEndTime\": \"12:00\",\r\n        \"orgId\": 6,\r\n        \"maxNumberOfVolunteers\": 50,\r\n        \"eventLocation\": \"Central Park\",\r\n        \"eventDescription\": \"Join us for a community tree planting event.\",\r\n        \"isActive\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make event 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgzNDIwMywiZXhwIjoxNzQ3OTIwNjAzfQ.MDmrcxH3cZVW5xuuJHsr1dshgGV_Bo1SJxXD0WSacIY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzU3NjAwOSwiZXhwIjoxNzQ3NTc5NjA5fQ.IejvRsTPcGe0Pv2OHqNJ5MuEpuzMAcmkKO_3y2mNbK0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"userData\": {\r\n        \"eventName\": \"senior brunch\",\r\n        \"eventDate\": \"2025-06-11\",\r\n        \"eventStartTime\": \"09:00\",\r\n        \"eventEndTime\": \"12:00\",\r\n        \"orgId\": 6,\r\n        \"maxNumberOfVolunteers\": 20,\r\n        \"eventLocation\": \"subway\",\r\n        \"eventDescription\": \"come old people.\",\r\n        \"isActive\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTQ4MTU5LCJleHAiOjE3NDgwMzQ1NTl9._ko7W-oWObNxMyORIHnGvQXz_aOdlUuCzYatNbSRWy8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 3,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3OTgyNDUyLCJleHAiOjE3NDgwNjg4NTJ9.WMq20q3yOc92gICaAktzm462nZ7o8zP-fxijULTQr48",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 1,\r\n    \"eventID\": 6,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup To Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6InZvbHVudGVlciIsImlhdCI6MTc0Nzk4ODMxMCwiZXhwIjoxNzQ4MDc0NzEwfQ.EIktOwg1_KJ61say9e14WunuAK2I-U5WRdGA7M9mYQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 5,\r\n    \"eventID\": 1,\r\n    \"action\": \"enroll\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve volunteer to event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0Nzk4NjQ2MSwiZXhwIjoxNzQ4MDcyODYxfQ.dX4zM96Am8JZbPOxmBmHPA2RKM6sbeYBXumCRn1LB_s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 2,\r\n    \"eventID\": 1,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/events/actions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"events",
+								"actions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Approve Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgxMzUyMywiZXhwIjoxNzQ3ODE3MTIzfQ.pJ4RCcgcgV2FTMF_QuatUmsw8SQUPJ0nPLxz_Zw8Gf4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"actionID\": 3,\r\n    \"action\": \"approve\",\r\n    \"actionValue\":\"NA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api//users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6Im9yZ2FuaXplciIsImlhdCI6MTc0NzgxMzUyMywiZXhwIjoxNzQ3ODE3MTIzfQ.pJ4RCcgcgV2FTMF_QuatUmsw8SQUPJ0nPLxz_Zw8Gf4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 6,\r\n    \"actionID\": 7,\r\n    \"action\": \"log-user\",\r\n    \"actionValue\":\"User always come on time\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api//users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loadUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ3ODQyMTk1LCJleHAiOjE3NDc5Mjg1OTV9.3fzI_gpL947BPBUeFH8LMM3b7t5vjvskCBzLX4LLMUc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\": 9,\r\n    \"userRequest\":\"add later\",\r\n    \"tableName\":\"volunteer_waiting_list\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5213/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5213",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
