@@ -14,6 +14,7 @@ import userActions from "./Users/actions.js";
 import loadEvents from "./Events/load.js";
 import createEvent from "./Events/create.js";
 import eventActions from "./Events/actions.js";
+import changePassword from "./auth/changePassword.js";
 
 const router = Router();
 
@@ -21,6 +22,7 @@ const router = Router();
 router.get("/ping", pingController);
 
 router.post("/auth/login", logUserController);
+router.post("/auth/changePassword", changePassword);
 
 router.post("/users/register", registerVolunteerController);
 router.get("/users", loadUsers);
