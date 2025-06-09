@@ -61,7 +61,8 @@
 │       │   │   │   ├── occupation.json
 │       │   │   │   ├── personalArea.json
 │       │   │   │   ├── signup.json
-│       │   │   │   └── skills.json
+│       │   │   │   ├── skills.json
+│       │   │   │   └── sort.json
 │       │   │   └── en
 │       │   │       ├── about.json
 │       │   │       ├── app.json
@@ -75,7 +76,8 @@
 │       │   │       ├── occupation.json
 │       │   │       ├── personalArea.json
 │       │   │       ├── signup.json
-│       │   │       └── skills.json
+│       │   │       ├── skills.json
+│       │   │       └── sort.json
 │       │   └── options
 │       │       ├── Colors.js
 │       │       ├── Insurance.js
@@ -214,5 +216,5 @@
 │       └── App-test.postman_collection.json
 └── workbox-config.cjs
 
-49 directories, 163 files
+49 directories, 165 files
 ```

@@ -1,27 +1,41 @@
 import { useTranslation } from "react-i18next";
-//TODO talk with fadi about a list of approved skills
 export const useSortOptions = (UserType) => {
   const { t } = useTranslation("sort");
 
-  if (UserType === "admin") {
-    console.log("add all def here");
+  const adminKeys = [],
+    orgKeys = [],
+    volKeys = [];
+
+  for (let i = 1; i <= 9; i++) {
+    let string = `sort_${i}`;
+    adminKeys.push(string);
+    if (i >= 3) orgKeys.push(string);
+    if (i >= 5) volKeys.push(string);
   }
-  return [
-    {
-      label: t("sort_1"),
-      value: t("sort_1"),
-      href: "#option1",
-      onClick: () => {
-        console.log("sort 1 clicked");
-      },
+
+  let keyToReturn = [];
+
+  console.log(`${UserType} sort option loaded`);
+  switch (UserType) {
+    case "admin":
+      keyToReturn = adminKeys;
+      break;
+    case "organizer":
+      keyToReturn = orgKeys;
+      break;
+    case "volunteer":
+      keyToReturn = volKeys;
+      break;
+    default:
+      keyToReturn = volKeys; //fallback
+  }
+
+  return keyToReturn.map((key) => ({
+    label: t(`${key}`),
+    value: t(`${key}`),
+    // href: `#option${key}`,
+    onClick: () => {
+      console.log(`Sort ${t(key)} clicked`);
     },
-    {
-      label: t("sort_2"),
-      value: t("sort_2"),
-      href: "#option2",
-      onClick: () => {
-        console.log("sort 2 clicked");
-      },
-    },
-  ];
+  }));
 };

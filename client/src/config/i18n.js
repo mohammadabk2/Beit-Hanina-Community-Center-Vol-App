@@ -12,6 +12,7 @@ import occupationEN from "./locales/en/occupation.json";
 import personalAreaVolunteerEN from "./locales/en/personalArea.json";
 import navBarEN from "./locales/en/navBar.json";
 import copyRightEN from "./locales/en/copyright.json";
+import sortEN from "./locales/en/sort.json";
 
 // Import arabic translation files
 import appAr from "./locales/ar/app.json";
@@ -24,6 +25,8 @@ import occupationAR from "./locales/ar/occupation.json"
 import personalAreaVolunteerAR from "./locales/ar/personalArea.json";
 import navBarAR from "./locales/ar/navBar.json";
 import copyRightAR from "./locales/ar/copyright.json";
+import sortAR from "./locales/ar/sort.json";
+
 
 // The translations
 const resources = {
@@ -38,6 +41,7 @@ const resources = {
     occupation: occupationEN,
     navBar: navBarEN,
     copyRight: copyRightEN,
+    sort: sortEN,
   },
   ar: {
     app: appAr,
@@ -50,6 +54,7 @@ const resources = {
     insurance: insuranceAR,
     occupation: occupationAR,
     copyRight: copyRightAR,
+    sort: sortAR,
   },
 };
 
