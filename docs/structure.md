@@ -18,7 +18,7 @@
 │   │   ├── logo192.png
 │   │   ├── logo512.png
 │   │   ├── manifest.json
-│   │   └── service-worker.cjs
+│   │   └── service-worker.js
 │   ├── README.md
 │   └── src
 │       ├── App.css

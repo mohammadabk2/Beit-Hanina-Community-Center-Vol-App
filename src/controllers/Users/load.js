@@ -32,6 +32,7 @@ const loadUsers = async (req, res) => {
     try {
       return new Date(date).toISOString().split("T")[0];
     } catch (err) {
+      console.log(err);
       return null; // Or return "" if you want empty string instead
     }
   };

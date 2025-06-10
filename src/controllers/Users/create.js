@@ -50,7 +50,7 @@ const registerVolunteer = async (req, res) => {
           userData.idNumber,
           userData.username,
           passwordHash,
-          userData.skills,
+          userData.skills
         );
       }
       if (reg) {
@@ -65,6 +65,7 @@ const registerVolunteer = async (req, res) => {
         });
       }
     } catch (error) {
+      console.log(error);
       res.status(500).send({
         message: "An internal server error occurred during singUp.",
         status: "error",

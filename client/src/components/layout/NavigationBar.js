@@ -76,23 +76,21 @@ const NavigationBar = () => {
       </div>
       {isAuthenticated && (
         <>
-          {role !== "admin" && (
-            <div
-              onClick={goToPersonalArea}
-              className={`flex-box flex-column${
-                location.pathname.startsWith("/personal-area")
-                  ? " active-nav"
-                  : ""
-              }`}
-            >
-              <img
-                className="navigation-button-image"
-                src={isLightMode ? profileIconLight : profileIconDark}
-                alt="Profile icon"
-              />
-              {t("personal_area")}
-            </div>
-          )}
+          <div
+            onClick={goToPersonalArea}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/personal-area")
+                ? " active-nav"
+                : ""
+            }`}
+          >
+            <img
+              className="navigation-button-image"
+              src={isLightMode ? profileIconLight : profileIconDark}
+              alt="Profile icon"
+            />
+            {t("personal_area")}
+          </div>
 
           <div
             onClick={goToHome}
