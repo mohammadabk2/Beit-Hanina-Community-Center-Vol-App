@@ -193,6 +193,8 @@ const HomeAdmin = () => {
           className="scroll-box1 flex-box flex-column"
         >
           <div className="flex-box top-scroll-box1 line-break">
+            {/* <div>{renderSearch()}</div> */}
+
             {renderButton(sortPeople, t("sort"))}
 
             {renderButton(switchToEvents, t("switch_to_events"))}
@@ -220,7 +222,23 @@ const HomeAdmin = () => {
 
           <div className="bottom-scroll-box1">
             <PeopleDisplaySwitcher
-              people={users}
+              // people={users}
+              people={users.filter(
+                (user) =>
+                  user.name
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.phoneNumber
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.email
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.idNumber
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.skills?.toLowerCase().includes(searchQuery.toLowerCase())
+              )}
               type={personView ? "card" : "table"}
               approveUser={handleApprove}
               rejectUser={handleReject}
