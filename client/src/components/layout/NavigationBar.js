@@ -24,20 +24,34 @@ const NavigationBar = () => {
   const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
   const goToPersonalArea = () => {
     //TODO add a check if Admin org or voulunteer
     console.log("Personal Area button clicked");
-    navigate("/personal-area-vol");
+
+    if (role === "admin") {
+      navigate("/personal-area-admin");
+    } else if (role === "organizer") {
+      navigate("/personal-area-org");
+    } else if (role === "volunteer") {
+      navigate("/personal-area-vol");
+    } else {
+      navigate("/");
+    }
   };
 
   const goToHome = () => {
-    //TODO add a check if Admin org or voulunteer
     console.log("Home button clicked");
-    navigate("/home-volunteer");
-    // navigate("/home-admin");
-    // navigate("/home-organizer");
+    if (role === "admin") {
+      navigate("/home-admin");
+    } else if (role === "organizer") {
+      navigate("/home-organizer");
+    } else if (role === "volunteer") {
+      navigate("/home-volunteer");
+    } else {
+      navigate("/");
+    }
   };
 
   const goToAbout = () => {
@@ -62,21 +76,23 @@ const NavigationBar = () => {
       </div>
       {isAuthenticated && (
         <>
-          <div
-            onClick={goToPersonalArea}
-            className={`flex-box flex-column${
-              location.pathname.startsWith("/personal-area")
-                ? " active-nav"
-                : ""
-            }`}
-          >
-            <img
-              className="navigation-button-image"
-              src={isLightMode ? profileIconLight : profileIconDark}
-              alt="Profile icon"
-            />
-            {t("personal_area")}
-          </div>
+          {role !== "admin" && (
+            <div
+              onClick={goToPersonalArea}
+              className={`flex-box flex-column${
+                location.pathname.startsWith("/personal-area")
+                  ? " active-nav"
+                  : ""
+              }`}
+            >
+              <img
+                className="navigation-button-image"
+                src={isLightMode ? profileIconLight : profileIconDark}
+                alt="Profile icon"
+              />
+              {t("personal_area")}
+            </div>
+          )}
 
           <div
             onClick={goToHome}
