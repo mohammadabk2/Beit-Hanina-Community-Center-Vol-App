@@ -63,7 +63,7 @@
         // Optional: Defer SW registration until after page load
         // window.addEventListener('load', () => {
         navigator.serviceWorker
-          .register("/service-worker.cjs")
+          .register("/service-worker.js")
           .then((registration) => {
             console.log(
               "Service Worker registered with scope:",

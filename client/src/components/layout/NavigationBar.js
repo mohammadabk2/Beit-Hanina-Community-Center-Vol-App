@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../config/Context/auth";
 
 import DropDownMenu from "../common/DropDownMenu";
 import { useLnOptions } from "../../config/options/Language";
 import { useTheme } from "../../config/options/Colors";
+import { useAuth } from "../../config/Context/auth";
 
 import modeIconDark from "../../icons/light/NavBar/mode_icon.svg";
 import profileIconLight from "../../icons/light/NavBar/profile_icon.svg";
@@ -24,21 +24,34 @@ const NavigationBar = () => {
   const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
   const goToPersonalArea = () => {
     //TODO add a check if Admin org or voulunteer
     console.log("Personal Area button clicked");
-    navigate("/personal-area-vol");
+
+    if (role === "admin") {
+      navigate("/personal-area-admin");
+    } else if (role === "organizer") {
+      navigate("/personal-area-org");
+    } else if (role === "volunteer") {
+      navigate("/personal-area-vol");
+    } else {
+      navigate("/");
+    }
   };
 
   const goToHome = () => {
-    //TODO add a check if Admin org or voulunteer
-    //TODO check if signed in
     console.log("Home button clicked");
-    navigate("/home-volunteer");
-    // navigate("/home-admin");
-    // navigate("/home-organizer");
+    if (role === "admin") {
+      navigate("/home-admin");
+    } else if (role === "organizer") {
+      navigate("/home-organizer");
+    } else if (role === "volunteer") {
+      navigate("/home-volunteer");
+    } else {
+      navigate("/");
+    }
   };
 
   const goToAbout = () => {

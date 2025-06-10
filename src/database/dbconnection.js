@@ -358,7 +358,6 @@ const addVolToOrganizer = async (userId, vol) => {
  * @async
  * @param {string} orgName - The name of the organization.
  * @param {string} orgAddress - The address of the organization.
- * @param {string} orgAdmin - The username of the organization admin.
  * @param {string} orgPhoneNumber - The phone number of the organization.
  * @param {string} orgEmail - The email of the organization.
  * @param {string} username - The desired username for the organization admin.
@@ -369,7 +368,6 @@ const addVolToOrganizer = async (userId, vol) => {
 const createOrganizer = async (
   orgName,
   orgAddress,
-  orgAdmin,
   orgPhoneNumber,
   orgEmail,
   username,
