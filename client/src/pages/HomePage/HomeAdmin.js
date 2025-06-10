@@ -193,7 +193,7 @@ const HomeAdmin = () => {
           className="scroll-box1 flex-box flex-column"
         >
           <div className="flex-box top-scroll-box1 line-break">
-            {/* <div>{renderSearch()}</div> */}
+            <div>{renderSearch()}</div>
 
             {renderButton(sortPeople, t("sort"))}
 

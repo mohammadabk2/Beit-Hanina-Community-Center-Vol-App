@@ -34,7 +34,6 @@ const NavigationBar = () => {
 
   const goToHome = () => {
     //TODO add a check if Admin org or voulunteer
-    //TODO check if signed in
     console.log("Home button clicked");
     navigate("/home-volunteer");
     // navigate("/home-admin");
