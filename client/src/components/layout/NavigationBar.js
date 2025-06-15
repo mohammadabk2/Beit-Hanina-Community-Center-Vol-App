@@ -108,6 +108,12 @@ const NavigationBar = () => {
         </>
       )}
 
+      <DropDownMenu
+        className="language-button"
+        text={t("ln")}
+        options={lnOptions}
+      />
+
       <div onClick={toggleTheme} className="flex-box flex-column">
         <img
           className="navigation-button-image"
@@ -117,12 +123,6 @@ const NavigationBar = () => {
         {!isLightMode && t("light_mode")}
         {isLightMode && t("dark_mode")}
       </div>
-
-      <DropDownMenu
-        className="language-button"
-        text={t("ln")}
-        options={lnOptions}
-      />
     </div>
   );
 };
