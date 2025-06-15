@@ -7,7 +7,7 @@ import DynamicButton from "../../components/common/ButtonComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
-import DynamicInput from "../../components/common/ButtonComponent";
+import DynamicInput from "../../components/common/InputComponent";
 
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
