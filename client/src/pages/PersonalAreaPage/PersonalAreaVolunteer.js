@@ -11,7 +11,7 @@ import CopyRight from "../../components/layout/CopyRight";
 import { useAuth } from "../../config/Context/auth";
 
 const PersonalArea = () => {
-  const { t } = useTranslation("personalVolunteer");
+  const { t } = useTranslation("personal");
   const { t: tsignup } = useTranslation("signUp");
   const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { userId, token } = useAuth();
