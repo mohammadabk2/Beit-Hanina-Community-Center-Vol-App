@@ -4,7 +4,7 @@ import validateToken from "../common/validateToken.js";
 const LoadInfo = async (req, res) => {
   console.log("Loading User Info");
 
-  const { userID } = req.body;
+  const { userID } = req.query;
   console.log(userID);
   if (!userID) {
     return res.status(400).send({
