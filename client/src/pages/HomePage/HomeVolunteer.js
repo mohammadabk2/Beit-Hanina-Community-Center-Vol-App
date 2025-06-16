@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"; // Import useState and useEffect
+import React, { useEffect, useState } from "react"; // Import useState and useEffect
 import { useTranslation } from "react-i18next";
 
 // import components here
@@ -7,6 +7,7 @@ import DynamicButton from "../../components/common/ButtonComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 // import orgLogo from "../../icons/org_icon.jpg"
+import DynamicInput from "../../components/common/InputComponent";
 
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
@@ -18,6 +19,7 @@ const HomeVolunteer = () => {
 
   const { userId, loadingInitial, isAuthenticated } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (userId && isAuthenticated) {
@@ -64,6 +66,14 @@ const HomeVolunteer = () => {
       <div className="scroll-box1 flex-box flex-column">
         <div className="flex-box flex-column top-scroll-box1 line-break">
           <div>
+            <DynamicInput
+              type="text"
+              placeholder={"..."}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="input-field"
+            />
+
             <DynamicButton
               className="button button-small"
               onClick={sortEvents}
@@ -75,7 +85,19 @@ const HomeVolunteer = () => {
         <div className="bottom-scroll-box1">
           {eventsLoading && <p>{t("loading_events")}</p>}
           {eventsError && <p style={{ color: "red" }}>{eventsError}</p>}
-          {!eventsLoading && !eventsError && renderEventItems(events)}
+          {!eventsLoading &&
+            !eventsError &&
+            renderEventItems(
+              events.filter(
+                (event) =>
+                  event.name
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  event.description
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase())
+              )
+            )}
         </div>
       </div>
       <CopyRight />

@@ -13,6 +13,7 @@ const config = [
       "src/deprecated/**",
       "client/android/**",
       "client/public/service-worker.js",
+      "dist/**",
     ],
   },
 

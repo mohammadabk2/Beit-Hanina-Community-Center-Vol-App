@@ -823,6 +823,48 @@ const changePassword = async (userID, newPasswordHash) => {
   }
 };
 
+/**
+ * Changes user password hash
+ * @param {number} userID - The user ID to fetch data for.
+ * @param {string} role - The role of the user ("volunteer" or "organizer").
+ * @returns {Promise<Object>} A promise that resolves to the User Info object.
+ * @throws {Error} If the database query fails.
+ */
+const loadUserInfo = async (userID, role) => {
+  const queries = {
+    volunteer: {
+      text: `
+        SELECT name, approved_hours, unapproved_hours, skills
+        FROM volunteer
+        WHERE user_id = $1;
+      `,
+    },
+    organizer: {
+      text: `
+        SELECT org_name, given_hours
+        FROM organizer
+        WHERE user_id = $1;
+      `,
+    },
+  };
+
+  const query = queries[role];
+  if (!query) {
+    throw new Error(`Invalid role: ${role}`);
+  }
+
+  try {
+    const res = await db.query(query.text, [userID]);
+    return res.rows[0] || null;
+  } catch (error) {
+    console.error(
+      `Error in Load User Info for user ${userID} Role: ${role}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -838,6 +880,7 @@ export default {
   fetchVolunteerlist,
   decideUserEventStatus,
   changePassword,
+  loadUserInfo,
 
   // Currently for testing unused
   getUserById, // tested
