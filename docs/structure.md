@@ -166,6 +166,9 @@
 │   ├── logic.png
 │   └── structure.md
 ├── eslint.config.mjs
+├── keys
+│   ├── Key_1.pem
+│   └── key_2.pem
 ├── package.json
 ├── package-lock.json
 ├── README.md
@@ -215,7 +218,11 @@
 │   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
-│   └── server.js
+│   ├── server.js
+│   └── utils
+│       ├── logger.js
+│       └── server-logs
+│           └── 16-06-2025.txt
 ├── tests
 │   ├── addAdmin.sql
 │   ├── drop_tables.sql
@@ -227,5 +234,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-49 directories, 176 files
+52 directories, 180 files
 ```
