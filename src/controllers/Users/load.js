@@ -25,7 +25,7 @@ const loadUsers = async (req, res) => {
   }
 
   console.log(
-    `Attempting load Uers from DB for userId: ${userID} for Table ${tableName}`
+    `Attempting load Users from DB for userId: ${userID} for Table ${tableName}`
   );
 
   const safeDateOnly = (date) => {
@@ -92,6 +92,12 @@ const loadUsers = async (req, res) => {
         status: "error",
       });
     }
+  } else {
+    console.log(`Invalid User Role`);
+    res.status(403).send({
+      message: "Invalid User Role",
+      status: "fail",
+    });
   }
 };
 export default loadUsers;

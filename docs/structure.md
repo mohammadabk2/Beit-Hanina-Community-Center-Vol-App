@@ -183,6 +183,7 @@
 ├── scripts
 │   ├── android_setup.sh
 │   ├── before_git.sh
+│   ├── buildExe.sh
 │   ├── convert_to_apk.sh
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
@@ -207,6 +208,7 @@
 │   │   ├── Users
 │   │   │   ├── actions.js
 │   │   │   ├── create.js
+│   │   │   ├── Info.js
 │   │   │   └── load.js
 │   │   └── validation.js
 │   ├── database
@@ -240,5 +242,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-56 directories, 182 files
+49 directories, 176 files
 ```
