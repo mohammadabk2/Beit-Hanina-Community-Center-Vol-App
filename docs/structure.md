@@ -142,14 +142,6 @@
 │           │   └── PersonalAreaVolunteer.js
 │           └── SignUpPage
 │               └── SignUp.js
-├── dist
-│   ├── index.html
-│   ├── index.js
-│   ├── lib
-│   │   └── binding
-│   │       └── napi-v3
-│   │           └── bcrypt_lib.node
-│   └── package.json
 ├── docs
 │   ├── digrams
 │   │   ├── database-digram.png
@@ -242,5 +234,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-49 directories, 176 files
+52 directories, 180 files
 ```
