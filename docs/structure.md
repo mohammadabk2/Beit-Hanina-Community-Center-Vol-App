@@ -142,6 +142,14 @@
 │           │   └── PersonalAreaVolunteer.js
 │           └── SignUpPage
 │               └── SignUp.js
+├── dist
+│   ├── index.html
+│   ├── index.js
+│   ├── lib
+│   │   └── binding
+│   │       └── napi-v3
+│   │           └── bcrypt_lib.node
+│   └── package.json
 ├── docs
 │   ├── digrams
 │   │   ├── database-digram.png
@@ -166,6 +174,9 @@
 │   ├── logic.png
 │   └── structure.md
 ├── eslint.config.mjs
+├── keys
+│   ├── Key_1.pem
+│   └── key_2.pem
 ├── package.json
 ├── package-lock.json
 ├── README.md
@@ -213,7 +224,11 @@
 │   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
-│   └── server.js
+│   ├── server.js
+│   └── utils
+│       ├── logger.js
+│       └── server-logs
+│           └── 16-06-2025.txt
 ├── tests
 │   ├── addAdmin.sql
 │   ├── drop_tables.sql
@@ -225,5 +240,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-49 directories, 174 files
+56 directories, 182 files
 ```

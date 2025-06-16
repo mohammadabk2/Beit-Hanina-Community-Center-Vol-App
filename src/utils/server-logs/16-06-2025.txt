@@ -1,0 +1,8 @@
+[10:43:00 PM] [LOG] Console logging to file system initialized
+[10:43:00 PM] [LOG] Server is running on http://localhost:5213
+[10:43:53 PM] [LOG] Console logging to file system initialized
+[10:43:53 PM] [LOG] Server is running on http://localhost:5213
+[10:44:45 PM] [LOG] Console logging to file system initialized
+[10:44:45 PM] [LOG] Server is running on http://localhost:5213
+[10:45:15 PM] [LOG] Console logging to file system initialized
+[10:45:15 PM] [LOG] Server is running on http://localhost:5213

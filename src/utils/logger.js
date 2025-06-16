@@ -74,7 +74,7 @@ console.info = function(...args) {
     originalInfo(...args);
 };
 
-console.log('🚀 Console logging to file system initialized');
+console.log('Console logging to file system initialized');
 
 export const restoreConsole = () => {
     console.log = originalLog;
