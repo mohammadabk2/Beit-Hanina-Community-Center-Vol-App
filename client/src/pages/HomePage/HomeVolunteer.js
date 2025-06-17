@@ -60,15 +60,18 @@ const HomeVolunteer = () => {
 
       if (response.status !== 200) {
         console.log(`${response.status} ${response.message}`);
+        alert("Failed to sign up try again later");
       }
     } catch (error) {
       console.error("Axios request failed:", error);
+      alert("Failed to sign up try again later");
     }
   };
 
   const handleJoin = async (eventID) => {
     console.log("Join Event Button Clicked");
     sendAxiod("/events/actions", eventID, "enroll", "");
+    alert("Signed up To Event");
   };
 
   const renderEventItems = (eventsArray) => {
