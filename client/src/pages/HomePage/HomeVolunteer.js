@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"; // Import useState and useEffect
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 // import components here
 import EventItem from "../../components/EventItem";
@@ -14,10 +15,10 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 
 const HomeVolunteer = () => {
-  // const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { t } = useTranslation("home");
 
-  const { userId, loadingInitial, isAuthenticated } = useAuth();
+  const { userId, loadingInitial, isAuthenticated, token } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -40,6 +41,36 @@ const HomeVolunteer = () => {
     //TODO call loadevents with arguemnt as needed
   };
 
+  const sendAxiod = async (path, actionID, actiontoPerform, actionValue) => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/${path}`,
+        {
+          userID: userId,
+          actionID: actionID,
+          action: actiontoPerform,
+          actionValue: actionValue,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        console.log(`${response.status} ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Axios request failed:", error);
+    }
+  };
+
+  const handleJoin = async (eventID) => {
+    console.log("Join Event Button Clicked");
+    sendAxiod("/events/actions", eventID, "enroll", "");
+  };
+
   const renderEventItems = (eventsArray) => {
     if (!Array.isArray(eventsArray) || eventsArray.length === 0) {
       return <p>{t("no_events_found")}</p>; // Or any other placeholder
@@ -55,6 +86,7 @@ const HomeVolunteer = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        joinEvent={() => handleJoin(event.id)} // Passes functions as callback
       />
     ));
   };
