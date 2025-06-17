@@ -182,6 +182,9 @@
 │   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
+├── server-logs
+│   ├── 16-06-2025.txt
+│   └── 17-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
@@ -209,20 +212,11 @@
 │   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
-│   ├── deprecated
-│   │   └── Users
-│   │       ├── Admin.js
-│   │       ├── Organizer.js
-│   │       ├── PersonFactory.js
-│   │       ├── Person.js
-│   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
 │   ├── server.js
 │   └── utils
-│       ├── logger.js
-│       └── server-logs
-│           └── 16-06-2025.txt
+│       └── logger.js
 ├── tests
 │   ├── addAdmin.sql
 │   ├── drop_tables.sql
@@ -234,5 +228,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-52 directories, 180 files
+50 directories, 176 files
 ```

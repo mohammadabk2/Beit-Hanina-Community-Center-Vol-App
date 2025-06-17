@@ -8,7 +8,7 @@ const eventActions = async (req, res) => {
 
   console.log(`${userID} , ${actionID} , ${action}, ${actionValue}`);
 
-  if (!userID || !actionID || !action || !actionValue) {
+  if (!userID || !actionID || !action || actionValue === undefined) {
     const message = "Request body Failed.";
     console.log(message);
     return res.status(400).send({
@@ -105,7 +105,7 @@ const eventActions = async (req, res) => {
     } catch (error) {
       console.error(`Error during action ${action} error:`, error);
       res.status(500).send({
-        message: "An internal server error occurred during login.",
+        message: "An internal server error occurred during Events actions.",
         status: "error",
       });
     }
