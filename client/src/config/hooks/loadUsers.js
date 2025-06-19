@@ -20,6 +20,7 @@ const useLoadUsers = () => {
       }
 
       setUserLoading(true);
+      console.log(tableName);
       try {
         const response = await axios.get(`${API_BASE_URL}/api/users`, {
           params: {

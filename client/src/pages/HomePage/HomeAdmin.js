@@ -81,11 +81,12 @@ const HomeAdmin = () => {
       href: "#",
       onClick: () => setPeopleStatus("volunteer"),
     },
-    {
-      label: t("org"),
-      href: "#",
-      onClick: () => setPeopleStatus("organizer"),
-    },
+    //TODO maybe add
+    // {
+    //   label: t("org"),
+    //   href: "#",
+    //   onClick: () => setPeopleStatus("organizer"),
+    // },
   ];
 
   const switchToEvents = () => setViewMode("events");
@@ -451,7 +452,7 @@ const HomeAdmin = () => {
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadUsers([peopleStatus]);
+      loadUsers(peopleStatus);
     }
   }, [userId, isAuthenticated, loadUsers, peopleStatus]);
 
