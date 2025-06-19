@@ -7,6 +7,7 @@ import logoIcon from "../icons/org_icon.png";
 import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
+import PopupComponent from "./common/PopupComponent"
 
 const EventItem = ({
   name,
@@ -20,15 +21,22 @@ const EventItem = ({
   approveEvent,
   joinEvent,
   editEvent,
+  volunteers,
 }) => {
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
 
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleFavorite = () => {
     console.log("Clicked favorite");
     setIsFavorite(!isFavorite);
+  };
+
+  const showEnrolled = () => {
+    console.log("Clicked enrolled");
+    setIsPopupOpen(true);
   };
 
   return (
@@ -100,8 +108,8 @@ const EventItem = ({
           {type === "org" && (
             <DynamicButton
               className="button"
-              text={t("org_button")}
-              onClick={editEvent}
+              text={t("enrolled users")}
+              onClick={showEnrolled}
             />
           )}
 
@@ -122,6 +130,20 @@ const EventItem = ({
           )}
         </div>
       </div>
+      {isPopupOpen && (
+        <PopupComponent
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          message={t("volunteers")}
+          buttonText="Cancel"
+        >
+          <ul>
+            {volunteers.map((user, index) => (
+              <li key={index}>{user}</li>
+            ))}
+          </ul>
+        </PopupComponent>
+      )}
     </div>
   );
 };

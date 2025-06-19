@@ -55,6 +55,12 @@ const HomeOrganizer = () => {
     return <div>You need to be logged in to view this data.</div>;
   }
 
+  // const sendAxiod = async (path, actionID, actiontoPerform, actionValue) => {
+  //   try {
+
+  //   }
+  // }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -67,6 +73,34 @@ const HomeOrganizer = () => {
   const handleCreateEvents = () => {
     console.log("Create Events button clicked!");
     setShowEvents(false); // Update state using the setter function
+  };
+
+  const handleEnrolledUsers = async (eventId) => {
+    console.log("HandleEnrolled Users button clicked!");
+    try {
+      const response = await axios.delete(
+        `${API_BASE_URL}/api/events/actions`,
+        {
+          userID: userId,
+          actionID: eventId,
+          action: "rejected",
+          actionValue: "",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        console.log(`${response.status} ${response.message}`);
+        alert("Failed to sign up try again later");
+      }
+    } catch (error) {
+      console.error("Axios request failed:", error);
+      alert("Failed to sign up try again later");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -109,6 +143,7 @@ const HomeOrganizer = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        volunteers={event.enrolledVol}
       />
     ));
   };

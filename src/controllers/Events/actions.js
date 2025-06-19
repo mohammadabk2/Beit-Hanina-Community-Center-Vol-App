@@ -84,6 +84,15 @@ const eventActions = async (req, res) => {
             "approved"
           );
         }
+
+        if (action === "reject") {
+          answer = await dbConnection.decideUserEventStatus(
+            actionID,
+            actionValue,
+            "vol_id",
+            "rejected"
+          );
+        }
       }
 
       if (!answer) {
