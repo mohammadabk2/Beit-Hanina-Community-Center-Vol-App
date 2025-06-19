@@ -4,11 +4,10 @@ import axios from "axios";
 
 // import components here
 import EventItem from "../../components/EventItem";
-import DynamicButton from "../../components/common/ButtonComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
-// import orgLogo from "../../icons/org_icon.jpg"
 import DynamicInput from "../../components/common/InputComponent";
+import DropDownMenu from "../../components/common/DropDownMenu";
 
 // import context and hooks
 import { useAuth } from "../../config/Context/auth";
@@ -21,12 +20,41 @@ const HomeVolunteer = () => {
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("approved");
+
+  const statusOptions = [
+    {
+      label: t("approved_events"),
+      href: "#",
+      onClick: () => setSelectedStatus("approved"),
+    },
+    {
+      label: t("pending_events"),
+      href: "#",
+      onClick: () => setSelectedStatus("pending"),
+    },
+    {
+      label: t("finished_events"),
+      href: "#",
+      onClick: () => setSelectedStatus("finished"),
+    },
+    {
+      label: t("rejected_events"),
+      href: "#",
+      onClick: () => setSelectedStatus("rejected"),
+    },
+    {
+      label: t("on_going"),
+      href: "#",
+      onClick: () => setSelectedStatus("ongoing"),
+    },
+  ];
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents(["approved"]);
+      loadEvents([selectedStatus]);
     }
-  }, [userId, isAuthenticated, loadEvents]);
+  }, [userId, isAuthenticated, loadEvents, selectedStatus]);
 
   if (loadingInitial) {
     return <div>Loading user data...</div>;
@@ -35,11 +63,6 @@ const HomeVolunteer = () => {
   if (!isAuthenticated) {
     return <div>You need to be logged in to view this data.</div>;
   }
-
-  const sortEvents = () => {
-    console.log("Sort button clicked");
-    //TODO call loadevents with arguemnt as needed
-  };
 
   const sendAxiod = async (path, actionID, actiontoPerform, actionValue) => {
     try {
@@ -98,8 +121,8 @@ const HomeVolunteer = () => {
     <div className="app flex-box flex-column">
       <NavigationBar />
 
-      <div className="scroll-box1 flex-box flex-column">
-        <div className="flex-box flex-column top-scroll-box1 line-break">
+      <div className="scroll-box1 flex-box">
+        <div className="flex-box  top-scroll-box1 line-break">
           <div>
             <DynamicInput
               type="text"
@@ -108,11 +131,13 @@ const HomeVolunteer = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="input-field"
             />
-
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
+          </div>
+          <div>
+            {" "}
+            <DropDownMenu
               text={t("sort")}
+              className="gender-button"
+              options={statusOptions}
             />
           </div>
         </div>
