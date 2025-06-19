@@ -57,7 +57,6 @@ const load = async (req, res) => {
             currentSize: event.current_number_of_vol,
             location: event.event_location,
             description: event.event_description,
-            enrolledVol: event.vol_id_waiting_list
           }));
         }
       }

@@ -1,5 +1,6 @@
 // to interact with the database
 // import { skipPartiallyEmittedExpressions } from "typescript";
+import e from "express";
 import db from "./db.js";
 //TODO change the functions to get certain columns instead of *
 //TODO some functions rely on names maybe the should also get id
@@ -739,6 +740,33 @@ const fetchVolunteerlist = async (eventID, listName) => {
 };
 
 /**
+ *
+ * @param {number} eventID
+ * @param {string} arrayName
+ * @returns {Promise<Object>} A promise that resolves to the fetched event user list object.
+ * @throws {Error} If the database query fails.
+ */
+const fetchEventVolunteers = async (eventID, arrayName) => {
+  const text = `
+  SELECT v.*, u.phone_number, u.email
+  FROM events e, unnest(e.${arrayName}) AS vol_id
+  JOIN volunteer v ON v.user_id = vol_id
+  JOIN users u ON u.id = v.user_id
+  WHERE e.event_id = $1;
+  `;
+
+  const values = [eventID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows;
+  } catch (error) {
+    console.error("Error fetching enrolled volunteers", error);
+    throw error;
+  }
+};
+
+/**
  * @param {number} eventID - ID of Event
  * @param {number} userID - ID of Volunteer to move
  * @param {string} arrayName - arrayName to move the Volunteer to (enrolled/waiting list)
@@ -881,6 +909,7 @@ export default {
   decideUserEventStatus,
   changePassword,
   loadUserInfo,
+  fetchEventVolunteers,
 
   // Currently for testing unused
   getUserById, // tested
