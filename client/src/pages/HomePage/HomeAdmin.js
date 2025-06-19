@@ -38,33 +38,53 @@ const HomeAdmin = () => {
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
   const [searchQuery, setSearchQuery] = useState(""); // search query
-  const [selectedStatus, setSelectedStatus] = useState("approved");
+
+  const [eventStatus, setEventStatus] = useState("approved");
+  const [peopleStatus, setPeopleStatus] = useState("volunteer_waiting_list");
 
   const eventOptions = [
     {
       label: t("approved_events"),
       href: "#",
-      onClick: () => setSelectedStatus("approved"),
+      onClick: () => setEventStatus("approved"),
     },
     {
       label: t("pending_events"),
       href: "#",
-      onClick: () => setSelectedStatus("pending"),
+      onClick: () => setEventStatus("pending"),
     },
     {
       label: t("finished_events"),
       href: "#",
-      onClick: () => setSelectedStatus("finished"),
+      onClick: () => setEventStatus("finished"),
     },
     {
       label: t("rejected_events"),
       href: "#",
-      onClick: () => setSelectedStatus("rejected"),
+      onClick: () => setEventStatus("rejected"),
     },
     {
       label: t("on_going"),
       href: "#",
-      onClick: () => setSelectedStatus("ongoing"),
+      onClick: () => setEventStatus("ongoing"),
+    },
+  ];
+
+  const peopeOptions = [
+    {
+      label: t("new"),
+      href: "#",
+      onClick: () => setPeopleStatus("volunteer_waiting_list"),
+    },
+    {
+      label: t("active"),
+      href: "#",
+      onClick: () => setPeopleStatus("volunteer"),
+    },
+    {
+      label: t("org"),
+      href: "#",
+      onClick: () => setPeopleStatus("organizer"),
     },
   ];
 
@@ -88,11 +108,6 @@ const HomeAdmin = () => {
       }
       return newPersonView;
     });
-  };
-
-  const sortPeople = () => {
-    console.log("Sort people button clicked");
-    //TODO Add sorting logic for people array here if needed
   };
 
   const approveEvent = (id) => {
@@ -223,7 +238,11 @@ const HomeAdmin = () => {
           <div className="flex-box top-scroll-box1 line-break">
             <div>{renderSearch()}</div>
 
-            {renderButton(sortPeople, t("sort"))}
+            <DropDownMenu
+              text={t("sort")}
+              className="gender-button"
+              options={peopeOptions}
+            />
 
             {renderButton(switchToEvents, t("switch_to_events"))}
             {/* //TODO give the img a class to make it bigger */}
@@ -423,17 +442,18 @@ const HomeAdmin = () => {
     );
   };
 
+  // UseEffects
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents([selectedStatus]);
+      loadEvents([eventStatus]);
     }
-  }, [userId, isAuthenticated, loadEvents, selectedStatus]);
+  }, [userId, isAuthenticated, loadEvents, eventStatus]);
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadUsers("volunteer_waiting_list");
+      loadUsers([peopleStatus]);
     }
-  }, [userId, isAuthenticated, loadUsers, selectedStatus]);
+  }, [userId, isAuthenticated, loadUsers, peopleStatus]);
 
   if (loadingInitial) {
     return <div>Loading Event data...</div>;
