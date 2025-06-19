@@ -22,6 +22,7 @@ const HomeVolunteer = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("approved");
 
+  //TODO add signup events and fav events options
   const statusOptions = [
     {
       label: t("approved_events"),
