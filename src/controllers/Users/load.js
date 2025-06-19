@@ -43,7 +43,7 @@ const loadUsers = async (req, res) => {
       const users = await dbConnection.getUsers(roleType.role, tableName);
 
       if (users && users.length > 0) {
-        // console.log(users); // !testing only
+        console.log(users); // !testing only
 
         let allUsers;
 
@@ -60,6 +60,7 @@ const loadUsers = async (req, res) => {
             idNumber: user.id_number,
             userName: user.username,
             logs: user.logs,
+            skills: user.skills,
           }));
         }
 

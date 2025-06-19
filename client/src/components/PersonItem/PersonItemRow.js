@@ -1,10 +1,12 @@
-// PersonItemRow.js
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../config/options/Colors";
 
+// Components
 import DynamicButton from "../common/ButtonComponent";
+import PopupComponent from "../common/PopupComponent";
+// Icons
 import checkLight from "../../icons/light/check-light.svg";
 import checkDark from "../../icons/dark/check-dark.svg";
 import crossLight from "../../icons/light/cross-light.svg";
@@ -24,7 +26,7 @@ const PersonItemRow = ({
   address,
   insurance, // Removed from direct display for brevity, but available if needed
   idNumber, // Removed from direct display for brevity, but available if needed
-  // skills, //! uncomment when added
+  skills,
   newUser,
   approveFunction,
   rejectFunction,
@@ -33,10 +35,13 @@ const PersonItemRow = ({
 }) => {
   const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
-  // const { t: tskill } = useTranslation("skills"); // Not needed here
 
-  // Simple skills display (comma-separated) - adjust as needed
-  // const skillsDisplay = skills ? skills.join(", ") : "N/A"; //! uncomment when added
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const showSkills = () => {
+    console.log("skills render");
+    setIsPopupOpen(true);
+  };
 
   return (
     // No outer div or table needed here, just the row
@@ -47,6 +52,13 @@ const PersonItemRow = ({
       <td>{phoneNumber}</td>
       <td>{email}</td>
       <td>{address}</td>
+      <td>
+        <DynamicButton
+          text={t("skills")}
+          className={"button button-small"}
+          onClick={showSkills}
+        />
+      </td>
       <td>{insurance}</td>
       <td>{idNumber}</td>
       {newUser ? (
@@ -91,6 +103,21 @@ const PersonItemRow = ({
             />
           </td>
         </>
+      )}
+
+      {isPopupOpen && (
+        <PopupComponent
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          message={t("skills")}
+          buttonText="Cancel"
+        >
+          <ul>
+            {skills.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        </PopupComponent>
       )}
     </tr>
   );
