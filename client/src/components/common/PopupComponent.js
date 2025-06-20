@@ -6,7 +6,6 @@ const PopupComponent = ({
   isOpen, 
   onClose, 
   message, 
-  buttonText,
   children,
   showCloseButton = true,
   closeOnOutsideClick = true
@@ -75,7 +74,6 @@ PopupComponent.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   message: PropTypes.string,
-  buttonText: PropTypes.string.isRequired,
   children: PropTypes.node,
   showCloseButton: PropTypes.bool,
   closeOnOutsideClick: PropTypes.bool
