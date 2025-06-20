@@ -23,8 +23,8 @@ const EventItem = ({
   rejectEvent,
   approveEvent,
   joinEvent,
-  editEvent,
-  volunteers,
+  // editEvent,
+  // volunteers,
 }) => {
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
