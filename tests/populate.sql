@@ -1,13 +1,13 @@
 -- USERS
 INSERT INTO users (phone_number, email, address, username, password_hash, banned, logs, role, profile_image_url)
 VALUES
-('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'hash1', FALSE, ARRAY['created account', 'updated profile'], 'ADMIN', 'https://img.com/1.jpg'),
-('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'hash2', FALSE, ARRAY['joined event'], 'VOLUNTEER', 'https://img.com/2.jpg'),
-('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'hash3', FALSE, ARRAY['created org'], 'ORGANIZER', 'https://img.com/3.jpg'),
-('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'hash4', TRUE, ARRAY['banned'], 'VOLUNTEER', 'https://img.com/4.jpg'),
-('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'hash5', FALSE, ARRAY[]::text[], 'VOLUNTEER', 'https://img.com/5.jpg'),
-('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'hash6', FALSE, ARRAY['created org'], 'ORGANIZER', 'https://img.com/6.jpg'),
-('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'hash7', FALSE, ARRAY['reset password'], 'ADMIN', 'https://img.com/7.jpg');
+('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'hash1', FALSE, ARRAY['created account', 'updated profile'], 'admin', 'https://img.com/1.jpg'),
+('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'hash2', FALSE, ARRAY['joined event'], 'volunteer', 'https://img.com/2.jpg'),
+('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'hash3', FALSE, ARRAY['created org'], 'organizer', 'https://img.com/3.jpg'),
+('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'hash4', TRUE, ARRAY['banned'], 'volunteer', 'https://img.com/4.jpg'),
+('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'hash5', FALSE, ARRAY[]::text[], 'volunteer', 'https://img.com/5.jpg'),
+('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'hash6', FALSE, ARRAY['created org'], 'organizer', 'https://img.com/6.jpg'),
+('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'hash7', FALSE, ARRAY['reset password'], 'admin', 'https://img.com/7.jpg');
 
 -- VOLUNTEER
 INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, skills, orgs)

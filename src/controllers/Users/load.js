@@ -78,7 +78,7 @@ const loadUsers = async (req, res) => {
         console.log("Mapped users data:", allUsers); // Debug log
       }
       if (allUsers === null) {
-        res.status(402).semd({
+        res.status(402).send({
           message: `Request body error`,
           status: "fail",
         });
