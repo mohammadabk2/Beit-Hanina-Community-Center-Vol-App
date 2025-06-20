@@ -111,7 +111,7 @@ const SignUpPage = () => {
         //TODO add wait here
         goBack();
       } else {
-        alert(`Login Failed: ${response.data.message}`);
+        alert(t("login_failed", { message: response.data.message }));
       }
     } catch (err) {
       console.error("Error during sign in:", err);
