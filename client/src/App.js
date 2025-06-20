@@ -94,12 +94,12 @@ const App = () => {
           navigate("home-volunteer");
         }
 
-        alert(`Welcome ${response.data.message}`);
+          alert(`${t("welcome_message")} ${response.data.message}`);
       } else {
         const message =
           response.data?.message || "Login failed. Please check credentials.";
         setError(message);
-        alert(`Login Failed: ${error}`);
+        alert(`${t("login_failed_message")} ${message}`);
       }
     } catch (err) {
       console.error("Error during sign in:", err);
@@ -131,7 +131,7 @@ const App = () => {
         errorMessage = "An error occurred before sending the request.";
       }
       setError(errorMessage);
-      alert(`${t("login_failed_message")} ${error}`);
+      alert(`${t("login_failed_message")} ${errorMessage}`);
     }
   };
 
@@ -142,7 +142,7 @@ const App = () => {
 
     if (isAuthenticated) {
       console.log("User already logged in. Cannot navigate to sign up.");
-      alert(`${t("sign_out_first_message")}`);
+      alert(t("sign_out_first_message"));
     } else {
       navigate("/sign-up");
     }
