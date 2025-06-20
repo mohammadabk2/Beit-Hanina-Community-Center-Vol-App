@@ -5,7 +5,10 @@ const loadUsers = async (req, res) => {
   console.log("Loading users from DB");
 
   const { userID, userRequest, tableName } = req.query;
-  if (!userID || !userRequest || !tableName) {
+  console.log(userRequest);
+  console.log(tableName);
+
+  if (!userID || !tableName) {
     return res.status(400).send({
       message: "User Id or Request Failed.",
       status: "fail",
@@ -40,52 +43,51 @@ const loadUsers = async (req, res) => {
   const roles = ["organizer", "admin"];
   if (roles.includes(roleType.role)) {
     try {
-      const users = await dbConnection.getUsers(roleType.role, tableName);
 
-      if (users && users.length > 0) {
-        console.log(users); // !testing only
+      // console.log(users); // !testing only
 
-        let allUsers;
+      let allUsers;
 
-        if (roleType.role === "admin") {
-          allUsers = users.map((user) => ({
-            id: user.id,
-            name: user.name,
-            birthDate: safeDateOnly(user.birth_date),
-            sex: user.sex,
-            phoneNumber: user.phone_number,
-            email: user.email,
-            address: user.address,
-            insurance: user.insurance,
-            idNumber: user.id_number,
-            userName: user.username,
-            logs: user.logs,
-            skills: user.skills,
-          }));
-        }
+      if (roleType.role === "admin") {
+        const users = await dbConnection.getUsers(roleType.role, tableName);
+        allUsers = users.map((user) => ({
+          id: user.id,
+          name: user.name,
+          birthDate: safeDateOnly(user.birth_date),
+          sex: user.sex,
+          phoneNumber: user.phone_number,
+          email: user.email,
+          address: user.address,
+          insurance: user.insurance,
+          idNumber: user.id_number,
+          userName: user.username,
+          logs: user.logs,
+        }));
+      }
 
-        if (roleType.role === "organizer") {
-          allUsers = users.map((user) => ({
-            id: user.id,
-            name: user.name,
-            birthDate: new Date(user.birth_date).toISOString().split("T")[0],
-            sex: user.sex,
-            phoneNumber: user.phone_number,
-          }));
-        }
-
-        res.status(200).send({
-          message: `Loading users successful!`,
-          status: "success",
-          userData: allUsers,
-        });
-      } else {
-        console.log(`loading failed!!`);
-        res.status(401).send({
-          message: "invalid query struct",
+      if (roleType.role === "organizer" && Array.isArray(userRequest) && userRequest.length > 0) {
+        // userRequest ind 0 is event id, 1 is array name
+        const users = await dbConnection.fetchEventVolunteers(userRequest[0], userRequest[1]);
+        console.log("Raw users data from DB:", users); // Debug log
+        allUsers = users.map((user) => ({
+          id: user.user_id,
+          name: user.name,
+          sex: user.sex,
+          phoneNumber: user.phone_number,
+        }));
+        console.log("Mapped users data:", allUsers); // Debug log
+      }
+      if (allUsers === null) {
+        res.status(402).send({
+          message: `Request body error`,
           status: "fail",
         });
       }
+      res.status(200).send({
+        message: `Loading users successful!`,
+        status: "success",
+        userData: allUsers,
+      });
     } catch (error) {
       console.error("Error during loading:", error);
       res.status(500).send({
