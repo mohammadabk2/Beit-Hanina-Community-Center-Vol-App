@@ -1,6 +1,6 @@
 // to interact with the database
 // import { skipPartiallyEmittedExpressions } from "typescript";
-import e from "express";
+// import e from "express";
 import db from "./db.js";
 //TODO change the functions to get certain columns instead of *
 //TODO some functions rely on names maybe the should also get id
