@@ -67,13 +67,13 @@ const PopupComponent = ({
           {children}
         </div>
         
-        <div className="flex-box justify-center">
+        {/* <div className="flex-box justify-center">
           <DynamicButton
             onClick={onClose}
             className="button button-small"
             text={buttonText}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
