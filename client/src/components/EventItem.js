@@ -23,8 +23,8 @@ const EventItem = ({
   rejectEvent,
   approveEvent,
   joinEvent,
-  editEvent,
-  volunteers,
+  // editEvent,
+  // volunteers,
 }) => {
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
@@ -32,7 +32,6 @@ const EventItem = ({
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [cachedUsers, setCachedUsers] = useState({});
   const [enrolledUsers, setEnrolledUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -40,10 +39,6 @@ const EventItem = ({
   useEffect(() => {
     const fetchEnrolledUsers = async () => {
       if (!isPopupOpen) return;
-      if (cachedUsers[id]) {
-        setEnrolledUsers(cachedUsers[id]);
-        return;
-      }
       
       setIsLoading(true);
       setError(null);
@@ -71,7 +66,6 @@ const EventItem = ({
 
         if (usersArr.length > 0) {
           setEnrolledUsers(usersArr);
-          setCachedUsers(prev => ({...prev, [id]: usersArr}));
           console.log(usersArr);
         } else {
           setEnrolledUsers([]);
@@ -86,7 +80,7 @@ const EventItem = ({
     };
 
     fetchEnrolledUsers();
-  }, [isPopupOpen, id, userId, token, cachedUsers]);
+  }, [isPopupOpen, id, userId, token]);
 
   const handleFavorite = () => {
     console.log("Clicked favorite");
@@ -96,6 +90,33 @@ const EventItem = ({
   const showEnrolled = () => {
     console.log("Clicked enrolled");
     setIsPopupOpen(true);
+  };
+
+  const handleEnrolledUsers = async (action, targetUserId) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/events/actions`,
+        {
+          targetUserID: targetUserId,
+          userID: userId,
+          actionID: id,
+          action: action,
+          actionValue: 'vol_id_waiting_list',
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        alert("Failed to update user status, try again later");
+      }
+    } catch (error) {
+      console.error("Axios request failed:", error);
+      alert("Failed to update user status, try again later");
+    }
   };
 
   console.log("enrolledUsers to render:", enrolledUsers);
@@ -202,13 +223,39 @@ const EventItem = ({
             <div className="error-message">{error}</div>
           ) : Array.isArray(enrolledUsers) && enrolledUsers.length > 0 ? (
             <div className="enrolled-users-list">
-              {enrolledUsers.map((user) => (
-                <div key={user.id} className="user-item">
-                  <div>{user.name}</div>
-                  <div>{user.phoneNumber}</div>
-                  <div>{user.sex}</div>
-                </div>
-              ))}
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr>
+                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Name</th>
+                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Phone</th>
+                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Gender</th>
+                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {enrolledUsers.map((user) => (
+                    <tr key={user.id} className="user-item">
+                      <td style={{ padding: '0.5rem' }}>{user.name}</td>
+                      <td style={{ padding: '0.5rem' }}>{user.phoneNumber}</td>
+                      <td style={{ padding: '0.5rem' }}>{user.sex}</td>
+                      <td style={{ padding: '0.5rem' }}>
+                        <button
+                          className="button button-approve"
+                          onClick={() => handleEnrolledUsers("approve", user.id)}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          className="button button-reject"
+                          onClick={() => handleEnrolledUsers("reject", user.id)}
+                        >
+                          Reject
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : (
             <div>No users enrolled in this event</div>
