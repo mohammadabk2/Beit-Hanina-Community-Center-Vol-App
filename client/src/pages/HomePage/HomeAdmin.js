@@ -309,7 +309,7 @@ const HomeAdmin = () => {
                   user.idNumber
                     ?.toLowerCase()
                     .includes(searchQuery.toLowerCase()) ||
-                  user.skills?.toLowerCase().includes(searchQuery.toLowerCase())
+                  user.skills?.join(" ").toLowerCase().includes(searchQuery.toLowerCase())
               )}
               type={personView ? "card" : "table"}
               approveUser={handleApprove}
