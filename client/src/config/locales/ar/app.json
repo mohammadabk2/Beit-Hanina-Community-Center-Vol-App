@@ -6,5 +6,11 @@
   "user-name-placeholder": "أدخل اسم المستخدم",
   "password-placeholder": "أدخل كلمة المرور",
   "sign-in": "تسجيل الدخول",
-  "sign-up": "اشتراك"
+  "sign-up": "اشتراك",
+  
+  "welcome_message": "مرحبًا",
+  "login_failed_default": "فشل تسجيل الدخول. يرجى التحقق من بيانات الدخول",
+  "login_failed_message": "فشل تسجيل الدخول",
+  "sign_out_first_message": "يرجى تسجيل الخروج أولاً "
+
 }
