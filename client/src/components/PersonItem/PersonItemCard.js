@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 import DynamicButton from "../common/ButtonComponent";
-
+import PopupComponent from "../common/PopupComponent";
 
 const PersonItemCard = ({
   name,
@@ -26,7 +26,12 @@ const PersonItemCard = ({
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
 
-  //TODO make half appear on the right and half on the left
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const showSkills = () => {
+    console.log("skills render");
+    setIsPopupOpen(true);
+  };
   return (
     <div
       className="flex-box flex-column event-box smooth-shadow-box"
@@ -53,7 +58,7 @@ const PersonItemCard = ({
             <div className="flex-box flex-column">
               <div>{tskill("skills")}:</div>
 
-              <div className="flex-box">
+              {/* <div className="flex-box">
                 {Array.isArray(skills) ? (
                   skills.map((person, index) => (
                     <div key={index} className="skills">
@@ -64,7 +69,12 @@ const PersonItemCard = ({
                 ) : (
                   <div>N/A</div>
                 )}
-              </div>
+              </div> */}
+              <DynamicButton
+                text={t("skills")}
+                className={"button button-small"}
+                onClick={showSkills}
+              />
             </div>
           </div>
         </div>
@@ -123,6 +133,21 @@ const PersonItemCard = ({
           )}
         </div>
       </div>
+
+      {isPopupOpen && (
+        <PopupComponent
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          message={t("skills")}
+          buttonText="Cancel"
+        >
+          <ul>
+            {skills.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        </PopupComponent>
+      )}
     </div>
   );
 };
