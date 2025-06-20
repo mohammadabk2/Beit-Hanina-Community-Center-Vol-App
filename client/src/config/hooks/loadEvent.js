@@ -12,7 +12,7 @@ const useLoadEvents = () => {
   const [eventsError, setEventsError] = useState(null);
 
   const loadEvents = useCallback(
-    async (request = ["approved"]) => {
+    async (request = ["approved"], type = "events") => {
       if (!token) {
         console.warn("Missing token. Logging out.");
         logout();
@@ -24,7 +24,7 @@ const useLoadEvents = () => {
         const response = await axios.get(`${API_BASE_URL}/api/events`, {
           params: {
             userID: userId,
-            type: "events",
+            type: type,
             userRequest: request,
           },
           headers: {

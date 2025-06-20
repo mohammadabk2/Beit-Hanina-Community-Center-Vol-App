@@ -102,20 +102,20 @@ const getUsers = async (role, tableName) => {
   if (role === "admin") {
     if (tableName === "volunteer_waiting_list") {
       query = `SELECT * FROM volunteer_waiting_list;`;
-    } else {
+    }
+    // else if (tableName === "organizer") {
+    //   //TODO maybe
+    //   query = `
+    //   SELECT * FROM organizer;
+    //   `
+    // }
+    else {
       query = `
       SELECT users.*, volunteer.*
       FROM users
       JOIN volunteer ON users.id = volunteer.user_id;
     `;
     }
-  } else if (role === "organizer") {
-    query = `
-      SELECT users.phone_number, users.profile_image_url, volunteer.name, volunteer.birth_date, volunteer.sex
-      FROM users
-      JOIN organizer ON users.id = volunteer.user_id
-      WHERE users.role = 'volunteer';
-    `;
   } else {
     console.error("Unsupported role in getUsers:", role);
     return null;
@@ -548,10 +548,9 @@ const getEvents = async (columnNames) => {
   const idsQuery = unionQueries.join(" UNION ALL ");
   console.log(`full query: ${idsQuery}`);
   try {
-    // Stores event ids in values as array
     const values = await db.query(idsQuery);
     const idsToFetch = values.rows.map((row) => row.unnest);
-    // Fetches requested events from events table
+
     const eventsQuery = `SELECT * FROM events WHERE event_id = ANY($1::int[]);`;
     const res = await db.query(eventsQuery, [idsToFetch]);
 
@@ -697,13 +696,26 @@ const rejectUser = async (userId) => {
  * @throws {Error} If the database query fails.
  */
 const updateEventStatus = async (eventID, newStatus, currentStatus) => {
+  // const text = `
+  // UPDATE events_status
+  // SET
+  //     ${currentStatus} = ARRAY_REMOVE(${currentStatus}, $1),
+  //     ${newStatus} = ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
+  // WHERE TRUE
+  // RETURNING *;`;
+
   const text = `
-  UPDATE events_status
-  SET
+    UPDATE events_status
+    SET
       ${currentStatus} = ARRAY_REMOVE(${currentStatus}, $1),
-      ${newStatus} = ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
-  WHERE TRUE
-  RETURNING *;`;
+      ${newStatus} = CASE
+        WHEN NOT ($1 = ANY(${newStatus})) THEN
+          ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
+        ELSE ${newStatus}
+      END
+    WHERE TRUE
+    RETURNING *;
+  `;
 
   const values = [eventID];
   try {

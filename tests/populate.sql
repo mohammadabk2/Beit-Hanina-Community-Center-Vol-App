@@ -19,7 +19,24 @@ INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, app
 (6, 'Pending User', '2000-01-01', 'M', 'Some Insurance', 'IDNPENDING001', 2, 3, ARRAY[1]),
 (7, 'Rejected User', '1999-01-01', 'F', 'Rejected Insurance', 'IDNREJECTED001', 11, 12, ARRAY[2]);
 
+UPDATE volunteer
+SET skills = ARRAY['First Aid', 'Event Planning', 'Team Leadership']
+WHERE user_id = 3;
 
+-- Add skills to Bob (user_id = 4)
+UPDATE volunteer
+SET skills = ARRAY['Carpentry', 'Heavy Lifting', 'Construction Safety']
+WHERE user_id = 4;
+
+-- Add skills to Pending User (user_id = 6)
+UPDATE volunteer
+SET skills = ARRAY['Data Entry', 'Basic Arabic', 'Customer Support']
+WHERE user_id = 6;
+
+-- Add skills to Rejected User (user_id = 7)
+UPDATE volunteer
+SET skills = ARRAY['Photography', 'Social Media']
+WHERE user_id = 7;
 
 -- ORGANIZERS
 INSERT INTO organizer (user_id, org_name, given_hours, vol_id) VALUES
@@ -30,7 +47,15 @@ INSERT INTO organizer (user_id, org_name, given_hours, vol_id) VALUES
 INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, logs, profile_image_url) VALUES
 ('Peter Parker', '2001-08-10', 'M', '234-567-8901', 'peter.parker@newyork.com', '20 Ingram St, Queens, NY', 'Daily Bugle Health', 'Clalit', 'IDNPP001', 'spidey', 'hashed_spidey_pass', ARRAY['Application submitted'], 'http://example.com/profiles/spidey_wait.jpg'),
 ('Diana Prince', '1970-03-22', 'F', '345-678-9012', 'diana.prince@themyscira.com', 'Themyscira Island', 'Amazonian Shield', 'Clalit','IDNDP002', 'wonderwoman', 'hashed_wonder_pass', ARRAY['Application submitted', 'Awaiting review'], NULL);
+-- add skills
+UPDATE volunteer_waiting_list
+SET skills = ARRAY['Photography', 'Web Design', 'Spider Reflexes']
+WHERE username = 'spidey';
 
+-- Add skills to Diana Prince
+UPDATE volunteer_waiting_list
+SET skills = ARRAY['Combat Training', 'Public Speaking', 'Strategy']
+WHERE username = 'wonderwoman';
 -- Rejected Users
 INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, profile_image_url) VALUES
 ('Lex Luthor', '1975-09-01', 'M', '666-666-6666', 'lex.luthor@lexcorp.com', 'LexCorp Tower, Metropolis', 'LexCorp Premium', 'IDNLEX001', 'lexmaster', 'hashed_lex_pass', ARRAY['Application submitted', 'Rejected: Conflict of interest'], 'http://example.com/profiles/lex_rejected.jpg'),

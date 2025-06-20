@@ -2,14 +2,15 @@ import express from "express";
 import path from "path";
 import bodyParser from "body-parser";
 import compression from "compression";
-// import controllers from "./controllers";
-import controllers from "./controllers/index.js";
-import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import db from "./database/db.js";
 import cors from "cors";
+
+import controllers from "./controllers/index.js";
+import dotenv from "dotenv";
+import db from "./database/db.js";
 import "./utils/logger.js";
+import startEventStatusScheduler from "./utils/eventStatusScheduler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,11 +47,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
-// // Start the server
-// app.listen(PORT, () => {
-//   console.log(`Server is running on http://localhost:${PORT}`);
-// });
-
 // 🧠 Connect to PostgreSQL before starting the server
 db.pool
   .connect()
@@ -61,9 +57,13 @@ db.pool
         console.log("PostgreSQL connected at:", res.rows[0].now);
         client.release();
 
+        // Start the server
         app.listen(PORT, () => {
           console.log(`Server is running on http://localhost:${PORT}`);
         });
+
+        // Start corn Scheduler
+        startEventStatusScheduler();
       })
       .catch((err) => {
         client.release();

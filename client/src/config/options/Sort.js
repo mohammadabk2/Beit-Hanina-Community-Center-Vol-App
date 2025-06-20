@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-//TODO talk with fadi about a list of approved skills
 export const useSortOptions = (UserType) => {
   const { t } = useTranslation("sort");
 

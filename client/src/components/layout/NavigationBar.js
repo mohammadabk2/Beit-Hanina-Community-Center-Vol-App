@@ -27,9 +27,6 @@ const NavigationBar = () => {
   const { isAuthenticated, role } = useAuth();
 
   const goToPersonalArea = () => {
-    //TODO add a check if Admin org or voulunteer
-    console.log("Personal Area button clicked");
-
     if (role === "admin") {
       navigate("/personal-area-admin");
     } else if (role === "organizer") {
