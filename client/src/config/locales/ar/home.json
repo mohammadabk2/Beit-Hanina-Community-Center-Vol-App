@@ -37,9 +37,6 @@
   "settings": "إعدادات",
   "personalArea": "الصفحة الشخصية",
 
-  
   "event_signup_failed": "فشل التسجيل في الحدث. يرجى المحاولة لاحقًا",
   "event_signup_success": "تم التسجيل في الحدث بنجاح"
-
-
 }
