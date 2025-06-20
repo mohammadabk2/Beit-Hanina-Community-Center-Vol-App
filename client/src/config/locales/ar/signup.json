@@ -27,5 +27,8 @@
   "selectinsurance": "اختيار التأمين",
   "selectoccupation": "اختيار المهنة",
   "userName": ":اسم المستخدم",
-  "password": ":كلمة المرور"
+  "password": ":كلمة المرور",
+
+   "sign_up_message": "تم التسجيل بنجاح",
+  "login_failed": "فشل تسجيل الدخول: {{message}}"
 }
