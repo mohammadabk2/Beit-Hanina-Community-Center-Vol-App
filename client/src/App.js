@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +8,7 @@ import DynamicInput from "./components/common/InputComponent";
 import DynamicButton from "./components/common/ButtonComponent";
 import NavigationBar from "./components/layout/NavigationBar";
 import CopyRight from "./components/layout/CopyRight";
-// import centreLogo from "./icons/org_icon.png";
+import NoConnection from "./pages/CommonPages/NoConnection/NoConnection";
 
 import { useAuth } from "./config/Context/auth";
 
@@ -23,6 +23,29 @@ const App = () => {
   const { login, isAuthenticated } = useAuth();
   // const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
   const [error, setError] = useState(null);
+  const [connectionError, setConnectionError] = useState(false);
+
+  useEffect(() => {
+    const ping = async () => {
+      try {
+        console.log("Pinging API...");
+        await axios.get(`${API_BASE_URL}/api/this-route-definitely-does-not-exist`);
+        console.log("Ping successful");
+        setConnectionError(false);
+      } catch (error) {
+        console.error("Ping failed:", error);
+        setConnectionError(true);
+      }
+    };
+
+    ping();
+  }, []);
+
+  if (connectionError) {
+    console.log("Rendering NoConnection component");
+    // return <NoConnection message={t("failed_to_ping")} />;
+    return <NoConnection message="Test: No connection detected." />;
+  }
 
   const handleUserName = (event) => {
     setUserName(event.target.value);

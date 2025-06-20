@@ -129,8 +129,12 @@
 │           │   └── About.js
 │           ├── CommonPages
 │           │   ├── ErrorScreen.js
-│           │   ├── Loading.js
-│           │   ├── NoConnection.js
+│           │   ├── Loading
+│           │   │   ├── loading.css
+│           │   │   └── Loading.js
+│           │   ├── NoConnection
+│           │   │   ├── noConnection.css
+│           │   │   └── NoConnection.js
 │           │   └── ULA.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
@@ -186,7 +190,8 @@
 │   ├── 16-06-2025.txt
 │   ├── 17-06-2025.txt
 │   ├── 18-06-2025.txt
-│   └── 19-06-2025.txt
+│   ├── 19-06-2025.txt
+│   └── 20-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
@@ -231,5 +236,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-50 directories, 179 files
+52 directories, 182 files
 ```

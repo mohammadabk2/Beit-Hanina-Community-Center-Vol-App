@@ -10,7 +10,7 @@ import DynamicInput from "../../components/common/InputComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 import DropDownMenu from "../../components/common/DropDownMenu";
-import LoadingPage from "../CommonPages/Loading";
+import LoadingPage from "../CommonPages/Loading/Loading";
 
 // Icons
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
