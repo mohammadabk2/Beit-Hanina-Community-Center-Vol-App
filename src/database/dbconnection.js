@@ -102,13 +102,13 @@ const getUsers = async (role, tableName) => {
   if (role === "admin") {
     if (tableName === "volunteer_waiting_list") {
       query = `SELECT * FROM volunteer_waiting_list;`;
-    } 
+    }
     // else if (tableName === "organizer") {
     //   //TODO maybe
     //   query = `
     //   SELECT * FROM organizer;
     //   `
-    // } 
+    // }
     else {
       query = `
       SELECT users.*, volunteer.*
@@ -548,10 +548,9 @@ const getEvents = async (columnNames) => {
   const idsQuery = unionQueries.join(" UNION ALL ");
   console.log(`full query: ${idsQuery}`);
   try {
-    // Stores event ids in values as array
     const values = await db.query(idsQuery);
     const idsToFetch = values.rows.map((row) => row.unnest);
-    // Fetches requested events from events table
+
     const eventsQuery = `SELECT * FROM events WHERE event_id = ANY($1::int[]);`;
     const res = await db.query(eventsQuery, [idsToFetch]);
 

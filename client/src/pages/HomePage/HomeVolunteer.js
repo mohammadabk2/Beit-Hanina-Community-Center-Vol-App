@@ -25,35 +25,25 @@ const HomeVolunteer = () => {
   //TODO add signup events and fav events options
   const statusOptions = [
     {
-      label: t("approved_events"),
+      label: t("new"),
       href: "#",
-      onClick: () => setSelectedStatus("approved"),
+      onClick: () => setSelectedStatus("new"),
     },
     {
-      label: t("pending_events"),
+      label: t("signed_up"),
       href: "#",
-      onClick: () => setSelectedStatus("pending"),
+      onClick: () => setSelectedStatus("signed-up"),
     },
     {
-      label: t("finished_events"),
+      label: t("favorites"),
       href: "#",
-      onClick: () => setSelectedStatus("finished"),
-    },
-    {
-      label: t("rejected_events"),
-      href: "#",
-      onClick: () => setSelectedStatus("rejected"),
-    },
-    {
-      label: t("on_going"),
-      href: "#",
-      onClick: () => setSelectedStatus("ongoing"),
+      onClick: () => setSelectedStatus("fav"),
     },
   ];
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents([selectedStatus]);
+      loadEvents([selectedStatus], "event-type");
     }
   }, [userId, isAuthenticated, loadEvents, selectedStatus]);
 

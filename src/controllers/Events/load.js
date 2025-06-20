@@ -35,7 +35,7 @@ const load = async (req, res) => {
   if (roles.includes(roleType.role)) {
     console.log(`Attempting load Events from DB for userId: ${userID}`);
 
-    //TODO verify token and id
+    //TODO verify id
     try {
       let answer;
       let response;
@@ -64,6 +64,13 @@ const load = async (req, res) => {
       if (type === "event-list" && eventID) {
         answer = await dbConnection.fetchVolunteerlist(eventID, userRequest);
         response = answer;
+      }
+
+      if(type === "event-type" && eventID){
+        //TODO load user request info like fav or regiersted for volunteer
+        // or mine for org 
+        console.log("logic not done yet");
+        // answer = await dbConnection
       }
 
       if (answer && response) {
