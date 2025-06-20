@@ -696,13 +696,26 @@ const rejectUser = async (userId) => {
  * @throws {Error} If the database query fails.
  */
 const updateEventStatus = async (eventID, newStatus, currentStatus) => {
+  // const text = `
+  // UPDATE events_status
+  // SET
+  //     ${currentStatus} = ARRAY_REMOVE(${currentStatus}, $1),
+  //     ${newStatus} = ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
+  // WHERE TRUE
+  // RETURNING *;`;
+
   const text = `
-  UPDATE events_status
-  SET
+    UPDATE events_status
+    SET
       ${currentStatus} = ARRAY_REMOVE(${currentStatus}, $1),
-      ${newStatus} = ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
-  WHERE TRUE
-  RETURNING *;`;
+      ${newStatus} = CASE
+        WHEN NOT ($1 = ANY(${newStatus})) THEN
+          ARRAY_APPEND(COALESCE(${newStatus}, ARRAY[]::INT[]), $1)
+        ELSE ${newStatus}
+      END
+    WHERE TRUE
+    RETURNING *;
+  `;
 
   const values = [eventID];
   try {

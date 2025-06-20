@@ -24,7 +24,6 @@ const App = () => {
   // const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
   const [error, setError] = useState(null);
 
-  //TODO these could be changed so that it doesnt save the value each letter
   const handleUserName = (event) => {
     setUserName(event.target.value);
   };

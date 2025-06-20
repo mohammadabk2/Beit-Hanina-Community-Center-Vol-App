@@ -10,6 +10,7 @@ import DynamicInput from "../../components/common/InputComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 import DropDownMenu from "../../components/common/DropDownMenu";
+import LoadingPage from "../CommonPages/Loading";
 
 // Icons
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
@@ -34,6 +35,7 @@ const HomeAdmin = () => {
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
+  const [sortText, setSortText] = useState(t("sort"));
 
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
@@ -46,27 +48,42 @@ const HomeAdmin = () => {
     {
       label: t("approved_events"),
       href: "#",
-      onClick: () => setEventStatus("approved"),
+      onClick: () => {
+        setEventStatus("approved");
+        setSortText(t("approved_events"));
+      },
     },
     {
       label: t("pending_events"),
       href: "#",
-      onClick: () => setEventStatus("pending"),
+      onClick: () => {
+        setEventStatus("pending");
+        setSortText(t("pending_events"));
+      },
     },
     {
       label: t("finished_events"),
       href: "#",
-      onClick: () => setEventStatus("finished"),
+      onClick: () => {
+        setEventStatus("finished");
+        setSortText(t("finished_events"));
+      },
     },
     {
       label: t("rejected_events"),
       href: "#",
-      onClick: () => setEventStatus("rejected"),
+      onClick: () => {
+        setEventStatus("rejected");
+        setSortText(t("rejected_events"));
+      },
     },
     {
       label: t("on_going"),
       href: "#",
-      onClick: () => setEventStatus("ongoing"),
+      onClick: () => {
+        setEventStatus("ongoing");
+        setSortText(t("on_going"));
+      },
     },
   ];
 
@@ -74,12 +91,19 @@ const HomeAdmin = () => {
     {
       label: t("new"),
       href: "#",
-      onClick: () => setPeopleStatus("volunteer_waiting_list"),
+
+      onClick: () => {
+        setPeopleStatus("volunteer_waiting_list");
+        setSortText(t("new"));
+      },
     },
     {
       label: t("active"),
       href: "#",
-      onClick: () => setPeopleStatus("volunteer"),
+      onClick: () => {
+        setPeopleStatus("volunteer");
+        setSortText(t("active"));
+      },
     },
     //TODO maybe add
     // {
@@ -111,10 +135,10 @@ const HomeAdmin = () => {
     });
   };
 
-  const approveEvent = (id) => {
+  const approveEvent = async (id) => {
     console.log(`approve event clicked event id:${id}`);
-    sendAxiod("events/actions", id, "approve", "NA");
-    //TODO force refresh
+    await sendAxiod("events/actions", id, "approve", "NA");
+    // loadEvents([eventStatus]); //TODO check if this effects anythign or not
   };
 
   const rejectEvent = (id) => {
@@ -240,7 +264,7 @@ const HomeAdmin = () => {
             <div>{renderSearch()}</div>
 
             <DropDownMenu
-              text={t("sort")}
+              text={sortText}
               className="gender-button"
               options={peopeOptions}
             />
@@ -414,7 +438,7 @@ const HomeAdmin = () => {
             {renderSearch()}
 
             <DropDownMenu
-              text={t("sort")}
+              text={sortText}
               className="gender-button"
               options={eventOptions}
             />
@@ -457,7 +481,7 @@ const HomeAdmin = () => {
   }, [userId, isAuthenticated, loadUsers, peopleStatus]);
 
   if (loadingInitial) {
-    return <div>Loading Event data...</div>;
+    return (<><LoadingPage message={t("Loading Events")}/></>);
   }
 
   if (!isAuthenticated) {
