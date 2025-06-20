@@ -6,7 +6,6 @@ const PopupComponent = ({
   isOpen, 
   onClose, 
   message, 
-  buttonText,
   children,
   showCloseButton = true,
   closeOnOutsideClick = true
@@ -66,14 +65,6 @@ const PopupComponent = ({
           {message && <div id="popup-title" className="bold-text personal-area-content">{message}</div>}
           {children}
         </div>
-        
-        <div className="flex-box justify-center">
-          <DynamicButton
-            onClick={onClose}
-            className="button button-small"
-            text={buttonText}
-          />
-        </div>
       </div>
     </div>
   );
@@ -83,7 +74,6 @@ PopupComponent.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   message: PropTypes.string,
-  buttonText: PropTypes.string.isRequired,
   children: PropTypes.node,
   showCloseButton: PropTypes.bool,
   closeOnOutsideClick: PropTypes.bool

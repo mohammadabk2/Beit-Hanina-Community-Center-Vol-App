@@ -110,7 +110,11 @@ const EventItem = ({
         }
       );
 
-      if (response.status !== 200) {
+      if (response.status === 200) {
+        setEnrolledUsers(enrolledUsers => 
+          enrolledUsers.filter(user => user.id !== targetUserId)
+        );
+      } else {
         alert("Failed to update user status, try again later");
       }
     } catch (error) {
