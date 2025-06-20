@@ -1,56 +1,47 @@
--- Dummy data for the database schema
+-- USERS
+INSERT INTO users (phone_number, email, address, username, password_hash, banned, logs, role, profile_image_url)
+VALUES
+('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'hash1', FALSE, ARRAY['created account', 'updated profile'], 'ADMIN', 'https://img.com/1.jpg'),
+('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'hash2', FALSE, ARRAY['joined event'], 'VOLUNTEER', 'https://img.com/2.jpg'),
+('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'hash3', FALSE, ARRAY['created org'], 'ORGANIZER', 'https://img.com/3.jpg'),
+('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'hash4', TRUE, ARRAY['banned'], 'VOLUNTEER', 'https://img.com/4.jpg'),
+('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'hash5', FALSE, ARRAY[]::text[], 'VOLUNTEER', 'https://img.com/5.jpg'),
+('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'hash6', FALSE, ARRAY['created org'], 'ORGANIZER', 'https://img.com/6.jpg'),
+('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'hash7', FALSE, ARRAY['reset password'], 'ADMIN', 'https://img.com/7.jpg');
 
--- Users
-INSERT INTO users (phone_number, email, address, username, password_hash, banned, logs, role, profile_image_url) VALUES
-('123-456-7890', 'john.doe@example.com', '123 Main St, Anytown, USA', 'admin', 'password', FALSE, ARRAY['User created', 'Logged in'], 'admin', 'http://example.com/profiles/johndoe.jpg'),
-('987-654-3210', 'jane.smith@example.com', '456 Oak Ave, Anytown, USA', 'org', 'password', FALSE, ARRAY['User created'], 'organizer', 'http://example.com/profiles/janesmith.jpg'),
-('555-123-4567', 'alice.wonder@example.com', '789 Pine Ln, Anytown, USA', 'vol', 'password', FALSE, ARRAY['User created', 'Updated profile'], 'volunteer', 'http://example.com/profiles/alicew.jpg'),
-('555-987-6543', 'bob.builder@example.com', '101 Builder Rd, Buildsville, USA', 'bobthebuilder', 'password', TRUE, ARRAY['User created', 'Banned due to inactivity'], 'volunteer', 'http://example.com/profiles/bob.jpg'),
-('555-555-5555', 'carol.danvers@example.com', '202 Sky High, Metropolis, USA', 'captainmarvel', 'password', FALSE, ARRAY['User created'], 'volunteer', NULL),
-('111-222-3333', 'pending.user@example.com', '303 Waitlist Way, Temp Town, USA', 'pendinguser', 'password', FALSE, ARRAY['Registration attempt'], 'volunteer', 'http://example.com/profiles/pending.jpg'),
-('444-555-6666', 'rejected.user@example.com', '404 Reject Rd, Outcast City, USA', 'rejecteduser', 'password', FALSE, ARRAY['Registration attempt', 'Application rejected'], 'volunteer', 'http://example.com/profiles/rejected.jpg');
+-- VOLUNTEER
+INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, skills, orgs)
+VALUES
+(2, 'Alice Blue', '2000-01-01', 'F', 'SafeInsure', 'V1001', 10, 2, ARRAY['First Aid', 'Cooking'], ARRAY[1]::int[]),
+(4, 'Bob Green', '1999-02-02', 'M', 'LifeCare', 'V1002', 5, 1, ARRAY['Driving'], ARRAY[1,2]::int[]),
+(5, 'Carol Red', '2001-03-03', 'F', 'MediPlus', 'V1003', 0, 0, ARRAY[]::text[], ARRAY[]::int[]);
 
--- VOLUNTEERS
--- Assuming user_ids by insertion order: 1 = admin, 2 = org, 3 = vol, 4 = bob, 5 = carol, 6 = pending, 7 = rejected
-
-INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, orgs) VALUES
-(3, 'Alice Wonderland', '1995-11-20', 'F', 'SecureLife Coverage', 'IDN987654321', 75, 5, ARRAY[5]),
-(4, 'Bob Builder', '1985-02-10', 'M', 'BuildWell Insurance', 'IDNBUILDER001', 20, 5, ARRAY[2]),
-(6, 'Pending User', '2000-01-01', 'M', 'Some Insurance', 'IDNPENDING001', 2, 3, ARRAY[1]),
-(7, 'Rejected User', '1999-01-01', 'F', 'Rejected Insurance', 'IDNREJECTED001', 11, 12, ARRAY[2]);
-
-
-
--- ORGANIZERS
-INSERT INTO organizer (user_id, org_name, given_hours, vol_id) VALUES
-(2, 'Helping Hands Org', 500, ARRAY[3]),      -- Jane Smith's org, Alice (user_id 3) is a volunteer
-(5, 'Planeteers Foundation', 300, ARRAY[4]);
-
--- Volunteer Waiting List
-INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, logs, profile_image_url) VALUES
-('Peter Parker', '2001-08-10', 'M', '234-567-8901', 'peter.parker@newyork.com', '20 Ingram St, Queens, NY', 'Daily Bugle Health', 'Clalit', 'IDNPP001', 'spidey', 'hashed_spidey_pass', ARRAY['Application submitted'], 'http://example.com/profiles/spidey_wait.jpg'),
-('Diana Prince', '1970-03-22', 'F', '345-678-9012', 'diana.prince@themyscira.com', 'Themyscira Island', 'Amazonian Shield', 'Clalit','IDNDP002', 'wonderwoman', 'hashed_wonder_pass', ARRAY['Application submitted', 'Awaiting review'], NULL);
-
--- Rejected Users
-INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, profile_image_url) VALUES
-('Lex Luthor', '1975-09-01', 'M', '666-666-6666', 'lex.luthor@lexcorp.com', 'LexCorp Tower, Metropolis', 'LexCorp Premium', 'IDNLEX001', 'lexmaster', 'hashed_lex_pass', ARRAY['Application submitted', 'Rejected: Conflict of interest'], 'http://example.com/profiles/lex_rejected.jpg'),
-('Selina Kyle', '1988-07-14', 'F', '777-888-9999', 'selina.kyle@gotham.cat', 'Penthouse, Gotham City', 'Nine Lives Insurance', 'IDNSK001', 'catwoman', 'hashed_cat_pass', ARRAY['Application submitted', 'Rejected: Background check failed'], 'http://example.com/profiles/cat_rejected.jpg');
+-- ORGANIZER
+INSERT INTO organizer (user_id, org_name, given_hours, vol_id)
+VALUES
+(3, 'Helping Hands', 20, ARRAY[2,4]::int[]),
+(6, 'Green Peace', 30, ARRAY[5]::int[]);
 
 -- EVENTS
-INSERT INTO events (
-  event_name, event_date, event_start, event_end, is_active,
-  org_id, vol_id, vol_id_waiting_list,
-  max_number_of_vol, current_number_of_vol,
-  event_location, event_description
-) VALUES
-('Community Clean-Up Day', '2025-06-15', '09:00:00', '14:00:00', TRUE, 2, ARRAY[3], ARRAY[6], 50, 1, 'Central Park, Anytown', 'Join us to clean up Central Park and make our city greener!'),
-('Animal Shelter Adoption Drive', '2025-07-20', '11:00:00', '16:00:00', TRUE, 5, ARRAY[4], ARRAY[]::INT[], 30, 1, 'Anytown Animal Shelter', 'Help find forever homes for our lovely animals. Volunteers needed for various roles.'),
-('Fundraising Gala Prep', '2025-08-01', '10:00:00', '18:00:00', FALSE, 2, ARRAY[]::INT[], ARRAY[]::INT[], 20, 0, 'Grand Ballroom, Anytown', 'Assist with setting up and organizing our annual fundraising gala. This event is in planning.'),
-('Tree Planting Initiative', '2025-09-10', '08:00:00', '13:00:00', TRUE, 5, ARRAY[]::INT[], ARRAY[]::INT[], 100, 0, 'Green Valley National Park', 'Participate in our massive tree planting event to combat deforestation.'),
-('Soup Kitchen Service', '2025-06-05', '17:00:00', '20:00:00', TRUE, 2, ARRAY[3], ARRAY[]::INT[], 15, 1, 'Downtown Soup Kitchen', 'Serve meals to those in need.');
+INSERT INTO events (event_name, event_date, event_start, event_end, is_active, org_id, vol_id, vol_id_waiting_list, max_number_of_vol, current_number_of_vol, event_location, event_description, event_skills)
+VALUES
+('Food Drive', '2024-07-01', '09:00', '13:00', TRUE, 3, ARRAY[2,4]::int[], ARRAY[5]::int[], 10, 2, 'Community Center', 'Distribute food', ARRAY['Organization', 'Teamwork']),
+('Park Cleanup', '2024-07-10', '10:00', '14:00', TRUE, 3, ARRAY[4]::int[], ARRAY[]::int[], 8, 1, 'Central Park', 'Clean up park', ARRAY['Cleaning', 'Teamwork']),
+('Tree Planting', '2024-09-15', '09:30', '13:30', FALSE, 6, ARRAY[5]::int[], ARRAY[2]::int[], 20, 1, 'City Park', 'Planting trees', ARRAY['Gardening', 'Teamwork']);
+
+-- VOLUNTEER WAITING LIST
+INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, logs, skills, profile_image_url)
+VALUES
+('Daisy White', '2002-04-04', 'F', '888-888-8888', 'wait1@example.com', '8 Wait St', 'SafeInsure', 'Student', 'WV1001', 'waituser1', 'hash8', ARRAY['applied'], ARRAY['Cooking'], 'https://img.com/8.jpg'),
+('Evan Black', '2003-05-05', 'M', '999-999-9999', 'wait2@example.com', '9 Wait St', 'LifeCare', 'Unemployed', 'WV1002', 'waituser2', 'hash9', ARRAY[]::text[], ARRAY[]::text[], 'https://img.com/9.jpg');
+
+-- REJECTED USERS
+INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, profile_image_url)
+VALUES
+('Fay Brown', '1998-06-06', 'F', '101-101-1010', 'rej1@example.com', '10 Rej St', 'MediPlus', 'RV1001', 'rejuser1', 'hash10', ARRAY['rejected'], 'https://img.com/10.jpg'),
+('George Gray', '1997-07-07', 'M', '202-202-2020', 'rej2@example.com', '11 Rej St', 'SafeInsure', 'RV1002', 'rejuser2', 'hash11', ARRAY[]::text[], 'https://img.com/11.jpg');
 
 -- EVENTS STATUS
-DELETE FROM events_status;
-
-INSERT INTO events_status (approved, rejected, pending, ongoing, finished) VALUES
-(ARRAY[1, 2, 4], ARRAY[]::INT[], ARRAY[3], ARRAY[]::INT[], ARRAY[5]);
+INSERT INTO events_status (approved, rejected, pending, ongoing, finished)
+VALUES
+(ARRAY[1,2]::int[], ARRAY[3]::int[], ARRAY[2]::int[], ARRAY[]::int[], ARRAY[1]::int[]);
