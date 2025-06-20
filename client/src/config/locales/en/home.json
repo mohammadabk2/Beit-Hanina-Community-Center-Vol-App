@@ -35,5 +35,9 @@
   "hide": "Hide",
   "ln": "Language",
   "settings":"Settings",
-  "personalArea":"Personal Area"
+  "personalArea":"Personal Area",
+  
+  "event_signup_failed": "Failed to sign up. Please try again .",
+  "event_signup_success": "Signed up for the event successfully!"
 }
+
