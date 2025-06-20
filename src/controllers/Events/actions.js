@@ -4,7 +4,7 @@ import validateToken from "../common/validateToken.js";
 const eventActions = async (req, res) => {
   console.log("Event Actions");
 
-  const { userID, actionID, action, actionValue } = req.body;
+  const { targetUserID, userID, actionID, action, actionValue } = req.body;
 
   console.log(`${userID} , ${actionID} , ${action}, ${actionValue}`);
 
@@ -79,7 +79,7 @@ const eventActions = async (req, res) => {
         if (action === "approve") {
           answer = await dbConnection.decideUserEventStatus(
             actionID,
-            actionValue,
+            targetUserID,
             "vol_id",
             "approved"
           );
@@ -88,8 +88,8 @@ const eventActions = async (req, res) => {
         if (action === "reject") {
           answer = await dbConnection.decideUserEventStatus(
             actionID,
-            actionValue,
-            "vol_id",
+            targetUserID,
+            "vol_id_waiting_list",
             "rejected"
           );
         }
