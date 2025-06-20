@@ -9,8 +9,6 @@ import cors from "cors";
 import controllers from "./controllers/index.js";
 import dotenv from "dotenv";
 import db from "./database/db.js";
-import "./utils/logger.js";
-import startEventStatusScheduler from "./utils/eventStatusScheduler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -62,8 +60,6 @@ db.pool
           console.log(`Server is running on http://localhost:${PORT}`);
         });
 
-        // Start corn Scheduler
-        startEventStatusScheduler();
       })
       .catch((err) => {
         client.release();
