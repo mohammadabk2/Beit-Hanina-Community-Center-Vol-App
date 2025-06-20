@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import PersonItemRow from "./PersonItemRow"; // Renamed component
 import { useTranslation } from "react-i18next";
 
-
 const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
   const { t } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
@@ -15,21 +14,26 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
   const isNewUserList = people.length > 0 ? people[0].isNew : false; // Example logic
 
   return (
-    <div className="person-table-container"> {/* Optional: for overflow/scrolling */}
+    <div className="person-table-container">
+      {" "}
+      {/* Optional: for overflow/scrolling */}
       <table className="person-table">
         <thead>
           <tr>
             {/* Keep only relevant headers */}
-            <th >{tsignup("fullName")}</th>
+            <th>{tsignup("fullName")}</th>
             <th>{tsignup("birthDate")}</th>
             <th>{tsignup("gender")}</th>
             <th>{tsignup("phoneNumber")}</th>
             <th>{tsignup("email")}</th>
             <th>{tsignup("address")}</th>
+            <th>{tsignup("skills")}</th>
             {/* Maybe add Insurance/ID later if needed, or show in details view */}
             <th>{tsignup("insurance")}</th>
             <th>{tsignup("idNumber")}</th>
-            <th colSpan={isNewUserList ? 2 : 2} className="actions-header"> {/* Adjust colSpan */}
+            <th colSpan={isNewUserList ? 2 : 2} className="actions-header">
+              {" "}
+              {/* Adjust colSpan */}
               {t("actions")}
             </th>
           </tr>
@@ -44,10 +48,10 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
               phoneNumber={person.phoneNumber}
               email={person.email}
               address={person.address}
+              skills={person.skills} // Pass skills
               insurance={person.insurance} // Pass data even if not displayed in main table
-              idNumber={person.idNumber}   // Pass data even if not displayed in main table
-              skills={person.skills}       // Pass skills
-              newUser={person.isNew}       // Pass the flag per person
+              idNumber={person.idNumber} // Pass data even if not displayed in main table
+              newUser={person.isNew} // Pass the flag per person
               approveFunction={() => approveUser(person.id)}
               rejectFunction={() => rejectUser(person.id)}
               viewLogsFunction={() => viewLogs(person.id)}

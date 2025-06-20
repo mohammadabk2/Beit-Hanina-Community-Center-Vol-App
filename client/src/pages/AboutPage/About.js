@@ -9,7 +9,6 @@ const About = () => {
 
   return (
     <div className="app flex-box flex-column">
-      {/* //TODO add check if signed in or not and use the right nav bar according to it */}
       <NavigationBar />
       <div className="general-box">
         <div className="flex-box flex-column smooth-shadow-box">
