@@ -8,6 +8,9 @@ const registerVolunteer = async (req, res) => {
   const userData = req.body;
   const errors = validation(userData);
 
+  // const file_path = "../../../images"
+  // req.imageFile
+
   if (Object.keys(errors).length > 0) {
     res.status(400).send({
       message: "Invalid registration data.",
@@ -25,12 +28,11 @@ const registerVolunteer = async (req, res) => {
       if (userData.type === "org") {
         console.log("adding an org");
         reg = await dbConnection.createOrganizer(
-          userData.orgName,
-          userData.orgAddress,
-          userData.orgAdmin,
-          userData.orgPhoneNumber,
-          userData.orgEmail,
-          userData.orgUserName,
+          userData.fullName,
+          userData.address,
+          userData.phoneNumber,
+          userData.email,
+          userData.username,
           passwordHash
         );
       } else if (userData.type === "vol") {
@@ -44,9 +46,11 @@ const registerVolunteer = async (req, res) => {
           userData.email,
           userData.address,
           userData.insurance,
+          userData.occupation,
           userData.idNumber,
           userData.username,
-          passwordHash
+          passwordHash,
+          userData.skills
         );
       }
       if (reg) {
@@ -61,6 +65,7 @@ const registerVolunteer = async (req, res) => {
         });
       }
     } catch (error) {
+      console.log(error);
       res.status(500).send({
         message: "An internal server error occurred during singUp.",
         status: "error",

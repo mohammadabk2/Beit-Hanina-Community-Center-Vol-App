@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 // import DropDownMenu from "./DropDownMenu";
 // import DynamicButton from "./ButtonComponent";
 
-const UploadFile = () => {
+const UploadFile = ({ onFileSelect }) => {
   const { t } = useTranslation("file");
 
   const [file, setFile] = useState(null);
@@ -20,17 +21,36 @@ const UploadFile = () => {
     const selectedFile = e.target.files?.[0]; // pass the first file only
 
     if (selectedFile) {
+      if (!selectedFile.type.startsWith("image/")) {
+        // Indicate an invalid selection
+        setError(t("error_invalid_image_type"));
+        if (onFileSelect) {
+          onFileSelect(null);
+        }
+        e.target.value = null;
+        return;
+      }
+
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
+
+      // Pass the file to the parent component
+      if (onFileSelect) {
+        onFileSelect(selectedFile);
+      }
     } else {
       setError(t("error_invalid_image_type"));
       setFile(null);
       setPreviewUrl(null);
       e.target.value = null;
+
+      if (onFileSelect) {
+        onFileSelect(null);
+      }
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
@@ -73,6 +93,10 @@ const UploadFile = () => {
       </div>
     </>
   );
+};
+
+UploadFile.propTypes = {
+  onFileSelect: PropTypes.func, //TODO check if this is right
 };
 
 export default UploadFile;

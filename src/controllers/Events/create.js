@@ -75,6 +75,7 @@ const createEvent = async (req, res) => {
         });
       }
     } catch (error) {
+      console.log(error);
       res.status(500).send({
         message: "An internal server error occurred during singUp.",
         status: "error",

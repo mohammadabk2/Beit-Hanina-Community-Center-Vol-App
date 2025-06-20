@@ -5,6 +5,7 @@
 │   ├── app
 │   │   └── apk
 │   │       ├── app-debug-2.apk
+│   │       ├── app-debug-3.apk
 │   │       └── app-debug.apk
 │   ├── assets
 │   │   └── logo.jpg
@@ -17,7 +18,7 @@
 │   │   ├── logo192.png
 │   │   ├── logo512.png
 │   │   ├── manifest.json
-│   │   └── service-worker.cjs
+│   │   └── service-worker.js
 │   ├── README.md
 │   └── src
 │       ├── App.css
@@ -88,6 +89,10 @@
 │       │   ├── about_icon.jpg
 │       │   ├── dark
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-dark.svg
+│       │   │   ├── cross-dark.svg
+│       │   │   ├── document-filled-dark.svg
+│       │   │   ├── document-plus-dark.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -101,6 +106,10 @@
 │       │   ├── home_icon.jpg
 │       │   ├── light
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-light.svg
+│       │   │   ├── cross-light.svg
+│       │   │   ├── document-filled-light.svg
+│       │   │   ├── document-plus-light.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -157,21 +166,29 @@
 │   ├── logic.png
 │   └── structure.md
 ├── eslint.config.mjs
+├── keys
+│   ├── Key_1.pem
+│   └── key_2.pem
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── scripts
 │   ├── android_setup.sh
 │   ├── before_git.sh
+│   ├── buildExe.sh
 │   ├── convert_to_apk.sh
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
+├── server-logs
+│   ├── 16-06-2025.txt
+│   └── 17-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
+│   │   │   ├── changePassword.js
 │   │   │   └── login.js
 │   │   ├── common
 │   │   │   ├── authenticate.js
@@ -186,6 +203,7 @@
 │   │   ├── Users
 │   │   │   ├── actions.js
 │   │   │   ├── create.js
+│   │   │   ├── Info.js
 │   │   │   └── load.js
 │   │   └── validation.js
 │   ├── database
@@ -194,25 +212,21 @@
 │   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
-│   ├── deprecated
-│   │   └── Users
-│   │       ├── Admin.js
-│   │       ├── Organizer.js
-│   │       ├── PersonFactory.js
-│   │       ├── Person.js
-│   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
-│   └── server.js
+│   ├── server.js
+│   └── utils
+│       └── logger.js
 ├── tests
 │   ├── addAdmin.sql
 │   ├── drop_tables.sql
 │   ├── events.sql
 │   ├── master.sql
 │   ├── populate.sql
-│   └── postman
-│       └── App-test.postman_collection.json
+│   ├── postman
+│   │   └── App-test.postman_collection.json
+│   └── test_cases.md
 └── workbox-config.cjs
 
-49 directories, 163 files
+50 directories, 176 files
 ```

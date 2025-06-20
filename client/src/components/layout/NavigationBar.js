@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../config/Context/auth"; // <-- Adjust the path based on your file structure
+import { useNavigate, useLocation } from "react-router-dom";
 
 import DropDownMenu from "../common/DropDownMenu";
 import { useLnOptions } from "../../config/options/Language";
 import { useTheme } from "../../config/options/Colors";
+import { useAuth } from "../../config/Context/auth";
 
 import modeIconDark from "../../icons/light/NavBar/mode_icon.svg";
 import profileIconLight from "../../icons/light/NavBar/profile_icon.svg";
@@ -21,23 +21,37 @@ import aboutIconDark from "../../icons/dark/NavBar/about_icon.svg";
 const NavigationBar = () => {
   const { t } = useTranslation("navBar");
   const navigate = useNavigate();
+  const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
   const goToPersonalArea = () => {
     //TODO add a check if Admin org or voulunteer
     console.log("Personal Area button clicked");
-    navigate("/personal-area-vol");
+
+    if (role === "admin") {
+      navigate("/personal-area-admin");
+    } else if (role === "organizer") {
+      navigate("/personal-area-org");
+    } else if (role === "volunteer") {
+      navigate("/personal-area-vol");
+    } else {
+      navigate("/");
+    }
   };
 
   const goToHome = () => {
-    //TODO add a check if Admin org or voulunteer
-    //TODO check if signed in
     console.log("Home button clicked");
-    navigate("/home-volunteer");
-    // navigate("/home-admin");
-    // navigate("/home-organizer");
+    if (role === "admin") {
+      navigate("/home-admin");
+    } else if (role === "organizer") {
+      navigate("/home-organizer");
+    } else if (role === "volunteer") {
+      navigate("/home-volunteer");
+    } else {
+      navigate("/");
+    }
   };
 
   const goToAbout = () => {
@@ -47,7 +61,12 @@ const NavigationBar = () => {
 
   return (
     <div className="flex-box navigation-box wrap-reverse flex-box-gap smooth-shadow-box">
-      <div onClick={goToAbout} className="flex-box flex-column">
+      <div
+        onClick={goToAbout}
+        className={`flex-box flex-column${
+          location.pathname === "/about" ? " active-nav" : ""
+        }`}
+      >
         <img
           className="navigation-button-image"
           src={isLightMode ? aboutIconLight : aboutIconDark}
@@ -57,7 +76,14 @@ const NavigationBar = () => {
       </div>
       {isAuthenticated && (
         <>
-          <div onClick={goToPersonalArea} className="flex-box flex-column">
+          <div
+            onClick={goToPersonalArea}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/personal-area")
+                ? " active-nav"
+                : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? profileIconLight : profileIconDark}
@@ -66,7 +92,12 @@ const NavigationBar = () => {
             {t("personal_area")}
           </div>
 
-          <div onClick={goToHome} className="flex-box flex-column">
+          <div
+            onClick={goToHome}
+            className={`flex-box flex-column${
+              location.pathname.startsWith("/home") ? " active-nav" : ""
+            }`}
+          >
             <img
               className="navigation-button-image"
               src={isLightMode ? homeIconLight : homeIconDark}
@@ -77,6 +108,12 @@ const NavigationBar = () => {
         </>
       )}
 
+      <DropDownMenu
+        className="language-button"
+        text={t("ln")}
+        options={lnOptions}
+      />
+
       <div onClick={toggleTheme} className="flex-box flex-column">
         <img
           className="navigation-button-image"
@@ -86,12 +123,6 @@ const NavigationBar = () => {
         {!isLightMode && t("light_mode")}
         {isLightMode && t("dark_mode")}
       </div>
-
-      <DropDownMenu
-        className="language-button"
-        text={t("ln")}
-        options={lnOptions}
-      />
     </div>
   );
 };

@@ -34,6 +34,8 @@ const HomeAdmin = () => {
   const [personView, setPersonView] = useState(true);
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
+  const [searchQuery, setSearchQuery] = useState(""); // search query
+
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
     setViewMode("people"); // Switch view mode to "people"
@@ -141,6 +143,48 @@ const HomeAdmin = () => {
     // TODO: Implement actual logic (e.g., show modal, navigate)
   };
 
+  const renderSearch = () => {
+    return (
+      <DynamicInput
+        type="text"
+        placeholder={"..."}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="input-field"
+      />
+    );
+  };
+
+  const renderButton = (func, text) => {
+    return (
+      <DynamicButton
+        className="button button-small"
+        onClick={func}
+        text={text}
+      />
+    );
+  };
+
+  const renderInput = (upperName, value, name, placeholder) => {
+    return (
+      <div className="flex-box flex-column input-field-box">
+        <div>
+          <label> {upperName} </label>
+          <label className="red-star">*</label>
+        </div>
+
+        <DynamicInput
+          className="input-field"
+          type="text"
+          value={value}
+          name={name}
+          onChange={handleChange}
+          placeholder={placeholder}
+        />
+      </div>
+    );
+  };
+
   const renderPeople = () => {
     return (
       <>
@@ -149,16 +193,11 @@ const HomeAdmin = () => {
           className="scroll-box1 flex-box flex-column"
         >
           <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortPeople}
-              text={t("sort")}
-            />
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToEvents}
-              text={t("switch_to_events")}
-            />
+            <div>{renderSearch()}</div>
+
+            {renderButton(sortPeople, t("sort"))}
+
+            {renderButton(switchToEvents, t("switch_to_events"))}
             {/* //TODO give the img a class to make it bigger */}
             <img
               className="table-img"
@@ -178,16 +217,28 @@ const HomeAdmin = () => {
                   : t("switch_to_card_view")
               }
             />
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToCreateOrg}
-              text={t("switch_to_create_org")}
-            />
+            {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
           </div>
 
           <div className="bottom-scroll-box1">
             <PeopleDisplaySwitcher
-              people={users}
+              // people={users}
+              people={users.filter(
+                (user) =>
+                  user.name
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.phoneNumber
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.email
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.idNumber
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  user.skills?.toLowerCase().includes(searchQuery.toLowerCase())
+              )}
               type={personView ? "card" : "table"}
               approveUser={handleApprove}
               rejectUser={handleReject}
@@ -201,18 +252,36 @@ const HomeAdmin = () => {
   };
 
   const [formData, setFormData] = useState({
-    orgName: "",
-    orgAddress: "",
-    orgAdmin: "",
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
+    username: "",
+    password: "",
+    type: "org",
+    // orgAdmin: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Create Org Submit clicked", formData);
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/users/register`,
+        formData
+      );
+      if (response.data.status === "success") {
+        alert(t("org_sign_up_message"));
+      } else {
+        alert(`Create organizer Failed: ${response.data.message}`);
+      }
+    } catch (error) {
+      console.error("Error during sign in:", error);
+    }
   };
 
   const renderCreateOrg = () => {
@@ -220,85 +289,68 @@ const HomeAdmin = () => {
       <>
         <div className="general-box flex-box flex-column">
           <div className="flex-box line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
+            {renderButton(switchToPeople, t("switch_to_people"))}
 
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToPeople}
-              text={t("switch_to_people")}
-            />
-
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToEvents}
-              text={t("switch_to_Events")}
-            />
+            {renderButton(switchToEvents, t("switch_to_events"))}
           </div>
 
           <form
             onSubmit={handleSubmit}
             className="flex-box flex-column input-field-box"
           >
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgName")} </label>
-                <label className="red-star">*</label>
-              </div>
+            {renderInput(
+              t("fullName"),
+              formData.fullName,
+              "fullName",
+              t("fullName_placeholder")
+            )}
 
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgName}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgName_placeholder")}
-              />
-            </div>
+            {renderInput(
+              t("phoneNumber"),
+              formData.phoneNumber,
+              "phoneNumber",
+              t("fullName_phone_placeholder")
+            )}
 
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgAddress")} </label>
-                <label className="red-star">*</label>
-              </div>
+            {renderInput(
+              t("email"),
+              formData.email,
+              "email",
+              t("email_phone_placeholder")
+            )}
 
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgAddress}
-                name="address"
-                onChange={handleChange}
-                placeholder={t("orgAddress_placeholder")}
-              />
-            </div>
+            {renderInput(
+              t("address"),
+              formData.address,
+              "address",
+              t("address_placeholder")
+            )}
 
-            <div className="flex-box flex-column input-field-box">
-              <div>
-                <label> {t("orgAdmin")} </label>
-                <label className="red-star">*</label>
-              </div>
+            {renderInput(
+              t("orgUserName"),
+              formData.username,
+              "username",
+              t("username_phone_placeholder")
+            )}
 
-              <DynamicInput
-                className="input-field"
-                type="text"
-                value={formData.orgAdmin}
-                name="name"
-                onChange={handleChange}
-                placeholder={t("orgAdmin_placeholder")}
-              />
-            </div>
+            {renderInput(
+              t("password"),
+              formData.password,
+              "password",
+              t("password_phone_placeholder")
+            )}
+
+            {/* {renderInput(
+              t("orgAdmin"),
+              formData.orgAdmin,
+              "orgAdmin",
+              t("orgAdmin_placeholder")
+            )} */}
 
             {/* //TODO add org pic */}
 
             <div className="flex-box">
-              <DynamicButton
-                className="button button-small"
-                onClick={handleSubmit}
-                text={t("submit_button")}
-              />
+              {renderButton(handleSubmit, t("submit_button"))}
             </div>
           </form>
         </div>
@@ -311,25 +363,29 @@ const HomeAdmin = () => {
       <>
         <div className="scroll-box1 general-box flex-box flex-column">
           <div className="flex-box top-scroll-box1 line-break">
-            <DynamicButton
-              className="button button-small"
-              onClick={sortEvents}
-              text={t("sort")}
-            />
+            {renderSearch()}
 
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToPeople}
-              text={t("switch_to_people")}
-            />
+            {renderButton(sortEvents, t("sort"))}
 
-            <DynamicButton
-              className="button button-small"
-              onClick={switchToCreateOrg}
-              text={t("switch_to_create_org")}
-            />
+            {renderButton(switchToPeople, t("switch_to_people"))}
+
+            {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
           </div>
-          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+
+          {/* <div className="bottom-scroll-box1">{renderEventItems(events)}</div> */}
+          <div className="bottom-scroll-box1">
+            {renderEventItems(
+              events.filter(
+                (event) =>
+                  event.name
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  event.description
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase())
+              )
+            )}
+          </div>
         </div>
       </>
     );

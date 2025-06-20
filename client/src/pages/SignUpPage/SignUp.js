@@ -15,7 +15,6 @@ import CopyRight from "../../components/layout/CopyRight";
 import { useInsuranceOptions } from "../../config/options/Insurance";
 import { useOccupationOptions } from "../../config/options/Occupation";
 
-
 const SignUpPage = () => {
   //TODO handle if already signed in maybe do that in App.js
   const navigate = useNavigate();
@@ -39,6 +38,8 @@ const SignUpPage = () => {
     userName: "",
     password: "",
     skills: [], // Initialize skills as an array
+    imageFile: null,
+    type: "vol",
   });
 
   const handleInsuranceChange = (value) => {
@@ -101,7 +102,7 @@ const SignUpPage = () => {
     console.log("Form submitted:", formData);
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/register`,
+        `${API_BASE_URL}/api/users/register`,
         formData
       );
 
@@ -117,210 +118,178 @@ const SignUpPage = () => {
     }
   };
 
+  // Stores image in form to send
+  const handleImageFileSelect = (file) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      imageFile: file,
+    }));
+  };
+
+  const renderInput = (upperName, value, name, placeholder, type) => {
+    return (
+      <div className="flex-box flex-column input-field-box">
+        <div>
+          <label> {upperName} </label>
+          <label className="red-star">*</label>
+        </div>
+
+        <DynamicInput
+          className="input-field"
+          type={type || "text"}
+          value={value}
+          name={name}
+          onChange={handleChange}
+          placeholder={placeholder || ""}
+        />
+      </div>
+    );
+  };
+
   return (
     <>
-    <div className="flex-box flex-column">
-      <NavigationBar />
-      <div>
-        <form
-          onSubmit={handleSubmit}
-          className="general-box smooth-shadow-box flex-box flex-column"
-        >
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label> {t("fullName")} </label>
-              <label className="red-star">*</label>
-            </div>
+      <div className="flex-box flex-column">
+        <NavigationBar />
+        <div>
+          <form
+            onSubmit={handleSubmit}
+            className="general-box smooth-shadow-box flex-box flex-column"
+          >
+            {renderInput(
+              t("fullName"),
+              formData.fullName,
+              "fullName",
+              t("fullname_placeholder")
+            )}
 
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.fullName}
-              name="fullName"
-              onChange={handleChange}
-              placeholder={t("fullname_placeholder")}
-            />
-          </div>
+            {renderInput(
+              t("birthDate"),
+              formData.birthDate,
+              "birthDate",
+              "",
+              "date"
+            )}
 
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("birthDate")} </label>
-              <label className="red-star">*</label>
-            </div>
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label>{t("gender")} </label>
+                <label className="red-star">*</label>
+              </div>
 
-            <DynamicInput
-              className="input-field"
-              type="date"
-              value={formData.birthDate}
-              name="birthDate"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("gender")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DropDownMenu
-              className="gender-button"
-              text={t(formData.sex) || t("genderselect")}
-              options={sexOptions}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("phoneNumber")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="tel"
-              value={formData.phoneNumber}
-              name="phoneNumber"
-              onChange={handleChange}
-              pattern="[0-9]*"
-              inputMode="numeric"
-              placeholder={t("phoneNnumber_placeholder")}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("email")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="email"
-              value={formData.email}
-              name="email"
-              onChange={handleChange}
-              placeholder={t("email_placeholder")}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("address")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.address}
-              name="address"
-              onChange={handleChange}
-              placeholder={t("address_placeholder")}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("insurance")} </label>
-              <label className="red-star">*</label>
-            </div>
-            <DropDownMenu
-              className="gender-button"
-              text={formData.insurance || t("selectinsurance")}
-              options={insuranceOptions}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("occupation")} </label>
-              <label className="red-star">*</label>
-            </div>
-            <DropDownMenu
-              className="gender-button"
-              text={formData.occupation || t("selectoccupation")}
-              options={occupationOptions}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("idNumber")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.idNumber}
-              name="idNumber"
-              onChange={handleChange}
-              placeholder={t("idNumber_placeholder")}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("userName")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.userName}
-              name="userName"
-              onChange={handleChange}
-              placeholder={tApp("user-name-placeholder")}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              <label>{t("password")} </label>
-              <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="password"
-              value={formData.password}
-              name="password"
-              onChange={handleChange}
-              placeholder={tApp("password-placeholder")}
-            />
-          </div>
-
-          <SelectComponent
-            type="skills"
-            onChange={handleChange}
-            chosen={formData.skills}
-          />
-
-          <UploadFile />
-
-          <div className="flex-box">
-            <div>
-              <DynamicButton
-                className="button"
-                text={t("submit")}
-                type="submit"
+              <DropDownMenu
+                className="gender-button"
+                text={t(formData.sex) || t("genderselect")}
+                options={sexOptions}
               />
             </div>
 
-            <div>
-              <DynamicButton
-                className="button"
-                onClick={goBack}
-                text={t("back")}
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label>{t("phoneNumber")} </label>
+                <label className="red-star">*</label>
+              </div>
+
+              <DynamicInput
+                className="input-field"
+                type="tel"
+                value={formData.phoneNumber}
+                name="phoneNumber"
+                onChange={handleChange}
+                pattern="[0-9]*"
+                inputMode="numeric"
+                placeholder={t("phoneNnumber_placeholder")}
               />
             </div>
-          </div>
-        </form>
+
+            {renderInput(
+              t("email"),
+              formData.email,
+              "email",
+              t("email_placeholder")
+            )}
+
+            {renderInput(
+              (t("address"),
+              formData.address,
+              "address",
+              t("address_placeholder"))
+            )}
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label>{t("insurance")} </label>
+                <label className="red-star">*</label>
+              </div>
+              <DropDownMenu
+                className="gender-button"
+                text={formData.insurance || t("selectinsurance")}
+                options={insuranceOptions}
+              />
+            </div>
+
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label>{t("occupation")} </label>
+                <label className="red-star">*</label>
+              </div>
+              <DropDownMenu
+                className="gender-button"
+                text={formData.occupation || t("selectoccupation")}
+                options={occupationOptions}
+              />
+            </div>
+
+            {renderInput(
+              t("idNumber"),
+              formData.idNumber,
+              "idNumber",
+              t("idNumber_placeholder")
+            )}
+
+            {renderInput(
+              t("userName"),
+              formData.userName,
+              "userName",
+              tApp("user-name-placeholder")
+            )}
+
+            {renderInput(
+              t("password"),
+              formData.password,
+              "password",
+              tApp("password-placeholder"),
+              "password"
+            )}
+
+            <SelectComponent
+              type="skills"
+              onChange={handleChange}
+              chosen={formData.skills}
+            />
+
+            <UploadFile onFileSelect={handleImageFileSelect} />
+
+            <div className="flex-box">
+              <div>
+                <DynamicButton
+                  className="button"
+                  text={t("submit")}
+                  type="submit"
+                />
+              </div>
+
+              <div>
+                <DynamicButton
+                  className="button"
+                  onClick={goBack}
+                  text={t("back")}
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <CopyRight />
       </div>
-      <CopyRight />
-    </div>
     </>
   );
 };

@@ -1,4 +1,6 @@
 // to interact with the database
+// import { skipPartiallyEmittedExpressions } from "typescript";
+import e from "express";
 import db from "./db.js";
 //TODO change the functions to get certain columns instead of *
 //TODO some functions rely on names maybe the should also get id
@@ -357,7 +359,6 @@ const addVolToOrganizer = async (userId, vol) => {
  * @async
  * @param {string} orgName - The name of the organization.
  * @param {string} orgAddress - The address of the organization.
- * @param {string} orgAdmin - The username of the organization admin.
  * @param {string} orgPhoneNumber - The phone number of the organization.
  * @param {string} orgEmail - The email of the organization.
  * @param {string} username - The desired username for the organization admin.
@@ -368,7 +369,6 @@ const addVolToOrganizer = async (userId, vol) => {
 const createOrganizer = async (
   orgName,
   orgAddress,
-  orgAdmin,
   orgPhoneNumber,
   orgEmail,
   username,
@@ -618,13 +618,15 @@ const createUser = async (
   email,
   address,
   insurance,
+  occupation,
   idNumber,
   username,
-  passwordHash
+  passwordHash,
+  skills
 ) => {
   const text = `
-    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, skills)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     RETURNING *;`;
   const values = [
     name,
@@ -634,9 +636,11 @@ const createUser = async (
     email,
     address,
     insurance,
+    occupation,
     idNumber,
     username,
     passwordHash,
+    skills,
   ];
   try {
     const res = await db.query(text, values);
@@ -736,6 +740,33 @@ const fetchVolunteerlist = async (eventID, listName) => {
 };
 
 /**
+ *
+ * @param {number} eventID
+ * @param {string} arrayName
+ * @returns {Promise<Object>} A promise that resolves to the fetched event user list object.
+ * @throws {Error} If the database query fails.
+ */
+const fetchEventVolunteers = async (eventID, arrayName) => {
+  const text = `
+  SELECT v.*, u.phone_number, u.email
+  FROM events e, unnest(e.${arrayName}) AS vol_id
+  JOIN volunteer v ON v.user_id = vol_id
+  JOIN users u ON u.id = v.user_id
+  WHERE e.event_id = $1;
+  `;
+
+  const values = [eventID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows;
+  } catch (error) {
+    console.error("Error fetching enrolled volunteers", error);
+    throw error;
+  }
+};
+
+/**
  * @param {number} eventID - ID of Event
  * @param {number} userID - ID of Volunteer to move
  * @param {string} arrayName - arrayName to move the Volunteer to (enrolled/waiting list)
@@ -795,6 +826,73 @@ const decideUserEventStatus = async (eventID, userID, arrayName, status) => {
   }
 };
 
+/**
+ * Changes user password hash
+ * @param {number} userID
+ * @param {string} newPasswordHash
+ * @returns {Promise<Object>} A promise that resolves to the new user password object.
+ * @throws {Error} If the database query fails.
+ */
+const changePassword = async (userID, newPasswordHash) => {
+  const text = `
+  UPDATE users
+  SET password_hash = $2
+  WHERE id = $1
+  RETURNING *`;
+
+  const values = [userID, newPasswordHash];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(`Error in password Change for user ${userID}:`, error);
+    throw error;
+  }
+};
+
+/**
+ * Changes user password hash
+ * @param {number} userID - The user ID to fetch data for.
+ * @param {string} role - The role of the user ("volunteer" or "organizer").
+ * @returns {Promise<Object>} A promise that resolves to the User Info object.
+ * @throws {Error} If the database query fails.
+ */
+const loadUserInfo = async (userID, role) => {
+  const queries = {
+    volunteer: {
+      text: `
+        SELECT name, approved_hours, unapproved_hours, skills
+        FROM volunteer
+        WHERE user_id = $1;
+      `,
+    },
+    organizer: {
+      text: `
+        SELECT org_name, given_hours
+        FROM organizer
+        WHERE user_id = $1;
+      `,
+    },
+  };
+
+  const query = queries[role];
+  if (!query) {
+    throw new Error(`Invalid role: ${role}`);
+  }
+
+  try {
+    const res = await db.query(query.text, [userID]);
+    return res.rows[0] || null;
+  } catch (error) {
+    console.error(
+      `Error in Load User Info for user ${userID} Role: ${role}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -809,6 +907,9 @@ export default {
   updateEventStatus,
   fetchVolunteerlist,
   decideUserEventStatus,
+  changePassword,
+  loadUserInfo,
+  fetchEventVolunteers,
 
   // Currently for testing unused
   getUserById, // tested

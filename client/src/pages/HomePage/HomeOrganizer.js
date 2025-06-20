@@ -5,7 +5,7 @@ import axios from "axios";
 import DynamicButton from "../../components/common/ButtonComponent";
 import DynamicInput from "../../components/common/InputComponent";
 import EventItem from "../../components/EventItem";
-import SelectComponent from "../../components/common/SelectComponent";
+// import SelectComponent from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
@@ -20,7 +20,7 @@ const HomeOrganizer = () => {
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
-  // const { users, usersLoading, userError, loadUsers } = useLoadUsers();
+  const [searchQuery, setSearchQuery] = useState(""); // search query
 
   const [showEvents, setShowEvents] = useState(true); // Use useState!
   const [formData, setFormData] = useState({
@@ -55,6 +55,12 @@ const HomeOrganizer = () => {
     return <div>You need to be logged in to view this data.</div>;
   }
 
+  // const sendAxiod = async (path, actionID, actiontoPerform, actionValue) => {
+  //   try {
+
+  //   }
+  // }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -68,6 +74,34 @@ const HomeOrganizer = () => {
     console.log("Create Events button clicked!");
     setShowEvents(false); // Update state using the setter function
   };
+
+  // const handleEnrolledUsers = async (eventId) => {
+  //   console.log("HandleEnrolled Users button clicked!");
+  //   try {
+  //     const response = await axios.delete(
+  //       `${API_BASE_URL}/api/events/actions`,
+  //       {
+  //         userID: userId,
+  //         actionID: eventId,
+  //         action: "rejected",
+  //         actionValue: "",
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.status !== 200) {
+  //       console.log(`${response.status} ${response.message}`);
+  //       alert("Failed to sign up try again later");
+  //     }
+  //   } catch (error) {
+  //     console.error("Axios request failed:", error);
+  //     alert("Failed to sign up try again later");
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,6 +136,7 @@ const HomeOrganizer = () => {
     return eventsArray.map((event) => (
       <EventItem
         key={event.id}
+        id={event.id}
         name={event.name}
         desc={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
@@ -109,8 +144,29 @@ const HomeOrganizer = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        volunteers={event.enrolledVol}
       />
     ));
+  };
+
+  const renderInput = (upperName, value, name, placeholder, type) => {
+    return (
+      <div className="flex-box flex-column input-field-box">
+        <div>
+          <label> {upperName} </label>
+          <label className="red-star">*</label>
+        </div>
+
+        <DynamicInput
+          className="input-field"
+          type={type || "text"}
+          value={value}
+          name={name}
+          onChange={handleChange}
+          placeholder={placeholder || ""}
+        />
+      </div>
+    );
   };
 
   const renderCreateEvent = () => {
@@ -120,63 +176,38 @@ const HomeOrganizer = () => {
           onSubmit={handleSubmit}
           className="general-box flex-box flex-column smooth-shadow-box"
         >
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              {t("event_name")}: <label className="red-star">*</label>
-            </div>
+          {renderInput(
+            t("event_name"),
+            formData.eventName,
+            "eventName",
+            t("event_name_placeholder")
+          )}
 
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.eventName}
-              name="eventName"
-              onChange={handleChange}
-              placeholder={t("event_name_placeholder")}
-            />
-          </div>
+          {renderInput(
+            t("event_date"),
+            formData.eventDate,
+            "eventDate",
+            "",
+            "date"
+          )}
 
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              {t("event_date")}: <label className="red-star">*</label>
-            </div>
+          {renderInput(
+            "event_start",
+            formData.eventStartTime,
+            "eventStartTime",
+            "",
+            "time"
+          )}
 
-            <DynamicInput
-              className="input-field"
-              type="date"
-              value={formData.eventDate}
-              name="eventDate"
-              onChange={handleChange}
-            />
-          </div>
+          {renderInput(
+            "event_end",
+            formData.eventEndTime,
+            "eventEndTime",
+            "",
+            "time"
+          )}
 
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              {t("event_start")}: <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="time"
-              value={formData.eventStartTime}
-              name="eventStartTime"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              {t("event_end")}: <label className="red-star">*</label>
-            </div>
-
-            <DynamicInput
-              className="input-field"
-              type="time"
-              value={formData.eventEndTime}
-              name="eventEndTime"
-              onChange={handleChange}
-            />
-          </div>
-
+          {/* {renderInput(t("volunteer_count"),formData.maxNumberOfVolunteers,"maxNumberOfVolunteers",t("event_count_placeholder"))} */}
           <div className="flex-box flex-column input-field-box">
             <div>
               <label> {t("volunteer_count")}: </label>
@@ -194,26 +225,18 @@ const HomeOrganizer = () => {
             />
           </div>
 
-          <div className="flex-box flex-column input-field-box">
-            <div>
-              {t("event_location")}: <label className="red-star">*</label>
-            </div>
+          {renderInput(
+            t("event_location"),
+            formData.eventLocation,
+            "eventLocation",
+            t("event_location_placeholder")
+          )}
 
-            <DynamicInput
-              className="input-field"
-              type="text"
-              value={formData.eventLocation}
-              name="eventLocation"
-              onChange={handleChange}
-              placeholder={t("event_location_placeholder")}
-            />
-          </div>
-
-          <SelectComponent
+          {/* <SelectComponent
             type="skills"
             onChange={handleChange}
             chosen={formData.skills}
-          />
+          /> */}
 
           <div className="flex-box flex-column input-field-box">
             <div>
@@ -255,6 +278,14 @@ const HomeOrganizer = () => {
         <div className="scroll-box1 flex-box flex-column">
           <div className="flex-box flex-column top-scroll-box1 line-break">
             <div>
+              <DynamicInput
+                type="text"
+                placeholder={"..."}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="input-field"
+              />
+
               <DynamicButton
                 className="button button-small"
                 onClick={sortEvents}
@@ -268,7 +299,19 @@ const HomeOrganizer = () => {
               />
             </div>
           </div>
-          <div className="bottom-scroll-box1">{renderEventItems(events)}</div>
+          <div className="bottom-scroll-box1">
+            {renderEventItems(
+              events.filter(
+                (event) =>
+                  event.name
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                  event.description
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase())
+              )
+            )}
+          </div>
         </div>
       </>
     );
