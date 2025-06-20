@@ -25,9 +25,10 @@ VALUES
 -- EVENTS
 INSERT INTO events (event_name, event_date, event_start, event_end, is_active, org_id, vol_id, vol_id_waiting_list, max_number_of_vol, current_number_of_vol, event_location, event_description, event_skills)
 VALUES
-('Food Drive', '2024-07-01', '09:00', '13:00', TRUE, 3, ARRAY[2,4]::int[], ARRAY[5]::int[], 10, 2, 'Community Center', 'Distribute food', ARRAY['Organization', 'Teamwork']),
+('Food Drive', '2024-07-01', '09:00', '13:00', TRUE, 3, ARRAY[2,4]::int[], ARRAY[2,5]::int[], 10, 2, 'Community Center', 'Distribute food', ARRAY['Organization', 'Teamwork']),
 ('Park Cleanup', '2024-07-10', '10:00', '14:00', TRUE, 3, ARRAY[4]::int[], ARRAY[]::int[], 8, 1, 'Central Park', 'Clean up park', ARRAY['Cleaning', 'Teamwork']),
-('Tree Planting', '2024-09-15', '09:30', '13:30', FALSE, 6, ARRAY[5]::int[], ARRAY[2]::int[], 20, 1, 'City Park', 'Planting trees', ARRAY['Gardening', 'Teamwork']);
+('Tree Planting', '2024-09-15', '09:30', '13:30', FALSE, 6, ARRAY[5]::int[], ARRAY[2]::int[], 20, 1, 'City Park', 'Planting trees', ARRAY['Gardening', 'Teamwork']),
+('Sample Event', '2024-12-01', '10:00', '14:00', TRUE, 3, ARRAY[2,4]::int[], ARRAY[5,2]::int[], 10, 2, 'Sample Location', 'Sample Description', ARRAY['Skill1', 'Skill2']);
 
 -- VOLUNTEER WAITING LIST
 INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, logs, skills, profile_image_url)

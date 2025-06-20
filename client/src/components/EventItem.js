@@ -65,9 +65,14 @@ const EventItem = ({
           }
         );
         
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          setEnrolledUsers(response.data);
-          setCachedUsers(prev => ({...prev, [id]: response.data}));
+        const usersArr = Array.isArray(response.data)
+          ? response.data
+          : response.data.userData || [];
+
+        if (usersArr.length > 0) {
+          setEnrolledUsers(usersArr);
+          setCachedUsers(prev => ({...prev, [id]: usersArr}));
+          console.log(usersArr);
         } else {
           setEnrolledUsers([]);
         }
@@ -81,7 +86,7 @@ const EventItem = ({
     };
 
     fetchEnrolledUsers();
-  }, [isPopupOpen, id, token, cachedUsers]);
+  }, [isPopupOpen, id, userId, token, cachedUsers]);
 
   const handleFavorite = () => {
     console.log("Clicked favorite");
@@ -92,6 +97,8 @@ const EventItem = ({
     console.log("Clicked enrolled");
     setIsPopupOpen(true);
   };
+
+  console.log("enrolledUsers to render:", enrolledUsers);
 
   return (
     <div className="flex-box flex-column event-box smooth-shadow-box">
