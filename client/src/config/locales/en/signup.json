@@ -30,5 +30,5 @@
   "password": "Password",
 
   "sign_up_message": "Sign up successful!",
-  "login_failed": "Login failed: {{message}}"
+  "login_failed": "Login failed"
 }

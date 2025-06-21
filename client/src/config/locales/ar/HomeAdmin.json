@@ -6,5 +6,5 @@
   "switch_to_card_view": "عرض كبطاقات",
 
   "org_sign_up_message": "تم إنشاء المنظم بنجاح!",
-  "org_sign_up_failed": "حدث خطأ أثناء إنشاء المنظم: {{message}}"
+  "org_sign_up_failed": "حدث خطأ أثناء إنشاء المنظم"
 }

@@ -6,5 +6,5 @@
     "switch_to_card_view": "Switch to Card View" ,
 
     "org_sign_up_message": "Organizer created successfully!",
-    "org_sign_up_failed": "Create organizer failed: {{message}}"
+    "org_sign_up_failed": "Create organizer failed"
 }

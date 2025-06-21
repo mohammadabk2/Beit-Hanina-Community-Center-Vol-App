@@ -30,5 +30,5 @@
   "password": ":كلمة المرور",
 
   "sign_up_message": "تم التسجيل بنجاح",
-  "login_failed": "فشل تسجيل الدخول: {{message}}"
+  "login_failed": "فشل تسجيل الدخول"
 }
