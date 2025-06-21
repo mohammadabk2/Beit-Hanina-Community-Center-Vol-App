@@ -349,7 +349,7 @@ const HomeAdmin = () => {
       if (response.data.status === "success") {
         alert(t("org_sign_up_message"));
       } else {
-        alert(`Create organizer Failed: ${response.data.message}`);
+          alert(`${t("welcome_message")} ${response.data.message}`);
       }
     } catch (error) {
       console.error("Error during sign in:", error);
