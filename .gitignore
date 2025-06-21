@@ -13,6 +13,9 @@ client/android/.gradle/
 client/android/app/build/
 client/android/build/
 client/android/local.properties
+dist/
+keys/
+server-logs/
 
 npm-debug.log*
 yarn-debug.log*

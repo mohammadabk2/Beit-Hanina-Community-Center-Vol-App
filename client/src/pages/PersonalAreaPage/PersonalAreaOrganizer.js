@@ -1,23 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
-
-import DynamicButton from "../../components/common/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
+import SelectSkills from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
+import { useAuth } from "../../config/Context/auth";
+
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const { userId, token } = useAuth();
 
-  //TODO change all these to read from database
-  const name = "Some org";
-  const userName = "org123";
-  const givenHours = 100;
-  const numberOfVolunteers = 50;
+  const [userData, setUserData] = useState(null);
+  const [userSkills, setUserSkills] = useState([]);
 
-  const printToPdf = () => {
-    console.log("print to PDF button clicked");
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/users/Info`, {
+          params: { userID: userId },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setUserData(response.data.userData);
+        } else {
+          console.log(`${response.status} ${response.data.message}`);
+        }
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    };
+
+    if (userId && token) {
+      fetchUserInfo();
+    }
+  }, [userId, token, API_BASE_URL]);
+
+  const handleSkills = (e) => {
+    if (e && e.target && Array.isArray(e.target.value)) {
+      setUserSkills(e.target.value);
+      //TODO add edit skills or change them to view only
+    } else {
+      console.error("Received unexpected event structure in handleSkills:", e);
+    }
   };
 
   return (
@@ -26,36 +57,31 @@ const PersonalArea = () => {
       <div className="general-box flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <div className="basic-box-padding">
-            <div className="perosnal-area-content basic-item-padding">
-              {t("org_name")}: {name}
-            </div>
+            {userData ? (
+              <>
+                <div className="personal-area-content basic-item-padding">
+                  {t("org_name")}: {userData.org_name}
+                </div>
 
-            <div className="perosnal-area-content basic-item-padding">
-              {t("user_name")}: {userName}
-            </div>
-
-            <div className="perosnal-area-content basic-item-padding">
-              {t("total_hours")}: {givenHours}
-            </div>
-
-            <div className="perosnal-area-content basic-item-padding">
-              {t("number_of_vol")}: {numberOfVolunteers}
-            </div>
+                <div className="personal-area-content basic-item-padding">
+                  {t("total_hours")}: {userData.given_hours}
+                </div>
+              </>
+            ) : (
+              <div>Loading user data...</div>
+            )}
           </div>
 
-          <div className="flex-box">
-            <DynamicButton
-              className="button"
-              text={t("to_pdf")}
-              onClick={printToPdf}
-            />
-          </div>
+          <SelectSkills
+            type="skills"
+            onChange={handleSkills}
+            chosen={userSkills}
+          />
 
           <ManageAccountBox />
         </div>
-        
-        <CopyRight />
       </div>
+      <CopyRight />
     </div>
   );
 };

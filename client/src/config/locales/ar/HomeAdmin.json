@@ -1,7 +1,10 @@
 {
-    "sort":"صنف",
-    "switch_to_people": "التبديل إلى الأشخاص",
-    "switch_to_events": "التبديل إلى الأحداث",
-    "switch_to_table_view": "التبديل إلى عرض الجدول",
-    "switch_to_card_view": "التبديل إلى عرض البطاقة"
+    "sort": "صنف",
+  "switch_to_people": "الانتقال إلى الأشخاص",
+  "switch_to_events": "الانتقال إلى الأحداث",
+  "switch_to_table_view": "عرض كجدول",
+  "switch_to_card_view": "عرض كبطاقات",
+
+  "org_sign_up_message": "تم إنشاء المنظم بنجاح!",
+  "org_sign_up_failed": "حدث خطأ أثناء إنشاء المنظم"
 }

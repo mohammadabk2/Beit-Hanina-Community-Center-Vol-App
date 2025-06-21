@@ -1,9 +1,20 @@
-// PersonItemRow.js
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../config/options/Colors";
 
+// Components
 import DynamicButton from "../common/ButtonComponent";
+import PopupComponent from "../common/PopupComponent";
+// Icons
+import checkLight from "../../icons/light/check-light.svg";
+import checkDark from "../../icons/dark/check-dark.svg";
+import crossLight from "../../icons/light/cross-light.svg";
+import crossDark from "../../icons/dark/cross-dark.svg";
+import docPlusLight from "../../icons/light/document-plus-light.svg";
+import docPlusDark from "../../icons/dark/document-plus-dark.svg";
+import docFilledLight from "../../icons/light/document-filled-light.svg";
+import docFilledDark from "../../icons/dark/document-filled-dark.svg";
 
 // Renamed component to reflect its purpose (rendering a row)
 const PersonItemRow = ({
@@ -15,7 +26,7 @@ const PersonItemRow = ({
   address,
   insurance, // Removed from direct display for brevity, but available if needed
   idNumber, // Removed from direct display for brevity, but available if needed
-  // skills, //! uncomment when added
+  skills,
   newUser,
   approveFunction,
   rejectFunction,
@@ -23,10 +34,14 @@ const PersonItemRow = ({
   addLogFunction,
 }) => {
   const { t } = useTranslation("home");
-  // const { t: tskill } = useTranslation("skills"); // Not needed here
+  const { isLightMode } = useTheme();
 
-  // Simple skills display (comma-separated) - adjust as needed
-  // const skillsDisplay = skills ? skills.join(", ") : "N/A"; //! uncomment when added
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const showSkills = () => {
+    console.log("skills render");
+    setIsPopupOpen(true);
+  };
 
   return (
     // No outer div or table needed here, just the row
@@ -37,26 +52,33 @@ const PersonItemRow = ({
       <td>{phoneNumber}</td>
       <td>{email}</td>
       <td>{address}</td>
-      <td>{insurance}</td> {/* Example: Can be added back if needed */}
-      <td>{idNumber}</td> {/* Example: Can be added back if needed */}
-      {/* <td>{skillsDisplay}</td> */} {/* Example: Skills cell */}
-      {/* Action Buttons - Render appropriate buttons in shared cells */}
+      <td>
+        <DynamicButton
+          text={t("skills")}
+          className={"button button-small"}
+          onClick={showSkills}
+        />
+      </td>
+      <td>{insurance}</td>
+      <td>{idNumber}</td>
       {newUser ? (
         <>
           <td>
             <DynamicButton
-              className="button button-approve" // Use specific classes for styling
-              text={t("approve_button")}
+              className="button button-approve"
+              logoSrc={isLightMode ? checkLight : checkDark}
+              logoalt={t("approve_button")}
               onClick={approveFunction}
-              aria-label={`${t("approve_button")} ${name}`} // Better accessibility
+              aria-label={`${t("approve_button")} ${name}`}
             />
           </td>
           <td>
             <DynamicButton
               className="button button-reject"
-              text={t("reject_button")}
+              logoSrc={isLightMode ? crossLight : crossDark}
+              logoalt={t("reject_button")}
               onClick={rejectFunction}
-              aria-label={`${t("reject_button")} ${name}`} // Better accessibility
+              aria-label={`${t("reject_button")} ${name}`}
             />
           </td>
         </>
@@ -64,21 +86,38 @@ const PersonItemRow = ({
         <>
           <td>
             <DynamicButton
-              className="button button-add" // Use specific classes
-              text={t("add_log")}
+              className="button button-add"
+              logoSrc={isLightMode ? docPlusLight : docPlusDark}
+              logoalt={t("add_log")}
               onClick={addLogFunction}
-              aria-label={`${t("add_log")} for ${name}`} // Better accessibility
+              aria-label={`${t("add_log")} for ${name}`}
             />
           </td>
           <td>
             <DynamicButton
-              className="button button-view" // Use specific classes
-              text={t("view_log")}
+              className="button button-view"
+              logoSrc={isLightMode ? docFilledLight : docFilledDark}
+              logoalt={t("view_log")}
               onClick={viewLogsFunction}
-              aria-label={`${t("view_log")} for ${name}`} // Better accessibility
+              aria-label={`${t("view_log")} for ${name}`}
             />
           </td>
         </>
+      )}
+
+      {isPopupOpen && (
+        <PopupComponent
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          message={t("skills")}
+          buttonText="Cancel"
+        >
+          <ul>
+            {skills.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        </PopupComponent>
       )}
     </tr>
   );

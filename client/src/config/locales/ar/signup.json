@@ -9,8 +9,8 @@
   "insurance": ":التأمين الصحي",
   "occupation": "المهنة",
   "idNumber": ":رقم الهوية",
-  "submit": ":إرسال الطلب",
-  "back": ":عودة",
+  "submit": "إرسال الطلب",
+  "back": "عودة",
   "address": ":العنوان",
   "ln": ":لغة",
   "skills": ":المهارات",
@@ -27,5 +27,8 @@
   "selectinsurance": "اختيار التأمين",
   "selectoccupation": "اختيار المهنة",
   "userName": ":اسم المستخدم",
-  "password": ":كلمة المرور"
+  "password": ":كلمة المرور",
+
+  "sign_up_message": "تم التسجيل بنجاح",
+  "login_failed": "فشل تسجيل الدخول"
 }

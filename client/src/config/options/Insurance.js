@@ -6,7 +6,7 @@ export const useInsuranceOptions = () => {
   return [
     {
       label: t("clalit"),
-      value: t("clalit"),
+      value: "clalit",
       href: "#cla",
       onClick: () => {
         console.log("Clalit clicked");
@@ -14,7 +14,7 @@ export const useInsuranceOptions = () => {
     },
     {
       label: t("leumit"),
-      value: t("leumit"),
+      value: "leumit",
       href: "#leu",
       onClick: () => {
         console.log("Leumit clicked");
@@ -22,7 +22,7 @@ export const useInsuranceOptions = () => {
     },
     {
       label: t("maccabi"),
-      value: t("maccabi"),
+      value: "maccabi",
       href: "#mac",
       onClick: () => {
         console.log("Maccabi clicked");
@@ -30,7 +30,7 @@ export const useInsuranceOptions = () => {
     },
     {
       label: t("meuhedet"),
-      value: t("meuhedet"),
+      value: "meuhedet",
       href: "#meu",
       onClick: () => {
         console.log("Meuhedet clicked");

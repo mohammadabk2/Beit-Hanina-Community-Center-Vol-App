@@ -35,5 +35,9 @@
   "hide": "Hide",
   "ln": "Language",
   "settings":"Settings",
-  "personalArea":"Personal Area"
+  "personalArea":"Personal Area",
+
+  "sign_up_message": "Sign up successful!",
+  "login_failed": "Login failed: {{message}}"
 }
+

@@ -23,33 +23,36 @@
 } */
 
 :root {
-  --primary-orange: #ffe0b2;
+  /* --primary-orange: #ffd699;
   --primary-blue: #e3f2fd;
-  --primary-green: #e8f5e9;
+  --primary-green: #e8f5e9; */
+  --text: #000000;
+  --bg-shapes: #3b548a33;
+  --bg-surface: #ffffff4b;
 
-  --body-color: #f4fbff;
-  --box-background-color: #fffaf3;
-  --skills-background: #f1fdf4;
+  --body-color: #ffffff;
+  --box-background-color: #fffaf5;
+  --skills-background: #d8d8d8;
 
   --input-border: #cfd8dc;
   --general-shadow: #0000001a;
-  --skills-shadow: #e0f2f1;
+  --skills-shadow: #e7e7e7;
 
   --general-text: #424242;
   --drop-down-text-color: #2e2e2e;
   --table-row-text: #455a64;
 
-  --input-focus: #ffb74d;
+  --input-focus: #6dacf3;
   --line-break: #cfd8dc;
   --table-line-break: #eeeeee;
 
-  --button-background: #c8e6c9;
-  --button-hover: #a5d6a7;
+  --button-background: #e6e6e6;
+  --button-hover: #d6d6d6;
   --button-text: #1b1b1b;
-  --button-border: #aed581;
+  --button-border: #d1d1d1;
 
-  --top-scroll-box: #f0faff;
-  --bottom-scroll-box: #f0faff;
+  --top-scroll-box: #3b548a33;
+  --bottom-scroll-box: #3b548a33;
 
   --even-row-table: #f9fbe7;
   --odd-row-table: #ffffff;
@@ -57,12 +60,16 @@
 }
 
 html[data-theme="dark"] {
-  --box-background-color: #333336;
+  --text: #ffffff;
+  --bg-shapes: #474747;
+  --bg-surface: #272727;
+
+  --box-background-color: #48484d;
   --drop-down-text-color: #000000;
   --general-shadow: #0000002c;
   --body-color: #333336;
-  --bottom-scroll-box: #292930;
-  --top-scroll-box: #292930;
+  --bottom-scroll-box: #3a3a41;
+  --top-scroll-box: #3a3a41;
   --line-break: #9e9e9e;
   --input-focus: #3498db;
   --input-border: #555555;

@@ -12,7 +12,8 @@ const config = [
       "node_modules/**",
       "src/deprecated/**",
       "client/android/**",
-      "client/public/service-worker.cjs",
+      "client/public/service-worker.js",
+      "dist/**",
     ],
   },
 

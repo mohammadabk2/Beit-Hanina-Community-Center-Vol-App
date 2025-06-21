@@ -1,1 +1,0 @@
-//TODO a loading page to transation between pages it takes too long to load

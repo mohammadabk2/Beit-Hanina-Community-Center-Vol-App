@@ -9,10 +9,9 @@ const About = () => {
 
   return (
     <div className="app flex-box flex-column">
-      {/* //TODO add check if signed in or not and use the right nav bar according to it */}
       <NavigationBar />
-      <div className="general-box scroll-box1 flex-box">
-        <div className="general-box flex-box flex-column smooth-shadow-box">
+      <div className="general-box">
+        <div className="flex-box flex-column smooth-shadow-box">
           {/* <div className="basic-item-padding personal-area-content">
             {tAbout("admins")}
           </div> */}
@@ -26,10 +25,16 @@ const About = () => {
             {tAbout("devs")}
           </div>
           <div className="basic-item-padding personal-area-content">
-            {tAbout("mohammadak")} {tAbout("jad")}
+            {tAbout("mohammadak")}
           </div>
           <div className="basic-item-padding personal-area-content">
-            {tAbout("husam")} {tAbout("mohammadqt")}
+            {tAbout("jad")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("husam")}
+          </div>
+          <div className="basic-item-padding personal-area-content">
+            {tAbout("mohammadqt")}
           </div>
           <div className="basic-item-padding personal-area-content">
             {tAbout("mohammadtb")}

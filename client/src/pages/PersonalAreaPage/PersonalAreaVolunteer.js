@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
+import axios from "axios";
 
 import DynamicButton from "../../components/common/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
@@ -8,24 +8,46 @@ import SelectSkills from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
+import { useAuth } from "../../config/Context/auth";
+
 const PersonalArea = () => {
-  const { t } = useTranslation("personalVolunteer");
+  const { t } = useTranslation("personal");
   const { t: tsignup } = useTranslation("signUp");
+  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const { userId, token } = useAuth();
 
-  //TODO change all these to read from database
-  const name = "john doe";
-  const userName = "johndoe12";
-  // const gender = "male";
-  const approvedHours = 10;
-  const unapprovedHours = 1;
+  const [userData, setUserData] = useState(null);
+  const [userSkills, setUserSkills] = useState([]);
 
-  const [userSkills, setUserSkills] = useState([
-    //TODO call to get user skills
-  ]);
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/users/Info`, {
+          params: { userID: userId },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setUserData(response.data.userData);
+        } else {
+          console.log(`${response.status} ${response.data.message}`);
+        }
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    };
+
+    if (userId && token) {
+      fetchUserInfo();
+    }
+  }, [userId, token, API_BASE_URL]);
 
   const handleSkills = (e) => {
     if (e && e.target && Array.isArray(e.target.value)) {
       setUserSkills(e.target.value);
+      //TODO add edit skills or change them to view only
     } else {
       console.error("Received unexpected event structure in handleSkills:", e);
     }
@@ -41,21 +63,23 @@ const PersonalArea = () => {
       <div className="general-box flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <div className="basic-box-padding">
-            <div className="personal-area-content basic-item-padding">
-              {tsignup("fullName")}: {name}
-            </div>
+            {userData ? (
+              <>
+                <div className="personal-area-content basic-item-padding">
+                  {tsignup("fullName")}: {userData.name}
+                </div>
 
-            <div className="personal-area-content basic-item-padding">
-              {t("user_name")}: {userName}
-            </div>
+                <div className="personal-area-content basic-item-padding">
+                  {t("approved_hours")}: {userData.approved_hours}
+                </div>
 
-            <div className="personal-area-content basic-item-padding">
-              {t("approved_hours")}: {approvedHours}
-            </div>
-
-            <div className="personal-area-content basic-item-padding">
-              {t("unapproved_hours")}: {unapprovedHours}
-            </div>
+                <div className="personal-area-content basic-item-padding">
+                  {t("unapproved_hours")}: {userData.unapproved_hours}
+                </div>
+              </>
+            ) : (
+              <div>Loading user data...</div>
+            )}
           </div>
 
           <SelectSkills
@@ -72,10 +96,9 @@ const PersonalArea = () => {
 
           <ManageAccountBox />
         </div>
-
-        <CopyRight />
       </div>
-    </div>  
+      <CopyRight />
+    </div>
   );
 };
 

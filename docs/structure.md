@@ -5,6 +5,7 @@
 │   ├── app
 │   │   └── apk
 │   │       ├── app-debug-2.apk
+│   │       ├── app-debug-3.apk
 │   │       └── app-debug.apk
 │   ├── assets
 │   │   └── logo.jpg
@@ -17,7 +18,7 @@
 │   │   ├── logo192.png
 │   │   ├── logo512.png
 │   │   ├── manifest.json
-│   │   └── service-worker.cjs
+│   │   └── service-worker.js
 │   ├── README.md
 │   └── src
 │       ├── App.css
@@ -28,6 +29,7 @@
 │       │   │   ├── ButtonComponent.js
 │       │   │   ├── DropDownMenu.js
 │       │   │   ├── InputComponent.js
+│       │   │   ├── PopupComponent.js
 │       │   │   ├── SelectComponent.js
 │       │   │   └── UploadComponent.js
 │       │   ├── EventItem.js
@@ -41,6 +43,11 @@
 │       │       ├── PersonItemRow.js
 │       │       └── PersonList.js
 │       ├── config
+│       │   ├── Context
+│       │   │   └── auth.js
+│       │   ├── hooks
+│       │   │   ├── loadEvent.js
+│       │   │   └── loadUsers.js
 │       │   ├── i18n.js
 │       │   ├── locales
 │       │   │   ├── ar
@@ -82,6 +89,10 @@
 │       │   ├── about_icon.jpg
 │       │   ├── dark
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-dark.svg
+│       │   │   ├── cross-dark.svg
+│       │   │   ├── document-filled-dark.svg
+│       │   │   ├── document-plus-dark.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -95,6 +106,10 @@
 │       │   ├── home_icon.jpg
 │       │   ├── light
 │       │   │   ├── card_view_icon.svg
+│       │   │   ├── check-light.svg
+│       │   │   ├── cross-light.svg
+│       │   │   ├── document-filled-light.svg
+│       │   │   ├── document-plus-light.svg
 │       │   │   ├── NavBar
 │       │   │   │   ├── about_icon.svg
 │       │   │   │   ├── home_icon.svg
@@ -114,8 +129,12 @@
 │           │   └── About.js
 │           ├── CommonPages
 │           │   ├── ErrorScreen.js
-│           │   ├── Loading.js
-│           │   ├── NoConnection.js
+│           │   ├── Loading
+│           │   │   ├── loading.css
+│           │   │   └── Loading.js
+│           │   ├── NoConnection
+│           │   │   ├── noConnection.css
+│           │   │   └── NoConnection.js
 │           │   └── ULA.js
 │           ├── HomePage
 │           │   ├── HomeAdmin.js
@@ -129,9 +148,15 @@
 │               └── SignUp.js
 ├── docs
 │   ├── digrams
+│   │   ├── database-digram.png
+│   │   ├── dataFlow.png
+│   │   ├── h3
+│   │   │   └── user_auth_sequence.png
 │   │   ├── image.png
 │   │   └── logic.drawio
 │   ├── editable
+│   │   ├── h3
+│   │   │   └── user_auth_sequence.drawio
 │   │   └── SignUp.drawio.svg
 │   ├── first-meeting
 │   │   ├── FIRST-MEETING-QUESTIONS.md
@@ -145,42 +170,71 @@
 │   ├── logic.png
 │   └── structure.md
 ├── eslint.config.mjs
+├── keys
+│   ├── Key_1.pem
+│   └── key_2.pem
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── scripts
+│   ├── android_setup.sh
 │   ├── before_git.sh
+│   ├── buildExe.sh
 │   ├── convert_to_apk.sh
 │   ├── convert_to_ipa.sh
 │   ├── generate_file_struct.sh
 │   ├── run_frontEnd.sh
-│   ├── setup_for_android.sh
 │   └── setup_server.sh
 ├── SECURITY.md
+├── server-logs
+│   ├── 16-06-2025.txt
+│   ├── 17-06-2025.txt
+│   ├── 18-06-2025.txt
+│   ├── 19-06-2025.txt
+│   └── 20-06-2025.txt
 ├── src
 │   ├── controllers
+│   │   ├── auth
+│   │   │   ├── changePassword.js
+│   │   │   └── login.js
+│   │   ├── common
+│   │   │   ├── authenticate.js
+│   │   │   ├── error.js
+│   │   │   ├── ping.js
+│   │   │   └── validateToken.js
+│   │   ├── Events
+│   │   │   ├── actions.js
+│   │   │   ├── create.js
+│   │   │   └── load.js
 │   │   ├── index.js
-│   │   ├── register.js
+│   │   ├── Users
+│   │   │   ├── actions.js
+│   │   │   ├── create.js
+│   │   │   ├── Info.js
+│   │   │   └── load.js
 │   │   └── validation.js
 │   ├── database
-│   │   ├── dbbuild.js
+│   │   ├── dbconnection.js
 │   │   ├── db.js
 │   │   ├── schema.sql
 │   │   └── validation
 │   │       └── users.js
-│   ├── deprecated
-│   │   └── Users
-│   │       ├── Admin.js
-│   │       ├── Organizer.js
-│   │       ├── PersonFactory.js
-│   │       ├── Person.js
-│   │       └── Volunteer.js
 │   ├── middlewares
 │   │   └── verifyToken.js
-│   └── server.js
+│   ├── server.js
+│   └── utils
+│       ├── eventStatusScheduler.js
+│       └── logger.js
 ├── tests
-│   └── test.txt
+│   ├── addAdmin.sql
+│   ├── drop_tables.sql
+│   ├── events.sql
+│   ├── master.sql
+│   ├── populate.sql
+│   ├── postman
+│   │   └── App-test.postman_collection.json
+│   └── test_cases.md
 └── workbox-config.cjs
 
-40 directories, 140 files
+52 directories, 182 files
 ```
