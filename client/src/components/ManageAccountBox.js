@@ -7,10 +7,13 @@ import { useAuth } from "../config/Context/auth";
 import PopupComponent from "./common/PopupComponent";
 import DynamicInput from "./common/InputComponent";
 
+import { SERVER_IP } from "../global";
+
+
 const ManageAccountBox = () => {
   const { t } = useTranslation("personal");
   const { logout, userId, token } = useAuth();
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [oldPassword, setOldPassword] = useState("");

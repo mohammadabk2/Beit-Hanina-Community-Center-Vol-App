@@ -11,9 +11,10 @@ import CopyRight from "./components/layout/CopyRight";
 import NoConnection from "./pages/CommonPages/NoConnection/NoConnection";
 
 import { useAuth } from "./config/Context/auth";
+import { SERVER_IP } from './global';
 
 const App = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");

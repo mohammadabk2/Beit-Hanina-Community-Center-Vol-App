@@ -1,0 +1,1 @@
+export const SERVER_IP = 'http://18.192.27.50';

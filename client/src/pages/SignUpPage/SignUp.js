@@ -14,13 +14,14 @@ import CopyRight from "../../components/layout/CopyRight";
 // Import the insurance and occupation options
 import { useInsuranceOptions } from "../../config/options/Insurance";
 import { useOccupationOptions } from "../../config/options/Occupation";
+import { SERVER_IP } from "../../global";
 
 const SignUpPage = () => {
   //TODO handle if already signed in maybe do that in App.js
   const navigate = useNavigate();
   const { t } = useTranslation("signUp");
   const { t: tApp } = useTranslation("app");
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
 
   const baseInsuranceOptions = useInsuranceOptions();
   const baseOccupationOptions = useOccupationOptions();

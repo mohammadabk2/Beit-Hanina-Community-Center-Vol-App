@@ -10,10 +10,12 @@ import CopyRight from "../../components/layout/CopyRight";
 
 import { useAuth } from "../../config/Context/auth";
 
+import { SERVER_IP } from "../../global";
+
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
   const { t: tsignup } = useTranslation("signUp");
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
   const { userId, token } = useAuth();
 
   const [userData, setUserData] = useState(null);

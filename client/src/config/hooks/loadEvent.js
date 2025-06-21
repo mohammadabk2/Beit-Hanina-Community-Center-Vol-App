@@ -2,10 +2,12 @@ import { useState, useCallback } from "react";
 import axios from "axios";
 import { useAuth } from "../Context/auth";
 
+import { SERVER_IP } from "../../global";
+
 const useLoadEvents = () => {
   const { userId, isAuthenticated, logout } = useAuth();
   const token = localStorage.getItem("authToken");
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
 
   const [events, setEvents] = useState([]);
   const [eventsLoading, setEventsLoading] = useState(false);

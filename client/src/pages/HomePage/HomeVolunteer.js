@@ -13,8 +13,10 @@ import DropDownMenu from "../../components/common/DropDownMenu";
 import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 
+import { SERVER_IP } from "../../global";
+
 const HomeVolunteer = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
   const { t } = useTranslation("home");
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
