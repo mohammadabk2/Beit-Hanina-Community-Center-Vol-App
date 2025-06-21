@@ -27,5 +27,8 @@
   "selectinsurance": "Select Insurance",
   "selectoccupation": "Select Occupation",
   "userName": "User Name",
-  "password": "Password"
+  "password": "Password",
+
+  "sign_up_message": "Sign up successful!",
+  "login_failed": "Login failed: {{message}}"
 }
