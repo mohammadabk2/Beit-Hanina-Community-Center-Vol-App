@@ -6,5 +6,10 @@
   "user-name-placeholder": "Enter UserName",
   "password-placeholder": "Enter password",
   "sign-in": "Sign in",
-  "sign-up": "Sign up"
+  "sign-up": "Sign up",
+
+  "welcome_message": "Welcome",
+  "login_failed_default": "Login failed. Please check your credentials",
+  "login_failed_message": "Login failed",
+  "sign_out_first_message": "Please sign out first"
 }

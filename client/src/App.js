@@ -94,12 +94,12 @@ const App = () => {
           navigate("home-volunteer");
         }
 
-        alert(`Welcome ${response.data.message}`);
+        alert(`${t("welcome_message")} ${response.data.message}`);
       } else {
         const message =
           response.data?.message || "Login failed. Please check credentials.";
         setError(message);
-        alert(`Login Failed: ${error}`);
+        alert(`${t("login_failed_message")} ${error}`);        
       }
     } catch (err) {
       console.error("Error during sign in:", err);
