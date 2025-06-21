@@ -5,7 +5,7 @@ export default {
   phoneNumber: /^\d{10}$/,
   email:
     /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-  address: /^[a-zA-Z\s]{1,255}$/,
+  address: /^[\p{L}\p{N}\s,.'\-#]{3,255}$/u,
   insurance: /^(clalit|leumit|maccabi|meuhedet)$/,
   idNumber: /^\d{9}$/,
   username: /^[a-zA-Z0-9]{3,20}$/,

@@ -111,7 +111,7 @@ const SignUpPage = () => {
         //TODO add wait here
         goBack();
       } else {
-          alert(t("login_failed"));
+        alert(t("login_failed"));
       }
     } catch (err) {
       console.error("Error during sign in:", err);
@@ -209,10 +209,10 @@ const SignUpPage = () => {
             )}
 
             {renderInput(
-              (t("address"),
+              t("address"),
               formData.address,
               "address",
-              t("address_placeholder"))
+              t("address_placeholder")
             )}
 
             <div className="flex-box flex-column input-field-box">
