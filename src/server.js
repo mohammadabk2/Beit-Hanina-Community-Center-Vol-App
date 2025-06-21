@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // API routes
 app.use(
   cors({
-    origin: "http://localhost:3000", // IMPORTANT: Replace with the exact URL of your client-side application.
+    origin: "http://18.192.27.50:300", // IMPORTANT: Replace with the exact URL of your client-side application.
     // For development, if you need it to work immediately without worrying about client port, you *could* temporarily use '*', but be aware of security.
     // Example: origin: '*'
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Standard methods, include OPTIONS for preflight requests
