@@ -60,6 +60,7 @@ const useLoadEvents = () => {
     eventsLoading,
     eventsError,
     loadEvents,
+    setEvents,
   };
 };
 
