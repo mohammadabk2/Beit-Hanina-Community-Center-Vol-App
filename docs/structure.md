@@ -85,6 +85,7 @@
 │       │       ├── Skills.js
 │       │       └── Sort.js
 │       ├── global.css
+│       ├── global.js
 │       ├── icons
 │       │   ├── about_icon.jpg
 │       │   ├── dark
@@ -186,12 +187,6 @@
 │   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
-├── server-logs
-│   ├── 16-06-2025.txt
-│   ├── 17-06-2025.txt
-│   ├── 18-06-2025.txt
-│   ├── 19-06-2025.txt
-│   └── 20-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
@@ -236,5 +231,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-52 directories, 182 files
+51 directories, 178 files
 ```

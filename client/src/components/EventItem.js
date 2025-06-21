@@ -11,6 +11,8 @@ import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 import PopupComponent from "./common/PopupComponent"
 
+import { SERVER_IP } from "../global";
+
 const EventItem = ({
   id,
   name,
@@ -29,6 +31,7 @@ const EventItem = ({
   const { t } = useTranslation("home");
   const { t: tskill } = useTranslation("skills");
   const { token, userId } = useAuth();
+  const API_BASE_URL = SERVER_IP;
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -47,7 +50,7 @@ const EventItem = ({
       
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/api/users`,
+          `${API_BASE_URL}/api/users`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -95,7 +98,7 @@ const EventItem = ({
   const handleEnrolledUsers = async (action, targetUserId) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/events/actions`,
+        `${API_BASE_URL}/api/events/actions`,
         {
           targetUserID: targetUserId,
           userID: userId,

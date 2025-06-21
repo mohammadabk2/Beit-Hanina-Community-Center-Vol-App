@@ -24,14 +24,18 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 import useLoadUsers from "../../config/hooks/loadUsers";
 
+import { SERVER_IP } from "../../global";
+
 const HomeAdmin = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
   const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
-  const { events, eventsLoading, eventsError, loadEvents, setEvents } = useLoadEvents(); // load events hook
-  const { users, usersLoading, userError, loadUsers, setUsers } = useLoadUsers(); // load users hook
+  const { events, eventsLoading, eventsError, loadEvents, setEvents } =
+    useLoadEvents(); // load events hook
+  const { users, usersLoading, userError, loadUsers, setUsers } =
+    useLoadUsers(); // load users hook
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
@@ -137,10 +141,10 @@ const HomeAdmin = () => {
 
   const approveEvent = async (id) => {
     console.log(`approve event clicked event id:${id}`);
-    
+
     // Optimistic update: Remove the event from current view
-    setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
-    
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+
     try {
       await sendAxiod("events/actions", id, "approve", "NA");
       // Optionally reload events to ensure consistency
@@ -154,10 +158,10 @@ const HomeAdmin = () => {
 
   const rejectEvent = async (id) => {
     console.log(`reject event clicked event id:${id}`);
-    
+
     // Optimistic update: Remove the event from current view
-    setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
-    
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+
     try {
       await sendAxiod("events/actions", id, "reject", "NA");
       // Optionally reload events to ensure consistency
@@ -214,10 +218,10 @@ const HomeAdmin = () => {
 
   const handleApprove = async (personId) => {
     console.log(`Approving person ${personId}`);
-    
+
     // Optimistic update: Remove the user from current view
-    setUsers(prevUsers => prevUsers.filter(user => user.id !== personId));
-    
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== personId));
+
     try {
       await sendAxiod("users", personId, "approve", "NA");
       // Optionally reload users to ensure consistency
@@ -231,10 +235,10 @@ const HomeAdmin = () => {
 
   const handleReject = async (personId) => {
     console.log(`Rejecting person ${personId}`);
-    
+
     // Optimistic update: Remove the user from current view
-    setUsers(prevUsers => prevUsers.filter(user => user.id !== personId));
-    
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== personId));
+
     try {
       await sendAxiod("users", personId, "reject", "NA");
       // Optionally reload users to ensure consistency
@@ -354,7 +358,10 @@ const HomeAdmin = () => {
                   user.idNumber
                     ?.toLowerCase()
                     .includes(searchQuery.toLowerCase()) ||
-                  user.skills?.join(" ").toLowerCase().includes(searchQuery.toLowerCase())
+                  user.skills
+                    ?.join(" ")
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase())
               )}
               type={personView ? "card" : "table"}
               approveUser={handleApprove}
@@ -394,7 +401,7 @@ const HomeAdmin = () => {
       if (response.data.status === "success") {
         alert(t("org_sign_up_message"));
       } else {
-          alert(t("org_sign_up_failed"));
+        alert(t("org_sign_up_failed"));
       }
     } catch (error) {
       console.error("Error during sign in:", error);
@@ -526,7 +533,11 @@ const HomeAdmin = () => {
   }, [userId, isAuthenticated, loadUsers, peopleStatus]);
 
   if (loadingInitial) {
-    return (<><LoadingPage message={t("Loading Events")}/></>);
+    return (
+      <>
+        <LoadingPage message={t("Loading Events")} />
+      </>
+    );
   }
 
   if (!isAuthenticated) {

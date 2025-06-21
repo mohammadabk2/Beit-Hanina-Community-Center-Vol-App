@@ -14,8 +14,11 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 // import useLoadUsers from "../../config/hooks/loadUsers";
 
+import { SERVER_IP } from "../../global";
+
+
 const HomeOrganizer = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
   const { t } = useTranslation("home");
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
