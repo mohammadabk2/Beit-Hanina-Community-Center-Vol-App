@@ -65,6 +65,7 @@ const useLoadUsers = () => {
     usersLoading,
     userError,
     loadUsers,
+    setUsers,
   };
 };
 
