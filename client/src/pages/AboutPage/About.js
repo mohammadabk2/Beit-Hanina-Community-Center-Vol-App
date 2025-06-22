@@ -1,11 +1,18 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
+import DynamicButton from "../../components/common/ButtonComponent";
 
 const About = () => {
   const { t: tAbout } = useTranslation("about");
+
+  const navigate = useNavigate();
+  const backToHome = () => {
+    navigate("/");
+  };
 
   return (
     <div className="app flex-box flex-column">
@@ -39,6 +46,12 @@ const About = () => {
           <div className="basic-item-padding personal-area-content">
             {tAbout("mohammadtb")}
           </div>
+
+          <DynamicButton
+            className="button"
+            text={tAbout("back")}
+            onClick={backToHome}
+          />
         </div>
       </div>
 
