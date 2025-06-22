@@ -759,54 +759,77 @@ const fetchEventVolunteers = async (eventID, arrayName) => {
  * @throws {Error} If the database query fails.
  */
 const decideUserEventStatus = async (eventID, userID, arrayName, status) => {
+  // Store queries and their respective values separately
   const queries = [];
-  const values = [eventID, userID];
 
   if (status === "waiting") {
-    queries.push(`
-      UPDATE events
-      SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
   }
 
   if (status === "approved") {
     // Add to approved list
-    queries.push(`
-      UPDATE events
-      SET vol_id = ARRAY_APPEND(COALESCE(vol_id, ARRAY[]::INT[]), $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET vol_id = ARRAY_APPEND(COALESCE(vol_id, ARRAY[]::INT[]), $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
     // Remove from waiting list
-    queries.push(`
-      UPDATE events
-      SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
+    // Increment current number of volunteers - only eventID needed
+    queries.push({
+      text: `
+        UPDATE events
+        SET current_number_of_vol = current_number_of_vol + 1
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID], // only one param here
+    });
   }
 
   if (status === "rejected") {
     // Remove from waiting list
-    queries.push(`
-      UPDATE events
-      SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
   }
+
   try {
     let result;
-    for (const text of queries) {
+    for (const { text, values } of queries) {
       const res = await db.query(text, values);
       result = res.rows[0]; // Optional: update only the last result
     }
     return result;
   } catch (error) {
     console.error(`Error in enrollUserToEvent on array ${arrayName}:`, error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error;
   }
 };
 
