@@ -16,7 +16,7 @@ import { SERVER_IP } from "../global";
 const EventItem = ({
   id,
   name,
-  req,
+  // req,
   type,
   count,
   size,
