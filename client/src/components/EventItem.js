@@ -30,7 +30,7 @@ const EventItem = ({
   // volunteers,
 }) => {
   const { t } = useTranslation("home");
-  const { t: tskill } = useTranslation("skills");
+  // const { t: tskill } = useTranslation("skills");
   const { token, userId } = useAuth();
   const API_BASE_URL = SERVER_IP;
 
@@ -171,9 +171,6 @@ const EventItem = ({
           ></img>
         </div>
       </div>
-      <div>
-        {description} {/*Desc, could be styled or not*/}
-      </div>
 
       <div className="flex-box event-box-content-middle">
         <div>
@@ -181,16 +178,18 @@ const EventItem = ({
         </div>
 
         <div className="flex-box flex-column skills-box">
-          <div>{tskill("skills")}:</div>
-
-          <div className="flex-box wrap-reverse">
+          <div className="event-description-label">{t("event_description")}</div>
+          <div style={{ marginBottom: '1rem' }}>
+            {description || t("no_description_available")}
+          </div>
+          {/* <div className="flex-box wrap-reverse">
             {req.map((item, index) => (
               <div key={index} className="skills">
                 {item}
                 {index < req.length - 1 && " "}
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 

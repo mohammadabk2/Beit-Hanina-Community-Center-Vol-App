@@ -279,6 +279,11 @@ textarea:focus {
   margin: 0.5rem 0 0.5rem 0;
 }
 
+.event-description-label {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .favorite-button-image {
   width: 2rem;
   position: absolute;
