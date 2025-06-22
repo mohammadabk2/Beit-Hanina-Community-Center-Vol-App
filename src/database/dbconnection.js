@@ -905,6 +905,30 @@ const loadUserInfo = async (userID, role) => {
   }
 };
 
+/**
+ * Get Volunteer Events
+ * @param {number} userID - The user ID to fetch data for.
+ * @param {string} eventType - Event Type (fav,signed-up).
+ * @returns {Promise<Object>} A promise that resolves to the User Events object.
+ * @throws {Error} If the database query fails.
+ */
+const getEventsForVolunteer = async (userID, eventType) => {
+  const text = `
+  SELECT ${eventType}
+  FROM volunteer
+  WHERE user_id=$1`;
+
+  const values = [userID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(`Error getting ${eventType} for user ${userID}:`, error);
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -922,6 +946,7 @@ export default {
   changePassword,
   loadUserInfo,
   fetchEventVolunteers,
+  getEventsForVolunteer,
 
   // Currently for testing unused
   getUserById, // tested

@@ -32,6 +32,8 @@ const load = async (req, res) => {
   }
 
   const roles = ["volunteer", "organizer", "admin"];
+  const volTypes = ["new", "signed-up", "fav"];
+
   if (roles.includes(roleType.role)) {
     console.log(`Attempting load Events from DB for userId: ${userID}`);
 
@@ -66,11 +68,50 @@ const load = async (req, res) => {
         response = answer;
       }
 
-      if(type === "event-type" && eventID){
-        //TODO load user request info like fav or regiersted for volunteer
-        // or mine for org 
-        console.log("logic not done yet");
-        // answer = await dbConnection
+      if (volTypes.includes(type)) {
+        //TODO logic to sort for volunteer
+        answer = await dbConnection.getEvents(userRequest);
+
+        let filteredEvents = answer;
+        // Filter based on type
+        if (type === "fav") {
+          console.log("User faved Events");
+          const favEventIds = await dbConnection.getEventsForVolunteer(
+            userID,
+            "fav_events"
+          );
+          filteredEvents = answer.filter((event) =>
+            favEventIds.includes(event.event_id)
+          );
+        }
+        if (type === "signed-up") {
+          console.log("User signed up Events");
+          const signedUpEventIds = await dbConnection.getEventsForVolunteer(
+            userID,
+            "signedup_events"
+          );
+          filteredEvents = answer.filter((event) =>
+            signedUpEventIds.includes(event.event_id)
+          );
+        }
+
+        answer = filteredEvents;
+        if (answer && answer.length > 0) {
+          response = answer.map((event) => ({
+            id: event.event_id,
+            name: event.event_name,
+            birthDate: new Date(event.event_date).toISOString().split("T")[0],
+            startTime: event.event_start,
+            endTime: event.event_end,
+            active: event.is_active,
+            orgId: event.org_id,
+            //TODO Implement different data return for vol/org/admin
+            maxSize: event.max_number_of_vol,
+            currentSize: event.current_number_of_vol,
+            location: event.event_location,
+            description: event.event_description,
+          }));
+        }
       }
 
       if (answer && response) {
@@ -82,7 +123,7 @@ const load = async (req, res) => {
           userData: response,
         });
       } else {
-        const message = `There does not exist any events under this category.`;
+        const message = `There does not exist any events under this category ${userRequest}.`;
         console.log(message);
         res.status(200).send({
           message: message,

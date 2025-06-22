@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS volunteer
     approved_hours INT DEFAULT 0,
     unapproved_hours INT DEFAULT 0,
     skills TEXT[] DEFAULT '{}',
-    orgs INT[] DEFAULT '{}'
+    orgs INT[] DEFAULT '{}',
+    fav_events INT[] DEFAULT '{}',
+    signedup_events INT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS volunteer_waiting_list
