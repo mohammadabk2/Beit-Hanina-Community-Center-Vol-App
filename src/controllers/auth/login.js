@@ -1,7 +1,7 @@
 import dbConnection from "../../database/dbconnection.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
 const generateToken = (userId, role) => {
@@ -24,27 +24,26 @@ const loginUser = async (req, res) => {
 
   try {
     const response = await dbConnection.getUserHash(userName); // Await the result
-    const isPasswordMatch = await bcrypt.compare(
-      password,
-      response.password_hash
-    ); // hash the password and compare to the stored hash
+    // prod
+    // const isPasswordMatch = await bcrypt.compare(
+    //   password,
+    //   response.password_hash
+    // ); // hash the password and compare to the stored hash
+    const isPasswordMatch = (password === response.password_hash); // testing only
 
     if (isPasswordMatch) {
       console.log(`Login successful for user: ${userName}`);
 
       const token = generateToken(response.id, response.role);
-      res
-        .header("Authorization", `Bearer ${token}`)
-        .status(200)
-        .send({
-          message: `Login successful! ${userName} ${response.id}`,
-          status: "success",
-          userData: {
-            // Add a dedicated object for user data
-            id: response.id,
-            role: response.role, // Include the user role
-          },
-        });
+      res.header('Authorization', `Bearer ${token}`).status(200).send({
+        message: `Login successful! ${userName} ${response.id}`,
+        status: "success",
+        userData: {
+          // Add a dedicated object for user data
+          id: response.id,
+          role: response.role, // Include the user role
+        },
+      });
     } else {
       console.log(`Login failed for user: ${userName}`);
       res.status(401).send({
