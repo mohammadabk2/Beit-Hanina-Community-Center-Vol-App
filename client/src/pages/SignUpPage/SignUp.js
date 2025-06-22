@@ -36,7 +36,7 @@ const SignUpPage = () => {
     insurance: "",
     occupation: "",
     idNumber: "",
-    userName: "",
+    username: "",
     password: "",
     skills: [], // Initialize skills as an array
     imageFile: null,
@@ -249,8 +249,8 @@ const SignUpPage = () => {
 
             {renderInput(
               t("userName"),
-              formData.userName,
-              "userName",
+              formData.username,
+              "username",
               tApp("user-name-placeholder")
             )}
 
