@@ -11,7 +11,6 @@ const PersonalArea = () => {
   const { t } = useTranslation("personal");
 
   //TODO change all these to read from database
-  const name = "Fadi";
 
   const printToPdf = () => {
     console.log("print to PDF button clicked");
@@ -96,9 +95,6 @@ const PersonalArea = () => {
       <div className="general-box flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
           <div className="basic-box-padding">
-            <div className="perosnal-area-content basic-box-padding">
-              {t("name")}: {name}
-            </div>
 
             <div className="flex-box basic-box-padding">
               {/* <DynamicButton

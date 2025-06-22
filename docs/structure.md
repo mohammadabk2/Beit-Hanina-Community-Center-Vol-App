@@ -54,9 +54,7 @@
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
 │       │   │   │   ├── copyright.json
-│       │   │   │   ├── HomeAdmin.json
 │       │   │   │   ├── home.json
-│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
 │       │   │   │   ├── occupation.json
@@ -68,9 +66,7 @@
 │       │   │       ├── app.json
 │       │   │       ├── copyright.json
 │       │   │       ├── events.json
-│       │   │       ├── HomeAdmin.json
 │       │   │       ├── home.json
-│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
 │       │   │       ├── occupation.json
@@ -187,6 +183,8 @@
 │   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
+├── server-logs
+│   └── 22-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
@@ -231,5 +229,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-51 directories, 178 files
+52 directories, 175 files
 ```

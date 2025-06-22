@@ -433,7 +433,7 @@ const HomeAdmin = () => {
               t("phoneNumber"),
               formData.phoneNumber,
               "phoneNumber",
-              t("fullName_phone_placeholder")
+              t("phone_placeholder")
             )}
 
             {renderInput(
@@ -454,7 +454,7 @@ const HomeAdmin = () => {
               t("orgUserName"),
               formData.username,
               "username",
-              t("username_phone_placeholder")
+              t("username_placeholder")
             )}
 
             {renderInput(

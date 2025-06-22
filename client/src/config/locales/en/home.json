@@ -38,6 +38,19 @@
   "personalArea":"Personal Area",
 
   "sign_up_message": "Sign up successful!",
-  "login_failed": "Login failed: {{message}}"
+  "login_failed": "Login failed: {{message}}",
+
+  "fullName":"Name of Organization",
+  "fullName_placeholder":"Enter The Name of The Organization ",
+  "phoneNumber":"Phone Number",
+  "phone_placeholder":"Enter Phone Number",
+  "email":"Email",
+  "email_phone_placeholder":"Enter Email",
+  "address":"Address",
+  "address_placeholder":"Enter Address",
+  "orgUserName":"Organization Username",
+  "username_placeholder":"Enter Organization Username",
+  "password":"Password",
+  "password_phone_placeholder":"Enter Password"
 }
 
