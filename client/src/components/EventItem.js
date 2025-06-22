@@ -9,7 +9,7 @@ import logoIcon from "../icons/org_icon.png";
 import personIcon from "../icons/person_icon.svg";
 import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
-import PopupComponent from "./common/PopupComponent"
+import PopupComponent from "./common/PopupComponent";
 
 import { SERVER_IP } from "../global";
 
@@ -42,27 +42,24 @@ const EventItem = ({
   useEffect(() => {
     const fetchEnrolledUsers = async () => {
       if (!isPopupOpen) return;
-      
+
       setIsLoading(true);
       setError(null);
 
       console.log(userId);
-      
+
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}/api/users`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            params: {
-              userID: userId,
-              userRequest: [id, 'vol_id_waiting_list'],
-              tableName: 'volunteer'
-            }
-          }
-        );
-        
+        const response = await axios.get(`${API_BASE_URL}/api/users`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            userID: userId,
+            userRequest: [id, "vol_id_waiting_list"],
+            tableName: "volunteer",
+          },
+        });
+
         const usersArr = Array.isArray(response.data)
           ? response.data
           : response.data.userData || [];
@@ -75,7 +72,7 @@ const EventItem = ({
         }
       } catch (error) {
         console.error("Error fetching enrolled users:", error);
-        setError(error.message || 'Failed to fetch enrolled users');
+        setError(error.message || "Failed to fetch enrolled users");
         setEnrolledUsers([]);
       } finally {
         setIsLoading(false);
@@ -84,11 +81,6 @@ const EventItem = ({
 
     fetchEnrolledUsers();
   }, [isPopupOpen, id, userId, token]);
-
-  const handleFavorite = () => {
-    console.log("Clicked favorite");
-    setIsFavorite(!isFavorite);
-  };
 
   const showEnrolled = () => {
     console.log("Clicked enrolled");
@@ -104,7 +96,7 @@ const EventItem = ({
           userID: userId,
           actionID: id,
           action: action,
-          actionValue: 'vol_id_waiting_list',
+          actionValue: "vol_id_waiting_list",
         },
         {
           headers: {
@@ -114,9 +106,40 @@ const EventItem = ({
       );
 
       if (response.status === 200) {
-        setEnrolledUsers(enrolledUsers => 
-          enrolledUsers.filter(user => user.id !== targetUserId)
+        setEnrolledUsers((enrolledUsers) =>
+          enrolledUsers.filter((user) => user.id !== targetUserId)
         );
+      } else {
+        alert("Failed to update user status, try again later");
+      }
+    } catch (error) {
+      console.error("Axios request failed:", error);
+      alert("Failed to update user status, try again later");
+    }
+  };
+
+  const handleFavorite = async () => {
+    console.log("Clicked favorite");
+    setIsFavorite(!isFavorite);
+
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/events/actions`,
+        {
+          userID: userId,
+          actionID: id,
+          action: "fav",
+          actionValue: "N/A",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("fav reversed");
       } else {
         alert("Failed to update user status, try again later");
       }
@@ -230,25 +253,35 @@ const EventItem = ({
             <div className="error-message">{error}</div>
           ) : Array.isArray(enrolledUsers) && enrolledUsers.length > 0 ? (
             <div className="enrolled-users-list">
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
                   <tr>
-                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Name</th>
-                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Phone</th>
-                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Gender</th>
-                    <th style={{ textAlign: 'left', padding: '0.5rem' }}>Actions</th>
+                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                      Name
+                    </th>
+                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                      Phone
+                    </th>
+                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                      Gender
+                    </th>
+                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {enrolledUsers.map((user) => (
                     <tr key={user.id} className="user-item">
-                      <td style={{ padding: '0.5rem' }}>{user.name}</td>
-                      <td style={{ padding: '0.5rem' }}>{user.phoneNumber}</td>
-                      <td style={{ padding: '0.5rem' }}>{user.sex}</td>
-                      <td style={{ padding: '0.5rem' }}>
+                      <td style={{ padding: "0.5rem" }}>{user.name}</td>
+                      <td style={{ padding: "0.5rem" }}>{user.phoneNumber}</td>
+                      <td style={{ padding: "0.5rem" }}>{user.sex}</td>
+                      <td style={{ padding: "0.5rem" }}>
                         <button
                           className="button button-approve"
-                          onClick={() => handleEnrolledUsers("approve", user.id)}
+                          onClick={() =>
+                            handleEnrolledUsers("approve", user.id)
+                          }
                         >
                           Approve
                         </button>

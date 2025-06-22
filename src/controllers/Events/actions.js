@@ -104,6 +104,15 @@ const eventActions = async (req, res) => {
         }
       }
 
+      // For all Users fav button Adds to fav list
+      if (action === "fav") {
+        answer = await dbconnection.addEventToVolunteerList(
+          userID,
+          "fav_events",
+          actionID
+        );
+      }
+
       if (!answer) {
         const message = `action failed!! invalid action type`;
         console.log(message);

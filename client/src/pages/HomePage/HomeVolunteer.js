@@ -110,6 +110,7 @@ const HomeVolunteer = () => {
     return eventsArray.map((event) => (
       <EventItem
         key={event.id}
+        id={event.id}
         name={event.name}
         desc={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
