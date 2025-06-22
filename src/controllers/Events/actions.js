@@ -71,7 +71,7 @@ const eventActions = async (req, res) => {
           );
 
           if (answer) {
-            await dbconnection.addEventToVolunteerList(
+            await dbconnection.addEventToUserList(
               userID,
               "signed_up_events",
               actionID
@@ -106,27 +106,27 @@ const eventActions = async (req, res) => {
 
       // For all Users fav button Adds to fav list
       if (action === "fav") {
-        // answer = await dbconnection.addEventToVolunteerList(
+        // answer = await dbconnection.addEventToUserList(
         //   userID,
         //   "fav_events",
         //   actionID
         // );
 
-        const favList = await dbconnection.getEventsForVolunteer(
+        const favList = await dbconnection.getUserEvents(
           userID,
           "fav_events"
         );
 
         if (favList.includes(Number(actionID))) {
           console.log("Event already in favorites, removing...");
-          answer = await dbconnection.removeEventFromVolunteerList(
+          answer = await dbconnection.removeEventFromUserList(
             userID,
             "fav_events",
             actionID
           );
         } else {
           console.log("Event not in favorites, adding...");
-          answer = await dbconnection.addEventToVolunteerList(
+          answer = await dbconnection.addEventToUserList(
             userID,
             "fav_events",
             actionID

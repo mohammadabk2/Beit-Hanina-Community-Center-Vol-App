@@ -119,6 +119,7 @@ const HomeVolunteer = () => {
         size={event.maxSize}
         eventLocation={event.location}
         joinEvent={() => handleJoin(event.id)} // Passes functions as callback
+        isFavorite={event.isFavorite}
       />
     ));
   };

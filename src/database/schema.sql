@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS users
     banned BOOLEAN DEFAULT FALSE,
     logs TEXT[] DEFAULT '{}',
     role TEXT,
-    profile_image_url TEXT
+    profile_image_url TEXT,
+    fav_events INT[] DEFAULT '{}',
+    signed_up_events INT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS volunteer

@@ -191,6 +191,7 @@ const HomeAdmin = () => {
         eventLocation={event.location}
         approveEvent={() => approveEvent(event.id)}
         rejectEvent={() => rejectEvent(event.id)}
+        isFavorite={event.isFavorite}
       />
     ));
   };

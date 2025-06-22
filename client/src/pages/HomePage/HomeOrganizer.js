@@ -111,6 +111,7 @@ const HomeOrganizer = () => {
         size={event.maxSize}
         eventLocation={event.location}
         volunteers={event.enrolledVol}
+        isFavorite={event.isFavorite}
       />
     ));
   };
