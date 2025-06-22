@@ -943,6 +943,36 @@ const addEventToVolunteerList = async (userID, tableName, eventID) => {
   }
 };
 
+/**
+ * Remove Event from Volunteer List
+ * @param {number} userID - The user ID to update.
+ * @param {string} tableName - Name of the list to remove from.
+ * @param {number} eventID - Event ID to remove.
+ * @returns {Promise<Object>} Updated volunteer row.
+ * @throws {Error} If the database query fails.
+ */
+const removeEventFromVolunteerList = async (userID, tableName, eventID) => {
+  const text = `
+    UPDATE volunteer
+    SET ${tableName} = ARRAY_REMOVE(${tableName}, $2)
+    WHERE user_id = $1
+    RETURNING *;
+  `;
+
+  const values = [userID, eventID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(
+      `Error removing Event:${eventID} for user: ${userID} from list: ${tableName}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -962,6 +992,7 @@ export default {
   fetchEventVolunteers,
   getEventsForVolunteer,
   addEventToVolunteerList,
+  removeEventFromVolunteerList,
 
   // Currently for testing unused
   getUserById, // tested
