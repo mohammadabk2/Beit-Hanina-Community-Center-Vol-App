@@ -907,11 +907,11 @@ const loadUserInfo = async (userID, role) => {
  * @returns {Promise<Object>} A promise that resolves to the User Events object.
  * @throws {Error} If the database query fails.
  */
-const getEventsForVolunteer = async (userID, eventType) => {
+const getUserEvents = async (userID, eventType) => {
   const text = `
   SELECT ${eventType}
-  FROM volunteer
-  WHERE user_id=$1;`;
+  FROM users
+  WHERE id=$1;`;
 
   const values = [userID];
 
@@ -933,22 +933,22 @@ const getEventsForVolunteer = async (userID, eventType) => {
 };
 
 /**
- * Set Volunteer Events
+ * Set User Events
  * @param {number} userID - The user ID to fetch data for.
  * @param {string} tableName - Name of the list to add to.
  * @param {number} eventID - Event ID.
  * @returns {Promise<Object>} A promise that resolves to the User Events object.
  * @throws {Error} If the database query fails.
  */
-const addEventToVolunteerList = async (userID, tableName, eventID) => {
+const addEventToUserList = async (userID, tableName, eventID) => {
   const text = `
-    UPDATE volunteer
+    UPDATE users
     SET ${tableName} = 
       CASE 
         WHEN NOT ${tableName} @> ARRAY[$2]::INT[] THEN array_append(COALESCE(${tableName}, '{}'), $2)
         ELSE ${tableName}
       END
-    WHERE user_id = $1
+    WHERE id = $1
     RETURNING *;
   `;
 
@@ -967,18 +967,18 @@ const addEventToVolunteerList = async (userID, tableName, eventID) => {
 };
 
 /**
- * Remove Event from Volunteer List
+ * Remove Event from User List
  * @param {number} userID - The user ID to update.
  * @param {string} tableName - Name of the list to remove from.
  * @param {number} eventID - Event ID to remove.
- * @returns {Promise<Object>} Updated volunteer row.
+ * @returns {Promise<Object>} Updated user row.
  * @throws {Error} If the database query fails.
  */
-const removeEventFromVolunteerList = async (userID, tableName, eventID) => {
+const removeEventFromUserList = async (userID, tableName, eventID) => {
   const text = `
-    UPDATE volunteer
+    UPDATE users
     SET ${tableName} = ARRAY_REMOVE(${tableName}, $2)
-    WHERE user_id = $1
+    WHERE id = $1
     RETURNING *;
   `;
 
@@ -1013,9 +1013,9 @@ export default {
   changePassword,
   loadUserInfo,
   fetchEventVolunteers,
-  getEventsForVolunteer,
-  addEventToVolunteerList,
-  removeEventFromVolunteerList,
+  getUserEvents,
+  addEventToUserList,
+  removeEventFromUserList,
 
   // Currently for testing unused
   getUserById, // tested

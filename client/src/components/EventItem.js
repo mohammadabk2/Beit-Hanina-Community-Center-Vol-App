@@ -25,6 +25,7 @@ const EventItem = ({
   rejectEvent,
   approveEvent,
   joinEvent,
+  isFavorite: initialIsFavorite = false,
   // editEvent,
   // volunteers,
 }) => {
@@ -33,11 +34,15 @@ const EventItem = ({
   const { token, userId } = useAuth();
   const API_BASE_URL = SERVER_IP;
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [enrolledUsers, setEnrolledUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setIsFavorite(initialIsFavorite);
+  }, [initialIsFavorite]);
 
   useEffect(() => {
     const fetchEnrolledUsers = async () => {
@@ -319,6 +324,7 @@ EventItem.propTypes = {
   rejectEvent: PropTypes.func,
   joinEvent: PropTypes.func,
   editEvent: PropTypes.func,
+  isFavorite: PropTypes.bool,
 };
 
 EventItem.defaultProps = {
