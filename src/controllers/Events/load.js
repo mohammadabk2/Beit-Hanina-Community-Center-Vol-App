@@ -69,7 +69,6 @@ const load = async (req, res) => {
       }
 
       if (volTypes.includes(type)) {
-        //TODO logic to sort for volunteer
         answer = await dbConnection.getEvents(userRequest);
 
         let filteredEvents = answer;
@@ -106,6 +105,30 @@ const load = async (req, res) => {
             active: event.is_active,
             orgId: event.org_id,
             //TODO Implement different data return for vol/org/admin
+            maxSize: event.max_number_of_vol,
+            currentSize: event.current_number_of_vol,
+            location: event.event_location,
+            description: event.event_description,
+          }));
+        }
+      }
+
+      if (type === "org") {
+        answer = await dbConnection.getEvents(userRequest);
+
+        let filteredEvents = answer;
+        filteredEvents = answer.filter((event) => event.org_id === Number(userID));
+        answer = filteredEvents;
+
+        if (answer && answer.length > 0) {
+          response = answer.map((event) => ({
+            id: event.event_id,
+            name: event.event_name,
+            birthDate: new Date(event.event_date).toISOString().split("T")[0],
+            startTime: event.event_start,
+            endTime: event.event_end,
+            active: event.is_active,
+            orgId: event.org_id,
             maxSize: event.max_number_of_vol,
             currentSize: event.current_number_of_vol,
             location: event.event_location,
