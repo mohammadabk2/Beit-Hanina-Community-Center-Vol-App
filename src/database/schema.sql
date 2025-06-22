@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS volunteer
     skills TEXT[] DEFAULT '{}',
     orgs INT[] DEFAULT '{}',
     fav_events INT[] DEFAULT '{}',
-    signedup_events INT[] DEFAULT '{}'
+    signed_up_events INT[] DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS volunteer_waiting_list

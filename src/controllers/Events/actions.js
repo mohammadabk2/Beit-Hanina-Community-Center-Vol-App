@@ -73,7 +73,7 @@ const eventActions = async (req, res) => {
           if (answer) {
             await dbconnection.addEventToVolunteerList(
               userID,
-              "signedup_events",
+              "signed_up_events",
               actionID
             ); // add to used list
           }

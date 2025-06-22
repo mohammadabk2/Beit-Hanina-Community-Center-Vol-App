@@ -88,7 +88,7 @@ const load = async (req, res) => {
           console.log("User signed up Events");
           const signedUpEventIds = await dbConnection.getEventsForVolunteer(
             userID,
-            "signedup_events"
+            "signed_up_events"
           );
           filteredEvents = answer.filter((event) =>
             signedUpEventIds.includes(event.event_id)

@@ -888,13 +888,21 @@ const getEventsForVolunteer = async (userID, eventType) => {
   const text = `
   SELECT ${eventType}
   FROM volunteer
-  WHERE user_id=$1`;
+  WHERE user_id=$1;`;
 
   const values = [userID];
 
   try {
     const res = await db.query(text, values);
-    return res.rows[0];
+    const raw = res.rows[0]?.[eventType]; // Parse PostgreSQL array format '{1,2,3}' into a real JS array
+    const parsed =
+      typeof raw === "string"
+        ? raw.replace(/[{}]/g, "").split(",").filter(Boolean).map(Number)
+        : Array.isArray(raw)
+        ? raw
+        : [];
+
+    return parsed;
   } catch (error) {
     console.error(`Error getting ${eventType} for user ${userID}:`, error);
     throw error;
