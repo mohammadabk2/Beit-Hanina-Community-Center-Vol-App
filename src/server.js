@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import cors from "cors";
+// import cors from "cors";
 
 import controllers from "./controllers/index.js";
 import dotenv from "dotenv";
@@ -22,18 +22,19 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// app.use(
+//   cors({
+//     origin: "http://18.192.27.50:300", // IMPORTANT: Replace with the exact URL of your client-side application.
+//     // For development, if you need it to work immediately without worrying about client port, you *could* temporarily use '*', but be aware of security.
+//     // Example: origin: '*'
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Standard methods, include OPTIONS for preflight requests
+//     allowedHeaders: ["Content-Type", "Authorization"], // Headers your client is allowed to *send*
+//     exposedHeaders: ["Authorization"], // <--- THIS IS WHAT YOU NEED! It tells the browser to allow client-side JS to read the 'Authorization' response header.
+//     credentials: true, // Important if you were sending cookies or Authorization headers with your requests
+//   })
+// ); //TODO enabled for testing. DELETE LATER AND REFRACTOR
+
 // API routes
-app.use(
-  cors({
-    origin: "http://18.192.27.50:300", // IMPORTANT: Replace with the exact URL of your client-side application.
-    // For development, if you need it to work immediately without worrying about client port, you *could* temporarily use '*', but be aware of security.
-    // Example: origin: '*'
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Standard methods, include OPTIONS for preflight requests
-    allowedHeaders: ["Content-Type", "Authorization"], // Headers your client is allowed to *send*
-    exposedHeaders: ["Authorization"], // <--- THIS IS WHAT YOU NEED! It tells the browser to allow client-side JS to read the 'Authorization' response header.
-    credentials: true, // Important if you were sending cookies or Authorization headers with your requests
-  })
-); //TODO enabled for testing. DELETE LATER AND REFRACTOR
 app.use("/api", controllers);
 
 // Serve static files from 'client/build'
