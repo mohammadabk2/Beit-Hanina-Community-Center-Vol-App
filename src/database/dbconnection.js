@@ -209,34 +209,6 @@ const getUserById = async (id) => {
 };
 
 /**
- * Adds a org to the array for a volunteer.
- *
- * @async
- * @param {number} userId - The ID of the user.
- * @param {string} tag - The tag to be added.
- * @returns {Promise<Object|null>} A promise that resolves to the updated volunteer object if successful, or null if not found.
- * @throws {Error} If the database query fails.
- */
-const addOrgToVolunteer = async (userId, tag) => {
-  const text = `
-      UPDATE volunteer
-      SET orgs = array_append(COALESCE(orgs, '{}'), $2)
-      WHERE user_id = $1
-      RETURNING *;
-    `;
-
-  const values = [userId, tag];
-
-  try {
-    const res = await db.query(text, values);
-    return res.rows[0] || null; // Return updated row or null if no user was found
-  } catch (error) {
-    console.error("Error adding tag:", error);
-    throw new Error("Failed to add tag");
-  }
-};
-
-/**
  * Increments the hours for a volunteer.
  *
  * @async
@@ -905,6 +877,102 @@ const loadUserInfo = async (userID, role) => {
   }
 };
 
+/**
+ * Get Volunteer Events
+ * @param {number} userID - The user ID to fetch data for.
+ * @param {string} eventType - Event Type (fav,signed-up).
+ * @returns {Promise<Object>} A promise that resolves to the User Events object.
+ * @throws {Error} If the database query fails.
+ */
+const getEventsForVolunteer = async (userID, eventType) => {
+  const text = `
+  SELECT ${eventType}
+  FROM volunteer
+  WHERE user_id=$1;`;
+
+  const values = [userID];
+
+  try {
+    const res = await db.query(text, values);
+    const raw = res.rows[0]?.[eventType]; // Parse PostgreSQL array format '{1,2,3}' into a real JS array
+    const parsed =
+      typeof raw === "string"
+        ? raw.replace(/[{}]/g, "").split(",").filter(Boolean).map(Number)
+        : Array.isArray(raw)
+        ? raw
+        : [];
+
+    return parsed;
+  } catch (error) {
+    console.error(`Error getting ${eventType} for user ${userID}:`, error);
+    throw error;
+  }
+};
+
+/**
+ * Set Volunteer Events
+ * @param {number} userID - The user ID to fetch data for.
+ * @param {string} tableName - Name of the list to add to.
+ * @param {number} eventID - Event ID.
+ * @returns {Promise<Object>} A promise that resolves to the User Events object.
+ * @throws {Error} If the database query fails.
+ */
+const addEventToVolunteerList = async (userID, tableName, eventID) => {
+  const text = `
+    UPDATE volunteer
+    SET ${tableName} = 
+      CASE 
+        WHEN NOT ${tableName} @> ARRAY[$2]::INT[] THEN array_append(COALESCE(${tableName}, '{}'), $2)
+        ELSE ${tableName}
+      END
+    WHERE user_id = $1
+    RETURNING *;
+  `;
+
+  const values = [userID, eventID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(
+      `Error adding Event:${eventID} for user: ${userID} into list: ${tableName}`,
+      error
+    );
+    throw error;
+  }
+};
+
+/**
+ * Remove Event from Volunteer List
+ * @param {number} userID - The user ID to update.
+ * @param {string} tableName - Name of the list to remove from.
+ * @param {number} eventID - Event ID to remove.
+ * @returns {Promise<Object>} Updated volunteer row.
+ * @throws {Error} If the database query fails.
+ */
+const removeEventFromVolunteerList = async (userID, tableName, eventID) => {
+  const text = `
+    UPDATE volunteer
+    SET ${tableName} = ARRAY_REMOVE(${tableName}, $2)
+    WHERE user_id = $1
+    RETURNING *;
+  `;
+
+  const values = [userID, eventID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(
+      `Error removing Event:${eventID} for user: ${userID} from list: ${tableName}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -922,13 +990,15 @@ export default {
   changePassword,
   loadUserInfo,
   fetchEventVolunteers,
+  getEventsForVolunteer,
+  addEventToVolunteerList,
+  removeEventFromVolunteerList,
 
   // Currently for testing unused
   getUserById, // tested
   updateOrgName, // tested //! probaibly dont need
   incrementGivenHours, // tested
   incrementVolHours, // tested
-  addOrgToVolunteer, // tested
   updateUser,
   addVolToOrganizer,
   changeStatus,

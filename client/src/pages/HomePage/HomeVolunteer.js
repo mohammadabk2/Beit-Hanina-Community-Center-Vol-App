@@ -22,30 +22,42 @@ const HomeVolunteer = () => {
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("approved");
+  const [selectedStatus, setSelectedStatus] = useState("new");
+  const [sortText, setSortText] = useState(t("sort"));
 
   //TODO add signup events and fav events options
   const statusOptions = [
     {
       label: t("new"),
       href: "#",
-      onClick: () => setSelectedStatus("new"),
+      onClick: () => {
+        setSelectedStatus("new");
+        setSortText(t("new"));
+      },
     },
     {
       label: t("signed_up"),
       href: "#",
-      onClick: () => setSelectedStatus("signed-up"),
+      onClick: () => {
+        setSelectedStatus("signed-up");
+        setSortText(t("signed_up"));
+      },
     },
     {
       label: t("favorites"),
       href: "#",
-      onClick: () => setSelectedStatus("fav"),
+      onClick: () => {
+        setSelectedStatus("fav");
+        setSortText(t("favorites"));
+      },
     },
   ];
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents([selectedStatus], "event-type");
+      loadEvents(["approved"], selectedStatus);
+      // loadEvents([selectedStatus], "event-type");
+      // loadEvents(["approved"]);
     }
   }, [userId, isAuthenticated, loadEvents, selectedStatus]);
 
@@ -98,6 +110,7 @@ const HomeVolunteer = () => {
     return eventsArray.map((event) => (
       <EventItem
         key={event.id}
+        id={event.id}
         name={event.name}
         desc={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
@@ -128,7 +141,7 @@ const HomeVolunteer = () => {
           <div>
             {" "}
             <DropDownMenu
-              text={t("sort")}
+              text={sortText}
               className="gender-button"
               options={statusOptions}
             />
