@@ -38,5 +38,27 @@
   "personalArea": "الصفحة الشخصية",
 
   "event_signup_failed": "فشل التسجيل في الحدث. يرجى المحاولة لاحقًا",
-  "event_signup_success": "تم التسجيل في الحدث بنجاح"
+  "event_signup_success": "تم التسجيل في الحدث بنجاح",
+
+  "fullName": "اسم المنظمة",
+  "fullName_placeholder": "أدخل اسم المنظمة",
+  "phoneNumber": "رقم الهاتف",
+  "phone_placeholder": "أدخل رقم الهاتف",
+  "email": "البريد الإلكتروني",
+  "email_phone_placeholder": "أدخل البريد الإلكتروني",
+  "address": "العنوان",
+  "address_placeholder": "أدخل العنوان",
+  "orgUserName": "اسم المستخدم للمنظمة",
+  "username_placeholder": "أدخل اسم المستخدم للمنظمة",
+  "password": "كلمة المرور",
+  "password_phone_placeholder": "أدخل كلمة المرور",
+
+  "name": "الاسم",
+  "sex": "الجنس",
+  "actions": "الإجراءات",
+  "approve": "الموافقة",
+  "reject": "الرفض",
+  "loading_users": "جارٍ تحميل المستخدمين...",
+  "no_users_enrolled": "لا يوجد مستخدمون مسجلون في هذا الحدث",
+  "enrolled_users": "المتطوعون المسجلون"
 }

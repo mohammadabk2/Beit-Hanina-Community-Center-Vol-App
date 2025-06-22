@@ -225,7 +225,7 @@ const EventItem = ({
           {type === "org" && (
             <DynamicButton
               className="button"
-              text={t("enrolled users")}
+              text={t("enrolled_users")}
               onClick={showEnrolled}
             />
           )}
@@ -253,7 +253,7 @@ const EventItem = ({
           onClose={() => setIsPopupOpen(false)}
         >
           {isLoading ? (
-            <div>Loading enrolled users...</div>
+            <div>{t("loding_users")}</div>
           ) : error ? (
             <div className="error-message">{error}</div>
           ) : Array.isArray(enrolledUsers) && enrolledUsers.length > 0 ? (
@@ -262,16 +262,16 @@ const EventItem = ({
                 <thead>
                   <tr>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Name
+                      {t("name")}
                     </th>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Phone
+                      {t("phoneNumber")}
                     </th>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Gender
+                      {t("gender")}
                     </th>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Actions
+                      {t("actions")}
                     </th>
                   </tr>
                 </thead>
@@ -288,13 +288,13 @@ const EventItem = ({
                             handleEnrolledUsers("approve", user.id)
                           }
                         >
-                          Approve
+                          {t("approve")}
                         </button>
                         <button
                           className="button button-reject"
                           onClick={() => handleEnrolledUsers("reject", user.id)}
                         >
-                          Reject
+                          {t("reject")}
                         </button>
                       </td>
                     </tr>
@@ -303,7 +303,7 @@ const EventItem = ({
               </table>
             </div>
           ) : (
-            <div>No users enrolled in this event</div>
+            <div>{t("no_users_enrolled")}</div>
           )}
         </PopupComponent>
       )}
