@@ -1,3 +1,4 @@
+import dbconnection from "../../database/dbconnection.js";
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
 
@@ -68,6 +69,14 @@ const eventActions = async (req, res) => {
             "vol_id_waiting_list",
             "waiting"
           );
+
+          if (answer) {
+            await dbconnection.addEventToVolunteerList(
+              userID,
+              "signedup_events",
+              actionID
+            ); // add to used list
+          }
         }
 
         //TODO maybe add a unenroll from event

@@ -209,34 +209,6 @@ const getUserById = async (id) => {
 };
 
 /**
- * Adds a org to the array for a volunteer.
- *
- * @async
- * @param {number} userId - The ID of the user.
- * @param {string} tag - The tag to be added.
- * @returns {Promise<Object|null>} A promise that resolves to the updated volunteer object if successful, or null if not found.
- * @throws {Error} If the database query fails.
- */
-const addOrgToVolunteer = async (userId, tag) => {
-  const text = `
-      UPDATE volunteer
-      SET orgs = array_append(COALESCE(orgs, '{}'), $2)
-      WHERE user_id = $1
-      RETURNING *;
-    `;
-
-  const values = [userId, tag];
-
-  try {
-    const res = await db.query(text, values);
-    return res.rows[0] || null; // Return updated row or null if no user was found
-  } catch (error) {
-    console.error("Error adding tag:", error);
-    throw new Error("Failed to add tag");
-  }
-};
-
-/**
  * Increments the hours for a volunteer.
  *
  * @async
@@ -929,6 +901,40 @@ const getEventsForVolunteer = async (userID, eventType) => {
   }
 };
 
+/**
+ * Set Volunteer Events
+ * @param {number} userID - The user ID to fetch data for.
+ * @param {string} tableName - Name of the list to add to.
+ * @param {number} eventID - Event ID.
+ * @returns {Promise<Object>} A promise that resolves to the User Events object.
+ * @throws {Error} If the database query fails.
+ */
+const addEventToVolunteerList = async (userID, tableName, eventID) => {
+  const text = `
+    UPDATE volunteer
+    SET ${tableName} = 
+      CASE 
+        WHEN NOT ${tableName} @> ARRAY[$2]::INT[] THEN array_append(COALESCE(${tableName}, '{}'), $2)
+        ELSE ${tableName}
+      END
+    WHERE user_id = $1
+    RETURNING *;
+  `;
+
+  const values = [userID, eventID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(
+      `Error adding Event:${eventID} for user: ${userID} into list: ${tableName}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -947,13 +953,13 @@ export default {
   loadUserInfo,
   fetchEventVolunteers,
   getEventsForVolunteer,
+  addEventToVolunteerList,
 
   // Currently for testing unused
   getUserById, // tested
   updateOrgName, // tested //! probaibly dont need
   incrementGivenHours, // tested
   incrementVolHours, // tested
-  addOrgToVolunteer, // tested
   updateUser,
   addVolToOrganizer,
   changeStatus,
