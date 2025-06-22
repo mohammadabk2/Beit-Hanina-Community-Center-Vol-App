@@ -16,7 +16,6 @@ import useLoadEvents from "../../config/hooks/loadEvent";
 
 import { SERVER_IP } from "../../global";
 
-
 const HomeOrganizer = () => {
   const API_BASE_URL = SERVER_IP;
   const { t } = useTranslation("home");
@@ -122,7 +121,11 @@ const HomeOrganizer = () => {
       }
     );
 
-    if (response.status !== 200) {
+    if (response.status === 200) {
+      alert(t("org Created"));
+      console.log("org Created");
+      setShowEvents(true);
+    } else {
       console.log(`${response.status} ${response.message}`);
     }
   };
