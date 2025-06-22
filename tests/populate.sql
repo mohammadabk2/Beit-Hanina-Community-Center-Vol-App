@@ -45,4 +45,4 @@ VALUES
 -- EVENTS STATUS
 INSERT INTO events_status (approved, rejected, pending, ongoing, finished)
 VALUES
-(ARRAY[1,2]::int[], ARRAY[3]::int[], ARRAY[2]::int[], ARRAY[]::int[], ARRAY[1]::int[]);
+(ARRAY[1,2]::int[], ARRAY[]::int[], ARRAY[3,4]::int[], ARRAY[]::int[], ARRAY[1]::int[]);

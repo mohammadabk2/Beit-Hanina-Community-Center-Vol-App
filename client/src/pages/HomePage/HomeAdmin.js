@@ -24,14 +24,18 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 import useLoadUsers from "../../config/hooks/loadUsers";
 
+import { SERVER_IP } from "../../global";
+
 const HomeAdmin = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
   const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
-  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents(); // load events hook
-  const { users, usersLoading, userError, loadUsers } = useLoadUsers(); // load users hook
+  const { events, eventsLoading, eventsError, loadEvents, setEvents } =
+    useLoadEvents(); // load events hook
+  const { users, usersLoading, userError, loadUsers, setUsers } =
+    useLoadUsers(); // load users hook
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
@@ -87,7 +91,7 @@ const HomeAdmin = () => {
     },
   ];
 
-  const peopeOptions = [
+  const peopleOptions = [
     {
       label: t("new"),
       href: "#",
@@ -137,13 +141,36 @@ const HomeAdmin = () => {
 
   const approveEvent = async (id) => {
     console.log(`approve event clicked event id:${id}`);
-    await sendAxiod("events/actions", id, "approve", "NA");
-    // loadEvents([eventStatus]); //TODO check if this effects anythign or not
+
+    // Optimistic update: Remove the event from current view
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+
+    try {
+      await sendAxiod("events/actions", id, "approve", "NA");
+      // Optionally reload events to ensure consistency
+      // loadEvents([eventStatus]);
+    } catch (error) {
+      // Revert optimistic update on error
+      console.error("Error approving event:", error);
+      loadEvents([eventStatus]);
+    }
   };
 
-  const rejectEvent = (id) => {
+  const rejectEvent = async (id) => {
     console.log(`reject event clicked event id:${id}`);
-    sendAxiod("events/actions", id, "reject", "NA");
+
+    // Optimistic update: Remove the event from current view
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+
+    try {
+      await sendAxiod("events/actions", id, "reject", "NA");
+      // Optionally reload events to ensure consistency
+      // loadEvents([eventStatus]);
+    } catch (error) {
+      // Revert optimistic update on error
+      console.error("Error rejecting event:", error);
+      loadEvents([eventStatus]);
+    }
   };
 
   const renderEventItems = (eventsArray) => {
@@ -189,16 +216,38 @@ const HomeAdmin = () => {
     }
   };
 
-  const handleApprove = (personId) => {
+  const handleApprove = async (personId) => {
     console.log(`Approving person ${personId}`);
-    sendAxiod("users", personId, "approve", "NA");
-    //TODO force refresh of page
+
+    // Optimistic update: Remove the user from current view
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== personId));
+
+    try {
+      await sendAxiod("users", personId, "approve", "NA");
+      // Optionally reload users to ensure consistency
+      // loadUsers(peopleStatus);
+    } catch (error) {
+      // Revert optimistic update on error
+      console.error("Error approving user:", error);
+      loadUsers(peopleStatus);
+    }
   };
 
-  const handleReject = (personId) => {
+  const handleReject = async (personId) => {
     console.log(`Rejecting person ${personId}`);
-    sendAxiod("users", personId, "reject", "NA");
-    //TODO force refresh of page
+
+    // Optimistic update: Remove the user from current view
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== personId));
+
+    try {
+      await sendAxiod("users", personId, "reject", "NA");
+      // Optionally reload users to ensure consistency
+      // loadUsers(peopleStatus);
+    } catch (error) {
+      // Revert optimistic update on error
+      console.error("Error rejecting user:", error);
+      loadUsers(peopleStatus);
+    }
   };
 
   const handleAddLog = (personId) => {
@@ -266,7 +315,7 @@ const HomeAdmin = () => {
             <DropDownMenu
               text={sortText}
               className="gender-button"
-              options={peopeOptions}
+              options={peopleOptions}
             />
 
             {renderButton(switchToEvents, t("switch_to_events"))}
@@ -309,7 +358,10 @@ const HomeAdmin = () => {
                   user.idNumber
                     ?.toLowerCase()
                     .includes(searchQuery.toLowerCase()) ||
-                  user.skills?.join(" ").toLowerCase().includes(searchQuery.toLowerCase())
+                  user.skills
+                    ?.join(" ")
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase())
               )}
               type={personView ? "card" : "table"}
               approveUser={handleApprove}
@@ -349,7 +401,7 @@ const HomeAdmin = () => {
       if (response.data.status === "success") {
         alert(t("org_sign_up_message"));
       } else {
-          alert(t("org_sign_up_failed"));
+        alert(t("org_sign_up_failed"));
       }
     } catch (error) {
       console.error("Error during sign in:", error);
@@ -481,7 +533,11 @@ const HomeAdmin = () => {
   }, [userId, isAuthenticated, loadUsers, peopleStatus]);
 
   if (loadingInitial) {
-    return (<><LoadingPage message={t("Loading Events")}/></>);
+    return (
+      <>
+        <LoadingPage message={t("Loading Events")} />
+      </>
+    );
   }
 
   if (!isAuthenticated) {

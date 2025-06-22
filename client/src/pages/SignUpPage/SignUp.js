@@ -14,13 +14,14 @@ import CopyRight from "../../components/layout/CopyRight";
 // Import the insurance and occupation options
 import { useInsuranceOptions } from "../../config/options/Insurance";
 import { useOccupationOptions } from "../../config/options/Occupation";
+import { SERVER_IP } from "../../global";
 
 const SignUpPage = () => {
   //TODO handle if already signed in maybe do that in App.js
   const navigate = useNavigate();
   const { t } = useTranslation("signUp");
   const { t: tApp } = useTranslation("app");
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
 
   const baseInsuranceOptions = useInsuranceOptions();
   const baseOccupationOptions = useOccupationOptions();
@@ -35,7 +36,7 @@ const SignUpPage = () => {
     insurance: "",
     occupation: "",
     idNumber: "",
-    userName: "",
+    username: "",
     password: "",
     skills: [], // Initialize skills as an array
     imageFile: null,
@@ -111,7 +112,7 @@ const SignUpPage = () => {
         //TODO add wait here
         goBack();
       } else {
-          alert(t("login_failed"));
+        alert(t("login_failed"));
       }
     } catch (err) {
       console.error("Error during sign in:", err);
@@ -209,10 +210,10 @@ const SignUpPage = () => {
             )}
 
             {renderInput(
-              (t("address"),
+              t("address"),
               formData.address,
               "address",
-              t("address_placeholder"))
+              t("address_placeholder")
             )}
 
             <div className="flex-box flex-column input-field-box">
@@ -248,8 +249,8 @@ const SignUpPage = () => {
 
             {renderInput(
               t("userName"),
-              formData.userName,
-              "userName",
+              formData.username,
+              "username",
               tApp("user-name-placeholder")
             )}
 

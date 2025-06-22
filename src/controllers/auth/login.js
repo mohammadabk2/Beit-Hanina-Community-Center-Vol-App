@@ -24,11 +24,12 @@ const loginUser = async (req, res) => {
 
   try {
     const response = await dbConnection.getUserHash(userName); // Await the result
+    // prod
     // const isPasswordMatch = await bcrypt.compare(
     //   password,
     //   response.password_hash
     // ); // hash the password and compare to the stored hash
-    const isPasswordMatch = (password === response.password_hash);
+    const isPasswordMatch = (password === response.password_hash); // testing only
 
     if (isPasswordMatch) {
       console.log(`Login successful for user: ${userName}`);

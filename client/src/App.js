@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,12 +9,13 @@ import DynamicInput from "./components/common/InputComponent";
 import DynamicButton from "./components/common/ButtonComponent";
 import NavigationBar from "./components/layout/NavigationBar";
 import CopyRight from "./components/layout/CopyRight";
-import NoConnection from "./pages/CommonPages/NoConnection/NoConnection";
+// import NoConnection from "./pages/CommonPages/NoConnection/NoConnection";
 
 import { useAuth } from "./config/Context/auth";
+import { SERVER_IP } from "./global";
 
 const App = () => {
-  const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+  const API_BASE_URL = SERVER_IP;
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -23,29 +25,31 @@ const App = () => {
   const { login, isAuthenticated } = useAuth();
   // const [isLoading, setIsLoading] = useState(false); // Local loading state for API call
   const [error, setError] = useState(null);
-  const [connectionError, setConnectionError] = useState(false);
 
-  useEffect(() => {
-    const ping = async () => {
-      try {
-        console.log("Pinging API...");
-        await axios.get(`${API_BASE_URL}/api/this-route-definitely-does-not-exist`);
-        console.log("Ping successful");
-        setConnectionError(false);
-      } catch (error) {
-        console.error("Ping failed:", error);
-        setConnectionError(true);
-      }
-    };
+  //! ping Logic
+  // const [connectionError, setConnectionError] = useState(false);
 
-    ping();
-  }, []);
+  // useEffect(() => {
+  //   const ping = async () => {
+  //     try {
+  //       console.log("Pinging API...");
+  //       await axios.get(`${API_BASE_URL}/api/ping`);
+  //       console.log("Ping successful");
+  //       setConnectionError(false);
+  //     } catch (error) {
+  //       console.error("Ping failed:", error);
+  //       setConnectionError(true);
+  //     }
+  //   };
 
-  if (connectionError) {
-    console.log("Rendering NoConnection component");
-    // return <NoConnection message={t("failed_to_ping")} />;
-    return <NoConnection message="Test: No connection detected." />;
-  }
+  //   ping();
+  // }, []);
+
+  // if (connectionError) {
+  //   console.log("Rendering NoConnection component");
+  //   // return <NoConnection message={t("failed_to_ping")} />;
+  //   return <NoConnection message="Test: No connection detected." />;
+  // }
 
   const handleUserName = (event) => {
     setUserName(event.target.value);
@@ -99,7 +103,7 @@ const App = () => {
         const message =
           response.data?.message || "Login failed. Please check credentials.";
         setError(message);
-        alert(`${t("login_failed_message")} ${error}`);        
+        alert(`${t("login_failed_message")} ${error}`);
       }
     } catch (err) {
       console.error("Error during sign in:", err);
