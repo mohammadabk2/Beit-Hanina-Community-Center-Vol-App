@@ -61,6 +61,8 @@ const load = async (req, res) => {
     let answer;
     let response;
 
+    console.log(`Loading on type ${type}`);
+
     switch (type) {
       case "events":
         answer = await dbConnection.getEvents(userRequest);
@@ -83,19 +85,44 @@ const load = async (req, res) => {
         );
         break;
 
-      case "fav":
-      case "signed-up":
-      case "new": {
+      case "fav": {
         answer = await dbConnection.getEvents(userRequest);
-        const columnName = type === "fav" ? "fav_events" : "signed_up_events";
-        const eventIds = await dbConnection.getEventsForVolunteer(
+        console.log("User faved Events");
+
+        const favEventIds = await dbConnection.getEventsForVolunteer(
           userID,
-          columnName
+          "fav_events"
         );
 
-        response = formatEvents(
-          answer.filter((event) => eventIds.includes(event.event_id))
+        const filteredEvents = answer.filter((event) =>
+          favEventIds.includes(event.event_id)
         );
+
+        answer = filteredEvents;
+        response = formatEvents(answer);
+        break;
+      }
+
+      case "signed-up": {
+        answer = await dbConnection.getEvents(userRequest);
+        console.log("User called signed up Events");
+
+        const favEventIds = await dbConnection.getEventsForVolunteer(
+          userID,
+          "signed_up_events"
+        );
+
+        const filteredEvents = answer.filter((event) =>
+          favEventIds.includes(event.event_id)
+        );
+
+        answer = filteredEvents;
+        response = formatEvents(answer);
+        break;
+      }
+      case "new": {
+        answer = await dbConnection.getEvents(userRequest);
+        response = formatEvents(answer);
         break;
       }
 

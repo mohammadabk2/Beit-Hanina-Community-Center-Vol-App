@@ -9,6 +9,7 @@ import cors from "cors";
 import controllers from "./controllers/index.js";
 import dotenv from "dotenv";
 import db from "./database/db.js";
+import "./utils/logger.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
