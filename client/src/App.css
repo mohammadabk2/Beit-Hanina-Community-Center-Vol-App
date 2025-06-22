@@ -599,13 +599,8 @@ html[lang="ar"] textarea {
 
 /* New popup enhancement styles */
 .popup-content-elevation {
-  border: 1px solid var(--button-border);
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
-  background-image: linear-gradient(
-    to bottom right,
-    var(--box-background-color),
-    var(--bottom-scroll-box)
-  );
+  background-color: var(--popup-background-color);
 }
 
 .popup-entrance-animation {

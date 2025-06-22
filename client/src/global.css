@@ -32,6 +32,7 @@
 
   --body-color: #ffffff;
   --box-background-color: #ffffff;
+  --popup-background-color: #ececec;
   --skills-background: #d8d8d8;
 
   --input-border: #cfd8dc;
@@ -64,25 +65,32 @@ html[data-theme="dark"] {
   --bg-shapes: #474747;
   --bg-surface: #272727;
 
-  --box-background-color: #48484d;
-  --drop-down-text-color: #000000;
-  --general-shadow: #0000002c;
   --body-color: #333336;
-  --bottom-scroll-box: #3a3a41;
-  --top-scroll-box: #3a3a41;
-  --line-break: #9e9e9e;
-  --input-focus: #3498db;
+  --box-background-color: #48484d;
+  --popup-background-color: #48484d;
+  --skills-background: #7070ff;
+
   --input-border: #555555;
+  --general-shadow: #0000002c;
+  --skills-shadow: #7a7a7a;
+
+  --general-text: #ffffff;
+  --drop-down-text-color: #000000;
+  --table-row-text: #dadada;
+
+  --input-focus: #3498db;
+  --line-break: #9e9e9e;
+  --table-line-break: #808285;
+
+  --button-background: #7070ff;
   --button-hover: #5050ba;
   --button-text: #ffffff;
-  --button-background: #7070ff;
   --button-border: #7070e0;
-  --general-text: #ffffff;
-  --skills-shadow: #7a7a7a;
-  --skills-background: #7070ff;
+
+  --top-scroll-box: #3a3a41;
+  --bottom-scroll-box: #3a3a41;
+
   --even-row-table: #333336;
-  --row-table-hover: #29292c;
   --odd-row-table: #3d3d3d;
-  --table-row-text: #dadada;
-  --table-line-break: #808285;
+  --row-table-hover: #29292c;
 }
