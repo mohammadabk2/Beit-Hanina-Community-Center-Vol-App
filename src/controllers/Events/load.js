@@ -1,8 +1,8 @@
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
 
-const formatEvents = (events, favoriteEventIds = []) =>
-  events.map((event) => ({
+const formatEvents = (events, favoriteEventIds = []) => {
+  return events.map((event) => ({
     id: event.event_id,
     name: event.event_name,
     birthDate: new Date(event.event_date).toISOString().split("T")[0],
@@ -16,6 +16,7 @@ const formatEvents = (events, favoriteEventIds = []) =>
     description: event.event_description,
     isFavorite: favoriteEventIds.includes(event.event_id),
   }));
+};
 
 const load = async (req, res) => {
   console.log("Loading Events from DB");

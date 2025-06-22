@@ -112,7 +112,7 @@ const HomeVolunteer = () => {
         key={event.id}
         id={event.id}
         name={event.name}
-        desc={event.description}
+        description={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
         type="vol"
         count={event.currentSize}
