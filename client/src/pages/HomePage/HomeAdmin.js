@@ -11,6 +11,7 @@ import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 import DropDownMenu from "../../components/common/DropDownMenu";
 import LoadingPage from "../CommonPages/Loading/Loading";
+import PopupComponent from "../../components/common/PopupComponent";
 
 // Icons
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
@@ -251,14 +252,64 @@ const HomeAdmin = () => {
     }
   };
 
+  // Popup state for logs
+  const [logPopupOpen, setLogPopupOpen] = useState(false);
+  const [viewLogsPopupOpen, setViewLogsPopupOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [logInput, setLogInput] = useState("");
+  const [logsToView, setLogsToView] = useState([]);
+  const [logLoading, setLogLoading] = useState(false);
+  const [logError, setLogError] = useState("");
+
   const handleAddLog = (personId) => {
-    console.log(`Adding log for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
+    setSelectedUserId(personId);
+    setLogInput("");
+    setLogError("");
+    setLogPopupOpen(true);
   };
 
   const handleViewLogs = (personId) => {
-    console.log(`Viewing logs for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
+    setSelectedUserId(personId);
+    // Find user logs
+    const user = users.find((u) => u.id === personId);
+    setLogsToView(Array.isArray(user?.logs) ? user.logs : []);
+    setViewLogsPopupOpen(true);
+  };
+
+  const handleLogInputChange = (e) => {
+    setLogInput(e.target.value);
+  };
+
+  const handleLogSubmit = async () => {
+    if (!logInput.trim()) {
+      setLogError(t("log_required") || "Log cannot be empty");
+      return;
+    }
+    setLogLoading(true);
+    setLogError("");
+    try {
+      await axios.post(
+        `${API_BASE_URL}/api/users`,
+        {
+          userID: userId,
+          actionID: selectedUserId,
+          action: "log-user",
+          actionValue: logInput,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setLogPopupOpen(false);
+      setLogInput("");
+      setSelectedUserId(null);
+      // Refresh users to get updated logs
+      loadUsers(peopleStatus);
+    } catch (err) {
+      setLogError(t("log_submit_failed") || "Failed to add log");
+    } finally {
+      setLogLoading(false);
+    }
   };
 
   const renderSearch = () => {
@@ -564,6 +615,64 @@ const HomeAdmin = () => {
       )}
       {viewMode === "createOrg" && renderCreateOrg()}
       <CopyRight />
+
+      {/* Add Log Popup */}
+      <PopupComponent
+        isOpen={logPopupOpen}
+        onClose={() => setLogPopupOpen(false)}
+        message={t("add_log")}
+      >
+        <div className="flex-box flex-column gap-1">
+          <textarea
+            className="input-field"
+            value={logInput}
+            onChange={handleLogInputChange}
+            placeholder={t("log_placeholder") || "Enter log message..."}
+            rows={4}
+            style={{ resize: "vertical" }}
+            disabled={logLoading}
+          />
+          {logError && <div style={{ color: "red" }}>{logError}</div>}
+          <div className="flex-box gap-1">
+            <DynamicButton
+              className="button button-approve"
+              text={t("submit_button")}
+              onClick={handleLogSubmit}
+              disabled={logLoading}
+            />
+            <DynamicButton
+              className="button button-reject"
+              text={t("back")}
+              onClick={() => setLogPopupOpen(false)}
+              disabled={logLoading}
+            />
+          </div>
+        </div>
+      </PopupComponent>
+
+      {/* View Logs Popup */}
+      <PopupComponent
+        isOpen={viewLogsPopupOpen}
+        onClose={() => setViewLogsPopupOpen(false)}
+        message={t("view_log")}
+      >
+        <div className="flex-box flex-column gap-1">
+          {logsToView.length === 0 ? (
+            <div>{t("no_logs") || "No logs found."}</div>
+          ) : (
+            <ul style={{ maxHeight: 300, overflowY: "auto" }}>
+              {logsToView.map((log, idx) => (
+                <li key={idx} style={{ marginBottom: 8 }}>{log}</li>
+              ))}
+            </ul>
+          )}
+          <DynamicButton
+            className="button button-reject"
+            text={t("back")}
+            onClick={() => setViewLogsPopupOpen(false)}
+          />
+        </div>
+      </PopupComponent>
     </div>
   );
 };

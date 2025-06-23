@@ -60,5 +60,10 @@
   "reject": "Reject",
   "loading_users": "Loading Users...",
   "no_users_enrolled": "No users enrolled in this event",
-  "enrolled_users": "Enrolled Volunteers"
+  "enrolled_users": "Enrolled Volunteers",
+
+  "log_required": "Log cannot be empty.",
+  "log_submit_failed": "Failed to add log.",
+  "log_placeholder": "Enter log message...",
+  "no_logs": "No logs found."
 }
