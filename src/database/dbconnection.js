@@ -104,18 +104,47 @@ const getUsers = async (role, tableName) => {
     if (tableName === "volunteer_waiting_list") {
       query = `SELECT * FROM volunteer_waiting_list;`;
     }
-    // else if (tableName === "organizer") {
-    //   //TODO maybe
-    //   query = `
-    //   SELECT * FROM organizer;
-    //   `
-    // }
     else {
+      // Return both volunteers and organizers, with a role field
       query = `
-      SELECT users.*, volunteer.*
-      FROM users
-      JOIN volunteer ON users.id = volunteer.user_id;
-    `;
+        SELECT 
+          users.id,
+          volunteer.name,
+          volunteer.birth_date,
+          volunteer.sex,
+          users.phone_number,
+          users.email,
+          users.address,
+          volunteer.insurance,
+          volunteer.id_number,
+          users.username,
+          volunteer.skills,
+          NULL as org_name,
+          NULL as given_hours,
+          NULL as vol_id,
+          'volunteer' as role
+        FROM users
+        JOIN volunteer ON users.id = volunteer.user_id
+        UNION ALL
+        SELECT 
+          users.id,
+          NULL as name,
+          NULL as birth_date,
+          NULL as sex,
+          users.phone_number,
+          users.email,
+          users.address,
+          NULL as insurance,
+          NULL as id_number,
+          users.username,
+          NULL as skills,
+          organizer.org_name,
+          organizer.given_hours,
+          organizer.vol_id,
+          'organizer' as role
+        FROM users
+        JOIN organizer ON users.id = organizer.user_id;
+      `;
     }
   } else {
     console.error("Unsupported role in getUsers:", role);
