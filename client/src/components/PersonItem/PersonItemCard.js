@@ -19,14 +19,15 @@ const PersonItemCard = ({
   newUser,
   approveFunction,
   rejectFunction,
-  viewLogsFunction,
   addLogFunction,
+  logs,
 }) => {
   const { t } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isLogsPopupOpen, setIsLogsPopupOpen] = useState(false);
 
   const showSkills = () => {
     console.log("skills render");
@@ -116,17 +117,15 @@ const PersonItemCard = ({
           {!newUser && (
             <>
               <div className="flex-box">
-                {/* TODO add plus icon */}
                 <DynamicButton
                   className="button"
                   text={t("add_log")}
                   onClick={addLogFunction}
                 />
-
                 <DynamicButton
                   className="button"
                   text={t("view_log")}
-                  onClick={viewLogsFunction}
+                  onClick={() => setIsLogsPopupOpen(true)}
                 />
               </div>
             </>
@@ -148,6 +147,23 @@ const PersonItemCard = ({
           </ul>
         </PopupComponent>
       )}
+      {isLogsPopupOpen && (
+        <PopupComponent
+          isOpen={isLogsPopupOpen}
+          onClose={() => setIsLogsPopupOpen(false)}
+          message={t("view_log")}
+        >
+          <div>
+            {logs && logs.length > 0 ? (
+              <ul>
+                {logs.map((log, idx) => <li key={idx}>{log}</li>)}
+              </ul>
+            ) : (
+              <div>{t("no_logs")}</div>
+            )}
+          </div>
+        </PopupComponent>
+      )}
     </div>
   );
 };
@@ -166,8 +182,8 @@ PersonItemCard.propTypes = {
   newUser: PropTypes.bool,
   approveFunction: PropTypes.func.isRequired,
   rejectFunction: PropTypes.func.isRequired,
-  viewLogsFunction: PropTypes.func.isRequired,
   addLogFunction: PropTypes.func.isRequired,
+  logs: PropTypes.arrayOf(PropTypes.string),
 };
 
 PersonItemCard.defaultProps = {

@@ -70,7 +70,7 @@ const PeopleDisplaySwitcher = ({
             approveFunction={() => approveUser(person.id)}
             rejectFunction={() => rejectUser(person.id)}
             addLogFunction={() => addLog(person.id)}
-            viewLogsFunction={() => viewLogs(person.id)}
+            logs={person.logs}
             // style={person.style} // Removed top-level style, apply styling via CSS or per-card if needed
           />
         ))}
@@ -105,8 +105,8 @@ PeopleDisplaySwitcher.propTypes = {
   // Handler functions passed from parent are required
   approveUser: PropTypes.func.isRequired,
   rejectUser: PropTypes.func.isRequired,
-  viewLogs: PropTypes.func.isRequired,
   addLog: PropTypes.func.isRequired,
+  viewLogs: undefined, // Remove this propType
 };
 
 // 8. Update DefaultProps (optional, but good practice for 'people')

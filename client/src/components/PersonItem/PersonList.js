@@ -41,21 +41,21 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
         <tbody>
           {people.map((person) => (
             <PersonItemRow
-              key={person.id} // Assuming each person has a unique ID
+              key={person.id}
               name={person.name}
               birthDate={person.birthDate}
               sex={person.sex}
               phoneNumber={person.phoneNumber}
               email={person.email}
               address={person.address}
-              skills={person.skills} // Pass skills
-              insurance={person.insurance} // Pass data even if not displayed in main table
-              idNumber={person.idNumber} // Pass data even if not displayed in main table
-              newUser={person.isNew} // Pass the flag per person
+              skills={person.skills}
+              insurance={person.insurance}
+              idNumber={person.idNumber}
+              newUser={person.isNew}
               approveFunction={() => approveUser(person.id)}
               rejectFunction={() => rejectUser(person.id)}
-              viewLogsFunction={() => viewLogs(person.id)}
               addLogFunction={() => addLog(person.id)}
+              logs={person.logs}
             />
           ))}
         </tbody>
@@ -68,7 +68,7 @@ PersonList.propTypes = {
   people: PropTypes.arrayOf(PropTypes.object).isRequired, // Assuming an array of person objects
   approveUser: PropTypes.func.isRequired,
   rejectUser: PropTypes.func.isRequired,
-  viewLogs: PropTypes.func.isRequired,
+  viewLogs: undefined, // Remove this propType
   addLog: PropTypes.func.isRequired,
 };
 

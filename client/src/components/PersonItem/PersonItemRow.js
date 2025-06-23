@@ -30,13 +30,14 @@ const PersonItemRow = ({
   newUser,
   approveFunction,
   rejectFunction,
-  viewLogsFunction,
+  logs,
   addLogFunction,
 }) => {
   const { t } = useTranslation("home");
   const { isLightMode } = useTheme();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isLogsPopupOpen, setIsLogsPopupOpen] = useState(false);
 
   const showSkills = () => {
     console.log("skills render");
@@ -90,7 +91,7 @@ const PersonItemRow = ({
               logoSrc={isLightMode ? docPlusLight : docPlusDark}
               logoalt={t("add_log")}
               onClick={addLogFunction}
-              aria-label={`${t("add_log")} for ${name}`}
+              aria-label={`${t("add_log")}`}
             />
           </td>
           <td>
@@ -98,8 +99,8 @@ const PersonItemRow = ({
               className="button button-view"
               logoSrc={isLightMode ? docFilledLight : docFilledDark}
               logoalt={t("view_log")}
-              onClick={viewLogsFunction}
-              aria-label={`${t("view_log")} for ${name}`}
+              onClick={() => setIsLogsPopupOpen(true)}
+              aria-label={`${t("view_log")}`}
             />
           </td>
         </>
@@ -117,6 +118,23 @@ const PersonItemRow = ({
               <li key={index}>{skill}</li>
             ))}
           </ul>
+        </PopupComponent>
+      )}
+      {isLogsPopupOpen && (
+        <PopupComponent
+          isOpen={isLogsPopupOpen}
+          onClose={() => setIsLogsPopupOpen(false)}
+          message={t("view_log")}
+        >
+          <div>
+            {logs && logs.length > 0 ? (
+              <ul>
+                {logs.map((log, idx) => <li key={idx}>{log}</li>)}
+              </ul>
+            ) : (
+              <div>{t("no_logs")}</div>
+            )}
+          </div>
         </PopupComponent>
       )}
     </tr>
@@ -137,7 +155,7 @@ PersonItemRow.propTypes = {
   newUser: PropTypes.bool,
   approveFunction: PropTypes.func.isRequired,
   rejectFunction: PropTypes.func.isRequired,
-  viewLogsFunction: PropTypes.func.isRequired,
+  logs: PropTypes.arrayOf(PropTypes.string),
   addLogFunction: PropTypes.func.isRequired,
 };
 

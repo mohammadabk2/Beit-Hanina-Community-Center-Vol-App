@@ -51,7 +51,7 @@ const loadUsers = async (req, res) => {
       if (roleType.role === "admin") {
         const users = await dbConnection.getUsers(roleType.role, tableName);
         allUsers = users.map((user) => ({
-          id: user.id,
+          id: user.user_id,
           name: user.name,
           birthDate: safeDateOnly(user.birth_date),
           sex: user.sex,

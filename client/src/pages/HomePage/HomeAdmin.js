@@ -270,8 +270,8 @@ const HomeAdmin = () => {
 
   const handleViewLogs = (personId) => {
     setSelectedUserId(personId);
-    // Find user logs
-    const user = users.find((u) => u.id === personId);
+    // Find user logs (fix type issue)
+    const user = users.find((u) => String(u.id) === String(personId));
     setLogsToView(Array.isArray(user?.logs) ? user.logs : []);
     setViewLogsPopupOpen(true);
   };
@@ -395,7 +395,6 @@ const HomeAdmin = () => {
 
           <div className="bottom-scroll-box1">
             <PeopleDisplaySwitcher
-              // people={users}
               people={users.filter(
                 (user) =>
                   user.name
@@ -419,7 +418,6 @@ const HomeAdmin = () => {
               approveUser={handleApprove}
               rejectUser={handleReject}
               addLog={handleAddLog}
-              viewLogs={handleViewLogs}
             />
           </div>
         </div>
