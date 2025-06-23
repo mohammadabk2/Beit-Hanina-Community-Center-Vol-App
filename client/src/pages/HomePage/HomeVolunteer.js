@@ -13,7 +13,7 @@ import DropDownMenu from "../../components/common/DropDownMenu";
 import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const HomeVolunteer = () => {
   const API_BASE_URL = SERVER_IP;

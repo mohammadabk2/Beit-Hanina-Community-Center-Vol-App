@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import axios from "axios";
 import { useAuth } from "../Context/auth";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../constants/global";
 
 const useLoadEvents = () => {
   const { userId, isAuthenticated, logout } = useAuth();

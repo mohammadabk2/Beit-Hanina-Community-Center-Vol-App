@@ -10,7 +10,7 @@ import CopyRight from "../../components/layout/CopyRight";
 
 import { useAuth } from "../../config/Context/auth";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
