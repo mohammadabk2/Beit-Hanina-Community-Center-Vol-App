@@ -24,7 +24,7 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 import useLoadUsers from "../../config/hooks/loadUsers";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const HomeAdmin = () => {
   const API_BASE_URL = SERVER_IP;

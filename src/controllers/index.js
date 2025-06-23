@@ -19,6 +19,7 @@ import userActions from "./Users/actions.js";
 import loadEvents from "./Events/load.js";
 import createEvent from "./Events/create.js";
 import eventActions from "./Events/actions.js";
+import exportEvents from "./Events/export.js";
 
 const router = Router();
 
@@ -36,6 +37,7 @@ router.get("/users/Info", LoadInfo);
 router.get("/events", loadEvents);
 router.post("/events", createEvent);
 router.post("/events/actions", eventActions);
+router.get("/events/export", exportEvents);
 
 // --- Static File Serving for React --- //! might turn off
 router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));

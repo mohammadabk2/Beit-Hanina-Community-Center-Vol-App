@@ -11,7 +11,7 @@ import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 import PopupComponent from "./common/PopupComponent";
 
-import { SERVER_IP } from "../global";
+import { SERVER_IP } from "../config/constants/global";
 
 const EventItem = ({
   id,

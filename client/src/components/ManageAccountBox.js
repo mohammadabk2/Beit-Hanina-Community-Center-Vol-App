@@ -7,7 +7,7 @@ import { useAuth } from "../config/Context/auth";
 import PopupComponent from "./common/PopupComponent";
 import DynamicInput from "./common/InputComponent";
 
-import { SERVER_IP } from "../global";
+import { SERVER_IP } from "../config/constants/global";
 
 
 const ManageAccountBox = () => {

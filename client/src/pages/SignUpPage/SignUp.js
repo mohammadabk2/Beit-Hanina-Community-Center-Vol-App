@@ -14,7 +14,7 @@ import CopyRight from "../../components/layout/CopyRight";
 // Import the insurance and occupation options
 import { useInsuranceOptions } from "../../config/options/Insurance";
 import { useOccupationOptions } from "../../config/options/Occupation";
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const SignUpPage = () => {
   //TODO handle if already signed in maybe do that in App.js
