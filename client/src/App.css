@@ -64,6 +64,8 @@ button {
 .smooth-shadow-box,
 .dropdown-menu {
   box-shadow: 0 0 0.5rem 0.0625rem var(--general-shadow);
+  background-color: var(--box-background-color);
+
 }
 
 /*Gives container white background that can resize */
@@ -74,6 +76,7 @@ button {
   border-radius: 0.625rem;
   background-color: var(--bottom-scroll-box);
   max-width: 34.5625rem;
+    background-color: var(--box-background-color);
 }
 
 /*Organizes containers in column when combined with flex-box class */
@@ -133,6 +136,7 @@ button {
   border-radius: 1rem;
   margin-bottom: 1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
+  background-color: var(--box-background-color);
 }
 
 /*Drop down button image */
@@ -196,6 +200,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--box-background-color);
 }
 
 .dropdown-item {
@@ -255,6 +260,7 @@ textarea:focus {
   border-radius: 0.625rem;
   background-color: var(--box-background-color);
   width: 95%;
+  background-color: var(--box-background-color);
 }
 
 .event-box-image {
@@ -326,6 +332,7 @@ textarea:focus {
   box-shadow: 0 0 0.5rem 0.0625rem var(--general-shadow);
   width: 100%;
   background-color: var(--top-scroll-box);
+  background-color: var(--box-background-color);
 }
 
 .bottom-scroll-box1 {
@@ -341,6 +348,7 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--box-background-color);
 }
 
 .scroll-box1,
@@ -416,8 +424,8 @@ textarea:focus {
   border-radius: 1rem 1rem 0 0;
   font-size: 2.3rem;
   width: 100%;
-  background-color: var(--box-background-color);
   margin-top: 1rem;
+  background-color: var(--box-background-color);
 }
 
 .bottom-user-box {
@@ -501,6 +509,17 @@ textarea:focus {
 .person-table .button-approve:hover {
   background-color: #218838;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+.center-logo {
+  width: 7rem;
+  height: auto;
+  margin: 0.2rem 0.5rem 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .person-table .button-reject {

@@ -16,6 +16,8 @@ import modeIconLight from "../../icons/dark/NavBar/mode_icon.svg";
 import profileIconDark from "../../icons/dark/NavBar/profile_icon.svg";
 import homeIconDark from "../../icons/dark/NavBar/home_icon.svg";
 import aboutIconDark from "../../icons/dark/NavBar/about_icon.svg";
+
+import CenterLogo from "../../icons/center_logo.svg";
 // import settingsIconDark from "../icons/dark/settings_icon.svg";
 
 const NavigationBar = () => {
@@ -104,6 +106,14 @@ const NavigationBar = () => {
           </div>
         </>
       )}
+
+      <div onClick={goToHome} className="flex-box flex-column">
+        <img
+          className="center-logo"
+          src={CenterLogo}
+          alt="Beit Hanina Community Center"
+        />
+      </div>
 
       <DropDownMenu
         className="language-button"
