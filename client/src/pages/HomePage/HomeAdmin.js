@@ -49,6 +49,19 @@ const HomeAdmin = () => {
   const [eventStatus, setEventStatus] = useState("approved");
   const [peopleStatus, setPeopleStatus] = useState("volunteer_waiting_list");
 
+  // State for Add Log popup
+  const [addLogPopupOpen, setAddLogPopupOpen] = useState(false);
+  const [addLogUserId, setAddLogUserId] = useState(null);
+  const [addLogValue, setAddLogValue] = useState("");
+
+  // State for View Log popup
+  const [viewLogPopupOpen, setViewLogPopupOpen] = useState(false);
+  const [viewLogUserId, setViewLogUserId] = useState(null);
+
+  const [userLogs, setUserLogs] = useState([]);
+  const [logsLoading, setLogsLoading] = useState(false);
+  const [logsError, setLogsError] = useState(null);
+
   const eventOptions = [
     {
       label: t("approved_events"),
@@ -254,11 +267,6 @@ const HomeAdmin = () => {
     }
   };
 
-  // State for Add Log popup
-  const [addLogPopupOpen, setAddLogPopupOpen] = useState(false);
-  const [addLogUserId, setAddLogUserId] = useState(null);
-  const [addLogValue, setAddLogValue] = useState("");
-
   const handleAddLog = (personId) => {
     setAddLogUserId(personId);
     setAddLogPopupOpen(true);
@@ -290,8 +298,24 @@ const HomeAdmin = () => {
   };
 
   const handleViewLogs = (personId) => {
-    console.log(`Viewing logs for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
+    setViewLogUserId(personId);
+    setLogsLoading(false);
+    setLogsError(null);
+    setViewLogPopupOpen(true);
+
+    const user = users.find(u => u.id === personId);
+    if (user && Array.isArray(user.logs)) {
+      setUserLogs(user.logs);
+    } else {
+      setUserLogs([]);
+    }
+  };
+
+  const handleViewLogClose = () => {
+    setViewLogPopupOpen(false);
+    setViewLogUserId(null);
+    setUserLogs([]);
+    setLogsError(null);
   };
 
   const renderSearch = () => {
@@ -618,6 +642,34 @@ const HomeAdmin = () => {
             <DynamicButton type="button" text={t("cancel_button")} className="button button-small" onClick={handleAddLogClose} />
           </div>
         </form>
+      </PopupComponent>
+      {/* View Logs Popup */}
+      <PopupComponent
+        isOpen={viewLogPopupOpen}
+        onClose={handleViewLogClose}
+        message={t("view_logs")}
+      >
+        {logsLoading ? (
+          <p>{t("loading_logs")}</p>
+        ) : logsError ? (
+          <p style={{ color: "red" }}>{logsError}</p>
+        ) : userLogs.length === 0 ? (
+          <p>{t("no_logs_found")}</p>
+        ) : (
+          <ul>
+            {userLogs.map((log, idx) => (
+              <li key={idx}>{log}</li>
+            ))}
+          </ul>
+        )}
+        <div className="flex-box gap-1">
+          <DynamicButton
+            type="button"
+            text={t("close_button")}
+            className="button button-small"
+            onClick={handleViewLogClose}
+          />
+        </div>
       </PopupComponent>
     </div>
   );
