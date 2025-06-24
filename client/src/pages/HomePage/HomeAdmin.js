@@ -428,7 +428,10 @@ const HomeAdmin = () => {
     e.preventDefault();
     console.log("Create Org Submit clicked", formData);
     try {
-      const response = await sendAxiod("users/register", formData);
+      const response = await axios.post(
+        `${API_BASE_URL}/api/users/register`,
+        formData
+      );
       if (response.data.status === "success") {
         alert(t("org_sign_up_message"));
       } else {
