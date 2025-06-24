@@ -11,6 +11,7 @@ import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 import DropDownMenu from "../../components/common/DropDownMenu";
 import LoadingPage from "../CommonPages/Loading/Loading";
+import PopupComponent from "../../components/common/PopupComponent";
 
 // Icons
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
@@ -214,7 +215,9 @@ const HomeAdmin = () => {
 
     if (response.status !== 200) {
       console.log(`${response.status} ${response.message}`);
+      return false;
     }
+    return true;
   };
 
   const handleApprove = async (personId) => {
@@ -251,9 +254,39 @@ const HomeAdmin = () => {
     }
   };
 
+  // State for Add Log popup
+  const [addLogPopupOpen, setAddLogPopupOpen] = useState(false);
+  const [addLogUserId, setAddLogUserId] = useState(null);
+  const [addLogValue, setAddLogValue] = useState("");
+
   const handleAddLog = (personId) => {
-    console.log(`Adding log for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
+    setAddLogUserId(personId);
+    setAddLogPopupOpen(true);
+    setAddLogValue("");
+  };
+
+  const handleAddLogSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await sendAxiod("users", addLogUserId, "log-user", addLogValue);
+      if (response) {
+        alert(t("log_added_successfully"));
+        setAddLogPopupOpen(false);
+        setAddLogUserId(null);
+        setAddLogValue("");
+      } else {
+        alert(t("log_add_failed"));
+      }
+    } catch (error) {
+      console.error("Error adding log:", error);
+      alert(t("log_add_failed"));
+    }
+  };
+
+  const handleAddLogClose = () => {
+    setAddLogPopupOpen(false);
+    setAddLogUserId(null);
+    setAddLogValue("");
   };
 
   const handleViewLogs = (personId) => {
@@ -564,6 +597,28 @@ const HomeAdmin = () => {
       )}
       {viewMode === "createOrg" && renderCreateOrg()}
       <CopyRight />
+      {/* Add Log Popup */}
+      <PopupComponent
+        isOpen={addLogPopupOpen}
+        onClose={handleAddLogClose}
+        message={t("add_log")}
+      >
+        <form onSubmit={handleAddLogSubmit} className="flex-box flex-column gap-1">
+          <label htmlFor="logInput">{t("log_details")}</label>
+          <DynamicInput
+            id="logInput"
+            type="text"
+            value={addLogValue}
+            onChange={e => setAddLogValue(e.target.value)}
+            placeholder={t("enter_log")}
+            className="input-field"
+          />
+          <div className="flex-box gap-1">
+            <DynamicButton type="submit" text={t("submit_button")} className="button button-small" />
+            <DynamicButton type="button" text={t("cancel_button")} className="button button-small" onClick={handleAddLogClose} />
+          </div>
+        </form>
+      </PopupComponent>
     </div>
   );
 };

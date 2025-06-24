@@ -60,5 +60,9 @@
   "reject": "الرفض",
   "loading_users": "جارٍ تحميل المستخدمين...",
   "no_users_enrolled": "لا يوجد مستخدمون مسجلون في هذا الحدث",
-  "enrolled_users": "المتطوعون المسجلون"
+  "enrolled_users": "المتطوعون المسجلون",
+  "log_required": "لا يمكن أن يكون السجل فارغًا.",
+  "log_submit_failed": "فشل في إضافة السجل.",
+  "log_placeholder": "أدخل نص السجل...",
+  "no_logs": "لا توجد سجلات."
 }
