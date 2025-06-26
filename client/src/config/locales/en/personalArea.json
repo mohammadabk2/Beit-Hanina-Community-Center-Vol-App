@@ -12,5 +12,8 @@
   "org_name": "Organization Name",
   "total_hours": "Hours Given To Org",
   "number_of_vol": "Number Of People That Have Volunteered Here",
-  "to_excel": "To Excel File"
+  "to_excel": "To Excel File",
+  "export": "Export",
+  "all_events_to_excel": "All Events to Excel",
+  "all_users_to_excel": "All Users to Excel"
 }

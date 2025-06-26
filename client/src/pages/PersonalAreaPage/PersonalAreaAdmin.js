@@ -13,12 +13,6 @@ const PersonalArea = () => {
   const { t } = useTranslation("personal");
   const { token, userId } = useAuth();
 
-  //TODO change all these to read from database
-
-  // const printToPdf = () => {
-  //   console.log("print to PDF button clicked");
-  // };
-
   const downloadToExcel = async () => {
     try {
       const response = await axios.get(
@@ -99,7 +93,7 @@ const PersonalArea = () => {
         <div className="general-box flex-box flex-column smooth-shadow-box">
               <DropDownMenu
                 className="gender-button"
-                text={t("select_type")}
+                text={t("export")}
                 options={eventOptions}
               />
             <ManageAccountBox />
