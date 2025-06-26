@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import DynamicButton from "../common/ButtonComponent";
 import PopupComponent from "../common/PopupComponent";
+import DynamicInput from "../common/InputComponent";
 
 const PersonItemCard = ({
   name,
@@ -21,17 +22,53 @@ const PersonItemCard = ({
   rejectFunction,
   viewLogsFunction,
   addLogFunction,
+  approveHoursFunction,
+  unapprovedHours = 0,
 }) => {
   const { t } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
   const { t: tskill } = useTranslation("skills");
+  const { t: tPersonal } = useTranslation("personalArea");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isApproveHoursPopupOpen, setIsApproveHoursPopupOpen] = useState(false);
+  const [hoursToApprove, setHoursToApprove] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const showSkills = () => {
     console.log("skills render");
     setIsPopupOpen(true);
   };
+
+  const showApproveHours = () => {
+    setIsApproveHoursPopupOpen(true);
+  };
+
+  const handleHoursChange = (e) => {
+    const value = parseInt(e.target.value) || 0;
+    setHoursToApprove(Math.min(value, unapprovedHours)); // Don't allow more than available
+  };
+
+  const handleApproveHours = async () => {
+    if (hoursToApprove <= 0) return;
+    
+    setIsSubmitting(true);
+    try {
+      await approveHoursFunction(hoursToApprove);
+      setIsApproveHoursPopupOpen(false);
+      setHoursToApprove(0);
+    } catch (error) {
+      console.error("Error approving hours:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCloseApproveHours = () => {
+    setHoursToApprove(0);
+    setIsApproveHoursPopupOpen(false);
+  };
+
   return (
     <div
       className="flex-box flex-column event-box smooth-shadow-box"
@@ -128,6 +165,12 @@ const PersonItemCard = ({
                   text={t("view_log")}
                   onClick={viewLogsFunction}
                 />
+
+                <DynamicButton
+                  className="button button-approve"
+                  text={t("approve_hours")}
+                  onClick={showApproveHours}
+                />
               </div>
             </>
           )}
@@ -146,6 +189,62 @@ const PersonItemCard = ({
               <li key={index}>{skill}</li>
             ))}
           </ul>
+        </PopupComponent>
+      )}
+
+      {isApproveHoursPopupOpen && (
+        <PopupComponent
+          isOpen={isApproveHoursPopupOpen}
+          onClose={handleCloseApproveHours}
+          message={t("approve_hours")}
+        >
+          <div className="flex-box flex-column gap-1">
+            <div className="personal-area-content">
+              {t("volunteer_name")}: <strong>{name}</strong>
+            </div>
+            
+            <div className="personal-area-content">
+              {tPersonal("unapproved_hours")}: <strong>{unapprovedHours}</strong>
+            </div>
+            
+            <div className="flex-box flex-column input-field-box">
+              <div>
+                <label>{t("hours_to_approve")}:</label>
+                <label className="red-star">*</label>
+              </div>
+              <DynamicInput
+                className="input-field"
+                type="number"
+                min="0"
+                max={unapprovedHours}
+                value={hoursToApprove}
+                onChange={handleHoursChange}
+                placeholder="0"
+                disabled={unapprovedHours === 0}
+              />
+            </div>
+            
+            {unapprovedHours === 0 && (
+              <div className="personal-area-content" style={{ color: "var(--text-color-secondary)" }}>
+                {t("no_unapproved_hours")}
+              </div>
+            )}
+            
+            <div className="flex-box gap-1">
+              <DynamicButton
+                className="button button-approve"
+                text={t("approve")}
+                onClick={handleApproveHours}
+                disabled={hoursToApprove <= 0 || unapprovedHours === 0 || isSubmitting}
+              />
+              <DynamicButton
+                className="button button-reject"
+                text={t("cancel")}
+                onClick={handleCloseApproveHours}
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
         </PopupComponent>
       )}
     </div>
@@ -168,6 +267,8 @@ PersonItemCard.propTypes = {
   rejectFunction: PropTypes.func.isRequired,
   viewLogsFunction: PropTypes.func.isRequired,
   addLogFunction: PropTypes.func.isRequired,
+  approveHoursFunction: PropTypes.func,
+  unapprovedHours: PropTypes.number,
 };
 
 PersonItemCard.defaultProps = {
@@ -180,6 +281,8 @@ PersonItemCard.defaultProps = {
   sex: "",
   phoneNumber: "",
   name: "",
+  approveHoursFunction: () => {},
+  unapprovedHours: 0,
 };
 
 export default PersonItemCard;

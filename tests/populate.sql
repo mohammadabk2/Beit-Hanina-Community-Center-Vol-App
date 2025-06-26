@@ -14,7 +14,7 @@ INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, app
 VALUES
 (2, 'Alice Blue', '2000-01-01', 'F', 'SafeInsure', 'V1001', 10, 2, ARRAY['First Aid', 'Cooking'], ARRAY[1]::int[]),
 (4, 'Bob Green', '1999-02-02', 'M', 'LifeCare', 'V1002', 5, 1, ARRAY['Driving'], ARRAY[1,2]::int[]),
-(5, 'Carol Red', '2001-03-03', 'F', 'MediPlus', 'V1003', 0, 0, ARRAY[]::text[], ARRAY[]::int[]);
+(5, 'Carol Red', '2001-03-03', 'F', 'MediPlus', 'V1003', 3, 2, ARRAY[]::text[], ARRAY[]::int[]);
 
 -- ORGANIZER
 INSERT INTO organizer (user_id, org_name, given_hours, vol_id)
