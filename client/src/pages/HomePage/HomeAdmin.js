@@ -261,6 +261,24 @@ const HomeAdmin = () => {
     // TODO: Implement actual logic (e.g., show modal, navigate)
   };
 
+  const handleApproveHours = async (personId, hoursToApprove) => {
+    console.log(`Approving ${hoursToApprove} hours for person ${personId}`);
+
+    try {
+      // First, increment approved hours
+      await sendAxiod("users", personId, "approve-hours", hoursToApprove.toString());
+      
+      // Then, decrement unapproved hours
+      await sendAxiod("users", personId, "decrement-unapproved-hours", hoursToApprove.toString());
+      
+      // Reload users to get updated data
+      loadUsers(peopleStatus);
+    } catch (error) {
+      console.error("Error approving hours:", error);
+      // Optionally show an error message to the user
+    }
+  };
+
   const renderSearch = () => {
     return (
       <DynamicInput
@@ -369,6 +387,7 @@ const HomeAdmin = () => {
               rejectUser={handleReject}
               addLog={handleAddLog}
               viewLogs={handleViewLogs}
+              approveHours={handleApproveHours}
             />
           </div>
         </div>

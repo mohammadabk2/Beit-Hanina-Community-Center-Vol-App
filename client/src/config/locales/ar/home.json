@@ -60,5 +60,11 @@
   "reject": "الرفض",
   "loading_users": "جارٍ تحميل المستخدمين...",
   "no_users_enrolled": "لا يوجد مستخدمون مسجلون في هذا الحدث",
-  "enrolled_users": "المتطوعون المسجلون"
+  "enrolled_users": "المتطوعون المسجلون",
+  
+  "approve_hours": "اعتماد الساعات",
+  "volunteer_name": "اسم المتطوع",
+  "hours_to_approve": "الساعات المراد اعتمادها",
+  "no_unapproved_hours": "لا توجد ساعات غير معتمدة متاحة",
+  "cancel": "إلغاء"
 }

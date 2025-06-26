@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import PersonItemRow from "./PersonItemRow"; // Renamed component
 import { useTranslation } from "react-i18next";
 
-const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
+const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approveHours }) => {
   const { t } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
   // const { t: tskill } = useTranslation("skills"); // For skills column if needed
@@ -31,7 +31,7 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
             {/* Maybe add Insurance/ID later if needed, or show in details view */}
             <th>{tsignup("insurance")}</th>
             <th>{tsignup("idNumber")}</th>
-            <th colSpan={isNewUserList ? 2 : 2} className="actions-header">
+            <th colSpan={isNewUserList ? 2 : 3} className="actions-header">
               {" "}
               {/* Adjust colSpan */}
               {t("actions")}
@@ -56,6 +56,8 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog }) => {
               rejectFunction={() => rejectUser(person.id)}
               viewLogsFunction={() => viewLogs(person.id)}
               addLogFunction={() => addLog(person.id)}
+              approveHoursFunction={(hours) => approveHours(person.id, hours)}
+              unapprovedHours={person.unapproved_hours || 0}
             />
           ))}
         </tbody>
@@ -70,6 +72,7 @@ PersonList.propTypes = {
   rejectUser: PropTypes.func.isRequired,
   viewLogs: PropTypes.func.isRequired,
   addLog: PropTypes.func.isRequired,
+  approveHours: PropTypes.func.isRequired,
 };
 
 PersonList.defaultProps = {

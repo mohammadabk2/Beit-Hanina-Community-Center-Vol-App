@@ -60,5 +60,11 @@
   "reject": "Reject",
   "loading_users": "Loading Users...",
   "no_users_enrolled": "No users enrolled in this event",
-  "enrolled_users": "Enrolled Volunteers"
+  "enrolled_users": "Enrolled Volunteers",
+  
+  "approve_hours": "Approve Hours",
+  "volunteer_name": "Volunteer Name",
+  "hours_to_approve": "Hours to Approve",
+  "no_unapproved_hours": "No unapproved hours available",
+  "cancel": "Cancel"
 }

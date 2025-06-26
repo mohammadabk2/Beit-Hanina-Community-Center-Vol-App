@@ -119,6 +119,8 @@ const getUsers = async (role, tableName) => {
           volunteer.id_number,
           users.username,
           volunteer.skills,
+          volunteer.approved_hours,
+          volunteer.unapproved_hours,
           NULL as org_name,
           NULL as given_hours,
           NULL as vol_id,
@@ -138,6 +140,8 @@ const getUsers = async (role, tableName) => {
           NULL as id_number,
           users.username,
           NULL as skills,
+          NULL as approved_hours,
+          NULL as unapproved_hours,
           organizer.org_name,
           organizer.given_hours,
           organizer.vol_id,
@@ -248,6 +252,7 @@ const getUserById = async (id) => {
  * @throws {Error} If the database query fails.
  */
 const incrementVolHours = async (userId, hourType, hours) => {
+  console.log('incrementVolHours called with:', { userId, hourType, hours });
   const allowedFields = ["approved_hours", "unapproved_hours"]; // Add any other allowed fields here
   if (!allowedFields.includes(hourType)) {
     throw new Error("Invalid field name");
