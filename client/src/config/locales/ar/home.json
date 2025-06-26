@@ -66,5 +66,14 @@
   "volunteer_name": "اسم المتطوع",
   "hours_to_approve": "الساعات المراد اعتمادها",
   "no_unapproved_hours": "لا توجد ساعات غير معتمدة متاحة",
-  "cancel": "إلغاء"
+  "cancel": "إلغاء",
+
+  "approved_events": "الفعاليات المعتمدة",
+  "pending_events": "الفعاليات المعلقة",
+  "finished_events": "الفعاليات المنتهية",
+  "rejected_events": "الفعاليات المرفوضة",
+  "on_going": "الفعاليات الجارية",
+
+  "new": "جديد",
+  "active": "نشط"
 }

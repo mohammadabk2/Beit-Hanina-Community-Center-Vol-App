@@ -70,5 +70,14 @@
   "log_required": "Log cannot be empty.",
   "log_submit_failed": "Failed to add log.",
   "log_placeholder": "Enter log message...",
-  "no_logs": "No logs found."
+  "no_logs": "No logs found.",
+
+  "approved_events": "Approved Events",
+  "pending_events": "Pending Events",
+  "finished_events": "Finished Events",
+  "rejected_events": "Rejected Events",
+  "on_going": "Ongoing Events",
+
+  "new": "New",
+  "active": "Active"
 }
