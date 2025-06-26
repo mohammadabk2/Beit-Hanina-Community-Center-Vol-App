@@ -96,34 +96,14 @@ const PersonalArea = () => {
   return (
     <div className="app flex-box flex-column">
       <NavigationBar />
-      <div className="general-box flex-box">
         <div className="general-box flex-box flex-column smooth-shadow-box">
-          <div className="basic-box-padding">
-
-            <div className="flex-box basic-box-padding">
-              {/* <DynamicButton
-                className="button"
-                text={t("to_pdf")}
-                onClick={printToPdf}
-              />
-
-              <DynamicButton
-                className="button"
-                text={t("to_excel")}
-                onClick={downloadToExcel}
-              /> */}
-
               <DropDownMenu
-                className="language-button"
+                className="gender-button"
                 text={t("select_type")}
                 options={eventOptions}
               />
-            </div>
-
             <ManageAccountBox />
-          </div>
         </div>
-      </div>
       <CopyRight />
     </div>
   );
