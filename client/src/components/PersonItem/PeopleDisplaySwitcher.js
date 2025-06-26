@@ -41,7 +41,10 @@ const PeopleDisplaySwitcher = ({
         // PersonList will delegate them to PersonItemRow, passing the relevant person ID
         approveUser={approveUser}
         rejectUser={rejectUser}
-        viewLogs={viewLogs}
+        viewLogs={(personId) => {
+          const user = people.find(u => u.id === personId);
+          viewLogs(personId, user?.logs || []);
+        }}
         addLog={addLog}
       />
     );
