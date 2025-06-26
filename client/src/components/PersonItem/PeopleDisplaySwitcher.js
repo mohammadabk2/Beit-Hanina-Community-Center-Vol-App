@@ -18,6 +18,7 @@ const PeopleDisplaySwitcher = ({
   rejectUser,
   viewLogs,
   addLog,
+  approveHours,
 }) => {
 
   // Optional: Add loading or empty state based on the people array
@@ -46,6 +47,7 @@ const PeopleDisplaySwitcher = ({
           viewLogs(personId, user?.logs || []);
         }}
         addLog={addLog}
+        approveHours={approveHours}
       />
     );
   }
@@ -74,6 +76,8 @@ const PeopleDisplaySwitcher = ({
             rejectFunction={() => rejectUser(person.id)}
             addLogFunction={() => addLog(person.id)}
             viewLogsFunction={() => viewLogs(person.id)}
+            approveHoursFunction={(hours) => approveHours(person.id, hours)}
+            unapprovedHours={person.unapproved_hours || 0}
             // style={person.style} // Removed top-level style, apply styling via CSS or per-card if needed
           />
         ))}
@@ -84,7 +88,7 @@ const PeopleDisplaySwitcher = ({
   // Fallback for invalid type
   console.warn("PeopleDisplaySwitcher received invalid type:", type);
   // Render the table as a default, or null, or an error message
-  return <PersonList people={people} approveUser={approveUser} rejectUser={rejectUser} viewLogs={viewLogs} addLog={addLog} />;
+  return <PersonList people={people} approveUser={approveUser} rejectUser={rejectUser} viewLogs={viewLogs} addLog={addLog} approveHours={approveHours} />;
 };
 
 // 7. Update PropTypes
@@ -102,6 +106,7 @@ PeopleDisplaySwitcher.propTypes = {
       idNumber: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       skills: PropTypes.arrayOf(PropTypes.string),
       isNew: PropTypes.bool, // Assuming the flag is 'isNew'
+      unapproved_hours: PropTypes.number, // Add unapproved hours field
       // Add other expected properties within a person object
   })), // Can be .isRequired if the parent guarantees an array
   type: PropTypes.oneOf(["card", "table"]).isRequired, // Type is required
@@ -110,11 +115,13 @@ PeopleDisplaySwitcher.propTypes = {
   rejectUser: PropTypes.func.isRequired,
   viewLogs: PropTypes.func.isRequired,
   addLog: PropTypes.func.isRequired,
+  approveHours: PropTypes.func, // Make optional for backward compatibility
 };
 
 // 8. Update DefaultProps (optional, but good practice for 'people')
 PeopleDisplaySwitcher.defaultProps = {
   people: [], // Default to empty array to prevent errors if loading handled internally
+  approveHours: () => {}, // Default empty function for backward compatibility
 };
 
 // 9. Export with the new name

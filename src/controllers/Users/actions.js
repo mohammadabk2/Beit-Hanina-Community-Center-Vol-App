@@ -52,6 +52,34 @@ const userActions = async (req, res) => {
         answer = await dbConnection.addLog(actionID, actionValue);
       }
 
+      if (action === "approve-hours") {
+        console.log(`approving ${actionValue} hours for User ${actionID}`);
+        const hoursToApprove = parseInt(actionValue);
+        if (isNaN(hoursToApprove) || hoursToApprove <= 0) {
+          const message = "Invalid hours value";
+          console.log(message);
+          return res.status(400).send({
+            message: message,
+            status: "fail",
+          });
+        }
+        answer = await dbConnection.incrementVolHours(actionID, "approved_hours", hoursToApprove);
+      }
+
+      if (action === "decrement-unapproved-hours") {
+        console.log(`decrementing ${actionValue} unapproved hours for User ${actionID}`);
+        const hoursToDecrement = parseInt(actionValue);
+        if (isNaN(hoursToDecrement) || hoursToDecrement <= 0) {
+          const message = "Invalid hours value";
+          console.log(message);
+          return res.status(400).send({
+            message: message,
+            status: "fail",
+          });
+        }
+        answer = await dbConnection.incrementVolHours(actionID, "unapproved_hours", -hoursToDecrement);
+      }
+
       if (!answer) {
         const message = `action failed!! invalid action type`;
         console.log(message);
