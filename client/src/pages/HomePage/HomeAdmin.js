@@ -56,7 +56,7 @@ const HomeAdmin = () => {
 
   // State for View Log popup
   const [viewLogPopupOpen, setViewLogPopupOpen] = useState(false);
-  const [viewLogUserId, setViewLogUserId] = useState(null);
+  // const [viewLogUserId, setViewLogUserId] = useState(null);
 
   const [userLogs, setUserLogs] = useState([]);
   const [logsLoading, setLogsLoading] = useState(false);
@@ -298,7 +298,7 @@ const HomeAdmin = () => {
   };
 
   const handleViewLogs = (personId) => {
-    setViewLogUserId(personId);
+    // setViewLogUserId(personId);
     setLogsLoading(false);
     setLogsError(null);
     setViewLogPopupOpen(true);
@@ -313,7 +313,7 @@ const HomeAdmin = () => {
 
   const handleViewLogClose = () => {
     setViewLogPopupOpen(false);
-    setViewLogUserId(null);
+    // setViewLogUserId(null);
     setUserLogs([]);
     setLogsError(null);
   };
