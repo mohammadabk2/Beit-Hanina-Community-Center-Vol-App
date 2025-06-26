@@ -64,5 +64,14 @@
   "log_required": "لا يمكن أن يكون السجل فارغًا.",
   "log_submit_failed": "فشل في إضافة السجل.",
   "log_placeholder": "أدخل نص السجل...",
-  "no_logs": "لا توجد سجلات."
+  "no_logs": "لا توجد سجلات.",
+
+  "approved_events": "الفعاليات المعتمدة",
+  "pending_events": "الفعاليات المعلقة",
+  "finished_events": "الفعاليات المنتهية",
+  "rejected_events": "الفعاليات المرفوضة",
+  "on_going": "الفعاليات الجارية",
+
+  "new": "جديد",
+  "active": "نشط"
 }
