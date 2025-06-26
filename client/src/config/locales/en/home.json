@@ -66,5 +66,9 @@
   "volunteer_name": "Volunteer Name",
   "hours_to_approve": "Hours to Approve",
   "no_unapproved_hours": "No unapproved hours available",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "log_required": "Log cannot be empty.",
+  "log_submit_failed": "Failed to add log.",
+  "log_placeholder": "Enter log message...",
+  "no_logs": "No logs found."
 }
