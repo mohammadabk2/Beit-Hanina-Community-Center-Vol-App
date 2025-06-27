@@ -1,13 +1,13 @@
 -- USERS
-INSERT INTO users (phone_number, email, address, username, password_hash, banned, logs, role, profile_image_url)
+INSERT INTO users (phone_number, email, address, username, password_hash, banned, role, profile_image_url)
 VALUES
-('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'hash1', FALSE, ARRAY['created account', 'updated profile'], 'admin', 'https://img.com/1.jpg'),
-('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'hash2', FALSE, ARRAY['joined event'], 'volunteer', 'https://img.com/2.jpg'),
-('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'hash3', FALSE, ARRAY['created org'], 'organizer', 'https://img.com/3.jpg'),
-('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'hash4', TRUE, ARRAY['banned'], 'volunteer', 'https://img.com/4.jpg'),
-('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'hash5', FALSE, ARRAY[]::text[], 'volunteer', 'https://img.com/5.jpg'),
-('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'hash6', FALSE, ARRAY['created org'], 'organizer', 'https://img.com/6.jpg'),
-('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'hash7', FALSE, ARRAY['reset password'], 'admin', 'https://img.com/7.jpg');
+('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'hash1', FALSE, 'admin', 'https://img.com/1.jpg'),
+('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'hash2', FALSE, 'volunteer', 'https://img.com/2.jpg'),
+('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'hash3', FALSE, 'organizer', 'https://img.com/3.jpg'),
+('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'hash4', TRUE, 'volunteer', 'https://img.com/4.jpg'),
+('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'hash5', FALSE, 'volunteer', 'https://img.com/5.jpg'),
+('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'hash6', FALSE, 'organizer', 'https://img.com/6.jpg'),
+('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'hash7', FALSE, 'admin', 'https://img.com/7.jpg');
 
 -- VOLUNTEER
 INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, skills, orgs)
@@ -31,18 +31,30 @@ VALUES
 ('Sample Event', '2024-12-01', '10:00', '14:00', TRUE, 3, ARRAY[2,4]::int[], ARRAY[5,2]::int[], 10, 2, 'Sample Location', 'Sample Description', ARRAY['Skill1', 'Skill2']);
 
 -- VOLUNTEER WAITING LIST
-INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, logs, skills, profile_image_url)
+INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, skills, profile_image_url)
 VALUES
-('Daisy White', '2002-04-04', 'F', '888-888-8888', 'wait1@example.com', '8 Wait St', 'SafeInsure', 'Student', 'WV1001', 'waituser1', 'hash8', ARRAY['applied'], ARRAY['Cooking'], 'https://img.com/8.jpg'),
-('Evan Black', '2003-05-05', 'M', '999-999-9999', 'wait2@example.com', '9 Wait St', 'LifeCare', 'Unemployed', 'WV1002', 'waituser2', 'hash9', ARRAY[]::text[], ARRAY[]::text[], 'https://img.com/9.jpg');
+('Daisy White', '2002-04-04', 'F', '888-888-8888', 'wait1@example.com', '8 Wait St', 'SafeInsure', 'Student', 'WV1001', 'waituser1', 'hash8', ARRAY['Cooking'], 'https://img.com/8.jpg'),
+('Evan Black', '2003-05-05', 'M', '999-999-9999', 'wait2@example.com', '9 Wait St', 'LifeCare', 'Unemployed', 'WV1002', 'waituser2', 'hash9', ARRAY[]::text[], 'https://img.com/9.jpg');
 
 -- REJECTED USERS
-INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, logs, profile_image_url)
+INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, profile_image_url)
 VALUES
-('Fay Brown', '1998-06-06', 'F', '101-101-1010', 'rej1@example.com', '10 Rej St', 'MediPlus', 'RV1001', 'rejuser1', 'hash10', ARRAY['rejected'], 'https://img.com/10.jpg'),
-('George Gray', '1997-07-07', 'M', '202-202-2020', 'rej2@example.com', '11 Rej St', 'SafeInsure', 'RV1002', 'rejuser2', 'hash11', ARRAY[]::text[], 'https://img.com/11.jpg');
+('Fay Brown', '1998-06-06', 'F', '101-101-1010', 'rej1@example.com', '10 Rej St', 'MediPlus', 'RV1001', 'rejuser1', 'hash10', 'https://img.com/10.jpg'),
+('George Gray', '1997-07-07', 'M', '202-202-2020', 'rej2@example.com', '11 Rej St', 'SafeInsure', 'RV1002', 'rejuser2', 'hash11', 'https://img.com/11.jpg');
 
 -- EVENTS STATUS
 INSERT INTO events_status (approved, rejected, pending, ongoing, finished)
 VALUES
 (ARRAY[1,2]::int[], ARRAY[]::int[], ARRAY[3,4]::int[], ARRAY[]::int[], ARRAY[1]::int[]);
+
+-- SYSTEM LOGS (Sample data for the new logging system)
+INSERT INTO system_logs (user_id, action, details, log_level, created_at)
+VALUES
+(1, 'USER_CREATED', 'Admin account created', 'INFO', '2024-01-01 10:00:00'),
+(1, 'PROFILE_UPDATED', 'Admin profile updated', 'INFO', '2024-01-01 10:30:00'),
+(2, 'USER_CREATED', 'Volunteer account created', 'INFO', '2024-01-02 09:00:00'),
+(2, 'EVENT_JOINED', 'Joined Food Drive event', 'INFO', '2024-01-02 14:00:00'),
+(3, 'USER_CREATED', 'Organizer account created', 'INFO', '2024-01-03 11:00:00'),
+(3, 'ORG_CREATED', 'Created organization: Helping Hands', 'INFO', '2024-01-03 11:30:00'),
+(4, 'USER_BANNED', 'User account was banned', 'WARN', '2024-01-04 16:00:00'),
+(7, 'PASSWORD_RESET', 'Admin password was reset', 'INFO', '2024-01-05 08:00:00');

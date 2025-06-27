@@ -1,6 +1,7 @@
 import dbConnection from "../../database/dbconnection.js";
 import validation from "../validation.js";
 import bcrypt from "bcrypt";
+import { logRegistration, logError, logWarning } from "../../utils/logger.js";
 
 //TODO validation check for front end
 
@@ -12,6 +13,14 @@ const registerVolunteer = async (req, res) => {
   // req.imageFile
 
   if (Object.keys(errors).length > 0) {
+    // Log validation errors
+    await logWarning(
+      null, 
+      'REGISTRATION_VALIDATION_ERROR', 
+      `Registration validation failed: ${JSON.stringify(errors)}`, 
+      req
+    );
+    
     res.status(400).send({
       message: "Invalid registration data.",
       status: "error",
@@ -24,9 +33,11 @@ const registerVolunteer = async (req, res) => {
       const passwordHash = await bcrypt.hash(userData.password, salt);
 
       let reg;
+      let userType;
 
       if (userData.type === "org") {
         console.log("adding an org");
+        userType = "organizer";
         reg = await dbConnection.createOrganizer(
           userData.fullName,
           userData.address,
@@ -35,8 +46,20 @@ const registerVolunteer = async (req, res) => {
           userData.username,
           passwordHash
         );
+        
+        if (reg) {
+          // Log successful organizer registration
+          await logRegistration(
+            reg.id, 
+            userData.username, 
+            userType, 
+            req
+          );
+        }
+        
       } else if (userData.type === "vol") {
         console.log("adding a Volunteer");
+        userType = "volunteer";
         reg = await dbConnection.createUser(
           "volunteer_waiting_list",
           userData.fullName,
@@ -52,13 +75,32 @@ const registerVolunteer = async (req, res) => {
           passwordHash,
           userData.skills
         );
+        
+        if (reg) {
+          // Log volunteer registration (waiting list)
+          await logRegistration(
+            null, // No user ID yet since they're in waiting list
+            userData.username, 
+            `${userType} (waiting list)`, 
+            req
+          );
+        }
       }
+      
       if (reg) {
         res.status(200).send({
           message: `Signed up successfully`,
           status: "success",
         });
       } else {
+        // Log registration failure
+        await logError(
+          null, 
+          'REGISTRATION_FAILED', 
+          `Registration failed for user: ${userData.username}, type: ${userData.type}`, 
+          req
+        );
+        
         res.status(503).send({
           message: "Database temporarily unavailable. Please try again later.",
           status: "error",
@@ -66,6 +108,15 @@ const registerVolunteer = async (req, res) => {
       }
     } catch (error) {
       console.log(error);
+      
+      // Log registration error
+      await logError(
+        null, 
+        'REGISTRATION_ERROR', 
+        `Registration error for user: ${userData.username} - ${error.message}`, 
+        req
+      );
+      
       res.status(500).send({
         message: "An internal server error occurred during singUp.",
         status: "error",
@@ -73,4 +124,5 @@ const registerVolunteer = async (req, res) => {
     }
   }
 };
+
 export default registerVolunteer;

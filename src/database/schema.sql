@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users
     username TEXT NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     banned BOOLEAN DEFAULT FALSE,
-    logs TEXT[] DEFAULT '{}',
     role TEXT,
     profile_image_url TEXT,
     fav_events INT[] DEFAULT '{}',
@@ -44,7 +43,6 @@ CREATE TABLE IF NOT EXISTS volunteer_waiting_list
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username TEXT UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[] DEFAULT '{}',
     skills TEXT[] DEFAULT '{}',
     profile_image_url TEXT
 );
@@ -62,9 +60,27 @@ CREATE TABLE IF NOT EXISTS rejected_users
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username TEXT UNIQUE,
     password_hash VARCHAR(255),
-    logs TEXT[] DEFAULT '{}',
     profile_image_url TEXT
 );
+
+-- New system_logs table for proper logging
+CREATE TABLE IF NOT EXISTS system_logs
+(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE SET NULL,
+    action VARCHAR(100) NOT NULL,
+    details TEXT,
+    ip_address INET,
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    log_level VARCHAR(10) DEFAULT 'INFO' CHECK (log_level IN ('DEBUG', 'INFO', 'WARN', 'ERROR'))
+);
+
+-- Indexes for fast log queries
+CREATE INDEX IF NOT EXISTS idx_system_logs_user_id ON system_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_system_logs_created_at ON system_logs(created_at);
+CREATE INDEX IF NOT EXISTS idx_system_logs_action ON system_logs(action);
+CREATE INDEX IF NOT EXISTS idx_system_logs_level ON system_logs(log_level);
 
 CREATE TABLE IF NOT EXISTS organizer
 (
