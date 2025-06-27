@@ -63,7 +63,7 @@ const loadUsers = async (req, res) => {
           idNumber: user.id_number,
           userName: user.username,
           logs: user.logs,
-          skills: user.skills,
+          skills: user.skills || [],
           approved_hours: user.approved_hours || 0,
           unapproved_hours: user.unapproved_hours || 0,
         }));
@@ -79,6 +79,7 @@ const loadUsers = async (req, res) => {
           name: user.name,
           sex: user.sex,
           phoneNumber: user.phone_number,
+          skills: [], // Organizers don't have skills, so set to empty array
         }));
         console.log("Mapped users data:", allUsers); // Debug log
       }
