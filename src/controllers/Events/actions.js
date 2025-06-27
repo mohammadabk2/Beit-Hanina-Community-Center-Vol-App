@@ -79,7 +79,19 @@ const eventActions = async (req, res) => {
           }
         }
 
-        //TODO maybe add a unenroll from event
+        if (action === "unenroll") {
+          // Remove user from event's waiting list and approved list
+          answer = await dbConnection.removeUserFromEvent(actionID, userID);
+
+          // Remove event from user's signed up events list
+          if (answer) {
+            await dbconnection.removeEventFromUserList(
+              userID,
+              "signed_up_events",
+              actionID
+            );
+          }
+        }
       }
 
       if (roleType.role === "organizer") {

@@ -26,6 +26,7 @@ const EventItem = ({
   approveEvent,
   joinEvent,
   isFavorite: initialIsFavorite = false,
+  isSignedUp = false,
   // editEvent,
   // volunteers,
 }) => {
@@ -182,19 +183,11 @@ const EventItem = ({
           <div style={{ marginBottom: '1rem' }}>
             {description || t("no_description_available")}
           </div>
-          {/* <div className="flex-box wrap-reverse">
-            {req.map((item, index) => (
-              <div key={index} className="skills">
-                {item}
-                {index < req.length - 1 && " "}
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
 
       <div>
-        {eventLocation} {/*Location, can be styled or not */}
+        {eventLocation}
       </div>
 
       <div className="flex-box event-box-content-bottom">
@@ -216,7 +209,7 @@ const EventItem = ({
           {type === "vol" && (
             <DynamicButton
               className="button"
-              text={t("join")}
+              text={isSignedUp ? t("cancel") : t("join")}
               onClick={joinEvent}
             />
           )}
@@ -324,6 +317,7 @@ EventItem.propTypes = {
   joinEvent: PropTypes.func,
   editEvent: PropTypes.func,
   isFavorite: PropTypes.bool,
+  isSignedUp: PropTypes.bool,
 };
 
 EventItem.defaultProps = {

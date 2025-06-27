@@ -567,17 +567,25 @@ textarea:focus {
     width: 85%;
   }
 
-  .event-box-content-middle {
+  .event-box-content-middle, .event-box-content-top {
     justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .skills-box {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
   }
 
   .bottom-scroll-box1 {
     height: 60vh;
   }
 
-  html {
-    font-size: 14px;
-  }
+  /* html {
+    font-size: 15px;
+  } */
 
   .skills {
     font-weight: normal;

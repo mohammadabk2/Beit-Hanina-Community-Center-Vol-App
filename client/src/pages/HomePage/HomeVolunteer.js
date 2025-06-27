@@ -21,9 +21,11 @@ const HomeVolunteer = () => {
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
   const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
+  const { events: signedUpEvents, loadEvents: loadSignedUpEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("new");
   const [sortText, setSortText] = useState(t("sort"));
+  const [signedUpEventIds, setSignedUpEventIds] = useState([]);
 
   //TODO add signup events and fav events options
   const statusOptions = [
@@ -56,10 +58,18 @@ const HomeVolunteer = () => {
   useEffect(() => {
     if (userId && isAuthenticated) {
       loadEvents(["approved"], selectedStatus);
-      // loadEvents([selectedStatus], "event-type");
-      // loadEvents(["approved"]);
+      // Load signed up events separately to track enrollment status
+      loadSignedUpEvents(["approved"], "signed-up");
     }
-  }, [userId, isAuthenticated, loadEvents, selectedStatus]);
+  }, [userId, isAuthenticated, loadEvents, loadSignedUpEvents, selectedStatus]);
+
+  // Update signed up event IDs when signed up events are loaded
+  useEffect(() => {
+    if (signedUpEvents.length > 0) {
+      const eventIds = signedUpEvents.map(event => event.id);
+      setSignedUpEventIds(eventIds);
+    }
+  }, [signedUpEvents]);
 
   if (loadingInitial) {
     return <div>Loading user data...</div>;
@@ -97,9 +107,28 @@ const HomeVolunteer = () => {
   };
 
   const handleJoin = async (eventID) => {
-    console.log("Join Event Button Clicked");
-    sendAxiod("/events/actions", eventID, "enroll", "");
-    alert(t("event_signup_success"));
+    const isSignedUp = signedUpEventIds.includes(eventID);
+    
+    if (isSignedUp) {
+      console.log("Cancel Enrollment Button Clicked");
+      sendAxiod("/events/actions", eventID, "unenroll", "");
+      alert("Enrollment cancelled");
+      
+      // Remove from signed up events list immediately for UI feedback
+      setSignedUpEventIds(prev => prev.filter(id => id !== eventID));
+    } else {
+      console.log("Join Event Button Clicked");
+      sendAxiod("/events/actions", eventID, "enroll", "");
+      alert(t("event_signup_success"));
+      
+      // Add to signed up events list immediately for UI feedback
+      setSignedUpEventIds(prev => [...prev, eventID]);
+    }
+    
+    // Refresh the signed up events list from backend to ensure consistency
+    setTimeout(() => {
+      loadSignedUpEvents(["approved"], "signed-up");
+    }, 1000); // Small delay to allow backend to process
   };
 
   const renderEventItems = (eventsArray) => {
@@ -120,6 +149,7 @@ const HomeVolunteer = () => {
         eventLocation={event.location}
         joinEvent={() => handleJoin(event.id)} // Passes functions as callback
         isFavorite={event.isFavorite}
+        isSignedUp={signedUpEventIds.includes(event.id)} // Pass enrollment status
       />
     ));
   };
