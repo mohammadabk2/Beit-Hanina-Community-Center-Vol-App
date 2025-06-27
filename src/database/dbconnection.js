@@ -1032,6 +1032,41 @@ const removeEventFromUserList = async (userID, tableName, eventID) => {
   }
 };
 
+/**
+ * Remove User from Event Lists (unenroll)
+ * @param {number} eventID - The event ID to remove user from.
+ * @param {number} userID - The user ID to remove.
+ * @returns {Promise<Object>} Updated event row.
+ * @throws {Error} If the database query fails.
+ */
+const removeUserFromEvent = async (eventID, userID) => {
+  const text = `
+    UPDATE events
+    SET 
+      vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2),
+      vol_id = ARRAY_REMOVE(vol_id, $2),
+      current_number_of_vol = CASE 
+        WHEN $2 = ANY(vol_id) THEN GREATEST(current_number_of_vol - 1, 0)
+        ELSE current_number_of_vol
+      END
+    WHERE event_id = $1
+    RETURNING *;
+  `;
+
+  const values = [eventID, userID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(
+      `Error removing User:${userID} from Event:${eventID}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
@@ -1052,6 +1087,7 @@ export default {
   getUserEvents,
   addEventToUserList,
   removeEventFromUserList,
+  removeUserFromEvent,
 
   // Currently for testing unused
   getUserById, // tested
