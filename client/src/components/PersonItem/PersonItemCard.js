@@ -184,11 +184,15 @@ const PersonItemCard = ({
           message={t("skills")}
           buttonText="Cancel"
         >
-          <ul>
-            {skills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </ul>
+          {(skills || []).length > 0 ? (
+            <ul>
+              {(skills || []).map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
+          ) : (
+            <div>No skills found</div> //TODO add translation
+          )}
         </PopupComponent>
       )}
 
@@ -260,7 +264,7 @@ PersonItemCard.propTypes = {
   address: PropTypes.string,
   insurance: PropTypes.string,
   idNumber: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string),
   style: PropTypes.object,
   newUser: PropTypes.bool,
   approveFunction: PropTypes.func.isRequired,
@@ -281,6 +285,7 @@ PersonItemCard.defaultProps = {
   sex: "",
   phoneNumber: "",
   name: "",
+  skills: [],
   approveHoursFunction: () => {},
   unapprovedHours: 0,
 };

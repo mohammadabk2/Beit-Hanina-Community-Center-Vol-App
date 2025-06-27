@@ -350,6 +350,10 @@ textarea:focus {
   max-width: 36.4375rem;
 }
 
+.person-table-content {
+  max-width: none !important;
+}
+
 .perosnal-area-content {
   max-width: 90vw;
 }
@@ -528,6 +532,7 @@ textarea:focus {
   flex-wrap: wrap; /* Allow cards to wrap to the next line */
   gap: 1rem; /* Space between cards */
   padding: 1rem; /* Padding around the container */
+  width: 100%;
   justify-content: center; /* Example: Center cards */
 }
 

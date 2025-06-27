@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../config/options/Colors";
@@ -152,22 +153,27 @@ const PersonItemRow = ({
         </>
       )}
 
-      {isPopupOpen && (
+      {isPopupOpen && ReactDOM.createPortal(
         <PopupComponent
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           message={t("skills")}
           buttonText="Cancel"
         >
-          <ul>
-            {skills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </ul>
-        </PopupComponent>
+          {(skills || []).length > 0 ? (
+            <ul>
+              {(skills || []).map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
+          ) : (
+            <div>No skills found</div> //TODO add translation
+          )}
+        </PopupComponent>,
+        document.body
       )}
 
-      {isApproveHoursPopupOpen && (
+      {isApproveHoursPopupOpen && ReactDOM.createPortal(
         <PopupComponent
           isOpen={isApproveHoursPopupOpen}
           onClose={handleCloseApproveHours}
@@ -220,7 +226,8 @@ const PersonItemRow = ({
               />
             </div>
           </div>
-        </PopupComponent>
+        </PopupComponent>,
+        document.body
       )}
     </tr>
   );

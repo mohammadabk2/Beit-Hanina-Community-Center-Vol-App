@@ -383,7 +383,7 @@ const HomeAdmin = () => {
       <>
         <div
           ref={personContainerRef}
-          className="scroll-box1 flex-box flex-column"
+          className={`${personView ? 'scroll-box1' : 'person-table-content'} flex-box flex-column`}
         >
           <div className="flex-box top-scroll-box1 line-break">
             <div>{renderSearch()}</div>
