@@ -117,7 +117,7 @@ const PersonItemCard = ({
         </div>
 
         <div className="basic-item-padding personal-area-content">
-          {tsignup("phoneNumber")}: {phoneNumber}
+          {tsignup("phoneNumber")} {phoneNumber}
         </div>
 
         <div className="basic-item-padding personal-area-content">
