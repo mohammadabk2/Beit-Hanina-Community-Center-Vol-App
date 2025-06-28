@@ -4,11 +4,11 @@
 
 - Show Admin Making an org
 - Show Admin Approving a Volunteer
-- Show Admin Approve/Reject an Event
-- Show Admin Exporting all types to excel
 - show admin approved hours for a volunteer
-- show sorting events 
 - show sorting people
+- Show Admin Approve/Reject an Event
+- show sorting events 
+- Show Admin Exporting all types to excel
 
 ### Org:
 
