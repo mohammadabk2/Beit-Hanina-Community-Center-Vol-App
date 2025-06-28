@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 
-import DynamicButton from "../../components/common/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import SelectSkills from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
