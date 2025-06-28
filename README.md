@@ -56,22 +56,6 @@ cd Beit-Hanina-Community-Center-Vol-App
 ### 🛠️ Environment Configuration
 Create .env files inside  the client/  directory.
 
-### 🚀 Run the Application
-
-Run this command in your terminal:
-
-1. **Linux/macOS**
-
-```bash
-source scripts/setup_server.sh
-```
-
-2. **Windows (PowerShell)**
-
-```bash
-.\scripts\setup_server.ps1
-```
-
 ## 👨‍👩‍👧‍👦 Development Team
 
 - Mohammad Abu Khdier
