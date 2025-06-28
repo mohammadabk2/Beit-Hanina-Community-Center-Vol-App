@@ -11,6 +11,7 @@ import modeIconDark from "../../icons/light/NavBar/mode_icon.svg";
 import profileIconLight from "../../icons/light/NavBar/profile_icon.svg";
 import homeIconLight from "../../icons/light/NavBar/home_icon.svg";
 import aboutIconLight from "../../icons/light/NavBar/about_icon.svg";
+import orgIcon from "../../icons/org_icon.svg";
 
 import modeIconLight from "../../icons/dark/NavBar/mode_icon.svg";
 import profileIconDark from "../../icons/dark/NavBar/profile_icon.svg";
@@ -58,67 +59,82 @@ const NavigationBar = () => {
 
   return (
     <div className="flex-box navigation-box wrap-reverse flex-box-gap smooth-shadow-box">
-      <div
-        onClick={goToAbout}
-        className={`flex-box flex-column${
-          location.pathname === "/about" ? " active-nav" : ""
-        }`}
-      >
-        <img
-          className="navigation-button-image"
-          src={isLightMode ? aboutIconLight : aboutIconDark}
-          alt="About icon"
-        />
-        {t("about_page")}
+      {/* Left side navigation items */}
+      <div className="flex-box flex-box-gap">
+        <div
+          onClick={goToAbout}
+          className={`flex-box flex-column${
+            location.pathname === "/about" ? " active-nav" : ""
+          }`}
+        >
+          <img
+            className="navigation-button-image"
+            src={isLightMode ? aboutIconLight : aboutIconDark}
+            alt="About icon"
+          />
+          {t("about_page")}
+        </div>
+        {isAuthenticated && (
+          <>
+            <div
+              onClick={goToPersonalArea}
+              className={`flex-box flex-column${
+                location.pathname.startsWith("/personal-area")
+                  ? " active-nav"
+                  : ""
+              }`}
+            >
+              <img
+                className="navigation-button-image"
+                src={isLightMode ? profileIconLight : profileIconDark}
+                alt="Profile icon"
+              />
+              {t("personal_area")}
+            </div>
+
+            <div
+              onClick={goToHome}
+              className={`flex-box flex-column${
+                location.pathname.startsWith("/home") ? " active-nav" : ""
+              }`}
+            >
+              <img
+                className="navigation-button-image"
+                src={isLightMode ? homeIconLight : homeIconDark}
+                alt="Home icon"
+              />
+              {t("home_page")}
+            </div>
+          </>
+        )}
       </div>
-      {isAuthenticated && (
-        <>
-          <div
-            onClick={goToPersonalArea}
-            className={`flex-box flex-column${
-              location.pathname.startsWith("/personal-area")
-                ? " active-nav"
-                : ""
-            }`}
-          >
-            <img
-              className="navigation-button-image"
-              src={isLightMode ? profileIconLight : profileIconDark}
-              alt="Profile icon"
-            />
-            {t("personal_area")}
-          </div>
 
-          <div
-            onClick={goToHome}
-            className={`flex-box flex-column${
-              location.pathname.startsWith("/home") ? " active-nav" : ""
-            }`}
-          >
-            <img
-              className="navigation-button-image"
-              src={isLightMode ? homeIconLight : homeIconDark}
-              alt="Home icon"
-            />
-            {t("home_page")}
-          </div>
-        </>
-      )}
-
-      <DropDownMenu
-        className="language-button"
-        text={t("ln")}
-        options={lnOptions}
-      />
-
-      <div onClick={toggleTheme} className="flex-box flex-column">
+      {/* Center organization icon */}
+      <div className="flex-box flex-center org-icon-container">
         <img
-          className="navigation-button-image"
-          src={isLightMode ? modeIconDark : modeIconLight}
-          alt="Mode Switch"
+          className="org-icon"
+          src={orgIcon}
+          alt="Organization icon"
         />
-        {!isLightMode && t("light_mode")}
-        {isLightMode && t("dark_mode")}
+      </div>
+
+      {/* Right side controls */}
+      <div className="flex-box flex-box-gap">
+        <DropDownMenu
+          className="language-button"
+          text={t("ln")}
+          options={lnOptions}
+        />
+
+        <div onClick={toggleTheme} className="flex-box flex-column">
+          <img
+            className="navigation-button-image"
+            src={isLightMode ? modeIconDark : modeIconLight}
+            alt="Mode Switch"
+          />
+          {!isLightMode && t("light_mode")}
+          {isLightMode && t("dark_mode")}
+        </div>
       </div>
     </div>
   );

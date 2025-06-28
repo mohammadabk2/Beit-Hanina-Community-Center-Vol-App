@@ -13,6 +13,7 @@ body {
 button {
   /* font-family: sans-serif; */
   font-weight: bold;
+  font-family: "Cairo", sans-serif;
 }
 
 /*Adds background transition to all classes for dark/light mode*/
@@ -133,9 +134,26 @@ button {
   border-radius: 1rem;
   margin-bottom: 1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/*Drop down button image */
+/* Organization icon container and styling */
+.org-icon-container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.org-icon {
+  width: 10rem;
+  height: 6.5rem;
+  object-fit: contain;
+}
+
+/* Drop down button image */
 .button-image {
   width: 1rem;
   margin-left: 0.3125rem;
@@ -152,6 +170,7 @@ textarea {
   padding: 0.3125rem;
   font-size: 1rem;
   width: 80%;
+  font-family: "Cairo", sans-serif;
 }
 
 /*Makes input field container responsive */
@@ -159,6 +178,7 @@ textarea {
 textarea {
   width: 80%;
   margin-top: 0.5rem;
+  font-family: "Cairo", sans-serif;
 }
 
 body {
@@ -221,6 +241,7 @@ textarea {
   padding: 0.5rem;
   box-sizing: border-box;
   margin: 0;
+  font-family: "Cairo", sans-serif;
 }
 
 input:focus,
@@ -590,6 +611,28 @@ textarea:focus {
   .skills {
     font-weight: normal;
   }
+
+  .org-icon {
+    width: 8rem;
+    height: 5rem;
+  }
+  
+  .navigation-box {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .org-icon-container {
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .org-icon {
+    width: 8rem;
+    height: 5rem;
+  }
 }
 
 /*for even smaller sizes*/
@@ -612,7 +655,22 @@ html[lang="ar"] input[type="search"],
 html[lang="ar"] input[type="tel"],
 html[lang="ar"] textarea {
   direction: rtl;
-  text-align: right;
+  text-align: right !important;
+  font-family: "Cairo", sans-serif;
+}
+
+/* Ensure Cairo font for all form elements in Arabic */
+html[lang="ar"] button,
+html[lang="ar"] .button,
+html[lang="ar"] .dropdown-toggle,
+html[lang="ar"] .dropdown-item,
+html[lang="ar"] .dropdown-item a {
+  font-family: "Cairo", sans-serif;
+}
+
+/* Ensure Cairo font for all elements in Arabic */
+html[lang="ar"] * {
+  font-family: "Cairo", sans-serif;
 }
 
 /* New popup enhancement styles */
@@ -720,3 +778,5 @@ html[data-theme="dark"] .active-nav::after {
   background: #1969d2;
   opacity: 0.35;
 }
+
+

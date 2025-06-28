@@ -243,28 +243,19 @@ const HomeOrganizer = () => {
     return (
       <>
         <div className="scroll-box1 flex-box flex-column">
-          <div className="flex-box flex-column top-scroll-box1 line-break">
-            <div>
-              <DynamicInput
-                type="text"
-                placeholder={"..."}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input-field"
-              />
-
-              {/* <DynamicButton
-                className="button button-small"
-                onClick={sortEvents}
-                text={t("sort")}
-              /> */}
-
-              <DynamicButton
-                className="button button-small"
-                onClick={handleCreateEvents}
-                text={t("create_event")}
-              />
-            </div>
+          <div className="flex-box flex-column top-scroll-box1 line-break"> 
+            <DynamicButton
+              className="button button-small"
+              onClick={handleCreateEvents}
+              text={t("create_event")}
+            />
+            <DynamicInput
+              type="text"
+              placeholder={"..."}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="input-field"
+            />
           </div>
           <div className="bottom-scroll-box1">
             {renderEventItems(
