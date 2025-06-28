@@ -1,6 +1,6 @@
 import ExcelJS from "exceljs";
 import dbConnection from "../../database/dbconnection.js";
-import validateToken from "../common/validateToken.js";
+import validateToken from "./validateToken.js";
 
 const exportEvents = async (req, res) => {
   console.log("Exporting events");
@@ -130,6 +130,60 @@ const exportEvents = async (req, res) => {
         "Content-Disposition",
         "attachment; filename=users.xlsx"
       );
+      // Write workbook to response
+      await workbook.xlsx.write(res);
+      res.end();
+      return;
+    }
+
+    if(userRequest === "logs"){
+      // Fetch all system logs
+      const logs = await dbConnection.getSystemLogs({}); // Get all logs
+      
+      // Create a new workbook and worksheet
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet("System Logs");
+      
+      // Add header row
+      worksheet.columns = [
+        { header: "ID", key: "id", width: 10 },
+        { header: "User ID", key: "user_id", width: 12 },
+        { header: "Username", key: "username", width: 20 },
+        { header: "Email", key: "email", width: 30 },
+        { header: "Action", key: "action", width: 25 },
+        { header: "Details", key: "details", width: 40 },
+        { header: "IP Address", key: "ip_address", width: 18 },
+        { header: "User Agent", key: "user_agent", width: 30 },
+        { header: "Log Level", key: "log_level", width: 12 },
+        { header: "Created At", key: "created_at", width: 20 },
+      ];
+      
+      // Add data rows
+      logs.forEach(log => {
+        worksheet.addRow({
+          id: log.id,
+          user_id: log.user_id || '',
+          username: log.username || '',
+          email: log.email || '',
+          action: log.action,
+          details: log.details || '',
+          ip_address: log.ip_address || '',
+          user_agent: log.user_agent || '',
+          log_level: log.log_level,
+          created_at: log.created_at,
+        });
+      });
+      
+      // Set response headers for file download
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=system_logs.xlsx"
+      );
+      
       // Write workbook to response
       await workbook.xlsx.write(res);
       res.end();
