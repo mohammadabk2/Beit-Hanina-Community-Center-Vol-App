@@ -24,7 +24,7 @@ const HomeVolunteer = () => {
   const { events: signedUpEvents, loadEvents: loadSignedUpEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("new");
-  const [sortText, setSortText] = useState(t("sort"));
+  const [sortText, setSortText] = useState("");
   const [signedUpEventIds, setSignedUpEventIds] = useState([]);
 
   //TODO add signup events and fav events options
@@ -54,6 +54,27 @@ const HomeVolunteer = () => {
       },
     },
   ];
+
+  // Update sortText when language changes or selectedStatus changes
+  useEffect(() => {
+    const updateSortText = () => {
+      switch (selectedStatus) {
+        case "new":
+          setSortText(t("new"));
+          break;
+        case "signed-up":
+          setSortText(t("signed_up"));
+          break;
+        case "fav":
+          setSortText(t("favorites"));
+          break;
+        default:
+          setSortText(t("new"));
+      }
+    };
+    
+    updateSortText();
+  }, [t, selectedStatus]);
 
   useEffect(() => {
     if (userId && isAuthenticated) {
@@ -159,24 +180,21 @@ const HomeVolunteer = () => {
       <NavigationBar />
 
       <div className="scroll-box1 flex-box">
-        <div className="flex-box  top-scroll-box1 line-break">
-          <div>
-            <DynamicInput
-              type="text"
-              placeholder={"..."}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="input-field"
-            />
-          </div>
-          <div>
-            {" "}
+        <div className="flex-box flex-column top-scroll-box1 line-break">
+          <div className="flex-box">
             <DropDownMenu
               text={sortText}
               className="gender-button"
               options={statusOptions}
             />
           </div>
+          <DynamicInput
+            type="text"
+            placeholder={"..."}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="input-field"
+          />
         </div>
         {/* <div className="bottom-scroll-box1">{renderEventItems(events)}</div> */}
         <div className="bottom-scroll-box1">
