@@ -168,6 +168,9 @@ const HomeVolunteer = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        eventDate={event.eventDate}
+        startTime={event.startTime}
+        endTime={event.endTime}
         joinEvent={() => handleJoin(event.id)} // Passes functions as callback
         isFavorite={event.isFavorite}
         isSignedUp={signedUpEventIds.includes(event.id)} // Pass enrollment status

@@ -110,6 +110,9 @@ const HomeOrganizer = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        eventDate={event.eventDate}
+        startTime={event.startTime}
+        endTime={event.endTime}
         volunteers={event.enrolledVol}
         isFavorite={event.isFavorite}
       />
