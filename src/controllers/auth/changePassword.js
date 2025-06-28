@@ -1,6 +1,7 @@
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
 import bcrypt from "bcrypt";
+import { logPasswordChange, logError, logWarning, logSecurityEvent } from "../../utils/logger.js";
 
 const changePassword = async (req, res) => {
   const { userID, action, newPassword } = req.body;
@@ -8,6 +9,14 @@ const changePassword = async (req, res) => {
   if (!userID || !action || !newPassword) {
     const message = "Request body Failed.";
     console.log(message);
+    
+    await logWarning(
+      userID, 
+      'PASSWORD_CHANGE_MISSING_DATA', 
+      'Password change attempt with missing data', 
+      req
+    );
+    
     return res.status(400).send({
       message: message,
       status: "fail",
@@ -20,6 +29,14 @@ const changePassword = async (req, res) => {
     console.log(`role type: ${roleType.role}`);
   } catch (error) {
     console.log(error);
+    
+    await logSecurityEvent(
+      userID, 
+      'PASSWORD_CHANGE_AUTH_FAILED', 
+      `Password change failed - authentication error: ${error.message}`, 
+      req
+    );
+    
     return res.status(error.statusCode).send({
       message: error,
       status: "fail",
@@ -30,6 +47,14 @@ const changePassword = async (req, res) => {
 
   try {
     let answer;
+    let targetUser;
+
+    // Get user info for logging
+    try {
+      targetUser = await dbConnection.getUserById(userID);
+    } catch (err) {
+      console.log("Could not fetch user info for logging");
+    }
 
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
@@ -37,11 +62,27 @@ const changePassword = async (req, res) => {
 
     if (action === "password-change") {
       answer = await dbConnection.changePassword(userID, passwordHash);
+      
+      if (answer) {
+        await logPasswordChange(
+          userID, 
+          targetUser?.username || 'unknown', 
+          req
+        );
+      }
     }
 
     if (!answer) {
       const message = `action failed!! invalid action type`;
       console.log(message);
+      
+      await logError(
+        userID, 
+        'PASSWORD_CHANGE_FAILED', 
+        `Password change failed for user: ${targetUser?.username || userID}`, 
+        req
+      );
+      
       res.status(401).send({
         message: message,
         status: "fail",
@@ -56,8 +97,16 @@ const changePassword = async (req, res) => {
     }
   } catch (error) {
     console.error(`Error during action ${action} error:`, error);
+    
+    await logError(
+      userID, 
+      'PASSWORD_CHANGE_ERROR', 
+      `Password change error: ${error.message}`, 
+      req
+    );
+    
     res.status(500).send({
-      message: "An internal server error occurred during login.",
+      message: "An internal server error occurred during password change.",
       status: "error",
     });
   }

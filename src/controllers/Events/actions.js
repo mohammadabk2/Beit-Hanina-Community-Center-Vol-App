@@ -1,6 +1,15 @@
 import dbconnection from "../../database/dbconnection.js";
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
+import { 
+  logEventEnrollment, 
+  logEventStatusChange, 
+  logVolunteerAssignment, 
+  logError, 
+  logWarning, 
+  logSecurityEvent,
+  logActivity 
+} from "../../utils/logger.js";
 
 const eventActions = async (req, res) => {
   console.log("Event Actions");
@@ -12,6 +21,14 @@ const eventActions = async (req, res) => {
   if (!userID || !actionID || !action || actionValue === undefined) {
     const message = "Request body Failed.";
     console.log(message);
+    
+    await logWarning(
+      userID, 
+      'EVENT_ACTION_MISSING_DATA', 
+      `Event action attempt with missing data: action=${action}, actionID=${actionID}`, 
+      req
+    );
+    
     return res.status(400).send({
       message: message,
       status: "fail",
@@ -24,6 +41,14 @@ const eventActions = async (req, res) => {
     console.log(`role type: ${roleType.role}`);
   } catch (error) {
     console.log(error);
+    
+    await logSecurityEvent(
+      userID, 
+      'EVENT_ACTION_AUTH_FAILED', 
+      `Event action failed - authentication error: ${error.message}`, 
+      req
+    );
+    
     return res.status(error.statusCode).send({
       message: error,
       status: "fail",
@@ -38,22 +63,60 @@ const eventActions = async (req, res) => {
   if (roles.includes(roleType.role)) {
     try {
       let answer;
+      let eventInfo;
+      let targetUserInfo;
+
+      // Get event and user info for logging
+      try {
+        const events = await dbConnection.getEvents(['approved', 'pending', 'ongoing']);
+        eventInfo = events.find(e => e.event_id === parseInt(actionID));
+        
+        if (targetUserID) {
+          targetUserInfo = await dbConnection.getUserById(targetUserID);
+        }
+      } catch (err) {
+        console.log("Could not fetch event/user info for logging");
+      }
 
       if (roleType.role === "admin") {
         console.log("Events Admin action");
+        
         if (action === "approve") {
           answer = await dbConnection.updateEventStatus(
             actionID,
             "approved",
             "pending"
           );
+          
+          if (answer) {
+            await logEventStatusChange(
+              userID, 
+              eventInfo?.event_name || 'unknown', 
+              actionID, 
+              'pending', 
+              'approved', 
+              req
+            );
+          }
         }
+        
         if (action === "reject") {
           answer = await dbConnection.updateEventStatus(
             actionID,
             "rejected",
             "pending"
           );
+          
+          if (answer) {
+            await logEventStatusChange(
+              userID, 
+              eventInfo?.event_name || 'unknown', 
+              actionID, 
+              'pending', 
+              'rejected', 
+              req
+            );
+          }
         }
       }
 
@@ -76,6 +139,14 @@ const eventActions = async (req, res) => {
               "signed_up_events",
               actionID
             ); // add to used list
+            
+            await logEventEnrollment(
+              userID, 
+              eventInfo?.event_name || 'unknown', 
+              actionID, 
+              'enrolled', 
+              req
+            );
           }
         }
 
@@ -89,6 +160,14 @@ const eventActions = async (req, res) => {
               userID,
               "signed_up_events",
               actionID
+            );
+            
+            await logEventEnrollment(
+              userID, 
+              eventInfo?.event_name || 'unknown', 
+              actionID, 
+              'unenrolled', 
+              req
             );
           }
         }
@@ -104,6 +183,16 @@ const eventActions = async (req, res) => {
             "vol_id",
             "approved"
           );
+          
+          if (answer) {
+            await logVolunteerAssignment(
+              userID, 
+              targetUserID, 
+              targetUserInfo?.username || 'unknown', 
+              eventInfo?.event_name || 'unknown', 
+              req
+            );
+          }
         }
 
         if (action === "reject") {
@@ -113,17 +202,21 @@ const eventActions = async (req, res) => {
             "vol_id_waiting_list",
             "rejected"
           );
+          
+          if (answer) {
+            await logActivity(
+              userID, 
+              'VOLUNTEER_REJECTED', 
+              `Rejected volunteer ${targetUserInfo?.username || targetUserID} for event ${eventInfo?.event_name || actionID}`, 
+              'INFO', 
+              req
+            );
+          }
         }
       }
 
       // For all Users fav button Adds to fav list
       if (action === "fav") {
-        // answer = await dbconnection.addEventToUserList(
-        //   userID,
-        //   "fav_events",
-        //   actionID
-        // );
-
         const favList = await dbconnection.getUserEvents(
           userID,
           "fav_events"
@@ -136,6 +229,16 @@ const eventActions = async (req, res) => {
             "fav_events",
             actionID
           );
+          
+          if (answer) {
+            await logActivity(
+              userID, 
+              'EVENT_UNFAVORITED', 
+              `Removed event ${eventInfo?.event_name || actionID} from favorites`, 
+              'INFO', 
+              req
+            );
+          }
         } else {
           console.log("Event not in favorites, adding...");
           answer = await dbconnection.addEventToUserList(
@@ -143,12 +246,30 @@ const eventActions = async (req, res) => {
             "fav_events",
             actionID
           );
+          
+          if (answer) {
+            await logActivity(
+              userID, 
+              'EVENT_FAVORITED', 
+              `Added event ${eventInfo?.event_name || actionID} to favorites`, 
+              'INFO', 
+              req
+            );
+          }
         }
       }
 
       if (!answer) {
         const message = `action failed!! invalid action type`;
         console.log(message);
+        
+        await logError(
+          userID, 
+          'EVENT_ACTION_FAILED', 
+          `Event action failed: ${action} on event ${actionID}`, 
+          req
+        );
+        
         res.status(401).send({
           message: message,
           status: "fail",
@@ -164,6 +285,14 @@ const eventActions = async (req, res) => {
       }
     } catch (error) {
       console.error(`Error during action ${action} error:`, error);
+      
+      await logError(
+        userID, 
+        'EVENT_ACTION_ERROR', 
+        `Error during event action ${action} on event ${actionID}: ${error.message}`, 
+        req
+      );
+      
       res.status(500).send({
         message: "An internal server error occurred during Events actions.",
         status: "error",
@@ -172,6 +301,14 @@ const eventActions = async (req, res) => {
   } else {
     const message = "User lacks permissions";
     console.log(message);
+    
+    await logSecurityEvent(
+      userID, 
+      'EVENT_ACTION_UNAUTHORIZED', 
+      `Unauthorized event action attempt: ${action} by user with role ${roleType.role}`, 
+      req
+    );
+    
     res.status(401).send({
       message: message,
       status: "error",
