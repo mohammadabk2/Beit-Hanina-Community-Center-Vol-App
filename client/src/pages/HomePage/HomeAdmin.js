@@ -231,6 +231,9 @@ const HomeAdmin = () => {
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        eventDate={event.eventDate}
+        startTime={event.startTime}
+        endTime={event.endTime}
         approveEvent={() => approveEvent(event.id)}
         rejectEvent={() => rejectEvent(event.id)}
         isFavorite={event.isFavorite}

@@ -305,6 +305,25 @@ textarea:focus {
   font-weight: bold;
 }
 
+.event-date-time-container {
+  justify-content: space-between;
+  width: 80%;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--box-background-color);
+  border-radius: 0.5rem;
+}
+
+.event-date {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.event-time {
+  color: var(--text-color);
+  font-style: italic;
+}
+
 .favorite-button-image {
   width: 2rem;
   position: absolute;

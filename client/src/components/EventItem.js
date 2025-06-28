@@ -22,6 +22,9 @@ const EventItem = ({
   size,
   eventLocation,
   description,
+  eventDate,
+  startTime,
+  endTime,
   rejectEvent,
   approveEvent,
   joinEvent,
@@ -190,6 +193,15 @@ const EventItem = ({
         {eventLocation}
       </div>
 
+      <div className="flex-box event-date-time-container">
+        <div className="event-date">
+          {eventDate}
+        </div>
+        <div className="event-time">
+          {startTime} - {endTime}
+        </div>
+      </div>
+
       <div className="flex-box event-box-content-bottom">
         <div className="event-spots-free"></div>
 
@@ -312,6 +324,9 @@ EventItem.propTypes = {
   size: PropTypes.number,
   description: PropTypes.string,
   eventLocation: PropTypes.string,
+  eventDate: PropTypes.string,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
   approveEvent: PropTypes.func,
   rejectEvent: PropTypes.func,
   joinEvent: PropTypes.func,

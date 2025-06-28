@@ -5,9 +5,9 @@ const formatEvents = (events, favoriteEventIds = []) => {
   return events.map((event) => ({
     id: event.event_id,
     name: event.event_name,
-    birthDate: new Date(event.event_date).toISOString().split("T")[0],
-    startTime: event.event_start,
-    endTime: event.event_end,
+    eventDate: new Date(event.event_date).toISOString().split("T")[0],
+    startTime: event.event_start.substring(0, 5),
+    endTime: event.event_end.substring(0, 5),
     active: event.is_active,
     orgId: event.org_id,
     maxSize: event.max_number_of_vol,
