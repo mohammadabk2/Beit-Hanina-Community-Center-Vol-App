@@ -133,9 +133,26 @@ button {
   border-radius: 1rem;
   margin-bottom: 1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/*Drop down button image */
+/* Organization icon container and styling */
+.org-icon-container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.org-icon {
+  width: 10rem;
+  height: 6.5rem;
+  object-fit: contain;
+}
+
+/* Drop down button image */
 .button-image {
   width: 1rem;
   margin-left: 0.3125rem;
@@ -590,6 +607,28 @@ textarea:focus {
   .skills {
     font-weight: normal;
   }
+
+  .org-icon {
+    width: 8rem;
+    height: 5rem;
+  }
+  
+  .navigation-box {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .org-icon-container {
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .org-icon {
+    width: 8rem;
+    height: 5rem;
+  }
 }
 
 /*for even smaller sizes*/
@@ -720,3 +759,5 @@ html[data-theme="dark"] .active-nav::after {
   background: #1969d2;
   opacity: 0.35;
 }
+
+
