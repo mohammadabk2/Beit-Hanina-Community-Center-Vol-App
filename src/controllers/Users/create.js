@@ -28,9 +28,13 @@ const registerVolunteer = async (req, res) => {
   } else {
     //TODO add a check when the request is made so it adds based on type a vol or an org
     try {
-      const saltRounds = 10;
-      const salt = await bcrypt.genSalt(saltRounds);
-      const passwordHash = await bcrypt.hash(userData.password, salt);
+      // DEMO: Store password in clear text (for demonstration only)
+      // const saltRounds = 10;
+      // const salt = await bcrypt.genSalt(saltRounds);
+      // const passwordHash = await bcrypt.hash(userData.password, salt);
+      
+      // Use plain password for demo
+      const passwordHash = userData.password;
 
       let reg;
       let userType;
