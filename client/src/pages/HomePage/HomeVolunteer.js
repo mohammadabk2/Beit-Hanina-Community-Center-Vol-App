@@ -20,7 +20,7 @@ const HomeVolunteer = () => {
   const { t } = useTranslation("home");
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
-  const { events, eventsLoading, eventsError, loadEvents, setEvents } = useLoadEvents();
+  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
   const { events: signedUpEvents, eventsLoading: signedUpEventsLoading, eventsError: signedUpEventsError, loadEvents: loadSignedUpEvents, setEvents: setSignedUpEvents } = useLoadEvents();
   const { events: favEvents, eventsLoading: favEventsLoading, eventsError: favEventsError, loadEvents: loadFavEvents, setEvents: setFavEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
