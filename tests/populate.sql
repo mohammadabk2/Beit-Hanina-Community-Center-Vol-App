@@ -1,13 +1,13 @@
 -- USERS
 INSERT INTO users (phone_number, email, address, username, password_hash, banned, role, profile_image_url)
 VALUES
-('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'hash1', FALSE, 'admin', 'https://img.com/1.jpg'),
-('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'hash2', FALSE, 'volunteer', 'https://img.com/2.jpg'),
-('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'hash3', FALSE, 'organizer', 'https://img.com/3.jpg'),
-('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'hash4', TRUE, 'volunteer', 'https://img.com/4.jpg'),
-('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'hash5', FALSE, 'volunteer', 'https://img.com/5.jpg'),
-('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'hash6', FALSE, 'organizer', 'https://img.com/6.jpg'),
-('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'hash7', FALSE, 'admin', 'https://img.com/7.jpg');
+('111-111-1111', 'admin1@example.com', '1 Admin St', 'admin1', 'pass', FALSE, 'admin', 'https://img.com/1.jpg'),
+('222-222-2222', 'vol1@example.com', '2 Vol St', 'vol1', 'pass', FALSE, 'volunteer', 'https://img.com/2.jpg'),
+('333-333-3333', 'org1@example.com', '3 Org St', 'org1', 'pass', FALSE, 'organizer', 'https://img.com/3.jpg'),
+('444-444-4444', 'vol2@example.com', '4 Vol St', 'vol2', 'pass', TRUE, 'volunteer', 'https://img.com/4.jpg'),
+('555-555-5555', 'vol3@example.com', '5 Vol St', 'vol3', 'pass', FALSE, 'volunteer', 'https://img.com/5.jpg'),
+('666-666-6666', 'org2@example.com', '6 Org St', 'org2', 'pass', FALSE, 'organizer', 'https://img.com/6.jpg'),
+('777-777-7777', 'admin2@example.com', '7 Admin St', 'admin2', 'pass', FALSE, 'admin', 'https://img.com/7.jpg');
 
 -- VOLUNTEER
 INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, approved_hours, unapproved_hours, skills, orgs)
@@ -33,14 +33,14 @@ VALUES
 -- VOLUNTEER WAITING LIST
 INSERT INTO volunteer_waiting_list (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, skills, profile_image_url)
 VALUES
-('Daisy White', '2002-04-04', 'F', '888-888-8888', 'wait1@example.com', '8 Wait St', 'SafeInsure', 'Student', 'WV1001', 'waituser1', 'hash8', ARRAY['Cooking'], 'https://img.com/8.jpg'),
-('Evan Black', '2003-05-05', 'M', '999-999-9999', 'wait2@example.com', '9 Wait St', 'LifeCare', 'Unemployed', 'WV1002', 'waituser2', 'hash9', ARRAY[]::text[], 'https://img.com/9.jpg');
+('Daisy White', '2002-04-04', 'F', '888-888-8888', 'wait1@example.com', '8 Wait St', 'SafeInsure', 'Student', 'WV1001', 'waituser1', 'pass', ARRAY['Cooking'], 'https://img.com/8.jpg'),
+('Evan Black', '2003-05-05', 'M', '999-999-9999', 'wait2@example.com', '9 Wait St', 'LifeCare', 'Unemployed', 'WV1002', 'waituser2', 'pass', ARRAY[]::text[], 'https://img.com/9.jpg');
 
 -- REJECTED USERS
 INSERT INTO rejected_users (name, birth_date, sex, phone_number, email, address, insurance, id_number, username, password_hash, profile_image_url)
 VALUES
-('Fay Brown', '1998-06-06', 'F', '101-101-1010', 'rej1@example.com', '10 Rej St', 'MediPlus', 'RV1001', 'rejuser1', 'hash10', 'https://img.com/10.jpg'),
-('George Gray', '1997-07-07', 'M', '202-202-2020', 'rej2@example.com', '11 Rej St', 'SafeInsure', 'RV1002', 'rejuser2', 'hash11', 'https://img.com/11.jpg');
+('Fay Brown', '1998-06-06', 'F', '101-101-1010', 'rej1@example.com', '10 Rej St', 'MediPlus', 'RV1001', 'rejuser1', 'pass', 'https://img.com/10.jpg'),
+('George Gray', '1997-07-07', 'M', '202-202-2020', 'rej2@example.com', '11 Rej St', 'SafeInsure', 'RV1002', 'rejuser2', 'pass', 'https://img.com/11.jpg');
 
 -- EVENTS STATUS
 INSERT INTO events_status (approved, rejected, pending, ongoing, finished)
