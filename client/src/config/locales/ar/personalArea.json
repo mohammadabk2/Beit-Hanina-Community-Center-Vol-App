@@ -15,5 +15,6 @@
   "to_excel": "إلى ملف Excel",
   "export": "تصدير",
   "all_events_to_excel": "كل الفعاليات إلى Excel",
-  "all_users_to_excel": "كل المستخدمين إلى Excel"
+  "all_users_to_excel": "كل المستخدمين إلى Excel",
+  "all_logs_to_excel": "كل السجلات إلى Excel"
 }

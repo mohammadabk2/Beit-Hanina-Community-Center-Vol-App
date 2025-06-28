@@ -73,6 +73,36 @@ const PersonalArea = () => {
     }
   };
 
+  // Add this function for logs export
+  const downloadLogsToExcel = async () => {
+    try {
+      const response = await axios.get(
+        `${SERVER_IP}/api/events/export`,
+        {
+          responseType: "blob",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            userID: userId,
+            userRequest: "logs",
+          },
+        }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "logs.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      alert(t("download_failed"));
+      console.error(err);
+    }
+  };
+
   //TODO make it do diffrent things
   const eventOptions = [
     {
@@ -84,6 +114,11 @@ const PersonalArea = () => {
       label: t("all_users_to_excel"),
       href: "#users_1",
       onClick: downloadUsersToExcel,
+    },
+    {
+      label: t("all_logs_to_excel"),
+      href: "#logs_1",
+      onClick: downloadLogsToExcel,
     },
   ];
 
