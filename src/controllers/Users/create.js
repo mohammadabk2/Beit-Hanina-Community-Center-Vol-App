@@ -1,6 +1,6 @@
 import dbConnection from "../../database/dbconnection.js";
 import validation from "../validation.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import { logRegistration, logError, logWarning } from "../../utils/logger.js";
 
 //TODO validation check for front end

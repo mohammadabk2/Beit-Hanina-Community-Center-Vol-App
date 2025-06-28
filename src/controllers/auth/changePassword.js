@@ -1,6 +1,6 @@
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import { logPasswordChange, logError, logWarning, logSecurityEvent } from "../../utils/logger.js";
 
 const changePassword = async (req, res) => {
