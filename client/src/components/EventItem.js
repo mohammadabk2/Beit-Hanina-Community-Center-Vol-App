@@ -236,17 +236,21 @@ const EventItem = ({
 
           {type === "admin" && (
             <>
-              <DynamicButton
-                className="button"
-                text={t("approve_button")}
-                onClick={approveEvent}
-              />
+              {approveEvent && (
+                <DynamicButton
+                  className="button"
+                  text={t("approve_button")}
+                  onClick={approveEvent}
+                />
+              )}
 
-              <DynamicButton
-                className="button"
-                text={t("reject_button")}
-                onClick={rejectEvent}
-              />
+              {rejectEvent && (
+                <DynamicButton
+                  className="button"
+                  text={t("reject_button")}
+                  onClick={rejectEvent}
+                />
+              )}
             </>
           )}
         </div>

@@ -234,8 +234,8 @@ const HomeAdmin = () => {
         eventDate={event.eventDate}
         startTime={event.startTime}
         endTime={event.endTime}
-        approveEvent={() => approveEvent(event.id)}
-        rejectEvent={() => rejectEvent(event.id)}
+        approveEvent={eventStatus === "rejected" || eventStatus === "pending" ? () => approveEvent(event.id) : undefined}
+        rejectEvent={eventStatus === "approved" || eventStatus === "pending" ? () => rejectEvent(event.id) : undefined}
         isFavorite={event.isFavorite}
       />
     ));

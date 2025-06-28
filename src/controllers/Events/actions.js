@@ -68,7 +68,7 @@ const eventActions = async (req, res) => {
 
       // Get event and user info for logging
       try {
-        const events = await dbConnection.getEvents(['approved', 'pending', 'ongoing']);
+        const events = await dbConnection.getEvents(['approved', 'pending', 'rejected', 'ongoing', 'finished']);
         eventInfo = events.find(e => e.event_id === parseInt(actionID));
         
         if (targetUserID) {
@@ -82,10 +82,30 @@ const eventActions = async (req, res) => {
         console.log("Events Admin action");
         
         if (action === "approve") {
+          // Get current status of the event
+          const currentStatus = await dbConnection.getEventCurrentStatus(actionID);
+          
+          if (!currentStatus) {
+            console.log(`Event ${actionID} not found in any status`);
+            return res.status(404).send({
+              message: "Event not found in any status",
+              status: "fail",
+            });
+          }
+          
+          // Only allow approval from pending or rejected status
+          if (currentStatus !== "pending" && currentStatus !== "rejected") {
+            console.log(`Cannot approve event from ${currentStatus} status`);
+            return res.status(400).send({
+              message: `Cannot approve event from ${currentStatus} status`,
+              status: "fail",
+            });
+          }
+          
           answer = await dbConnection.updateEventStatus(
             actionID,
             "approved",
-            "pending"
+            currentStatus
           );
           
           if (answer) {
@@ -93,7 +113,7 @@ const eventActions = async (req, res) => {
               userID, 
               eventInfo?.event_name || 'unknown', 
               actionID, 
-              'pending', 
+              currentStatus, 
               'approved', 
               req
             );
@@ -101,10 +121,30 @@ const eventActions = async (req, res) => {
         }
         
         if (action === "reject") {
+          // Get current status of the event
+          const currentStatus = await dbConnection.getEventCurrentStatus(actionID);
+          
+          if (!currentStatus) {
+            console.log(`Event ${actionID} not found in any status`);
+            return res.status(404).send({
+              message: "Event not found in any status",
+              status: "fail",
+            });
+          }
+          
+          // Only allow rejection from pending or approved status
+          if (currentStatus !== "pending" && currentStatus !== "approved") {
+            console.log(`Cannot reject event from ${currentStatus} status`);
+            return res.status(400).send({
+              message: `Cannot reject event from ${currentStatus} status`,
+              status: "fail",
+            });
+          }
+          
           answer = await dbConnection.updateEventStatus(
             actionID,
             "rejected",
-            "pending"
+            currentStatus
           );
           
           if (answer) {
@@ -112,7 +152,7 @@ const eventActions = async (req, res) => {
               userID, 
               eventInfo?.event_name || 'unknown', 
               actionID, 
-              'pending', 
+              currentStatus, 
               'rejected', 
               req
             );
