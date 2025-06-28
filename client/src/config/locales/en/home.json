@@ -31,13 +31,55 @@
 
   "join": "Register",
   "favorite": "Favorite",
+  "favorites": "Favorites",
   "share": "Share",
   "hide": "Hide",
   "ln": "Language",
-  "settings":"Settings",
-  "personalArea":"Personal Area",
+  "settings": "Settings",
+  "personalArea": "Personal Area",
 
   "sign_up_message": "Sign up successful!",
-  "login_failed": "Login failed: {{message}}"
-}
+  "signed_up": "Signed Up",
+  "login_failed": "Login failed: {{message}}",
 
+  "fullName": "Name of Organization",
+  "fullName_placeholder": "Enter The Name of The Organization ",
+  "phoneNumber": "Phone Number",
+  "phone_placeholder": "Enter Phone Number",
+  "email": "Email",
+  "email_phone_placeholder": "Enter Email",
+  "address": "Address",
+  "address_placeholder": "Enter Address",
+  "orgUserName": "Organization Username",
+  "username_placeholder": "Enter Organization Username",
+  "password": "Password",
+  "password_phone_placeholder": "Enter Password",
+
+  "name": "Name",
+  "sex": "Sex",
+  "actions": "Actions",
+  "approve": "Approve",
+  "reject": "Reject",
+  "loading_users": "Loading Users...",
+  "no_users_enrolled": "No users enrolled in this event",
+  "enrolled_users": "Enrolled Volunteers",
+  
+  "approve_hours": "Approve Hours",
+  "volunteer_name": "Volunteer Name",
+  "hours_to_approve": "Hours to Approve",
+  "no_unapproved_hours": "No unapproved hours available",
+  "cancel": "Cancel",
+  "log_required": "Log cannot be empty.",
+  "log_submit_failed": "Failed to add log.",
+  "log_placeholder": "Enter log message...",
+  "no_logs": "No logs found.",
+
+  "approved_events": "Approved Events",
+  "pending_events": "Pending Events",
+  "finished_events": "Finished Events",
+  "rejected_events": "Rejected Events",
+  "on_going": "Ongoing Events",
+
+  "new": "New",
+  "active": "Active"
+}

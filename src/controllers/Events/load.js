@@ -1,6 +1,23 @@
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
 
+const formatEvents = (events, favoriteEventIds = []) => {
+  return events.map((event) => ({
+    id: event.event_id,
+    name: event.event_name,
+    eventDate: new Date(event.event_date).toISOString().split("T")[0],
+    startTime: event.event_start.substring(0, 5),
+    endTime: event.event_end.substring(0, 5),
+    active: event.is_active,
+    orgId: event.org_id,
+    maxSize: event.max_number_of_vol,
+    currentSize: event.current_number_of_vol,
+    location: event.event_location,
+    description: event.event_description,
+    isFavorite: favoriteEventIds.includes(event.event_id),
+  }));
+};
+
 const load = async (req, res) => {
   console.log("Loading Events from DB");
 
@@ -32,111 +49,123 @@ const load = async (req, res) => {
   }
 
   const roles = ["volunteer", "organizer", "admin"];
-  const volTypes = ["new", "signed-up", "fav"];
 
-  if (roles.includes(roleType.role)) {
-    console.log(`Attempting load Events from DB for userId: ${userID}`);
+  if (!roles.includes(roleType.role)) {
+    return res.status(403).send({
+      message: "Unauthorized role",
+      status: "fail",
+    });
+  }
 
-    //TODO verify id
-    try {
-      let answer;
-      let response;
+  console.log(`Attempting load Events from DB for userId: ${userID}`);
 
-      if (type === "events") {
+  try {
+    let answer;
+    let response;
+
+    console.log(`Loading on type ${type}`);
+
+    switch (type) {
+      case "events": {
         answer = await dbConnection.getEvents(userRequest);
-
-        if (answer && answer.length > 0) {
-          response = answer.map((event) => ({
-            id: event.event_id,
-            name: event.event_name,
-            birthDate: new Date(event.event_date).toISOString().split("T")[0],
-            startTime: event.event_start,
-            endTime: event.event_end,
-            active: event.is_active,
-            orgId: event.org_id,
-            //TODO Implement different data return for vol/org/admin
-            maxSize: event.max_number_of_vol,
-            currentSize: event.current_number_of_vol,
-            location: event.event_location,
-            description: event.event_description,
-          }));
-        }
+        const favEventIds = await dbConnection.getUserEvents(userID, "fav_events");
+        response = formatEvents(answer, favEventIds);
+        break;
       }
 
-      if (type === "event-list" && eventID) {
-        answer = await dbConnection.fetchVolunteerlist(eventID, userRequest);
-        response = answer;
+      case "event-list":
+        if (eventID) {
+          response = await dbConnection.fetchVolunteerlist(
+            eventID,
+            userRequest
+          );
+        }
+        break;
+
+      case "org": {
+        answer = await dbConnection.getEvents(userRequest);
+        const filteredEvents = answer.filter((event) => event.org_id === Number(userID));
+        const favEventIds = await dbConnection.getUserEvents(userID, "fav_events");
+        response = formatEvents(filteredEvents, favEventIds);
+        break;
       }
 
-      if (volTypes.includes(type)) {
-        //TODO logic to sort for volunteer
+      case "fav": {
         answer = await dbConnection.getEvents(userRequest);
+        console.log("User faved Events");
 
-        let filteredEvents = answer;
-        // Filter based on type
-        if (type === "fav") {
-          console.log("User faved Events");
-          const favEventIds = await dbConnection.getEventsForVolunteer(
-            userID,
-            "fav_events"
-          );
-          filteredEvents = answer.filter((event) =>
-            favEventIds.includes(event.event_id)
-          );
-        }
-        if (type === "signed-up") {
-          console.log("User signed up Events");
-          const signedUpEventIds = await dbConnection.getEventsForVolunteer(
-            userID,
-            "signed_up_events"
-          );
-          filteredEvents = answer.filter((event) =>
-            signedUpEventIds.includes(event.event_id)
-          );
-        }
+        const favEventIds = await dbConnection.getUserEvents(
+          userID,
+          "fav_events"
+        );
+
+        const filteredEvents = answer.filter((event) =>
+          favEventIds.includes(event.event_id)
+        );
 
         answer = filteredEvents;
-        if (answer && answer.length > 0) {
-          response = answer.map((event) => ({
-            id: event.event_id,
-            name: event.event_name,
-            birthDate: new Date(event.event_date).toISOString().split("T")[0],
-            startTime: event.event_start,
-            endTime: event.event_end,
-            active: event.is_active,
-            orgId: event.org_id,
-            //TODO Implement different data return for vol/org/admin
-            maxSize: event.max_number_of_vol,
-            currentSize: event.current_number_of_vol,
-            location: event.event_location,
-            description: event.event_description,
-          }));
-        }
+        response = formatEvents(answer, favEventIds);
+        break;
       }
 
-      if (answer && response) {
-        const message = `Loading ${type} successful!`;
-        console.log(message);
-        res.status(200).send({
-          message: message,
-          status: "success",
-          userData: response,
-        });
-      } else {
-        const message = `There does not exist any events under this category ${userRequest}.`;
-        console.log(message);
-        res.status(200).send({
-          message: message,
-          status: "success",
-        });
+      case "signed-up": {
+        answer = await dbConnection.getEvents(userRequest);
+        console.log("User called signed up Events");
+
+        const signedUpEventIds = await dbConnection.getUserEvents(
+          userID,
+          "signed_up_events"
+        );
+
+        const favEventIds = await dbConnection.getUserEvents(
+          userID,
+          "fav_events"
+        );
+
+        const filteredEvents = answer.filter((event) =>
+          signedUpEventIds.includes(event.event_id)
+        );
+
+        answer = filteredEvents;
+        response = formatEvents(answer, favEventIds);
+        break;
       }
-    } catch (error) {
-      console.error("Error during loading:", error);
-      res.status(500).send({
-        message: "An internal server error occurred during login.",
-        status: "error",
+      case "new": {
+        answer = await dbConnection.getEvents(userRequest);
+        const favEventIds = await dbConnection.getUserEvents(userID, "fav_events");
+        response = formatEvents(answer, favEventIds);
+        break;
+      }
+
+      default:
+        return res.status(400).send({
+          message: `Unknown request type: ${type}`,
+          status: "fail",
+        });
+    }
+
+    if (answer && response) {
+      const message = `Loading ${type} successful!`;
+      console.log(message);
+      res.status(200).send({
+        message: message,
+        status: "success",
+        userData: response,
+      });
+    } else {
+      const message = `There does not exist any events under this category ${userRequest}.`;
+      console.log(message);
+      res.status(200).send({
+        message: message,
+        status: "success",
       });
     }
+  } catch (error) {
+    console.error("Error during loading:", error);
+    res.status(500).send({
+      message: "An internal server error occurred during login.",
+      status: "error",
+    });
   }
 };
 export default load;

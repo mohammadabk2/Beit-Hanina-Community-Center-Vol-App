@@ -14,8 +14,7 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 // import useLoadUsers from "../../config/hooks/loadUsers";
 
-import { SERVER_IP } from "../../global";
-
+import { SERVER_IP } from "../../config/constants/global";
 
 const HomeOrganizer = () => {
   const API_BASE_URL = SERVER_IP;
@@ -40,15 +39,9 @@ const HomeOrganizer = () => {
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents(["approved"]);
+      loadEvents(["approved"],"org");
     }
   }, [userId, isAuthenticated, loadEvents]);
-
-  // useEffect(() => {
-  //   if (userId && isAuthenticated) {
-  //     loadUsers("users");
-  //   }
-  // }, [userId, isAuthenticated, loadUsers]);
 
   if (loadingInitial) {
     return <div>Loading user data...</div>;
@@ -57,12 +50,6 @@ const HomeOrganizer = () => {
   if (!isAuthenticated) {
     return <div>You need to be logged in to view this data.</div>;
   }
-
-  // const sendAxiod = async (path, actionID, actiontoPerform, actionValue) => {
-  //   try {
-
-  //   }
-  // }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -77,34 +64,6 @@ const HomeOrganizer = () => {
     console.log("Create Events button clicked!");
     setShowEvents(false); // Update state using the setter function
   };
-
-  // const handleEnrolledUsers = async (eventId) => {
-  //   console.log("HandleEnrolled Users button clicked!");
-  //   try {
-  //     const response = await axios.delete(
-  //       `${API_BASE_URL}/api/events/actions`,
-  //       {
-  //         userID: userId,
-  //         actionID: eventId,
-  //         action: "rejected",
-  //         actionValue: "",
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status !== 200) {
-  //       console.log(`${response.status} ${response.message}`);
-  //       alert("Failed to sign up try again later");
-  //     }
-  //   } catch (error) {
-  //     console.error("Axios request failed:", error);
-  //     alert("Failed to sign up try again later");
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,14 +81,18 @@ const HomeOrganizer = () => {
       }
     );
 
-    if (response.status !== 200) {
+    if (response.status === 200) {
+      alert(t("org Created"));
+      console.log("org Created");
+      setShowEvents(true);
+    } else {
       console.log(`${response.status} ${response.message}`);
     }
   };
 
-  const sortEvents = () => {
-    console.log("Sort button clicked");
-  };
+  // const sortEvents = () => {
+  //   console.log("Sort button clicked");
+  // };
 
   const renderEventItems = (eventsArray) => {
     if (!Array.isArray(eventsArray) || eventsArray.length === 0) {
@@ -141,13 +104,17 @@ const HomeOrganizer = () => {
         key={event.id}
         id={event.id}
         name={event.name}
-        desc={event.description}
+        description={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
         type="org"
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        eventDate={event.eventDate}
+        startTime={event.startTime}
+        endTime={event.endTime}
         volunteers={event.enrolledVol}
+        isFavorite={event.isFavorite}
       />
     ));
   };
@@ -279,28 +246,19 @@ const HomeOrganizer = () => {
     return (
       <>
         <div className="scroll-box1 flex-box flex-column">
-          <div className="flex-box flex-column top-scroll-box1 line-break">
-            <div>
-              <DynamicInput
-                type="text"
-                placeholder={"..."}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input-field"
-              />
-
-              <DynamicButton
-                className="button button-small"
-                onClick={sortEvents}
-                text={t("sort")}
-              />
-
-              <DynamicButton
-                className="button button-small"
-                onClick={handleCreateEvents}
-                text={t("create_event")}
-              />
-            </div>
+          <div className="flex-box flex-column top-scroll-box1 line-break"> 
+            <DynamicButton
+              className="button button-small"
+              onClick={handleCreateEvents}
+              text={t("create_event")}
+            />
+            <DynamicInput
+              type="text"
+              placeholder={"..."}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="input-field"
+            />
           </div>
           <div className="bottom-scroll-box1">
             {renderEventItems(

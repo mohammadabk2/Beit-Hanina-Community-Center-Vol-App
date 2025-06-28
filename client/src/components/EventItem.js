@@ -11,33 +11,42 @@ import fullStar from "../icons/favorite_icon.svg";
 import emptyStar from "../icons/not_favorite_icon.svg";
 import PopupComponent from "./common/PopupComponent";
 
-import { SERVER_IP } from "../global";
+import { SERVER_IP } from "../config/constants/global";
 
 const EventItem = ({
   id,
   name,
-  req,
+  // req,
   type,
   count,
   size,
   eventLocation,
   description,
+  eventDate,
+  startTime,
+  endTime,
   rejectEvent,
   approveEvent,
   joinEvent,
+  isFavorite: initialIsFavorite = false,
+  isSignedUp = false,
   // editEvent,
   // volunteers,
 }) => {
   const { t } = useTranslation("home");
-  const { t: tskill } = useTranslation("skills");
+  // const { t: tskill } = useTranslation("skills");
   const { token, userId } = useAuth();
   const API_BASE_URL = SERVER_IP;
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [enrolledUsers, setEnrolledUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setIsFavorite(initialIsFavorite);
+  }, [initialIsFavorite]);
 
   useEffect(() => {
     const fetchEnrolledUsers = async () => {
@@ -166,9 +175,6 @@ const EventItem = ({
           ></img>
         </div>
       </div>
-      <div>
-        {description} {/*Desc, could be styled or not*/}
-      </div>
 
       <div className="flex-box event-box-content-middle">
         <div>
@@ -176,21 +182,24 @@ const EventItem = ({
         </div>
 
         <div className="flex-box flex-column skills-box">
-          <div>{tskill("skills")}:</div>
-
-          <div className="flex-box wrap-reverse">
-            {req.map((item, index) => (
-              <div key={index} className="skills">
-                {item}
-                {index < req.length - 1 && " "}
-              </div>
-            ))}
+          <div className="event-description-label">{t("event_description")}</div>
+          <div style={{ marginBottom: '1rem' }}>
+            {description || t("no_description_available")}
           </div>
         </div>
       </div>
 
       <div>
-        {eventLocation} {/*Location, can be styled or not */}
+        {eventLocation}
+      </div>
+
+      <div className="flex-box event-date-time-container">
+        <div className="event-date">
+          {eventDate}
+        </div>
+        <div className="event-time">
+          {startTime} - {endTime}
+        </div>
       </div>
 
       <div className="flex-box event-box-content-bottom">
@@ -212,7 +221,7 @@ const EventItem = ({
           {type === "vol" && (
             <DynamicButton
               className="button"
-              text={t("join")}
+              text={isSignedUp ? t("cancel") : t("join")}
               onClick={joinEvent}
             />
           )}
@@ -220,7 +229,7 @@ const EventItem = ({
           {type === "org" && (
             <DynamicButton
               className="button"
-              text={t("enrolled users")}
+              text={t("enrolled_users")}
               onClick={showEnrolled}
             />
           )}
@@ -248,7 +257,7 @@ const EventItem = ({
           onClose={() => setIsPopupOpen(false)}
         >
           {isLoading ? (
-            <div>Loading enrolled users...</div>
+            <div>{t("loding_users")}</div>
           ) : error ? (
             <div className="error-message">{error}</div>
           ) : Array.isArray(enrolledUsers) && enrolledUsers.length > 0 ? (
@@ -257,16 +266,16 @@ const EventItem = ({
                 <thead>
                   <tr>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Name
+                      {t("name")}
                     </th>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Phone
+                      {t("phoneNumber")}
                     </th>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Gender
+                      {t("gender")}
                     </th>
                     <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      Actions
+                      {t("actions")}
                     </th>
                   </tr>
                 </thead>
@@ -283,13 +292,13 @@ const EventItem = ({
                             handleEnrolledUsers("approve", user.id)
                           }
                         >
-                          Approve
+                          {t("approve")}
                         </button>
                         <button
                           className="button button-reject"
                           onClick={() => handleEnrolledUsers("reject", user.id)}
                         >
-                          Reject
+                          {t("reject")}
                         </button>
                       </td>
                     </tr>
@@ -298,7 +307,7 @@ const EventItem = ({
               </table>
             </div>
           ) : (
-            <div>No users enrolled in this event</div>
+            <div>{t("no_users_enrolled")}</div>
           )}
         </PopupComponent>
       )}
@@ -315,10 +324,15 @@ EventItem.propTypes = {
   size: PropTypes.number,
   description: PropTypes.string,
   eventLocation: PropTypes.string,
+  eventDate: PropTypes.string,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
   approveEvent: PropTypes.func,
   rejectEvent: PropTypes.func,
   joinEvent: PropTypes.func,
   editEvent: PropTypes.func,
+  isFavorite: PropTypes.bool,
+  isSignedUp: PropTypes.bool,
 };
 
 EventItem.defaultProps = {

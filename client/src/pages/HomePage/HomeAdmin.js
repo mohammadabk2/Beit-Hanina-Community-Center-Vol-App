@@ -11,6 +11,7 @@ import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 import DropDownMenu from "../../components/common/DropDownMenu";
 import LoadingPage from "../CommonPages/Loading/Loading";
+import PopupComponent from "../../components/common/PopupComponent";
 
 // Icons
 import CardIconDark from "../../icons/dark/card_view_icon.svg";
@@ -24,7 +25,7 @@ import { useAuth } from "../../config/Context/auth";
 import useLoadEvents from "../../config/hooks/loadEvent";
 import useLoadUsers from "../../config/hooks/loadUsers";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const HomeAdmin = () => {
   const API_BASE_URL = SERVER_IP;
@@ -39,7 +40,7 @@ const HomeAdmin = () => {
 
   const [viewMode, setViewMode] = useState("events"); // "events", "people", "createOrg"
   const [personView, setPersonView] = useState(true);
-  const [sortText, setSortText] = useState(t("sort"));
+  const [sortText, setSortText] = useState("");
 
   const personContainerRef = useRef(null); // For attatching to person table to change sizing dynamically
 
@@ -48,6 +49,20 @@ const HomeAdmin = () => {
   const [eventStatus, setEventStatus] = useState("approved");
   const [peopleStatus, setPeopleStatus] = useState("volunteer_waiting_list");
 
+  // State for Add Log popup
+  const [addLogPopupOpen, setAddLogPopupOpen] = useState(false);
+  const [addLogUserId, setAddLogUserId] = useState(null);
+  const [addLogValue, setAddLogValue] = useState("");
+
+  // State for View Log popup
+  const [viewLogPopupOpen, setViewLogPopupOpen] = useState(false);
+  // const [viewLogUserId, setViewLogUserId] = useState(null);
+
+  const [userLogs, setUserLogs] = useState([]);
+  const [logsLoading, setLogsLoading] = useState(false);
+  const [logsError, setLogsError] = useState(null);
+
+  // Create eventOptions with current translations
   const eventOptions = [
     {
       label: t("approved_events"),
@@ -117,6 +132,33 @@ const HomeAdmin = () => {
     // },
   ];
 
+  // Update sortText when language changes or eventStatus changes
+  useEffect(() => {
+    const updateSortText = () => {
+      switch (eventStatus) {
+        case "approved":
+          setSortText(t("approved_events"));
+          break;
+        case "pending":
+          setSortText(t("pending_events"));
+          break;
+        case "finished":
+          setSortText(t("finished_events"));
+          break;
+        case "rejected":
+          setSortText(t("rejected_events"));
+          break;
+        case "ongoing":
+          setSortText(t("on_going"));
+          break;
+        default:
+          setSortText(t("approved_events"));
+      }
+    };
+    
+    updateSortText();
+  }, [t, eventStatus]);
+
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
     setViewMode("people"); // Switch view mode to "people"
@@ -183,14 +225,18 @@ const HomeAdmin = () => {
         key={event.id}
         id={event.id}
         name={event.name}
-        desc={event.description}
+        description={event.description}
         req={event.requirements || []} // Assuming 'requirements' might exist, fallback to empty array
         type="admin"
         count={event.currentSize}
         size={event.maxSize}
         eventLocation={event.location}
+        eventDate={event.eventDate}
+        startTime={event.startTime}
+        endTime={event.endTime}
         approveEvent={() => approveEvent(event.id)}
         rejectEvent={() => rejectEvent(event.id)}
+        isFavorite={event.isFavorite}
       />
     ));
   };
@@ -213,7 +259,9 @@ const HomeAdmin = () => {
 
     if (response.status !== 200) {
       console.log(`${response.status} ${response.message}`);
+      return false;
     }
+    return true;
   };
 
   const handleApprove = async (personId) => {
@@ -251,13 +299,72 @@ const HomeAdmin = () => {
   };
 
   const handleAddLog = (personId) => {
-    console.log(`Adding log for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
+    setAddLogUserId(personId);
+    setAddLogPopupOpen(true);
+    setAddLogValue("");
+  };
+
+  const handleAddLogSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await sendAxiod("users", addLogUserId, "log-user", addLogValue);
+      if (response) {
+        alert(t("log_added_successfully"));
+        setAddLogPopupOpen(false);
+        setAddLogUserId(null);
+        setAddLogValue("");
+      } else {
+        alert(t("log_add_failed"));
+      }
+    } catch (error) {
+      console.error("Error adding log:", error);
+      alert(t("log_add_failed"));
+    }
+  };
+
+  const handleAddLogClose = () => {
+    setAddLogPopupOpen(false);
+    setAddLogUserId(null);
+    setAddLogValue("");
   };
 
   const handleViewLogs = (personId) => {
-    console.log(`Viewing logs for person ${personId}`);
-    // TODO: Implement actual logic (e.g., show modal, navigate)
+    // setViewLogUserId(personId);
+    setLogsLoading(false);
+    setLogsError(null);
+    setViewLogPopupOpen(true);
+
+    const user = users.find(u => u.id === personId);
+    if (user && Array.isArray(user.logs)) {
+      setUserLogs(user.logs);
+    } else {
+      setUserLogs([]);
+    }
+  };
+
+  const handleViewLogClose = () => {
+    setViewLogPopupOpen(false);
+    // setViewLogUserId(null);
+    setUserLogs([]);
+    setLogsError(null);
+  };
+
+  const handleApproveHours = async (personId, hoursToApprove) => {
+    console.log(`Approving ${hoursToApprove} hours for person ${personId}`);
+
+    try {
+      // First, increment approved hours
+      await sendAxiod("users", personId, "approve-hours", hoursToApprove.toString());
+      
+      // Then, decrement unapproved hours
+      await sendAxiod("users", personId, "decrement-unapproved-hours", hoursToApprove.toString());
+      
+      // Reload users to get updated data
+      loadUsers(peopleStatus);
+    } catch (error) {
+      console.error("Error approving hours:", error);
+      // Optionally show an error message to the user
+    }
   };
 
   const renderSearch = () => {
@@ -307,38 +414,41 @@ const HomeAdmin = () => {
       <>
         <div
           ref={personContainerRef}
-          className="scroll-box1 flex-box flex-column"
+          className={`${personView ? 'scroll-box1' : 'person-table-content'} flex-box flex-column`}
         >
-          <div className="flex-box top-scroll-box1 line-break">
-            <div>{renderSearch()}</div>
+          <div className="flex-box flex-column top-scroll-box1 line-break">
+            <div className="flex-box">
+              {renderButton(switchToEvents, t("switch_to_events"))}
+              {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
+            </div>
+            <div className="flex-box">
+              <DropDownMenu
+                text={sortText}
+                className="gender-button"
+                options={peopleOptions}
+              />
 
-            <DropDownMenu
-              text={sortText}
-              className="gender-button"
-              options={peopleOptions}
-            />
-
-            {renderButton(switchToEvents, t("switch_to_events"))}
-            {/* //TODO give the img a class to make it bigger */}
-            <img
-              className="table-img"
-              onClick={togglePersonView}
-              src={
-                personView
-                  ? isLightMode
-                    ? TableIconLight
-                    : TableIconDark
-                  : isLightMode
-                  ? CardIconLight
-                  : CardIconDark
-              }
-              alt={
-                personView
-                  ? t("switch_to_table_view")
-                  : t("switch_to_card_view")
-              }
-            />
-            {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
+              {/* //TODO give the img a class to make it bigger */}
+              <img
+                className="table-img"
+                onClick={togglePersonView}
+                src={
+                  personView
+                    ? isLightMode
+                      ? TableIconLight
+                      : TableIconDark
+                    : isLightMode
+                    ? CardIconLight
+                    : CardIconDark
+                }
+                alt={
+                  personView
+                    ? t("switch_to_table_view")
+                    : t("switch_to_card_view")
+                }
+              />
+            </div>
+            {renderSearch()}
           </div>
 
           <div className="bottom-scroll-box1">
@@ -368,6 +478,7 @@ const HomeAdmin = () => {
               rejectUser={handleReject}
               addLog={handleAddLog}
               viewLogs={handleViewLogs}
+              approveHours={handleApproveHours}
             />
           </div>
         </div>
@@ -433,7 +544,7 @@ const HomeAdmin = () => {
               t("phoneNumber"),
               formData.phoneNumber,
               "phoneNumber",
-              t("fullName_phone_placeholder")
+              t("phone_placeholder")
             )}
 
             {renderInput(
@@ -454,7 +565,7 @@ const HomeAdmin = () => {
               t("orgUserName"),
               formData.username,
               "username",
-              t("username_phone_placeholder")
+              t("username_placeholder")
             )}
 
             {renderInput(
@@ -486,18 +597,21 @@ const HomeAdmin = () => {
     return (
       <>
         <div className="scroll-box1 general-box flex-box flex-column">
-          <div className="flex-box top-scroll-box1 line-break">
+          <div className="flex-box flex-column top-scroll-box1 line-break">
+            <div className="flex-box">
+              {renderButton(switchToPeople, t("switch_to_people"))}
+              {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
+            </div>
+            <div className="flex-box">
+              <DropDownMenu
+                text={sortText}
+                className="gender-button"
+                options={eventOptions}
+              />
+            </div>
+            
             {renderSearch()}
-
-            <DropDownMenu
-              text={sortText}
-              className="gender-button"
-              options={eventOptions}
-            />
-
-            {renderButton(switchToPeople, t("switch_to_people"))}
-
-            {renderButton(switchToCreateOrg, t("switch_to_create_org"))}
+        
           </div>
 
           {/* <div className="bottom-scroll-box1">{renderEventItems(events)}</div> */}
@@ -563,6 +677,56 @@ const HomeAdmin = () => {
       )}
       {viewMode === "createOrg" && renderCreateOrg()}
       <CopyRight />
+      {/* Add Log Popup */}
+      <PopupComponent
+        isOpen={addLogPopupOpen}
+        onClose={handleAddLogClose}
+        message={t("add_log")}
+      >
+        <form onSubmit={handleAddLogSubmit} className="flex-box flex-column gap-1">
+          <label htmlFor="logInput">{t("log_details")}</label>
+          <DynamicInput
+            id="logInput"
+            type="text"
+            value={addLogValue}
+            onChange={e => setAddLogValue(e.target.value)}
+            placeholder={t("enter_log")}
+            className="input-field"
+          />
+          <div className="flex-box gap-1">
+            <DynamicButton type="submit" text={t("submit_button")} className="button button-small" />
+            <DynamicButton type="button" text={t("cancel_button")} className="button button-small" onClick={handleAddLogClose} />
+          </div>
+        </form>
+      </PopupComponent>
+      {/* View Logs Popup */}
+      <PopupComponent
+        isOpen={viewLogPopupOpen}
+        onClose={handleViewLogClose}
+        message={t("view_logs")}
+      >
+        {logsLoading ? (
+          <p>{t("loading_logs")}</p>
+        ) : logsError ? (
+          <p style={{ color: "red" }}>{logsError}</p>
+        ) : userLogs.length === 0 ? (
+          <p>{t("no_logs_found")}</p>
+        ) : (
+          <ul>
+            {userLogs.map((log, idx) => (
+              <li key={idx}>{log}</li>
+            ))}
+          </ul>
+        )}
+        <div className="flex-box gap-1">
+          <DynamicButton
+            type="button"
+            text={t("close_button")}
+            className="button button-small"
+            onClick={handleViewLogClose}
+          />
+        </div>
+      </PopupComponent>
     </div>
   );
 };

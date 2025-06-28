@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 import ManageAccountBox from "../../components/ManageAccountBox";
-import SelectSkills from "../../components/common/SelectComponent";
+// import SelectSkills from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
 import { useAuth } from "../../config/Context/auth";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
@@ -17,7 +17,7 @@ const PersonalArea = () => {
   const { userId, token } = useAuth();
 
   const [userData, setUserData] = useState(null);
-  const [userSkills, setUserSkills] = useState([]);
+  // const [userSkills, setUserSkills] = useState([]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -44,14 +44,14 @@ const PersonalArea = () => {
     }
   }, [userId, token, API_BASE_URL]);
 
-  const handleSkills = (e) => {
-    if (e && e.target && Array.isArray(e.target.value)) {
-      setUserSkills(e.target.value);
-      //TODO add edit skills or change them to view only
-    } else {
-      console.error("Received unexpected event structure in handleSkills:", e);
-    }
-  };
+  // const handleSkills = (e) => {
+  //   if (e && e.target && Array.isArray(e.target.value)) {
+  //     setUserSkills(e.target.value);
+  //     //TODO add edit skills or change them to view only
+  //   } else {
+  //     console.error("Received unexpected event structure in handleSkills:", e);
+  //   }
+  // };
 
   return (
     <div className="app flex-box flex-column">
@@ -74,11 +74,11 @@ const PersonalArea = () => {
             )}
           </div>
 
-          <SelectSkills
+          {/* <SelectSkills
             type="skills"
             onChange={handleSkills}
             chosen={userSkills}
-          />
+          /> */}
 
           <ManageAccountBox />
         </div>

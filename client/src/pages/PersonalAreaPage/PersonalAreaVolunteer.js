@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 
-import DynamicButton from "../../components/common/ButtonComponent";
 import ManageAccountBox from "../../components/ManageAccountBox";
 import SelectSkills from "../../components/common/SelectComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
@@ -10,7 +9,7 @@ import CopyRight from "../../components/layout/CopyRight";
 
 import { useAuth } from "../../config/Context/auth";
 
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const PersonalArea = () => {
   const { t } = useTranslation("personal");
@@ -55,9 +54,9 @@ const PersonalArea = () => {
     }
   };
 
-  const printToPdf = () => {
-    console.log("print to PDF button clicked");
-  };
+  // const printToPdf = () => {
+  //   console.log("print to PDF button clicked");
+  // };
 
   return (
     <div className="app flex-box flex-column">
@@ -90,11 +89,11 @@ const PersonalArea = () => {
             chosen={userSkills}
           />
 
-          <DynamicButton
+          {/* <DynamicButton
             className="button"
             text={t("to_pdf")}
             onClick={printToPdf}
-          />
+          /> */}
 
           <ManageAccountBox />
         </div>

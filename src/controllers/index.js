@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import pingController from "./common/ping.js";
+import exportEvents from "./common/export.js";
 
 import logUserController from "./auth/login.js";
 import changePassword from "./auth/changePassword.js";
@@ -36,6 +37,7 @@ router.get("/users/Info", LoadInfo);
 router.get("/events", loadEvents);
 router.post("/events", createEvent);
 router.post("/events/actions", eventActions);
+router.get("/events/export", exportEvents);
 
 // --- Static File Serving for React --- //! might turn off
 router.use(express.static(path.join(__dirname, "..", "..", "client", "build")));

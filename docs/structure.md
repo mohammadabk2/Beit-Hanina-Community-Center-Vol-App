@@ -43,6 +43,8 @@
 │       │       ├── PersonItemRow.js
 │       │       └── PersonList.js
 │       ├── config
+│       │   ├── constants
+│       │   │   └── global.js
 │       │   ├── Context
 │       │   │   └── auth.js
 │       │   ├── hooks
@@ -54,9 +56,7 @@
 │       │   │   │   ├── about.json
 │       │   │   │   ├── app.json
 │       │   │   │   ├── copyright.json
-│       │   │   │   ├── HomeAdmin.json
 │       │   │   │   ├── home.json
-│       │   │   │   ├── HomeOrganizer.json
 │       │   │   │   ├── insurance.json
 │       │   │   │   ├── navBar.json
 │       │   │   │   ├── occupation.json
@@ -68,9 +68,7 @@
 │       │   │       ├── app.json
 │       │   │       ├── copyright.json
 │       │   │       ├── events.json
-│       │   │       ├── HomeAdmin.json
 │       │   │       ├── home.json
-│       │   │       ├── HomeOrganizer.json
 │       │   │       ├── insurance.json
 │       │   │       ├── navBar.json
 │       │   │       ├── occupation.json
@@ -85,12 +83,12 @@
 │       │       ├── Skills.js
 │       │       └── Sort.js
 │       ├── global.css
-│       ├── global.js
 │       ├── icons
 │       │   ├── about_icon.jpg
 │       │   ├── dark
 │       │   │   ├── card_view_icon.svg
 │       │   │   ├── check-dark.svg
+│       │   │   ├── clock-dark.svg
 │       │   │   ├── cross-dark.svg
 │       │   │   ├── document-filled-dark.svg
 │       │   │   ├── document-plus-dark.svg
@@ -108,6 +106,7 @@
 │       │   ├── light
 │       │   │   ├── card_view_icon.svg
 │       │   │   ├── check-light.svg
+│       │   │   ├── clock-light.svg
 │       │   │   ├── cross-light.svg
 │       │   │   ├── document-filled-light.svg
 │       │   │   ├── document-plus-light.svg
@@ -187,6 +186,13 @@
 │   ├── run_frontEnd.sh
 │   └── setup_server.sh
 ├── SECURITY.md
+├── server-logs
+│   ├── 22-06-2025.txt
+│   ├── 23-06-2025.txt
+│   ├── 24-06-2025.txt
+│   ├── 26-06-2025.txt
+│   ├── 27-06-2025.txt
+│   └── 28-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
@@ -200,6 +206,7 @@
 │   │   ├── Events
 │   │   │   ├── actions.js
 │   │   │   ├── create.js
+│   │   │   ├── export.js
 │   │   │   └── load.js
 │   │   ├── index.js
 │   │   ├── Users
@@ -231,5 +238,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-51 directories, 178 files
+53 directories, 183 files
 ```

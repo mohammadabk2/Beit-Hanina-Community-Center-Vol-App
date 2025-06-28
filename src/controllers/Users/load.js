@@ -50,6 +50,7 @@ const loadUsers = async (req, res) => {
 
       if (roleType.role === "admin") {
         const users = await dbConnection.getUsers(roleType.role, tableName);
+        console.log("Raw users data from DB:", users); // Debug log
         allUsers = users.map((user) => ({
           id: user.id,
           name: user.name,
@@ -62,8 +63,11 @@ const loadUsers = async (req, res) => {
           idNumber: user.id_number,
           userName: user.username,
           logs: user.logs,
-          skills: user.skills,
+          skills: user.skills || [],
+          approved_hours: user.approved_hours || 0,
+          unapproved_hours: user.unapproved_hours || 0,
         }));
+        console.log("Mapped users data:", allUsers); // Debug log
       }
 
       if (roleType.role === "organizer" && Array.isArray(userRequest) && userRequest.length > 0) {
@@ -75,6 +79,7 @@ const loadUsers = async (req, res) => {
           name: user.name,
           sex: user.sex,
           phoneNumber: user.phone_number,
+          skills: [], // Organizers don't have skills, so set to empty array
         }));
         console.log("Mapped users data:", allUsers); // Debug log
       }

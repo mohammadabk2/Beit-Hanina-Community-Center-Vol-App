@@ -1,1 +1,2 @@
-DROP TABLE users, volunteer_waiting_list, volunteer, organizer, events, events_status, rejected_users;
+DROP INDEX IF EXISTS idx_system_logs_user_id, idx_system_logs_created_at, idx_system_logs_action, idx_system_logs_level;
+DROP TABLE system_logs, users, volunteer_waiting_list, volunteer, organizer, events, events_status, rejected_users;

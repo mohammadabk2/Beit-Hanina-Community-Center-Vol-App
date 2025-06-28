@@ -36,7 +36,7 @@ const createVolunteer = async (waitingListId) => {
 
     // Insert into users table
     const userInsertText = `
-      INSERT INTO users (phone_number, email, address, username, password_hash, logs, profile_image_url)
+      INSERT INTO users (phone_number, email, address, username, password_hash, profile_image_url, role)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *;`;
     const userValues = [
@@ -45,8 +45,8 @@ const createVolunteer = async (waitingListId) => {
       v.address,
       v.username,
       v.password_hash,
-      v.logs || [],
       v.profile_image_url || null,
+      'volunteer', // Set role as volunteer
     ];
     const userRes = await client.query(userInsertText, userValues);
     const user = userRes.rows[0];
@@ -104,18 +104,51 @@ const getUsers = async (role, tableName) => {
     if (tableName === "volunteer_waiting_list") {
       query = `SELECT * FROM volunteer_waiting_list;`;
     }
-    // else if (tableName === "organizer") {
-    //   //TODO maybe
-    //   query = `
-    //   SELECT * FROM organizer;
-    //   `
-    // }
     else {
+      // Return both volunteers and organizers, with a role field
       query = `
-      SELECT users.*, volunteer.*
-      FROM users
-      JOIN volunteer ON users.id = volunteer.user_id;
-    `;
+        SELECT 
+          users.id,
+          volunteer.name,
+          volunteer.birth_date,
+          volunteer.sex,
+          users.phone_number,
+          users.email,
+          users.address,
+          volunteer.insurance,
+          volunteer.id_number,
+          users.username,
+          volunteer.skills,
+          volunteer.approved_hours,
+          volunteer.unapproved_hours,
+          NULL as org_name,
+          NULL as given_hours,
+          NULL as vol_id,
+          'volunteer' as role
+        FROM users
+        JOIN volunteer ON users.id = volunteer.user_id
+        UNION ALL
+        SELECT 
+          users.id,
+          NULL as name,
+          NULL as birth_date,
+          NULL as sex,
+          users.phone_number,
+          users.email,
+          users.address,
+          NULL as insurance,
+          NULL as id_number,
+          users.username,
+          NULL as skills,
+          NULL as approved_hours,
+          NULL as unapproved_hours,
+          organizer.org_name,
+          organizer.given_hours,
+          organizer.vol_id,
+          'organizer' as role
+        FROM users
+        JOIN organizer ON users.id = organizer.user_id;
+      `;
     }
   } else {
     console.error("Unsupported role in getUsers:", role);
@@ -219,6 +252,7 @@ const getUserById = async (id) => {
  * @throws {Error} If the database query fails.
  */
 const incrementVolHours = async (userId, hourType, hours) => {
+  console.log('incrementVolHours called with:', { userId, hourType, hours });
   const allowedFields = ["approved_hours", "unapproved_hours"]; // Add any other allowed fields here
   if (!allowedFields.includes(hourType)) {
     throw new Error("Invalid field name");
@@ -416,13 +450,12 @@ const addEvent = async (
   orgId,
   maxNumberOfVolunteers,
   eventDescription,
-  eventLocation,
-  eventSkills
+  eventLocation
 ) => {
   const eventsText = `
   INSERT INTO events (event_name, event_date, event_start, event_end, 
-  is_active, org_id, max_number_of_vol, event_location, event_description, event_skills)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  is_active, org_id, max_number_of_vol, event_location, event_description)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING *;
 `;
 
@@ -436,7 +469,6 @@ const addEvent = async (
     maxNumberOfVolunteers,
     eventLocation,
     eventDescription,
-    eventSkills,
   ];
 
   try {
@@ -535,32 +567,115 @@ const getEvents = async (columnNames) => {
 };
 
 /**
- * Adds a log to the Logs array of a user
+ * Adds a system log entry to the system_logs table
  *
  * @async
- * @param {number} userID - The ID of the user.
- * @param {string} logMessage - new entry to the logs array
- * @returns {Promise<string|null>} A promise that resolves to the user object if found, or null if not found.
- * @throws {Error} If the database query fails.
+ * @param {number} userId - The ID of the user performing the action (can be null for system actions)
+ * @param {string} action - The action being performed (e.g., 'LOGIN', 'CREATE_EVENT', 'UPDATE_PROFILE')
+ * @param {string} details - Additional details about the action
+ * @param {string} ipAddress - IP address of the user
+ * @param {string} userAgent - User agent string
+ * @param {string} logLevel - Log level (DEBUG, INFO, WARN, ERROR)
+ * @returns {Promise<Object>} The created log entry
+ * @throws {Error} If the database query fails
  */
-const addLog = async (userId, logMessage) => {
-  const text = `UPDATE users SET logs = array_append(COALESCE(logs, ARRAY[]::TEXT[]), $1) WHERE id = $2 RETURNING *;`;
-  const values = [logMessage, userId];
+const addSystemLog = async (userId, action, details, ipAddress = null, userAgent = null, logLevel = 'INFO') => {
+  const text = `
+    INSERT INTO system_logs (user_id, action, details, ip_address, user_agent, log_level)
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;
+  `;
+  
+  const values = [userId, action, details, ipAddress, userAgent, logLevel];
 
   try {
     const res = await db.query(text, values);
-
-    if (res.rows.length === 0) {
-      console.warn(`User with id ${userId} not found`);
-      return null;
-    }
-
     return res.rows[0];
   } catch (error) {
-    console.error("Error in addLog:", error);
-    throw error; // Re-throw the error to be handled by the caller
+    console.error("Error in addSystemLog:", error);
+    throw error;
   }
 };
+
+/**
+ * Retrieves system logs with optional filtering
+ *
+ * @async
+ * @param {Object} filters - Optional filters
+ * @param {number} filters.userId - Filter by user ID
+ * @param {string} filters.action - Filter by action
+ * @param {string} filters.logLevel - Filter by log level
+ * @param {Date} filters.startDate - Start date for filtering
+ * @param {Date} filters.endDate - End date for filtering
+ * @param {number} filters.limit - Limit number of results (default: 100)
+ * @param {number} filters.offset - Offset for pagination (default: 0)
+ * @returns {Promise<Array>} Array of log entries
+ * @throws {Error} If the database query fails
+ */
+const getSystemLogs = async (filters = {}) => {
+  let text = `
+    SELECT sl.*, u.username, u.email 
+    FROM system_logs sl
+    LEFT JOIN users u ON sl.user_id = u.id
+    WHERE 1=1
+  `;
+  
+  const values = [];
+  let paramCount = 0;
+
+  if (filters.userId) {
+    paramCount++;
+    text += ` AND sl.user_id = $${paramCount}`;
+    values.push(filters.userId);
+  }
+
+  if (filters.action) {
+    paramCount++;
+    text += ` AND sl.action = $${paramCount}`;
+    values.push(filters.action);
+  }
+
+  if (filters.logLevel) {
+    paramCount++;
+    text += ` AND sl.log_level = $${paramCount}`;
+    values.push(filters.logLevel);
+  }
+
+  if (filters.startDate) {
+    paramCount++;
+    text += ` AND sl.created_at >= $${paramCount}`;
+    values.push(filters.startDate);
+  }
+
+  if (filters.endDate) {
+    paramCount++;
+    text += ` AND sl.created_at <= $${paramCount}`;
+    values.push(filters.endDate);
+  }
+
+  text += ` ORDER BY sl.created_at DESC`;
+
+  const limit = filters.limit || 100;
+  paramCount++;
+  text += ` LIMIT $${paramCount}`;
+  values.push(limit);
+
+  if (filters.offset) {
+    paramCount++;
+    text += ` OFFSET $${paramCount}`;
+    values.push(filters.offset);
+  }
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows;
+  } catch (error) {
+    console.error("Error in getSystemLogs:", error);
+    throw error;
+  }
+};
+
+
 
 /**
  * Creates a new user in the database.
@@ -759,54 +874,77 @@ const fetchEventVolunteers = async (eventID, arrayName) => {
  * @throws {Error} If the database query fails.
  */
 const decideUserEventStatus = async (eventID, userID, arrayName, status) => {
+  // Store queries and their respective values separately
   const queries = [];
-  const values = [eventID, userID];
 
   if (status === "waiting") {
-    queries.push(`
-      UPDATE events
-      SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET ${arrayName} = ARRAY_APPEND(COALESCE(${arrayName}, ARRAY[]::INT[]), $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
   }
 
   if (status === "approved") {
     // Add to approved list
-    queries.push(`
-      UPDATE events
-      SET vol_id = ARRAY_APPEND(COALESCE(vol_id, ARRAY[]::INT[]), $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET vol_id = ARRAY_APPEND(COALESCE(vol_id, ARRAY[]::INT[]), $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
     // Remove from waiting list
-    queries.push(`
-      UPDATE events
-      SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
+    // Increment current number of volunteers - only eventID needed
+    queries.push({
+      text: `
+        UPDATE events
+        SET current_number_of_vol = current_number_of_vol + 1
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID], // only one param here
+    });
   }
 
   if (status === "rejected") {
     // Remove from waiting list
-    queries.push(`
-      UPDATE events
-      SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
-      WHERE event_id = $1
-      RETURNING *;
-    `);
+    queries.push({
+      text: `
+        UPDATE events
+        SET vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2)
+        WHERE event_id = $1
+        RETURNING *;
+      `,
+      values: [eventID, userID],
+    });
   }
+
   try {
     let result;
-    for (const text of queries) {
+    for (const { text, values } of queries) {
       const res = await db.query(text, values);
       result = res.rows[0]; // Optional: update only the last result
     }
     return result;
   } catch (error) {
     console.error(`Error in enrollUserToEvent on array ${arrayName}:`, error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error;
   }
 };
 
@@ -884,11 +1022,11 @@ const loadUserInfo = async (userID, role) => {
  * @returns {Promise<Object>} A promise that resolves to the User Events object.
  * @throws {Error} If the database query fails.
  */
-const getEventsForVolunteer = async (userID, eventType) => {
+const getUserEvents = async (userID, eventType) => {
   const text = `
   SELECT ${eventType}
-  FROM volunteer
-  WHERE user_id=$1;`;
+  FROM users
+  WHERE id=$1;`;
 
   const values = [userID];
 
@@ -910,22 +1048,22 @@ const getEventsForVolunteer = async (userID, eventType) => {
 };
 
 /**
- * Set Volunteer Events
+ * Set User Events
  * @param {number} userID - The user ID to fetch data for.
  * @param {string} tableName - Name of the list to add to.
  * @param {number} eventID - Event ID.
  * @returns {Promise<Object>} A promise that resolves to the User Events object.
  * @throws {Error} If the database query fails.
  */
-const addEventToVolunteerList = async (userID, tableName, eventID) => {
+const addEventToUserList = async (userID, tableName, eventID) => {
   const text = `
-    UPDATE volunteer
+    UPDATE users
     SET ${tableName} = 
       CASE 
         WHEN NOT ${tableName} @> ARRAY[$2]::INT[] THEN array_append(COALESCE(${tableName}, '{}'), $2)
         ELSE ${tableName}
       END
-    WHERE user_id = $1
+    WHERE id = $1
     RETURNING *;
   `;
 
@@ -944,18 +1082,18 @@ const addEventToVolunteerList = async (userID, tableName, eventID) => {
 };
 
 /**
- * Remove Event from Volunteer List
+ * Remove Event from User List
  * @param {number} userID - The user ID to update.
  * @param {string} tableName - Name of the list to remove from.
  * @param {number} eventID - Event ID to remove.
- * @returns {Promise<Object>} Updated volunteer row.
+ * @returns {Promise<Object>} Updated user row.
  * @throws {Error} If the database query fails.
  */
-const removeEventFromVolunteerList = async (userID, tableName, eventID) => {
+const removeEventFromUserList = async (userID, tableName, eventID) => {
   const text = `
-    UPDATE volunteer
+    UPDATE users
     SET ${tableName} = ARRAY_REMOVE(${tableName}, $2)
-    WHERE user_id = $1
+    WHERE id = $1
     RETURNING *;
   `;
 
@@ -973,13 +1111,49 @@ const removeEventFromVolunteerList = async (userID, tableName, eventID) => {
   }
 };
 
+/**
+ * Remove User from Event Lists (unenroll)
+ * @param {number} eventID - The event ID to remove user from.
+ * @param {number} userID - The user ID to remove.
+ * @returns {Promise<Object>} Updated event row.
+ * @throws {Error} If the database query fails.
+ */
+const removeUserFromEvent = async (eventID, userID) => {
+  const text = `
+    UPDATE events
+    SET 
+      vol_id_waiting_list = ARRAY_REMOVE(vol_id_waiting_list, $2),
+      vol_id = ARRAY_REMOVE(vol_id, $2),
+      current_number_of_vol = CASE 
+        WHEN $2 = ANY(vol_id) THEN GREATEST(current_number_of_vol - 1, 0)
+        ELSE current_number_of_vol
+      END
+    WHERE event_id = $1
+    RETURNING *;
+  `;
+
+  const values = [eventID, userID];
+
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0];
+  } catch (error) {
+    console.error(
+      `Error removing User:${userID} from Event:${eventID}`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default {
   // Currently using
   getUsers,
   getUserHash,
   getEvents,
   createVolunteer,
-  addLog,
+  addSystemLog, // New logging function
+  getSystemLogs, // New log retrieval function
   createUser,
   rejectUser,
   createOrganizer,
@@ -990,9 +1164,10 @@ export default {
   changePassword,
   loadUserInfo,
   fetchEventVolunteers,
-  getEventsForVolunteer,
-  addEventToVolunteerList,
-  removeEventFromVolunteerList,
+  getUserEvents,
+  addEventToUserList,
+  removeEventFromUserList,
+  removeUserFromEvent,
 
   // Currently for testing unused
   getUserById, // tested

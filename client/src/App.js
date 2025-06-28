@@ -12,7 +12,7 @@ import CopyRight from "./components/layout/CopyRight";
 // import NoConnection from "./pages/CommonPages/NoConnection/NoConnection";
 
 import { useAuth } from "./config/Context/auth";
-import { SERVER_IP } from "./global";
+import { SERVER_IP } from "./config/constants/global";
 
 const App = () => {
   const API_BASE_URL = SERVER_IP;
@@ -98,7 +98,7 @@ const App = () => {
           navigate("home-volunteer");
         }
 
-        alert(`${t("welcome_message")} ${response.data.message}`);
+        alert(`${t("welcome_message")}`);
       } else {
         const message =
           response.data?.message || "Login failed. Please check credentials.";

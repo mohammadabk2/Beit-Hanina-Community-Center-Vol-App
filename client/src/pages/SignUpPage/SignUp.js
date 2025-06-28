@@ -6,7 +6,6 @@ import axios from "axios";
 import DynamicButton from "../../components/common/ButtonComponent";
 import DynamicInput from "../../components/common/InputComponent";
 import DropDownMenu from "../../components/common/DropDownMenu";
-import SelectComponent from "../../components/common/SelectComponent";
 import UploadFile from "../../components/common/UploadComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
@@ -14,7 +13,7 @@ import CopyRight from "../../components/layout/CopyRight";
 // Import the insurance and occupation options
 import { useInsuranceOptions } from "../../config/options/Insurance";
 import { useOccupationOptions } from "../../config/options/Occupation";
-import { SERVER_IP } from "../../global";
+import { SERVER_IP } from "../../config/constants/global";
 
 const SignUpPage = () => {
   //TODO handle if already signed in maybe do that in App.js
@@ -38,7 +37,6 @@ const SignUpPage = () => {
     idNumber: "",
     username: "",
     password: "",
-    skills: [], // Initialize skills as an array
     imageFile: null,
     type: "vol",
   });
@@ -261,12 +259,6 @@ const SignUpPage = () => {
               tApp("password-placeholder"),
               "password"
             )}
-
-            <SelectComponent
-              type="skills"
-              onChange={handleChange}
-              chosen={formData.skills}
-            />
 
             <UploadFile onFileSelect={handleImageFileSelect} />
 
