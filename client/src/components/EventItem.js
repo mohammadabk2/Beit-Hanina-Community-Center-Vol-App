@@ -30,6 +30,7 @@ const EventItem = ({
   joinEvent,
   isFavorite: initialIsFavorite = false,
   isSignedUp = false,
+  onFavorite,
   // editEvent,
   // volunteers,
 }) => {
@@ -129,6 +130,14 @@ const EventItem = ({
 
   const handleFavorite = async () => {
     console.log("Clicked favorite");
+    
+    // If external handler is provided, use it for optimistic updates
+    if (onFavorite) {
+      onFavorite();
+      return;
+    }
+    
+    // Otherwise, use internal implementation
     setIsFavorite(!isFavorite);
 
     try {
@@ -337,6 +346,7 @@ EventItem.propTypes = {
   editEvent: PropTypes.func,
   isFavorite: PropTypes.bool,
   isSignedUp: PropTypes.bool,
+  onFavorite: PropTypes.func,
 };
 
 EventItem.defaultProps = {
