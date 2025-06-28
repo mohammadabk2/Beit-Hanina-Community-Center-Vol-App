@@ -20,12 +20,14 @@ const HomeVolunteer = () => {
   const { t } = useTranslation("home");
 
   const { userId, loadingInitial, isAuthenticated, token } = useAuth();
-  const { events, eventsLoading, eventsError, loadEvents } = useLoadEvents();
-  const { events: signedUpEvents, loadEvents: loadSignedUpEvents } = useLoadEvents();
+  const { events, eventsLoading, eventsError, loadEvents, setEvents } = useLoadEvents();
+  const { events: signedUpEvents, eventsLoading: signedUpEventsLoading, eventsError: signedUpEventsError, loadEvents: loadSignedUpEvents, setEvents: setSignedUpEvents } = useLoadEvents();
+  const { events: favEvents, eventsLoading: favEventsLoading, eventsError: favEventsError, loadEvents: loadFavEvents, setEvents: setFavEvents } = useLoadEvents();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("new");
   const [sortText, setSortText] = useState("");
   const [signedUpEventIds, setSignedUpEventIds] = useState([]);
+  const [favoriteEventIds, setFavoriteEventIds] = useState([]);
 
   //TODO add signup events and fav events options
   const statusOptions = [
@@ -78,11 +80,21 @@ const HomeVolunteer = () => {
 
   useEffect(() => {
     if (userId && isAuthenticated) {
-      loadEvents(["approved"], selectedStatus);
-      // Load signed up events separately to track enrollment status
-      loadSignedUpEvents(["approved"], "signed-up");
+      switch (selectedStatus) {
+        case "new":
+          loadEvents(["approved"], "new");
+          break;
+        case "signed-up":
+          loadSignedUpEvents(["approved"], "signed-up");
+          break;
+        case "fav":
+          loadFavEvents(["approved"], "fav");
+          break;
+        default:
+          loadEvents(["approved"], "new");
+      }
     }
-  }, [userId, isAuthenticated, loadEvents, loadSignedUpEvents, selectedStatus]);
+  }, [userId, isAuthenticated, loadEvents, loadSignedUpEvents, loadFavEvents, selectedStatus]);
 
   // Update signed up event IDs when signed up events are loaded
   useEffect(() => {
@@ -91,6 +103,15 @@ const HomeVolunteer = () => {
       setSignedUpEventIds(eventIds);
     }
   }, [signedUpEvents]);
+
+  // Update favorite event IDs when events are loaded
+  useEffect(() => {
+    const currentEvents = getCurrentEventsData().events;
+    if (currentEvents.length > 0) {
+      const favIds = currentEvents.filter(event => event.isFavorite).map(event => event.id);
+      setFavoriteEventIds(favIds);
+    }
+  }, [events, signedUpEvents, favEvents]);
 
   if (loadingInitial) {
     return <div>Loading user data...</div>;
@@ -132,24 +153,85 @@ const HomeVolunteer = () => {
     
     if (isSignedUp) {
       console.log("Cancel Enrollment Button Clicked");
-      sendAxiod("/events/actions", eventID, "unenroll", "");
-      alert("Enrollment cancelled");
       
-      // Remove from signed up events list immediately for UI feedback
+      // Optimistic update: Remove from signed up events list immediately
       setSignedUpEventIds(prev => prev.filter(id => id !== eventID));
+      
+      // If currently viewing signed-up events, remove from display immediately
+      if (selectedStatus === "signed-up") {
+        setSignedUpEvents(prev => prev.filter(event => event.id !== eventID));
+      }
+      
+      try {
+        await sendAxiod("/events/actions", eventID, "unenroll", "");
+        alert("Enrollment cancelled");
+      } catch (error) {
+        // Revert optimistic update on error
+        console.error("Error cancelling enrollment:", error);
+        setSignedUpEventIds(prev => [...prev, eventID]);
+        if (selectedStatus === "signed-up") {
+          // Reload signed-up events to restore the correct state
+          loadSignedUpEvents(["approved"], "signed-up");
+        }
+      }
     } else {
       console.log("Join Event Button Clicked");
-      sendAxiod("/events/actions", eventID, "enroll", "");
-      alert(t("event_signup_success"));
       
-      // Add to signed up events list immediately for UI feedback
+      // Optimistic update: Add to signed up events list immediately
       setSignedUpEventIds(prev => [...prev, eventID]);
+      
+      try {
+        await sendAxiod("/events/actions", eventID, "enroll", "");
+        alert(t("event_signup_success"));
+      } catch (error) {
+        // Revert optimistic update on error
+        console.error("Error joining event:", error);
+        setSignedUpEventIds(prev => prev.filter(id => id !== eventID));
+      }
     }
+  };
+
+  const handleFavorite = async (eventID) => {
+    const isFavorite = favoriteEventIds.includes(eventID);
     
-    // Refresh the signed up events list from backend to ensure consistency
-    setTimeout(() => {
-      loadSignedUpEvents(["approved"], "signed-up");
-    }, 1000); // Small delay to allow backend to process
+    if (isFavorite) {
+      console.log("Unfavorite Button Clicked");
+      
+      // Optimistic update: Remove from favorite events list immediately
+      setFavoriteEventIds(prev => prev.filter(id => id !== eventID));
+      
+      // If currently viewing favorite events, remove from display immediately
+      if (selectedStatus === "fav") {
+        setFavEvents(prev => prev.filter(event => event.id !== eventID));
+      }
+      
+      try {
+        await sendAxiod("/events/actions", eventID, "fav", "");
+        console.log("Event unfavorited successfully");
+      } catch (error) {
+        // Revert optimistic update on error
+        console.error("Error unfavoriting event:", error);
+        setFavoriteEventIds(prev => [...prev, eventID]);
+        if (selectedStatus === "fav") {
+          // Reload favorite events to restore the correct state
+          loadFavEvents(["approved"], "fav");
+        }
+      }
+    } else {
+      console.log("Favorite Button Clicked");
+      
+      // Optimistic update: Add to favorite events list immediately
+      setFavoriteEventIds(prev => [...prev, eventID]);
+      
+      try {
+        await sendAxiod("/events/actions", eventID, "fav", "");
+        console.log("Event favorited successfully");
+      } catch (error) {
+        // Revert optimistic update on error
+        console.error("Error favoriting event:", error);
+        setFavoriteEventIds(prev => prev.filter(id => id !== eventID));
+      }
+    }
   };
 
   const renderEventItems = (eventsArray) => {
@@ -172,10 +254,41 @@ const HomeVolunteer = () => {
         startTime={event.startTime}
         endTime={event.endTime}
         joinEvent={() => handleJoin(event.id)} // Passes functions as callback
-        isFavorite={event.isFavorite}
+        isFavorite={favoriteEventIds.includes(event.id)} // Use state instead of event.isFavorite
         isSignedUp={signedUpEventIds.includes(event.id)} // Pass enrollment status
+        onFavorite={() => handleFavorite(event.id)} // Pass favorite handler
       />
     ));
+  };
+
+  // Get the appropriate events array and loading state based on selected status
+  const getCurrentEventsData = () => {
+    switch (selectedStatus) {
+      case "new":
+        return {
+          events: events,
+          loading: eventsLoading,
+          error: eventsError
+        };
+      case "signed-up":
+        return {
+          events: signedUpEvents,
+          loading: signedUpEventsLoading,
+          error: signedUpEventsError
+        };
+      case "fav":
+        return {
+          events: favEvents,
+          loading: favEventsLoading,
+          error: favEventsError
+        };
+      default:
+        return {
+          events: events,
+          loading: eventsLoading,
+          error: eventsError
+        };
+    }
   };
 
   return (
@@ -201,12 +314,12 @@ const HomeVolunteer = () => {
         </div>
         {/* <div className="bottom-scroll-box1">{renderEventItems(events)}</div> */}
         <div className="bottom-scroll-box1">
-          {eventsLoading && <p>{t("loading_events")}</p>}
-          {eventsError && <p style={{ color: "red" }}>{eventsError}</p>}
-          {!eventsLoading &&
-            !eventsError &&
+          {getCurrentEventsData().loading && <p>{t("loading_events")}</p>}
+          {getCurrentEventsData().error && <p style={{ color: "red" }}>{getCurrentEventsData().error}</p>}
+          {!getCurrentEventsData().loading &&
+            !getCurrentEventsData().error &&
             renderEventItems(
-              events.filter(
+              getCurrentEventsData().events.filter(
                 (event) =>
                   event.name
                     ?.toLowerCase()
