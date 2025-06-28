@@ -31,6 +31,7 @@
 
   "join": "التسجيل للحدث",
   "favorite": "حفظ",
+  "favorites": "المفضلة",
   "share": "مشاركة",
   "hide": "اخفاء",
   "ln": "لغة",
@@ -39,6 +40,7 @@
 
   "event_signup_failed": "فشل التسجيل في الحدث. يرجى المحاولة لاحقًا",
   "event_signup_success": "تم التسجيل في الحدث بنجاح",
+  "signed_up": "مسجل",
 
   "fullName": "اسم المنظمة",
   "fullName_placeholder": "أدخل اسم المنظمة",

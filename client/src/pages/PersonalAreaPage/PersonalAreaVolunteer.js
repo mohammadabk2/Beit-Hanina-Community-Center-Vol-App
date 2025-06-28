@@ -55,9 +55,9 @@ const PersonalArea = () => {
     }
   };
 
-  const printToPdf = () => {
-    console.log("print to PDF button clicked");
-  };
+  // const printToPdf = () => {
+  //   console.log("print to PDF button clicked");
+  // };
 
   return (
     <div className="app flex-box flex-column">
@@ -90,11 +90,11 @@ const PersonalArea = () => {
             chosen={userSkills}
           />
 
-          <DynamicButton
+          {/* <DynamicButton
             className="button"
             text={t("to_pdf")}
             onClick={printToPdf}
-          />
+          /> */}
 
           <ManageAccountBox />
         </div>

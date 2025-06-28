@@ -31,6 +31,7 @@
 
   "join": "Register",
   "favorite": "Favorite",
+  "favorites": "Favorites",
   "share": "Share",
   "hide": "Hide",
   "ln": "Language",
@@ -38,6 +39,7 @@
   "personalArea": "Personal Area",
 
   "sign_up_message": "Sign up successful!",
+  "signed_up": "Signed Up",
   "login_failed": "Login failed: {{message}}",
 
   "fullName": "Name of Organization",
