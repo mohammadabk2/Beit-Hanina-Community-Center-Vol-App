@@ -675,7 +675,37 @@ const getSystemLogs = async (filters = {}) => {
   }
 };
 
+/**
+ * Gets the current status of an event from the events_status table
+ * @param {number} eventID - The event ID to check
+ * @returns {Promise<string|null>} The current status of the event or null if not found
+ * @throws {Error} If the database query fails
+ */
+const getEventCurrentStatus = async (eventID) => {
+  const text = `
+    SELECT 
+      CASE 
+        WHEN $1 = ANY(approved) THEN 'approved'
+        WHEN $1 = ANY(rejected) THEN 'rejected'
+        WHEN $1 = ANY(pending) THEN 'pending'
+        WHEN $1 = ANY(ongoing) THEN 'ongoing'
+        WHEN $1 = ANY(finished) THEN 'finished'
+        ELSE NULL
+      END as current_status
+    FROM events_status
+    WHERE TRUE;
+  `;
 
+  const values = [eventID];
+  
+  try {
+    const res = await db.query(text, values);
+    return res.rows[0]?.current_status || null;
+  } catch (error) {
+    console.error("Error getting event current status:", error);
+    throw error;
+  }
+};
 
 /**
  * Creates a new user in the database.
@@ -1177,4 +1207,5 @@ export default {
   updateUser,
   addVolToOrganizer,
   changeStatus,
+  getEventCurrentStatus,
 };
