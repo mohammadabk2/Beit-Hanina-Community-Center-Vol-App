@@ -41,6 +41,8 @@
   "sign_up_message": "Sign up successful!",
   "signed_up": "Signed Up",
   "login_failed": "Login failed: {{message}}",
+  "event_created_successfully": "Event created successfully!",
+  "event_created_failed": "Failed to create event. Please try again.",
 
   "fullName": "Name of Organization",
   "fullName_placeholder": "Enter The Name of The Organization ",
@@ -81,5 +83,19 @@
   "on_going": "Ongoing Events",
 
   "new": "New",
-  "active": "Active"
+  "active": "Active",
+
+  "no_events_found": "No events found",
+  "log_added_successfully": "Log added successfully",
+  "log_add_failed": "Failed to add log",
+  "org_sign_up_message": "Organization sign up successful!",
+  "org_sign_up_failed": "Organization sign up failed",
+  "log_details": "Log Details",
+  "enter_log": "Enter log message...",
+  "cancel_button": "Cancel",
+  "view_logs": "View Logs",
+  "loading_logs": "Loading logs...",
+  "no_logs_found": "No logs found",
+  "close_button": "Close",
+  "loading_events": "Loading Events..."
 }

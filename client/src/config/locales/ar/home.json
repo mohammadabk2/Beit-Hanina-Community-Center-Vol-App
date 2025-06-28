@@ -41,6 +41,8 @@
   "event_signup_failed": "فشل التسجيل في الحدث. يرجى المحاولة لاحقًا",
   "event_signup_success": "تم التسجيل في الحدث بنجاح",
   "signed_up": "مسجل",
+  "event_created_successfully": "تم إنشاء الفعالية بنجاح!",
+  "event_created_failed": "فشل في إنشاء الفعالية. يرجى المحاولة مرة أخرى.",
 
   "fullName": "اسم المنظمة",
   "fullName_placeholder": "أدخل اسم المنظمة",
@@ -77,5 +79,19 @@
   "on_going": "الفعاليات الجارية",
 
   "new": "جديد",
-  "active": "نشط"
+  "active": "نشط",
+
+  "no_events_found": "لم يتم العثور على فعاليات",
+  "log_added_successfully": "تم إضافة السجل بنجاح",
+  "log_add_failed": "فشل في إضافة السجل",
+  "org_sign_up_message": "تم تسجيل المنظمة بنجاح!",
+  "org_sign_up_failed": "فشل في تسجيل المنظمة",
+  "log_details": "تفاصيل السجل",
+  "enter_log": "أدخل رسالة السجل...",
+  "cancel_button": "إلغاء",
+  "view_logs": "عرض السجلات",
+  "loading_logs": "جارٍ تحميل السجلات...",
+  "no_logs_found": "لم يتم العثور على سجلات",
+  "close_button": "إغلاق",
+  "loading_events": "جارٍ تحميل الفعاليات..."
 }

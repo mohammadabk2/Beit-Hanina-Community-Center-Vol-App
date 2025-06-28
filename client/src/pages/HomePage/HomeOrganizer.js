@@ -82,10 +82,11 @@ const HomeOrganizer = () => {
     );
 
     if (response.status === 200) {
-      alert(t("org Created"));
-      console.log("org Created");
+      alert(t("event_created_successfully"));
+      console.log("Event created successfully");
       setShowEvents(true);
     } else {
+      alert(t("event_created_failed"));
       console.log(`${response.status} ${response.message}`);
     }
   };
