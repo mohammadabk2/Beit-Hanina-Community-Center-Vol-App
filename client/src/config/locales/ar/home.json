@@ -21,6 +21,8 @@
   "create_event": "إنشاء فعالية",
   "event_name": "اسم الفعالية",
   "event_date": "تاريخ الفعالية",
+  "event_start": "وقت بداية الفعالية",
+  "event_end": "وقت انتهاء الفعالية",
   "volunteer_count": "عدد المتطوعين المطلوبين",
   "event_name_placeholder": "أدخل اسم الفعالية",
   "event_count_placeholder": "أدخل عدد المتطوعين",
