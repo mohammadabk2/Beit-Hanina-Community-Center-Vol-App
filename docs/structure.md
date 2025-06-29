@@ -121,6 +121,7 @@
 │       │   │   └── x_icon.svg
 │       │   ├── not_favorite_icon.svg
 │       │   ├── org_icon.png
+│       │   ├── org_icon.svg
 │       │   └── person_icon.svg
 │       ├── index.js
 │       ├── installPrompt.js
@@ -187,12 +188,8 @@
 │   └── setup_server.sh
 ├── SECURITY.md
 ├── server-logs
-│   ├── 22-06-2025.txt
-│   ├── 23-06-2025.txt
-│   ├── 24-06-2025.txt
-│   ├── 26-06-2025.txt
-│   ├── 27-06-2025.txt
-│   └── 28-06-2025.txt
+│   ├── 28-06-2025.txt
+│   └── 29-06-2025.txt
 ├── src
 │   ├── controllers
 │   │   ├── auth
@@ -201,12 +198,12 @@
 │   │   ├── common
 │   │   │   ├── authenticate.js
 │   │   │   ├── error.js
+│   │   │   ├── export.js
 │   │   │   ├── ping.js
 │   │   │   └── validateToken.js
 │   │   ├── Events
 │   │   │   ├── actions.js
 │   │   │   ├── create.js
-│   │   │   ├── export.js
 │   │   │   └── load.js
 │   │   ├── index.js
 │   │   ├── Users
@@ -238,5 +235,5 @@
 │   └── test_cases.md
 └── workbox-config.cjs
 
-53 directories, 183 files
+53 directories, 180 files
 ```

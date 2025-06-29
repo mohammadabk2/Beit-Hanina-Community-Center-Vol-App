@@ -40,7 +40,7 @@ const PersonItemRow = ({
   unapprovedHours = 0,
 }) => {
   const { t } = useTranslation("home");
-  const { t: tPersonal } = useTranslation("personalArea");
+  // const { t: tPersonal } = useTranslation("personalArea");
   const { isLightMode } = useTheme();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
