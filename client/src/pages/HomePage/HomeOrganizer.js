@@ -163,7 +163,7 @@ const HomeOrganizer = () => {
           )}
 
           {renderInput(
-            "event_start",
+            t("event_start"),
             formData.eventStartTime,
             "eventStartTime",
             "",
@@ -171,7 +171,7 @@ const HomeOrganizer = () => {
           )}
 
           {renderInput(
-            "event_end",
+            t("event_end"),
             formData.eventEndTime,
             "eventEndTime",
             "",

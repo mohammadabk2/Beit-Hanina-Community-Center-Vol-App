@@ -21,6 +21,8 @@
   "create_event": "Create Event",
   "event_name": "Name of Event",
   "event_date": "Date of Event",
+  "event_start": "Event Start Time",
+  "event_end": "Event End Time",
   "volunteer_count": "Number of Volunteers Needed",
   "event_name_placeholder": "Enter Name of the Event",
   "event_count_placeholder": "Enter Number of Volunteers",
