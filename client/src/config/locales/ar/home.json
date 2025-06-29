@@ -67,6 +67,7 @@
   "enrolled_users": "المتطوعون المسجلون",
   
   "approve_hours": "اعتماد الساعات",
+  "unapproved_hours": "الساعات غير المعتمدة",
   "volunteer_name": "اسم المتطوع",
   "hours_to_approve": "الساعات المراد اعتمادها",
   "no_unapproved_hours": "لا توجد ساعات غير معتمدة متاحة",

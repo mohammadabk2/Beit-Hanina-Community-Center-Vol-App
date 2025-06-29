@@ -185,7 +185,7 @@ const PersonItemRow = ({
             </div>
             
             <div className="personal-area-content">
-              {tPersonal("unapproved_hours")}: <strong>{unapprovedHours}</strong>
+              {t("unapproved_hours")}: <strong>{unapprovedHours}</strong>
             </div>
             
             <div className="flex-box flex-column input-field-box">
