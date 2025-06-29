@@ -53,7 +53,7 @@ const changePassword = async (req, res) => {
     try {
       targetUser = await dbConnection.getUserById(userID);
     } catch (err) {
-      console.log("Could not fetch user info for logging");
+      console.log(`Could not fetch user info for logging: ${err}`);
     }
 
     // DEMO: Store password in clear text (for demonstration only)

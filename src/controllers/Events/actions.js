@@ -75,7 +75,7 @@ const eventActions = async (req, res) => {
           targetUserInfo = await dbConnection.getUserById(targetUserID);
         }
       } catch (err) {
-        console.log("Could not fetch event/user info for logging");
+        console.log(`Could not fetch event/user info for logging: ${err}`);
       }
 
       if (roleType.role === "admin") {

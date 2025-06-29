@@ -66,7 +66,7 @@ const userActions = async (req, res) => {
       try {
         targetUser = await dbConnection.getUserById(actionID);
       } catch (err) {
-        console.log("Could not fetch target user info for logging");
+        console.log(`Could not fetch target user info for logging: ${err}`);
       }
 
       if (action === "approve" && actionValue === "NA") {
