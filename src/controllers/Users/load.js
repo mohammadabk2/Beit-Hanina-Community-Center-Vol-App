@@ -43,9 +43,6 @@ const loadUsers = async (req, res) => {
   const roles = ["organizer", "admin"];
   if (roles.includes(roleType.role)) {
     try {
-
-      // console.log(users); // !testing only
-
       let allUsers;
 
       if (roleType.role === "admin") {

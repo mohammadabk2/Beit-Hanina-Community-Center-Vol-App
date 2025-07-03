@@ -1,6 +1,7 @@
 import dbConnection from "../../database/dbconnection.js";
 import validateToken from "../common/validateToken.js";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
+
 import { logPasswordChange, logError, logWarning, logSecurityEvent } from "../../utils/logger.js";
 
 const changePassword = async (req, res) => {
@@ -56,13 +57,10 @@ const changePassword = async (req, res) => {
       console.log(`Could not fetch user info for logging: ${err}`);
     }
 
-    // DEMO: Store password in clear text (for demonstration only)
-    // const saltRounds = 10;
-    // const salt = await bcrypt.genSalt(saltRounds);
-    // const passwordHash = await bcrypt.hash(newPassword, salt);
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    const passwordHash = await bcrypt.hash(newPassword, salt);
     
-    // Use plain password for demo
-    const passwordHash = newPassword;
 
     if (action === "password-change") {
       answer = await dbConnection.changePassword(userID, passwordHash);

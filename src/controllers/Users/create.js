@@ -1,6 +1,6 @@
 import dbConnection from "../../database/dbconnection.js";
 import validation from "../validation.js";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { logRegistration, logError, logWarning } from "../../utils/logger.js";
 
 //TODO validation check for front end
@@ -28,13 +28,9 @@ const registerVolunteer = async (req, res) => {
   } else {
     //TODO add a check when the request is made so it adds based on type a vol or an org
     try {
-      // DEMO: Store password in clear text (for demonstration only)
-      // const saltRounds = 10;
-      // const salt = await bcrypt.genSalt(saltRounds);
-      // const passwordHash = await bcrypt.hash(userData.password, salt);
-      
-      // Use plain password for demo
-      const passwordHash = userData.password;
+      const saltRounds = 10;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const passwordHash = await bcrypt.hash(userData.password, salt);
 
       let reg;
       let userType;

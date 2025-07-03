@@ -1,5 +1,5 @@
 import dbConnection from "../../database/dbconnection.js";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 import { logLogin, logError, logSuspiciousActivity } from "../../utils/logger.js";
@@ -48,11 +48,10 @@ const loginUser = async (req, res) => {
     }
 
     // prod
-    // const isPasswordMatch = await bcrypt.compare(
-    //   password,
-    //   response.password_hash
-    // ); // hash the password and compare to the stored hash
-    const isPasswordMatch = (password === response.password_hash); // testing only
+    const isPasswordMatch = await bcrypt.compare(
+      password,
+      response.password_hash
+    ); // hash the password and compare to the stored hash
 
     if (isPasswordMatch) {
       console.log(`Login successful for user: ${userName}`);
