@@ -511,6 +511,7 @@ const HomeAdmin = () => {
       );
       if (response.data.status === "success") {
         alert(t("org_sign_up_message"));
+        setViewMode("events");
       } else {
         alert(t("org_sign_up_failed"));
       }
