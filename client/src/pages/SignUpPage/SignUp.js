@@ -6,7 +6,7 @@ import axios from "axios";
 import DynamicButton from "../../components/common/ButtonComponent";
 import DynamicInput from "../../components/common/InputComponent";
 import DropDownMenu from "../../components/common/DropDownMenu";
-import UploadFile from "../../components/common/UploadComponent";
+// import UploadFile from "../../components/common/UploadComponent";
 import NavigationBar from "../../components/layout/NavigationBar";
 import CopyRight from "../../components/layout/CopyRight";
 
@@ -20,8 +20,8 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("signUp");
   const { t: tApp } = useTranslation("app");
-  const { t: tInsurance } = useTranslation("insurance");
-  const { t: tOccupation } = useTranslation("occupation");
+  // const { t: tInsurance } = useTranslation("insurance");
+  // const { t: tOccupation } = useTranslation("occupation");
   const API_BASE_URL = SERVER_IP;
 
   const baseInsuranceOptions = useInsuranceOptions();
@@ -143,12 +143,12 @@ const SignUpPage = () => {
   };
 
   // Stores image in form to send
-  const handleImageFileSelect = (file) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      imageFile: file,
-    }));
-  };
+  // const handleImageFileSelect = (file) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     imageFile: file,
+  //   }));
+  // };
 
   const renderInput = (upperName, value, name, placeholder, type) => {
     return (
