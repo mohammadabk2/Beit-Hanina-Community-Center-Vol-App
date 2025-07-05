@@ -693,12 +693,19 @@ html[lang="ar"] * {
 }
 
 /* RTL Table Styles for Arabic */
+/* Force LTR direction on table to let JavaScript handle column ordering */
 html[lang="ar"] .person-table {
-  direction: rtl;
+  direction: ltr !important;
 }
 
 html[lang="ar"] .person-table thead th,
 html[lang="ar"] .person-table tbody td {
+  text-align: right;
+}
+
+/* Ensure table cells maintain proper alignment in RTL */
+html[lang="ar"] .person-table th,
+html[lang="ar"] .person-table td {
   text-align: right;
 }
 
@@ -708,7 +715,7 @@ html[lang="ar"] .person-table th.actions-header {
 
 /* Ensure proper text alignment for table content in RTL */
 html[lang="ar"] .person-table tbody td {
-  direction: rtl;
+  /* direction: rtl; - Removed to let JavaScript handle column ordering */
 }
 
 /* RTL support for flex containers in table cells */

@@ -16,7 +16,7 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approve
   // If it's mixed, you'll need to pass 'isNew' down to PersonItemRow
   const isNewUserList = people.length > 0 ? people[0].isNew : false; // Example logic
 
-  // Define table headers in the order they should appear
+  // Define table headers in the order they should appear (LTR order)
   const tableHeaders = [
     <th key="fullName">{tsignup("fullName")}</th>,
     <th key="birthDate">{tsignup("birthDate")}</th>,
@@ -36,9 +36,14 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approve
     </th>
   );
 
-  // Combine all headers and reverse order for RTL
-  const allHeaders = [...tableHeaders, actionsHeader];
-  const orderedHeaders = isRTL ? allHeaders.reverse() : allHeaders;
+  // For RTL: Put actions first (rightmost), then reverse the data columns
+  // For LTR: Put data columns first, then actions (leftmost)
+  const allHeaders = isRTL ? [actionsHeader, ...tableHeaders.reverse()] : [...tableHeaders, actionsHeader];
+
+  // Debug logging
+  console.log('RTL Mode:', isRTL);
+  console.log('Language:', i18n.language);
+  console.log('Headers order:', allHeaders.map(h => h.key));
 
   return (
     <div className="person-table-container">
@@ -47,7 +52,7 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approve
       <table className="person-table">
         <thead>
           <tr>
-            {orderedHeaders}
+            {allHeaders}
           </tr>
         </thead>
         <tbody>
@@ -70,6 +75,7 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approve
               addLogFunction={() => addLog(person.id)}
               approveHoursFunction={(hours) => approveHours(person.id, hours)}
               unapprovedHours={person.unapproved_hours || 0}
+              isRTL={isRTL} // Pass RTL flag to PersonItemRow
             />
           ))}
         </tbody>

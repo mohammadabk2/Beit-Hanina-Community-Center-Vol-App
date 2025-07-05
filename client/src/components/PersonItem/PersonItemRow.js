@@ -38,6 +38,7 @@ const PersonItemRow = ({
   addLogFunction,
   approveHoursFunction,
   unapprovedHours = 0,
+  isRTL = false, // Add RTL prop
 }) => {
   const { t, i18n } = useTranslation("home");
   // const { t: tPersonal } = useTranslation("personalArea");
@@ -48,8 +49,8 @@ const PersonItemRow = ({
   const [hoursToApprove, setHoursToApprove] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Check if current language is Arabic for RTL layout
-  const isRTL = i18n.language === "ar";
+  // Check if current language is Arabic for RTL layout (fallback to prop)
+  const isRTLMode = isRTL || i18n.language === "ar";
 
   const showSkills = () => {
     console.log("skills render");
@@ -85,7 +86,7 @@ const PersonItemRow = ({
     setIsApproveHoursPopupOpen(false);
   };
 
-  // Define table cells in the order they should appear
+  // Define table cells in the order they should appear (LTR order)
   const tableCells = [
     <td key="name">{name}</td>,
     <td key="birthDate">{birthDate}</td>,
@@ -158,14 +159,19 @@ const PersonItemRow = ({
     ]
   );
 
-  // Combine all cells and reverse order for RTL
-  const allCells = [...tableCells, ...actionCells];
-  const orderedCells = isRTL ? allCells.reverse() : allCells;
+  // For RTL: Put actions first (rightmost), then reverse the data columns
+  // For LTR: Put data columns first, then actions (leftmost)
+  const allCells = isRTLMode ? [...actionCells, ...tableCells.reverse()] : [...tableCells, ...actionCells];
+
+  // Debug logging
+  console.log('PersonItemRow RTL Mode:', isRTLMode);
+  console.log('PersonItemRow Language:', i18n.language);
+  console.log('PersonItemRow Cells order:', allCells.map(c => c.key));
 
   return (
     // No outer div or table needed here, just the row
     <tr>
-      {orderedCells}
+      {allCells}
       
       {isPopupOpen && ReactDOM.createPortal(
         <PopupComponent
@@ -265,6 +271,7 @@ PersonItemRow.propTypes = {
   addLogFunction: PropTypes.func.isRequired,
   approveHoursFunction: PropTypes.func,
   unapprovedHours: PropTypes.number,
+  isRTL: PropTypes.bool,
 };
 
 // Update default props if needed
@@ -273,6 +280,7 @@ PersonItemRow.defaultProps = {
   newUser: false,
   approveHoursFunction: () => {},
   unapprovedHours: 0,
+  isRTL: false,
   // Add other defaults as necessary
 };
 
