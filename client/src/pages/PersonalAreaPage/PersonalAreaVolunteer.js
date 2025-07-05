@@ -22,6 +22,8 @@ const PersonalArea = () => {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
+      console.log("Fetching user info with userId:", userId);
+      console.log("Token:", token ? "Present" : "Missing");
       try {
         const response = await axios.get(`${API_BASE_URL}/api/users/Info`, {
           params: { userID: userId },
@@ -31,7 +33,12 @@ const PersonalArea = () => {
         });
 
         if (response.status === 200) {
+          console.log("API Response:", response.data.userData);
           setUserData(response.data.userData);
+          // Set the skills from the API response
+          if (response.data.userData.skills) {
+            setUserSkills(response.data.userData.skills);
+          }
         } else {
           console.log(`${response.status} ${response.data.message}`);
         }
@@ -67,27 +74,27 @@ const PersonalArea = () => {
             {userData ? (
               <>
                 <div className="personal-area-content basic-item-padding">
-                  {tsignup("fullName")}: {userData.name}
+                  {tsignup("fullName")}: {userData.name || 'N/A'}
                 </div>
 
                 <div className="personal-area-content basic-item-padding">
-                  {t("username")}: {userData.username}
+                  {t("username")}: {userData.username || 'N/A'}
                 </div>
 
                 <div className="personal-area-content basic-item-padding">
-                  {t("email")}: {userData.email}
+                  {t("email")}: {userData.email || 'N/A'}
                 </div>
 
                 <div className="personal-area-content basic-item-padding">
-                  {t("birth_date")}: {userData.birth_date}
+                  {t("birth_date")}: {userData.birth_date ? new Date(userData.birth_date).toLocaleDateString() : 'N/A'}
                 </div>
 
                 <div className="personal-area-content basic-item-padding">
-                  {t("approved_hours")}: {userData.approved_hours}
+                  {t("approved_hours")}: {userData.approved_hours || 0}
                 </div>
 
                 <div className="personal-area-content basic-item-padding">
-                  {t("unapproved_hours")}: {userData.unapproved_hours}
+                  {t("unapproved_hours")}: {userData.unapproved_hours || 0}
                 </div>
               </>
             ) : (

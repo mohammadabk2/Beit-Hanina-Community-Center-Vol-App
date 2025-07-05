@@ -1041,8 +1041,7 @@ const loadUserInfo = async (userID, role) => {
           o.org_name, 
           o.given_hours,
           u.username,
-          u.email,
-          o.birth_date
+          u.email
         FROM organizer o
         JOIN users u ON o.user_id = u.id
         WHERE o.user_id = $1;
