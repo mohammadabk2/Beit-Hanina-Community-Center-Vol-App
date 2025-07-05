@@ -37,6 +37,7 @@ const SignUpPage = () => {
     idNumber: "",
     username: "",
     password: "",
+    confirmPassword: "",
     imageFile: null,
     type: "vol",
   });
@@ -99,6 +100,13 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
+    
+    // Validate password match
+    if (formData.password !== formData.confirmPassword) {
+      alert(t("password_mismatch"));
+      return;
+    }
+    
     try {
       const response = await axios.post(
         `${API_BASE_URL}/api/users/register`,
@@ -177,7 +185,7 @@ const SignUpPage = () => {
 
               <DropDownMenu
                 className="gender-button"
-                text={t(formData.sex) || t("genderselect")}
+                text={formData.sex === "M" ? t("male") : formData.sex === "F" ? t("female") : t("genderselect")}
                 options={sexOptions}
               />
             </div>
@@ -257,6 +265,14 @@ const SignUpPage = () => {
               formData.password,
               "password",
               tApp("password-placeholder"),
+              "password"
+            )}
+
+            {renderInput(
+              t("confirmPassword"),
+              formData.confirmPassword,
+              "confirmPassword",
+              tApp("confirm-password-placeholder"),
               "password"
             )}
 

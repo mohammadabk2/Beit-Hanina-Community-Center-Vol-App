@@ -5,6 +5,7 @@
   "welcome": "Welcome",
   "user-name-placeholder": "Enter UserName",
   "password-placeholder": "Enter password",
+  "confirm-password-placeholder": "Confirm password",
   "sign-in": "Sign in",
   "sign-up": "Sign up",
 
