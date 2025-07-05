@@ -34,10 +34,13 @@ const EventItem = ({
   // editEvent,
   // volunteers,
 }) => {
-  const { t } = useTranslation("home");
+  const { t, i18n } = useTranslation("home");
   // const { t: tskill } = useTranslation("skills");
   const { token, userId } = useAuth();
   const API_BASE_URL = SERVER_IP;
+
+  // Check if current language is Arabic for RTL layout
+  const isRTL = i18n.language === "ar";
 
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -278,42 +281,87 @@ const EventItem = ({
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
                   <tr>
-                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      {t("name")}
-                    </th>
-                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      {t("phoneNumber")}
-                    </th>
-                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      {t("gender")}
-                    </th>
-                    <th style={{ textAlign: "left", padding: "0.5rem" }}>
-                      {t("actions")}
-                    </th>
+                    {isRTL ? (
+                      <>
+                        <th style={{ textAlign: "right", padding: "0.5rem" }}>
+                          {t("actions")}
+                        </th>
+                        <th style={{ textAlign: "right", padding: "0.5rem" }}>
+                          {t("gender")}
+                        </th>
+                        <th style={{ textAlign: "right", padding: "0.5rem" }}>
+                          {t("phoneNumber")}
+                        </th>
+                        <th style={{ textAlign: "right", padding: "0.5rem" }}>
+                          {t("name")}
+                        </th>
+                      </>
+                    ) : (
+                      <>
+                        <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                          {t("name")}
+                        </th>
+                        <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                          {t("phoneNumber")}
+                        </th>
+                        <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                          {t("gender")}
+                        </th>
+                        <th style={{ textAlign: "left", padding: "0.5rem" }}>
+                          {t("actions")}
+                        </th>
+                      </>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
                   {enrolledUsers.map((user) => (
                     <tr key={user.id} className="user-item">
-                      <td style={{ padding: "0.5rem" }}>{user.name}</td>
-                      <td style={{ padding: "0.5rem" }}>{user.phoneNumber}</td>
-                      <td style={{ padding: "0.5rem" }}>{user.sex}</td>
-                      <td style={{ padding: "0.5rem" }}>
-                        <button
-                          className="button button-approve"
-                          onClick={() =>
-                            handleEnrolledUsers("approve", user.id)
-                          }
-                        >
-                          {t("approve")}
-                        </button>
-                        <button
-                          className="button button-reject"
-                          onClick={() => handleEnrolledUsers("reject", user.id)}
-                        >
-                          {t("reject")}
-                        </button>
-                      </td>
+                      {isRTL ? (
+                        <>
+                          <td style={{ padding: "0.5rem", textAlign: "right" }}>
+                            <button
+                              className="button button-approve"
+                              onClick={() =>
+                                handleEnrolledUsers("approve", user.id)
+                              }
+                            >
+                              {t("approve")}
+                            </button>
+                            <button
+                              className="button button-reject"
+                              onClick={() => handleEnrolledUsers("reject", user.id)}
+                            >
+                              {t("reject")}
+                            </button>
+                          </td>
+                          <td style={{ padding: "0.5rem", textAlign: "right" }}>{user.sex}</td>
+                          <td style={{ padding: "0.5rem", textAlign: "right" }}>{user.phoneNumber}</td>
+                          <td style={{ padding: "0.5rem", textAlign: "right" }}>{user.name}</td>
+                        </>
+                      ) : (
+                        <>
+                          <td style={{ padding: "0.5rem" }}>{user.name}</td>
+                          <td style={{ padding: "0.5rem" }}>{user.phoneNumber}</td>
+                          <td style={{ padding: "0.5rem" }}>{user.sex}</td>
+                          <td style={{ padding: "0.5rem" }}>
+                            <button
+                              className="button button-approve"
+                              onClick={() =>
+                                handleEnrolledUsers("approve", user.id)
+                              }
+                            >
+                              {t("approve")}
+                            </button>
+                            <button
+                              className="button button-reject"
+                              onClick={() => handleEnrolledUsers("reject", user.id)}
+                            >
+                              {t("reject")}
+                            </button>
+                          </td>
+                        </>
+                      )}
                     </tr>
                   ))}
                 </tbody>

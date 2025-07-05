@@ -692,6 +692,82 @@ html[lang="ar"] * {
   font-family: "Cairo", sans-serif;
 }
 
+/* RTL Table Styles for Arabic */
+html[lang="ar"] .person-table {
+  direction: rtl;
+}
+
+html[lang="ar"] .person-table thead th,
+html[lang="ar"] .person-table tbody td {
+  text-align: right;
+}
+
+html[lang="ar"] .person-table th.actions-header {
+  text-align: center;
+}
+
+/* Ensure proper text alignment for table content in RTL */
+html[lang="ar"] .person-table tbody td {
+  direction: rtl;
+}
+
+/* RTL support for flex containers in table cells */
+html[lang="ar"] .person-table .flex-box {
+  flex-direction: row-reverse;
+}
+
+/* Ensure buttons in table cells are properly aligned in RTL */
+html[lang="ar"] .person-table .button {
+  margin: 0 0.125rem 0 0.125rem;
+}
+
+/* RTL support for popup content */
+html[lang="ar"] .popup-content {
+  direction: rtl;
+  text-align: right;
+}
+
+html[lang="ar"] .popup-content .flex-box {
+  flex-direction: row-reverse;
+}
+
+/* RTL support for input fields in popups */
+html[lang="ar"] .popup-content input {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL support for EventItem popup table */
+html[lang="ar"] .enrolled-users-list table {
+  direction: rtl;
+}
+
+html[lang="ar"] .enrolled-users-list th,
+html[lang="ar"] .enrolled-users-list td {
+  text-align: right;
+}
+
+html[lang="ar"] .enrolled-users-list .button {
+  margin: 0 0.125rem 0 0.125rem;
+}
+
+/* RTL support for event box content */
+html[lang="ar"] .event-box-content-top {
+  flex-direction: row-reverse;
+}
+
+html[lang="ar"] .event-box-content-middle {
+  flex-direction: row-reverse;
+}
+
+html[lang="ar"] .event-box-content-bottom {
+  flex-direction: row-reverse;
+}
+
+html[lang="ar"] .event-date-time-container {
+  flex-direction: row-reverse;
+}
+
 /* New popup enhancement styles */
 .popup-content-elevation {
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);

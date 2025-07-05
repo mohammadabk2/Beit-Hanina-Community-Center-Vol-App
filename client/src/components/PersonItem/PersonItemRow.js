@@ -39,7 +39,7 @@ const PersonItemRow = ({
   approveHoursFunction,
   unapprovedHours = 0,
 }) => {
-  const { t } = useTranslation("home");
+  const { t, i18n } = useTranslation("home");
   // const { t: tPersonal } = useTranslation("personalArea");
   const { isLightMode } = useTheme();
 
@@ -47,6 +47,9 @@ const PersonItemRow = ({
   const [isApproveHoursPopupOpen, setIsApproveHoursPopupOpen] = useState(false);
   const [hoursToApprove, setHoursToApprove] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Check if current language is Arabic for RTL layout
+  const isRTL = i18n.language === "ar";
 
   const showSkills = () => {
     console.log("skills render");
@@ -82,77 +85,88 @@ const PersonItemRow = ({
     setIsApproveHoursPopupOpen(false);
   };
 
+  // Define table cells in the order they should appear
+  const tableCells = [
+    <td key="name">{name}</td>,
+    <td key="birthDate">{birthDate}</td>,
+    <td key="sex">{sex}</td>,
+    <td key="phoneNumber">{phoneNumber}</td>,
+    <td key="email">{email}</td>,
+    <td key="address">{address}</td>,
+    <td key="skills">
+      <DynamicButton
+        text={t("skills")}
+        className={"button button-small"}
+        onClick={showSkills}
+      />
+    </td>,
+    <td key="insurance">{insurance}</td>,
+    <td key="idNumber">{idNumber}</td>,
+  ];
+
+  // Add action buttons based on user type
+  const actionCells = newUser ? (
+    [
+      <td key="approve">
+        <DynamicButton
+          className="button button-approve"
+          logoSrc={isLightMode ? checkLight : checkDark}
+          logoalt={t("approve_button")}
+          onClick={approveFunction}
+          aria-label={`${t("approve_button")} ${name}`}
+        />
+      </td>,
+      <td key="reject">
+        <DynamicButton
+          className="button button-reject"
+          logoSrc={isLightMode ? crossLight : crossDark}
+          logoalt={t("reject_button")}
+          onClick={rejectFunction}
+          aria-label={`${t("reject_button")} ${name}`}
+        />
+      </td>,
+    ]
+  ) : (
+    [
+      <td key="add">
+        <DynamicButton
+          className="button button-add"
+          logoSrc={isLightMode ? docPlusLight : docPlusDark}
+          logoalt={t("add_log")}
+          onClick={addLogFunction}
+          aria-label={`${t("add_log")} for ${name}`}
+        />
+      </td>,
+      <td key="view">
+        <DynamicButton
+          className="button button-view"
+          logoSrc={isLightMode ? docFilledLight : docFilledDark}
+          logoalt={t("view_log")}
+          onClick={viewLogsFunction}
+          aria-label={`${t("view_log")} for ${name}`}
+        />
+      </td>,
+      <td key="approveHours">
+        <DynamicButton
+          className="button button-approve"
+          logoSrc={isLightMode ? clockLight : clockDark}
+          logoalt={t("approve_hours")}
+          onClick={showApproveHours}
+          aria-label={`${t("approve_hours")} for ${name}`}
+        />
+      </td>,
+    ]
+  );
+
+  // Combine all cells and reverse order for RTL
+  const allCells = [...tableCells, ...actionCells];
+  const orderedCells = isRTL ? allCells.reverse() : allCells;
+
   return (
     // No outer div or table needed here, just the row
     <tr>
-      <td>{name}</td>
-      <td>{birthDate}</td>
-      <td>{sex}</td>
-      <td>{phoneNumber}</td>
-      <td>{email}</td>
-      <td>{address}</td>
-      <td>
-        <DynamicButton
-          text={t("skills")}
-          className={"button button-small"}
-          onClick={showSkills}
-        />
-      </td>
-      <td>{insurance}</td>
-      <td>{idNumber}</td>
-      {newUser ? (
-        <>
-          <td>
-            <DynamicButton
-              className="button button-approve"
-              logoSrc={isLightMode ? checkLight : checkDark}
-              logoalt={t("approve_button")}
-              onClick={approveFunction}
-              aria-label={`${t("approve_button")} ${name}`}
-            />
-          </td>
-          <td>
-            <DynamicButton
-              className="button button-reject"
-              logoSrc={isLightMode ? crossLight : crossDark}
-              logoalt={t("reject_button")}
-              onClick={rejectFunction}
-              aria-label={`${t("reject_button")} ${name}`}
-            />
-          </td>
-        </>
-      ) : (
-        <>
-          <td>
-            <DynamicButton
-              className="button button-add"
-              logoSrc={isLightMode ? docPlusLight : docPlusDark}
-              logoalt={t("add_log")}
-              onClick={addLogFunction}
-              aria-label={`${t("add_log")} for ${name}`}
-            />
-          </td>
-          <td>
-            <DynamicButton
-              className="button button-view"
-              logoSrc={isLightMode ? docFilledLight : docFilledDark}
-              logoalt={t("view_log")}
-              onClick={viewLogsFunction}
-              aria-label={`${t("view_log")} for ${name}`}
-            />
-          </td>
-          <td>
-            <DynamicButton
-              className="button button-approve"
-              logoSrc={isLightMode ? clockLight : clockDark}
-              logoalt={t("approve_hours")}
-              onClick={showApproveHours}
-              aria-label={`${t("approve_hours")} for ${name}`}
-            />
-          </td>
-        </>
-      )}
-
+      {orderedCells}
+      
       {isPopupOpen && ReactDOM.createPortal(
         <PopupComponent
           isOpen={isPopupOpen}

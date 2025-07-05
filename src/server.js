@@ -25,7 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: "http://18.192.27.50",
+    // origin: "http://18.192.27.50",
+    origin: "http://localhost:3000", //!for devlop
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Authorization"],

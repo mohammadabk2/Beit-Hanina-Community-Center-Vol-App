@@ -5,13 +5,40 @@ import PersonItemRow from "./PersonItemRow"; // Renamed component
 import { useTranslation } from "react-i18next";
 
 const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approveHours }) => {
-  const { t } = useTranslation("home");
+  const { t, i18n } = useTranslation("home");
   const { t: tsignup } = useTranslation("signUp");
   // const { t: tskill } = useTranslation("skills"); // For skills column if needed
+
+  // Check if current language is Arabic for RTL layout
+  const isRTL = i18n.language === "ar";
 
   // Determine which set of actions apply (assuming all people in the list are either new or existing)
   // If it's mixed, you'll need to pass 'isNew' down to PersonItemRow
   const isNewUserList = people.length > 0 ? people[0].isNew : false; // Example logic
+
+  // Define table headers in the order they should appear
+  const tableHeaders = [
+    <th key="fullName">{tsignup("fullName")}</th>,
+    <th key="birthDate">{tsignup("birthDate")}</th>,
+    <th key="gender">{tsignup("gender")}</th>,
+    <th key="phoneNumber">{tsignup("phoneNumber")}</th>,
+    <th key="email">{tsignup("email")}</th>,
+    <th key="address">{tsignup("address")}</th>,
+    <th key="skills">{tsignup("skills")}</th>,
+    <th key="insurance">{tsignup("insurance")}</th>,
+    <th key="idNumber">{tsignup("idNumber")}</th>,
+  ];
+
+  // Add actions header
+  const actionsHeader = (
+    <th key="actions" colSpan={isNewUserList ? 2 : 3} className="actions-header">
+      {t("actions")}
+    </th>
+  );
+
+  // Combine all headers and reverse order for RTL
+  const allHeaders = [...tableHeaders, actionsHeader];
+  const orderedHeaders = isRTL ? allHeaders.reverse() : allHeaders;
 
   return (
     <div className="person-table-container">
@@ -20,22 +47,7 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approve
       <table className="person-table">
         <thead>
           <tr>
-            {/* Keep only relevant headers */}
-            <th>{tsignup("fullName")}</th>
-            <th>{tsignup("birthDate")}</th>
-            <th>{tsignup("gender")}</th>
-            <th>{tsignup("phoneNumber")}</th>
-            <th>{tsignup("email")}</th>
-            <th>{tsignup("address")}</th>
-            <th>{tsignup("skills")}</th>
-            {/* Maybe add Insurance/ID later if needed, or show in details view */}
-            <th>{tsignup("insurance")}</th>
-            <th>{tsignup("idNumber")}</th>
-            <th colSpan={isNewUserList ? 2 : 3} className="actions-header">
-              {" "}
-              {/* Adjust colSpan */}
-              {t("actions")}
-            </th>
+            {orderedHeaders}
           </tr>
         </thead>
         <tbody>
