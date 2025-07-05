@@ -71,6 +71,18 @@ const PersonalArea = () => {
                 </div>
 
                 <div className="personal-area-content basic-item-padding">
+                  {t("username")}: {userData.username}
+                </div>
+
+                <div className="personal-area-content basic-item-padding">
+                  {t("email")}: {userData.email}
+                </div>
+
+                <div className="personal-area-content basic-item-padding">
+                  {t("birth_date")}: {userData.birth_date}
+                </div>
+
+                <div className="personal-area-content basic-item-padding">
                   {t("approved_hours")}: {userData.approved_hours}
                 </div>
 

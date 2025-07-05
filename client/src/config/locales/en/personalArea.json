@@ -2,6 +2,8 @@
   "desc": "Personal Area",
   "name": "Name",
   "email": "Email",
+  "username": "Username",
+  "birth_date": "Birth Date",
   "skills": "Skills",
   "approved_hours": "Approved Hours",
   "unapproved_hours": "Unapproved Hours",

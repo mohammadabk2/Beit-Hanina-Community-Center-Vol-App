@@ -1014,16 +1014,30 @@ const loadUserInfo = async (userID, role) => {
   const queries = {
     volunteer: {
       text: `
-        SELECT name, approved_hours, unapproved_hours, skills
-        FROM volunteer
-        WHERE user_id = $1;
+        SELECT 
+          v.name, 
+          v.approved_hours, 
+          v.unapproved_hours, 
+          v.skills,
+          u.username,
+          u.email,
+          v.birth_date
+        FROM volunteer v
+        JOIN users u ON v.user_id = u.id
+        WHERE v.user_id = $1;
       `,
     },
     organizer: {
       text: `
-        SELECT org_name, given_hours
-        FROM organizer
-        WHERE user_id = $1;
+        SELECT 
+          o.org_name, 
+          o.given_hours,
+          u.username,
+          u.email,
+          o.birth_date
+        FROM organizer o
+        JOIN users u ON o.user_id = u.id
+        WHERE o.user_id = $1;
       `,
     },
   };
