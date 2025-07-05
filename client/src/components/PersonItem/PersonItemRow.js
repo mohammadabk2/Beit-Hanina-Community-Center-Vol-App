@@ -32,6 +32,7 @@ const PersonItemRow = ({
   idNumber, // Removed from direct display for brevity, but available if needed
   skills,
   newUser,
+  role,
   approveFunction,
   rejectFunction,
   viewLogsFunction,
@@ -89,20 +90,27 @@ const PersonItemRow = ({
   // Define table cells in the order they should appear (LTR order)
   const tableCells = [
     <td key="name">{name}</td>,
-    <td key="birthDate">{birthDate}</td>,
-    <td key="sex">{sex}</td>,
+    // Only show birthDate for volunteers
+    ...(role === "organizer" ? [] : [<td key="birthDate">{birthDate}</td>]),
+    // Only show sex for volunteers
+    ...(role === "organizer" ? [] : [<td key="sex">{sex}</td>]),
     <td key="phoneNumber">{phoneNumber}</td>,
     <td key="email">{email}</td>,
     <td key="address">{address}</td>,
-    <td key="skills">
-      <DynamicButton
-        text={t("skills")}
-        className={"button button-small"}
-        onClick={showSkills}
-      />
-    </td>,
-    <td key="insurance">{insurance}</td>,
-    <td key="idNumber">{idNumber}</td>,
+    // Only show skills for volunteers
+    ...(role === "organizer" ? [] : [
+      <td key="skills">
+        <DynamicButton
+          text={t("skills")}
+          className={"button button-small"}
+          onClick={showSkills}
+        />
+      </td>
+    ]),
+    // Only show insurance for volunteers
+    ...(role === "organizer" ? [] : [<td key="insurance">{insurance}</td>]),
+    // Only show idNumber for volunteers
+    ...(role === "organizer" ? [] : [<td key="idNumber">{idNumber}</td>]),
   ];
 
   // Add action buttons based on user type
@@ -147,15 +155,18 @@ const PersonItemRow = ({
           aria-label={`${t("view_log")} for ${name}`}
         />
       </td>,
-      <td key="approveHours">
-        <DynamicButton
-          className="button button-approve"
-          logoSrc={isLightMode ? clockLight : clockDark}
-          logoalt={t("approve_hours")}
-          onClick={showApproveHours}
-          aria-label={`${t("approve_hours")} for ${name}`}
-        />
-      </td>,
+      // Only show approve hours button for volunteers
+      ...(role === "organizer" ? [] : [
+        <td key="approveHours">
+          <DynamicButton
+            className="button button-approve"
+            logoSrc={isLightMode ? clockLight : clockDark}
+            logoalt={t("approve_hours")}
+            onClick={showApproveHours}
+            aria-label={`${t("approve_hours")} for ${name}`}
+          />
+        </td>
+      ]),
     ]
   );
 
@@ -265,6 +276,7 @@ PersonItemRow.propTypes = {
   idNumber: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Keep if passed
   skills: PropTypes.arrayOf(PropTypes.string), // Updated prop type
   newUser: PropTypes.bool,
+  role: PropTypes.string,
   approveFunction: PropTypes.func.isRequired,
   rejectFunction: PropTypes.func.isRequired,
   viewLogsFunction: PropTypes.func.isRequired,

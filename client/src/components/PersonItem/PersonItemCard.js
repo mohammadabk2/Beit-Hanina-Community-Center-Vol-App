@@ -18,6 +18,7 @@ const PersonItemCard = ({
   skills,
   style,
   newUser,
+  role,
   approveFunction,
   rejectFunction,
   viewLogsFunction,
@@ -78,43 +79,52 @@ const PersonItemCard = ({
       {/* <div className="event-box-title general-box">{name}</div> */}
       <div className="top-user-box line-break">{name}</div>
       <div className="bottom-user-box flex-box flex-column">
-        <div className="basic-item-padding personal-area-content">
-          {tsignup("birthDate")} {birthDate}
-        </div>
+        {/* Only show birthDate for volunteers */}
+        {role !== "organizer" && (
+          <div className="basic-item-padding personal-area-content">
+            {tsignup("birthDate")} {birthDate}
+          </div>
+        )}
 
         <div className="basic-item-padding personal-area-content">
           {tsignup("address")} {address}
         </div>
 
-        <div className="basic-item-padding personal-area-content">
-          {tsignup("gender")} {sex}
-        </div>
+        {/* Only show gender for volunteers */}
+        {role !== "organizer" && (
+          <div className="basic-item-padding personal-area-content">
+            {tsignup("gender")} {sex}
+          </div>
+        )}
 
-        <div className="basic-item-padding personal-area-content">
-          <div className="flex-box">
-            <div className="flex-box flex-column">
-              <div>{tskill("skills")}:</div>
+        {/* Only show skills for volunteers */}
+        {role !== "organizer" && (
+          <div className="basic-item-padding personal-area-content">
+            <div className="flex-box">
+              <div className="flex-box flex-column">
+                <div>{tskill("skills")}:</div>
 
-              {/* <div className="flex-box">
-                {Array.isArray(skills) ? (
-                  skills.map((person, index) => (
-                    <div key={index} className="skills">
-                      {person}
-                      {index < skills.length - 1 && " "}
-                    </div>
-                  ))
-                ) : (
-                  <div>N/A</div>
-                )}
-              </div> */}
-              <DynamicButton
-                text={t("skills")}
-                className={"button button-small"}
-                onClick={showSkills}
-              />
+                {/* <div className="flex-box">
+                  {Array.isArray(skills) ? (
+                    skills.map((person, index) => (
+                      <div key={index} className="skills">
+                        {person}
+                        {index < skills.length - 1 && " "}
+                      </div>
+                    ))
+                  ) : (
+                    <div>N/A</div>
+                  )}
+                </div> */}
+                <DynamicButton
+                  text={t("skills")}
+                  className={"button button-small"}
+                  onClick={showSkills}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="basic-item-padding personal-area-content">
           {tsignup("phoneNumber")} {phoneNumber}
@@ -124,13 +134,19 @@ const PersonItemCard = ({
           {tsignup("email")} {email}
         </div>
 
-        <div className="basic-item-padding personal-area-content">
-          {tsignup("insurance")} {insurance}
-        </div>
+        {/* Only show insurance for volunteers */}
+        {role !== "organizer" && (
+          <div className="basic-item-padding personal-area-content">
+            {tsignup("insurance")} {insurance}
+          </div>
+        )}
 
-        <div className="basic-item-padding personal-area-content">
-          {tsignup("idNumber")} {idNumber}
-        </div>
+        {/* Only show idNumber for volunteers */}
+        {role !== "organizer" && (
+          <div className="basic-item-padding personal-area-content">
+            {tsignup("idNumber")} {idNumber}
+          </div>
+        )}
 
         <div>
           {newUser && (
@@ -166,11 +182,14 @@ const PersonItemCard = ({
                   onClick={viewLogsFunction}
                 />
 
-                <DynamicButton
-                  className="button button-approve"
-                  text={t("approve_hours")}
-                  onClick={showApproveHours}
-                />
+                {/* Only show approve hours button for volunteers */}
+                {role !== "organizer" && (
+                  <DynamicButton
+                    className="button button-approve"
+                    text={t("approve_hours")}
+                    onClick={showApproveHours}
+                  />
+                )}
               </div>
             </>
           )}
@@ -267,6 +286,7 @@ PersonItemCard.propTypes = {
   skills: PropTypes.arrayOf(PropTypes.string),
   style: PropTypes.object,
   newUser: PropTypes.bool,
+  role: PropTypes.string,
   approveFunction: PropTypes.func.isRequired,
   rejectFunction: PropTypes.func.isRequired,
   viewLogsFunction: PropTypes.func.isRequired,

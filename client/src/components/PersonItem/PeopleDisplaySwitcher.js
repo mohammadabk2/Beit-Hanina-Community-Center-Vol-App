@@ -71,6 +71,7 @@ const PeopleDisplaySwitcher = ({
             insurance={person.insurance}
             idNumber={person.idNumber}
             newUser={person.isNew} // Assuming the flag is 'isNew' on the person object
+            role={person.role} // Pass the role to determine which fields to show
             // Pass handler functions, wrapping them to include the person's ID
             approveFunction={() => approveUser(person.id)}
             rejectFunction={() => rejectUser(person.id)}
@@ -106,6 +107,7 @@ PeopleDisplaySwitcher.propTypes = {
       idNumber: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       skills: PropTypes.arrayOf(PropTypes.string),
       isNew: PropTypes.bool, // Assuming the flag is 'isNew'
+      role: PropTypes.string, // Add role field
       unapproved_hours: PropTypes.number, // Add unapproved hours field
       // Add other expected properties within a person object
   })), // Can be .isRequired if the parent guarantees an array
