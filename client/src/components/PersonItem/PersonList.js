@@ -18,7 +18,7 @@ const PersonList = ({ people, approveUser, rejectUser, viewLogs, addLog, approve
 
   // Determine if all users are organizers (for conditional headers)
   const isAllOrganizers = people.length > 0 && people.every(person => person.role === "organizer");
-  const isAllVolunteers = people.length > 0 && people.every(person => person.role === "volunteer");
+  // const isAllVolunteers = people.length > 0 && people.every(person => person.role === "volunteer");
 
   // Define table headers in the order they should appear (LTR order)
   const tableHeaders = [
