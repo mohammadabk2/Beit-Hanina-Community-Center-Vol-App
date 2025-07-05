@@ -132,32 +132,45 @@ const HomeAdmin = () => {
     // },
   ];
 
-  // Update sortText when language changes or eventStatus changes
+  // Update sortText when language changes, viewMode changes, or status changes
   useEffect(() => {
     const updateSortText = () => {
-      switch (eventStatus) {
-        case "approved":
-          setSortText(t("approved_events"));
-          break;
-        case "pending":
-          setSortText(t("pending_events"));
-          break;
-        case "finished":
-          setSortText(t("finished_events"));
-          break;
-        case "rejected":
-          setSortText(t("rejected_events"));
-          break;
-        case "ongoing":
-          setSortText(t("on_going"));
-          break;
-        default:
-          setSortText(t("approved_events"));
+      if (viewMode === "events") {
+        switch (eventStatus) {
+          case "approved":
+            setSortText(t("approved_events"));
+            break;
+          case "pending":
+            setSortText(t("pending_events"));
+            break;
+          case "finished":
+            setSortText(t("finished_events"));
+            break;
+          case "rejected":
+            setSortText(t("rejected_events"));
+            break;
+          case "ongoing":
+            setSortText(t("on_going"));
+            break;
+          default:
+            setSortText(t("approved_events"));
+        }
+      } else if (viewMode === "people") {
+        switch (peopleStatus) {
+          case "volunteer_waiting_list":
+            setSortText(t("new"));
+            break;
+          case "volunteer":
+            setSortText(t("active"));
+            break;
+          default:
+            setSortText(t("new"));
+        }
       }
     };
     
     updateSortText();
-  }, [t, eventStatus]);
+  }, [t, eventStatus, peopleStatus, viewMode]);
 
   const switchToEvents = () => setViewMode("events");
   const switchToPeople = () => {
