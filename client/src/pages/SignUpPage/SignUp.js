@@ -20,6 +20,8 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("signUp");
   const { t: tApp } = useTranslation("app");
+  const { t: tInsurance } = useTranslation("insurance");
+  const { t: tOccupation } = useTranslation("occupation");
   const API_BASE_URL = SERVER_IP;
 
   const baseInsuranceOptions = useInsuranceOptions();
@@ -34,6 +36,7 @@ const SignUpPage = () => {
     address: "",
     insurance: "",
     occupation: "",
+    customField: "",
     idNumber: "",
     username: "",
     password: "",
@@ -41,6 +44,20 @@ const SignUpPage = () => {
     imageFile: null,
     type: "vol",
   });
+
+  // Helper function to get translated insurance label
+  const getInsuranceLabel = (value) => {
+    if (!value) return t("selectinsurance");
+    const option = baseInsuranceOptions.find(opt => opt.value === value);
+    return option ? option.label : value;
+  };
+
+  // Helper function to get translated occupation label
+  const getOccupationLabel = (value) => {
+    if (!value) return t("selectoccupation");
+    const option = baseOccupationOptions.find(opt => opt.value === value);
+    return option ? option.label : value;
+  };
 
   const handleInsuranceChange = (value) => {
     setFormData({ ...formData, insurance: value });
@@ -229,7 +246,7 @@ const SignUpPage = () => {
               </div>
               <DropDownMenu
                 className="gender-button"
-                text={formData.insurance || t("selectinsurance")}
+                text={getInsuranceLabel(formData.insurance)}
                 options={insuranceOptions}
               />
             </div>
@@ -241,10 +258,17 @@ const SignUpPage = () => {
               </div>
               <DropDownMenu
                 className="gender-button"
-                text={formData.occupation || t("selectoccupation")}
+                text={getOccupationLabel(formData.occupation)}
                 options={occupationOptions}
               />
             </div>
+
+            {renderInput(
+              t("customField"),
+              formData.customField,
+              "customField",
+              t("customField_placeholder")
+            )}
 
             {renderInput(
               t("idNumber"),
@@ -276,7 +300,7 @@ const SignUpPage = () => {
               "password"
             )}
 
-            <UploadFile onFileSelect={handleImageFileSelect} />
+            {/* <UploadFile onFileSelect={handleImageFileSelect} /> */}
 
             <div className="flex-box">
               <div>

@@ -26,6 +26,8 @@
   "remove": "إزالة ",
   "selectinsurance": "اختيار التأمين",
   "selectoccupation": "اختيار المهنة",
+  "customField": "معلومات إضافية",
+  "customField_placeholder": "أدخل أي معلومات إضافية",
   "userName": "اسم المستخدم",
   "password": "كلمة المرور",
   "confirmPassword": "تأكيد كلمة المرور",

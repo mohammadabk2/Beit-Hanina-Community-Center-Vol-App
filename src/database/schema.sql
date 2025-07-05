@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS volunteer
     skills TEXT[] DEFAULT '{}',
     orgs INT[] DEFAULT '{}',
     fav_events INT[] DEFAULT '{}',
-    signed_up_events INT[] DEFAULT '{}'
+    signed_up_events INT[] DEFAULT '{}',
+    custom_field TEXT
 );
 
 CREATE TABLE IF NOT EXISTS volunteer_waiting_list
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS volunteer_waiting_list
     address VARCHAR(255) NOT NULL,
     insurance TEXT NOT NULL,
     occupation VARCHAR(20) NOT NULL,
+    custom_field TEXT,
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username TEXT UNIQUE,
     password_hash VARCHAR(255),
@@ -58,6 +60,8 @@ CREATE TABLE IF NOT EXISTS rejected_users
     email TEXT NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL,
     insurance TEXT NOT NULL,
+    occupation VARCHAR(20) NOT NULL,
+    custom_field TEXT,
     id_number VARCHAR(20) NOT NULL UNIQUE,
     username TEXT UNIQUE,
     password_hash VARCHAR(255),

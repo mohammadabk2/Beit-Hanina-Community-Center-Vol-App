@@ -26,6 +26,8 @@
   "remove": "Remove",
   "selectinsurance": "Select Insurance",
   "selectoccupation": "Select Occupation",
+  "customField": "Additional Information",
+  "customField_placeholder": "Enter any additional information",
   "userName": "User Name",
   "password": "Password",
   "confirmPassword": "Confirm Password",

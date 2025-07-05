@@ -63,6 +63,7 @@ const loadUsers = async (req, res) => {
           skills: user.skills || [],
           approved_hours: user.approved_hours || 0,
           unapproved_hours: user.unapproved_hours || 0,
+          customField: user.custom_field,
         }));
         console.log("Mapped users data:", allUsers); // Debug log
       }

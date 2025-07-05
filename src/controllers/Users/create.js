@@ -70,6 +70,7 @@ const registerVolunteer = async (req, res) => {
           userData.address,
           userData.insurance,
           userData.occupation,
+          userData.customField,
           userData.idNumber,
           userData.username,
           passwordHash,

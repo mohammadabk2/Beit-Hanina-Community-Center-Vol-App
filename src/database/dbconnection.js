@@ -53,8 +53,8 @@ const createVolunteer = async (waitingListId) => {
 
     // Insert into Volunteer table
     const volunteerInsertText = `
-      INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO volunteer (user_id, name, birth_date, sex, insurance, id_number, custom_field)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *;`;
     const volunteerValues = [
       user.id,
@@ -63,6 +63,7 @@ const createVolunteer = async (waitingListId) => {
       v.sex,
       v.insurance,
       v.id_number,
+      v.custom_field,
     ];
     const volunteerRes = await client.query(
       volunteerInsertText,
@@ -121,6 +122,7 @@ const getUsers = async (role, tableName) => {
           volunteer.skills,
           volunteer.approved_hours,
           volunteer.unapproved_hours,
+          volunteer.custom_field,
           NULL as org_name,
           NULL as given_hours,
           NULL as vol_id,
@@ -142,6 +144,7 @@ const getUsers = async (role, tableName) => {
           NULL as skills,
           NULL as approved_hours,
           NULL as unapproved_hours,
+          NULL as custom_field,
           organizer.org_name,
           organizer.given_hours,
           organizer.vol_id,
@@ -719,9 +722,12 @@ const getEventCurrentStatus = async (eventID) => {
  * @param {string} email - The user's email address.
  * @param {string} address - The user's home address.
  * @param {string} insurance - The user's insurance provider.
+ * @param {string} occupation - The user's occupation.
+ * @param {string} customField - The user's additional information.
  * @param {number} idNumber - The user's government ID number.
  * @param {string} username - The chosen username for the user.
  * @param {string} passwordHash - The hashed password.
+ * @param {Array} skills - The user's skills.
  * @returns {Promise<Object>} A promise that resolves to the newly created user object.
  * @throws {Error} If the database query fails.
  */
@@ -735,14 +741,15 @@ const createUser = async (
   address,
   insurance,
   occupation,
+  customField,
   idNumber,
   username,
   passwordHash,
   skills
 ) => {
   const text = `
-    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, occupation, id_number, username, password_hash, skills)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    INSERT INTO ${tableName} (name, birth_date, sex, phone_number, email, address, insurance, occupation, custom_field, id_number, username, password_hash, skills)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
     RETURNING *;`;
   const values = [
     name,
@@ -753,6 +760,7 @@ const createUser = async (
     address,
     insurance,
     occupation,
+    customField,
     idNumber,
     username,
     passwordHash,
