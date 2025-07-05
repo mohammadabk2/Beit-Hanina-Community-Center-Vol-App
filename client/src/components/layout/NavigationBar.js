@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import DropDownMenu from "../common/DropDownMenu";
+import DynamicButton from "../common/ButtonComponent";
 import { useLnOptions } from "../../config/options/Language";
 import { useTheme } from "../../config/options/Colors";
 import { useAuth } from "../../config/Context/auth";
@@ -25,7 +26,7 @@ const NavigationBar = () => {
   const location = useLocation();
   const lnOptions = useLnOptions();
   const { isLightMode, toggleTheme } = useTheme();
-  const { isAuthenticated, role } = useAuth();
+  const { isAuthenticated, role, logout } = useAuth();
 
   const goToPersonalArea = () => {
     if (role === "admin") {
@@ -135,6 +136,14 @@ const NavigationBar = () => {
           {!isLightMode && t("light_mode")}
           {isLightMode && t("dark_mode")}
         </div>
+
+        {isAuthenticated && (
+          <DynamicButton
+            className="button"
+            text={t("sign_out")}
+            onClick={logout}
+          />
+        )}
       </div>
     </div>
   );

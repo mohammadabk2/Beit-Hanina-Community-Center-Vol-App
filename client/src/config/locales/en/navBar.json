@@ -7,5 +7,6 @@
   "personal_area": "Personal Area",
   "settings": "Settings",
   "logout": "Logout",
-  "login": "Login"
+  "login": "Login",
+  "sign_out": "Sign Out"
 }
