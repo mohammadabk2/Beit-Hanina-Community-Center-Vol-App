@@ -98,7 +98,7 @@ const App = () => {
           navigate("home-volunteer");
         }
 
-        alert(`${t("welcome_message")}`);
+        // alert(`${t("welcome_message")}`);
       } else {
         const message =
           response.data?.message || "Login failed. Please check credentials.";
