@@ -48,23 +48,52 @@ const loadUsers = async (req, res) => {
       if (roleType.role === "admin") {
         const users = await dbConnection.getUsers(roleType.role, tableName);
         console.log("Raw users data from DB:", users); // Debug log
-        allUsers = users.map((user) => ({
-          id: user.id,
-          name: user.name,
-          birthDate: safeDateOnly(user.birth_date),
-          sex: user.sex,
-          phoneNumber: user.phone_number,
-          email: user.email,
-          address: user.address,
-          insurance: user.insurance,
-          idNumber: user.id_number,
-          userName: user.username,
-          logs: user.logs,
-          skills: user.skills || [],
-          approved_hours: user.approved_hours || 0,
-          unapproved_hours: user.unapproved_hours || 0,
-          customField: user.custom_field,
-        }));
+        allUsers = users.map((user) => {
+          // Handle different data structures for volunteers vs organizers
+          if (user.role === "organizer") {
+            return {
+              id: user.id,
+              name: user.org_name, // Use org_name for organizers
+              birthDate: null, // Organizers don't have birth_date
+              sex: null, // Organizers don't have sex
+              phoneNumber: user.phone_number,
+              email: user.email,
+              address: user.address,
+              insurance: null, // Organizers don't have insurance
+              idNumber: null, // Organizers don't have id_number
+              userName: user.username,
+              logs: user.logs || [],
+              skills: [], // Organizers don't have skills
+              approved_hours: 0, // Organizers don't have approved_hours
+              unapproved_hours: 0, // Organizers don't have unapproved_hours
+              customField: null, // Organizers don't have custom_field
+              org_name: user.org_name, // Keep original org_name
+              given_hours: user.given_hours || 0,
+              vol_id: user.vol_id,
+              role: user.role,
+            };
+          } else {
+            // Volunteer data structure
+            return {
+              id: user.id,
+              name: user.name,
+              birthDate: safeDateOnly(user.birth_date),
+              sex: user.sex,
+              phoneNumber: user.phone_number,
+              email: user.email,
+              address: user.address,
+              insurance: user.insurance,
+              idNumber: user.id_number,
+              userName: user.username,
+              logs: user.logs || [],
+              skills: user.skills || [],
+              approved_hours: user.approved_hours || 0,
+              unapproved_hours: user.unapproved_hours || 0,
+              customField: user.custom_field,
+              role: user.role,
+            };
+          }
+        });
         console.log("Mapped users data:", allUsers); // Debug log
       }
 

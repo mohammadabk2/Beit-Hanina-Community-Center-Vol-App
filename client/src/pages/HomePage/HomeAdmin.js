@@ -124,12 +124,14 @@ const HomeAdmin = () => {
         setSortText(t("active"));
       },
     },
-    //TODO maybe add
-    // {
-    //   label: t("org"),
-    //   href: "#",
-    //   onClick: () => setPeopleStatus("organizer"),
-    // },
+    {
+      label: t("orgs"),
+      href: "#",
+      onClick: () => {
+        setPeopleStatus("organizer");
+        setSortText(t("orgs"));
+      },
+    },
   ];
 
   // Update sortText when language changes, viewMode changes, or status changes
@@ -162,6 +164,9 @@ const HomeAdmin = () => {
             break;
           case "volunteer":
             setSortText(t("active"));
+            break;
+          case "organizer":
+            setSortText(t("orgs"));
             break;
           default:
             setSortText(t("new"));
